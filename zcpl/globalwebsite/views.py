@@ -12,3 +12,6 @@ def services(request):
 
 def itadservices(request):
     return render(request,'services/itad_services.html')
+
+def it_hardware(request):
+    return render(request,'services/it_hardware.html')
