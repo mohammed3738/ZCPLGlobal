@@ -9,3 +9,6 @@ def about_us(request):
 
 def services(request):
     return render(request,'services/services.html')
+
+def itadservices(request):
+    return render(request,'services/itad_services.html')
