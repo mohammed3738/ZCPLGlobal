@@ -2057,7 +2057,8 @@ img.lazy-image.loaded {
 }
 
 .default-form .form-group textarea {
-  height: 220px;
+  /* height: 220px; 
+    height: 130px;*/
   resize: none;
 }
 
@@ -22995,7 +22996,7 @@ img.lazy-image.loaded {
 }
 
 .contact-two__text {
-  max-width: 351px;
+  /* max-width: 351px; */
   margin: 0;
   font-size: 16px;
   line-height: 34px;
@@ -30054,6 +30055,7 @@ img.lazy-image.loaded {
 }
 .contact-twelev .default-form .form-group textarea {
   height: 315px;
+
 }
 .contact-twelev .default-form .form-group {
   margin-bottom: 20px;
