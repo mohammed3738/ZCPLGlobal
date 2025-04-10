@@ -318,7 +318,9 @@ figure {
   line-height: 30px;
   font-weight: 400;
   letter-spacing: 0.1em;
-  padding: 19px 50px 16px;
+  /* padding: 19px 50px 16px; */
+  padding: 8px 18px ;
+
   z-index: 1;
 }
 
