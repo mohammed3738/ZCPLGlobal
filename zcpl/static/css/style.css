@@ -318,9 +318,7 @@ figure {
   line-height: 30px;
   font-weight: 400;
   letter-spacing: 0.1em;
-  /* padding: 19px 50px 16px; */
-  padding: 8px 18px ;
-
+  padding: 19px 50px 16px;
   z-index: 1;
 }
 
@@ -9831,7 +9829,9 @@ img.lazy-image.loaded {
 .work-tabs .tab-buttons .tab-btn {
   position: relative;
   float: left;
-  width: 33.333%;
+  width: 24%;
+  /* width custom */
+
   line-height: 40px;
   font-size: 30px;
   font-weight: 400;
@@ -21764,6 +21764,11 @@ img.lazy-image.loaded {
   .about-ten__content {
     padding-left: 100px;
     padding-top: 116px;
+  }
+  .about-ten1__content {
+    /* padding-left: 100px; */
+    padding-right: 60px;
+    padding-top: 30px;
   }
 }
 .about-ten__text {
