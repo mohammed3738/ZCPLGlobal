@@ -8983,8 +8983,8 @@ img.lazy-image.loaded {
 .feature-eight__image img {
   max-width: 100%;
   border-radius: 8px;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
+  /* -webkit-filter: grayscale(100%); */
+  /* filter: grayscale(100%); */
   background-color: #1c1e22;
   display: block;
   margin-left: auto;
@@ -17056,7 +17056,8 @@ img.lazy-image.loaded {
 }
 
 .sec-title-eight {
-  margin-bottom: 47px;
+  /* margin-bottom: 47px; */
+  margin-bottom: 20px;
 }
 
 .sec-title-eight__text {
@@ -21763,7 +21764,7 @@ img.lazy-image.loaded {
 @media (min-width: 1200px) {
   .about-ten__content {
     padding-left: 100px;
-    padding-top: 116px;
+    /* padding-top: 116px; */
   }
   .about-ten1__content {
     /* padding-left: 100px; */
@@ -21793,7 +21794,8 @@ img.lazy-image.loaded {
 
 @media (min-width: 1200px) {
   .about-ten__box + .about-ten__box {
-    margin-top: 53px;
+    /* margin-top: 53px; */
+    margin-top: 13px;
   }
 }
 .about-ten__box {
