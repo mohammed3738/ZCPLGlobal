@@ -15,3 +15,9 @@ def itadservices(request):
 
 def it_hardware(request):
     return render(request,'services/it_hardware.html')
+
+def server_maintenance(request):
+    return render(request,'services/server_maintenance.html')
+
+def storage_maintenance(request):
+    return render(request,'services/storage_maintenance.html')
