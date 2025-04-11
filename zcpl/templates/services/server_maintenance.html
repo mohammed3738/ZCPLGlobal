@@ -1,0 +1,307 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Banner Section -->
+
+<section class="slider-six">
+  <div class="slider-six__curv">
+    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
+                <path fill="currentColor"
+                    d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
+            </svg> -->
+  </div>
+  <!-- /.slider-six__curv -->
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="
+            background-image: url(images/update-01-10-2021/slider/slider-six-1-1.jpg);
+          "
+        ></div>
+        <!-- /.image-layer -->
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text"><span>Server Maintenance</span></p>
+            <!-- /.slider-six__text -->
+            <h2 class="slider-six__title">
+              Your Trusted Partner for Server Maintenance Services.
+            </h2>
+            <!-- /.slider-six__title -->
+            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+            <!-- /.thm-btn__six -->
+          </div>
+          <!-- /.slider-six__content -->
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="
+            background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
+          "
+        ></div>
+        <!-- /.image-layer -->
+     
+      </div>
+    </div>
+    <!-- If we need navigation buttons -->
+    <!-- <div class="slider-bottom-box clearfix">
+                <div class="main-slider__nav">
+                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
+                        <span class="fa fa-angle-left"></span>
+                    </div>
+                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
+                        <span class="fa fa-angle-right"></span>
+                    </div>
+                </div>
+            </div> -->
+  </div>
+</section>
+<!-- /.slider-six -->
+
+<div class="auto-container" style="padding-block: 100px">
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="about-six__content">
+        <div class="sec-title-six">
+          <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
+          <!-- /.sec-title-six__text -->
+          <h2 class="sec-title-six__title">
+            Your Trusted Partner for Server Maintenance Services
+          </h2>
+          <!-- /.sec-title-six__title -->
+        </div>
+        <!-- /.sec-title-six -->
+        <div class="about-six__text">
+          At Zaco Computers, we understand the vital role servers play in the
+          smooth operation of your business. That's why we offer comprehensive
+          server maintenance services designed to keep your servers running
+          efficiently, securely and reliably. Whether you have a single server
+          or a complex network infrastructure, our team of highly skilled and
+          certified IT engineers is equipped to provide the support you need to
+          achieve optimal performance with minimize downtime.
+        </div>
+        <!-- /.about-six__text -->
+        <div class="link-box" style="margin-top:20px">
+            <a class="theme-btn btn-style-one" href="about.html">
+              <i class="btn-curve"></i>
+              <span class="btn-title">Discover More</span>
+            </a>
+          </div>
+          <!-- /.about-six__content -->
+        </div>
+    </div>
+    <!-- /.col-md-12 col-lg-5 -->
+    <div class="col-md-12 col-lg-6 wow fadeInRight" data-wow-duration="1500ms">
+      <div class="about-six__image">
+        <img
+          src="{% static 'images/update-01-10-2021/resources/YOUR-TRUSTED-PARTNER-SERVICES.jpg' %}"
+          alt=""
+        />
+      </div>
+      <!-- /.about-six__image -->
+    </div>
+    <!-- /.col-md-12 col-lg-7 -->
+  </div>
+  <!-- /.row -->
+
+  <!-- /.row -->
+</div>
+<!-- /.auto-container -->
+
+
+<!--We DO Section-->
+<section class="we-do-section">
+    <div class="auto-container">
+        <div class="sec-title " style="text-align:center;padding-bottom:5px ">
+            <h2>
+              Sell your IT Equipment & Server Hardware to Zaco
+              <span class="dot">.</span>
+            </h2>
+          </div>
+        <div class="sec-title">
+        
+      <div class="row clearfix">
+        <!--Left Column-->
+        <div class="left-col col-lg-5 col-md-12 col-sm-12">
+            <div class="">
+                <img
+                  src="{% static 'images/update-01-10-2021/resources/YOUR-TRUSTED-PARTNER-SERVICES.jpg' %}"
+                  alt=""
+                />
+              </div>
+        </div>
+        <!--Right Column-->
+        <div class="right-col col-lg-7 col-md-12 col-sm-12">
+            
+          <div class="inner">
+            <div class="faq-box">
+              <ul class="accordion-box clearfix">
+                <!--Block-->
+                <li class="accordion block active-block">
+                  <div class="acc-btn active">
+                    <span class="count">1.</span> Routine Server Maintenance
+
+                  </div>
+                  <div class="acc-content current">
+                    <div class="content">
+                      <div class="text">
+                        We provide regular preventive maintenance, including updates, hardware checks, security audits, and performance tuning to prevent issues before they affect your servers.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">2.</span> 24/7 Monitoring and Support
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Our proactive monitoring tools keep a watchful eye on your servers and our dedicated support team is available 24/7 to address any issues promptly and efficiently.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">3.</span> Backup and Disaster Recovery
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        We offer comprehensive backup and disaster recovery solutions to safeguard your critical data and ensure business continuity in case of unexpected events.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">4.</span> Hardware and Software Support
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Our team can provide expert IT support for both hardware and software issues, ensuring your servers remain operational and perform at their peak.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">5.</span>On-site and Remote Support
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        We offer flexible support options, including on-site visits for complex issues and remote support for efficient troubleshooting and problem resolution.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <section class="about-ten">
+    <div class="auto-container">
+        <div class="row">
+        
+            <div class="col-lg-7 d-flex">
+                <div class="my-auto">
+
+                    <div class="about-ten__content">
+                        <div class="sec-title-eight text-start">
+                            {% comment %} <p class="sec-title-eight__text">Why Choose Us</p><!-- /.sec-title-eight__text --> {% endcomment %}
+                            <h2 class="sec-title-eight__title">Benefits of Choosing Zaco Computers for Server Maintenance
+                                Experts</h2><!-- /.sec-title-eight__title -->
+                        </div><!-- /.sec-title-eight -->
+   
+                        <div class="about-ten__box">
+                            {% comment %} <h3 class="about-ten__box__title">Customer Experience</h3> {% endcomment %}
+                            <!-- /.about-ten__box__title -->
+                            <p class="about-ten__box__text">Our proactive server maintenance approach helps prevent issues and optimizes server performance, leading to increased uptime and efficiency.</p>
+                            <!-- /.about-ten__box__text -->
+                        </div><!-- /.about-ten__box -->
+                        <div class="about-ten__box">
+                            {% comment %} <h3 class="about-ten__box__title">Customer Experience</h3> {% endcomment %}
+                            <!-- /.about-ten__box__title -->
+                            <p class="about-ten__box__text">We ensure your servers are protected with the latest security measures, minimizing the risk of data breaches and cyber-attacks. Our prompt and efficient server support minimizes downtime and ensures your business operations remain uninterrupted.</p>
+                            <!-- /.about-ten__box__text -->
+                        </div><!-- /.about-ten__box -->
+                        <div class="about-ten__box">
+                            {% comment %} <h3 class="about-ten__box__title">Customer Experience</h3> {% endcomment %}
+                            <!-- /.about-ten__box__title -->
+                            <p class="about-ten__box__text">By preventing costly server failures and data loss, our server maintenance support and services can help you save money in the long run.</p>
+                            <!-- /.about-ten__box__text -->
+                        </div><!-- /.about-ten__box -->
+                        <div class="about-ten__box">
+                            {% comment %} <h3 class="about-ten__box__title">Customer Experience</h3> {% endcomment %}
+                            <!-- /.about-ten__box__title -->
+                            <p class="about-ten__box__text">WWith our expertise and dedication, you can enjoy peace of mind knowing your critical servers are in good hands.</p>
+                            <!-- /.about-ten__box__text -->
+                        </div><!-- /.about-ten__box -->
+                    </div><!-- /.about-ten__content -->
+                </div><!-- /.my-auto -->
+            </div><!-- /.col-lg-7 -->
+            <div class="col-lg-5 wow fadeInLeft" data-wow-duration="1500ms">
+                <div class="about-ten__image">
+                    <img src="  {% static 'images/update-01-10-2021/resources/server-maintainance-1.jpg' %}" alt="">
+                </div><!-- /.about-ten__image -->
+            </div><!-- /.col-lg-5 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section><!-- /.about-ten -->
+
+<section class="feature-eight">
+    <div class="auto-container">
+        
+        <div class="row">
+            <div class="col-md-12 col-lg-5">
+                <div class="feature-eight__image">
+                    {% comment %} <img src="images/update-26-02-2021/resources/READY-TO-EXPERIENCE-THE-BENEFITS-OF-RELIABLE-SERVER-MAINTENANCE.png" alt=""> {% endcomment %}
+                    <img src="{% static 'images/update-26-02-2021/resources/READY-TO-EXPERIENCE-THE-BENEFITS-OF-RELIABLE-SERVER-MAINTENANCE.png' %}" alt="">
+                </div><!-- /.feature-eight__image -->
+            </div><!-- /.col-md-12 -->
+            <div class="col-md-12 col-lg-7">
+                <div class="feature-eight__content">
+                    <div class="sec-title">
+                        <h2>Ready to experience the benefits of reliable server maintenance? <span class="dot">.</span></h2>
+                    </div>
+                    <p class="feature-eight__text">
+                        Contact Zaco Computers today to discuss your specific needs and learn how our comprehensive server maintenance services can help you achieve optimal performance, enhance security and ensure business continuity.
+                    </p><!-- /.feature-eight__text -->
+                    {% comment %} <div class="progress-box">
+                        <div class="bar-title">Digital marketing</div>
+                        <div class="bar">
+                            <div class="bar-inner count-bar counted" data-percent="70%" style="width: 70%;">
+                                <div class="count-box counted">
+                                    <span class="count-text" data-stop="70" data-speed="1500">70</span>%
+                                </div>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div><!-- /.feature-eight__content -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section><!-- /.feature-eight -->
+
+  {% endblock %}

@@ -318,7 +318,8 @@ figure {
   line-height: 30px;
   font-weight: 400;
   letter-spacing: 0.1em;
-  padding: 19px 50px 16px;
+  /* padding: 19px 50px 16px; */
+  padding: 8px 18px ;
   z-index: 1;
 }
 
@@ -2057,7 +2058,8 @@ img.lazy-image.loaded {
 }
 
 .default-form .form-group textarea {
-  height: 220px;
+  /* height: 220px; 
+    height: 130px;*/
   resize: none;
 }
 
@@ -4288,7 +4290,7 @@ img.lazy-image.loaded {
 ***/
 .we-do-section {
   position: relative;
-  padding: 240px 0px 90px;
+  padding: 80px 0px 90px;
   background: #ffffff url(../images/background/pattern-2.png) left top repeat;
 }
 
@@ -8982,8 +8984,8 @@ img.lazy-image.loaded {
 .feature-eight__image img {
   max-width: 100%;
   border-radius: 8px;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
+  /* -webkit-filter: grayscale(100%); */
+  /* filter: grayscale(100%); */
   background-color: #1c1e22;
   display: block;
   margin-left: auto;
@@ -9018,11 +9020,12 @@ img.lazy-image.loaded {
 }
 @media (min-width: 1200px) {
   .feature-eight__content {
-    padding: 100px;
+    /* padding: 100px; */
+    padding: 50px;
   }
 }
 .feature-eight__text {
-  margin-bottom: 35px;
+  /* margin-bottom: 35px; */
 }
 
 .feature-eight .progress-box {
@@ -9828,7 +9831,9 @@ img.lazy-image.loaded {
 .work-tabs .tab-buttons .tab-btn {
   position: relative;
   float: left;
-  width: 33.333%;
+  width: 24%;
+  /* width custom */
+
   line-height: 40px;
   font-size: 30px;
   font-weight: 400;
@@ -16543,12 +16548,13 @@ img.lazy-image.loaded {
   .history-timeline__card:after {
     content: "";
     width: 1px;
-    height: 100%;
+    height: 90%;
     background-color: #e9ebee;
     position: absolute;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-    top: 0;
+    /* top: 0; */
+    top: 15%;
     left: 50%;
   }
 }
@@ -17052,7 +17058,8 @@ img.lazy-image.loaded {
 }
 
 .sec-title-eight {
-  margin-bottom: 47px;
+  /* margin-bottom: 47px; */
+  margin-bottom: 20px;
 }
 
 .sec-title-eight__text {
@@ -21757,8 +21764,14 @@ img.lazy-image.loaded {
 }
 @media (min-width: 1200px) {
   .about-ten__content {
-    padding-left: 100px;
-    padding-top: 116px;
+    /* padding-left: 100px; */
+    padding-right: 100px;
+    /* padding-top: 116px; */
+  }
+  .about-ten1__content {
+    /* padding-left: 100px; */
+    padding-right: 60px;
+    padding-top: 30px;
   }
 }
 .about-ten__text {
@@ -21783,7 +21796,8 @@ img.lazy-image.loaded {
 
 @media (min-width: 1200px) {
   .about-ten__box + .about-ten__box {
-    margin-top: 53px;
+    /* margin-top: 53px; */
+    margin-top: 13px;
   }
 }
 .about-ten__box {
@@ -22994,7 +23008,7 @@ img.lazy-image.loaded {
 }
 
 .contact-two__text {
-  max-width: 351px;
+  /* max-width: 351px; */
   margin: 0;
   font-size: 16px;
   line-height: 34px;
@@ -30053,6 +30067,7 @@ img.lazy-image.loaded {
 }
 .contact-twelev .default-form .form-group textarea {
   height: 315px;
+
 }
 .contact-twelev .default-form .form-group {
   margin-bottom: 20px;

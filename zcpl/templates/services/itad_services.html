@@ -1,72 +1,70 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <!-- Banner Section -->
 
-      <section class="slider-six">
-        <div class="slider-six__curv">
-          <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
+<section class="slider-six">
+  <div class="slider-six__curv">
+    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
                 <path fill="currentColor"
                     d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
             </svg> -->
-        </div>
-        <!-- /.slider-six__curv -->
+  </div>
+  <!-- /.slider-six__curv -->
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
         <div
-          class="swiper-container thm-swiper__slider"
-          data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
-        >
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div
-                class="image-layer"
-                style="
-                  background-image: url(images/update-01-10-2021/slider/slider-six-1-1.jpg);
-                "
-              ></div>
-              <!-- /.image-layer -->
-              <div class="auto-container">
-                <div class="slider-six__content">
-                  <p class="slider-six__text"><span>Services</span></p>
-                  <!-- /.slider-six__text -->
-                  <h2 class="slider-six__title">
-                    Expert IT Support to Keep Your Business Running Smoothly,
-                    Anytime, Anywhere.
-                  </h2>
-                  <!-- /.slider-six__title -->
-                  <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
-                  <!-- /.thm-btn__six -->
-                </div>
-                <!-- /.slider-six__content -->
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div
-                class="image-layer"
-                style="
-                  background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
-                "
-              ></div>
-              <!-- /.image-layer -->
-              <div class="auto-container">
-                <div class="slider-six__content">
-                  <p class="slider-six__text">
-                    <span>Welcome to best linoor business agency</span>
-                  </p>
-                  <!-- /.slider-six__text -->
-                  <h2 class="slider-six__title">
-                    meet the corporate <br />
-                    business agency
-                  </h2>
-                  <!-- /.slider-six__title -->
-                  <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
-                  <!-- /.thm-btn__six -->
-                </div>
-                <!-- /.slider-six__content -->
-              </div>
-            </div>
+          class="image-layer"
+          style="
+            background-image: url(images/update-01-10-2021/slider/slider-six-1-1.jpg);
+          "
+        ></div>
+        <!-- /.image-layer -->
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text"><span>ITAD Services</span></p>
+            <!-- /.slider-six__text -->
+            <h2 class="slider-six__title">
+              Safely and Sustainably Dispose of Your IT Assets with Zaco's
+              Expert ITAD Services
+            </h2>
+            <!-- /.slider-six__title -->
+            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+            <!-- /.thm-btn__six -->
           </div>
-          <!-- If we need navigation buttons -->
-          <!-- <div class="slider-bottom-box clearfix">
+          <!-- /.slider-six__content -->
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="
+            background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
+          "
+        ></div>
+        <!-- /.image-layer -->
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text">
+              <span>Welcome to best linoor business agency</span>
+            </p>
+            <!-- /.slider-six__text -->
+            <h2 class="slider-six__title">
+              meet the corporate <br />
+              business agency
+            </h2>
+            <!-- /.slider-six__title -->
+            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+            <!-- /.thm-btn__six -->
+          </div>
+          <!-- /.slider-six__content -->
+        </div>
+      </div>
+    </div>
+    <!-- If we need navigation buttons -->
+    <!-- <div class="slider-bottom-box clearfix">
                 <div class="main-slider__nav">
                     <div class="swiper-button-prev" id="main-slider__swiper-button-next">
                         <span class="fa fa-angle-left"></span>
@@ -76,9 +74,370 @@
                     </div>
                 </div>
             </div> -->
+  </div>
+</section>
+<!-- /.slider-six -->
+
+<!--Contact Section-->
+<section class="contact-section contact-two">
+  <div class="auto-container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="contact-two__content">
+          <div class="sec-title">
+            <h2>
+              Sell your IT Equipment & Server Hardware to Zaco
+              <span class="dot">.</span>
+            </h2>
+          </div>
+          <p class="contact-two__text">
+            As technology advances, organizations are often left managing large
+            volumes of aging or obsolete IT equipment that have reached end of
+            life. From servers to storages, and networking gear, outdated assets
+            need to be retired properly according to regulations through IT
+            asset disposition (ITAD) services.
+          </p>
+          <p class="contact-two__text">
+            Zaco's comprehensive IT asset disposition services provide a
+            solution to help clients worldwide safely and sustainably dispose of
+            all types of outdated IT assets. With over 15 years of experience in
+            ITAD, we have the expertise and global infrastructure to handle
+            large-scale ITAD projects.
+          </p>
+          <!-- /.contact-two__text -->
+          <div class="contact-two__social">
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-facebook"></a>
+            <a href="#" class="fab fa-pinterest-p"></a>
+            <a href="#" class="fab fa-instagram"></a>
+          </div>
+          <!-- /.contact-two__social -->
         </div>
-      </section>
-      <!-- /.slider-six -->
+        <!-- /.contact-two__content -->
+      </div>
+      <!-- /.col-lg-4 -->
+      <div class="col-lg-6">
+        <div class="form-box">
+          <div class="default-form">
+            <form method="post" action="sendemail.php">
+              <div class="row clearfix">
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="field-inner">
+                    <input
+                      type="text"
+                      name="username"
+                      value=""
+                      placeholder="Your Name"
+                      required=""
+                    />
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="field-inner">
+                    <input
+                      type="number"
+                      name="contact"
+                      value=""
+                      placeholder="contact"
+                      required=""
+                    />
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="field-inner">
+                    <input
+                      type="text"
+                      name="company"
+                      value=""
+                      placeholder="Company"
+                      required=""
+                    />
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="field-inner">
+                    <input
+                      type="email"
+                      name="email"
+                      value=""
+                      placeholder="Email Address"
+                      required=""
+                    />
+                  </div>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                  <div class="field-inner">
+                    <input
+                      type="text"
+                      name="location"
+                      value=""
+                      placeholder="Location/City"
+                      required=""
+                    />
+                  </div>
+                </div>
 
+                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                  <div class="field-inner">
+                    <textarea
+                      name="message"
+                      placeholder="Write M1essage"
+                      required=""
+                    ></textarea>
+                  </div>
+                </div>
 
-      {% endblock %}
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="">
+                    <label for="fileUpload">Upload a file:</label>
+                    <input
+                      type="file"
+                      id=""
+                      name="fileUpload"
+                      accept=".docx, .xlsx, .pdf"
+                    />
+                    <p>Accepted file: .docx, .xlsx, .pdf</p>
+                  </div>
+                </div>
+
+                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                  <button class="theme-btn btn-style-one">
+                    <i class="btn-curve"></i>
+                    <span class="btn-title">Send message</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-8 -->
+    </div>
+    <!-- /.row -->
+  </div>
+</section>
+<!--We DO Section-->
+
+<section class="we-do-section">
+  <div class="auto-container">
+    <div class="row clearfix">
+      <!--Left Column-->
+
+      <!--Right Column-->
+      <div class="right-col col-lg-12 col-md-12 col-sm-12">
+        <div class="sec-title-eight text-center">
+          <h2 class="sec-title-eight__title">IT Equipment BuyBack Benefits</h2>
+        </div>
+        <div class="inner">
+          <div class="faq-box">
+            <ul class="accordion-box clearfix">
+              <!--Block-->
+              <li class="accordion block active-block">
+                <div class="acc-btn active">
+                  <span class="count">1.</span> Exchange Your IT Equipment
+                </div>
+                <div class="acc-content current">
+                  <div class="content">
+                    <div class="text">
+                      Zaco is currently a leading supplier for servers, storages
+                      and IT equipment. Our massive inventory caters to our
+                      existing global clients and we can help you in choosing
+                      the correct IT equipment for your business. We even give
+                      options for exchanging your existing hardware with a new
+                      one at a discounted price.
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!--Block-->
+              <li class="accordion block">
+                <div class="acc-btn">
+                  <span class="count">2.</span>Convert IT Assets into Quick
+                  Money
+                </div>
+                <div class="acc-content">
+                  <div class="content">
+                    <div class="text">
+                      You can turn in used IT server equipment that will
+                      generate cash inflow for you. This can be useful for
+                      obtaining new IT assets for your company or achieving any
+                      other business objectives.
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <!--Block-->
+              <li class="accordion block">
+                <div class="acc-btn">
+                  <span class="count">3.</span> Helping the Environment
+                </div>
+                <div class="acc-content">
+                  <div class="content">
+                    <div class="text">
+                      You are helping our environment in the process as Zaco
+                      takes care of disposing and recycling of old servers and
+                      all the IT equipment. We appreciate your contribution
+                      towards a sustainable environment for our future.
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="history-timeline">
+  <div class="auto-container">
+    <div class="history-timeline__card">
+      <div class="row">
+        <div class="sec-title-eight text-center " style="padding-block:50px">
+          <h2 class="sec-title-eight__title">
+            Simple IT Equipment BuyBack Process at Zaco
+          </h2>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="history-timeline__info">
+            <span class="history-timeline__date"></span>
+            <h3 class="history-timeline__title">Request a Quote</h3>
+            <!-- /.history-timeline__title -->
+            <p class="history-timeline__text">
+              Submit details of the equipment for IT asset disposition through our online form or contact a representative. We will provide a customized quote for our ITAD services within 1-2 business days.
+            </p>
+          </div>
+          <!-- /.history-timeline__info -->
+        </div>
+        <!-- /.col-md-12 col-lg-6 -->
+        <div class="col-md-12 col-lg-6"></div>
+        <!-- /.col-md-12 col-lg-6 -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="history-timeline__info">
+            <span class="history-timeline__date"></span>
+            <h3 class="history-timeline__title">IT Asset Evaluation</h3>
+            <!-- /.history-timeline__title -->
+            <p class="history-timeline__text">
+              Our certified technicians will then inspect the assets either on-site or remotely to assess each item's condition and data security requirements. A detailed inventory report will then be issued and shared.
+            </p>
+          </div>
+          <!-- /.history-timeline__info -->
+        </div>
+        <!-- /.col-md-12 col-lg-6 -->
+        <div class="col-md-12 col-lg-6">
+          <div class="history-timeline__image">
+            <img
+              src="images/update-26-02-2021/resources/history-1-1.jpg"
+              alt=""
+            />
+          </div>
+          <!-- /.history-timeline__image -->
+        </div>
+        <!-- /.col-md-12 col-lg-6 -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="history-timeline__info">
+            <span class="history-timeline__date"></span>
+            <h3 class="history-timeline__title">Secure Data Erasure
+            </h3>
+            <!-- /.history-timeline__title -->
+            <p class="history-timeline__text">
+              Using (Environmental Protection Agency) EPA-approved methods, we ensure all customer data and sensitive information is destroyed beyond forensic recovery.
+            </p>
+          </div>
+          <!-- /.history-timeline__info -->
+        </div>
+        <!-- /.col-md-12 col-lg-6 -->
+        <div class="col-md-12 col-lg-6"></div>
+        <!-- /.col-md-12 col-lg-6 -->
+      </div>
+      <!-- /.row -->
+            <!-- /.row -->
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <div class="history-timeline__info">
+                  <span class="history-timeline__date"></span>
+                  <h3 class="history-timeline__title">Payment</h3>
+                  <!-- /.history-timeline__title -->
+                  <p class="history-timeline__text">
+                    Once processing is complete, we will pay you promptly for the assets as per the agreed quote for our ITAD services. Comprehensive documentation is provided.
+                  </p>
+                </div>
+                <!-- /.history-timeline__info -->
+              </div>
+              <!-- /.col-md-12 col-lg-6 -->
+              <div class="col-md-12 col-lg-6">
+                <div class="history-timeline__image">
+                  <img
+                    src="images/update-26-02-2021/resources/history-1-1.jpg"
+                    alt=""
+                  />
+                </div>
+                <!-- /.history-timeline__image -->
+              </div>
+              <!-- /.col-md-12 col-lg-6 -->
+            </div>
+    </div>
+
+    <!-- /.history-timeline__card -->
+  </div>
+  <!-- /.auto-container -->
+</section>
+<!-- /.history-timeline -->
+<section class="video-six">
+  <div
+    class="video-six__parallax jarallax"
+    data-jarallax
+    data-speed="0.3"
+    data-imgPosition="50% 80%"
+  >
+    <img
+      src="images/update-01-10-2021/background/video-six-bg-1.jpg"
+      class="jarallax-img"
+      alt=""
+    />
+  </div>
+  <div class="auto-container">
+    <div class="video-six__inner">
+      <h3 class="video-six__title">
+        For any queries or support, feel free to get in touch with us.
+      </h3>
+      <!-- /.video-six__title -->
+      <div class="video-six__video">
+        <!-- <h3 class="video-six__video__text">Watch video</h3>
+     
+        <a
+          href="https://www.youtube.com/watch?v=8DP4NgupAhI"
+          class="lightbox-image video-six__btn"
+        >
+          <i class="fa fa-play"></i>
+          <i class="ripple"></i> </a
+        > -->
+        <div class="link-box">
+          <a
+            class="theme-btn btn-style-one"
+            href="about.html"
+            style="background-color: #ffaa17"
+          >
+            <i class="btn-curve"></i>
+            <span class="btn-title">Contact Us</span>
+          </a>
+        </div>
+      </div>
+      <!-- /.video-six__video -->
+    </div>
+    <!-- /.video-six__inner -->
+  </div>
+  <!-- /.auto-container -->
+</section>
+<!-- /.video-six -->
+
+{% endblock %}

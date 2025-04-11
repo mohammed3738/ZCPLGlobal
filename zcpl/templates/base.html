@@ -239,7 +239,7 @@
                                           <li><a href="partners.html">Our Partner</a></li>
                                       </ul> -->
                                   </li>
-                                  <li class="dropdown"><a href="#">Pages</a>
+                                  <li class="dropdown"><a href="#">Shop</a>
                                       <!-- <ul>
                                           <li><a href="pricing.html">Our Pricing </a></li>
                                           <li><a href="pricing-2.html">Pricing 02</a></li>
@@ -259,16 +259,18 @@
                                       </ul> -->
                                   </li>
                                   <li class="dropdown"><a href="{% url 'services' %}">Services</a>
-                                      <!-- <ul>
-                                          <li><a href="services.html">All Services</a></li>
-                                          <li><a href="services-2.html">Services Two</a></li>
-                                          <li><a href="web-development.html">Website Development</a></li>
+                                      <ul>
+                                          <li><a href="{% url 'it-hardware' %}">IT Hardware</a></li>
+                                          <li><a href="{% url 'server-maintenance' %}">Server Maintenance</a></li>
+                                          <li><a href="{% url 'storage-maintenance' %}">Storage Maintenance</a></li>
+                                          <li><a href="{% url 'network-maintenance' %}">Network Maintenance</a></li>
+                                          <li><a href="{% url 'rental-services' %}">Rental Services</a></li>
                                           <li><a href="graphic-designing.html">Graphic Designing</a></li>
                                           <li><a href="digital-marketing.html">Digital Marketing</a></li>
                                           <li><a href="seo.html">SEO & Content Writting</a></li>
                                           <li><a href="app-development.html">App Development</a></li>
-                                          <li><a href="ui-designing.html">UI/UX Designing</a></li>
-                                      </ul> -->
+                                          <li><a href="ui-designing.html">UI/UX Designing</a></li> 
+                                      </ul> 
                                   </li>
                                   <li class="dropdown"><a href="{% url 'itad-services' %}">ITAD Services</a>
                                       <!-- <ul>
@@ -285,7 +287,7 @@
                                               </a></li>
                                       </ul> -->
                                   </li>
-                                  <li class="dropdown"><a href="shop.html">Shop</a>
+                                  <li class="dropdown"><a href="shop.html">Global Operations</a>
                                       <!-- <ul>
                                           <li><a href="shop.html">Shop Page</a></li>
                                           <li><a href="product-details.html">Product Details</a></li>
@@ -293,7 +295,7 @@
                                           <li><a href="checkout.html">Checkout Page</a></li>
                                       </ul> -->
                                   </li>
-                                  <li class="dropdown"><a href="blog-grid.html">Blog</a>
+                                  {% comment %} <li class="dropdown"><a href="blog-grid.html">Blog</a> {% endcomment %}
                                       <!-- <ul>
                     <li><a href="blog.html">Blog Right Sidebar</a></li>
                     <li><a href="blog-left.html">Blog Left Sidebar <span>new</span></a></li>
@@ -302,7 +304,7 @@
                   </ul> -->
                                   </li>
                                   <li class="dropdown">
-                                      <a href="contact.html">Contact</a>
+                                      <a href="contact.html">Contact Us</a>
                                       <!-- <ul>
                                           <li><a href="contact.html">Contact 01</a></li>
                                           <li><a href="contact-2.html">Contact 02 <span>New</span></a></li>
