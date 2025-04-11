@@ -9020,11 +9020,12 @@ img.lazy-image.loaded {
 }
 @media (min-width: 1200px) {
   .feature-eight__content {
-    padding: 100px;
+    /* padding: 100px; */
+    padding: 50px;
   }
 }
 .feature-eight__text {
-  margin-bottom: 35px;
+  /* margin-bottom: 35px; */
 }
 
 .feature-eight .progress-box {
@@ -21764,7 +21765,8 @@ img.lazy-image.loaded {
 }
 @media (min-width: 1200px) {
   .about-ten__content {
-    padding-left: 100px;
+    /* padding-left: 100px; */
+    padding-right: 100px;
     /* padding-top: 116px; */
   }
   .about-ten1__content {
