@@ -11,6 +11,8 @@ urlpatterns = [
     path('it-hardware',views.it_hardware,name="it-hardware"),
     path('server-maintenance',views.server_maintenance,name="server-maintenance"),
     path('storage-maintenance',views.storage_maintenance,name="storage-maintenance"),
+    path('network-maintenance',views.network_maintenance,name="network-maintenance"),
+    path('rental-services',views.rental_services,name="rental-services"),
 
 
 

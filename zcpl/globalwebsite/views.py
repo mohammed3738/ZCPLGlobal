@@ -21,3 +21,9 @@ def server_maintenance(request):
 
 def storage_maintenance(request):
     return render(request,'services/storage_maintenance.html')
+
+def network_maintenance(request):
+    return render(request,'services/network_maintenance.html')
+
+def rental_services(request):
+    return render(request,'services/rental_services.html')
