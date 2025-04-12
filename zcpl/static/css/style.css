@@ -5090,7 +5090,7 @@ img.lazy-image.loaded {
   position: relative;
   display: block;
   min-height: 260px;
-  padding: 115px 0px 0px 110px;
+  padding: 115px 0px 0px 80px;
   background: #ffffff;
   border-radius: 7px 0px 0px 0px;
 }
