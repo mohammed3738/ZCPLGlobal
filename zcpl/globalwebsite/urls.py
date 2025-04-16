@@ -13,6 +13,7 @@ urlpatterns = [
     path('storage-maintenance',views.storage_maintenance,name="storage-maintenance"),
     path('network-maintenance',views.network_maintenance,name="network-maintenance"),
     path('rental-services',views.rental_services,name="rental-services"),
+    path('infrastructure-managed-service',views.infrastructure_service,name="infrastructure-managed-service"),
 
 
 

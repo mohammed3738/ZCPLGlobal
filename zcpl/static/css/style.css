@@ -21773,6 +21773,11 @@ img.lazy-image.loaded {
     padding-right: 60px;
     padding-top: 30px;
   }
+  .about-ten2__content {
+    padding-left: 100px;
+    /* padding-right: 60px; */
+    padding-top: 30px;
+  }
 }
 .about-ten__text {
   color: var(--thm-base);

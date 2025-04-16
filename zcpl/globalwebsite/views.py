@@ -27,3 +27,6 @@ def network_maintenance(request):
 
 def rental_services(request):
     return render(request,'services/rental_services.html')
+
+def infrastructure_service(request):
+    return render(request,'services/infrastructure_service.html')
