@@ -1,0 +1,229 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Banner Section -->
+
+<section class="slider-six">
+  <div class="slider-six__curv">
+
+  </div>
+
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="background-image: url({% static "images/about-us/about-us-1.jpg" %})"
+
+
+        ></div>
+        <!-- /.image-layer -->
+        <div class="auto-container">
+          <div class="slider-six__content">
+            {% comment %}
+            <p class="slider-six__text"><span>About</span></p>
+            {% endcomment %}
+            <!-- /.slider-six__text -->
+            <h2 class="slider-six__title">Contact</h2>
+            <!-- /.slider-six__title -->
+            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+            <!-- /.thm-btn__six -->
+          </div>
+          <!-- /.slider-six__content -->
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="sec-title-eight text-center " style="padding-top:30px" >
+    <h2 class="sec-title-eight__title">Offices Near you</h2>
+  </div>
+
+  <div class="cards-container-contact-1">
+    <div class="card-contact-contact-1" >
+        <div class="country-header-contact">INDIA</div>
+    </div>
+
+    <div class="card-contact-contact-1" >
+        <div class="country-header-contact">U.K</div>
+    </div>
+  </div>
+  <div class="cards-container-contact">
+    <div
+      class="card-contact-contact"
+    
+        style="background-image: url({% static "images/update-01-10-2021/resources/mumbai-2.webp" %})"
+    >
+      <div class="card-overlay-contact">
+        <h2 style="color: white">Zaco Computers Pvt Ltd(H.O)</h2>
+        <p>
+          3, DLH Park, S. V. Road, Goregaon (West), Mumbai – 400062.
+          Maharashtra, India.
+        </p>
+        <p>
+          <strong>Office Timings:</strong><br />
+          Monday to Saturday 10:00 am to 7:00 pm IST
+        </p>
+        <a href="mailto:info@zacocomputer.com" class="btn"
+          >info@zacocomputer.com</a
+        >
+        <a href="tel:+912269288800" class="btn">+91-22-69288800</a>
+      </div>
+    </div>
+
+    <div
+      class="card-contact-contact"
+
+      style="background-image: url({% static "images/update-01-10-2021/resources/UK-office.webp" %})"
+    >
+      <div class="card-overlay-contact">
+        <h2 style="color: white">Zaco Computers UK Limited</h2>
+        <p>124 City Road, London, England, EC1V 2NX.</p>
+        <p>
+          <strong>Office Timings:</strong><br />
+          Monday to Saturday 10:00 am to 7:00 pm IST
+        </p>
+        <a href="mailto:info@zacocomputer.com" class="btn"
+          >info@zacocomputer.com</a
+        >
+        <a href="tel:+447785246591" class="btn">+44-7785246591</a>
+        <a href="tel:+442038158028" class="btn">+44 203 815 8028</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="cards-container-contact-1">
+    <div class="card-contact-contact-1" >
+        <div class="country-header-contact">UAE</div>
+    </div>
+
+    <div class="card-contact-contact-1" >
+        <div class="country-header-contact">CANADA</div>
+
+    </div>
+  </div>
+
+  <div class="cards-container-contact">
+    <div
+      class="card-contact-contact"
+    
+        style="background-image: url({% static "images/update-01-10-2021/resources/mumbai-2.webp" %})"
+    >
+      <div class="card-overlay-contact">
+        <h2 style="color: white">Zaco IT Solutions FZE</h2>
+        <p>
+            B.C 1303474, First Floor, AFZ-B1, Ajman, UAE.
+        </p>
+        <p>
+          <strong>Office Timings:</strong><br />
+          Monday to Saturday 10:00 am to 7:00 pm IST
+        </p>
+        <a href="mailto:info@zacocomputer.com" class="btn"
+          >info@zacocomputer.com</a
+        >
+        <a href="tel:+912269288800" class="btn">+91-22-69288800</a>
+      </div>
+    </div>
+
+    <div
+      class="card-contact-contact"
+
+      style="background-image: url({% static "images/update-01-10-2021/resources/UK-office.webp" %})"
+    >
+      <div class="card-overlay-contact">
+        <h2 style="color: white">Zaco IT Solutions FZE</h2>
+        <p>124 City Road, London, England, EC1V 2NX.</p>
+        <p>
+          <strong>Office Timings:</strong><br />
+          Monday to Saturday 10:00 am to 7:00 pm IST
+        </p>
+        <a href="mailto:info@zacocomputer.com" class="btn"
+          >info@zacocomputer.com</a
+        >
+        <a href="tel:+447785246591" class="btn">+44-7785246591</a>
+        <a href="tel:+442038158028" class="btn">+44 203 815 8028</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+  
+  
+</section>
+{% comment %} <div class="sec-title-eight text-center " style="padding-top:30px" >
+  <h2 class="sec-title-eight__title">Write Us a Message</h2>
+</div> {% endcomment %}
+
+
+
+        <!--Contact Section-->
+        <section class="contact-section">
+            <div class="auto-container">
+                {% comment %} <div class="sec-title centered">
+                    <h2>Offices near you<span class="dot">.</span></h2>
+                </div> {% endcomment %}
+
+       
+
+                <div class="map-box">
+                    <iframe class="map-iframe"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230899.1642407818!2d145.06327708904033!3d-37.792102974783376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65cd0db468a97%3A0xb61fde84306fc38a!2sMelbourne%20Zoo!5e0!3m2!1sen!2s!4v1592307685926!5m2!1sen!2s"
+                        style="border:0;" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+                <div class="form-box">
+                    {% comment %} <div class="sec-title">
+                        <h2>Write Us a Message<span class="dot">.</span></h2>
+                    </div> {% endcomment %}
+                    <div class="sec-title-eight text-center " style="padding-top:30px" >
+                        <h2 class="sec-title-eight__title">Write Us a Message</h2>
+                      </div>
+                    <div class="default-form">
+                        <form method="post" action="sendemail.php" id="contact-form">
+                            <div class="row clearfix">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <div class="field-inner">
+                                        <input type="text" name="username" value="" placeholder="Your Name" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <div class="field-inner">
+                                        <input type="email" name="email" value="" placeholder="Email Address"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <div class="field-inner">
+                                        <input type="text" name="phone" value="" placeholder="Phone Number" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <div class="field-inner">
+                                        <input type="text" name="subject" value="" placeholder="Subject" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <div class="field-inner">
+                                        <textarea name="message" placeholder="Write Message" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <button class="theme-btn btn-style-one">
+                                        <i class="btn-curve"></i>
+                                        <span class="btn-title">Send message</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

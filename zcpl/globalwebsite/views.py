@@ -6,9 +6,12 @@ def home(request):
 
 def about_us(request):
     return render(request,'main/about.html')
+def contact(request):
+    return render(request,'main/contact.html')
 
 def services(request):
     return render(request,'services/services.html')
+
 
 def itadservices(request):
     return render(request,'services/itad_services.html')
