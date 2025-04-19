@@ -31078,3 +31078,106 @@ img.lazy-image.loaded {
     padding: 11px 15px;
   }
 }
+
+
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
+}
+
+.container-contact {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px 0;
+}
+
+.country-header-contact {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ff7300;
+  padding: 10px 30px;
+  border: 2px solid #ff7300;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.cards-container-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  padding: 30px;
+}
+
+.card-contact-contact {
+  width: 550px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.cards-container-contact-1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  /* padding: 30px; */
+  padding-top: 40px;
+}
+
+.card-contact-contact-1 {
+  width: 550px;
+  /* height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); */
+}
+
+.card-overlay-contact {
+  background: rgba(0, 0, 0, 0.65); /* Slightly darker overlay */
+  color: white;
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.card-overlay-contact h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-overlay-contact p {
+  margin: 8px 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.btn {
+  background-color: #3b5998;
+  color: white;
+  padding: 8px 20px;
+  text-decoration: none;
+  border-radius: 50px;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
