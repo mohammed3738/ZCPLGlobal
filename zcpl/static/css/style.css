@@ -31103,9 +31103,9 @@ body {
 .country-header-contact {
   font-size: 28px;
   font-weight: 600;
-  color: #ff7300;
+  color: #1A3546;
   padding: 10px 30px;
-  border: 2px solid #ff7300;
+  border: 2px solid #41B974;
   border-radius: 5px;
   text-align: center;
 }
@@ -31134,11 +31134,12 @@ body {
   justify-content: center;
   gap: 50px;
   /* padding: 30px; */
-  padding-top: 40px;
+  padding-top: 25px;
 }
 
 .card-contact-contact-1 {
-  width: 550px;
+  margin-bottom: 25px;
+  /* width: 550px; */
   /* height: 400px;
   background-size: cover;
   background-position: center;
