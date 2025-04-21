@@ -33,3 +33,6 @@ def rental_services(request):
 
 def infrastructure_service(request):
     return render(request,'services/infrastructure_service.html')
+
+def global_it(request):
+    return render(request,'services/global_it.html')
