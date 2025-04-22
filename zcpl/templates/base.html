@@ -231,6 +231,20 @@
                     <span class="icon flaticon-email me-1"></span>
                     <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
                   </div>
+                  <div class="email d-flex align-items-center ms-3">
+                    <div>
+                      {% comment %} <label for="country" class="form-label">Select Country:</label> {% endcomment %}
+                      <select id="country" name="country" class="form-select" onchange="redirectToPage(this.value)">
+                        <option value="">-- Choose a Country --</option>
+
+                        <option value="{% url 'uk-home' %}">United Kingdom</option>
+                        <option value="india">India</option>
+                        <option value="uae">United Arab Emirates</option>
+                        <option value="canada">Canada</option>
+                      </select>
+                    </div>
+                    </div>
+                                    
                 </div>
                 
                 <!-- /.phone -->
@@ -529,6 +543,15 @@
       document.getElementById('closeSupportBar').addEventListener('click', function () {
         document.getElementById('supportBar').style.display = 'none';
       });
+
+
+
+      function redirectToPage(value) {
+        if (value) {
+          window.location.href = value;
+        }
+      }
+    
     </script>
     
   </body>
