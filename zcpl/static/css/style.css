@@ -18299,10 +18299,21 @@ img.lazy-image.loaded {
     margin-bottom: 0;
   }
 }
+/* .about-seven__images::before {
+  content: "";
+  width: 88%;
+  height: 88%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -40px;
+} */
+
 .about-seven__images::before {
   content: "";
   width: 88%;
   height: 88%;
+  background-color: var(--thm-base);
   border-radius: 50%;
   position: absolute;
   top: 0;
