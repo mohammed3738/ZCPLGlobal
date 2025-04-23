@@ -39,3 +39,8 @@ def global_it(request):
 
 def uk_home(request):
     return render(request,'uk/main/uk_home.html')
+
+def uae_home(request):
+    return render(request,'uae/uae_home.html')
+def canada_home(request):
+    return render(request,'canada/canada_home.html')
