@@ -7409,7 +7409,8 @@ img.lazy-image.loaded {
 ***/
 .featured-section {
   position: relative;
-  padding: 200px 0px 90px;
+  /* padding: 200px 0px 90px; */
+  padding: 100px 0px 30px;
   background: #ffffff url(../images/background/pattern-2.png) left top repeat;
 }
 
