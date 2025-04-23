@@ -4290,7 +4290,7 @@ img.lazy-image.loaded {
 ***/
 .we-do-section {
   position: relative;
-  padding: 80px 0px 90px;
+  padding: 70px 0px 49px;
   background: #ffffff url(../images/background/pattern-2.png) left top repeat;
 }
 
@@ -7715,7 +7715,9 @@ img.lazy-image.loaded {
 ***/
 .why-us-section {
   position: relative;
-  padding: 110px 0px 80px;
+  /* padding: 110px 0px 80px; */
+  padding: 50px 0px 50px;
+
   background: #ffffff;
 }
 
@@ -30783,7 +30785,8 @@ img.lazy-image.loaded {
 /*--- Tabs --*/
 .tabs-thirteen {
   position: relative;
-  padding: 120px 0 220px;
+  /* padding: 120px 0 220px; */
+  padding:50px 0 30px;
 }
 @media (max-width: 767px) {
   .tabs-thirteen {
