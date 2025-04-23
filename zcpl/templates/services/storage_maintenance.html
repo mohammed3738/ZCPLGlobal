@@ -20,7 +20,7 @@
               <div
                 class="image-layer"
                 style="
-                  background-image: url(images/update-01-10-2021/slider/slider-six-1-1.jpg);
+                  background-image: url({% static "images/services/storage-services-bk.jpg" %});
                 "
               ></div>
               <!-- /.image-layer -->
@@ -39,7 +39,7 @@
                 <!-- /.slider-six__content -->
               </div>
             </div>
-            <div class="swiper-slide">
+            {% comment %} <div class="swiper-slide">
               <div
                 class="image-layer"
                 style="
@@ -63,7 +63,7 @@
                 </div>
                 <!-- /.slider-six__content -->
               </div>
-            </div>
+            </div> {% endcomment %}
           </div>
           <!-- If we need navigation buttons -->
           <!-- <div class="slider-bottom-box clearfix">
@@ -279,7 +279,7 @@
                                 <div class="image-col col-lg-5 col-md-6 col-sm-12">
                                     <div class="inner">
                                         <div class="image">
-                                            <img src="images/resource/featured-image-14.jpg" alt="">
+                                            <img src="{% static "images/services/customer-focus.jpg" %}" alt="">
                                         </div>
                                     </div>
                                 </div>
