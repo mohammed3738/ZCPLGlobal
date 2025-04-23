@@ -3808,7 +3808,8 @@ img.lazy-image.loaded {
 ***/
 .about-section {
   position: relative;
-  padding: 120px 0px 90px;
+  /* padding: 120px 0px 90px; */
+  padding: 90px 0px 90px;
   background: #ffffff;
 }
 
@@ -5736,7 +5737,8 @@ img.lazy-image.loaded {
 ***/
 .agency-section {
   position: relative;
-  padding: 120px 0px 80px;
+  /* padding: 120px 0px 80px; */
+  padding: 80px 0px 80px;
   background: #ffffff url(../images/background/pattern-2.png) left top repeat;
 }
 
@@ -9464,7 +9466,8 @@ img.lazy-image.loaded {
 ***/
 .services-section-three {
   position: relative;
-  padding: 0px 0px 90px;
+  padding: 40px 0px 90px;
+  /* padding: 0px 0px 90px; */
   background: #ffffff;
 }
 
@@ -18138,8 +18141,10 @@ img.lazy-image.loaded {
 /* sponsor six */
 .sponsor-six {
   border-bottom: 1px solid #e2e7ea;
-  padding-bottom: 120px;
-  padding-top: 120px;
+  /* padding-bottom: 120px;
+  padding-top: 120px; */
+  padding-bottom: 90px;
+  padding-top: 90px;
 }
 
 .sponsor-six img {
@@ -18168,7 +18173,8 @@ img.lazy-image.loaded {
 }
 @media (min-width: 1200px) {
   .about-six {
-    padding-bottom: 235px;
+    /* padding-bottom: 235px; */
+    padding-bottom: 100px;
   }
 }
 .about-six__curv svg {
@@ -18285,8 +18291,10 @@ img.lazy-image.loaded {
 
 /* about seven */
 .about-seven {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  /* padding-top: 120px;
+  padding-bottom: 120px; */
+  padding-top: 90px;
+  padding-bottom: 90px;
 }
 
 .about-seven__images {
@@ -21578,7 +21586,8 @@ img.lazy-image.loaded {
 
 @media (min-width: 1200px) {
   .project-eight {
-    padding-top: 116px;
+    /* padding-top: 116px; */
+    padding-top: 90px;
     padding-bottom: 120px;
   }
 }
