@@ -207,7 +207,6 @@
                   >1800 209 1986</a
                 >
               </div>
-              
             </div>
           </div>
         </div>
@@ -218,37 +217,45 @@
             <div class="auto-container">
               <p>Your Trusted IT Infrastructure Partner.</p>
               <div class="right-content">
-                
                 <div class="contact-info d-flex align-items-center">
                   <div class="phone d-flex align-items-center me-3">
                     <span class="icon flaticon-call me-1"></span>
                     <a href="tel:022 6928 8800">022 6928 8800</a>
                   </div>
-                
+
                   <span class="separator mx-2">|</span>
-                
+
                   <div class="email d-flex align-items-center ms-3">
                     <span class="icon flaticon-email me-1"></span>
-                    <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
+                    <a href="mailto:info@zacocomputer.com"
+                      >info@zacocomputer.com</a
+                    >
                   </div>
                   <div class="email d-flex align-items-center ms-3">
                     <div>
-                      {% comment %} <label for="country" class="form-label">Select Country:</label> {% endcomment %}
-                      <select id="country" name="country" class="form-select" onchange="redirectToPage(this.value)">
-                        <option value="">-- Choose a Country --</option>
-
-                        <option value="{% url 'uk-home' %}">United Kingdom</option>
-                        <option value="india">India</option>
-                        <option value="{% url 'uae-home' %}">United Arab Emirates</option>
-                        <option value="{% url 'canada-home' %}">Canada</option>
-                      </select>
+                      {% comment %}
+                      <label for="country" class="form-label"
+                        >Select Country:</label
+                      >
+                      {% endcomment %}
+                      <select
+  id="country"
+  name="country"
+  class="form-select"
+  onchange="redirectToPage(this.value)"
+>
+  <option value="">-- Choose a Country --</option>
+  <option value="{% url 'uk-home' %}">United Kingdom</option>
+  <option value="india">India</option>
+  <option value="{% url 'uae-home' %}">United Arab Emirates</option>
+  <option value="{% url 'canada-home' %}">Canada</option>
+</select>
                     </div>
-                    </div>
-                                    
+                  </div>
                 </div>
-                
+
                 <!-- /.phone -->
-                
+
                 <!-- /.social-links -->
               </div>
               <!-- /.right-content -->
@@ -335,7 +342,7 @@
                             >Server Maintenance</a
                           >
                         </li>
-                       
+
                         <li>
                           <a href="{% url 'storage-maintenance' %}"
                             >Storage Maintenance</a
@@ -356,7 +363,7 @@
                             >Infrastructure Managed Service</a
                           >
                         </li>
-                         {% comment %}
+                        {% comment %}
                         <li>
                           <a href="graphic-designing.html">Graphic Designing</a>
                         </li>
@@ -396,7 +403,7 @@
                                               </a></li>
                                       </ul> -->
                     </li>
-                    
+
                     {% comment %}
                     <li class="dropdown">
                       <a href="blog-grid.html">Blog</a> {% endcomment %}
@@ -540,19 +547,25 @@
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="{% static 'js/color-switcher.js' %}"></script>
     <script>
-      document.getElementById('closeSupportBar').addEventListener('click', function () {
-        document.getElementById('supportBar').style.display = 'none';
-      });
-
-
-
       function redirectToPage(value) {
         if (value) {
+          // redirect
           window.location.href = value;
         }
       }
     
-    </script>
+      window.onload = function () {
+        const currentURL = window.location.pathname; // e.g. "/india/" or "/uk/"
+        const selectElement = document.getElementById('country');
+        const options = selectElement.options;
     
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value && currentURL.startsWith(options[i].value)) {
+            options[i].selected = true;
+            break;
+          }
+        }
+      };
+    </script>
   </body>
 </html>
