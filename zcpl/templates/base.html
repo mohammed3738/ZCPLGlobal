@@ -234,18 +234,13 @@
                   </div>
                   <div class="email d-flex align-items-center ms-3">
                     <div>
-                      {% comment %}
-                      <label for="country" class="form-label"
-                        >Select Country:</label
-                      >
-                      {% endcomment %}
                       <select
                         id="country"
                         name="country"
                         class="form-select"
                         onchange="redirectToPage(this.value)"
                       >
-                        <option value="">-- Choose a Country --</option>
+                        <option value="{% url "home" %}">Global</option>
                         <option value="{% url 'uk-home' %}">
                           United Kingdom
                         </option>
@@ -298,42 +293,9 @@
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'about_us' %}">About Us</a>
-                      <!-- <ul>
-                                          <li><a href="about-2.html">About Two </a></li>
-                                          <li><a href="about-me.html">About Me </a></li>
-                                          <li><a href="mission.html">Our Mission </a></li>
-                                          <li><a href="history.html">Our History </a></li>
-                                          <li class="dropdown">
-                                              <a href="team.html">Our Team </a>
-                                              <ul>
-                                                  <li><a href="team.html">Team 01</a></li>
-                                                  <li><a href="team-2.html">Team 02</a></li>
-                                                  <li><a href="team-3.html">Team 03</a></li>
-                                              </ul>
-                                          </li>
-                                          <li><a href="process.html">Our Process </a></li>
-                                          <li><a href="partners.html">Our Partner</a></li>
-                                      </ul> -->
                     </li>
                     <li class="dropdown">
                       <a href="#">Shop</a>
-                      <!-- <ul>
-                                          <li><a href="pricing.html">Our Pricing </a></li>
-                                          <li><a href="pricing-2.html">Pricing 02</a></li>
-                                          <li><a href="how-it-works.html">How it Works </a></li>
-                                          <li><a href="coming-soon.html">Coming Soon </a></li>
-                                          <li><a href="testimonials.html">Testimonials</a></li>
-                                          <li><a href="testimonials-2.html">Testimonials Two </a></li>
-                                          <li><a href="faqs.html">FAQs</a></li>
-                                          <li><a href="events.html">Events </a></li>
-                                          <li><a href="event-details.html">Event Details </a></li>
-                                          <li><a href="clients.html">Clients Page </a></li>
-                                          <li><a href="not-found.html">404 Page</a></li>
-                                          <li><a href="login.html">Login Page</a></li>
-                                          <li><a href="register.html">Register Page</a></li>
-                                          <li><a href="forgot-password.html">Forget Page</a></li>
-                                          <li><a href="under-construction.html">Under Construction</a></li>
-                                      </ul> -->
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'services' %}">Services</a>
@@ -367,63 +329,22 @@
                             >Infrastructure Managed Service</a
                           >
                         </li>
-                        {% comment %}
-                        <li>
-                          <a href="graphic-designing.html">Graphic Designing</a>
-                        </li>
-                        <li>
-                          <a href="digital-marketing.html">Digital Marketing</a>
-                        </li>
-                        <li><a href="seo.html">SEO & Content Writting</a></li>
-                        <li>
-                          <a href="app-development.html">App Development</a>
-                        </li>
-                        <li><a href="ui-designing.html">UI/UX Designing</a></li>
-                        {% endcomment %}
+                       
                       </ul>
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'global-it' %}">Global IT Support</a>
-                      <!-- <ul>
-                                          <li><a href="shop.html">Shop Page</a></li>
-                                          <li><a href="product-details.html">Product Details</a></li>
-                                          <li><a href="cart.html">Cart Page</a></li>
-                                          <li><a href="checkout.html">Checkout Page</a></li>
-                                      </ul> -->
+                      
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'itad-services' %}">ITAD Services</a>
-                      <!-- <ul>
-                                          <li><a href="portfolio.html">Portfolio</a></li>
-                                          <li><a href="portfolio-2-columns.html">Portfolio 2 Col <span>new</span></a>
-                                          </li>
-                                          <li><a href="portfolio-4-columns.html">Portfolio 4 Col <span>new</span></a>
-                                          </li>
-                                          <li><a href="portfolio-masonary.html">Portfolio Masonary
-                                                  <span>new</span></a></li>
-                                          <li><a href="portfolio-single.html">Portfolio Single 01</a></li>
-                                          <li><a href="portfolio-single-2.html">Portfolio Single 02</a></li>
-                                          <li><a href="portfolio-single-3.html">Portfolio Single 03
-                                              </a></li>
-                                      </ul> -->
+                     
                     </li>
 
-                    {% comment %}
-                    <li class="dropdown">
-                      <a href="blog-grid.html">Blog</a> {% endcomment %}
-                      <!-- <ul>
-                    <li><a href="blog.html">Blog Right Sidebar</a></li>
-                    <li><a href="blog-left.html">Blog Left Sidebar <span>new</span></a></li>
-                    <li><a href="blog-grid.html">Blog Grid View</a></li>
-                    <li><a href="blog-single.html">Blog Single</a></li>
-                  </ul> -->
-                    </li>
+               
                     <li class="dropdown">
                       <a href="{% url 'contact' %}">Contact Us</a>
-                      <!-- <ul>
-                                          <li><a href="contact.html">Contact 01</a></li>
-                                          <li><a href="contact-2.html">Contact 02 <span>New</span></a></li>
-                                      </ul> -->
+
                     </li>
                   </ul>
                 </nav>
