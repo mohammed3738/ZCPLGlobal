@@ -16,6 +16,7 @@ urlpatterns = [
     path('rental-services',views.rental_services,name="rental-services"),
     path('infrastructure-managed-service',views.infrastructure_service,name="infrastructure-managed-service"),
     path('global-it',views.global_it,name="global-it"),
+    path('microsoft-vm',views.microsoft_vm,name="microsoft-vm"),
     # path('uk',views.uk_home,name="uk-home"),
     # path('uae',views.uae_home,name="uae-home"),
     # path('ca',views.canada_home,name="canada-home"),
