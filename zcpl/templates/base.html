@@ -387,18 +387,18 @@
     <script>
       function redirectToPage(value) {
         if (value) {
-          // redirect
           window.location.href = value;
         }
       }
-
+    
       window.onload = function () {
-        const currentURL = window.location.pathname; // e.g. "/india/" or "/uk/"
+        const currentURL = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
         const selectElement = document.getElementById("country");
         const options = selectElement.options;
-
+    
         for (let i = 0; i < options.length; i++) {
-          if (options[i].value && currentURL.startsWith(options[i].value)) {
+          const optionValue = options[i].value.replace(/\/$/, ""); // Normalize trailing slash
+          if (optionValue && (currentURL === optionValue)) {
             options[i].selected = true;
             break;
           }
