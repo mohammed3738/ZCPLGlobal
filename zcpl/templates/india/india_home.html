@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'india/base.html' %} {% load static %} {% block content %}
+
 <!-- Banner Section -->
 
 <section class="slider-six">
@@ -291,4 +292,51 @@
   </div>
   <!-- /.auto-container -->
 </section>
+
+
+<section class="about-me-one">
+  <div class="auto-container">
+      <div class="row">
+          <div class="col-md-12 col-lg-6">
+              <div class="about-me-one__image">
+                  <img src="{% static "images/update-26-02-2021/resources/about-me-1.jpg" %}" alt="">
+              </div><!-- /.about-me-one__image -->
+          </div><!-- /.col-md-12 -->
+          <div class="col-md-12 col-lg-6">
+              <div class="about-me-one__content">
+                  <div class="sec-title pb-2">
+                      <h2>Why Zaco is the Right IT Partner for Your Business</h2>
+                  </div>
+                  
+                  <p class="about-me-one__text">Zaco stands out as a trusted IT solutions provider 
+                    with over 20 years of experience in delivering reliable and high-performance 
+                    refurbished servers. We focus on quality, ensuring that every server undergoes 
+                    thorough testing before it reaches you. Our wide product range from leading 
+                    global brands is tailored to meet diverse business needs, offering flexibility 
+                    and cost savings without compromising performance. With expert support at every 
+                    stage—from consultation to installation and maintenance—we simplify IT complexities 
+                    for businesses of all sizes. Backed by a strong global presence and a commitment to 
+                    customer satisfaction, Zaco is the partner you can rely on for long-term IT success.
+
+
+
+
+                  </p>
+
+                  {% comment %} <p class="about-me-one__qoute">I help my clients stand out and they help me grow.</p> {% endcomment %}
+                  <!-- /.about-me-one__qoute -->
+
+                  <div class="row about-me-one__certificate-row">
+                      <div class="col-md-6">
+                          <img src="{% static "images/update-26-02-2021/resources/about-certificate-1.jpg" %}" alt="">
+                      </div><!-- /.col-md-6 -->
+                      <div class="col-md-6">
+                          <img src="{% static "images/update-26-02-2021/resources/about-certificate-2.jpg" %}" alt="">
+                      </div><!-- /.col-md-6 -->
+                  </div><!-- /.row -->
+              </div><!-- /.about-me-one__content -->
+          </div><!-- /.col-md-12 -->
+      </div><!-- /.row -->
+  </div><!-- /.auto-container -->
+</section><!-- /.about-me-one -->
 {% endblock %}

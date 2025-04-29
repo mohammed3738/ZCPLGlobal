@@ -5,3 +5,6 @@ from django.shortcuts import render
 
 def india_home(request):
     return render(request,'india/india_home.html')
+
+def india_contact(request):
+    return render(request,'india/contact.html')

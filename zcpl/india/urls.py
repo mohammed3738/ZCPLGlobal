@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [    
     
     path('',views.india_home,name="india-home"),
+    path('contact',views.india_contact,name="india-contact"),
 
 
 
