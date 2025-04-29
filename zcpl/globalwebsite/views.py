@@ -37,3 +37,6 @@ def infrastructure_service(request):
 def global_it(request):
     return render(request,'services/global_it.html')
 
+def microsoft_vm(request):
+    return render(request,'services/microsoft_vm.html')
+
