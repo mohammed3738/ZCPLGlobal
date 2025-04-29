@@ -1,0 +1,294 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Banner Section -->
+
+<section class="slider-six">
+  <div class="slider-six__curv">
+    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
+                <path fill="currentColor"
+                    d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
+            </svg> -->
+  </div>
+  <!-- /.slider-six__curv -->
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style=" background-image: url({% static "images/canada/can-home-1.jpg" %}); " >
+      </div>
+      <!-- /.image-layer -->
+      <div class="auto-container">
+        <div class="slider-six__content">
+          {% comment %} <p class="slider-six__text"><span>Server Maintenance</span></p> {% endcomment %}
+          <!-- /.slider-six__text -->
+          <h2 class="slider-six__title">
+            Powering Businesses with Reliable IT Hardware
+.
+          </h2>
+          <!-- /.slider-six__title -->
+          <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+          <!-- /.thm-btn__six -->
+        </div>
+        <!-- /.slider-six__content -->
+      </div>
+    </div>
+    {% comment %} <div class="swiper-slide">
+      <div
+        class="image-layer"
+        style="
+          background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
+        "
+      ></div>
+      <!-- /.image-layer -->
+    </div> {% endcomment %}
+  </div>
+  <!-- If we need navigation buttons -->
+  <!-- <div class="slider-bottom-box clearfix">
+                <div class="main-slider__nav">
+                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
+                        <span class="fa fa-angle-left"></span>
+                    </div>
+                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
+                        <span class="fa fa-angle-right"></span>
+                    </div>
+                </div>
+            </div> -->
+</section>
+<!-- /.slider-six -->
+
+<div>
+<section class="about-thirteen">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-flex align-items-center wow fadeInLeft" data-wow-delay="200ms">
+        <div class="about-thirteen__content">
+          <div class="sec-title-thirteen">
+            <div class="sec-title-thirteen__tagline"><span class="sec-title-thirteen__tagline__bar"></span>About Zaco</div>
+            <h2 class="sec-title-thirteen__title">Two Decades of Trusted IT Excellence</h2>
+          </div>
+          <p class="about-thirteen__content__text">
+            Zaco Computers Pvt. Ltd. is a trusted name in providing high-quality refurbished servers, 
+            IT hardware, and end-to-end IT solutions. With a strong presence in India, the UK, and the UAE,
+             we support businesses worldwide through enterprise-grade servers, storage systems, networking 
+             products, and managed IT services. Our expertly refurbished equipment undergoes rigorous 
+             testing to ensure reliability and performance. We offer tailored infrastructure solutions, 
+             flexible service-level agreements, and multi-vendor support to meet diverse business needs. 
+             
+
+
+           
+          </p>
+          
+          <ul class="list-unstyled about-thirteen__content__list">
+                            <li>
+                                <i class="fa fa-check-circle"></i>
+                                IT Hardware Solutions
+                            </li>
+                            <li>
+                                <i class="fa fa-check-circle"></i>
+                                Infrastructure Managed Services (IMS)
+
+
+                            </li>
+                            <li>
+                                <i class="fa fa-check-circle"></i>
+                                IT Software Solutions
+
+                              </li>
+
+                              <li>
+                                <i class="fa fa-check-circle"></i>
+                                Server Maintenance & Installation Services
+                              </li>
+                        </ul>
+          <a href="about.html" class="thm-btn-thirteen">Discover More</a>
+        </div>
+      </div>
+      <div class="col-lg-6 wow fadeInRight" data-wow-delay="100ms">
+        <div class="about-thirteen__image">
+          <img src="{% static "images/update-15-08-2024/resources/about-13-2.jpg" %}" alt="linoor">
+          <div class="about-thirteen__image__two">
+            <img src="{% static "images/update-15-08-2024/resources/about-13-1.jpg" %}" alt="linoor">
+          </div>
+          <div class="about-thirteen__image__experiance">
+            <div class="about-thirteen__image__experiance__inner">
+              <div class="about-thirteen__image__experiance__icon"><i class="linoor-icon-three-awareness-1"></i></div>
+              <span class="count-box"><span class="count-text" data-speed="4000" data-stop="20"></span></span>+
+              <br>Year of Experience
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<section class="about-section">
+  <div class="auto-container">
+      <div class="row clearfix">
+          <!--Image Column-->
+          <div class="image-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+              <div class="inner">
+                  <div class="image-block wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img
+                          src="{% static "images/resource/featured-image-1.jpg" %}" alt=""></div>
+                  <div class="image-block wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms"><img
+                          src="{% static "images/resource/featured-image-2.jpg" %}" alt=""></div>
+              </div>
+          </div>
+          <!--Text Column-->
+          <div class="text-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+              <div class="inner">
+                  <div class="sec-title pb-1">
+                      <h2>Reliable Refurbished Servers<span class="dot">.</span></h2>
+                     {% comment %} <div class="lower-text">We are committed to providing our customers with exceptional
+                          service while offering our employees the best training.</div> {% endcomment %}
+                  </div> 
+                  <div class="text">
+                      <p>Zaco offers a wide range of high-quality refurbished servers from leading 
+                        brands like HP, DELL, IBM, Cisco, and more. Our servers undergo rigorous testing
+                         to ensure they meet the highest standards of reliability and performance, making 
+                         them ideal for businesses seeking cost-effective IT infrastructure solutions without 
+                         compromising on quality.<br>
+                        Whether you need low to high-end configurations, our inventory covers a variety 
+                        of options to meet your specific requirements. We specialize in delivering servers
+                         that are fully functional and optimized for seamless operations. Our team provides
+                          expert guidance to help you choose the right servers for your business needs, 
+                          ensuring compatibility and scalability. <br>
+                        We also offer customized server configurations, enabling you to tailor your systems
+                         to your unique specifications. In addition, we provide comprehensive support for 
+                         server installation, maintenance, and upgrades, ensuring smooth integration into your existing infrastructure. <br>
+                        
+                        </p>
+                  </div>
+                  
+                  {% comment %} <div class="link-box">
+                      <a class="theme-btn btn-style-one" href="about.html">
+                          <i class="btn-curve"></i>
+                          <span class="btn-title">Discover More</span>
+                      </a>
+                  </div> {% endcomment %}
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="project-eight" id="portfolio">
+  <div class="auto-container">
+    <div class="sec-title-eight text-center">
+      <!-- <p class="sec-title-eight__text">Recent Cases</p> -->
+      <!-- /.sec-title-eight__text -->
+      <h2 class="sec-title-eight__title">Our Global Presence</h2>
+      <!-- /.sec-title-eight__title -->
+    </div>
+    <!-- /.sec-title-eight -->
+    <div
+      class="thm-swiper__slider swiper-container"
+      data-swiper-options='{"spaceBetween": 30, "slidesPerView": 2, "autoplay": { "delay": 5000 }, "breakpoints": {
+						"0": {
+							"slidesPerView": 1
+						},
+						"375": {
+							"slidesPerView": 1
+						},
+						"480": {
+							"slidesPerView": 2
+						},
+						"767": {
+							"slidesPerView": 3
+						},
+						"1199": {
+							"slidesPerView": 4
+						}
+					}}'
+    >
+      <div class="swiper-wrapper" style="justify-content: center;">
+          {% comment %} <div class="swiper-slide">
+            <div class="project-eight__item">
+              <img
+                src="{% static 'images/home/Zaco India.jpg' %}"
+                alt=""
+              />
+              <div class="project-eight__content">
+                <a class="project-eight__link" href="portfolio-single.html"
+                  ><i class="flaticon-right-arrow"></i
+                ></a>
+                <h3 class="project-eight__title">
+                  <a href="portfolio-single.html">India</a>
+                </h3>
+                <!-- /.project-eight__title -->
+              </div>
+              <!-- /.project-eight__content -->
+            </div>
+            <!-- /.project-eight__item -->
+          </div> {% endcomment %}
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco UK.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="portfolio-single.html"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="portfolio-single.html"> United Kingdom</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco UAE.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="portfolio-single.html"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="portfolio-single.html">UAE</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div>
+        <!-- /.swiper-slide -->
+        {% comment %} <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco Canada.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="portfolio-single.html"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="portfolio-single.html">Canada</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div> {% endcomment %}
+        <!-- /.swiper-slide -->
+      </div>
+    </div>
+  </div>
+  <!-- /.auto-container -->
+</section>
+{% endblock %}

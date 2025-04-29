@@ -44,3 +44,6 @@ def uae_home(request):
     return render(request,'uae/uae_home.html')
 def canada_home(request):
     return render(request,'canada/canada_home.html')
+
+def india_home(request):
+    return render(request,'india/india_home.html')

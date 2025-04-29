@@ -204,7 +204,7 @@
                 <a
                   href="tel:18002091986"
                   style="color: white; text-decoration: underline"
-                  >1800 209 1986</a
+                  >+91 1800 209 1986</a
                 >
               </div>
             </div>
@@ -220,7 +220,7 @@
                 <div class="contact-info d-flex align-items-center">
                   <div class="phone d-flex align-items-center me-3">
                     <span class="icon flaticon-call me-1"></span>
-                    <a href="tel:022 6928 8800">022 6928 8800</a>
+                    <a href="tel:022 6928 8800">+91 22 6928 8800</a>
                   </div>
 
                   <span class="separator mx-2">|</span>
@@ -246,7 +246,7 @@
 >
   <option value="">-- Choose a Country --</option>
   <option value="{% url 'uk-home' %}">United Kingdom</option>
-  <option value="india">India</option>
+  <option value="{% url "india-home" %}">India</option>
   <option value="{% url 'uae-home' %}">United Arab Emirates</option>
   {% comment %} <option value="{% url 'canada-home' %}">Canada</option> {% endcomment %}
 </select>
