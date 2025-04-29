@@ -37,13 +37,3 @@ def infrastructure_service(request):
 def global_it(request):
     return render(request,'services/global_it.html')
 
-def uk_home(request):
-    return render(request,'uk/main/uk_home.html')
-
-def uae_home(request):
-    return render(request,'uae/uae_home.html')
-def canada_home(request):
-    return render(request,'canada/canada_home.html')
-
-def india_home(request):
-    return render(request,'india/india_home.html')

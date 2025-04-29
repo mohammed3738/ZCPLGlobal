@@ -22,6 +22,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('globalwebsite.urls')),
+    path('ca/',include('canada.urls')),
+    path('in/',include('india.urls')),
+    path('uk/',include('uk.urls')),
+    path('uae/',include('uae.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
