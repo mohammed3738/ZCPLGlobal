@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Banner Section -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="background-image: url({% static "images/contact/contact1.jpg" %}); background-position: top"
+        ></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <h2 class="slider-six__title">Terms and Conditions</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Terms and Conditions Content -->
+<section class="terms-conditions-content section-padding">
+  <div class="auto-container">
+    <div class="content-box">
+      <h3>Effective Date: February 21, 2023</h3>
+
+      <h3>General Terms</h3>
+      <p>
+        This website is operated by Zaco Computers Pvt. Ltd. Throughout the site, the terms “we”, “us”, “our” and “Zaco” refer to Zaco Computers Pvt. Ltd. By accessing our website and/or placing an order with us, you engage in our “Service” and agree to be bound by the following terms and conditions.
+      </p>
+
+      <h3>Product Limited Warranty</h3>
+      <p>
+        Zaco Computers Pvt. Ltd. provides a 30-day warranty on its products and parts, covering defects in material and workmanship. The warranty begins on the invoice date and covers hardware components only. Software issues and minor imperfections not materially affecting functionality are not covered.
+      </p>
+      <p>
+        During the warranty period, at our discretion, we may:
+        <ul>
+          <li>Provide a comparable or better replacement product or part</li>
+          <li>Supply replacement parts needed to repair the product</li>
+          <li>Repair the product</li>
+          <li>Refund or credit the amount paid for the product (Shipping & Handling may be deducted)</li>
+        </ul>
+      </p>
+      <p>
+        Defective components or products must be returned to Zaco within 10 days of receiving the replacement. Failure to return the defective items within this period will result in charges for the replacement products.
+      </p>
+
+      <h3>Modifications to the Service & Prices</h3>
+      <p>
+        Prices for our products are subject to change without notice. We reserve the right to modify or discontinue the Service (or any part or content thereof) without notice at any time. We shall not be liable to you or any third-party for any modification, price change, suspension, or discontinuance of the Service.
+      </p>
+
+      <h3>User Suggestions</h3>
+      <p>
+        Any feedback, comments, ideas, improvements, or suggestions ("Suggestions") provided by you with respect to the website shall remain the sole and exclusive property of Zaco Computers Pvt. Ltd. We are free to use, copy, modify, publish, or redistribute the Suggestions for any purpose without credit or compensation to you.
+      </p>
+
+      <h3>Disclaimer</h3>
+      <p>
+        The materials on our website are provided with a 30-day warranty. We do not guarantee that any remaining manufacturer warranty on the products can be transferred to the new owner. Further, we do not warranty software or any third-party hardware installed into a system by the purchaser. Zaco Computers Pvt. Ltd. is an independent reseller unassociated with product manufacturers.
+      </p>
+      <p>
+        Under no circumstances shall our team be liable for any direct, indirect, special, incidental, or consequential damages, including but not limited to, loss of data or profit, arising out of the use, or the inability to use, the materials on this site.
+      </p>
+
+      <h3>Governing Law</h3>
+      <p>
+        These terms and conditions are governed by and construed in accordance with the laws of India, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.
+      </p>
+
+      <h3>Contacting Us</h3>
+      <p>
+        If you have any questions about these Terms and Conditions, please contact us at: <strong>sales@zacocomputer.com</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

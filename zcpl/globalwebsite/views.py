@@ -40,3 +40,12 @@ def global_it(request):
 def microsoft_vm(request):
     return render(request,'services/microsoft_vm.html')
 
+
+def privacy(request):
+    return render(request,'main/privacy.html')
+
+
+def term(request):
+    return render(request,'main/terms.html')
+
+

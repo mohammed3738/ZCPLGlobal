@@ -68,55 +68,7 @@
 
   <body>
     <div class="page-wrapper">
-      <!-- style switcher -->
-      <!-- <div class="style-switcher">
-			<a href="#" id="switcher-toggler"><i class="fa fa-cog"></i></a>
-			<h3>Color Skins</h3>
-			<ul id="styleOptions" title="Switch Color">
-				<li>
-					<a href="" data-theme="color-default" class="color-default">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-2" class="color-2">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-3" class="color-3">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-4" class="color-4">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-5" class="color-5">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-6" class="color-6">
-
-					</a>
-				</li>
-			</ul>
-			<div class="language-feature">
-				<button class="ltr-switcher" data-href="#googtrans(en|en)">LTR</button>
-				<button class="rtl-switcher" data-href="#googtrans(en|ar)">RTL</button>
-			</div>
-			<div class="layout-feature">
-				<a href="#" class="dark-switcher">Dark</a>
-				<button class="boxed-switcher">Boxed</button>
-			</div>
-		</div> -->
-
-      <!-- <div class="preloader">
-			<div class="icon" style="background-image: url(images/update-01-10-2021/preloader-6.png);"></div>
-		</div> -->
+     
 
       <!--Mobile Menu-->
       <div class="side-menu__block">
@@ -139,20 +91,20 @@
           <div class="side-menu__sep"></div>
           <!-- /.side-menu__sep -->
           <div class="side-menu__content">
-            <p>
+            {% comment %} <p>
               Linoor is a premium Template for Digital Agencies, Start Ups,
               Small Business and a wide range of other agencies.
-            </p>
+            </p> {% endcomment %}
             <p>
-              <a href="mailto:needhelp@linoor.com">needhelp@linoor.com</a>
+              <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
               <br />
-              <a href="tel:888-999-0000">888 999 0000</a>
+              <a href="tel:+91-22-69288800">+91 22 69288800</a>
             </p>
             <div class="side-menu__social">
-              <a href="#"><i class="fab fa-facebook-square"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+              <a href="https://www.facebook.com/zacoitsolved"><i class="fab fa-facebook-square"></i></a>
+              <a href="https://twitter.com/zacoitsolved"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/zacoitsolutions/"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.pinterest.com/zacoitsolved/"><i class="fab fa-pinterest-p"></i></a>
             </div>
           </div>
           <!-- /.side-menu__content -->
@@ -205,7 +157,7 @@
                 <a
                   href="tel:18002091986"
                   style="color: white; text-decoration: underline"
-                  >1800 209 1986</a
+                  >+91 1800 209 1986</a
                 >
               </div>
             </div>
@@ -221,7 +173,7 @@
                 <div class="contact-info d-flex align-items-center">
                   <div class="phone d-flex align-items-center me-3">
                     <span class="icon flaticon-call me-1"></span>
-                    <a href="tel:022 6928 8800">022 6928 8800</a>
+                    <a href="tel:022 6928 8800">+91 22 6928 8800</a>
                   </div>
 
                   <span class="separator mx-2">|</span>
@@ -244,7 +196,7 @@
                         <option value="{% url 'uk-home' %}">
                           United Kingdom
                         </option>
-                        <option value="india">India</option>
+                        <option value="{% url "india-home" %}">India</option>
                         <option value="{% url 'uae-home' %}">
                           United Arab Emirates
                         </option>
@@ -267,14 +219,14 @@
               <!--Logo-->
               <div class="logo-box">
                 <div class="logo">
-                  <a
-                    href="index.html"
-                    title="Linoor - DIgital Agency HTML Template"
+                 <a
+                    href="{% url "home" %}"
+                    title="Zaco Computers Private Limited"
                     ><img
                       src="{% static 'images/Zacow1.png' %}"
                       id="thm-logo"
-                      alt="Linoor - DIgital Agency HTML Template"
-                      title="Linoor - DIgital Agency HTML Template"
+                      alt="Zaco Computers Private Limited"
+                      title="Zaco Computers Private Limited""
                   /></a>
                 </div>
               </div>
@@ -295,7 +247,7 @@
                       <a href="{% url 'about_us' %}">About Us</a>
                     </li>
                     <li class="dropdown">
-                      <a href="#">Shop</a>
+                      <a href="https://store.zacocomputer.com/">Shop</a>
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'services' %}">Services</a>

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Banner Section -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="background-image: url({% static "images/contact/contact1.jpg" %}); background-position: top"
+        ></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <h2 class="slider-six__title">Privacy Policy</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="privacy-policy-content section-padding">
+  <div class="auto-container">
+    <div class="content-box">
+      <h3>Introduction</h3>
+      <p>We at Zaco Computers Pvt. Ltd. are committed to protecting your privacy. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website.</p>
+
+      <h3>Information We Collect</h3>
+      <ul>
+        <li>Personal Identification Information (Name, email address, phone number, etc.)</li>
+        <li>Non-personal data (browser type, IP address, etc.)</li>
+        <li>Cookies and tracking technologies</li>
+      </ul>
+
+      <h3>How We Use Your Information</h3>
+      <ul>
+        <li>To improve customer service</li>
+        <li>To personalize user experience</li>
+        <li>To process transactions</li>
+        <li>To send periodic emails or updates</li>
+      </ul>
+
+      <h3>Data Security</h3>
+      <p>We implement a variety of security measures to maintain the safety of your personal information.</p>
+
+      <h3>Your Data Protection Rights</h3>
+      <ul>
+        <li>The right to access, update or delete your personal information</li>
+        <li>The right to object or restrict data processing</li>
+        <li>The right to data portability</li>
+      </ul>
+
+      <h3>Third-party Sharing</h3>
+      <p>We do not sell, trade, or rent your personal identification information to others without your consent.</p>
+
+      <h3>Changes to This Policy</h3>
+      <p>We reserve the right to update our Privacy Policy at any time. Updates will be posted on this page with the revised date.</p>
+
+      <h3>Contacting Us</h3>
+      <p>If you have any questions about this Privacy Policy, please contact us at: <strong>sales@zacocomputer.com</strong>.</p>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -11,8 +11,6 @@
       rel="stylesheet"
     />
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
     <!-- reey font -->
     <link rel="stylesheet" href="{% static 'css/reey-font.css' %}" />
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
@@ -70,55 +68,7 @@
 
   <body>
     <div class="page-wrapper">
-      <!-- style switcher -->
-      <!-- <div class="style-switcher">
-			<a href="#" id="switcher-toggler"><i class="fa fa-cog"></i></a>
-			<h3>Color Skins</h3>
-			<ul id="styleOptions" title="Switch Color">
-				<li>
-					<a href="" data-theme="color-default" class="color-default">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-2" class="color-2">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-3" class="color-3">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-4" class="color-4">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-5" class="color-5">
-
-					</a>
-				</li>
-				<li>
-					<a href="" data-theme="color-6" class="color-6">
-
-					</a>
-				</li>
-			</ul>
-			<div class="language-feature">
-				<button class="ltr-switcher" data-href="#googtrans(en|en)">LTR</button>
-				<button class="rtl-switcher" data-href="#googtrans(en|ar)">RTL</button>
-			</div>
-			<div class="layout-feature">
-				<a href="#" class="dark-switcher">Dark</a>
-				<button class="boxed-switcher">Boxed</button>
-			</div>
-		</div> -->
-
-      <!-- <div class="preloader">
-			<div class="icon" style="background-image: url(images/update-01-10-2021/preloader-6.png);"></div>
-		</div> -->
+     
 
       <!--Mobile Menu-->
       <div class="side-menu__block">
@@ -141,20 +91,20 @@
           <div class="side-menu__sep"></div>
           <!-- /.side-menu__sep -->
           <div class="side-menu__content">
-            <p>
+            {% comment %} <p>
               Linoor is a premium Template for Digital Agencies, Start Ups,
               Small Business and a wide range of other agencies.
-            </p>
+            </p> {% endcomment %}
             <p>
-              <a href="mailto:needhelp@linoor.com">needhelp@linoor.com</a>
+              <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
               <br />
-              <a href="tel:888-999-0000">888 999 0000</a>
+              <a href="tel:+91-22-69288800">+91 22 69288800</a>
             </p>
             <div class="side-menu__social">
-              <a href="#"><i class="fab fa-facebook-square"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+              <a href="https://www.facebook.com/zacoitsolved"><i class="fab fa-facebook-square"></i></a>
+              <a href="https://twitter.com/zacoitsolved"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/zacoitsolutions/"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.pinterest.com/zacoitsolved/"><i class="fab fa-pinterest-p"></i></a>
             </div>
           </div>
           <!-- /.side-menu__content -->
@@ -207,7 +157,7 @@
                 <a
                   href="tel:18002091986"
                   style="color: white; text-decoration: underline"
-                  >1800 209 1986</a
+                  >+91 1800 209 1986</a
                 >
               </div>
             </div>
@@ -223,7 +173,7 @@
                 <div class="contact-info d-flex align-items-center">
                   <div class="phone d-flex align-items-center me-3">
                     <span class="icon flaticon-call me-1"></span>
-                    <a href="tel:022 6928 8800">022 6928 8800</a>
+                    <a href="tel:022 6928 8800">+91 22 6928 8800</a>
                   </div>
 
                   <span class="separator mx-2">|</span>
@@ -236,20 +186,22 @@
                   </div>
                   <div class="email d-flex align-items-center ms-3">
                     <div>
-                      {% comment %}
-                      <label for="country" class="form-label"
-                        >Select Country:</label
+                      <select
+                        id="country"
+                        name="country"
+                        class="form-select"
+                        onchange="redirectToPage(this.value)"
                       >
-                      {% endcomment %}
-<!-- Your select -->
-<select id="country" name="country" class="form-select">
-  <option value="">-- Choose a Country --</option>
-  <option value="{% url 'uk-home' %}" data-image="https://flagcdn.com/gb.svg">United Kingdom</option>
-  <option value="{% url "india-home" %}" data-image="https://flagcdn.com/in.svg">India</option>
-  <option value="{% url 'uae-home' %}" data-image="https://flagcdn.com/ae.svg">United Arab Emirates</option>
-  <!-- <option value="/canada/" data-image="https://flagcdn.com/ca.svg">Canada</option> -->
-</select>
-                                 </div>
+                        <option value="{% url "home" %}">Global</option>
+                        <option value="{% url 'uk-home' %}">
+                          United Kingdom
+                        </option>
+                        <option value="{% url "india-home" %}">India</option>
+                        <option value="{% url 'uae-home' %}">
+                          United Arab Emirates
+                        </option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -267,14 +219,14 @@
               <!--Logo-->
               <div class="logo-box">
                 <div class="logo">
-                  <a
-                    href="index.html"
-                    title="Linoor - DIgital Agency HTML Template"
+                 <a
+                    href="{% url "home" %}"
+                    title="Zaco Computers Private Limited"
                     ><img
                       src="{% static 'images/Zacow1.png' %}"
                       id="thm-logo"
-                      alt="Linoor - DIgital Agency HTML Template"
-                      title="Linoor - DIgital Agency HTML Template"
+                      alt="Zaco Computers Private Limited"
+                      title="Zaco Computers Private Limited""
                   /></a>
                 </div>
               </div>
@@ -293,11 +245,9 @@
                     </li>
                     {% comment %} <li class="dropdown">
                       <a href="{% url 'about_us' %}">About Us</a>
-                      
                     </li>
                     <li class="dropdown">
                       <a href="https://store.zacocomputer.com/">Shop</a>
-                  
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'services' %}">Services</a>
@@ -331,7 +281,7 @@
                             >Infrastructure Managed Service</a
                           >
                         </li>
-                      
+                       
                       </ul>
                     </li>
                     <li class="dropdown">
@@ -340,14 +290,13 @@
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'itad-services' %}">ITAD Services</a>
-                      
-                    </li>
-
-                   
+                     
                     </li> {% endcomment %}
+
+               
                     <li class="dropdown">
                       <a href="{% url 'india-contact' %}">Contact Us</a>
-                     
+
                     </li>
                   </ul>
                 </nav>
@@ -361,8 +310,9 @@
       <!-- End Main Header -->
 
       {% block content %}{% endblock %}
-      
-{% include "footer.html" %}
+
+        {% include "india/footer.html" %}
+
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -386,79 +336,26 @@
     <script src="{% static 'js/lang.js' %}"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="{% static 'js/color-switcher.js' %}"></script>
-
-
-        <!-- Select2 CSS -->
-<!-- Include jQuery and Select2 JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<script>
-  function redirectToPage(value) {
-    if (value) {
-      window.location.href = value;
-    }
-  }
-
-  $(document).ready(function () {
-    function formatFlag(option) {
-      if (!option.id) return option.text;
-      var imageUrl = $(option.element).data('image');
-      if (imageUrl) {
-        var $option = $(
-          '<span><img src="' + imageUrl + '" class="img-flag" style="width: 20px; height: 14px; margin-right: 8px;" /> ' + option.text + '</span>'
-        );
-        return $option;
+    <script>
+      function redirectToPage(value) {
+        if (value) {
+          window.location.href = value;
+        }
       }
-      return option.text;
-    }
-
-    $('#country').select2({
-      templateResult: formatFlag,
-      templateSelection: formatFlag,
-      minimumResultsForSearch: -1 // hide search box
-    });
-
-    // Preselect option without triggering redirect
-    const currentURL = window.location.pathname;
-    const selectElement = document.getElementById('country');
-    const options = selectElement.options;
-
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].value && currentURL.startsWith(options[i].value)) {
-        options[i].selected = true;
-        break;
-      }
-    }
-    $('#country').trigger('change.select2'); // just refresh UI, no redirect
-
-    // Redirect on user change
-    $('#country').on('change', function () {
-      redirectToPage(this.value);
-    });
-  });
-</script>
-
-<!-- <script>
-  function redirectToPage(value) {
-    if (value) {
-      // redirect
-      window.location.href = value;
-    }
-  }
-
-  window.onload = function () {
-    const currentURL = window.location.pathname; // e.g. "/india/" or "/uk/"
-    const selectElement = document.getElementById('country');
-    const options = selectElement.options;
-
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].value && currentURL.startsWith(options[i].value)) {
-        options[i].selected = true;
-        break;
-      }
-    }
-  };
-</script> -->
+    
+      window.onload = function () {
+        const currentURL = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
+        const selectElement = document.getElementById("country");
+        const options = selectElement.options;
+    
+        for (let i = 0; i < options.length; i++) {
+          const optionValue = options[i].value.replace(/\/$/, ""); // Normalize trailing slash
+          if (optionValue && (currentURL === optionValue)) {
+            options[i].selected = true;
+            break;
+          }
+        }
+      };
+    </script>
   </body>
 </html>
