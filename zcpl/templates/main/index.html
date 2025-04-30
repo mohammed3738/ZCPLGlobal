@@ -45,7 +45,7 @@
                 Reliable, Cost-Effective IT Solutions Worldwide
               </h1>
               <div class="link-box">
-                <a class="theme-btn btn-style-one" href="about.html">
+                <a class="theme-btn btn-style-one" href="{% url 'server-maintenance' %}">
                   <i class="btn-curve"></i>
                   <span class="btn-title">Discover More</span>
                 </a>
@@ -72,9 +72,9 @@
               <div class="sub-title">IT Hardware Solutions & Services</div>
               <h1>Efficient, Reliable, and Scalable IT Infrastructure</h1>
               <div class="link-box">
-                <a class="theme-btn btn-style-one" href="about.html">
+                <a class="theme-btn btn-style-one" href="{% url 'contact' %}">
                   <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
+                  <span class="btn-title">Contact Us</span>
                 </a>
               </div>
             </div>
@@ -98,7 +98,7 @@
               <div class="sub-title">"Free IT Hardware Assessment</div>
               <h1>Get Expert Insights at No Cost</h1>
               <div class="link-box">
-                <a class="theme-btn btn-style-one" href="about.html">
+                <a class="theme-btn btn-style-one" href="{% url 'it-hardware' %}">
                   <i class="btn-curve"></i>
                   <span class="btn-title">Discover More</span>
                 </a>
@@ -124,7 +124,7 @@
               <div class="sub-title">Seamless Data Center Support & Logistics for Your Business</div>
               <h1>Comprehensive IT Solutions Across India and UAE for Global Operations</h1>
               <div class="link-box">
-                <a class="theme-btn btn-style-one" href="about.html">
+                <a class="theme-btn btn-style-one" href="{% url 'global-it' %}">
                   <i class="btn-curve"></i>
                   <span class="btn-title">Discover More</span>
                 </a>
@@ -176,9 +176,9 @@
               <div class="sub-title">Need to Modernize Your IT Systems?</div>
               <h1>Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h1>              
               <div class="link-box">
-                <a class="theme-btn btn-style-one" href="about.html">
+                <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
                   <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
+                  <span class="btn-title">Learn More</span>
                 </a>
               </div>
             </div>
@@ -355,7 +355,7 @@
           <div class="blog-eight__content">
             <!-- <div class="blog-eight__date">16 sep</div> -->
             <h3 class="blog-eight__title">
-              <a href="blog-single.html">IT Hardware Solutions</a>
+              <a href="{% url "it-hardware" %}">IT Hardware Solutions</a>
             </h3>
             <!-- /.blog-eight__title -->
             <p class="blog-eight__text">
@@ -379,7 +379,7 @@
           <div class="blog-eight__content">
             <!-- <div class="blog-eight__date">16 sep</div> -->
             <h3 class="blog-eight__title">
-              <a href="blog-single.html">IT Software Solutions</a>
+              <a href="https://zacoinfotech.com/">IT Software Solutions</a>
             </h3>
             <!-- /.blog-eight__title -->
             <p class="blog-eight__text">
@@ -426,7 +426,7 @@
           <div class="blog-eight__content">
             <!-- <div class="blog-eight__date">16 sep</div> -->
             <h3 class="blog-eight__title">
-              <a href="blog-single.html">Global IT Support Services</a>
+              <a href="{% url "global-it" %}">Global IT Support Services</a>
             </h3>
             <!-- /.blog-eight__title -->
             <p class="blog-eight__text">
@@ -881,9 +881,9 @@
           </div>
 
           <div class="link-box">
-            <a class="theme-btn btn-style-one" href="about.html">
+            <a class="theme-btn btn-style-one" href="{% url "infrastructure-managed-service" %}">
               <i class="btn-curve"></i>
-              <span class="btn-title">Discover More</span>
+              <span class="btn-title">Know More</span>
             </a>
           </div>
         </div>
@@ -929,7 +929,7 @@
               alt=""
             />
             <div class="project-eight__content">
-              <a class="project-eight__link" href="portfolio-single.html"
+              <a class="project-eight__link" href="{% url "india-contact" %}"
                 ><i class="flaticon-right-arrow"></i
               ></a>
               <h3 class="project-eight__title">
@@ -949,11 +949,11 @@
               alt=""
             />
             <div class="project-eight__content">
-              <a class="project-eight__link" href="portfolio-single.html"
+              <a class="project-eight__link" href="{% url "uk-contact" %}"
                 ><i class="flaticon-right-arrow"></i
               ></a>
               <h3 class="project-eight__title">
-                <a href="portfolio-single.html"> United Kingdom</a>
+                <a href="{% url "uk-contact" %}"> United Kingdom</a>
               </h3>
               <!-- /.project-eight__title -->
             </div>
@@ -969,11 +969,11 @@
               alt=""
             />
             <div class="project-eight__content">
-              <a class="project-eight__link" href="portfolio-single.html"
+              <a class="project-eight__link" href="{% url "uae-contact" %}"
                 ><i class="flaticon-right-arrow"></i
               ></a>
               <h3 class="project-eight__title">
-                <a href="portfolio-single.html">UAE</a>
+                <a href="{% url "uae-contact" %}">UAE</a>
               </h3>
               <!-- /.project-eight__title -->
             </div>
