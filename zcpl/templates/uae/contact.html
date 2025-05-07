@@ -43,11 +43,12 @@
             <div class="col-lg-8">
                 <div class="form-box">
                     <div class="default-form">
-                        <form method="post" action="sendemail.php" id="contact-form">
+                        <form method="post" id="contact-form">
+                            {% csrf_token %}
                             <div class="row clearfix">
                                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                     <div class="field-inner">
-                                        <input type="text" name="username" value="" placeholder="Your Name"
+                                        <input type="text" name="name" value="" placeholder="Your Name"
                                             required="">
                                     </div>
                                 </div>
@@ -60,6 +61,12 @@
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <div class="field-inner">
                                         <textarea name="message" placeholder="Write Message"
+                                            required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <div class="field-inner">
+                                        <textarea name="subject" placeholder="Write Subject"
                                             required=""></textarea>
                                     </div>
                                 </div>

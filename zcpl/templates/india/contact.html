@@ -130,6 +130,7 @@
             </div>
             <div class="default-form">
                 <form method="post" >
+                    {% csrf_token %}
                     <div class="row clearfix">
                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <div class="field-inner">
@@ -169,6 +170,11 @@
         </div>
     </div>
 </section>
+
+
+{% if success %}
+<p style="color: green;">Your message has been sent successfully!</p>
+{% endif %}
 
 
 {% endblock %}
