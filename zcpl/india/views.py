@@ -8,3 +8,6 @@ def india_home(request):
 
 def india_contact(request):
     return render(request,'india/contact.html')
+
+def india_services(request):
+    return render(request, 'india/service.html')

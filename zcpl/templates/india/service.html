@@ -1,0 +1,246 @@
+{% extends 'india/base.html' %} {% load static %} {% block content %}
+<section class="banner-section-four">
+
+    <!-- If we need navigation buttons -->
+    <div class="banner-section-four__nav">
+        <div class="swiper-button-prev" id="banner-section-four__swiper-button-next"><i
+                class="fa fa-angle-up"></i>
+        </div>
+        <div class="swiper-button-next" id="banner-section-four__swiper-button-prev"><i
+                class="fa fa-angle-down"></i></div>
+    </div><!-- /.banner-section-four__nav -->
+    <div class="swiper-container thm-swiper__slider" data-swiper-options='{
+        "slidesPerView": 1,
+        "loop": true,
+        "effect": "fade",
+        "autoplay": {
+            "delay": 5000
+        },
+        "navigation": {
+            "nextEl": "#banner-section-four__swiper-button-next",
+            "prevEl": "#banner-section-four__swiper-button-prev"
+        }
+    }'>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image-layer"
+                    style="background-image: url({% static "images/update-1-12-2020/slider/main-slider-1-1.jpg" %});">
+                </div>
+                <!-- /.image-layer -->
+                <div class="auto-container">
+                    <div class="row">
+                        <div class="col-xl-7 col-lg-7">
+                            <h2>Reliable IT Hardware Solutions</h2>
+                            <p>Experience top-tier refurbished servers and storage solutions tailored for your business needs.</p>
+                            <a href="#" class="theme-btn btn-style-three">Discover More</a>
+                            <!-- /.thm-btn dynamic-radius -->
+                        </div><!-- /.col-lg-7 text-right -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </div><!-- /.swiper-slide -->
+            <div class="swiper-slide">
+                <div class="image-layer"
+                    style="background-image: url({% static "images/update-1-12-2020/slider/main-slider-1-2.jpg" %});">
+                </div>
+                <!-- /.image-layer -->
+                <div class="auto-container">
+                    <div class="row">
+                        <div class="col-xl-7 col-lg-7">
+                            <h2>Innovative Software Services</h2>
+                            <p>Transform your business digitally with our comprehensive software development and consulting services.</p>
+                            <a href="#" class="theme-btn btn-style-three">Discover More</a>
+                            <!-- /.thm-btn dynamic-radius -->
+                        </div><!-- /.col-lg-7 text-right -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </div><!-- /.swiper-slide -->
+        </div><!-- /.swiper-wrapper -->
+
+
+    </div><!-- /.swiper-container thm-swiper__slider -->
+</section><!-- /.banner-section-four -->
+
+
+
+
+<section class="services-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <!--Title Block-->
+            <div class="title-block col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <div class="inner">
+                    <div class="sec-title">
+                        <h2>Your Trusted IT Solutions Partner<span class="dot">.</span></h2>
+                        <div class="lower-text">Zaco delivers expert IT solutions, integrating hardware and software services to streamline and optimize your business operations.</div>
+                    </div>
+                </div>
+            </div>
+            <!--Service Block-->
+            <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft" data-wow-delay="0ms"
+                data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="bottom-curve"></div>
+                    <h6><a href="web-development.html">IT Hardware Solution & Services</a></h6>
+                </div>
+            </div>
+            <!--Service Block-->
+            <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft"
+                data-wow-delay="300ms" data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="bottom-curve"></div>
+                    <h6><a href="graphic-designing.html">Server Maintenance Services</a></h6>
+                </div>
+            </div>
+            <!--Service Block-->
+            <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft" data-wow-delay="0ms"
+                data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="bottom-curve"></div>
+                    <h6><a href="digital-marketing.html">Storage Maintenance Services</a></h6>
+                </div>
+            </div>
+            <!--Service Block-->
+            <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft"
+                data-wow-delay="300ms" data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="bottom-curve"></div>
+                    <h6><a href="seo.html">Network Maintenance Services & Support</a></h6>
+                </div>
+            </div>
+            <!--Service Block-->
+            <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft"
+                data-wow-delay="600ms" data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="bottom-curve"></div>
+                    <h6><a href="app-development.html">Server Rental</a></h6>
+                </div>
+            </div>
+            <!--Service Block-->
+            <div class="service-block col-xl-3 col-lg-6 col-md-6 col-sm-12 wow fadeInLeft"
+                data-wow-delay="900ms" data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="bottom-curve"></div>
+                    <h6><a href="ui-designing.html">Infrastructure Managed Services (IMS)</a></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="about-seven">
+    <div class="auto-container">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 wow fadeInLeft" data-wow-duration="1500ms">
+                <div class="about-seven__images">
+                    <img src="{% static "images/update-01-10-2021/resources/about-seven-1-1.jpg" %}" alt="">
+                    <img src="{% static "images/update-01-10-2021/resources/about-seven-1-2.jpg" %}" alt="">
+                </div><!-- /.about-seven__images -->
+            </div><!-- /.col-md-12 col-lg-6 -->
+            <div class="col-md-12 col-lg-6">
+                <div class="about-seven__content">
+                    <div class="sec-title-six text-start">
+                        {% comment %} <p class="sec-title-six__text"><span>About Company</span></p> {% endcomment %}
+                        <!-- /.sec-title-six__text -->
+                        <h2 class="sec-title-six__title">Lightning and Best in Class Hardware & Software Support.</h2>
+                        <!-- /.sec-title-six__title -->
+                    </div><!-- /.sec-title-six -->
+                    <p class="about-seven__summery">we take pride in providing lightning-fast and 
+                        top-notch customer support for all IT-related software and hardware issues.
+                         In addition to speedy resolution times, we also strive to provide the best-in-class 
+                         hardware and software support in the industry. Our team is highly trained and 
+                         experienced, and we stay up-to-date with the latest technologies and trends to 
+                         ensure that we can solve any problem that our customers may face. Our goal is to 
+                         provide peace of mind for our customers, knowing that they can rely on us to 
+                         take care of any IT-related issue that they may encounter.
+
+                    </p><!-- /.about-seven__summery -->
+                    <a href="about.html" class="about-seven__btn thm-btn__six">Discover More</a>
+                </div><!-- /.about-seven__content -->
+            </div><!-- /.col-md-12 col-lg-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section><!-- /.about-seven -->
+
+
+<section class="about-six">
+
+
+    <div class="auto-container">
+        <div class="row">
+            <div class="col-md-12 col-lg-5">
+                <div class="about-six__content">
+
+                    <div class="sec-title-six">
+                        {% comment %} <p class="sec-title-six__text"><span>Our Company Benefits</span></p> {% endcomment %}
+                        <!-- /.sec-title-six__text -->
+                        <h2 class="sec-title-six__title">IT Specialists Who Know The Hardware & Software Services Inside Out
+                        </h2>
+                        <!-- /.sec-title-six__title -->
+                    </div><!-- /.sec-title-six -->
+                    <div class="about-six__text">With Zaco you can optimize your maintenance support for 
+                        hardware, software and your relationships with multiple providers with a single 
+                        contact person.
+
+                    </div><!-- /.about-six__text -->
+                </div><!-- /.about-six__content -->
+            </div><!-- /.col-md-12 col-lg-5 -->
+            <div class="col-md-12 col-lg-7 wow fadeInRight" data-wow-duration="1500ms">
+                <div class="about-six__image">
+                    <img src="{% static "images/update-01-10-2021/resources/about-six-1-1.jpg" %}" alt="">
+                </div><!-- /.about-six__image -->
+            </div><!-- /.col-md-12 col-lg-7 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section><!-- /.about-six -->
+
+
+<section class="feature-six">
+    <div class="auto-container">
+        <div class="row no-gutters">
+            <div class="col-md-12 col-lg-12 col-xl-6">
+                <div class="feature-six__image clearfix">
+                    <img src="{% static "images/update-26-02-2021/resources/feature-2-1.jpg" %}"
+                        alt="Total design freedom for everyone">
+                    <div class="feature-six__image__caption">IT Specialists Who Know The Hardware & 
+                        Software Services Inside Out</div><!-- /.feature-six__image__caption -->
+                </div><!-- /.feature-six__image -->
+            </div><!-- /.col-md-12 col-lg-6 -->
+            <div class="col-md-12 col-lg-12 col-xl-6 d-flex">
+                <div class="my-auto">
+
+                    <div class="feature-six__content">
+                        <div class="sec-title">
+                            <h2>Experts in IT Infrastructure, Hardware & Software Support<span class="dot">.</span></h2>
+                        </div>
+                        <div class="feature-six__content__text">
+                            At Zaco, we specialize in end-to-end IT support—bridging the gap between high-performance hardware and dynamic software services. Whether you need reliable refurbished servers or expert guidance in managing multi-vendor systems, our team provides a single point of contact to simplify and streamline your IT environment.</div>
+                        <!-- /.feature-six__content__text -->
+                        <ul class="m-0 list-unstyled feature-six__list">
+                            <li class="feature-six__list__item">
+                                <i class="flaticon-check-symbol"></i>
+                                Refurbished enterprise-grade hardware with warranty </li>
+                            <li class="feature-six__list__item">
+                                <i class="flaticon-check-symbol"></i>
+                                Seamless third-party maintenance and AMC support </li>
+                            <li class="feature-six__list__item">
+                                <i class="flaticon-check-symbol"></i>
+                                Scalable infrastructure planning and deployment </li>
+                            <li class="feature-six__list__item">
+                                <i class="flaticon-check-symbol"></i>
+                                Personalized service through a dedicated account manager </li>
+                        </ul>
+                    </div><!-- /.feature-six__content -->
+                </div><!-- /.my-auto -->
+            </div><!-- /.col-md-12 col-lg-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section>
+
+
+
+
+
+{% endblock %}
