@@ -96,3 +96,6 @@ def server_maintenance_india(request):
 
 def storage_maintenance_india(request):
     return render(request, 'india/storage_maintenance_in.html')
+
+def network_maintenance_india(request):
+    return render(request, 'india/network_maintenance_in.html')
