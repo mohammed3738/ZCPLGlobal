@@ -87,3 +87,12 @@ def india_contact(request):
 
 def india_services(request):
     return render(request, 'india/service.html')
+
+def it_hardware(request):
+    return render(request, 'india/it_hardware_in.html')
+
+def server_maintenance_india(request):
+    return render(request, 'india/server_maintenance_in.html')
+
+def storage_maintenance_india(request):
+    return render(request, 'india/storage_maintenance_in.html')

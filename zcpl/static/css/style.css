@@ -22025,7 +22025,7 @@ img.lazy-image.loaded {
 .about-eleven__images::before {
   content: "";
   width: 20px;
-  height: 326px;
+  height: 422px;
   background-color: var(--thm-base);
   color: var(--thm-base);
   position: absolute;
@@ -22107,7 +22107,7 @@ img.lazy-image.loaded {
   line-height: 1.3;
   color: var(--thm-black);
   font-weight: bold;
-  max-width: 118px;
+  max-width: 128px;
 }
 
 .about-eleven__progress {

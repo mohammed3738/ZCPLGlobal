@@ -1,0 +1,301 @@
+{% extends 'india/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .why-choose-us {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .why-choose-us .section-title {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+  }
+  
+  .feature-box {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: 0.3s ease;
+  }
+  
+  .feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-box .icon {
+    font-size: 30px;
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  .feature-box h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  
+  .feature-box p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+</style>
+<!-- Banner Section -->
+
+      <section class="slider-six">
+        <div class="slider-six__curv">
+          <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
+                <path fill="currentColor"
+                    d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
+            </svg> -->
+        </div>
+        <!-- /.slider-six__curv -->
+        <div
+          class="swiper-container thm-swiper__slider"
+          data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+        >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div
+                class="image-layer"
+                style="
+                  background-image: url({% static "images/india/it-hardware/hardware-banner.jpg" %});
+                "
+              ></div>
+              <!-- /.image-layer -->
+              <div class="auto-container">
+                <div class="slider-six__content">
+                  <p class="slider-six__text"><span>Comprehensive IT Hardware Services in India
+                </span></p>
+                  <!-- /.slider-six__text -->
+                  <h2 class="slider-six__title">
+                    Reliable solutions for all your IT infrastructure needs.
+                  </h2>
+                  <!-- /.slider-six__title -->
+                  <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+                  <!-- /.thm-btn__six -->
+                </div>
+                <!-- /.slider-six__content -->
+              </div>
+            </div>
+            {% comment %} <div class="swiper-slide">
+              <div
+                class="image-layer"
+                style="
+                  background-image: url({% static "images/update-01-10-2021/slider/slider-six-1-2.jpg" %});
+                "
+              ></div>
+              <!-- /.image-layer -->
+              <div class="auto-container">
+                <div class="slider-six__content">
+                  <p class="slider-six__text">
+                    <span>Welcome to best linoor business agency</span>
+                  </p>
+                  <!-- /.slider-six__text -->
+                  <h2 class="slider-six__title">
+                    meet the corporate <br />
+                    business agency
+                  </h2>
+                  <!-- /.slider-six__title -->
+                  <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+                  <!-- /.thm-btn__six -->
+                </div>
+                <!-- /.slider-six__content -->
+              </div>
+            </div> {% endcomment %}
+          </div>
+          <!-- If we need navigation buttons -->
+          <!-- <div class="slider-bottom-box clearfix">
+                <div class="main-slider__nav">
+                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
+                        <span class="f  a fa-angle-left"></span>
+                    </div>
+                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
+                        <span class="fa fa-angle-right"></span>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+      </section>
+      <!-- /.slider-six -->
+
+
+
+
+
+
+  
+
+
+
+
+
+      <!--We DO Section-->
+<section class="we-do-section">
+    <div class="auto-container">
+    </h3>
+    {% comment %} <div class="row pb-5" style="text-align: center;">
+        <h3 class="sec-title-six__title">It Hardware Solutions And Services
+
+    </div> {% endcomment %}
+      <div class="row clearfix">
+        <!--Left Column-->
+        
+        <div class="left-col col-lg-6 col-md-12 col-sm-12">
+          <div class="inner">
+            <img
+            src="{% static 'images/india/it-hardware/intro-img.jpg' %}"
+            class="jarallax-img"
+            alt=""
+          />
+            <!-- <div class="progress-box">
+                    <div class="bar-title">Digital marketing</div>
+                    <div class="bar">
+                      <div class="bar-inner count-bar" data-percent="70%">
+                        <div class="count-box">
+                          <span
+                            class="count-text"
+                            data-stop="70"
+                            data-speed="1500"
+                            >0</span
+                          >%
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+          </div>
+        </div>
+        <!--Right Column-->
+        <div class="right-col col-lg-6 col-md-12 col-sm-12">
+          <div class="content-box">
+            <h3 class="section-title">Building the Backbone of Your IT Infrastructure</h3>
+            <p class="section-description">
+              At Zaco, we specialize in delivering end-to-end IT hardware services tailored to meet the needs of businesses across India. Whether you're a startup, SMB, or large enterprise, our hardware solutions ensure optimal performance, security, and scalability.
+
+            </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="service-seven">
+    <div class="auto-container">
+      <div class="sec-title-seven text-center">
+        <h2 class="sec-title-seven__title">Services We Offer</h2><!-- /.sec-title-seven__title -->
+      </div><!-- /.sec-title-seven -->
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="service-seven__item wow fadeInLeft" data-wow-duration="1500ms">
+            <div class="service-seven__icon">
+              <i class="flaticon-laptop"></i>
+            </div><!-- /.service-seven__icon -->
+            <h3 class="service-seven__title"><a href="digital-marketing.html">Hardware Installation & Setup
+                </a></h3>
+            <p class="service-seven__text">Professional setup of servers, desktops, workstations, routers, and more.</p>
+            <a href="digital-marketing.html" class="service-seven__link">
+              <i class="flaticon-right-arrow"></i>
+            </a><!-- /.service-seven__link -->
+          </div><!-- /.service-seven__item -->
+        </div><!-- /.col-md-6 col-lg-3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-seven__item wow fadeInUp" data-wow-duration="1500ms">
+            <div class="service-seven__icon">
+              <i class="flaticon-presentation"></i>
+            </div><!-- /.service-seven__icon -->
+            <h3 class="service-seven__title"><a href="digital-marketing.html">Hardware <br> AMC</a></h3>
+            <p class="service-seven__text">Timely preventive maintenance and priority support with custom AMC plans.</p>
+            <a href="digital-marketing.html" class="service-seven__link">
+              <i class="flaticon-right-arrow"></i>
+            </a><!-- /.service-seven__link -->
+          </div><!-- /.service-seven__item -->
+        </div><!-- /.col-md-6 col-lg-3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-seven__item wow fadeInUp" data-wow-duration="1500ms">
+            <div class="service-seven__icon">
+              <i class="flaticon-target"></i>
+            </div><!-- /.service-seven__icon -->
+            <h3 class="service-seven__title"><a href="digital-marketing.html">Hardware Upgrades & Replacements</a></h3>
+            <p class="service-seven__text">Upgrade old systems or replace faulty components to improve efficiency.
+
+              </p>
+            <a href="digital-marketing.html" class="service-seven__link">
+              <i class="flaticon-right-arrow"></i>
+            </a><!-- /.service-seven__link -->
+          </div><!-- /.service-seven__item -->
+        </div><!-- /.col-md-6 col-lg-3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-seven__item wow fadeInRight" data-wow-duration="1500ms">
+            <div class="service-seven__icon">
+              <i class="flaticon-visualization"></i>
+            </div><!-- /.service-seven__icon -->
+            <h3 class="service-seven__title"><a href="digital-marketing.html">Data Center Setup & Migration</a></h3>
+            <p class="service-seven__text">Complete planning and execution for building or migrating your data center.
+
+            </p>
+            <a href="digital-marketing.html" class="service-seven__link">
+              <i class="flaticon-right-arrow"></i>
+            </a><!-- /.service-seven__link -->
+          </div><!-- /.service-seven__item -->
+        </div><!-- /.col-md-6 col-lg-3 -->
+      </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+  </section><!-- /.service-seven -->
+
+
+
+  <section class="why-choose-us">
+    <div class="container">
+      <h2 class="sec-title-seven__title" style="margin-bottom: 40px">Why Choose Us</h2>
+      <div class="features-grid">
+        <div class="feature-box">
+          <i class="icon fas fa-tools"></i>
+          <h4>Expert Technicians</h4>
+          <p>Our certified engineers ensure precise diagnostics and repairs using the latest tools.</p>
+        </div>
+        <div class="feature-box">
+          <i class="icon fas fa-shield-alt"></i>
+          <h4>Reliable Solutions</h4>
+          <p>We deliver consistent hardware support and maintenance to keep your systems running smoothly.</p>
+        </div>
+        <div class="feature-box">
+          <i class="icon fas fa-clock"></i>
+          <h4>Quick Turnaround</h4>
+          <p>We value your time — our efficient processes minimize downtime and maximize productivity.</p>
+        </div>
+        <div class="feature-box">
+          <i class="icon fas fa-rupee-sign"></i>
+          <h4>Cost-Effective Services</h4>
+          <p>Affordable pricing models without compromising on service quality or hardware performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+  
+  
+
+
+
+
+
+        
+{% endblock %}
