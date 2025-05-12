@@ -99,3 +99,10 @@ def storage_maintenance_india(request):
 
 def network_maintenance_india(request):
     return render(request, 'india/network_maintenance_in.html')
+
+def rental_services_india(request):
+    return render(request,'india/rental_services.html')
+
+
+def infrastructure_service_india(request):
+    return render(request,'india/infrastructure_service.html')
