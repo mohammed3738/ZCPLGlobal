@@ -68,7 +68,7 @@
 
   <body>
     <div class="page-wrapper">
-     
+
 
       <!--Mobile Menu-->
       <div class="side-menu__block">
@@ -144,13 +144,14 @@
             style="
               background-color: #ffaa17;
               color: white;
-              padding: 10px 0;
+              {% comment %} padding: 10px 0; {% endcomment %}
               text-align: center;
               position: relative;
+              {% comment %} display:flex; {% endcomment %}
             "
           >
             <div
-              class="auto-container d-flex justify-content-between align-items-center flex-wrap"
+              class="auto-container d-flex justify-content-between align-items-center flex-wrap "
             >
               <div class="support-text">
                 <strong>24x7 Support</strong> | Toll-Free:
@@ -168,7 +169,7 @@
         <div class="header-upper">
           <div class="topbar-four">
             <div class="auto-container">
-              <p>Your Trusted IT Infrastructure Partner.</p>
+              <p>Your Trusted IT Infrastructure Partner</p>
               <div class="right-content">
                 <div class="contact-info d-flex align-items-center">
                   <div class="phone d-flex align-items-center me-3">
@@ -247,7 +248,7 @@
                       <a href="{% url 'about_us' %}">About Us</a>
                     </li>
                     <li class="dropdown">
-                      <a href="https://store.zacocomputer.com/">Shop</a>
+                      <a href="https://store.zacocomputer.com/">Online Store</a>
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'services' %}">Services</a>
@@ -281,19 +282,19 @@
                             >Infrastructure Managed Service</a
                           >
                         </li>
-                       
+
                       </ul>
                     </li>
                     <li class="dropdown">
                       <a href="{% url 'global-it' %}">Global IT Support</a>
-                      
+
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'itad-services' %}">ITAD Services</a>
-                     
+                      <a href="{% url 'itad-services' %}">IT Buyback</a>
+
                     </li>
 
-               
+
                     <li class="dropdown">
                       <a href="{% url 'contact' %}">Contact Us</a>
 
@@ -342,12 +343,12 @@
           window.location.href = value;
         }
       }
-    
+
       window.onload = function () {
         const currentURL = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
         const selectElement = document.getElementById("country");
         const options = selectElement.options;
-    
+
         for (let i = 0; i < options.length; i++) {
           const optionValue = options[i].value.replace(/\/$/, ""); // Normalize trailing slash
           if (optionValue && (currentURL === optionValue)) {
