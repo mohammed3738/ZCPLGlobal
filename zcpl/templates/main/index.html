@@ -5,12 +5,12 @@
   <div class="left-based-text">
     <div class="base-inner">
       <div class="hours">
-        <ul class="clearfix">
+        {% comment %} <ul class="clearfix">
           <li><span>mon - sat</span></li>
           <li><span>9am - 7pm</span></li>
-        </ul>
+        </ul> {% endcomment %}
       </div>
-      <div class="social-links">
+      {% comment %} <div class="social-links">
         <ul class="clearfix">
           <li>
             <a href="https://twitter.com/zacoitsolved"><span>Twitter</span></a>
@@ -22,7 +22,7 @@
             <a href="https://www.linkedin.com/company/zaco-computer-pvt.-ltd./"><span>Linked In</span></a>
           </li>
         </ul>
-      </div>
+      </div> {% endcomment %}
     </div>
   </div>
 
@@ -57,12 +57,12 @@
     </div>
 
     <!-- Slide Item -->
-    <div class="slide-item">
+    {% comment %} <div class="slide-item">
       <div
         class="image-layer"
         style="background-image: url({% static "images/main-slider/Global IT Business Solutions Provider.jpg" %})"
       ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
+
       <div class="right-bottom-curve"></div>
       <div class="right-top-curve"></div>
       <div class="auto-container">
@@ -81,14 +81,14 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
     <!-- Slide Item -->
-    <div class="slide-item">
+    {% comment %} <div class="slide-item">
       <div
         class="image-layer"
         style="background-image: url({% static "images/main-slider/Free IT Hardware Assessment.jpg" %})"
       ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
+      <div class="left-top-line"></div>
       <div class="right-bottom-curve"></div>
       <div class="right-top-curve"></div>
       <div class="auto-container">
@@ -107,7 +107,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
     <!-- Slide Item -->
     <div class="slide-item">
       <div
@@ -174,7 +174,7 @@
           <div class="content">
             <div class="inner">
               <div class="sub-title">Need to Modernize Your IT Systems?</div>
-              <h1>Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h1>              
+              <h1>Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h1>
               <div class="link-box">
                 <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
                   <i class="btn-curve"></i>
@@ -359,8 +359,8 @@
             </h3>
             <!-- /.blog-eight__title -->
             <p class="blog-eight__text">
-              Boost productivity with our tailored, 
-              high-performance IT hardware solutions for seamless, 
+              Boost productivity with our tailored,
+              high-performance IT hardware solutions for seamless,
               uninterrupted workspace performance.
             </p>
             <!-- /.blog-eight__text -->
@@ -383,7 +383,7 @@
             </h3>
             <!-- /.blog-eight__title -->
             <p class="blog-eight__text">
-              Streamline operations, enhance efficiency, 
+              Streamline operations, enhance efficiency,
               and stay ahead with our advanced IT software solutions for digital success.
             </p>
             <!-- /.blog-eight__text -->
@@ -430,7 +430,7 @@
             </h3>
             <!-- /.blog-eight__title -->
             <p class="blog-eight__text">
-              We offer expert IT hardware support for your clients in India, 
+              We offer expert IT hardware support for your clients in India,
               ensuring reliable performance and minimal downtime.
             </p>
             <!-- /.blog-eight__text -->
@@ -466,7 +466,7 @@
           <div class="sec-title-six text-start">
             <!-- <p class="sec-title-six__text"><span>About Company</span></p> -->
             <!-- /.sec-title-six__text -->
-            <h2 class="sec-title-six__title">IT Lifecycle Management <span class="dot">.</span></h2>
+            <h2 class="sec-title-six__title">IT Lifecycle Management <span class="dot"></span></h2>
             <!-- /.sec-title-six__title -->
           </div>
           <!-- /.sec-title-six -->
@@ -527,10 +527,10 @@
           <div class="right-col col-lg-6 col-md-12 col-sm-12">
               <div class="inner">
                   <div class="sec-title">
-                      <h2>ENTERPRISE-GRADE REFURBISHED SERVERS<span class="dot">.</span></h2>
-                      <div class="lower-text">We provide globally certified refurbished servers from 
-                        leading brands like Dell, HPE, IBM, and Cisco. With customizable configurations 
-                        and strict quality testing, our servers deliver performance and savings for 
+                      <h2>ENTERPRISE-GRADE REFURBISHED SERVERS to Most trusted global company for servers & storages<span class="dot"></span></h2>
+                      <div class="lower-text">We provide certified refurbished servers of 
+                        leading brands like Dell, HPE, IBM, and Cisco. With customizable configurations
+                        and strict quality testing, our servers deliver performance and savings for
                         businesses worldwide.
                       </div>
                   </div>
@@ -566,7 +566,7 @@
 
 
 
-<section class="about-six">
+<section class="about-six" style="padding-bottom:120px;">
   <div class="about-six__curv">
     <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
 					<path fill="currentColor"
@@ -582,15 +582,15 @@
           <div class="sec-title-six">
             <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
             <!-- /.sec-title-six__text -->
-            <h2 class="sec-title-six__title">Premium Refurbished Cisco Networking Solutions <span class="dot">.</span></h2>
+            <h2 class="sec-title-six__title">Premium Refurbished Cisco Networking Solutions <span class="dot"></span></h2>
             <!-- /.sec-title-six__title -->
           </div>
           <!-- /.sec-title-six -->
           <div class="about-six__text">
-            Zaco offers high-quality, cost-effective refurbished Cisco networking device, 
-            including Catalyst and Nexus switches, ISR and ASR routers, access points, 
-            and ASA firewalls. Each unit is professionally refurbished, performance-tested, 
-            and backed by expert support. Get reliable, enterprise-grade solutions with quick 
+            Zaco offers high-quality, cost-effective refurbished Cisco networking device,
+            including Catalyst and Nexus switches, ISR and ASR routers, access points,
+            and ASA firewalls. Each unit is professionally refurbished, performance-tested,
+            and backed by expert support. Get reliable, enterprise-grade solutions with quick
             turnaround times and seamless integration for your business needs.
 
 
@@ -620,7 +620,7 @@
     <!-- /.row -->
 
     <div class="row">
-    <h5>Our inventory features a wide selection of refurbished Cisco gear, including</h5>
+    <h5 style="padding-top:40px; margin:auto; text-align:center">Our inventory features a wide selection of refurbished Cisco gear, including</h5>
 
       <div class="col-md-12 col-lg-4">
         <div class="about-six__box">
@@ -788,19 +788,19 @@
               <h2>
                 Delivering Complete IT Solutions, Globally<span
                   class="dot"
-                  >.</span
+                  ></span
                 >
               </h2>
               <div class="lower-text">
-                At Zaco Computers, we specialize in providing comprehensive IT hardware services 
-                that ensure your infrastructure is secure, reliable, and built to perform. From 
-                servers and storage to networking equipment and peripherals, we support every 
+                At Zaco Computers, we specialize in providing comprehensive IT hardware services
+                that ensure your infrastructure is secure, reliable, and built to perform. From
+                servers and storage to networking equipment and peripherals, we support every
                 stage of your hardware lifecycle with expert care and precision.
               </div>
               <div class="lower-text">
-                Our team ensures smooth operations through proactive monitoring, 
-                swift issue resolution, and routine maintenance. Whether you're 
-                running operations locally or across borders, our scalable and 
+                Our team ensures smooth operations through proactive monitoring,
+                swift issue resolution, and routine maintenance. Whether you're
+                running operations locally or across borders, our scalable and
                 tailored hardware solutions help you stay ahead without disruption.
 
 
@@ -853,18 +853,18 @@
         <div class="inner">
           <div class="sec-title">
             <h2 style="font-size: 45px; line-height: 1.1em">
-              Your Infrastructure, Our Expertise<span class="dot">.</span>
+              Your Infrastructure, Our Expertise<span class="dot"></span>
             </h2>
           </div>
           <div class="text">
             <p>
-              As a global business, you need an IT partner you can rely on 
-              wherever your operations take you. At Zaco Computers, we deliver 
-              Infrastructure Managed Services that help multinational companies 
-              manage their software environments—from VMware and Microsoft 365 to 
-              Azure, AWS, and other cloud and SaaS platforms. Our experts monitor 
-              your systems 24x7 from multiple support centers, resolving issues 
-              swiftly and ensuring uninterrupted operations. With tailored IT 
+              As a global business, you need an IT partner you can rely on
+              wherever your operations take you. At Zaco Computers, we deliver
+              Infrastructure Managed Services that help multinational companies
+              manage their software environments—from VMware and Microsoft 365 to
+              Azure, AWS, and other cloud and SaaS platforms. Our experts monitor
+              your systems 24x7 from multiple support centers, resolving issues
+              swiftly and ensuring uninterrupted operations. With tailored IT
               support plans, we ensure optimal performance and compliance with global standards.
 
 
@@ -872,9 +872,9 @@
           </div>
           <div class="text">
             <p>
-              Through proactive maintenance, real-time monitoring, and 
-              regular updates, we prevent issues before they arise. Your 
-              teams can focus on growth, while we ensure your software 
+              Through proactive maintenance, real-time monitoring, and
+              regular updates, we prevent issues before they arise. Your
+              teams can focus on growth, while we ensure your software
               infrastructure stays secure, scalable, and efficient—wherever in the world you are.
 
             </p>
@@ -1019,7 +1019,7 @@
           <div class="sec-title">
             <h2>
               Sell your IT Equipment & Server Hardware to Zaco<span class="dot"
-                >.</span
+                ></span
               >
             </h2>
           </div>
@@ -1032,9 +1032,9 @@
             Zaco offers a reliable solution for selling old and used IT server
             equipment in India. Whether it's HP, DELL, IBM servers, or Cisco
             networking equipment, Zaco ensures a sustainable process for
-            handling and recycling these assets. By filling a form, sellers can
+            <a href="{% url "itad-services" %}">handling and recycling these assets. By filling a form, sellers can
             seamlessly offload their equipment, trusting Zaco's team to manage
-            the rest.
+            the rest.</a>
           </div>
           <!-- <div class="progress-box">
                   <div class="bar-title">Digital marketing</div>
@@ -1177,7 +1177,7 @@
           <img src="{% static 'images/home/Tata Power.jpg' %}" alt="" />
         </div>
         <!-- /.swiper-slide -->
-       
+
         <!-- /.swiper-slide -->
       </div>
     </div>
@@ -1270,7 +1270,7 @@
           <img src="{% static 'images/home/redhat.jpg' %}" alt="" />
         </div>
         <!-- /.swiper-slide -->
-       
+
         <!-- /.swiper-slide -->
       </div>
     </div>
@@ -1303,13 +1303,13 @@
           <div class="right-col col-lg-6 col-md-12 col-sm-12">
               <div class="inner">
                   <div class="sec-title">
-                      <h2>Why Choose Zaco for Refurbished IT Solutions?<span class="dot">.</span></h2>
+                      <h2>Why Choose Zaco for Refurbished IT Solutions?<span class="dot"></span></h2>
                   </div>
                   <div class="features">
                       <div class="feature">
                           <div class="inner-box">
                               <h6>Smart IT Thinking</h6>
-                              <div class="text">We approach IT challenges with flexible, 
+                              <div class="text">We approach IT challenges with flexible,
                                 scalable, and cost-effective strategies.
                               </div>
                           </div>
@@ -1317,7 +1317,7 @@
                       <div class="feature">
                           <div class="inner-box">
                               <h6>Customer-Centric Approach</h6>
-                              <div class="text">We tailor solutions to meet 
+                              <div class="text">We tailor solutions to meet
                                 your unique business needs, ensuring satisfaction every time.
 
                               </div>
@@ -1326,7 +1326,7 @@
                       <div class="feature">
                           <div class="inner-box">
                               <h6>Global Expertise</h6>
-                              <div class="text">Our certified engineers and support 
+                              <div class="text">Our certified engineers and support
                                 team deliver solutions you can trust.</div>
                           </div>
                       </div>
