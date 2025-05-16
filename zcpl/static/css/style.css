@@ -6533,7 +6533,7 @@ img.lazy-image.loaded {
   position: relative;
   float: left;
   display: block;
-  font-size: 60px;
+  font-size: 52px;
   line-height: 0.85em;
   text-transform: uppercase;
   color: var(--thm-black);
