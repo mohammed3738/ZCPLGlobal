@@ -6533,7 +6533,7 @@ img.lazy-image.loaded {
   position: relative;
   float: left;
   display: block;
-  font-size: 60px;
+  font-size: 52px;
   line-height: 0.85em;
   text-transform: uppercase;
   color: var(--thm-black);
@@ -29226,7 +29226,7 @@ img.lazy-image.loaded {
   overflow: hidden;
   border-radius: 6px;
 }
-.project-twelev__item::after {
+/* .project-twelev__item::after {
   position: absolute;
   left: 0;
   top: 0;
@@ -29243,7 +29243,7 @@ img.lazy-image.loaded {
   transform: translatex(0) scalex(1);
   opacity: 0.6;
   filter: blur(0);
-}
+} */
 .project-twelev__item img {
   width: 100%;
   height: auto;
@@ -31209,5 +31209,56 @@ body {
 
 
 
-/* custom dropdown topbar */
+/* custom slider */
 
+.slider1-container {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slider1 {
+  overflow: hidden;
+}
+
+.slider1-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide1 {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.slider1-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.slider1-btn:hover {
+  opacity: 1;
+}
+
+.prev1 {
+  left: 10px;
+}
+
+.next1 {
+  right: 10px;
+}
