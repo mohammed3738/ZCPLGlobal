@@ -10,6 +10,9 @@
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800;900&family=Teko:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- reey font -->
@@ -221,15 +224,14 @@
               <!--Logo-->
               <div class="logo-box">
                 <div class="logo">
-                  <a
-                    href="index.html"
-                    title="Zaco Computers Private Limited"
-                    ><img
+                  <a href="{% url 'home' %}" title="Zaco Computers Private Limited">
+                    <img
                       src="{% static 'images/Zacow1.png' %}"
                       id="thm-logo"
                       alt="Zaco Computers Private Limited"
-                      title="Zaco Computers Private Limited""
-                  /></a>
+                      title="Zaco Computers Private Limited" />
+                  </a>
+
                 </div>
               </div>
               <div class="nav-outer clearfix">
@@ -315,6 +317,9 @@
 
         {% include "footer.html" %}
 
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -326,6 +331,7 @@
     <script src="{% static 'js/appear.js' %}"></script>
     <script src="{% static 'js/wow.js' %}"></script>
     <script src="{% static 'js/jQuery.style.switcher.min.js' %}"></script>
+    <script src="{% static 'js/custom_js.js' %}"></script>
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"
