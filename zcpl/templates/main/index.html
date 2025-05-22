@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
+
 <!-- Banner Section -->
 <section class="banner-section banner-one">
   <div class="left-based-text">
@@ -528,7 +529,7 @@
               <div class="inner">
                   <div class="sec-title">
                       <h2>Most trusted global company for servers & storages<span class="dot"></span></h2>
-                      <div class="lower-text">We provide certified refurbished servers of 
+                      <div class="lower-text">We provide new & certified refurbished servers of 
                         leading brands like Dell, HPE, IBM, and Cisco. With customizable configurations
                         and strict quality testing, our servers deliver performance and savings for
                         businesses worldwide.
@@ -560,8 +561,138 @@
 </section>
 
 
+<!-- /.sponsor-six -->
+<section class="sponsor-six">
+  <div class="auto-container">
+    <div class="sec-title-eight text-center">
+      <!-- <p class="sec-title-eight__text">Recent Cases</p> -->
+      <!-- /.sec-title-eight__text -->
+      <h2 class="sec-title-eight__title">Brands We Support</h2>
+      <!-- /.sec-title-eight__title -->
+    </div>
+    <div
+      class="thm-swiper__slider swiper-container"
+      data-swiper-options='{"spaceBetween": 100, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
+						"0": {
+							"spaceBetween": 30,
+							"slidesPerView": 2
+						},
+						"375": {
+							"spaceBetween": 30,
+							"slidesPerView": 2
+						},
+						"575": {
+							"spaceBetween": 30,
+							"slidesPerView": 3
+						},
+						"767": {
+							"spaceBetween": 50,
+							"slidesPerView": 4
+						},
+						"991": {
+							"spaceBetween": 50,
+							"slidesPerView": 5
+						},
+						"1199": {
+							"spaceBetween": 100,
+							"slidesPerView": 5
+						}
+					}}'
+    >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/hpe.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/dell.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/ibm.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/lenovo.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/cisco.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/fortinet.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/vm.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/microsoft.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/veeam.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+        {% comment %} <div class="swiper-slide">
+          <img src="{% static 'images/home/sec.jpg' %}" alt="" />
+        </div> {% endcomment %}
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/redhat.jpg' %}" alt="" />
+        </div>
+        <!-- /.swiper-slide -->
+
+        <!-- /.swiper-slide -->
+      </div>
+    </div>
+  </div>
+  <!-- /.auto-container -->
+</section>
+<!-- /.sponsor-six -->
 
 
+<!-- /.sponsor-six -->
+		<section class="project-twelev">
+			<div class="container">
+				<div class="sec-title-twelev text-center">
+					{% comment %} <div class="sec-title-twelev__tagline"><span class="sec-title-twelev__tagline__bar"></span>Latest Work</div> {% endcomment %}
+					<h2 class="sec-title-twelev__title">Shop by category</h2>
+				</div>
+				<div class="project-twelev__carousel owl-theme owl-carousel">
+					<div class="project-twelev__item">
+						<img src="{% static "images/products/blade.webp" %}" alt="linoor">
+            <p class="about-six__box__title text-center p-5">Blade Server</p>
+					</div><!-- project-twelev__item -->
+					<div class="project-twelev__item">
+						<img src="{% static "images/products/firewall.webp" %}" alt="linoor">
+            <p class="about-six__box__title text-center p-5">Firewall</p>
+					</div><!-- project-twelev__item -->
+					<div class="project-twelev__item">
+						<img src="{% static "images/products/rack.webp" %}" alt="linoor">
+            <p class="about-six__box__title text-center p-5">Server Rack</p>
+					</div><!-- project-twelev__item -->
+					<div class="project-twelev__item">
+						<img src="{% static "images/products/switch.webp" %}" alt="linoor">
+            <p class="about-six__box__title text-center p-5">Switch</p>
+					</div><!-- project-twelev__item -->
+
+					<div class="project-twelev__item">
+						<img src="{% static "images/products/router.webp" %}" alt="linoor">
+            <p class="about-six__box__title text-center p-5">Router</p>
+					</div><!-- project-twelev__item -->
+					<div class="project-twelev__item">
+						<img src="{% static "images/products/tower.webp" %}" alt="linoor">
+            <p class="about-six__box__title text-center p-5">Tower Server</p>
+					</div><!-- project-twelev__item -->
+				</div>
+			</div>
+		</section>
+
+
+<!-- /.sponsor-six -->
 
 
 
@@ -582,12 +713,12 @@
           <div class="sec-title-six">
             <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
             <!-- /.sec-title-six__text -->
-            <h2 class="sec-title-six__title">Premium Refurbished Cisco Networking Solutions <span class="dot"></span></h2>
+            <h2 class="sec-title-six__title">New and Refurbished Cisco Networking Solutions <span class="dot"></span></h2>
             <!-- /.sec-title-six__title -->
           </div>
           <!-- /.sec-title-six -->
           <div class="about-six__text">
-            Zaco offers high-quality, cost-effective refurbished Cisco networking device,
+            Zaco offers high-quality, cost-effective new and refurbished Cisco networking device,
             including Catalyst and Nexus switches, ISR and ASR routers, access points,
             and ASA firewalls. Each unit is professionally refurbished, performance-tested,
             and backed by expert support. Get reliable, enterprise-grade solutions with quick
@@ -649,31 +780,28 @@
       </div>
 
 
-      <div class="col-md-12 col-lg-4">
+      {% comment %} <div class="col-md-12 col-lg-4">
         <div class="about-six__box">
-          {% comment %} <i class="flaticon-clipboard about-six__box__icon"></i> {% endcomment %}
           <h3 class="about-six__box__title">Cisco ASR Routers</h3>
         </div>
         <!-- /.about-six__box -->
-      </div>
+      </div> {% endcomment %}
       <!-- /.col-md-12 col-lg-4 -->
-      <div class="col-md-12 col-lg-4">
+      {% comment %} <div class="col-md-12 col-lg-4">
         <div class="about-six__box">
-          {% comment %} <i class="flaticon-settings about-six__box__icon"></i> {% endcomment %}
           <h3 class="about-six__box__title">
             Cisco Access Points
           </h3>
         </div>
         <!-- /.about-six__box -->
-      </div>
+      </div> {% endcomment %}
       <!-- /.col-md-12 col-lg-4 -->
-      <div class="col-md-12 col-lg-4">
+      {% comment %} <div class="col-md-12 col-lg-4">
         <div class="about-six__box">
-          {% comment %} <i class="fa fa-recycle about-six__box__icon"></i> {% endcomment %}
           <h3 class="about-six__box__title">Cisco ASA Firewalls</h3>
         </div>
         <!-- /.about-six__box -->
-      </div>
+      </div> {% endcomment %}
       <!-- /.col-md-12 col-lg-4 -->
     </div>
     <!-- /.row -->
@@ -892,121 +1020,6 @@
   </div>
 </section>
 
-<section class="project-eight" id="portfolio">
-  <div class="auto-container">
-    <div class="sec-title-eight text-center">
-      <!-- <p class="sec-title-eight__text">Recent Cases</p> -->
-      <!-- /.sec-title-eight__text -->
-      <h2 class="sec-title-eight__title">Our Global Presence</h2>
-      <!-- /.sec-title-eight__title -->
-    </div>
-    <!-- /.sec-title-eight -->
-    <div
-      class="thm-swiper__slider swiper-container"
-      data-swiper-options='{"spaceBetween": 30, "slidesPerView": 2, "autoplay": { "delay": 5000 }, "breakpoints": {
-						"0": {
-							"slidesPerView": 1
-						},
-						"375": {
-							"slidesPerView": 1
-						},
-						"480": {
-							"slidesPerView": 2
-						},
-						"767": {
-							"slidesPerView": 3
-						},
-						"1199": {
-							"slidesPerView": 4
-						}
-					}}'
-    >
-      <div class="swiper-wrapper" style="justify-content: center;">
-        <div class="swiper-slide">
-          <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco India.jpg' %}"
-              alt=""
-            />
-            <div class="project-eight__content">
-              <a class="project-eight__link" href="{% url "india-contact" %}"
-                ><i class="flaticon-right-arrow"></i
-              ></a>
-              <h3 class="project-eight__title">
-                <a href="portfolio-single.html">India</a>
-              </h3>
-              <!-- /.project-eight__title -->
-            </div>
-            <!-- /.project-eight__content -->
-          </div>
-          <!-- /.project-eight__item -->
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco UK.jpg' %}"
-              alt=""
-            />
-            <div class="project-eight__content">
-              <a class="project-eight__link" href="{% url "uk-contact" %}"
-                ><i class="flaticon-right-arrow"></i
-              ></a>
-              <h3 class="project-eight__title">
-                <a href="{% url "uk-contact" %}"> United Kingdom</a>
-              </h3>
-              <!-- /.project-eight__title -->
-            </div>
-            <!-- /.project-eight__content -->
-          </div>
-          <!-- /.project-eight__item -->
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco UAE.jpg' %}"
-              alt=""
-            />
-            <div class="project-eight__content">
-              <a class="project-eight__link" href="{% url "uae-contact" %}"
-                ><i class="flaticon-right-arrow"></i
-              ></a>
-              <h3 class="project-eight__title">
-                <a href="{% url "uae-contact" %}">UAE</a>
-              </h3>
-              <!-- /.project-eight__title -->
-            </div>
-            <!-- /.project-eight__content -->
-          </div>
-          <!-- /.project-eight__item -->
-        </div>
-        <!-- /.swiper-slide -->
-        {% comment %} <div class="swiper-slide">
-          <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco Canada.jpg' %}"
-              alt=""
-            />
-            <div class="project-eight__content">
-              <a class="project-eight__link" href="portfolio-single.html"
-                ><i class="flaticon-right-arrow"></i
-              ></a>
-              <h3 class="project-eight__title">
-                <a href="portfolio-single.html">Canada</a>
-              </h3>
-              <!-- /.project-eight__title -->
-            </div>
-            <!-- /.project-eight__content -->
-          </div>
-          <!-- /.project-eight__item -->
-        </div> {% endcomment %}
-        <!-- /.swiper-slide -->
-      </div>
-    </div>
-  </div>
-  <!-- /.auto-container -->
-</section>
 <!-- /.project-seven -->
 
 <!--We DO Section-->
@@ -1187,97 +1200,6 @@
 
 
 
-<!-- /.sponsor-six -->
-<section class="sponsor-six">
-  <div class="auto-container">
-    <div class="sec-title-eight text-center">
-      <!-- <p class="sec-title-eight__text">Recent Cases</p> -->
-      <!-- /.sec-title-eight__text -->
-      <h2 class="sec-title-eight__title">Brands We Support</h2>
-      <!-- /.sec-title-eight__title -->
-    </div>
-    <div
-      class="thm-swiper__slider swiper-container"
-      data-swiper-options='{"spaceBetween": 100, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
-						"0": {
-							"spaceBetween": 30,
-							"slidesPerView": 2
-						},
-						"375": {
-							"spaceBetween": 30,
-							"slidesPerView": 2
-						},
-						"575": {
-							"spaceBetween": 30,
-							"slidesPerView": 3
-						},
-						"767": {
-							"spaceBetween": 50,
-							"slidesPerView": 4
-						},
-						"991": {
-							"spaceBetween": 50,
-							"slidesPerView": 5
-						},
-						"1199": {
-							"spaceBetween": 100,
-							"slidesPerView": 5
-						}
-					}}'
-    >
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/hpe.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/dell.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/ibm.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/lenovo.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/cisco.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/fortinet.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/vm.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/microsoft.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/veeam.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-        {% comment %} <div class="swiper-slide">
-          <img src="{% static 'images/home/sec.jpg' %}" alt="" />
-        </div> {% endcomment %}
-        <!-- /.swiper-slide -->
-        <div class="swiper-slide">
-          <img src="{% static 'images/home/redhat.jpg' %}" alt="" />
-        </div>
-        <!-- /.swiper-slide -->
-
-        <!-- /.swiper-slide -->
-      </div>
-    </div>
-  </div>
-  <!-- /.auto-container -->
-</section>
-<!-- /.sponsor-six -->
 
 
 <section class="why-us-section">
@@ -1336,6 +1258,122 @@
           </div>
       </div>
   </div>
+</section>
+
+<section class="project-eight" id="portfolio">
+  <div class="auto-container">
+    <div class="sec-title-eight text-center">
+      <!-- <p class="sec-title-eight__text">Recent Cases</p> -->
+      <!-- /.sec-title-eight__text -->
+      <h2 class="sec-title-eight__title">Our Global Presence</h2>
+      <!-- /.sec-title-eight__title -->
+    </div>
+    <!-- /.sec-title-eight -->
+    <div
+      class="thm-swiper__slider swiper-container"
+      data-swiper-options='{"spaceBetween": 30, "slidesPerView": 2, "autoplay": { "delay": 5000 }, "breakpoints": {
+						"0": {
+							"slidesPerView": 1
+						},
+						"375": {
+							"slidesPerView": 1
+						},
+						"480": {
+							"slidesPerView": 2
+						},
+						"767": {
+							"slidesPerView": 3
+						},
+						"1199": {
+							"slidesPerView": 4
+						}
+					}}'
+    >
+      <div class="swiper-wrapper" style="justify-content: center;">
+        <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco India.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="{% url "india-contact" %}"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="portfolio-single.html">India</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco UK.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="{% url "uk-contact" %}"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="{% url "uk-contact" %}"> United Kingdom</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div>
+        <!-- /.swiper-slide -->
+        <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco UAE.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="{% url "uae-contact" %}"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="{% url "uae-contact" %}">UAE</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div>
+        <!-- /.swiper-slide -->
+        {% comment %} <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img
+              src="{% static 'images/home/Zaco Canada.jpg' %}"
+              alt=""
+            />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="portfolio-single.html"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="portfolio-single.html">Canada</a>
+              </h3>
+              <!-- /.project-eight__title -->
+            </div>
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div> {% endcomment %}
+        <!-- /.swiper-slide -->
+      </div>
+    </div>
+  </div>
+  <!-- /.auto-container -->
 </section>
 
 
@@ -1664,6 +1702,8 @@
   <!-- /.auto-container -->
 </section> {% endcomment %}
 <!-- /.project-six -->
+
+
 
 
 
