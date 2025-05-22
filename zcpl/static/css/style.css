@@ -29245,8 +29245,12 @@ img.lazy-image.loaded {
   filter: blur(0);
 } */
 .project-twelev__item img {
-  width: 100%;
-  height: auto;
+  /* width: 100%;
+  height: auto; */
+  width: 200px !important;  /* adjust as needed */
+  height: auto !important;
+
+
 }
 .project-twelev__item__content {
   position: absolute;
