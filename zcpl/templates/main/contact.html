@@ -1,284 +1,171 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-<!-- Banner Section -->
+{% extends 'base contact.html' %}
+{% load static %}
+{% block content %}
 
+<!-- Hero Banner -->
 <section class="slider-six">
-  <div class="slider-six__curv">
-
-  </div>
-
+  <div class="slider-six__curv"></div>
   <div
     class="swiper-container thm-swiper__slider"
-    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+    data-swiper-options='{
+      "slidesPerView": 1,
+      "loop": true,
+      "effect": "fade",
+      "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true },
+      "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" },
+      "autoplay": { "delay": 5000 }
+    }'
   >
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <div
           class="image-layer"
-          style="background-image: url({% static "images/contact/contact1.jpg" %});background-position:top"
-
-
+          style="background-image: url({% static 'images/contact/contact1.jpg' %}); background-position: center;"
         ></div>
-        <!-- /.image-layer -->
-        <div class="auto-container">
+        <div class="auto-container text-center text-white">
           <div class="slider-six__content">
-            {% comment %}
-            <p class="slider-six__text"><span>About</span></p>
-            {% endcomment %}
-            <!-- /.slider-six__text -->
-            <h2 class="slider-six__title">Contact</h2>
-            <!-- /.slider-six__title -->
-            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
-            <!-- /.thm-btn__six -->
+            <h2 class="slider-six__title">Let’s Connect Globally</h2>
+            <p class="slider-six__text">Reach out to our regional offices for all your IT needs.</p>
           </div>
-          <!-- /.slider-six__content -->
         </div>
       </div>
     </div>
-  
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
 </section>
-{% comment %} <div class="sec-title-eight text-center " style="padding-top:30px" >
-  <h2 class="sec-title-eight__title">Write Us a Message</h2>
-</div> {% endcomment %}
 
-
-<section class="feature-twelev">
-  <div class="sec-title-eight text-center " style="padding-bottom:50px" >
-    <h2 class="sec-title-eight__title">Offices Near you</h2>
-  </div>
+<!-- Global Offices with Icons and Images -->
+<section class="feature-twelev py-5 bg-light">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 wow fadeInUp" data-wow-delay="00ms">
-        <div class="feature-twelev__item">
-          <div class="card-contact-contact-1" >
-            <div class="country-header-contact">INDIA</div>
-        </div>
-          <div class="feature-twelev__item__wrapper">
-    
-            <h3 class="feature-twelev__item__title">
-              Zaco Computers Pvt Ltd(H.O)<br />
-            </h3>
-            <p class="feature-twelev__item__text">
-              Office Location: 3, DLH Park, S. V. Road, Goregaon (West), Mumbai – 400062. Maharashtra, India.
-            </p>
-            <p class="feature-twelev__item__text">
-              Office Timings: Monday to Saturday 10:00 am to 7:00 pm 
-            </p>
-            <div class="feature-twelev__item__br"></div>
-            <div>
-              <a
-                href="mailto:info@zacocomputer.com"
-                class="feature-twelev__item__text"
-                >info@zacocomputer.com</a
-              >
-            </div>
-            <div>
-              <a href="tel:+447785246591" class="feature-twelev__item__text"
-                >+91 22 69288800</a
-              >
-            </div>
-          
+    <div class="text-center mb-5">
+      <h2 class="sec-title-eight__title">Our Global Offices</h2>
+      <p>We're just one call or message away — anywhere in the world.</p>
+    </div>
+    <div class="row gy-4">
+      {% comment %} INDIA {% endcomment %}
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow h-100 border-0">
+          <img src="{% static 'images/contact/india-office.jpg' %}" class="card-img-top" alt="India Office">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-map-marker-alt me-2 text-danger"></i>India (Head Office)
+            </h5>
+            <p><strong>Zaco Computers Pvt Ltd</strong></p>
+            <p><i class="fas fa-location-dot me-1"></i> 3, DLH Park, Goregaon (W), Mumbai – 400062</p>
+            <p><i class="fas fa-clock me-1"></i> Mon - Sat, 10 AM – 7 PM</p>
+            <p><i class="fas fa-envelope me-1"></i> <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a></p>
+            <p><i class="fas fa-phone me-1"></i> <a href="tel:+912269288800">+91 22 6928 8800</a></p>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="00ms">
-        <div class="feature-twelev__item">
-          <div class="card-contact-contact-1" >
-            <div class="country-header-contact">UK</div>
-        </div>
-          <div class="feature-twelev__item__wrapper">
-            {% comment %} <div class="feature-twelev__item__icon">
-              <i class="linoor-icon-three-touch"></i>
-            </div> {% endcomment %}
-            <h3 class="feature-twelev__item__title">
-              Zaco Computers UK Limited<br />
-            </h3>
-            <p class="feature-twelev__item__text">
-              Office Location: 124 City Road, London, England, EC1V 2NX.
+
+      {% comment %} UK {% endcomment %}
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow h-100 border-0">
+          <img src="{% static 'images/contact/uk-office.jpg' %}" class="card-img-top" alt="UK Office">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-map-marker-alt me-2 text-danger"></i>United Kingdom
+            </h5>
+            <p><strong>Zaco Computers UK Ltd</strong></p>
+            <p><i class="fas fa-location-dot me-1"></i> 124 City Road, London, EC1V 2NX</p>
+            <p><i class="fas fa-clock me-1"></i> Mon - Sat, 9 AM – 5 PM</p>
+            <p><i class="fas fa-envelope me-1"></i> <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a></p>
+            <p>
+              <i class="fas fa-phone me-1"></i>
+              <a href="tel:+447785246591">+44 7785 246591</a>, <a href="tel:+442038158028">+44 203 815 8028</a>
             </p>
-            <p class="feature-twelev__item__text">
-              Office Timings: Monday to Saturday 09:00 am to 05:00 pm 
-            </p>
-            <div class="feature-twelev__item__br"></div>
-          
-            <div>
-              <a
-                href="mailto:info@zacocomputer.com"
-                class="feature-twelev__item__text"
-                >info@zacocomputer.com</a
-              >
-            </div>
-            <div>
-              <a href="tel:+447785246591" class="feature-twelev__item__text"
-                >+44 7785246591</a
-              >
-            </div>
-            <div>
-              <a href="tel:+442038158028" class="feature-twelev__item__text"
-                >+44 203 815 8028</a
-              >
-            </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="00ms">
-        <div class="feature-twelev__item">
-          <div class="card-contact-contact-1" >
-            <div class="country-header-contact">UAE</div>
-        </div>
-          <div class="feature-twelev__item__wrapper">
-            {% comment %} <div class="feature-twelev__item__icon">
-              <i class="linoor-icon-three-touch"></i>
-            </div> {% endcomment %}
-            <h3 class="feature-twelev__item__title">
-              Zaco IT Solutions FZE<br />
-            </h3>
-            <p class="feature-twelev__item__text">
-              Office Location: B.C 1303474, First Floor, AFZ-B1, Ajman, UAE.
-            </p>
-            <p class="feature-twelev__item__text">
-              Office Timings: Monday to Saturday 10:00 am to 7:00 pm 
-            </p>
-            <div class="feature-twelev__item__br"></div>
-          
-            <div>
-              <a
-                href="mailto:info@zacocomputer.com"
-                class="feature-twelev__item__text"
-                >info@zacocomputer.com</a
-              >
-            </div>
-            <div>
-              <a href="tel:+971 56 625 4023" class="feature-twelev__item__text"
-                >+971 56 625 4023</a
-              >
-            </div>
-       
+
+      {% comment %} UAE {% endcomment %}
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow h-100 border-0">
+          <img src="{% static 'images/contact/uae-office.jpg' %}" class="card-img-top" alt="UAE Office">
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-map-marker-alt me-2 text-danger"></i>United Arab Emirates
+            </h5>
+            <p><strong>Zaco IT Solutions FZE</strong></p>
+            <p><i class="fas fa-location-dot me-1"></i> B.C 1303474, First Floor, AFZ-B1, Ajman</p>
+            <p><i class="fas fa-clock me-1"></i> Mon - Sat, 10 AM – 7 PM</p>
+            <p><i class="fas fa-envelope me-1"></i> <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a></p>
+            <p><i class="fas fa-phone me-1"></i> <a href="tel:+971566254023">+971 56 625 4023</a></p>
           </div>
         </div>
       </div>
-      {% comment %} <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="00ms">
-        <div class="feature-twelev__item">
-          <div class="card-contact-contact-1" >
-            <div class="country-header-contact">CANADA</div>
-        </div>
-          <div class="feature-twelev__item__wrapper">
-            <div class="feature-twelev__item__icon">
-              <i class="linoor-icon-three-touch"></i>
-            </div> 
-            <h3 class="feature-twelev__item__title">
-              Zaco IT Solutions FZE<br />
-            </h3>
-            <p class="feature-twelev__item__text">
-              Office Location: 135 Lower Sherbourne Street, M5A 1Y4, Toronto, ON.
-            </p>
-            <p class="feature-twelev__item__text">
-              Office Timings: Monday to Saturday 10:00 am to 7:00 pm IST
-            </p>
-            <div class="feature-twelev__item__br"></div>
-          
-            <div>
-              <a
-                href="mailto:info@zacocomputer.com"
-                class="feature-twelev__item__text"
-                >info@zacocomputer.com</a
-              >
-            </div>
-            <div>
-              <a href="tel:+447785246591" class="feature-twelev__item__text"
-                >+44-7785246591</a
-              >
-            </div>
-            <div>
-              <a href="tel:+442038158028" class="feature-twelev__item__text"
-                >+44 203 815 8028</a
-              >
-            </div>
-          </div>
-        </div>
-      </div> {% endcomment %}
- 
     </div>
   </div>
 </section>
-        <!--Contact Section-->
-        <section class="contact-section">
-            <div class="auto-container">
-                {% comment %} <div class="sec-title centered">
-                    <h2>Offices near you<span class="dot">.</span></h2>
-                </div> {% endcomment %}
 
-       
 
-                <div class="map-box">
-                    <iframe class="map-iframe"
-                        src="https://maps.google.com/maps?q=Zaco+Computers+Pvt.+Ltd.+3%2C+Dlh+Park%2C+Swami+Vivekananda+Rd%2C+Malad%2C+Sunder+Nagar%2C+Goregaon+West%2C+Mumbai%2C+Maharashtra+400062&output=embed"
-                        style="border:0;" aria-hidden="false" tabindex="0"></iframe>
-                        
-                </div>
-                <div class="form-box">
-                    {% comment %} <div class="sec-title">
-                        <h2>Write Us a Message<span class="dot">.</span></h2>
-                    </div> {% endcomment %}
-                    <div class="sec-title-eight text-center " style="padding-top:30px" >
-                        <h2 class="sec-title-eight__title">Write Us a Message</h2>
-                      </div>
-                    <div class="default-form">
-                        <form   >
-                            <div class="row clearfix">
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <div class="field-inner">
-                                        <input type="text" name="username" value="" placeholder="Your Name" required="">
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <div class="field-inner">
-                                        <input type="email" name="email" value="" placeholder="Email Address"
-                                            required="">
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <div class="field-inner">
-                                        <input type="text" name="phone" value="" placeholder="Phone Number" required="">
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <div class="field-inner">
-                                        <input type="text" name="subject" value="" placeholder="Subject" required="">
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <div class="field-inner">
-                                        <textarea name="message" placeholder="Write Message" required=""></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <button class="theme-btn btn-style-one">
-                                        <i class="btn-curve"></i>
-                                        <span class="btn-title">Send message</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<!-- Contact Form + Map Section -->
+<section class="contact-section pt-5 pb-5 bg-light">
+  <div class="container">
+    <div class="sec-title-eight text-center mb-4">
+      <h2 class="sec-title-eight__title">Connect With Us</h2>
+      <p>We're here to help — whether you have questions, feedback, or just want to say hello.</p>
+    </div>
+
+    <div class="row g-4 align-items-stretch">
+      <!-- Contact Form -->
+      <div class="col-lg-6">
+        <div class="card shadow border-0 p-4 h-100">
+          <h4 class="mb-3">Write Us a Message</h4>
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+              </div>
+              <div class="col-12 mb-3">
+                <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+              </div>
+              <div class="col-12 text-center">
+                <button class="btn btn-primary px-4 py-2" type="submit">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </div>
             </div>
-        </section>
+          </form>
+        </div>
+      </div>
+
+      <!-- Embedded Google Map -->
+      <div class="col-lg-6">
+        <div class="card shadow border-0 h-100">
+          <iframe
+            class="rounded w-100 h-100"
+            src="https://maps.google.com/maps?q=Zaco+Computers+Pvt.+Ltd.+3%2C+Dlh+Park%2C+Swami+Vivekananda+Rd%2C+Goregaon+West%2C+Mumbai%2C+Maharashtra+400062&output=embed"
+            style="min-height: 100%; border:0;"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Media Footer Section -->
+<section class="bg-dark text-white py-4">
+  <div class="container text-center">
+    <p class="mb-2">Follow us on social media</p>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="https://www.facebook.com/zacocomputer" target="_blank" class="text-white fs-4"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.linkedin.com/company/zacocomputers" target="_blank" class="text-white fs-4"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://twitter.com/zacocomputer" target="_blank" class="text-white fs-4"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com/zacocomputer" target="_blank" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
