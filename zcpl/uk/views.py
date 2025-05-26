@@ -15,7 +15,7 @@ def uk_home(request):
 
 def uk_contact(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
+        name = request.POST.get('username')
         email = request.POST.get('email')
         # phone = request.POST.get('phone')
         subject = request.POST.get('subject')

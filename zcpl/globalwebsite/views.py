@@ -1,5 +1,8 @@
 from django.shortcuts import render
-
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.conf import settings
+from .models import *
 # Create your views here.
 def home(request):
     return render(request,'main/index.html')
@@ -7,6 +10,32 @@ def home(request):
 def about_us(request):
     return render(request,'main/about.html')
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('username')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        # Save to database
+        ContactMessageGlobal.objects.create(
+            name=name,
+            email=email,
+            phone=phone,
+            subject=subject,
+            message=message
+        )
+
+        full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+
+        send_mail(
+            subject,
+            full_message,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.CONTACT_RECEIVER_EMAIL],
+            fail_silently=False,
+        )
+
+
     return render(request,'main/contact.html')
 
 def services(request):
