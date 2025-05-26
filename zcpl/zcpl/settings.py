@@ -152,4 +152,4 @@ EMAIL_HOST_PASSWORD = 'uvxe hxzp cfbh gyxy'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
-CONTACT_RECEIVER_EMAIL = ['abhiraj@zacocomputer.com', 'info@zacocomputer.com']
+CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
