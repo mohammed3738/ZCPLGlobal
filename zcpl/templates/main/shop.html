@@ -17,7 +17,7 @@
   }
 
   .subcategory-list.show {
-    max-height: 500px; /* adjust based on how many items */
+    max-height: 500px; /* or auto if you want to expand based on content */
   }
 
   .arrow {
@@ -74,6 +74,7 @@
           </div>
 
           <!-- Categories -->
+<!-- Categories -->
 <div class="shop-category shop-sidebar__single">
   <h3 class="shop-sidebar__title">Categories</h3>
   <ul class="list-unstyled">
@@ -82,9 +83,9 @@
       <li>
         <div class="category-header" onclick="toggleSubcategories(this)">
           <span>{{ cat.name }}</span>
-          <span class="arrow">&#9662;</span> <!-- Down arrow -->
+          <span class="arrow">&#9656;</span> <!-- Right arrow initially -->
         </div>
-        <ul class="subcategory-list show" style="padding-left: 15px;">
+        <ul class="subcategory-list" style="padding-left: 15px;">
           {% for subcat in cat.subcategories.all %}
             <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
           {% endfor %}
@@ -174,9 +175,9 @@
     sublist.classList.toggle('show');
 
     if (sublist.classList.contains('show')) {
-      arrow.innerHTML = '&#9662;'; // Down arrow
+      arrow.innerHTML = '&#9662;'; // ▼ down arrow
     } else {
-      arrow.innerHTML = '&#9656;'; // Right arrow
+      arrow.innerHTML = '&#9656;'; // ▶ right arrow
     }
   }
 </script>

@@ -41,17 +41,32 @@ class ReviewForm(forms.ModelForm):
 #     notes       = forms.CharField(required=False,
 #                                   widget=forms.Textarea(attrs={'rows':3}))
 
+# class BankTransferForm(forms.Form):
+#     first_name = forms.CharField(max_length=100)
+#     last_name = forms.CharField(max_length=100)
+#     address = forms.CharField(widget=forms.Textarea)
+#     phone = forms.CharField(max_length=20)
+#     email = forms.EmailField()
+
+#     transaction_id = forms.CharField(label="Bank Transaction ID", max_length=100)
+#     payer_name = forms.CharField(label="Your Account Holder Name", max_length=100)
+#     payer_bank_name = forms.CharField(label="Your Bank Name", max_length=100)
+
+
 class BankTransferForm(forms.Form):
-    full_name = forms.CharField(max_length=100)
-    address = forms.CharField(widget=forms.Textarea)
-    phone = forms.CharField(max_length=20)
+    first_name = forms.CharField(max_length=50)
+    last_name = forms.CharField(max_length=50)
     email = forms.EmailField()
+    phone = forms.CharField(max_length=20)
+    address = forms.CharField(widget=forms.Textarea)
+    city = forms.CharField(max_length=100)
+    state = forms.CharField(max_length=100)
+    zip_code = forms.CharField(max_length=20)
+    country = forms.CharField(max_length=100)
 
-    transaction_id = forms.CharField(label="Bank Transaction ID", max_length=100)
-    payer_name = forms.CharField(label="Your Account Holder Name", max_length=100)
-    payer_bank_name = forms.CharField(label="Your Bank Name", max_length=100)
-
-
+    transaction_id = forms.CharField(max_length=100)
+    payer_name = forms.CharField(max_length=100)
+    payer_bank_name = forms.CharField(max_length=100)
 
 
 class SignUpForm(forms.ModelForm):

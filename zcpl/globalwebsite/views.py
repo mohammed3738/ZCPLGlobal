@@ -349,24 +349,43 @@ def cart_update_all(request):
 def checkout(request):
     cart = Cart(request)
 
+    if len(cart) == 0:
+        messages.info(request, "Your cart is empty.")
+        return redirect('shop')  # or whatever your shop URL name is
+
     if request.method == "POST":
         form = BankTransferForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             order = Order.objects.create(
-                user=request.user,
+                user=request.user if request.user.is_authenticated else None,
                 first_name=cd['first_name'],
                 last_name=cd['last_name'],
-                address=cd['address'],
-                phone=cd['phone'],
                 email=cd['email'],
+                phone=cd['phone'],
+                address=cd['address'],
+                city=cd['city'],
+                state=cd['state'],
+                zip_code=cd['zip_code'],
+                country=cd['country'],
                 transaction_id=cd['transaction_id'],
                 payer_name=cd['payer_name'],
                 payer_bank_name=cd['payer_bank_name'],
-                payment_status="Pending"
+                payment_status="Pending",
+                total=cart.get_total_price()
             )
+
+            for item in cart:
+                OrderItem.objects.create(
+                    order=order,
+                    product=item['product'],
+                    price=item['product'].price,
+                    quantity=item['quantity']
+                )
+
             cart.clear()
-            return render(request, "main/order_success.html", {"order": order})
+            return redirect('order_success', order_id=order.id)
+
     else:
         form = BankTransferForm()
 
