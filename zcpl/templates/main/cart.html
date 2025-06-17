@@ -44,9 +44,9 @@
                         {% for item in cart_page_obj %}
                         <tr>
                             <td>
-                                <div class="product-box">
+                                <div class="product-box" >
                                     <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="100">
-                                    <h3><a href="{% url 'product_detail' item.product.id %}">{{ item.product.name }}</a></h3>
+                                    <h3 style="font-size: 16px; line-height: 1.2;"> <a href="{% url 'product_detail' item.product.id %}">{{ item.product.name }}</a></h3>
                                 </div>
                             </td>
                             <td>₹{{ item.product.price }}</td>
@@ -89,13 +89,13 @@
 
             <div class="row mt-4">
                 <div class="col-lg-4 offset-lg-8">
-                    <ul class="cart-total list-unstyled">
+                    <ul class="cart-total list-unstyled" >
                         <li><span>Subtotal</span><span>₹{{ cart.get_total_price }}</span></li>
                         <li><span>Shipping Cost</span><span>₹0.00</span></li>
                         <li><span>Total</span><span class="cart-total__total">₹{{ cart.get_total_price }}</span></li>
                     </ul>
                     <div class="cart-page__buttons">
-                        <button type="submit" class="theme-btn btn-style-two">
+                        <button type="submit" class="theme-btn btn-style-two" style="margin-bottom: 10px;">
                             <i class="btn-curve"></i>
                             <span class="btn-title">Update Cart</span>
                         </button>

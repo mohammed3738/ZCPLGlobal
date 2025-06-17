@@ -60,13 +60,13 @@
           <div class="shop-search shop-sidebar__single">
             <form method="get" action="">
               <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}">
-              <select name="sort" class="custom-select-box" style="margin-top: 10px;">
+              {% comment %} <select name="sort" class="custom-select-box" style="margin-top: 10px;">
                 <option value="">Sort by</option>
                 <option value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Price: Low to High</option>
                 <option value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Price: High to Low</option>
                 <option value="date" {% if request.GET.sort == "date" %}selected{% endif %}>Newest First</option>
                 <option value="rating" {% if request.GET.sort == "rating" %}selected{% endif %}>Top Rated</option>
-              </select>
+              </select> {% endcomment %}
               <button type="submit" style="margin-top: 10px;">
                 <i class="flaticon-magnifying-glass"></i>
               </button>
@@ -123,7 +123,7 @@
                 </div>
               </div>
               <div class="product-card__content">
-                <h3 class="product-card__title">
+                <h3 class="product-card__title" style="font-size: 16px; line-height: 1.2;">
                   <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
                 </h3>
                 <p class="product-card__price">₹{{ product.price }}</p>

@@ -49,7 +49,6 @@
                             <h3 class="product-details__title">
                                 {{ product.name }}
                             </h3><!-- /.product-details__title -->
-                            <p class="product-details__price">₹{{ product.price }}</p>
                         </div><!-- /.product-details__top -->
                         <div class="product-details__reveiw">
                             <i class="fa fa-star"></i>
@@ -58,7 +57,10 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <span>2 Customer Reviews</span>
+
                         </div><!-- /.product-details__reveiw -->
+                            <div class="product-details__price">₹{{ product.price }}</div>
+
                         <div class="product-details__content">
                             <p>{{ product.name }}</p>
                             {% comment %} <p>REF. 4231/406 <br> {% endcomment %}
