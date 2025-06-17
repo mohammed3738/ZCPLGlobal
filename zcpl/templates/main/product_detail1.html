@@ -1,0 +1,50 @@
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+{% block content %} {% endcomment %}
+{% comment %} <div class="container"> {% endcomment %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ product.name }}</h2>
+            <p><strong>Price:</strong> ₹{{ product.price }}</p>
+            <p>{{ product.description }}</p>
+
+            <form action="{% url 'cart_add' product.id %}" method="post" class="form-inline">
+                {% csrf_token %}
+                <label for="id_quantity">Quantity:</label>
+                {{ cart_product_form.quantity }}
+                {{ cart_product_form.override }}
+                <button type="submit" class="btn btn-primary ml-2">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+{% comment %} </div> {% endcomment %}
+
+
+<hr>
+<h4>Customer Reviews</h4>
+{% for review in reviews %}
+  <div class="border p-2 mb-2">
+    <strong>{{ review.name }}</strong> - 
+    {{ review.rating }} ★<br>
+    <small>{{ review.created_at|date:"M d, Y H:i" }}</small>
+    <p>{{ review.comment }}</p>
+  </div>
+{% empty %}
+  <p>No reviews yet. Be the first to review this product!</p>
+{% endfor %}
+
+<hr>
+<h4>Leave a Review</h4>
+<form method="post">
+  {% csrf_token %}
+  {{ review_form.as_p }}
+  <button type="submit" class="btn btn-success">Submit Review</button>
+</form>
+
+
+
+
+{% comment %} {% endblock %} {% endcomment %}

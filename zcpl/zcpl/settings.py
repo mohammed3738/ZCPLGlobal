@@ -130,6 +130,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Example: Custom static directory
 ]
 
+LOGIN_URL = '/signin/'
 
 # Media files (Uploaded by users)
 MEDIA_URL = '/media/'  # URL for accessing media files

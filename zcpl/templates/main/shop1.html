@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+</head>
+<body>
+    <h1>Shop</h1>
+
+    <h3>Categories:</h3>
+    <ul>
+        <li><a href="{% url 'shop' %}">All</a></li>
+        {% for cat in categories %}
+            <li>
+                <a href="{% url 'product_by_category' cat.slug %}">
+                    {{ cat.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Products:</h3>
+    <div>
+        {% for product in products %}
+            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+                <h4>{{ product.name }}</h4>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" width="150">
+                {% endif %}
+                <p>Price: ₹{{ product.price }}</p>
+                <p>{{ product.description|truncatechars:100 }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

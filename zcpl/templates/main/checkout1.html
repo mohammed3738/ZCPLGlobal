@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="checkout-page">
+  <div class="auto-container">
+
+    <h3 class="checkout__title">Billing details</h3>
+
+    <form method="post">
+      {% csrf_token %}
+      <!-- Billing form left column -->
+      <div class="row">
+        <div class="col-lg-6">
+          {{ form.country.label_tag }} {{ form.country }}
+          <div class="row">
+            <div class="col-md-6">{{ form.first_name.label_tag }} {{ form.first_name }}</div>
+            <div class="col-md-6">{{ form.last_name.label_tag }} {{ form.last_name }}</div>
+          </div>
+          {{ form.address.label_tag }} {{ form.address }}
+          <div class="row">
+            <div class="col-md-4">{{ form.city.label_tag }} {{ form.city }}</div>
+            <div class="col-md-4">{{ form.state.label_tag }} {{ form.state }}</div>
+            <div class="col-md-4">{{ form.zip_code.label_tag }} {{ form.zip_code }}</div>
+          </div>
+          {{ form.email.label_tag }} {{ form.email }}
+          {{ form.phone.label_tag }} {{ form.phone }}
+          {{ form.notes.label_tag }} {{ form.notes }}
+        </div>
+
+        <!-- Order summary right column -->
+        <div class="col-lg-6">
+          <h3 class="checkout__title">Your order</h3>
+          <table class="table checkout__table">
+            <thead><tr><th>Product</th><th>Subtotal</th></tr></thead>
+            <tbody>
+              {% for item in cart %}
+                <tr>
+                  <td>{{ item.product.name }} × {{ item.quantity }}</td>
+                  <td>₹{{ item.total_price }}</td>
+                </tr>
+              {% endfor %}
+              <tr><td><strong>Total</strong></td><td><strong>₹{{ cart.get_total_price }}</strong></td></tr>
+            </tbody>
+          </table>
+
+          <button type="submit" class="theme-btn btn-style-one w-100">
+            <span class="btn-title">Place your order</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.container -->
+</section>
+{% endblock %}

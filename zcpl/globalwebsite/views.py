@@ -1,8 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.conf import settings
 from .models import *
+from .cart import Cart
+from .forms import *
+from django.db.models import Q, Avg
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from .forms import SignUpForm, SignInForm
+# from .models import Product
+from .forms import ProductForm
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def home(request):
     return render(request,'main/index.html')
@@ -77,4 +89,343 @@ def privacy(request):
 def term(request):
     return render(request,'main/terms.html')
 
+# def shop(request):
+#     products = Product.objects.all().order_by('-id')
 
+#     return render(request,'main/shop.html', {'products': products})
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('shop')
+    else:
+        form = ProductForm()
+    return render(request, 'main/add_product.html', {'form': form})
+
+# def product_list(request):
+#     products = Product.objects.all().order_by('-id')
+#     return render(request, 'shop/product_list.html', {'products': products})
+
+
+
+from django.core.paginator import Paginator
+
+# def shop(request, category_slug=None):
+#     query = request.GET.get('q', '')
+#     sort = request.GET.get('sort', '')
+#     page_number = request.GET.get('page', 1)
+
+#     products = Product.objects.filter(available=True)
+
+#     if query:
+#         products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+#     if category_slug:
+#         category = get_object_or_404(Category, slug=category_slug)
+#         products = products.filter(category=category)
+#     else:
+#         category = None
+
+#     if sort == 'price_asc':
+#         products = products.order_by('price')
+#     elif sort == 'price_desc':
+#         products = products.order_by('-price')
+#     elif sort == 'date':
+#         products = products.order_by('-created_at')
+#     elif sort == 'rating':
+#         products = products.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')
+
+#     paginator = Paginator(products, 9)  # 9 products per page
+#     page_obj = paginator.get_page(page_number)
+
+#     return render(request, 'main/shop.html', {
+#         'category': category,
+#         'categories': Category.objects.all(),
+#         'products': page_obj
+#     })
+
+# views.py
+
+def shop(request, category_slug=None, subcategory_slug=None):
+    query = request.GET.get('q', '')
+    sort = request.GET.get('sort', '')
+    page_number = request.GET.get('page', 1)
+
+    products = Product.objects.filter(available=True)
+
+    category = None
+    subcategory = None
+
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        subcategories = SubCategory.objects.filter(category=category)
+
+        if subcategory_slug:
+            subcategory = get_object_or_404(SubCategory, slug=subcategory_slug, category=category)
+            products = products.filter(category=subcategory)
+        else:
+            products = products.filter(category__category=category)
+
+    if query:
+        products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    if sort == 'price_asc':
+        products = products.order_by('price')
+    elif sort == 'price_desc':
+        products = products.order_by('-price')
+    elif sort == 'date':
+        products = products.order_by('-created_at')
+    elif sort == 'rating':
+        products = products.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')
+
+    paginator = Paginator(products, 9)
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'main/shop.html', {
+        'category': category,
+        'subcategory': subcategory,
+        'products': page_obj,
+        'categories': Category.objects.all(),
+    })
+
+
+def cart_add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    form = CartAddProductForm(request.POST)
+
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(product=product,
+                 quantity=cd['quantity'],
+                 override_quantity=cd['override'])
+    return redirect('cart_detail')
+
+
+
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return redirect('cart_detail')
+
+
+# def cart_detail(request):
+#     cart = Cart(request)
+#     return render(request, 'main/cart_detail.html', {'cart': cart})
+def cart_detail(request):
+    cart = Cart(request)
+    cart_items = list(cart)  # turn generator into list for pagination
+    paginator = Paginator(cart_items, 5)  # 5 items per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'main/cart.html', {
+        'cart': cart,
+        'cart_page_obj': page_obj,
+    })
+
+
+
+
+# def product_detail(request, product_id):
+#     product = get_object_or_404(Product, id=product_id)
+#     cart_product_form = CartAddProductForm()
+#     return render(request, 'main/product_detail.html', {
+#         'product': product,
+#         'cart_product_form': cart_product_form
+#     })
+# def product_detail(request, product_id):
+#     product = get_object_or_404(Product, id=product_id)
+#     reviews = product.reviews.all().order_by('-created_at')
+#     cart_product_form = CartAddProductForm()
+    
+#     if request.method == 'POST':
+#         review_form = ReviewForm(request.POST)
+#         if review_form.is_valid():
+#             review = review_form.save(commit=False)
+#             review.product = product
+#             review.save()
+#             return redirect('product_detail', product_id=product.id)
+#     else:
+#         review_form = ReviewForm()
+
+#     return render(request, 'main/product_detail.html', {
+#         'product': product,
+#         'cart_product_form': cart_product_form,
+#         'review_form': review_form,
+#         'reviews': reviews
+#     })
+
+
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    reviews = product.reviews.all().order_by('-created_at')
+    cart_product_form = CartAddProductForm()
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        comment = request.POST.get('comment')
+        rating = request.POST.get('rating')
+
+        if name and comment and rating:
+            Review.objects.create(
+                product=product,
+                name=name,
+                comment=comment,
+                rating=int(rating)
+            )
+            return redirect('product_detail', product_id=product.id)
+
+    return render(request, 'main/product_detail.html', {
+        'product': product,
+        'cart_product_form': cart_product_form,
+        'reviews': reviews
+    })
+
+
+
+
+
+def cart_update_all(request):
+    cart = Cart(request)
+    for key, value in request.POST.items():
+        if key.startswith('quantity_'):
+            try:
+                product_id = key.split('_')[1]
+                product = Product.objects.get(id=product_id)
+                quantity = int(value)
+                cart.add(product=product, quantity=quantity, override_quantity=True)
+            except (Product.DoesNotExist, ValueError):
+                continue
+    return redirect('cart_detail')
+
+
+
+
+@login_required
+# def checkout(request):
+#     cart = Cart(request)
+#     if len(cart) == 0:          # cart empty → kick back to shop
+#         messages.info(request, "Your cart is empty.")
+#         return redirect('shop')  # adjust if your shop URL name differs
+
+#     if request.method == 'POST':
+#         form = CheckoutForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             order = Order.objects.create(
+#                 user       = request.user if request.user.is_authenticated else None,
+#                 first_name = data['first_name'],
+#                 last_name  = data['last_name'],
+#                 email      = data['email'],
+#                 phone      = data['phone'],
+#                 address    = data['address'],
+#                 city       = data['city'],
+#                 state      = data['state'],
+#                 zip_code   = data['zip_code'],
+#                 country    = data['country'],
+#                 notes      = data.get('notes',''),
+#                 total      = cart.get_total_price()
+#             )
+#             for item in cart:          # cart.__iter__() provides product, qty…
+#                 OrderItem.objects.create(
+#                     order    = order,
+#                     product  = item['product'],
+#                     price    = item['product'].price,
+#                     quantity = item['quantity']
+#                 )
+#             cart.clear()               # empty session cart
+#             return redirect('order_success', order_id=order.id)
+#     else:
+#         form = CheckoutForm()
+
+#     return render(request, 'main/checkout1.html',
+#                   {'form': form, 'cart': cart})
+
+def checkout(request):
+    cart = Cart(request)
+
+    if request.method == "POST":
+        form = BankTransferForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            order = Order.objects.create(
+                user=request.user,
+                first_name=cd['first_name'],
+                last_name=cd['last_name'],
+                address=cd['address'],
+                phone=cd['phone'],
+                email=cd['email'],
+                transaction_id=cd['transaction_id'],
+                payer_name=cd['payer_name'],
+                payer_bank_name=cd['payer_bank_name'],
+                payment_status="Pending"
+            )
+            cart.clear()
+            return render(request, "main/order_success.html", {"order": order})
+    else:
+        form = BankTransferForm()
+
+    # Sample company bank details
+    bank_info = {
+        "account_name": "Zaco Computers Pvt Ltd",
+        "account_number": "1234567890",
+        "ifsc": "HDFC0001234",
+        "bank_name": "HDFC Bank",
+        "branch": "Mumbai Main Branch"
+    }
+
+    return render(request, "main/checkout2.html", {
+        "form": form,
+        "cart": cart,
+        "bank_info": bank_info
+    })
+
+
+
+def order_success(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'main/order_success.html', {'order': order})
+
+
+
+
+
+
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # hashes password
+            user.save()
+            login(request, user)
+            return redirect('shop')  # change to your landing page
+    else:
+        form = SignUpForm()
+    return render(request, 'auth/signup.html', {'form': form})
+
+
+def signin_view(request):
+    if request.method == 'POST':
+        form = SignInForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('shop')
+        else:
+            messages.error(request, "Invalid credentials.")
+    else:
+        form = SignInForm()
+    return render(request, 'auth/signin.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('signin')

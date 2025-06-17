@@ -1,0 +1,246 @@
+ {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ 
+ 
+ 
+ <!-- Banner Section -->
+        <section class="page-banner">
+            <div class="image-layer" style="background-image:url(images/background/image-7.jpg);"></div>
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <div class="banner-inner">
+                <div class="auto-container">
+                    <div class="inner-container clearfix">
+                        <h1>Checkout Page</h1>
+                        <div class="page-nav">
+                            <ul class="bread-crumb clearfix">
+                                <li><a href="index-main.html">Home</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li class="active">Checkout</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Banner Section -->
+
+
+        <section class="checkout-page">
+            <div class="auto-container">
+                <p class="checkout-page__returning">Returning Customer? <a href="login.html">Click here to Login</a></p>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="checkout__title">Billing Details</h3><!-- /.checkout__title -->
+                        <div class="default-form">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <select name="country" class="custom-select-box">
+                                            <option value="USA">USA</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Australia">Australia</option>
+                                        </select>
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="First Name">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Last Name">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Company">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Address">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Appartment, Unit, etc. (optional)">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Town / City">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="State">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Zip Code">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Email Address">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Phone">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner field-checkbox">
+                                        <input type="checkbox" id="create-account">
+                                        <label for="create-account">Create an Account?</label>
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+
+                            </div><!-- /.row -->
+                        </div><!-- /.default-form -->
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="checkout__checkbox">
+                            <input type="checkbox" checked id="different-address">
+                            <label for="different-address" class="checkout__title">Ship to a different address</label>
+                        </div><!-- /.checkout__checkbox -->
+                        <div class="default-form">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <select name="country" class="custom-select-box">
+                                            <option value="USA">USA</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Australia">Australia</option>
+                                        </select>
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="First Name">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Last Name">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Company">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Address">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Appartment, Unit, etc. (optional)">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Town / City">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="State">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Zip Code">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Email Address">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-6 form-group">
+                                    <div class="field-inner">
+                                        <input type="text" placeholder="Phone">
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                                <div class="col-md-12 form-group">
+                                    <div class="field-inner">
+                                        <textarea placeholder="Notes About Your Order"></textarea>
+                                    </div><!-- /.field-inner -->
+                                </div><!-- /.col-md-12 form-group -->
+                            </div><!-- /.row -->
+                        </div><!-- /.default-form -->
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+                <h3 class="checkout__title">Your order</h3><!-- /.checkout__title -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="table-responsive">
+                            <table class="table checkout__table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Product Name</td>
+                                        <td>$10.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td>$10.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping</td>
+                                        <td>$00.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>$20.98</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.table-responsive -->
+                    </div><!-- /.col-lg-6 -->
+                    <div class="col-lg-6">
+                        <div class="checkout__payment">
+                            <div class="checkout__payment__item checkout__payment__item--active">
+                                <h3 class="checkout__payment__title">Direct Bank Transfer</h3>
+                                <div class="checkout__payment__content">
+                                    Make your payment directly into our bank account. Please
+                                    use your Order ID as the payment reference. Your order
+                                    wont be shipped until the funds have cleared.
+                                </div><!-- /.checkout__payment__content -->
+                            </div><!-- /.checkout__payment__item -->
+                            <div class="checkout__payment__item">
+                                <h3 class="checkout__payment__title">Paypal payment <img
+                                        src="images/update-26-01-2021/shops/paypal-1.jpg" alt=""></h3>
+                                <div class="checkout__payment__content">
+                                    Make your payment directly into our bank account. Please
+                                    use your Order ID as the payment reference. Your order
+                                    wont be shipped until the funds have cleared.
+                                </div><!-- /.checkout__payment__content -->
+                            </div><!-- /.checkout__payment__item -->
+                        </div><!-- /.checkout__payment -->
+                        <div class="text-right d-flex justify-content-end">
+
+                            <a class="theme-btn btn-style-one" href="checkout.html">
+                                <i class="btn-curve"></i>
+                                <span class="btn-title">Place your order</span>
+                            </a>
+                        </div><!-- /.text-right -->
+
+                    </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.checkout-page -->
+{% endblock %}

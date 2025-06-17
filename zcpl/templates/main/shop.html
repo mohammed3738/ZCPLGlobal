@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 5px 0;
+  }
+
+  .subcategory-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .subcategory-list.show {
+    max-height: 500px; /* adjust based on how many items */
+  }
+
+  .arrow {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+  }
+</style>
+
+<!-- Banner Section -->
+<section class="page-banner">
+  <div
+    class="image-layer"
+    style="background-image: url(images/background/image-7.jpg)"
+  ></div>
+  <div class="shape-1"></div>
+  <div class="shape-2"></div>
+  <div class="banner-inner">
+    <div class="auto-container">
+      <div class="inner-container clearfix">
+        <h1>Products</h1>
+        <div class="page-nav">
+          <ul class="bread-crumb clearfix">
+            <li><a href="index-main.html">Home</a></li>
+            <li class="active">Shop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--End Banner Section -->
+
+<section class="shop-page">
+  <div class="auto-container">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <div class="shop-sidebar">
+          <!-- Search and Sort -->
+          <div class="shop-search shop-sidebar__single">
+            <form method="get" action="">
+              <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}">
+              <select name="sort" class="custom-select-box" style="margin-top: 10px;">
+                <option value="">Sort by</option>
+                <option value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Price: Low to High</option>
+                <option value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Price: High to Low</option>
+                <option value="date" {% if request.GET.sort == "date" %}selected{% endif %}>Newest First</option>
+                <option value="rating" {% if request.GET.sort == "rating" %}selected{% endif %}>Top Rated</option>
+              </select>
+              <button type="submit" style="margin-top: 10px;">
+                <i class="flaticon-magnifying-glass"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Categories -->
+<div class="shop-category shop-sidebar__single">
+  <h3 class="shop-sidebar__title">Categories</h3>
+  <ul class="list-unstyled">
+    <li><a href="{% url 'shop' %}">All</a></li>
+    {% for cat in categories %}
+      <li>
+        <div class="category-header" onclick="toggleSubcategories(this)">
+          <span>{{ cat.name }}</span>
+          <span class="arrow">&#9662;</span> <!-- Down arrow -->
+        </div>
+        <ul class="subcategory-list show" style="padding-left: 15px;">
+          {% for subcat in cat.subcategories.all %}
+            <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+        </div>
+      </div>
+
+      <!-- Products -->
+      <div class="col-lg-9">
+        <div class="product-sorting default-form">
+          <p>Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results</p>
+        </div>
+
+        <div class="row">
+          {% for product in products %}
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-card__image">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                <div class="product-card__buttons">
+                  {% comment %} <a class="theme-btn btn-style-one" href="{% url 'cart_add' product.id %}">
+                    <i class="btn-curve"></i>
+                    <input type="number" name="quantity" value="1" min="1" />
+                    <input type="hidden" name="override" value="False" />
+                    <span class="btn-title">Add To Cart</span>
+                  </a> {% endcomment %}
+                  <a class="theme-btn btn-style-two" href="{% url 'product_detail' product.id %}">
+                    <i class="btn-curve"></i>
+                    <span class="btn-title">Quick View</span>
+                  </a>
+                </div>
+              </div>
+              <div class="product-card__content">
+                <h3 class="product-card__title">
+                  <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                </h3>
+                <p class="product-card__price">₹{{ product.price }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper text-center mt-4">
+          <ul class="pagination justify-content-center">
+            {% if products.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?q={{ request.GET.q }}&sort={{ request.GET.sort }}&page={{ products.previous_page_number }}">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+
+            {% for num in products.paginator.page_range %}
+              {% if products.number == num %}
+              <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+              {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+              <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&sort={{ request.GET.sort }}&page={{ num }}">{{ num }}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if products.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?q={{ request.GET.q }}&sort={{ request.GET.sort }}&page={{ products.next_page_number }}">&raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.shop-page -->
+<script>
+  function toggleSubcategories(element) {
+    const arrow = element.querySelector('.arrow');
+    const sublist = element.nextElementSibling;
+
+    sublist.classList.toggle('show');
+
+    if (sublist.classList.contains('show')) {
+      arrow.innerHTML = '&#9662;'; // Down arrow
+    } else {
+      arrow.innerHTML = '&#9656;'; // Right arrow
+    }
+  }
+</script>
+
+{% endblock %}

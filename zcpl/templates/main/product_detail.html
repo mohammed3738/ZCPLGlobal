@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load custom_tags %}
+<style>
+.star-rating i {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ccc;
+}
+.star-rating i.text-warning {
+    color: #ffc107;
+}
+
+</style>
+
+     <!-- Banner Section -->
+        <section class="page-banner">
+            <div class="image-layer" style="background-image:url(images/background/image-7.jpg);"></div>
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <div class="banner-inner">
+                <div class="auto-container">
+                    <div class="inner-container clearfix">
+                        <h1>Product Details</h1>
+                        <div class="page-nav">
+                            <ul class="bread-crumb clearfix">
+                                <li><a href="index-main.html">Home</a></li>
+                                <li class="active">Shop</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Banner Section -->
+
+        <section class="product-details">
+            <div class="auto-container">
+                <div class="row">
+                    <div class="col-lg-12 col-xl-6">
+                        <a href="images/update-26-01-2021/shops/shop-d-1.jpg"
+                            class="product-details__image lightbox-image">
+                            <img src="{{ product.image.url }}" alt="">
+                        </a><!-- /.product-details__image -->
+                    </div><!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="product-details__top">
+                            <h3 class="product-details__title">
+                                {{ product.name }}
+                            </h3><!-- /.product-details__title -->
+                            <p class="product-details__price">₹{{ product.price }}</p>
+                        </div><!-- /.product-details__top -->
+                        <div class="product-details__reveiw">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <span>2 Customer Reviews</span>
+                        </div><!-- /.product-details__reveiw -->
+                        <div class="product-details__content">
+                            <p>{{ product.name }}</p>
+                            {% comment %} <p>REF. 4231/406 <br> {% endcomment %}
+                                Available in store</p>
+                            </div><!-- /.product-details__content -->
+                        <form action="{% url 'cart_add' product.id %}" method="post" class="form-inline">
+                        {% csrf_token %}
+                        <div class="product-details__quantity">
+                            <h3 class="product-details__quantity-title">Choose quantity</h3>
+                            {{ cart_product_form.quantity }}
+                            {{ cart_product_form.override }}
+                        </div><!-- /.product-details__quantity -->
+                        <div class="product-details__buttons">
+                            {% comment %} <a class="theme-btn btn-style-two" href="cart.html">
+                                <i class="btn-curve"></i>
+                                <span class="btn-title">Add to wishlist</span>
+                            </a> {% endcomment %}
+                            {% comment %} <a class="theme-btn btn-style-one">
+                                <i class="btn-curve"></i>
+                                <span class="btn-title">Add to cart</span>
+                            </a> {% endcomment %}
+                            <button type="submit" class="theme-btn btn-style-one">  
+                                <i class="btn-curve"></i>                              
+                                <span class="btn-title">Add to cart</span>
+                            </button>
+
+                        </div><!-- /.product-details__buttons -->
+                        </form>
+                        <div class="product-details__social">
+                            <span>Share with friends</span>
+                            <a href="#" class="fab fa-facebook-square"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                            <a href="#" class="fab fa-pinterest-p"></a>
+                        </div><!-- /.product-details__social -->
+                    </div><!-- /.col-md-12 col-lg-6 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.product-details -->
+
+        {% comment %} <section class="product-description">
+            <div class="auto-container">
+                <h3 class="product-description__title">Description</h3><!-- /.product-title -->
+                <p class="product-description__text">Lorem ipsum dolor sit amet sectetur adipiscin elit cras feuiat
+                    antesed ces condimentum viverra duis autue nim convallis id diam vitae duis egety dictum erosin
+                    dictum sem. Vivamus sed molestie sapien aliquam et facilisis arcu dut molestie augue suspendisse
+                    sodales tortor nunced quis cto ligula posuere cursus keuis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecated cupidatat non
+                    proident sunt in culpa qui officia deserunt mollit anim id est laborum ivamus sed molestie sapien.
+                </p>
+                <p class="product-description__text">Aliquam et facilisis arcuut olestie augue. Suspendisse sodales
+                    tortor nunc quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit in voluptate
+                    velit esse cill doloreeu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt
+                    in culpa qui officia deserunt mollit anim id est laborum. Vivaus sed delly molestie sapien. Aliquam
+                    et facilisis arcuut molestie augue. </p>
+            </div><!-- /.container -->
+        </section><!-- /.product-description --> {% endcomment %}
+
+        <section class="review-one">
+            <div class="auto-container">
+                <div class="comments-area">
+                    <div class="comments-title">
+                        <h3>Comments</h3>
+                    </div>
+                    <div class="comment-box">
+                        
+
+                        {% for review in reviews %}
+                        <div class="comment">
+                            {% comment %} <div class="author-thumb">
+                                <figure class="thumb"><img src="images/resource/author-7.jpg" alt="">
+                                </figure>
+                            </div> {% endcomment %}
+                            <div class="info">
+                                <div class="name">{{ review.name }}</div>
+                                <div class="date">{{ review.created_at|date:"M d, Y H:i" }}</div>
+                            </div>
+                            <div class="text">{{ review.comment }}</div>
+
+                            <div class="reply-btn">
+                            <p class="mb-1">
+                                {% for _ in review.rating|times %}
+                                    <i class="fa fa-star text-warning"></i>
+                                {% endfor %}
+                                {% for _ in 5|subtract:review.rating|times %}
+                                    <i class="fa fa-star text-secondary"></i>
+                                {% endfor %}
+                            </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% comment %} <div class="comment-box">
+                        <div class="comment">
+                            <div class="author-thumb">
+                                <figure class="thumb"><img src="images/resource/author-8.jpg" alt="">
+                                </figure>
+                            </div>
+                            <div class="info">
+                                <div class="name">David Martin</div>
+                                <div class="date">20 May, 2020 . 4:00 pm</div>
+                            </div>
+                            <div class="text">Aliquam et facilisis arcuut olestie augue. Suspendisse sodales tortor nunc
+                                quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cill doloreeu fugiat nulla pariatur excepteur sint</div>
+                            <div class="reply-btn">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+
+                </div>
+
+            </div><!-- /.container -->
+        </section><!-- /.review-one -->
+
+<section class="review-form">
+    <div class="auto-container">
+        <h3 class="review-form__title">Add a review</h3>
+
+        <form action="" method="post" class="review-form__form default-form">
+            {% csrf_token %}
+            <p class="review-form__text">
+                Rate this Product?
+                <span class="star-rating">
+                    <i class="fa fa-star" data-value="1"></i>
+                    <i class="fa fa-star" data-value="2"></i>
+                    <i class="fa fa-star" data-value="3"></i>
+                    <i class="fa fa-star" data-value="4"></i>
+                    <i class="fa fa-star" data-value="5"></i>
+                </span>
+            </p>
+            <input type="hidden" name="rating" id="rating-value">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <textarea name="comment" placeholder="Write Message" required></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <button class="theme-btn btn-style-one" type="submit">
+                        <i class="btn-curve"></i>
+                        <span class="btn-title">Submit Review</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<script>
+    const stars = document.querySelectorAll('.star-rating i');
+    const ratingInput = document.getElementById('rating-value');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = star.getAttribute('data-value');
+            ratingInput.value = rating;
+
+            stars.forEach(s => {
+                s.classList.remove('text-warning');
+                if (s.getAttribute('data-value') <= rating) {
+                    s.classList.add('text-warning');
+                }
+            });
+        });
+    });
+</script>
+
+        {% endblock %}

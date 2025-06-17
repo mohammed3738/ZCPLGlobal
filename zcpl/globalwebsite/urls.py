@@ -19,12 +19,42 @@ urlpatterns = [
     path('microsoft-vm',views.microsoft_vm,name="microsoft-vm"),
     path('privacy-policy',views.privacy,name="privacy"),
     path('terms-and-conditions',views.term,name="term"),
+    # path('shop',views.shop,name="shop"),
+    path('add/', views.add_product, name='add_product'),
+    # path('category/<slug:category_slug>/', views.shop, name='product_by_category'),
+
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+    path('cart/update_all/', views.cart_update_all, name='cart_update_all'),
+
+
+    path('cart/', views.cart_detail, name='cart_detail'),
+    path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
+    path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
+
     # path('uk',views.uk_home,name="uk-home"),
     # path('uae',views.uae_home,name="uae-home"),
     # path('ca',views.canada_home,name="canada-home"),
     # path('in',views.india_home,name="india-home"),
 
+    path('checkout/', views.checkout, name='checkout'),
+    path('order-success/<int:order_id>/', views.order_success,
+         name='order_success'),
 
+
+
+    path('signup/', views.signup_view, name='signup'),
+    path('signin/', views.signin_view, name='signin'),
+    path('logout/', views.logout_view, name='logout'),
+
+
+
+
+
+# urls.py
+
+path('shop/', views.shop, name='shop'),
+path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
+path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
 
 ]
 

@@ -12054,7 +12054,8 @@ img.lazy-image.loaded {
 .comments-area .comment {
   position: relative;
   min-height: 90px;
-  padding-left: 130px;
+  /* padding-left: 130px;  */
+  /* padding-left: 130px; old*/ 
 }
 
 .comments-area .comment-box .author-thumb {

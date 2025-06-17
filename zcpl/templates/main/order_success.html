@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+{% comment %} <div class="auto-container text-center py-5">
+  <h2>Thank you!</h2>
+  <p>Your order #{{ order.id }} has been placed.</p>
+  <p>Total paid: ₹{{ order.total }}</p>
+  <a href="{% url 'shop' %}" class="btn btn-primary mt-3">Continue shopping</a>
+</div> {% endcomment %}
+<!-- templates/main/order_success.html -->
+<h2>Thank You!</h2>
+<p>Your order has been placed and is awaiting manual payment verification.</p>
+<p>Order ID: {{ order.id }}</p>
+<p>Transaction ID: {{ order.transaction_id }}</p>
+
+{% endblock %}
