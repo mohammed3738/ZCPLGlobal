@@ -14,7 +14,8 @@ from .forms import SignUpForm, SignInForm
 # from .models import Product
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required
-
+# from django.core.mail import send_mail
+# from django.conf import settings
 # Create your views here.
 def home(request):
     return render(request,'main/index.html')
@@ -346,50 +347,117 @@ def cart_update_all(request):
 #     return render(request, 'main/checkout1.html',
 #                   {'form': form, 'cart': cart})
 
+
+
+#second working
+# def checkout(request):
+#     cart = Cart(request)
+
+#     if len(cart) == 0:
+#         messages.info(request, "Your cart is empty.")
+#         return redirect('shop')  # or whatever your shop URL name is
+
+#     if request.method == "POST":
+#         form = BankTransferForm(request.POST)
+#         if form.is_valid():
+#             cd = form.cleaned_data
+#             order = Order.objects.create(
+#                 user=request.user if request.user.is_authenticated else None,
+#                 first_name=cd['first_name'],
+#                 last_name=cd['last_name'],
+#                 email=cd['email'],
+#                 phone=cd['phone'],
+#                 address=cd['address'],
+#                 city=cd['city'],
+#                 state=cd['state'],
+#                 zip_code=cd['zip_code'],
+#                 country=cd['country'],
+#                 transaction_id=cd['transaction_id'],
+#                 payer_name=cd['payer_name'],
+#                 payer_bank_name=cd['payer_bank_name'],
+#                 payment_status="Pending",
+#                 total=cart.get_total_price()
+#             )
+
+#             for item in cart:
+#                 OrderItem.objects.create(
+#                     order=order,
+#                     product=item['product'],
+#                     price=item['product'].price,
+#                     quantity=item['quantity']
+#                 )
+
+#             cart.clear()
+#             return redirect('order_success', order_id=order.id)
+
+#     else:
+#         form = BankTransferForm()
+
+#     # Sample company bank details
+#     bank_info = {
+#         "account_name": "Zaco Computers Pvt Ltd",
+#         "account_number": "1234567890",
+#         "ifsc": "HDFC0001234",
+#         "bank_name": "HDFC Bank",
+#         "branch": "Mumbai Main Branch"
+#     }
+
+#     return render(request, "main/checkout2.html", {
+#         "form": form,
+#         "cart": cart,
+#         "bank_info": bank_info
+#     })
+
+
+
+
+
 def checkout(request):
     cart = Cart(request)
-
-    if len(cart) == 0:
-        messages.info(request, "Your cart is empty.")
-        return redirect('shop')  # or whatever your shop URL name is
 
     if request.method == "POST":
         form = BankTransferForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             order = Order.objects.create(
-                user=request.user if request.user.is_authenticated else None,
+                user=request.user,
                 first_name=cd['first_name'],
                 last_name=cd['last_name'],
-                email=cd['email'],
-                phone=cd['phone'],
                 address=cd['address'],
                 city=cd['city'],
                 state=cd['state'],
                 zip_code=cd['zip_code'],
                 country=cd['country'],
+                phone=cd['phone'],
+                email=cd['email'],
                 transaction_id=cd['transaction_id'],
                 payer_name=cd['payer_name'],
                 payer_bank_name=cd['payer_bank_name'],
-                payment_status="Pending",
-                total=cart.get_total_price()
+                payment_status="Pending"
             )
 
-            for item in cart:
-                OrderItem.objects.create(
-                    order=order,
-                    product=item['product'],
-                    price=item['product'].price,
-                    quantity=item['quantity']
-                )
+            # Email admin
+            subject = f"New Order #{order.id} Received"
+            message = f"""
+A new order has been placed.
+
+Order ID: {order.id}
+Customer: {order.first_name} {order.last_name}
+Email: {order.email}
+Phone: {order.phone}
+Transaction ID: {order.transaction_id}
+Amount: ₹{cart.get_total_price()}
+
+Please verify the payment and process the order.
+"""
+            admin_email = 'admin@example.com'  # replace with your admin email
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [admin_email])
 
             cart.clear()
-            return redirect('order_success', order_id=order.id)
-
+            return render(request, "main/order_success.html", {"order": order})
     else:
         form = BankTransferForm()
 
-    # Sample company bank details
     bank_info = {
         "account_name": "Zaco Computers Pvt Ltd",
         "account_number": "1234567890",
@@ -403,6 +471,7 @@ def checkout(request):
         "cart": cart,
         "bank_info": bank_info
     })
+
 
 
 
