@@ -38,7 +38,10 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-
+.form-row textarea {
+  min-height: 60px;       /* 👈 reduced height */
+  max-height: 100px;
+}
   .form-row input:focus,
   .form-row select:focus,
   .form-row textarea:focus {
@@ -53,10 +56,7 @@
     margin-top: -6px;
     margin-bottom: 8px;
   }
-.form-row textarea {
-  min-height: 60px;       /* 👈 reduced height */
-  max-height: 120px;
-}
+
   .submit-btn {
     background-color: #28a745;
     color: #fff;
@@ -97,7 +97,6 @@
     </div>
 </section>
 <!--End Banner Section -->
-
 <div class="container my-5">
   <h2 class="mb-4">Checkout - Bank Transfer</h2>
 
@@ -123,51 +122,73 @@
     </div>
 
     <!-- Checkout Form Section -->
-    <div class="col-md-6 mb-4">
+    {% comment %} <div class="col-md-6 mb-4">
       <div class="form-card">
         <h5>Enter Your Details</h5>
         <form method="POST">
           {% csrf_token %} {{ form.non_field_errors }} {% for field in form %}
-          <div class="form-row">{{ field.label_tag }} {{ field }}</div>
-          {% if field.errors %}
-          <div class="error-text">{{ field.errors }}</div>
-          {% endif %} {% endfor %}
-
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }} {% if field.errors %}
+            <div class="error-text">{{ field.errors }}</div>
+            {% endif %}
+          </div>
+          {% endfor %}
           <button type="submit" class="submit-btn">Place Order</button>
         </form>
       </div>
-    </div>
+    </div> {% endcomment %}
+    <div class="col-md-6 mb-4">
+  <div class="form-card">
+    <h5>Enter Your Details</h5>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
 
-    <!-- Cart Summary -->
-    <div class="row mt-5">
-      <div class="col-12">
-        <h4>Your Cart</h4>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Qty</th>
-              <th>Unit Price</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in cart %}
-            <tr>
-              <td>{{ item.product.name }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>₹{{ item.product.price }}</td>
-              <td>₹{{ item.total_price }}</td>
-            </tr>
-            {% endfor %}
-            <tr>
-              <td colspan="3" class="text-end"><strong>Cart Total:</strong></td>
-              <td><strong>₹{{ cart.get_total_price }}</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {% for field in form %}
+        <div class="form-row">
+          {{ field.label_tag }}
+          {{ field }}
+        </div>
+        {% if field.errors %}
+        <div class="error-text">{{ field.errors }}</div>
+        {% endif %}
+      {% endfor %}
+
+      <button type="submit" class="submit-btn">Place Order</button>
+    </form>
+  </div>
+</div>
+  </div>
+
+  <!-- Cart Summary -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <h4>Your Cart</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>₹{{ item.product.price }}</td>
+            <td>₹{{ item.total_price }}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="3" class="text-end"><strong>Cart Total:</strong></td>
+            <td><strong>₹{{ cart.get_total_price }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}
