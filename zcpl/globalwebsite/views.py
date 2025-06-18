@@ -307,7 +307,7 @@ def cart_update_all(request):
 
 
 
-@login_required
+# @login_required
 # def checkout(request):
 #     cart = Cart(request)
 #     if len(cart) == 0:          # cart empty → kick back to shop
