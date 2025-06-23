@@ -266,7 +266,7 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     reviews = product.reviews.all().order_by('-created_at')
     cart_product_form = CartAddProductForm()
-
+    
     if request.method == 'POST':
         name = request.POST.get('name')
         comment = request.POST.get('comment')
@@ -284,7 +284,9 @@ def product_detail(request, product_id):
     return render(request, 'main/product_detail.html', {
         'product': product,
         'cart_product_form': cart_product_form,
-        'reviews': reviews
+        'reviews': reviews,
+        'review_count': reviews.count()
+
     })
 
 
@@ -411,7 +413,7 @@ def cart_update_all(request):
 
 
 
-
+@login_required
 def checkout(request):
     cart = Cart(request)
 
@@ -483,21 +485,48 @@ def order_success(request, order_id):
 
 
 
-
-
-
 def signup_view(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])  # hashes password
-            user.save()
-            login(request, user)
-            return redirect('shop')  # change to your landing page
-    else:
-        form = SignUpForm()
-    return render(request, 'auth/signup.html', {'form': form})
+        username = request.POST.get('username')
+        email    = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        # Basic validations
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
+            return redirect('signup')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken.")
+            return redirect('signup')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered.")
+            return redirect('signup')
+
+        # Create user
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        login(request, user)  # Optional: auto-login
+        messages.success(request, "Account created successfully!")
+        return redirect('home')  # Update to your desired redirect
+
+    return render(request, 'auth/register.html')
+
+
+
+# def signup_view(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.set_password(form.cleaned_data['password'])  # hashes password
+#             user.save()
+#             login(request, user)
+#             return redirect('shop')  # change to your landing page
+#     else:
+#         form = SignUpForm()
+#     return render(request, 'auth/signup.html', {'form': form})
 
 
 def signin_view(request):

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="icon"></div>
+        </div>
+
+        <section class="login-wrapper">
+            <div class="login-bg" style="background-image: url(images/update-1-12-2020/background/login-bg.jpg);"></div>
+            <!-- /.login-bg -->
+            <div class="login-content">
+                <div class="login-content__inner">
+                    <div class="logo-box">
+                        <div class="logo text-center"><a href="index.html"
+                                title="Linoor - DIgital Agency HTML Template"><img src="{% static 'images/Zacow1.png' %}"
+                                    width="134" id="dLogo" class="main-logo" alt="Linoor - DIgital Agency HTML Template"
+                                    title="Linoor - DIgital Agency HTML Template"></a></div>
+                    </div>
+                    <form method="post" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" name="username" placeholder="Your Name *" required>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="email" name="email" placeholder="Enter Email Address *" required>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="password" name="password1" placeholder="Your Password *" required>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="password" name="password2" placeholder="Confirm Password *" required>
+                            </div>
+                        </div>
+                        <button type='submit' class="theme-btn btn-style-one">
+                            <i class="btn-curve"></i>
+                            <span class="btn-title">Register Now</span>
+                        </button>
+                        <p class="signup-link">Already have an Account? <a href="{% url 'signin' %}">Login Here</a></p>
+                    </form>
+                    <p class="copyright-text">© Copyright 2022 by Layerdrops.com</p><!-- /.copyright-text -->
+                </div><!-- /.login-content__inner -->
+            </div><!-- /.login-content -->
+        </section><!-- /.login-wrapper -->
+
+    </div>
+    <!--End pagewrapper-->
+
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/TweenMax.js" %}"></script>
+    <script src="{% static "js/wow.js" %}"></script>
+    <script src="{% static "js/isotope.js" %}"></script>
+    <script src="{% static "js/jquery.easing.min.js" %}"></script>
+    <script src="{% static "js/jarallax.min.js" %}"></script>
+    <script src="{% static "js/custom-script.js" %}"></script>
+
+</body>
+
+</html>
