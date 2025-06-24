@@ -200,21 +200,13 @@
                   </div>
                   <div class="email d-flex align-items-center ms-3">
                     <div>
-                      <select
-                        id="country"
-                        name="country"
-                        class="form-select"
-                        onchange="redirectToPage(this.value)"
-                      >
-                        <option value="{% url "home" %}">Global</option>
-                        <option value="{% url 'uk-home' %}">
-                          United Kingdom
-                        </option>
-                        <option value="{% url "india-home" %}">India</option>
-                        <option value="{% url 'uae-home' %}">
-                          United Arab Emirates
-                        </option>
-                      </select>
+                    <select id="country" class="form-select" onchange="redirectToPage(this.value)">
+                      <option value="/in/">India</option>
+                      <option value="/uk/">United Kingdom</option>
+                      <option value="/uae/">United Arab Emirates</option>
+                      {% comment %} <option value="/ca/">Canada</option> {% endcomment %}
+                      <option value="/">Global</option> <!-- Global LAST -->
+                    </select>
                     </div>
                   </div>
                 </div>
@@ -360,26 +352,49 @@
     <script src="{% static 'js/lang.js' %}"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="{% static 'js/color-switcher.js' %}"></script>
-    <script>
-      function redirectToPage(value) {
-        if (value) {
-          window.location.href = value;
-        }
+<script>
+  function redirectToPage(value) {
+    if (value) {
+      localStorage.setItem("selectedCountry", value);
+      window.location.href = value;
+    }
+  }
+
+  window.onload = function () {
+    const currentPath = window.location.pathname;
+    const select = document.getElementById("country");
+    if (!select) return;
+
+    console.log("Current Path:", currentPath);
+
+    const options = select.options;
+    let matched = false;
+
+    for (let i = 0; i < options.length; i++) {
+      const optionPath = new URL(options[i].value, window.location.origin).pathname;
+      console.log(`Checking if "${currentPath}" starts with "${optionPath}"`);
+
+      if (currentPath.startsWith(optionPath)) {
+        options[i].selected = true;
+        matched = true;
+        console.log("Matched:", optionPath);
+        break;
       }
+    }
 
-      window.onload = function () {
-        const currentURL = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
-        const selectElement = document.getElementById("country");
-        const options = selectElement.options;
-
+    if (!matched) {
+      const savedValue = localStorage.getItem("selectedCountry");
+      console.log("No match. Falling back to saved value:", savedValue);
+      if (savedValue) {
         for (let i = 0; i < options.length; i++) {
-          const optionValue = options[i].value.replace(/\/$/, ""); // Normalize trailing slash
-          if (optionValue && (currentURL === optionValue)) {
+          if (options[i].value === savedValue) {
             options[i].selected = true;
             break;
           }
         }
-      };
-    </script>
+      }
+    }
+  };
+</script>
   </body>
 </html>
