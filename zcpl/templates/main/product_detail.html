@@ -94,7 +94,7 @@
                         <form action="{% url 'cart_add' product.id %}" method="post" class="form-inline">
                         {% csrf_token %}
                         <div class="product-details__quantity">
-                            <h3 class="product-details__quantity-title">Choose quantity</h3>
+                            <h3 class="product-details__quantity-title">Choose Quantity</h3>
                             {{ cart_product_form.quantity }}
                             {{ cart_product_form.override }}
                         </div><!-- /.product-details__quantity -->
@@ -115,11 +115,11 @@
                         </div><!-- /.product-details__buttons -->
                         </form>
                         <div class="product-details__social">
-                            <span>Share with friends</span>
-                            <a href="#" class="fab fa-facebook-square"></a>
-                            <a href="#" class="fab fa-twitter"></a>
-                            <a href="#" class="fab fa-instagram"></a>
-                            <a href="#" class="fab fa-pinterest-p"></a>
+                            <span>Recommend to Others</span>
+                            <a href="https://www.facebook.com/zacoitsolved" class="fab fa-facebook-square"></a>
+                            <a href="https://x.com/zacoitsolved" class="fab fa-twitter"></a>
+                            <a href="https://www.instagram.com/zacoitsolutions/" class="fab fa-instagram"></a>
+                            <a href="https://in.pinterest.com/zacoitsolved/" class="fab fa-pinterest-p"></a>
                         </div><!-- /.product-details__social -->
                     </div><!-- /.col-md-12 col-lg-6 -->
                 </div><!-- /.row -->
