@@ -84,10 +84,13 @@
                             <span>{{ review_count }} Customer Review{{ review_count|pluralize }}</span>
 
                         </div><!-- /.product-details__reveiw -->
+                        {% if product.price != 0 %}
                             <div class="product-details__price">₹{{ product.price }}</div>
-
+                        {% else %}
+                            <p></p>
+                        {% endif %}
                         <div class="product-details__content">
-                            <p>{{ product.short_description }}</p>
+                            <div>{{ product.short_description|safe }}</div>
                             {% comment %} <p>REF. 4231/406 <br> {% endcomment %}
                                 Available in store</p>
                             </div><!-- /.product-details__content -->
@@ -107,11 +110,18 @@
                                 <i class="btn-curve"></i>
                                 <span class="btn-title">Add to cart</span>
                             </a> {% endcomment %}
+                            {% if product.price != 0 %}
                             <button type="submit" class="theme-btn btn-style-one">  
                                 <i class="btn-curve"></i>                              
                                 <span class="btn-title">Add to cart</span>
                             </button>
-
+                            {% else %}
+                            <button type="submit" class="theme-btn btn-style-one">  
+                                <i class="btn-curve"></i>                              
+                                <!-- <span class="btn-title">Contact Us</span> -->
+                                <a href="{% url 'contact' %}" class="btn-title" style="color: aliceblue;">Request Quote</a>
+                            </button>
+                            {% endif %}
                         </div><!-- /.product-details__buttons -->
                         </form>
                         <div class="product-details__social">
@@ -129,8 +139,7 @@
       <section class="product-description">
             <div class="auto-container">
                 <h3 class="product-description__title">Description</h3><!-- /.product-title -->
-                {{ product.description }}
-                </p>
+                {{ product.description|safe }}
                 {% comment %} <p class="product-description__text">Aliquam et facilisis arcuut olestie augue. Suspendisse sodales
                     tortor nunc quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit in voluptate
                     velit esse cill doloreeu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt
