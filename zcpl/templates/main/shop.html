@@ -103,7 +103,8 @@
           <p>Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results</p>
         </div>
 
-        <div class="row">
+        {% comment %} uncomment here  {% endcomment %}
+        <!--<div class="row">
           {% for product in products %}
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="product-card">
@@ -126,12 +127,17 @@
                 <h3 class="product-card__title" style="font-size: 16px; line-height: 1.2;">
                   <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
                 </h3>
+                {% if product.price != 0 %}
+                
                 <p class="product-card__price">₹{{ product.price }}</p>
+                {% else %}
+                <p></p>
+                {% endif %}
               </div>
             </div>
           </div>
           {% endfor %}
-        </div>
+        </div> -->
 
         <!-- Pagination -->
         <div class="pagination-wrapper text-center mt-4">

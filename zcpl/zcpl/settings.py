@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'uae',
     'uk',
     'canada',
+    'ckeditor',
+
 ]
 
 MIDDLEWARE = [
