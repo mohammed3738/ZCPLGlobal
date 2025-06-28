@@ -94,17 +94,43 @@ def term(request):
 #     products = Product.objects.all().order_by('-id')
 
 #     return render(request,'main/shop.html', {'products': products})
-
+@login_required
 def add_product(request):
+    error = ""
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('shop')
-    else:
-        form = ProductForm()
-    return render(request, 'main/add_product.html', {'form': form})
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        category_id = request.POST.get('category')
+        short_description = request.POST.get('short_description')
+        description = request.POST.get('description')
+        available = request.POST.get('available') == 'on'
+        image = request.FILES.get('image')
 
+        if name and price and category_id:
+            try:
+                category = SubCategory.objects.get(id=category_id)
+                Product.objects.create(
+                    name=name,
+                    price=price,
+                    category=category,
+                    short_description=short_description,
+                    description=description,
+                    available=available,
+                    image=image
+                )
+            except SubCategory.DoesNotExist:
+                error = "Selected category does not exist."
+        else:
+            error = "Please fill in all required fields."
+
+    subcategories = SubCategory.objects.all()
+    products = Product.objects.all().order_by('-created')
+
+    return render(request, 'main/add_product.html', {
+        'subcategories': subcategories,
+        'products': products,
+        'error': error
+    })
 # def product_list(request):
 #     products = Product.objects.all().order_by('-id')
 #     return render(request, 'shop/product_list.html', {'products': products})

@@ -20,7 +20,9 @@ urlpatterns = [
     path('privacy-policy',views.privacy,name="privacy"),
     path('terms-and-conditions',views.term,name="term"),
     # path('shop',views.shop,name="shop"),
-    path('add/', views.add_product, name='add_product'),
+    # path('add/', views.add_product, name='add_product'),
+    path('add-product/', views.add_product, name='add_product'),
+
     # path('category/<slug:category_slug>/', views.shop, name='product_by_category'),
 
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),

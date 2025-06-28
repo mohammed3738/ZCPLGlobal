@@ -3,10 +3,15 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 
+# class ProductForm(forms.ModelForm):
+#     class Meta:
+#         model = Product
+#         fields = ['name', 'description', 'price', 'image']
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'image']
+        fields = ['category', 'name', 'description', 'short_description', 'price', 'image', 'available']
 
 
 
