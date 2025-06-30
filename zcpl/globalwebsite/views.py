@@ -94,10 +94,60 @@ def term(request):
 #     products = Product.objects.all().order_by('-id')
 
 #     return render(request,'main/shop.html', {'products': products})
+# @login_required
+# def add_product(request):
+#     error = ""
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         price = request.POST.get('price')
+#         category_id = request.POST.get('category')
+#         short_description = request.POST.get('short_description')
+#         description = request.POST.get('description')
+#         available = request.POST.get('available') == 'on'
+#         image = request.FILES.get('image')
+
+#         if name and price and category_id:
+#             try:
+#                 category = SubCategory.objects.get(id=category_id)
+#                 Product.objects.create(
+#                     name=name,
+#                     price=price,
+#                     category=category,
+#                     short_description=short_description,
+#                     description=description,
+#                     available=available,
+#                     image=image
+#                 )
+#             except SubCategory.DoesNotExist:
+#                 error = "Selected category does not exist."
+#         else:
+#             error = "Please fill in all required fields."
+
+#     subcategories = SubCategory.objects.all()
+#     products = Product.objects.all().order_by('-created')
+
+#     return render(request, 'main/add_product.html', {
+#         'subcategories': subcategories,
+#         'products': products,
+#         'error': error
+#     })
+# def product_list(request):
+#     products = Product.objects.all().order_by('-id')
+#     return render(request, 'shop/product_list.html', {'products': products})
+
+
+
+# edit and add product view 
 @login_required
-def add_product(request):
+def add_or_edit_product(request):
+    subcategories = SubCategory.objects.all()
+    products = Product.objects.all().order_by('-created')
     error = ""
+    editing = False
+    product_to_edit = None
+
     if request.method == 'POST':
+        product_id = request.POST.get('product_id')  # for editing
         name = request.POST.get('name')
         price = request.POST.get('price')
         category_id = request.POST.get('category')
@@ -106,9 +156,25 @@ def add_product(request):
         available = request.POST.get('available') == 'on'
         image = request.FILES.get('image')
 
-        if name and price and category_id:
-            try:
-                category = SubCategory.objects.get(id=category_id)
+        try:
+            category = SubCategory.objects.get(id=category_id)
+        except SubCategory.DoesNotExist:
+            error = "Selected category does not exist."
+            category = None
+
+        if name and price and category:
+            if product_id:  # Update existing product
+                product = get_object_or_404(Product, id=product_id)
+                product.name = name
+                product.price = price
+                product.category = category
+                product.short_description = short_description
+                product.description = description
+                product.available = available
+                if image:
+                    product.image = image
+                product.save()
+            else:  # Add new product
                 Product.objects.create(
                     name=name,
                     price=price,
@@ -118,22 +184,22 @@ def add_product(request):
                     available=available,
                     image=image
                 )
-            except SubCategory.DoesNotExist:
-                error = "Selected category does not exist."
+            return redirect('add_or_edit_product')
         else:
             error = "Please fill in all required fields."
 
-    subcategories = SubCategory.objects.all()
-    products = Product.objects.all().order_by('-created')
+    elif request.method == 'GET' and 'edit' in request.GET:
+        editing = True
+        product_id = request.GET.get('edit')
+        product_to_edit = get_object_or_404(Product, id=product_id)
 
     return render(request, 'main/add_product.html', {
         'subcategories': subcategories,
         'products': products,
+        'editing': editing,
+        'product_to_edit': product_to_edit,
         'error': error
     })
-# def product_list(request):
-#     products = Product.objects.all().order_by('-id')
-#     return render(request, 'shop/product_list.html', {'products': products})
 
 
 

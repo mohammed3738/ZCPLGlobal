@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add Product</title>
+  <title>Add/Edit Product</title>
   <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 </head>
 <body>
-
-  <h2>Add Product</h2>
+  <h2>{% if editing %}Edit Product{% else %}Add Product{% endif %}</h2>
 
   {% if error %}
     <p style="color: red;">{{ error }}</p>
@@ -14,33 +13,44 @@
 
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    {% if editing %}
+      <input type="hidden" name="product_id" value="{{ product_to_edit.id }}">
+    {% endif %}
+
     <label>Category:</label><br>
     <select name="category" required>
       <option value="">-- Select --</option>
       {% for subcat in subcategories %}
-        <option value="{{ subcat.id }}">{{ subcat.name }}</option>
+        <option value="{{ subcat.id }}"
+          {% if editing and product_to_edit.category.id == subcat.id %}selected{% endif %}>
+          {{ subcat.name }}
+        </option>
       {% endfor %}
     </select><br><br>
 
     <label>Product Name:</label><br>
-    <input type="text" name="name" required><br><br>
+    <input type="text" name="name" value="{% if editing %}{{ product_to_edit.name }}{% endif %}" required><br><br>
 
     <label>Price:</label><br>
-    <input type="number" step="0.01" name="price" required><br><br>
+    <input type="number" step="0.01" name="price" value="{% if editing %}{{ product_to_edit.price }}{% endif %}" required><br><br>
 
     <label>Available:</label>
-    <input type="checkbox" name="available" checked><br><br>
+    <input type="checkbox" name="available" {% if editing and product_to_edit.available %}checked{% endif %}><br><br>
 
     <label>Image:</label><br>
-    <input type="file" name="image"><br><br>
+    <input type="file" name="image"><br>
+    {% if editing and product_to_edit.image %}
+      <img src="{{ product_to_edit.image.url }}" width="100"><br>
+    {% endif %}
+    <br>
 
     <label>Short Description:</label><br>
-    <textarea name="short_description"></textarea><br><br>
+    <textarea name="short_description" id="short_description">{% if editing %}{{ product_to_edit.short_description }}{% endif %}</textarea><br><br>
 
     <label>Full Description:</label><br>
-    <textarea name="description"></textarea><br><br>
+    <textarea name="description" id="description">{% if editing %}{{ product_to_edit.description }}{% endif %}</textarea><br><br>
 
-    <button type="submit">Add Product</button>
+    <button type="submit">{% if editing %}Update{% else %}Add{% endif %} Product</button>
   </form>
 
   <script>
@@ -60,6 +70,7 @@
         <th>Available</th>
         <th>Image</th>
         <th>Created</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -77,12 +88,14 @@
           {% endif %}
         </td>
         <td>{{ product.created }}</td>
+        <td>
+          <a href="?edit={{ product.id }}">Edit</a>
+        </td>
       </tr>
       {% empty %}
-      <tr><td colspan="6">No products found.</td></tr>
+      <tr><td colspan="7">No products found.</td></tr>
       {% endfor %}
     </tbody>
   </table>
-
 </body>
 </html>
