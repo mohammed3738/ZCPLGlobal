@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add/Edit Product</title>
+  <title>Manage Products</title>
   <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+  <style>
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .form-group { margin-bottom: 15px; }
+  </style>
 </head>
 <body>
+
   <h2>{% if editing %}Edit Product{% else %}Add Product{% endif %}</h2>
 
   {% if error %}
@@ -17,44 +24,54 @@
       <input type="hidden" name="product_id" value="{{ product_to_edit.id }}">
     {% endif %}
 
-    <label>Category:</label><br>
-    <select name="category" required>
-      <option value="">-- Select --</option>
-      {% for subcat in subcategories %}
-        <option value="{{ subcat.id }}"
-          {% if editing and product_to_edit.category.id == subcat.id %}selected{% endif %}>
-          {{ subcat.name }}
-        </option>
-      {% endfor %}
-    </select><br><br>
+    <div class="form-group">
+      <label>Category:</label><br>
+      <select name="category" required>
+        <option value="">-- Select --</option>
+        {% for subcat in subcategories %}
+          <option value="{{ subcat.id }}"
+            {% if editing and product_to_edit.category.id == subcat.id %}selected{% endif %}>
+            {{ subcat.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
 
-    <label>Product Name:</label><br>
-    <input type="text" name="name" value="{% if editing %}{{ product_to_edit.name }}{% endif %}" required><br><br>
+    <div class="form-group">
+      <label>Product Name:</label><br>
+      <input type="text" name="name" value="{% if editing %}{{ product_to_edit.name }}{% endif %}" required>
+    </div>
 
-    <label>Price:</label><br>
-    <input type="number" step="0.01" name="price" value="{% if editing %}{{ product_to_edit.price }}{% endif %}" required><br><br>
+    <div class="form-group">
+      <label>Price:</label><br>
+      <input type="number" step="0.01" name="price" value="{% if editing %}{{ product_to_edit.price }}{% endif %}" required>
+    </div>
 
-    <label>Available:</label>
-    <input type="checkbox" name="available"
-  {% if editing %}
-    {% if product_to_edit.available %}checked{% endif %}
-  {% else %}
-    checked
-  {% endif %}>
-<br><br>
+    <div class="form-group">
+      <label>Available:</label>
+      <input type="checkbox" name="available"
+        {% if editing %}
+          {% if product_to_edit.available %}checked{% endif %}
+        {% else %}checked{% endif %}>
+    </div>
 
-    <label>Image:</label><br>
-    <input type="file" name="image"><br>
-    {% if editing and product_to_edit.image %}
-      <img src="{{ product_to_edit.image.url }}" width="100"><br>
-    {% endif %}
-    <br>
+    <div class="form-group">
+      <label>Image:</label><br>
+      <input type="file" name="image"><br>
+      {% if editing and product_to_edit.image %}
+        <img src="{{ product_to_edit.image.url }}" width="100"><br>
+      {% endif %}
+    </div>
 
-    <label>Short Description:</label><br>
-    <textarea name="short_description" id="short_description">{% if editing %}{{ product_to_edit.short_description }}{% endif %}</textarea><br><br>
+    <div class="form-group">
+      <label>Short Description:</label><br>
+      <textarea name="short_description" id="short_description">{% if editing %}{{ product_to_edit.short_description }}{% endif %}</textarea>
+    </div>
 
-    <label>Full Description:</label><br>
-    <textarea name="description" id="description">{% if editing %}{{ product_to_edit.description }}{% endif %}</textarea><br><br>
+    <div class="form-group">
+      <label>Full Description:</label><br>
+      <textarea name="description" id="description">{% if editing %}{{ product_to_edit.description }}{% endif %}</textarea>
+    </div>
 
     <button type="submit">{% if editing %}Update{% else %}Add{% endif %} Product</button>
   </form>
@@ -67,7 +84,19 @@
   <hr>
 
   <h2>Product List</h2>
-  <table border="1" cellpadding="8" cellspacing="0">
+
+  <form method="get" style="margin-bottom: 15px;">
+    <input type="text" name="search" placeholder="Search by name" value="{{ request.GET.search }}">
+    <select name="sort">
+      <option value="">Sort by</option>
+      <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Name A-Z</option>
+      <option value="-price" {% if request.GET.sort == '-price' %}selected{% endif %}>Price High to Low</option>
+      <option value="price" {% if request.GET.sort == 'price' %}selected{% endif %}>Price Low to High</option>
+    </select>
+    <button type="submit">Apply</button>
+  </form>
+
+  <table>
     <thead>
       <tr>
         <th>Name</th>
@@ -81,27 +110,27 @@
     </thead>
     <tbody>
       {% for product in products %}
-      <tr>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category.name }}</td>
-        <td>₹{{ product.price }}</td>
-        <td>{{ product.available }}</td>
-        <td>
-          {% if product.image %}
-            <img src="{{ product.image.url }}" width="50" />
-          {% else %}
-            N/A
-          {% endif %}
-        </td>
-        <td>{{ product.created }}</td>
-        <td>
-          <a href="?edit={{ product.id }}">Edit</a>
-        </td>
-      </tr>
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category.name }}</td>
+          <td>₹{{ product.price }}</td>
+          <td>{{ product.available }}</td>
+          <td>
+            {% if product.image %}
+              <img src="{{ product.image.url }}" width="50" />
+            {% else %}N/A{% endif %}
+          </td>
+          <td>{{ product.created }}</td>
+          <td>
+            <a href="?edit={{ product.id }}">Edit</a> |
+            <a href="?delete={{ product.id }}" onclick="return confirm('Delete product?')">Delete</a>
+          </td>
+        </tr>
       {% empty %}
-      <tr><td colspan="7">No products found.</td></tr>
+        <tr><td colspan="7">No products found.</td></tr>
       {% endfor %}
     </tbody>
   </table>
+
 </body>
 </html>

@@ -21,7 +21,7 @@ urlpatterns = [
     path('terms-and-conditions',views.term,name="term"),
     # path('shop',views.shop,name="shop"),
     # path('add/', views.add_product, name='add_product'),
-    path('add-product/', views.add_or_edit_product, name='add_or_edit_product'),
+    path('add-product/', views.manage_products, name='add_or_edit_product'),
 
     # path('category/<slug:category_slug>/', views.shop, name='product_by_category'),
 
