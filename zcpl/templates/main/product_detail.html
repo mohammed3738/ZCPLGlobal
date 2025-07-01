@@ -90,7 +90,9 @@
                             <p></p>
                         {% endif %}
                         <div class="product-details__content">
-                            <div>{{ product.short_description|safe }}</div>
+                            <div style="max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">
+                            {{ product.short_description|safe }}
+                            </div>
                             {% comment %} <p>REF. 4231/406 <br> {% endcomment %}
                                 Available in store</p>
                             </div><!-- /.product-details__content -->
