@@ -32,6 +32,26 @@
 }
 
 
+.ckeditor-content {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.ckeditor-content table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+
+.ckeditor-content table td,
+.ckeditor-content table th {
+  word-break: break-word;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+
+
 </style>
 
      <!-- Banner Section -->
@@ -89,13 +109,12 @@
                         {% else %}
                             <p></p>
                         {% endif %}
-                        <div class="product-details__content">
-                            <div style="max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">
-                            {{ product.short_description|safe }}
+                            <div class="product-details__content">
+                            <div class="ckeditor-content">
+                                {{ product.short_description|safe }}
                             </div>
-                            {% comment %} <p>REF. 4231/406 <br> {% endcomment %}
-                                Available in store</p>
-                            </div><!-- /.product-details__content -->
+                            <p>Available in store</p>
+                            </div>
                         <form action="{% url 'cart_add' product.id %}" method="post" class="form-inline">
                         {% csrf_token %}
                         <div class="product-details__quantity">
