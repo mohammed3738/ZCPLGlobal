@@ -351,10 +351,12 @@ def shop(request, category_slug=None, subcategory_slug=None):
             subcategory = get_object_or_404(SubCategory, slug=subcategory_slug, category=category)
             products = products.filter(category=subcategory)
         else:
-            products = products.filter(category__category=category)
+            products = products.filter(category__in=subcategories)
 
     if query:
-        products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        products = products.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
 
     if sort == 'price_asc':
         products = products.order_by('price')
@@ -374,7 +376,6 @@ def shop(request, category_slug=None, subcategory_slug=None):
         'products': page_obj,
         'categories': Category.objects.all(),
     })
-
 
 def cart_add(request, product_id):
     cart = Cart(request)

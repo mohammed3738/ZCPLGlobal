@@ -22,10 +22,13 @@ urlpatterns = [
     # path('shop',views.shop,name="shop"),
     # path('add/', views.add_product, name='add_product'),
     path('add-product/', views.manage_products, name='add_or_edit_product'),
+    path('shop/', views.shop, name='shop'),
+    path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
+    # path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
 
     # path('category/<slug:category_slug>/', views.shop, name='product_by_category'),
 
-    path('shop/<slug:slug>/', views.product_detail, name='product_detail'),
+    path('product/<slug:slug>/', views.product_detail, name='product_detail'),
     path('cart/update_all/', views.cart_update_all, name='cart_update_all'),
 
 
