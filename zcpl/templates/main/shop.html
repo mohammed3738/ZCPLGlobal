@@ -117,7 +117,7 @@
                     <input type="hidden" name="override" value="False" />
                     <span class="btn-title">Add To Cart</span>
                   </a> {% endcomment %}
-                  <a class="theme-btn btn-style-two" href="{% url 'product_detail' product.id %}">
+                  <a class="theme-btn btn-style-two" href="{% url 'product_detail' category_slug=product.category.category.slug subcategory_slug=product.category.slug slug=product.slug %}">
                     <i class="btn-curve"></i>
                     <span class="btn-title">Quick View</span>
                   </a>
@@ -125,7 +125,7 @@
               </div>
               <div class="product-card__content">
                 <h3 class="product-card__title" style="font-size: 16px; line-height: 1.2;">
-                  <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                  <a href="{% url 'product_detail' category_slug=product.category.category.slug subcategory_slug=product.category.slug slug=product.slug %}">{{ product.name }}</a>
                 </h3>
                 {% if product.price != 0 %}
                 

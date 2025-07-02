@@ -446,11 +446,16 @@ def cart_detail(request):
 
 
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+def product_detail(request, category_slug, subcategory_slug, slug):
+    product = get_object_or_404(
+        Product,
+        slug=slug,
+        category__slug=subcategory_slug,
+        category__category__slug=category_slug
+    )
     reviews = product.reviews.all().order_by('-created_at')
     cart_product_form = CartAddProductForm()
-    
+
     if request.method == 'POST':
         name = request.POST.get('name')
         comment = request.POST.get('comment')
@@ -463,14 +468,13 @@ def product_detail(request, product_id):
                 comment=comment,
                 rating=int(rating)
             )
-            return redirect('product_detail', product_id=product.id)
+            return redirect('product_detail', category_slug=category_slug, subcategory_slug=subcategory_slug, slug=product.slug)
 
     return render(request, 'main/product_detail.html', {
         'product': product,
         'cart_product_form': cart_product_form,
         'reviews': reviews,
         'review_count': reviews.count()
-
     })
 
 

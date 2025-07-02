@@ -64,6 +64,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
