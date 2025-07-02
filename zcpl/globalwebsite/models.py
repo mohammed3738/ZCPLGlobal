@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from decimal import Decimal
 from ckeditor.fields import RichTextField
+from django.utils.text import slugify
 
 # Create your models here.
 from django.db import models
