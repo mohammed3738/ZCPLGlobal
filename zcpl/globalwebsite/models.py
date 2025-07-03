@@ -58,6 +58,8 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='products')
+    categories = models.ManyToManyField(SubCategory, related_name='product')
+
     name = models.CharField(max_length=200)
     description = RichTextField(blank=True)
     short_description = RichTextField(blank=True, null=True)

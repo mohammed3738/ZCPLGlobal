@@ -349,9 +349,9 @@ def shop(request, category_slug=None, subcategory_slug=None):
 
         if subcategory_slug:
             subcategory = get_object_or_404(SubCategory, slug=subcategory_slug, category=category)
-            products = products.filter(category=subcategory)
+            products = products.filter(categories=subcategory)
         else:
-            products = products.filter(category__in=subcategories)
+            products = products.filter(categories__in=subcategories)
 
     if query:
         products = products.filter(
