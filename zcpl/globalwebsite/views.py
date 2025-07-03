@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import login_required
 # from django.core.mail import send_mail
 # from django.conf import settings
 # Create your views here.
+
+
 def home(request):
     return render(request,'main/index.html')
 
@@ -223,52 +225,47 @@ def manage_products(request):
         product_to_edit = get_object_or_404(Product, id=edit_id)
         editing = True
 
-    # Handle POST (Add/Edit)
     if request.method == "POST":
         name = request.POST.get('name')
         price = request.POST.get('price')
-        category_id = request.POST.get('category')
         available = True if request.POST.get('available') == 'on' else False
         short_description = request.POST.get('short_description')
         description = request.POST.get('description')
         image = request.FILES.get('image')
 
-        try:
-            category = SubCategory.objects.get(id=category_id)
-        except SubCategory.DoesNotExist:
-            category = None
+        # Fetch multiple category IDs
+        category_ids = request.POST.getlist('categories')
+        selected_subcategories = SubCategory.objects.filter(id__in=category_ids)
 
-        if not all([name, price, category]):
-            error = "Name, Price and Category are required."
+        if not all([name, price]) or not selected_subcategories:
+            error = "Name, Price, and at least one Category are required."
         else:
             if not editing:
-                # Prevent duplicate products
-                if Product.objects.filter(name=name, category=category).exists():
-                    error = "Product with this name already exists in this category."
-                else:
-                    product = Product.objects.create(
-                        name=name,
-                        price=price,
-                        category=category,
-                        available=available,
-                        short_description=short_description,
-                        description=description,
-                    )
-                    if image:
-                        product.image = image
-                        product.save()
-                    return redirect('add_or_edit_product')
+                # Create new product
+                product = Product.objects.create(
+                    name=name,
+                    price=price,
+                    available=available,
+                    short_description=short_description,
+                    description=description,
+                )
+                product.categories.set(selected_subcategories)
+                if image:
+                    product.image = image
+                    product.save()
+                return redirect('add_or_edit_product')
             else:
+                # Update existing product
                 product = product_to_edit
                 product.name = name
                 product.price = price
-                product.category = category
                 product.available = available
                 product.short_description = short_description
                 product.description = description
                 if image:
                     product.image = image
                 product.save()
+                product.categories.set(selected_subcategories)
                 return redirect('add_or_edit_product')
 
     # Fetch all subcategories
@@ -281,7 +278,7 @@ def manage_products(request):
     products = Product.objects.all()
 
     if search:
-        products = products.filter(Q(name__icontains=search) | Q(category__name__icontains=search))
+        products = products.filter(Q(name__icontains=search) | Q(categories__name__icontains=search)).distinct()
 
     if sort:
         products = products.order_by(sort)
