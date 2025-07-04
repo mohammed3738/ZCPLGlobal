@@ -15255,7 +15255,7 @@ img.lazy-image.loaded {
   text-shadow: 0 0 1px currentColor;
 }
 
-.shop-category ul li a:after {
+/* .shop-category ul li a:after {
   position: absolute;
   right: 0;
   top: -1px;
@@ -15266,7 +15266,7 @@ img.lazy-image.loaded {
   line-height: 30px;
   font-weight: 700;
   z-index: 1;
-}
+} */
 
 .shop-sidebar__single {
   padding: 30px;

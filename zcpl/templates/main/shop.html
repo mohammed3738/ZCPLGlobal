@@ -2,28 +2,30 @@
 {% load static %}
 {% block content %}
 <style>
-  .category-header {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    font-weight: 500;
-    padding: 5px 0;
-  }
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .subcategory-list {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
+.category-link {
+  flex-grow: 1;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap; /* prevent wrapping */
+}
 
-  .subcategory-list.show {
-    max-height: 500px; /* or auto if you want to expand based on content */
-  }
+.arrow-toggle::after {
+  content: "\25B6"; /* ▶ right arrow */
+  font-size: 12px;
+  cursor: pointer;
+  padding-left: 10px;
+}
 
-  .arrow {
-    font-size: 14px;
-    transition: transform 0.3s ease;
-  }
+/* Toggle arrow direction when open */
+.arrow-toggle.open::after {
+  content: "\25BC"; /* ▼ down arrow */
+}
 </style>
 
 <!-- Banner Section -->
@@ -81,11 +83,11 @@
     <li><a href="{% url 'shop' %}">All</a></li>
     {% for cat in categories %}
       <li>
-        <div class="category-header" onclick="toggleSubcategories(this)">
-          <span>{{ cat.name }}</span>
-          <span class="arrow">&#9656;</span> <!-- Right arrow initially -->
+        <div class="category-header">
+          <a href="{% url 'shop_by_category' cat.slug %}" class="">{{ cat.name }}</a>
+          <span class="arrow-toggle" onclick="toggleSubcategories(this)"></span>
         </div>
-        <ul class="subcategory-list" style="padding-left: 15px;">
+        <ul class="subcategory-list" style="display: none; padding-left: 15px;">
           {% for subcat in cat.subcategories.all %}
             <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
           {% endfor %}
@@ -174,16 +176,15 @@
 </section>
 <!-- /.shop-page -->
 <script>
-  function toggleSubcategories(element) {
-    const arrow = element.querySelector('.arrow');
-    const sublist = element.nextElementSibling;
-
-    sublist.classList.toggle('show');
-
-    if (sublist.classList.contains('show')) {
-      arrow.innerHTML = '&#9662;'; // ▼ down arrow
+  function toggleSubcategories(el) {
+    const subList = el.closest('li').querySelector('.subcategory-list');
+    
+    if (subList.style.display === "none") {
+      subList.style.display = "block";
+      el.classList.add('open');
     } else {
-      arrow.innerHTML = '&#9656;'; // ▶ right arrow
+      subList.style.display = "none";
+      el.classList.remove('open');
     }
   }
 </script>
