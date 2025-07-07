@@ -91,7 +91,7 @@
           {% for subcat in cat.subcategories.all %}
             <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
           {% endfor %}
-        </ul>
+        </ul>  
       </li>
     {% endfor %}
   </ul>
