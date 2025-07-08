@@ -76,6 +76,100 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+
+  <style>
+    /* Mega menu container */
+.mega-menu-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% + 0px);
+  background: #fff;
+  padding: 30px 20px;
+  margin: 0 20px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  border-radius: 0 0 8px 8px;
+  display: none;
+}
+
+.dropdown.megamenu:hover .mega-menu-wrapper {
+  display: block;
+}
+
+/* Horizontal layout */
+.mega-menu {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 80px; */
+}
+.mega-menu .column ul li a {
+  font-size: 15px;
+  padding: 6px 0;
+}
+.mega-menu .column ul li {
+  margin-bottom: 10px;
+}
+/* Each column setup */
+.mega-column {
+  width: 20%;
+  text-align: left;
+}
+.mega-column h4 {
+  margin: 0;
+  font-size: 18px;
+ font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+/* Sections in column */
+.menu-section {
+  margin-bottom: 20px;
+  color: #000;
+  font-weight: 300;
+}
+.section-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+/* Links styling */
+.menu-section a {
+  display: block;
+  font-size: 13px;
+  color: #141414;
+  line-height: 1.6;
+  text-decoration: none;
+  padding: 2px 0;
+}
+
+/* Hover effect */
+.menu-section a:hover {
+  color: #419747;
+}
+
+/* IDs or classes already included in theme for nav widths */
+
+@media (max-width: 991px) {
+  .mega-menu {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .mega-menu .column {
+    width: 100%;
+  }
+}
+
+  </style>
   </head>
 
   <body>
@@ -256,9 +350,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <li class="dropdown">
                       <a href="{% url 'about_us' %}">About Us</a>
                     </li>
-                    <li class="dropdown">
+                    {% comment %} <li class="dropdown">
                       <a href="{% url 'shop' %}">Online Store</a>
-                    </li>
+                    </li> {% endcomment %}
+                    <li class="dropdown megamenu">
+  <a href="{% url 'shop' %}">Online Store</a>
+  <div class="mega-menu-wrapper">
+    <div class="mega-menu">
+      {% for category in categories %}
+        <div class="mega-column">
+          <h4>{{ category.name }}</h4>
+          <div class="menu-section">
+            {% for subcategory in category.subcategories.all %}
+              <a href="{% url 'shop_by_subcategory' category.slug subcategory.slug %}">
+                {{ subcategory.name }}
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</li>
+
                     <li class="dropdown">
                       <a href="{% url 'india-services' %}">Services</a>
                       <ul>

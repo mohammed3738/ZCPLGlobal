@@ -373,12 +373,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="mega-column">
           <h4>{{ category.name }}</h4>
           <div class="menu-section">
-            {% for subcat in category.subcategories.all %}
-              <a href="{% url 'shop_by_subcategory' category.slug subcat.slug %}">
-                {{ subcat.name }}
+            {% for subcategory in category.subcategories.all %}
+              <a href="{% url 'shop_by_subcategory' category.slug subcategory.slug %}">
+                {{ subcategory.name }}
               </a>
-            {% empty %}
-              <p style="font-size: 14px;">No subcategories</p>
             {% endfor %}
           </div>
         </div>
