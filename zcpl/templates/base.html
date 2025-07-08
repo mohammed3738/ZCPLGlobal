@@ -69,7 +69,99 @@
     ><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
   </head>
+<style>
 
+/* Mega menu container */
+.mega-menu-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% + 0px);
+  background: #fff;
+  padding: 30px 20px;
+  margin: 0 20px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  border-radius: 0 0 8px 8px;
+  display: none;
+}
+
+.dropdown.megamenu:hover .mega-menu-wrapper {
+  display: block;
+}
+
+/* Horizontal layout */
+.mega-menu {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 80px; */
+}
+.mega-menu .column ul li a {
+  font-size: 15px;
+  padding: 6px 0;
+}
+.mega-menu .column ul li {
+  margin-bottom: 10px;
+}
+/* Each column setup */
+.mega-column {
+  width: 20%;
+  text-align: left;
+}
+.mega-column h4 {
+  margin: 0;
+  font-size: 18px;
+ font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+/* Sections in column */
+.menu-section {
+  margin-bottom: 20px;
+  color: #000;
+  font-weight: 300;
+}
+.section-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+/* Links styling */
+.menu-section a {
+  display: block;
+  font-size: 13px;
+  color: #141414;
+  line-height: 1.6;
+  text-decoration: none;
+  padding: 2px 0;
+}
+
+/* Hover effect */
+.menu-section a:hover {
+  color: #419747;
+}
+
+/* IDs or classes already included in theme for nav widths */
+
+@media (max-width: 991px) {
+  .mega-menu {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .mega-menu .column {
+    width: 100%;
+  }
+}
+
+</style>
   <body>
     <div class="page-wrapper">
 {% if messages %}
@@ -251,9 +343,126 @@
                     <li class="dropdown">
                       <a href="{% url 'about_us' %}">About Us</a>
                     </li>
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                       <a href="{% url 'shop' %}">Online Store</a>
-                    </li>
+                    </li> -->
+
+
+<!-- /////////////////////////////////////////////////////// -->
+
+<li class="dropdown megamenu">
+  <a href="#"> Online store</a>
+  <div class="mega-menu-wrapper">
+    <div class="mega-menu">
+      <!-- Column 1: HP -->
+      <div class="mega-column">
+        <h4>HP</h4>
+        <div class="menu-section">
+          <strong>HP SERVERS</strong>
+          <a href="#">HP Rack Servers</a>
+          <a href="#">HP Tower Servers</a>
+          <a href="#">HP Blade Servers</a>
+          <a href="#">HP Chassis</a>
+        </div>
+        <div class="menu-section">
+          <strong>HP SERVER PARTS</strong>
+          <a href="#">HP Server Hard Disk</a>
+          <a href="#">HP Server Memory</a>
+          <a href="#">HP Server Motherboard</a>
+          <a href="#">HP Server Power Supply</a>
+          <a href="#">HP Storages</a>
+          <a href="#">HP Workstations</a>
+        </div>
+      </div>
+
+      <!-- Repeat below block for DELL, IBM, SUN, CISCO -->
+      <div class="mega-column">
+        <h4>DELL</h4>
+        <div class="menu-section">
+          <strong>DELL SERVERS</strong>
+          <a href="#">DELL Rack Servers</a>
+          <a href="#">DELL Tower Servers</a>
+          <a href="#">DELL Blade Servers</a>
+          <a href="#">DELL Chassis</a>
+        </div>
+        <div class="menu-section">
+          <strong>DELL SERVER PARTS</strong>
+          <a href="#">DELL Server Hard Disk</a>
+          <a href="#">DELL Server Memory</a>
+          <a href="#">DELL Server Motherboard</a>
+          <a href="#">DELL Server Power Supply</a>
+          <a href="#">DELL Storages</a>
+          <a href="#">DELL Workstations</a>
+        </div>
+      </div>
+
+      <!-- IBM -->
+      <div class="mega-column">
+        <h4>IBM</h4>
+        <div class="menu-section">
+          <strong>IBM SERVERS</strong>
+          <a href="#">IBM Rack Servers</a>
+          <a href="#">IBM Tower Servers</a>
+          <a href="#">IBM Blade Servers</a>
+          <a href="#">IBM Chassis</a>
+        </div>
+        <div class="menu-section">
+          <strong>IBM SERVER PARTS</strong>
+          <a href="#">IBM Server Hard Disk</a>
+          <a href="#">IBM Server Memory</a>
+          <a href="#">IBM Server Motherboard</a>
+          <a href="#">IBM Server Power Supply</a>
+          <a href="#">IBM Storages</a>
+          <a href="#">IBM Workstations</a>
+        </div>
+      </div>
+
+      <!-- SUN -->
+      <div class="mega-column">
+        <h4>SUN</h4>
+        <div class="menu-section">
+          <strong>SUN SERVERS</strong>
+          <a href="#">SUN Rack Servers</a>
+          <a href="#">SUN Tower Servers</a>
+          <a href="#">SUN Blade Servers</a>
+          <a href="#">SUN Chassis</a>
+        </div>
+        <div class="menu-section">
+          <strong>SUN SERVER PARTS</strong>
+          <a href="#">SUN Server Hard Disk</a>
+          <a href="#">SUN Server Memory</a>
+          <a href="#">SUN Server Motherboard</a>
+          <a href="#">SUN Server Power Supply</a>
+          <a href="#">SUN Storages</a>
+          <a href="#">SUN Workstations</a>
+        </div>
+      </div>
+
+      <!-- CISCO -->
+      <div class="mega-column">
+        <h4>CISCO</h4>
+        <div class="menu-section">
+          <strong>CISCO SWITCHES</strong>
+          <a href="#">CISCO Switches</a>
+          <a href="#">CISCO Routers</a>
+          <a href="#">CISCO Firewall</a>
+          <a href="#">CISCO Chassis</a>
+        </div>
+        <div class="menu-section">
+          <strong>SERVER SPARE PARTS</strong>
+          <a href="#">Server Hard Disk</a>
+          <a href="#">Server Memory</a>
+          <a href="#">Server Motherboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+
+
+
+<!-- ////////////////////////////////////////////// -->
+
                     <li class="dropdown">
                       <a href="{% url 'services' %}">Services</a>
                       <ul>
