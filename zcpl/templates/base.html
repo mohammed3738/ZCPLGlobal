@@ -366,110 +366,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- /////////////////////////////////////////////////////// -->
 
 <li class="dropdown megamenu">
-  <a href="#"> Online store</a>
+  <a href="{% url 'shop' %}">Online Store</a>
   <div class="mega-menu-wrapper">
     <div class="mega-menu">
-      <!-- Column 1: HP -->
-      <div class="mega-column">
-        <h4>HP</h4>
-        <div class="menu-section">
-          <strong>HP SERVERS</strong>
-          <a href="#">HP Rack Servers</a>
-          <a href="#">HP Tower Servers</a>
-          <a href="#">HP Blade Servers</a>
-          <a href="#">HP Chassis</a>
+      {% for category in categories %}
+        <div class="mega-column">
+          <h4>{{ category.name }}</h4>
+          <div class="menu-section">
+            {% for subcat in category.subcategories.all %}
+              <a href="{% url 'shop_by_subcategory' category.slug subcat.slug %}">
+                {{ subcat.name }}
+              </a>
+            {% empty %}
+              <p style="font-size: 14px;">No subcategories</p>
+            {% endfor %}
+          </div>
         </div>
-        <div class="menu-section">
-          <strong>HP SERVER PARTS</strong>
-          <a href="#">HP Server Hard Disk</a>
-          <a href="#">HP Server Memory</a>
-          <a href="#">HP Server Motherboard</a>
-          <a href="#">HP Server Power Supply</a>
-          <a href="#">HP Storages</a>
-          <a href="#">HP Workstations</a>
-        </div>
-      </div>
-
-      <!-- Repeat below block for DELL, IBM, SUN, CISCO -->
-      <div class="mega-column">
-        <h4>DELL</h4>
-        <div class="menu-section">
-          <strong>DELL SERVERS</strong>
-          <a href="#">DELL Rack Servers</a>
-          <a href="#">DELL Tower Servers</a>
-          <a href="#">DELL Blade Servers</a>
-          <a href="#">DELL Chassis</a>
-        </div>
-        <div class="menu-section">
-          <strong>DELL SERVER PARTS</strong>
-          <a href="#">DELL Server Hard Disk</a>
-          <a href="#">DELL Server Memory</a>
-          <a href="#">DELL Server Motherboard</a>
-          <a href="#">DELL Server Power Supply</a>
-          <a href="#">DELL Storages</a>
-          <a href="#">DELL Workstations</a>
-        </div>
-      </div>
-
-      <!-- IBM -->
-      <div class="mega-column">
-        <h4>IBM</h4>
-        <div class="menu-section">
-          <strong>IBM SERVERS</strong>
-          <a href="#">IBM Rack Servers</a>
-          <a href="#">IBM Tower Servers</a>
-          <a href="#">IBM Blade Servers</a>
-          <a href="#">IBM Chassis</a>
-        </div>
-        <div class="menu-section">
-          <strong>IBM SERVER PARTS</strong>
-          <a href="#">IBM Server Hard Disk</a>
-          <a href="#">IBM Server Memory</a>
-          <a href="#">IBM Server Motherboard</a>
-          <a href="#">IBM Server Power Supply</a>
-          <a href="#">IBM Storages</a>
-          <a href="#">IBM Workstations</a>
-        </div>
-      </div>
-
-      <!-- SUN -->
-      <div class="mega-column">
-        <h4>SUN</h4>
-        <div class="menu-section">
-          <strong>SUN SERVERS</strong>
-          <a href="#">SUN Rack Servers</a>
-          <a href="#">SUN Tower Servers</a>
-          <a href="#">SUN Blade Servers</a>
-          <a href="#">SUN Chassis</a>
-        </div>
-        <div class="menu-section">
-          <strong>SUN SERVER PARTS</strong>
-          <a href="#">SUN Server Hard Disk</a>
-          <a href="#">SUN Server Memory</a>
-          <a href="#">SUN Server Motherboard</a>
-          <a href="#">SUN Server Power Supply</a>
-          <a href="#">SUN Storages</a>
-          <a href="#">SUN Workstations</a>
-        </div>
-      </div>
-
-      <!-- CISCO -->
-      <div class="mega-column">
-        <h4>CISCO</h4>
-        <div class="menu-section">
-          <strong>CISCO SWITCHES</strong>
-          <a href="#">CISCO Switches</a>
-          <a href="#">CISCO Routers</a>
-          <a href="#">CISCO Firewall</a>
-          <a href="#">CISCO Chassis</a>
-        </div>
-        <div class="menu-section">
-          <strong>SERVER SPARE PARTS</strong>
-          <a href="#">Server Hard Disk</a>
-          <a href="#">Server Memory</a>
-          <a href="#">Server Motherboard</a>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </li>

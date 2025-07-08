@@ -2,16 +2,16 @@
 {% load static %}
 {% block content %}
 
-<body>
+{% comment %} <body> {% endcomment %}
 
-    <div class="page-wrapper">
+    {% comment %} <div class="page-wrapper">
 
         <!-- Preloader -->
         <div class="preloader">
             <div class="icon"></div>
-        </div>
+        </div> {% endcomment %}
 
-        <section class="login-wrapper">
+        <section class="login-wrapper" style="margin-top:100px;">
             <div class="login-bg" style="background-image: url(images/update-1-12-2020/background/login-bg.jpg);"></div>
             <!-- /.login-bg -->
             <div class="login-content">
@@ -49,14 +49,14 @@
             </div><!-- /.login-content -->
         </section><!-- /.login-wrapper -->
 
-    </div>
+    {% comment %} </div>
     <!--End pagewrapper-->
 
-    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a> {% endcomment %}
 
 
 
-    <script src="{% static "js/jquery.js" %}"></script>
+    {% comment %} <script src="{% static "js/jquery.js" %}"></script>
     <script src="{% static "js/popper.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/TweenMax.js" %}"></script>
@@ -66,6 +66,7 @@
     <script src="{% static "js/jarallax.min.js" %}"></script>
     <script src="{% static "js/custom-script.js" %}"></script>
 
-</body>
+</body> {% endcomment %}
 
-</html>
+{% comment %} </html> {% endcomment %}
+{% endblock %}
