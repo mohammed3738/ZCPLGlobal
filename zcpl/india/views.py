@@ -106,3 +106,6 @@ def rental_services_india(request):
 
 def infrastructure_service_india(request):
     return render(request,'india/infrastructure_service.html')
+
+def server_mumbai(request):
+    return render(request,'india/service/server_mumbai.html')

@@ -16,6 +16,7 @@ urlpatterns = [
     # path("contact/success/", TemplateView.as_view(template_name="success.html"), name="contact_success"),
     path('rental-services',views.rental_services_india,name="rental-services-india"),
     path('infrastructure-managed-service',views.infrastructure_service_india,name="infrastructure-managed-service-india"),
+    path('refurbished-servers-mumbai',views.server_mumbai,name="refurbished-servers-mumbai"),
 
 
 ]
