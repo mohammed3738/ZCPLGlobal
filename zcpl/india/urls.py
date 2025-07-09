@@ -17,6 +17,11 @@ urlpatterns = [
     path('rental-services',views.rental_services_india,name="rental-services-india"),
     path('infrastructure-managed-service',views.infrastructure_service_india,name="infrastructure-managed-service-india"),
     path('refurbished-servers-mumbai',views.server_mumbai,name="refurbished-servers-mumbai"),
+    path('refurbished-servers-banglore',views.server_banglore,name="refurbished-servers-banglore"),
+    path('refurbished-servers-chennai',views.server_chennai,name="refurbished-servers-chennai"),
+    path('refurbished-servers-kolkata',views.server_kolkata,name="refurbished-servers-kolkata"),
+    path('refurbished-servers-ahmedabad',views.server_ahmedabad,name="refurbished-servers-ahmedabad"),
+    path('refurbished-servers-hyderabad',views.server_hyderabad,name="refurbished-servers-hyderabad"),
 
 
 ]
