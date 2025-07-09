@@ -124,3 +124,9 @@ def server_ahmedabad(request):
 
 def server_kolkata(request):
     return render(request,'india/service/server_kolkata.html')
+
+def server_delhi(request):
+    return render(request,'india/service/server_delhi.html')
+
+def server_pune(request):
+    return render(request,'india/service/server_pune.html')

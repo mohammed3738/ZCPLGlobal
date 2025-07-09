@@ -1,4 +1,48 @@
 {% extends 'india/base.html' %} {% load static %} {% block content %}
+  <style>
+    .box-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .box {
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .box a {
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      background-color: #e9ecef;
+    }
+
+    @media (max-width: 992px) {
+      .box-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .box-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 
 <!-- Banner Section -->
 
@@ -55,6 +99,10 @@
             </div> -->
 </section>
 <!-- /.slider-six -->
+
+
+
+
 
 <div>
 <section class="about-thirteen">
@@ -122,6 +170,23 @@
     </div>
   </div>
 </section>
+</div>
+
+
+
+  {% comment %} <div class="sec-title-thirteen__tagline"><span class="sec-title-thirteen__tagline__bar"></span>About Zaco</div> {% endcomment %}
+  <h2 class="sec-title-thirteen__title" style="text-align:center;">Our Quality Refurbished Servers India Collection
+</h2>
+
+<div class="box-container">
+  <div class="box"><a href="{% url 'refurbished-servers-mumbai' %}">Refurbished Servers Mumbai</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-banglore' %}">Refurbished Servers Banglore</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-hyderabad' %}">Refurbished Servers Hyderabad</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-ahmedabad' %}">Refurbished Servers Ahmedabad</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-kolkata' %}">Refurbished Servers Kolkata</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-chennai' %}">Refurbished Servers Chennai</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-pune' %}">Refurbished Servers Pune</a></div>
+  <div class="box"><a href="{% url 'refurbished-servers-delhi' %}">Refurbished Servers Delhi</a></div>
 </div>
 
 
