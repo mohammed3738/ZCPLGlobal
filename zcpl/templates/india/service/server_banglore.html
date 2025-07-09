@@ -1,67 +1,114 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <!-- Banner Section -->
+<style>
+  .why-zaco-section {
+  background: #f8f6f9;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+.why-zaco-section .section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.feature-box {
+  background: #fff;
+  padding: 10px 10px 10px 0;
+  border-left: 1px solid #e0e0e0;
+  padding-left: 25px;
+}
+
+.feature-box .icon {
+  color: #000;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.feature-box h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.feature-box p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .why-zaco-section {
+    padding: 40px 15px;
+  }
+
+  .feature-box {
+    padding-left: 15px;
+  }
+
+  .feature-box h3 {
+    font-size: 18px;
+  }
+
+  .feature-box p {
+    font-size: 15px;
+  }
+}
+
+</style>
+<!-- Hero Banner -->
 <section class="slider-six">
-  <div class="slider-six__curv">
-    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
-                <path fill="currentColor"
-                    d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
-            </svg> -->
-  </div>
-  <!-- /.slider-six__curv -->
+  <div class="slider-six__curv"></div>
   <div
     class="swiper-container thm-swiper__slider"
-    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+    data-swiper-options='{
+      "slidesPerView": 1,
+      "loop": true,
+      "effect": "fade",
+      "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true },
+      "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" },
+      "autoplay": { "delay": 5000 }
+    }'
   >
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <div
           class="image-layer"
-          style="
-            background-image: url({% static "images/services/network-back.jpg" %});
-          "
+          style="background-image: url({% static 'images/contact/contact1.jpg' %}); background-position: top;"
         ></div>
-        <!-- /.image-layer -->
-        <div class="auto-container">
+        <div class="auto-container text-center text-white">
           <div class="slider-six__content">
-            <p class="slider-six__text"><span>Network Maintenance</span></p>
-            <!-- /.slider-six__text -->
-            <h2 class="slider-six__title">
-              
-            Seamless Connectivity and Maximum Uptime for Your Global IT Network!
-            </h2>
-            <!-- /.slider-six__title -->
-            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
-            <!-- /.thm-btn__six -->
+            <h2 class="slider-six__title">Refurbished Servers in Bangalore</h2>
+            <p class="slider-six__text">Explore our quality refurbished servers Bangalore collection at Zaco.</p>
           </div>
-          <!-- /.slider-six__content -->
         </div>
       </div>
-      {% comment %} <div class="swiper-slide">
-        <div
-          class="image-layer"
-          style="
-            background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
-          "
-        ></div>
-        <!-- /.image-layer -->
-     
-      </div> {% endcomment %}
     </div>
-    <!-- If we need navigation buttons -->
-    <!-- <div class="slider-bottom-box clearfix">
-                <div class="main-slider__nav">
-                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
-                        <span class="fa fa-angle-left"></span>
-                    </div>
-                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
-                        <span class="fa fa-angle-right"></span>
-                    </div>
-                </div>
-            </div> -->
-  <!--</div> -->
+  </div>
 </section>
-<!-- /.slider-six -->
+
+
+
+
+
+
+
+
 
 <div class="auto-container" style="padding-block: 100px">
   <div class="row">
@@ -71,21 +118,16 @@
           <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
           <!-- /.sec-title-six__text -->
           <h2 class="sec-title-six__title">
-            Your Trusted Partner For It Network Maintenance Services
+           Refurbished Servers Bangalore – Quality Collection from Zaco
           </h2>
           <!-- /.sec-title-six__title -->
         </div>
         <!-- /.sec-title-six -->
         <div class="about-six__text">
-            At Zaco Computers, we understand the critical importance of a robust and reliable IT network for businesses operating across the globe. Our Network Maintenance and Support Services are designed to ensure seamless connectivity, optimal performance and maximum uptime for your organization's IT infrastructure.
+        Why Look Elsewhere When You Can Shop Quality Refurbished Servers in your Own City? Yes! You heard it right, Zaco is supplying top-quality refurbished servers in Bangalore. Buying refurbished servers not only reduces your IT hardware expenses but also works as fine as the new servers. So, why would anyone select a brand-new server when they are getting the same quality server by spending so less. You can save thousands of bucks and still can upgrade your servers. Take advantage of this opportunity and buy refurbished servers in Bangalore now from Zaco.
         </div>
         <!-- /.about-six__text -->
-        <div class="link-box" style="margin-top:20px">
-            <a class="theme-btn btn-style-one" href="{% url "contact" %}">
-              <i class="btn-curve"></i>
-              <span class="btn-title">Contact Us</span>
-            </a>
-          </div>
+ 
           <!-- /.about-six__content -->
         </div>
     </div>
@@ -93,7 +135,7 @@
     <div class="col-md-12 col-lg-6 wow fadeInRight" data-wow-duration="1500ms">
       <div class="about-six__image">
         <img
-          src="{% static 'images/rentalimg/YOUR-TRUSTED-PARTNER-FOR-STORAGE-MAINTENANCE-SERVICES-1.png' %}"
+          src="{% static 'images/update-01-10-2021/resources/YOUR-TRUSTED-PARTNER-SERVICES.jpg' %}"
           alt=""
         />
       </div>
@@ -105,89 +147,147 @@
 
   <!-- /.row -->
 </div>
-<!-- /.auto-container -->
 
 
-<!--We DO Section-->
-<section class="we-do-section">
+            <!--Featured Section-->
+              <section class="featured-section">
+                <div class="auto-container">
+                  <div class="row clearfix">
+                    <!--Left Column-->
+                    <div class="left-col col-lg-6 col-md-12 col-sm-12">
+                      <div
+                        class="inner wow fadeInLeft"
+                        data-wow-delay="0ms"
+                        data-wow-duration="1500ms"
+                      >
+                        <div class="image-box">
+                          <img src="{% static 'images/it-hardware/STORAGE-MAINTENANCE-1.png' %}" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                    <!--Right Column-->
+                    <div
+                      class="right-col col-lg-6 col-md-12 col-sm-12"
+                      style="margin-block: auto"
+                    >
+                      <div class="inner">
+                        <div class="sec-title">
+                          <h2>
+                             Buy Refurbished Servers in Bangalore – Servers that Fulfill your Business Demands
+                          </h2>
+                          <div class="lower-text">
+                                Our comprehensive collection of refurbished servers in Bangalore includes servers from all top-selling brands such as HP, IBM, and DELL. Whether you run a large-scale business or a small enterprise, we have servers for all kinds of businesses. Zaco is the one-stop solution provider for your IT infrastructure. If you are looking for any specific configuration, you can find it online on our website. For further details, you can contact our team.
+      
+                          </div>
+                         
+                          <!-- /.about-six__content -->
+                        </div>
+          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!--Featured Section-->
 
-    <div class="auto-container">
-        <div class="sec-title " style="text-align:center;padding-bottom:5px ">
-            <h2>
-                Our Network Maintenance Services Include<span class="text-color" >:</span>
-              
-            </h2>
-          </div>
-        <div class="sec-title">
+
+
+
+
+
+
+<div class="auto-container" style="padding-block: 100px">
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="about-six__content">
+        <div class="sec-title-six">
+          <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
+          <!-- /.sec-title-six__text -->
+          <h2 class="sec-title-six__title">
+        Reliable Online Shopping for Refurbished Servers Bangalore Collection
+          </h2>
+          <!-- /.sec-title-six__title -->
+        </div>
+        <!-- /.sec-title-six -->
+        <div class="about-six__text">
+     We are dedicated to giving our customers the best services. To save you from traveling, we even provide an online purchase option. When buying something online, the first question that pops up in our head is, “what if the server quality is not good?”, when you are buying from us, you really don’t have to worry about the server quality as all the products at Zaco are thoroughly tested in our in-house testing facility. For your satisfaction, you can check our servers physically. You can get your refurbished server delivered anywhere across the country in a few simple steps. Get your hands on our top-notch refurbished servers in Bangalore and enjoy our long-term services.
+        </div>
+        <!-- /.about-six__text -->
         
-      <div class="row clearfix">
-        <!--Left Column-->
-   
-        <!--Right Column-->
-        <div class="right-col col-lg-6 col-md-12 col-sm-12">
-            
-          <div class="inner">
-            <div class="faq-box">
-              <ul class="accordion-box clearfix">
-                <!--Block-->
-                <li class="accordion block active-block">
-                  <div class="acc-btn active">
-                    <span class="count">1.</span> IT Network Support
+          <!-- /.about-six__content -->
+        </div>
+    </div>
+    <!-- /.col-md-12 col-lg-5 -->
+    <div class="col-md-12 col-lg-6 wow fadeInRight" data-wow-duration="1500ms">
+      <div class="about-six__image">
+        <img
+          src="{% static 'images/update-01-10-2021/resources/YOUR-TRUSTED-PARTNER-SERVICES.jpg' %}"
+          alt=""
+        />
+      </div>
+      <!-- /.about-six__image -->
+    </div>
+    <!-- /.col-md-12 col-lg-7 -->
+  </div>
+  <!-- /.row -->
 
-                  </div>
-                  <div class="acc-content current">
-                    <div class="content">
-                      <div class="text">
-                        Our experienced team of IT experts is dedicated to providing comprehensive network support solutions tailored to meet your specific needs. Whether it's troubleshooting network issues, optimizing network performance, or implementing security protocols, we are here to keep your network running smoothly.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-  
-                <!--Block-->
-                <li class="accordion block">
-                  <div class="acc-btn">
-                    <span class="count">2.</span>  Managed IT Network Services
-                  </div>
-                  <div class="acc-content">
-                    <div class="content">
-                      <div class="text">
-                        With our Managed IT Network Services, you can offload the day-to-day management of your network to our experts, allowing you to focus on your core business objectives. From proactive monitoring and maintenance to timely upgrades, we proactively manage every aspect of your network to ensure its reliability and security.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-  
-                <!--Block-->
-                <li class="accordion block">
-                  <div class="acc-btn">
-                    <span class="count">3.</span> IT Networking Services
-                  </div>
-                  <div class="acc-content">
-                    <div class="content">
-                      <div class="text">
-                        Zaco Computers offers a wide range of IT Networking Services aimed at helping businesses to build, expand, and optimize their network infrastructure. Whether you're setting up a new network, expanding your existing one, or migrating to the cloud, our team has the expertise and resources to support your overall networking needs.
-                      </div>
-                    </div>
-                  </div>
-                </li>
+  <!-- /.row -->
+</div>
+
+
+
+
+<section class="why-zaco-section">
+  <div class="container">
+    <h2 class="section-title">Facilities you get when you Buy Refurbished Servers in Bangalore from Zaco</h2>
+    <div class="grid-container">
+      <!-- Box 1 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Warranty on Refurb Servers</h3>
+        <p>
          
-            
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="left-col col-lg-6 col-md-12 col-sm-12 wow fadeInRight" data-wow-duration="1500ms">
-            <div class="">
-                <img
-                  src="{% static 'images/rentalimg/Our-Network-Maintenance-Services-Include.png' %}"
-                  alt=""
-                />
-              </div>
-        </div>
+        We provide a minimum 1-year warranty on our refurbished servers. If any issue arises, we take full responsibility and resolve the issue.
+        </p>
+      </div>
+
+
+
+      <!-- Box 3 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Server Support Services and Free Consultation</h3>
+        <p>
+          After purchase, our experts guide you through any difficulty. If you want to upgrade your refurbished servers in Bangalore without changing them or you are confused about what to buy, get a free consultation from our IT mentors. For a more detailed discussion, you can even visit our office in Bangalore and our IT experts will help you out in selecting the correct server for your business.
+        </p>
+      </div>
+      <!-- Box 2 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Server Installation Services</h3>
+        <p>
+         When you buy a refurbished server in Bangalore from Zaco, we take our full responsibility for guiding you before purchasing right to the installation. Our well-experienced technicians perform the hassle-free installation.
+        </p>
+      </div>
+      <!-- Box 4 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Fastest Server Delivery</h3>
+        <p>
+         As your time is valuable, we provide the fastest delivery option throughout Bangalore. You can get our in-stock refurb servers delivered on the same day that you order. Enjoy hassle-free services by placing an order online. We provide our refurbished servers in Bangalore collection with all safety measures.
+        </p>
+      </div>
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>24X7 Customer Services</h3>
+        <p>
+         All the configuration information is given on our website. If you want to know more or get a customized refurbished server quote in Bangalore, you can call our customer service executives anytime. Our on-call assistance is available 24X7. Zaco has been providing quality IT hardware solutions including great customer services across India for more than two decades.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
@@ -198,43 +298,6 @@
 
 
 
-
-
-
-
-<section class="feature-eight">
-    <div class="auto-container">
-        
-        <div class="row">
-            <div class="col-md-12 col-lg-5 wow fadeInLeft" data-wow-duration="1500ms">
-                <div class="feature-eight__image">
-                    {% comment %} <img src="images/update-26-02-2021/resources/READY-TO-EXPERIENCE-THE-BENEFITS-OF-RELIABLE-SERVER-MAINTENANCE.png" alt=""> {% endcomment %}
-                    <img src="{% static 'images/rentalimg/WHY-CHOOSE-ZACO-NETWORK-SUPPORT-&SERVICES.png' %}" alt="">
-                </div><!-- /.feature-eight__image -->
-            </div><!-- /.col-md-12 -->
-            <div class="col-md-12 col-lg-7">
-                <div class="feature-eight__content">
-                    <div class="sec-title">
-                        <h2>Why Choose Zaco for IT Network Support & Services? </h2>
-                    </div>
-                    <p class="feature-eight__text">
-                        With our presence in multiple countries, including India, the United Kingdom and the UAE, we offer global network support services to businesses worldwide. Our team brings years of experience and in-depth expertise in managing and supporting IT networks of all sizes and complexities. We take a proactive approach to network maintenance, ensuring potential issues are identified and resolved before they impact your business operations. Whether you need assistance during business hours or require any emergency support after working hours, our team is available round-the-clock to address your networking-related concerns. Partner with Zaco for reliable, efficient and cost-effective network maintenance support and services that empower your business to thrive in today's digital landscape.
-                    </p><!-- /.feature-eight__text -->
-                    {% comment %} <div class="progress-box">
-                        <div class="bar-title">Digital marketing</div>
-                        <div class="bar">
-                            <div class="bar-inner count-bar counted" data-percent="70%" style="width: 70%;">
-                                <div class="count-box counted">
-                                    <span class="count-text" data-stop="70" data-speed="1500">70</span>%
-                                </div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
-                </div><!-- /.feature-eight__content -->
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
-    </div><!-- /.auto-container -->
-</section><!-- /.feature-eight -->
 
 
 
