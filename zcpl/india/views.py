@@ -109,3 +109,18 @@ def infrastructure_service_india(request):
 
 def server_mumbai(request):
     return render(request,'india/service/server_mumbai.html')
+
+def server_banglore(request):
+    return render(request,'india/service/server_banglore.html')
+
+def server_chennai(request):
+    return render(request,'india/service/server_chennai.html')
+
+def server_hyderabad(request):
+    return render(request,'india/service/server_hyderabad.html')
+
+def server_ahmedabad(request):
+    return render(request,'india/service/server_ahmedabad.html')
+
+def server_kolkata(request):
+    return render(request,'india/service/server_kolkata.html')
