@@ -1,67 +1,114 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <!-- Banner Section -->
+<style>
+  .why-zaco-section {
+  background: #f8f6f9;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+.why-zaco-section .section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.feature-box {
+  background: #fff;
+  padding: 10px 10px 10px 0;
+  border-left: 1px solid #e0e0e0;
+  padding-left: 25px;
+}
+
+.feature-box .icon {
+  color: #000;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.feature-box h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.feature-box p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .why-zaco-section {
+    padding: 40px 15px;
+  }
+
+  .feature-box {
+    padding-left: 15px;
+  }
+
+  .feature-box h3 {
+    font-size: 18px;
+  }
+
+  .feature-box p {
+    font-size: 15px;
+  }
+}
+
+</style>
+<!-- Hero Banner -->
 <section class="slider-six">
-  <div class="slider-six__curv">
-    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
-                <path fill="currentColor"
-                    d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
-            </svg> -->
-  </div>
-  <!-- /.slider-six__curv -->
+  <div class="slider-six__curv"></div>
   <div
     class="swiper-container thm-swiper__slider"
-    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+    data-swiper-options='{
+      "slidesPerView": 1,
+      "loop": true,
+      "effect": "fade",
+      "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true },
+      "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" },
+      "autoplay": { "delay": 5000 }
+    }'
   >
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <div
           class="image-layer"
-          style="
-            background-image: url({% static "images/services/network-back.jpg" %});
-          "
+          style="background-image: url({% static 'images/contact/contact1.jpg' %}); background-position: top;"
         ></div>
-        <!-- /.image-layer -->
-        <div class="auto-container">
+        <div class="auto-container text-center text-white">
           <div class="slider-six__content">
-            <p class="slider-six__text"><span>Network Maintenance</span></p>
-            <!-- /.slider-six__text -->
-            <h2 class="slider-six__title">
-              
-            Seamless Connectivity and Maximum Uptime for Your Global IT Network!
-            </h2>
-            <!-- /.slider-six__title -->
-            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
-            <!-- /.thm-btn__six -->
+            <h2 class="slider-six__title">Refurbished Servers in Delhi</h2>
+            <p class="slider-six__text">Zaco offer refurbished servers in Delhi that are built on quality and re-tested thoroughly.</p>
           </div>
-          <!-- /.slider-six__content -->
         </div>
       </div>
-      {% comment %} <div class="swiper-slide">
-        <div
-          class="image-layer"
-          style="
-            background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
-          "
-        ></div>
-        <!-- /.image-layer -->
-     
-      </div> {% endcomment %}
     </div>
-    <!-- If we need navigation buttons -->
-    <!-- <div class="slider-bottom-box clearfix">
-                <div class="main-slider__nav">
-                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
-                        <span class="fa fa-angle-left"></span>
-                    </div>
-                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
-                        <span class="fa fa-angle-right"></span>
-                    </div>
-                </div>
-            </div> -->
-  <!--</div> -->
+  </div>
 </section>
-<!-- /.slider-six -->
+
+
+
+
+
+
+
+
 
 <div class="auto-container" style="padding-block: 100px">
   <div class="row">
@@ -71,21 +118,16 @@
           <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
           <!-- /.sec-title-six__text -->
           <h2 class="sec-title-six__title">
-            Your Trusted Partner For It Network Maintenance Services
+           Refurbished Servers in Delhi at Lowest Price from Zaco | Quality Refurbished Servers Delhi Collection
           </h2>
           <!-- /.sec-title-six__title -->
         </div>
         <!-- /.sec-title-six -->
         <div class="about-six__text">
-            At Zaco Computers, we understand the critical importance of a robust and reliable IT network for businesses operating across the globe. Our Network Maintenance and Support Services are designed to ensure seamless connectivity, optimal performance and maximum uptime for your organization's IT infrastructure.
+         You’ve come to the correct place if you’re seeking low-cost, high-quality servers in Delhi. Zaco offers refurbished servers from leading OEMs such as Dell, HPE, and IBM in Delhi. From small businesses to giant corporations, we offer servers for everyone. Our refurbished servers are a good choice for IT setups on a tight budget. We supply high-quality servers at a very convenient rate. Be ready to work without hassle with our Delhi-based pre-tested refurbished servers. Zaco has a large selection of refurbished servers, including nearly all generations of various brands. You can choose from a variety of configurations ranging from low to high-end reconditioned servers to meet your needs.
         </div>
         <!-- /.about-six__text -->
-        <div class="link-box" style="margin-top:20px">
-            <a class="theme-btn btn-style-one" href="{% url "contact" %}">
-              <i class="btn-curve"></i>
-              <span class="btn-title">Contact Us</span>
-            </a>
-          </div>
+ 
           <!-- /.about-six__content -->
         </div>
     </div>
@@ -93,7 +135,7 @@
     <div class="col-md-12 col-lg-6 wow fadeInRight" data-wow-duration="1500ms">
       <div class="about-six__image">
         <img
-          src="{% static 'images/rentalimg/YOUR-TRUSTED-PARTNER-FOR-STORAGE-MAINTENANCE-SERVICES-1.png' %}"
+          src="{% static 'images/update-01-10-2021/resources/YOUR-TRUSTED-PARTNER-SERVICES.jpg' %}"
           alt=""
         />
       </div>
@@ -105,89 +147,141 @@
 
   <!-- /.row -->
 </div>
-<!-- /.auto-container -->
 
 
-<!--We DO Section-->
-<section class="we-do-section">
+            <!--Featured Section-->
+              <section class="featured-section">
+                <div class="auto-container">
+                  <div class="row clearfix">
+                    <!--Left Column-->
+                    <div class="left-col col-lg-6 col-md-12 col-sm-12">
+                      <div
+                        class="inner wow fadeInLeft"
+                        data-wow-delay="0ms"
+                        data-wow-duration="1500ms"
+                      >
+                        <div class="image-box">
+                          <img src="{% static 'images/it-hardware/STORAGE-MAINTENANCE-1.png' %}" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                    <!--Right Column-->
+                    <div
+                      class="right-col col-lg-6 col-md-12 col-sm-12"
+                      style="margin-block: auto"
+                    >
+                      <div class="inner">
+                        <div class="sec-title">
+                          <h2>
+                             Refurbished Servers for Sale in Delhi | Avail Great Deals on Refurbished Servers Delhi Collection
+                          </h2>
+                          <div class="lower-text">
+                                 Do you have a limited IT infrastructure budget? Don’t worry; Zaco provides quality refurbished servers at a far lesser price than any other Delhi reseller. We are committed to providing you with high-quality servers at a reasonable price. You can even physically inspect the servers that you choose, at our office in Delhi. Refurbished servers in Delhi are offered by Zaco in a variety of customized configurations. Check out our Zaco Online Store today to learn more about the configurations and rates. For more than 2 decades, many companies in Delhi have trusted us in supplying and supporting their valuable refurbished servers and server spare parts.
+      
+                          </div>
+                         
+                          <!-- /.about-six__content -->
+                        </div>
+          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!--Featured Section-->
 
-    <div class="auto-container">
-        <div class="sec-title " style="text-align:center;padding-bottom:5px ">
-            <h2>
-                Our Network Maintenance Services Include<span class="text-color" >:</span>
-              
-            </h2>
-          </div>
-        <div class="sec-title">
+
+
+
+
+
+
+<div class="auto-container" style="padding-block: 100px">
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="about-six__content">
+        <div class="sec-title-six">
+          <!-- <p class="sec-title-six__text"><span>Our Company Benefits</span></p> -->
+          <!-- /.sec-title-six__text -->
+          <h2 class="sec-title-six__title">
+        Customized Refurbished Servers Delhi Collection
+          </h2>
+          <!-- /.sec-title-six__title -->
+        </div>
+        <!-- /.sec-title-six -->
+        <div class="about-six__text">
+      Some businesses require specialized servers that are not widely available. In such situations, we are your best alternative. We customize servers to our customers’ needs for their convenience. Our team is experienced to create custom servers to ensure that your work runs well. We specialize in producing precise, reliable tailored refurbished servers, and we have decades of experience providing quality server solutions to our global clientele. Our refurbished servers have also been rigorously tested for good performance, and you can rely on them for long-term use because we offer expert server support services even after the guarantee period has expired.
+        </div>
+        <!-- /.about-six__text -->
         
-      <div class="row clearfix">
-        <!--Left Column-->
-   
-        <!--Right Column-->
-        <div class="right-col col-lg-6 col-md-12 col-sm-12">
-            
-          <div class="inner">
-            <div class="faq-box">
-              <ul class="accordion-box clearfix">
-                <!--Block-->
-                <li class="accordion block active-block">
-                  <div class="acc-btn active">
-                    <span class="count">1.</span> IT Network Support
+          <!-- /.about-six__content -->
+        </div>
+    </div>
+    <!-- /.col-md-12 col-lg-5 -->
+    <div class="col-md-12 col-lg-6 wow fadeInRight" data-wow-duration="1500ms">
+      <div class="about-six__image">
+        <img
+          src="{% static 'images/update-01-10-2021/resources/YOUR-TRUSTED-PARTNER-SERVICES.jpg' %}"
+          alt=""
+        />
+      </div>
+      <!-- /.about-six__image -->
+    </div>
+    <!-- /.col-md-12 col-lg-7 -->
+  </div>
+  <!-- /.row -->
 
-                  </div>
-                  <div class="acc-content current">
-                    <div class="content">
-                      <div class="text">
-                        Our experienced team of IT experts is dedicated to providing comprehensive network support solutions tailored to meet your specific needs. Whether it's troubleshooting network issues, optimizing network performance, or implementing security protocols, we are here to keep your network running smoothly.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-  
-                <!--Block-->
-                <li class="accordion block">
-                  <div class="acc-btn">
-                    <span class="count">2.</span>  Managed IT Network Services
-                  </div>
-                  <div class="acc-content">
-                    <div class="content">
-                      <div class="text">
-                        With our Managed IT Network Services, you can offload the day-to-day management of your network to our experts, allowing you to focus on your core business objectives. From proactive monitoring and maintenance to timely upgrades, we proactively manage every aspect of your network to ensure its reliability and security.
-                      </div>
-                    </div>
-                  </div>
-                </li>
-  
-                <!--Block-->
-                <li class="accordion block">
-                  <div class="acc-btn">
-                    <span class="count">3.</span> IT Networking Services
-                  </div>
-                  <div class="acc-content">
-                    <div class="content">
-                      <div class="text">
-                        Zaco Computers offers a wide range of IT Networking Services aimed at helping businesses to build, expand, and optimize their network infrastructure. Whether you're setting up a new network, expanding your existing one, or migrating to the cloud, our team has the expertise and resources to support your overall networking needs.
-                      </div>
-                    </div>
-                  </div>
-                </li>
+  <!-- /.row -->
+</div>
+
+
+
+
+<section class="why-zaco-section">
+  <div class="container">
+    <h2 class="section-title">Why Buy Refurbished Servers in Delhi from Zaco?</h2>
+    <div class="grid-container">
+      <!-- Box 1 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Order Servers Online and Avail Fastest Delivery across India</h3>
+        <p>
          
-            
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="left-col col-lg-6 col-md-12 col-sm-12 wow fadeInRight" data-wow-duration="1500ms">
-            <div class="">
-                <img
-                  src="{% static 'images/rentalimg/Our-Network-Maintenance-Services-Include.png' %}"
-                  alt=""
-                />
-              </div>
-        </div>
+         Our customers can now purchase refurbished servers from any location in India. We provide the fastest delivery option in several places, including Delhi, since we respect your time. Purchase or place an order online in a few easy clicks and have it delivered the next business day. When you buy from us, you can count on our prompt and efficient delivery.
+        </p>
+      </div>
+
+
+
+      <!-- Box 3 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Guaranteed Server Support Services</h3>
+        <p>
+         All of our refurbished servers come with a 90-day warranty. Let’s say your server develops a flaw during the warranty period. In any such situation, we guarantee that our dedicated & experienced technical team will be there to assist you. Our experts are here to assist you with your questions if you are unsure about which server is appropriate for your company. Our primary aim is to provide the finest possible service to our customers within their budget.
+        </p>
+      </div>
+      <!-- Box 2 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>24×7 Refurbished Servers Customer Support</h3>
+        <p>
+        You can contact us at any moment if you have any queries regarding a certain server or require a quotation for the same. Our customer support is accessible around the clock to ensure complete customer satisfaction. Send us your inquiries, and we will do our best to respond.
+Zaco’s refurbished servers perform just as well as new servers. Why spend more on brand new servers when you can get the same features for a fraction of the price with refurbished ones? Why do you want to pass up a chance to get two important benefits for a considerably lesser price? Place your order now and benefit from our long-term support and other guarantees. Don’t be hesitant, if you’re thinking of buying a refurbished server in Dehli, think about Zaco today!
+        </p>
+      </div>
+      <!-- Box 4 -->
+      <div class="feature-box">
+        <div class="icon">⬤</div>
+        <h3>Server Installation Services</h3>
+        <p>
+          Server installation is often a major concern after a purchase, but when you buy a refurbished server in Delhi from Zaco, you can count on our assistance. Our trained professionals will quickly and efficiently install your server system at your location, giving you peace of mind. Zaco is even known for providing best-in-class server maintenance services to our clients.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
@@ -198,43 +292,6 @@
 
 
 
-
-
-
-
-<section class="feature-eight">
-    <div class="auto-container">
-        
-        <div class="row">
-            <div class="col-md-12 col-lg-5 wow fadeInLeft" data-wow-duration="1500ms">
-                <div class="feature-eight__image">
-                    {% comment %} <img src="images/update-26-02-2021/resources/READY-TO-EXPERIENCE-THE-BENEFITS-OF-RELIABLE-SERVER-MAINTENANCE.png" alt=""> {% endcomment %}
-                    <img src="{% static 'images/rentalimg/WHY-CHOOSE-ZACO-NETWORK-SUPPORT-&SERVICES.png' %}" alt="">
-                </div><!-- /.feature-eight__image -->
-            </div><!-- /.col-md-12 -->
-            <div class="col-md-12 col-lg-7">
-                <div class="feature-eight__content">
-                    <div class="sec-title">
-                        <h2>Why Choose Zaco for IT Network Support & Services? </h2>
-                    </div>
-                    <p class="feature-eight__text">
-                        With our presence in multiple countries, including India, the United Kingdom and the UAE, we offer global network support services to businesses worldwide. Our team brings years of experience and in-depth expertise in managing and supporting IT networks of all sizes and complexities. We take a proactive approach to network maintenance, ensuring potential issues are identified and resolved before they impact your business operations. Whether you need assistance during business hours or require any emergency support after working hours, our team is available round-the-clock to address your networking-related concerns. Partner with Zaco for reliable, efficient and cost-effective network maintenance support and services that empower your business to thrive in today's digital landscape.
-                    </p><!-- /.feature-eight__text -->
-                    {% comment %} <div class="progress-box">
-                        <div class="bar-title">Digital marketing</div>
-                        <div class="bar">
-                            <div class="bar-inner count-bar counted" data-percent="70%" style="width: 70%;">
-                                <div class="count-box counted">
-                                    <span class="count-text" data-stop="70" data-speed="1500">70</span>%
-                                </div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
-                </div><!-- /.feature-eight__content -->
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
-    </div><!-- /.auto-container -->
-</section><!-- /.feature-eight -->
 
 
 
