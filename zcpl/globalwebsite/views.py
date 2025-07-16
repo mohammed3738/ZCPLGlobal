@@ -728,3 +728,9 @@ def signin_view(request):
 def logout_view(request):
     logout(request)
     return redirect('signin')
+
+def sitemap(request):
+    return render(request,'sitemap.xml', content_type="application/xml")
+
+def robots_txt(request):
+    return render(request,'robots.txt', content_type="text/plain")
