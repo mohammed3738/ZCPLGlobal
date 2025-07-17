@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from globalwebsite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,8 @@ urlpatterns = [
     path('in/',include('india.urls')),
     path('uk/',include('uk.urls')),
     path('uae/',include('uae.urls')),
+    path('sitemap.xml', views.sitemap, name='sitemap'),
+    path('robots.txt', views.robots_txt, name='robots_txt'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
