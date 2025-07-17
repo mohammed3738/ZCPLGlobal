@@ -79,6 +79,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </head>
 <style>
 
+
+
+
+
 /* Mega menu container */
 .mega-menu-wrapper {
   position: absolute;
@@ -217,11 +221,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               Linoor is a premium Template for Digital Agencies, Start Ups,
               Small Business and a wide range of other agencies.
             </p> {% endcomment %}
+
             <p>
               <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
               <br />
               <a href="tel:+91-22-69288800">+91 22 69288800</a>
             </p>
+
+  <!-- 🌍 Country Dropdown -->
+<div class="mobile-country-selector" style="margin-top: 15px; max-width: 250px;">
+  <label for="mobile-country" style="color: #fff; font-weight: bold; font-size: 14px;">Select Country:</label><br />
+  <select
+    id="mobile-country"
+    class="form-select"
+    onchange="redirectToPage(this.value)"
+    style="
+      margin-top: 5px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+    "
+  >
+    <option value="/in/">India</option>
+    <option value="/uk/">United Kingdom</option>
+    <option value="/uae/">United Arab Emirates</option>
+    <option value="/">Global</option>
+  </select>
+</div>
+
+
             <div class="side-menu__social">
               <a href="https://www.facebook.com/zacoitsolved"><i class="fab fa-facebook-square"></i></a>
               <a href="https://twitter.com/zacoitsolved"><i class="fab fa-twitter"></i></a>
@@ -329,6 +360,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- /.auto-container -->
           </div>
           <!-- /.topbar -->
+           
           <div class="inner-container clearfix">
             <div class="auto-container">
               <!--Logo-->
