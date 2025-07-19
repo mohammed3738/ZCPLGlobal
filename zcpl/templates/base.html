@@ -3,7 +3,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Refurbished Servers In India From DELL, HPE & IBM </title>
+    {% comment %} <title>Refurbished Servers In India From DELL, HPE & IBM </title> {% endcomment %}
+
+    <title>{% block title %}Refurbished Servers Globally From DELL, HPE & IBM{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Default meta description.{% endblock %}">
+  {% block canonical %}
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  {% endblock %}
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
