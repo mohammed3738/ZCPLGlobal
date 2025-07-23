@@ -4,6 +4,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Refurbished Servers In India From DELL, HPE & IBM /</title>
+    {% block canonical %}
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  {% endblock %}
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -114,6 +117,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <br />
               <a href="tel: +44 203 815 8028"> +44 203 815 8028</a>
             </p>
+
+
+              <!-- 🌍 Country Dropdown -->
+            <div class="mobile-country-selector" style="margin-top: 15px; max-width: 250px;">
+              <label for="mobile-country" style="color: #fff; font-weight: bold; font-size: 14px;">Select Country:</label><br />
+              <select
+                id="mobile-country"
+                class="form-select"
+                onchange="redirectToPage(this.value)"
+                style="
+                  margin-top: 5px;
+                  width: 100%;
+                  max-width: 100%;
+                  box-sizing: border-box;
+                  padding: 6px 10px;
+                  font-size: 14px;
+                  border-radius: 4px;
+                "
+              >
+                <option value="/in/">India</option>
+                <option value="/uk/">United Kingdom</option>
+                <option value="/uae/">United Arab Emirates</option>
+                <option value="/">Global</option>
+              </select>
+            </div>
+
+
             <div class="side-menu__social">
               <a href="https://www.facebook.com/zacoitsolved"><i class="fab fa-facebook-square"></i></a>
               <a href="https://twitter.com/zacoitsolved"><i class="fab fa-twitter"></i></a>
@@ -226,7 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="logo-box">
                 <div class="logo">
                  <a
-                    href="{% url "home-uk" %}"
+                    href="{% url "uk-home" %}"
                     title="Zaco Computers Private Limited"
                     ><img
                       src="{% static 'images/Zacow1.png' %}"

@@ -3,7 +3,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Refurbished Servers In India From DELL, HPE & IBM</title>
+    {% comment %} <title>Refurbished Servers In India From DELL, HPE & IBM</title> {% endcomment %}
+    <title>{% block title %}Refurbished Servers Globally From DELL, HPE & IBM{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Default meta description.{% endblock %}">
+  {% block canonical %}
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  {% endblock %}
+
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -172,7 +178,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </style>
   </head>
 
-  <body>
+<body>
 
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2PWXWXK"
@@ -507,5 +513,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 {% include "tidio.html" %}
 
-  </body>
+</body>
 </html>

@@ -922,11 +922,11 @@
 
 @media only screen and (max-width: 599px) {
   .banner-carousel .content-box h1 {
-    font-size: 46px;
+    font-size: 30px;
   }
 
   .banner-three .banner-carousel .content-box h1 {
-    font-size: 46px;
+    font-size: 30px;
     line-height: 1em;
     margin-bottom: 10px;
   }
