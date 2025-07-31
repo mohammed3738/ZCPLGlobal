@@ -54,8 +54,41 @@ def india_home(request):
 
 
 
+# def india_contact(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('username')
+#         email = request.POST.get('email')
+#         phone = request.POST.get('phone')
+#         subject = request.POST.get('subject')
+#         message = request.POST.get('message')
+#         # Save to database
+#         ContactMessage.objects.create(
+#             name=name,
+#             email=email,
+#             phone=phone,
+#             subject=subject,
+#             message=message
+#         )
+
+#         full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+
+#         send_mail(
+#             subject,
+#             full_message,
+#             settings.DEFAULT_FROM_EMAIL,
+#             [settings.CONTACT_RECEIVER_EMAIL],
+#             fail_silently=False,
+#         )
+
+#         return render(request, 'india/contact.html', {'success': True})
+
+#     return render(request, 'india/contact.html')
+
+
+
 def india_contact(request):
     if request.method == 'POST':
+        form = ContactForm(request.POST)
         name = request.POST.get('username')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
@@ -80,9 +113,14 @@ def india_contact(request):
             fail_silently=False,
         )
 
-        return render(request, 'india/contact.html', {'success': True})
 
-    return render(request, 'india/contact.html')
+     
+              # Replace with your success template
+    else:
+        form = ContactForm()
+
+    return render(request, 'india/contact.html', {'form': form,'success': True})
+
 
 
 def india_services(request):

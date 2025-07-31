@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'uk',
     'canada',
     'ckeditor',
+    'captcha',
 
 ]
 
@@ -164,3 +165,9 @@ EMAIL_HOST_PASSWORD = 'uvxe hxzp cfbh gyxy'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
 # CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
+
+
+RECAPTCHA_PUBLIC_KEY = '6LfaCZMrAAAAAJxdbefcTWNIcr8x3B92YYgyFjMf'
+RECAPTCHA_PRIVATE_KEY = '6LfaCZMrAAAAAFWsNm_QzfmQEt8qfBq15jtOpmQS'
+# RECAPTCHA_PUBLIC_KEY = '6LcL9ZIrAAAAABqTwm1NNe6PQ63La_AIQztS4um5'
+# RECAPTCHA_PRIVATE_KEY = '6LcL9ZIrAAAAAK-HCSZZ7HBKX8fuZV-RLSlbmfnO'

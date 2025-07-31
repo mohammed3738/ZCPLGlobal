@@ -18212,11 +18212,11 @@ img.lazy-image.loaded {
   color: #fff;
 }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .about-six__content {
     margin-right: -30px;
   }
-}
+} */
 .about-six__text {
   font-size: 18px;
   line-height: 2em;
