@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 # from .forms import ContactForm
 from django.conf import settings
 from .models import *
+from .forms import ContactForm
 
 def uae_home(request):
     return render(request,'uae/uae_home.html')
@@ -44,6 +45,9 @@ def uae_contact(request):
             fail_silently=False,
         )
 
-        return render(request, 'uae/contact.html', {'success': True})
+    else:
+        form = ContactForm()
+
+        return render(request, 'uae/contact.html', {'form':form,'success': True})
 
     return render(request, 'uae/contact.html')

@@ -2,6 +2,8 @@ from django import forms
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 # class ProductForm(forms.ModelForm):
 #     class Meta:
@@ -94,3 +96,14 @@ class SignUpForm(forms.ModelForm):
 class SignInForm(AuthenticationForm):
     username = forms.CharField(label="Username or Email")
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+
+
+class ContactForm(forms.Form):
+    # name = forms.CharField()
+    # email = forms.EmailField()
+    # phone = forms.CharField()
+    # subject = forms.CharField()
+    # message = forms.CharField(widget=forms.Textarea)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)

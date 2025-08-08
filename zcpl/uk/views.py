@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 # from .forms import ContactForm
 from django.conf import settings
 from .models import *
-
+from .forms import ContactForm
 # Create your views here.
 def uk_home(request):
     return render(request,'uk/uk_home.html')
@@ -38,8 +38,10 @@ def uk_contact(request):
             [settings.CONTACT_RECEIVER_EMAIL],
             fail_silently=False,
         )
+    else:
+        form = ContactForm()
 
-        return render(request, 'uk/contact.html', {'success': True})
+        return render(request, 'uk/contact.html', {'form':form,'success': True})
 
     return render(request, 'uk/contact.html')
 

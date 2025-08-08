@@ -50,8 +50,11 @@ def contact(request):
             fail_silently=False,
         )
 
+    else:
+        form = ContactForm()
 
-    return render(request,'main/contact.html')
+
+    return render(request,'main/contact.html',{"form": form})
 
 def services(request):
     return render(request,'services/services.html')
