@@ -21,6 +21,8 @@ def uae_home(request):
 
 def uae_contact(request):
     if request.method == 'POST':
+        form = ContactForm(request.POST)
+
         name = request.POST.get('name')
         email = request.POST.get('email')
         # phone = request.POST.get('phone')

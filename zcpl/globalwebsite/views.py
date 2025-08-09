@@ -24,8 +24,11 @@ def home(request):
 
 def about_us(request):
     return render(request,'main/about.html')
+
 def contact(request):
     if request.method == 'POST':
+        form = ContactForm(request.POST)
+
         name = request.POST.get('username')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
