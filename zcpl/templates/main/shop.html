@@ -111,7 +111,11 @@
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="product-card">
               <div class="product-card__image">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                {% else %}
+                    <img src="{% static 'images/no-image.png' %}" alt="No Image Available" />
+                {% endif %}
                 <div class="product-card__buttons">
                   {% comment %} <a class="theme-btn btn-style-one" href="{% url 'cart_add' product.id %}">
                     <i class="btn-curve"></i>

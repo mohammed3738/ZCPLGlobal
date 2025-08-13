@@ -15,7 +15,6 @@ admin.site.register(Order)
 
 
 
-
 class ProductAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
     short_description = forms.CharField(widget=CKEditorWidget())
@@ -24,7 +23,24 @@ class ProductAdminForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
+
+class ProductImageInline(admin.TabularInline):  # You can use StackedInline if you want bigger fields
+    model = ProductImage
+    extra = 1  # Number of empty image upload fields
+    fields = ('image',)
+    readonly_fields = ()
+    classes = ['collapse']  # Makes it collapsible
+
+
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
+    inlines = [ProductImageInline]
+    list_display = ('name', 'price', 'available', 'created')
+    list_filter = ('available', 'created')
+    search_fields = ('name', 'description')
+
 
 admin.site.register(Product, ProductAdmin)
+
+
+

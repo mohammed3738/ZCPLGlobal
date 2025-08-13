@@ -51,6 +51,17 @@
 }
 
 
+.thumbnail-gallery img {
+    cursor: pointer; /* show pointer cursor */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thumbnail-gallery img:hover {
+    transform: scale(1.1); /* zoom on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
 
 </style>
 
@@ -79,10 +90,24 @@
             <div class="auto-container">
                 <div class="row">
                     <div class="col-lg-12 col-xl-6">
-                    <div class="img-zoom-container">
-                    <img id="mainImage" src="{{ product.image.url }}" alt="{{ product.name }}" width="500" />
-                    <div id="zoomResult" class="img-zoom-result"></div>
-                    </div>
+                        <div class="img-zoom-container">
+                            <!-- Main Image -->
+                            <img id="mainImage" src="{{ product.image.url }}" alt="{{ product.name }}" width="500" />
+                            <div id="zoomResult" class="img-zoom-result"></div>
+                        </div>
+
+                        <!-- Thumbnails -->
+                        <div class="thumbnail-gallery">
+                            {% for img in product.images.all %}
+                                <img 
+                                    src="{{ img.image.url }}" 
+                                    alt="{{ img.alt_text }}" 
+                                    class="thumbnail product-image" 
+                                    width="100" 
+                                    onclick="document.getElementById('mainImage').src=this.src">
+                            {% endfor %}
+                        </div>
+
 
                         {% comment %} <a href="images/update-26-01-2021/shops/shop-d-1.jpg"
                             class="product-details__image lightbox-image">
