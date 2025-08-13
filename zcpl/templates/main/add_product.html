@@ -8,6 +8,8 @@
     th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
     th { background-color: #f2f2f2; }
     .form-group { margin-bottom: 15px; }
+    .thumb-preview { margin: 5px; display: inline-block; }
+    .thumb-preview img { border: 1px solid #ccc; padding: 3px; }
   </style>
 </head>
 <body>
@@ -24,18 +26,17 @@
       <input type="hidden" name="product_id" value="{{ product_to_edit.id }}">
     {% endif %}
 
-<div class="form-group">
-  <label>Categories (you can select multiple):</label><br>
-  <select name="categories" multiple required size="7">
-    {% for subcat in subcategories %}
-      <option value="{{ subcat.id }}"
-        {% if editing and subcat in product_to_edit.categories.all %}selected{% endif %}>
-        {{ subcat.name }}
-      </option>
-    {% endfor %}
-  </select>
-</div>
-
+    <div class="form-group">
+      <label>Categories (you can select multiple):</label><br>
+      <select name="categories" multiple required size="7">
+        {% for subcat in subcategories %}
+          <option value="{{ subcat.id }}"
+            {% if editing and subcat in product_to_edit.categories.all %}selected{% endif %}>
+            {{ subcat.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
 
     <div class="form-group">
       <label>Product Name:</label><br>
@@ -56,10 +57,26 @@
     </div>
 
     <div class="form-group">
-      <label>Image:</label><br>
+      <label>Main Image:</label><br>
       <input type="file" name="image"><br>
       {% if editing and product_to_edit.image %}
         <img src="{{ product_to_edit.image.url }}" width="100"><br>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label>Gallery Images (you can select multiple):</label><br>
+      <input type="file" name="gallery_images" multiple>
+      {% if editing %}
+        <div>
+          {% for img in product_to_edit.images.all %}
+            <div class="thumb-preview">
+              <img src="{{ img.image.url }}" width="80">
+            </div>
+          {% empty %}
+            <p>No extra images</p>
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
 
@@ -112,13 +129,13 @@
       {% for product in products %}
         <tr>
           <td>{{ product.name }}</td>
-<td>
-  {% for cat in product.categories.all %}
-    {{ cat.name }}{% if not forloop.last %}, {% endif %}
-  {% empty %}
-    N/A
-  {% endfor %}
-</td>
+          <td>
+            {% for cat in product.categories.all %}
+              {{ cat.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+              N/A
+            {% endfor %}
+          </td>
           <td>₹{{ product.price }}</td>
           <td>{{ product.available }}</td>
           <td>

@@ -213,19 +213,18 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 
 @login_required
-
 def manage_products(request):
     editing = False
     product_to_edit = None
     error = None
 
-    # Handle delete
+    # Handle delete product
     delete_id = request.GET.get('delete')
     if delete_id:
         Product.objects.filter(id=delete_id).delete()
         return redirect('add_or_edit_product')
 
-    # Handle edit
+    # Handle edit mode
     edit_id = request.GET.get('edit')
     if edit_id:
         product_to_edit = get_object_or_404(Product, id=edit_id)
@@ -239,7 +238,7 @@ def manage_products(request):
         description = request.POST.get('description')
         image = request.FILES.get('image')
 
-        # Fetch multiple category IDs
+        # Multiple category selection
         category_ids = request.POST.getlist('categories')
         selected_subcategories = SubCategory.objects.filter(id__in=category_ids)
 
@@ -247,7 +246,7 @@ def manage_products(request):
             error = "Name, Price, and at least one Category are required."
         else:
             if not editing:
-                # Create new product
+                # Create product
                 product = Product.objects.create(
                     name=name,
                     price=price,
@@ -259,9 +258,8 @@ def manage_products(request):
                 if image:
                     product.image = image
                     product.save()
-                return redirect('add_or_edit_product')
             else:
-                # Update existing product
+                # Update product
                 product = product_to_edit
                 product.name = name
                 product.price = price
@@ -272,19 +270,28 @@ def manage_products(request):
                     product.image = image
                 product.save()
                 product.categories.set(selected_subcategories)
-                return redirect('add_or_edit_product')
+
+            # Handle multiple gallery images
+            gallery_images = request.FILES.getlist('gallery_images')
+            for g_image in gallery_images:
+                ProductImage.objects.create(product=product, image=g_image)
+
+            return redirect('add_or_edit_product')
 
     # Fetch all subcategories
     subcategories = SubCategory.objects.all()
 
-    # Search and sort
+    # Search & sort
     search = request.GET.get('search', '')
-    sort = request.GET.get('sort', '-created')  # default to newest
+    sort = request.GET.get('sort', '-created')
 
     products = Product.objects.all()
 
     if search:
-        products = products.filter(Q(name__icontains=search) | Q(categories__name__icontains=search)).distinct()
+        products = products.filter(
+            Q(name__icontains=search) |
+            Q(categories__name__icontains=search)
+        ).distinct()
 
     if sort:
         products = products.order_by(sort)
@@ -296,6 +303,7 @@ def manage_products(request):
         'products': products,
         'error': error
     })
+
 
 
 from django.core.paginator import Paginator
