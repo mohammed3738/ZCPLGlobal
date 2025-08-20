@@ -19,37 +19,76 @@ def uae_home(request):
 
 
 
+# def uae_contact(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+
+#         name = request.POST.get('name')
+#         email = request.POST.get('email')
+#         # phone = request.POST.get('phone')
+#         subject = request.POST.get('subject')
+#         message = request.POST.get('message')
+#         # Save to database
+#         ContactMessageUae.objects.create(
+#             name=name,
+#             email=email,
+#             # phone=phone,
+#             subject=subject,
+#             message=message
+#         )
+
+#         full_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+
+#         send_mail(
+#             subject,
+#             full_message,
+#             settings.DEFAULT_FROM_EMAIL,
+#             [settings.CONTACT_RECEIVER_EMAIL],
+#             fail_silently=False,
+#         )
+
+#     else:
+#         form = ContactForm()
+
+#         return render(request, 'uae/contact.html', {'form':form,'success': True})
+
+#     return render(request, 'uae/contact.html')
+
+
+
+
+
 def uae_contact(request):
+    success = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        if form.is_valid():  # ✅ Validate including captcha
+            name = request.POST.get('username')
+            email = request.POST.get('email')
+            # phone = request.POST.get('phone')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
 
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        # phone = request.POST.get('phone')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
-        # Save to database
-        ContactMessageUae.objects.create(
-            name=name,
-            email=email,
-            # phone=phone,
-            subject=subject,
-            message=message
-        )
+            # Save to database
+            ContactMessageUae.objects.create(
+                name=name,
+                email=email,
+                # phone=phone,
+                subject=subject,
+                message=message
+            )
 
-        full_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+            full_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
 
-        send_mail(
-            subject,
-            full_message,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.CONTACT_RECEIVER_EMAIL],
-            fail_silently=False,
-        )
-
+            send_mail(
+                subject,
+                full_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+            success = True  # success only after valid submission
     else:
         form = ContactForm()
 
-        return render(request, 'uae/contact.html', {'form':form,'success': True})
-
-    return render(request, 'uae/contact.html')
+    return render(request, 'uae/contact.html', {'form': form, 'success': success})

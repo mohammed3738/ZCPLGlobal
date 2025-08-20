@@ -136,9 +136,17 @@
               <div class="col-12 mb-3">
                 <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
               </div>
-              <div class="col-12 mb-3">
-                <label for="captcha" class="form-label">Captcha</label>
-                                        {{ form.captcha }}
+              <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                  <div class="field-inner">
+                      {{ form.captcha }}
+                      {% if form.captcha.errors %}
+                          <div class="error text-danger">
+                              {% for error in form.captcha.errors %}
+                                  <small>{{ error }}</small>
+                              {% endfor %}
+                          </div>
+                      {% endif %}
+                  </div>
               </div>
               <div class="col-12 text-center">
                 <button class="btn btn-primary px-4 py-2" type="submit">

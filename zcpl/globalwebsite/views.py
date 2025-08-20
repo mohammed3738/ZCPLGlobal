@@ -25,39 +25,86 @@ def home(request):
 def about_us(request):
     return render(request,'main/about.html')
 
+# def contact(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+
+#         name = request.POST.get('username')
+#         email = request.POST.get('email')
+#         phone = request.POST.get('phone')
+#         subject = request.POST.get('subject')
+#         message = request.POST.get('message')
+#         # Save to database
+#         ContactMessageGlobal.objects.create(
+#             name=name,
+#             email=email,
+#             phone=phone,
+#             subject=subject,
+#             message=message
+#         )
+
+#         full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+
+#         send_mail(
+#             subject,
+#             full_message,
+#             settings.DEFAULT_FROM_EMAIL,
+#             [settings.CONTACT_RECEIVER_EMAIL],
+#             fail_silently=False,
+#         )
+
+#     else:
+#         form = ContactForm()
+
+
+#     return render(request,'main/contact.html',{"form": form})
+
+
+
+
+
+
+
+
 def contact(request):
+    success = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        if form.is_valid():  # ✅ Validate including captcha
+            name = request.POST.get('username')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
 
-        name = request.POST.get('username')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
-        # Save to database
-        ContactMessageGlobal.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            subject=subject,
-            message=message
-        )
+            # Save to database
+            ContactMessageGlobal.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                subject=subject,
+                message=message
+            )
 
-        full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+            full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
 
-        send_mail(
-            subject,
-            full_message,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.CONTACT_RECEIVER_EMAIL],
-            fail_silently=False,
-        )
-
+            send_mail(
+                subject,
+                full_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+            success = True  # success only after valid submission
     else:
         form = ContactForm()
 
+    return render(request, 'main/contact.html', {'form': form, 'success': success})
 
-    return render(request,'main/contact.html',{"form": form})
+
+
+
+
 
 def services(request):
     return render(request,'services/services.html')
