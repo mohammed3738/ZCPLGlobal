@@ -3177,6 +3177,23 @@ img.lazy-image.loaded {
   z-index: 22;
 }
 
+.banner-section-four h1 {
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+  font-size: 80px;
+  line-height: 90px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(110px);
+  transform: translateY(110px);
+  -webkit-transition-delay: 1000ms;
+  transition-delay: 1000ms;
+  -webkit-transition: opacity 2000ms ease, -webkit-transform 2000ms ease;
+  transition: opacity 2000ms ease, -webkit-transform 2000ms ease;
+  transition: transform 2000ms ease, opacity 2000ms ease;
+  transition: transform 2000ms ease, opacity 2000ms ease, -webkit-transform 2000ms ease;
+}
 .banner-section-four h2 {
   margin: 0;
   font-weight: bold;
@@ -3242,6 +3259,7 @@ img.lazy-image.loaded {
 
 .banner-section-four .swiper-slide-active .btn-style-three,
 .banner-section-four .swiper-slide-active h2,
+.banner-section-four .swiper-slide-active h1,
 .banner-section-four .swiper-slide-active p {
   visibility: visible;
   opacity: 1;
@@ -3780,6 +3798,16 @@ img.lazy-image.loaded {
   color: #fff;
 }
 
+.service-block-three__single h3 {
+  margin: 0;
+  color: var(--thm-black);
+  font-size: 20px;
+  line-height: 34px;
+  font-weight: bold;
+  text-transform: capitalize;
+  -webkit-transition: all 500ms ease;
+  transition: all 500ms ease;
+}
 .service-block-three__single h6 {
   margin: 0;
   color: var(--thm-black);
@@ -3791,6 +3819,13 @@ img.lazy-image.loaded {
   transition: all 500ms ease;
 }
 
+.service-block-three__single:hover h3 {
+  color: #fff;
+}
+
+.service-block-three__single h3 a {
+  color: inherit;
+}
 .service-block-three__single:hover h6 {
   color: #fff;
 }
@@ -7513,6 +7548,14 @@ img.lazy-image.loaded {
   border-radius: 50%;
 }
 
+.featured-section .feature h3 {
+  font-size: 24px;
+  text-transform: uppercase;
+  left: 1px;
+  font-weight: 400;
+  margin-bottom: 0;
+  color: var(--thm-black);
+}
 .featured-section .feature h6 {
   font-size: 24px;
   text-transform: uppercase;
@@ -7923,6 +7966,13 @@ img.lazy-image.loaded {
   color: #fff;
 }
 
+.why-us-section .feature h3 {
+  font-size: 24px;
+  text-transform: uppercase;
+  left: 1px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
 .why-us-section .feature h6 {
   font-size: 24px;
   text-transform: uppercase;
