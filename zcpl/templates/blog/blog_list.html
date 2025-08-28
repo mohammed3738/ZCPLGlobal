@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        
+        <!-- Banner Section -->
+        <section class="page-banner">
+            <div class="image-layer" style="background-image:url(images/background/image-7.jpg);"></div>
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <div class="banner-inner">
+                <div class="auto-container">
+                    <div class="inner-container clearfix">
+                        <h1>Blog Posts</h1>
+                        <div class="page-nav">
+                            <ul class="bread-crumb clearfix">
+                                <li><a href="index-main.html">Home</a></li>
+                                <li class="active">Blog Posts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Banner Section -->
+
+        <!-- News Section -->
+        <section class="news-section">
+            <div class="auto-container">
+
+                <div class="row clearfix">
+                    <!--News Block-->
+                {% for i in blogs %}
+                <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0ms"
+                    data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <a href="{% url 'blog_detail' i.slug %}">
+                                {% if i.image %}
+                                    <img src="{{ i.image.url }}" alt="{{ i.title }}">
+                                {% else %}
+                                    <img src="{% static 'images/default-blog.jpg' %}" alt="No image">
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="lower-box">
+                            <div class="post-meta">
+                                <ul class="clearfix">
+                                    <li><span class="far fa-clock"></span> {{ i.created_at|date:"d M, Y" }}</li>
+                                    <li><span class="far fa-user-circle"></span> {{ i.author|default:"Admin" }}</li>
+                                    <li><span class="far fa-comments"></span> 0 Comments</li> 
+                                </ul>
+                            </div>
+                            <h5>
+                                <a href="{% url 'blog_detail' i.slug %}">{{ i.title }}</a>
+                            </h5>
+                            <div class="text">
+                                {{ i.content|truncatechars:100 }}
+                            </div>
+                            <div class="link-box">
+                                <a class="theme-btn" href="{% url 'blog_detail' i.slug %}">
+                                    <span class="flaticon-next-1"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                </div>
+                <div class="more-box">
+                    <a class="theme-btn btn-style-one" href="blog.html">
+                        <i class="btn-curve"></i>
+                        <span class="btn-title">Load more posts</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

@@ -790,8 +790,83 @@ def logout_view(request):
     logout(request)
     return redirect('signin')
 
+
+# Blog List View
+def blog_list(request):
+    blogs = Blog.objects.all()
+    return render(request, 'blog/blog_list.html', {'blogs': blogs})
+
+@login_required
+def create_blog(request):
+    if request.method == "POST":
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user   # set logged in user as author
+            blog.save()
+            return redirect('blog_detail', slug=blog.slug)
+    else:
+        form = BlogForm()
+    return render(request, 'blog/blog_form.html', {'form': form})
+
+# def blog_detail(request, slug):
+#     blog = get_object_or_404(Blog, slug=slug)
+#     return render(request, 'blog/blog_detail.html', {'blog': blog})
+
+# def blog_detail(request, slug):
+#     blog = get_object_or_404(Blog, slug=slug)
+#     comments = blog.comments.all().order_by('-created_at')  # latest first
+
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.blog = blog
+#             comment.user = request.user  # make sure user is logged in
+#             comment.save()
+#             return redirect('blog_detail', slug=blog.slug)
+#     else:
+#         form = CommentForm()
+
+#     context = {
+#         'blog': blog,
+#         'comments': comments,
+#         'form': form
+#     }
+#     return render(request, 'blog/blog_detail.html', context)
+
+
+
+def blog_detail(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    comments = blog.comments.all().order_by('-created_at')
+
+    latest_posts = Blog.objects.order_by("-created_at")[:3]  # for sidebar
+
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = blog
+            comment.save()
+            return redirect('blog_detail', slug=blog.slug)
+    else:
+        form = CommentForm()
+
+    return render(request, "blog/blog_detail.html", {
+        "blog": blog,
+        "comments": comments,
+        "form": form,
+        "latest_posts":latest_posts
+    })
+
+
+
 def sitemap(request):
     return render(request,'sitemap.xml', content_type="application/xml")
 
 def robots_txt(request):
     return render(request,'robots.txt', content_type="text/plain")
+
+
