@@ -25,39 +25,86 @@ def home(request):
 def about_us(request):
     return render(request,'main/about.html')
 
+# def contact(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+
+#         name = request.POST.get('username')
+#         email = request.POST.get('email')
+#         phone = request.POST.get('phone')
+#         subject = request.POST.get('subject')
+#         message = request.POST.get('message')
+#         # Save to database
+#         ContactMessageGlobal.objects.create(
+#             name=name,
+#             email=email,
+#             phone=phone,
+#             subject=subject,
+#             message=message
+#         )
+
+#         full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+
+#         send_mail(
+#             subject,
+#             full_message,
+#             settings.DEFAULT_FROM_EMAIL,
+#             [settings.CONTACT_RECEIVER_EMAIL],
+#             fail_silently=False,
+#         )
+
+#     else:
+#         form = ContactForm()
+
+
+#     return render(request,'main/contact.html',{"form": form})
+
+
+
+
+
+
+
+
 def contact(request):
+    success = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        if form.is_valid():  # ✅ Validate including captcha
+            name = request.POST.get('username')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
 
-        name = request.POST.get('username')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
-        # Save to database
-        ContactMessageGlobal.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            subject=subject,
-            message=message
-        )
+            # Save to database
+            ContactMessageGlobal.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                subject=subject,
+                message=message
+            )
 
-        full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+            full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
 
-        send_mail(
-            subject,
-            full_message,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.CONTACT_RECEIVER_EMAIL],
-            fail_silently=False,
-        )
-
+            send_mail(
+                subject,
+                full_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+            success = True  # success only after valid submission
     else:
         form = ContactForm()
 
+    return render(request, 'main/contact.html', {'form': form, 'success': success})
 
-    return render(request,'main/contact.html',{"form": form})
+
+
+
+
 
 def services(request):
     return render(request,'services/services.html')
@@ -213,19 +260,18 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 
 @login_required
-
 def manage_products(request):
     editing = False
     product_to_edit = None
     error = None
 
-    # Handle delete
+    # Handle delete product
     delete_id = request.GET.get('delete')
     if delete_id:
         Product.objects.filter(id=delete_id).delete()
         return redirect('add_or_edit_product')
 
-    # Handle edit
+    # Handle edit mode
     edit_id = request.GET.get('edit')
     if edit_id:
         product_to_edit = get_object_or_404(Product, id=edit_id)
@@ -239,7 +285,7 @@ def manage_products(request):
         description = request.POST.get('description')
         image = request.FILES.get('image')
 
-        # Fetch multiple category IDs
+        # Multiple category selection
         category_ids = request.POST.getlist('categories')
         selected_subcategories = SubCategory.objects.filter(id__in=category_ids)
 
@@ -247,7 +293,7 @@ def manage_products(request):
             error = "Name, Price, and at least one Category are required."
         else:
             if not editing:
-                # Create new product
+                # Create product
                 product = Product.objects.create(
                     name=name,
                     price=price,
@@ -259,9 +305,8 @@ def manage_products(request):
                 if image:
                     product.image = image
                     product.save()
-                return redirect('add_or_edit_product')
             else:
-                # Update existing product
+                # Update product
                 product = product_to_edit
                 product.name = name
                 product.price = price
@@ -272,19 +317,28 @@ def manage_products(request):
                     product.image = image
                 product.save()
                 product.categories.set(selected_subcategories)
-                return redirect('add_or_edit_product')
+
+            # Handle multiple gallery images
+            gallery_images = request.FILES.getlist('gallery_images')
+            for g_image in gallery_images:
+                ProductImage.objects.create(product=product, image=g_image)
+
+            return redirect('add_or_edit_product')
 
     # Fetch all subcategories
     subcategories = SubCategory.objects.all()
 
-    # Search and sort
+    # Search & sort
     search = request.GET.get('search', '')
-    sort = request.GET.get('sort', '-created')  # default to newest
+    sort = request.GET.get('sort', '-created')
 
     products = Product.objects.all()
 
     if search:
-        products = products.filter(Q(name__icontains=search) | Q(categories__name__icontains=search)).distinct()
+        products = products.filter(
+            Q(name__icontains=search) |
+            Q(categories__name__icontains=search)
+        ).distinct()
 
     if sort:
         products = products.order_by(sort)
@@ -296,6 +350,7 @@ def manage_products(request):
         'products': products,
         'error': error
     })
+
 
 
 from django.core.paginator import Paginator
@@ -735,8 +790,83 @@ def logout_view(request):
     logout(request)
     return redirect('signin')
 
+
+# Blog List View
+def blog_list(request):
+    blogs = Blog.objects.all()
+    return render(request, 'blog/blog_list.html', {'blogs': blogs})
+
+@login_required
+def create_blog(request):
+    if request.method == "POST":
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user   # set logged in user as author
+            blog.save()
+            return redirect('blog_detail', slug=blog.slug)
+    else:
+        form = BlogForm()
+    return render(request, 'blog/blog_form.html', {'form': form})
+
+# def blog_detail(request, slug):
+#     blog = get_object_or_404(Blog, slug=slug)
+#     return render(request, 'blog/blog_detail.html', {'blog': blog})
+
+# def blog_detail(request, slug):
+#     blog = get_object_or_404(Blog, slug=slug)
+#     comments = blog.comments.all().order_by('-created_at')  # latest first
+
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.blog = blog
+#             comment.user = request.user  # make sure user is logged in
+#             comment.save()
+#             return redirect('blog_detail', slug=blog.slug)
+#     else:
+#         form = CommentForm()
+
+#     context = {
+#         'blog': blog,
+#         'comments': comments,
+#         'form': form
+#     }
+#     return render(request, 'blog/blog_detail.html', context)
+
+
+
+def blog_detail(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    comments = blog.comments.all().order_by('-created_at')
+
+    latest_posts = Blog.objects.order_by("-created_at")[:3]  # for sidebar
+
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = blog
+            comment.save()
+            return redirect('blog_detail', slug=blog.slug)
+    else:
+        form = CommentForm()
+
+    return render(request, "blog/blog_detail.html", {
+        "blog": blog,
+        "comments": comments,
+        "form": form,
+        "latest_posts":latest_posts
+    })
+
+
+
 def sitemap(request):
     return render(request,'sitemap.xml', content_type="application/xml")
 
 def robots_txt(request):
     return render(request,'robots.txt', content_type="text/plain")
+
+

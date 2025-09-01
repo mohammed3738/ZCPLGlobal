@@ -33,7 +33,7 @@ touch with our global support team today.
         ></div>
         <div class="auto-container text-center text-white">
           <div class="slider-six__content">
-            <h2 class="slider-six__title">Let’s Connect Globally</h2>
+            <h1 class="slider-six__title">Let’s Connect Globally</h1>
             <p class="slider-six__text">Reach out to our global offices for all your IT needs.</p>
           </div>
         </div>
@@ -145,9 +145,17 @@ touch with our global support team today.
               <div class="col-12 mb-3">
                 <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
               </div>
-              <div class="col-12 mb-3">
-                <label for="captcha" class="form-label">Captcha</label>
-                                        {{ form.captcha }}
+              <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                  <div class="field-inner">
+                      {{ form.captcha }}
+                      {% if form.captcha.errors %}
+                          <div class="error text-danger">
+                              {% for error in form.captcha.errors %}
+                                  <small>{{ error }}</small>
+                              {% endfor %}
+                          </div>
+                      {% endif %}
+                  </div>
               </div>
               <div class="col-12 text-center">
                 <button class="btn btn-primary px-4 py-2" type="submit">

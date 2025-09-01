@@ -1,0 +1,9 @@
+{% comment %} {% extends "base.html" %}
+{% block content %} {% endcomment %}
+  <h2>Create Blog</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Publish</button>
+  </form>
+{% comment %} {% endblock %} {% endcomment %}

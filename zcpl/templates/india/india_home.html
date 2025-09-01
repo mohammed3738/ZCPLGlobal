@@ -1,56 +1,107 @@
-{% extends 'india/base.html' %} {% load static %} 
-{% block title %}Refurbished Servers In India From DELL, HPE & IBM
-{% endblock %}
-{% block meta_description %}Refurbished Server Online: Buy new & refurbished servers. Zaco provides quality HPE, IBM and DELL refurbished servers along with global IT Solutions.
-{% endblock %}
+{% extends 'india/base.html' %} {% load static %} {% block title %}Refurbished
+Servers In India From DELL, HPE & IBM {% endblock %} {% block meta_description
+%}Refurbished Server Online: Buy new & refurbished servers. Zaco provides
+quality HPE, IBM and DELL refurbished servers along with global IT Solutions. {%
+endblock %} {% block content %}
+<style>
+  .box-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+  }
 
+  .box {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
+  .box a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+  }
 
-{% block content %}
-  <style>
+  .box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: #e9ecef;
+  }
+
+  @media (max-width: 992px) {
     .box-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 20px;
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    .box {
-      background-color: #f5f5f5;
-      text-align: center;
-      padding: 40px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  @media (max-width: 576px) {
+    .box-container {
+      grid-template-columns: 1fr;
     }
+  }
+  <style > .box-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+  }
 
-    .box a {
-      text-decoration: none;
-      color: #333;
-      font-size: 18px;
-      font-weight: 600;
-    }
+  .box {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .box:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      background-color: #e9ecef;
-    }
+  .box a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+  }
 
-    @media (max-width: 992px) {
-      .box-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+  .box a span {
+    display: block; /* हर span नई line में */
+  }
 
-    @media (max-width: 576px) {
-      .box-container {
-        grid-template-columns: 1fr;
-      }
+  .box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: #e9ecef;
+  }
+  h3 {
+    font-size: 30px !important;
+  }
+  @media (max-width: 992px) {
+    .box-container {
+      grid-template-columns: repeat(2, 1fr);
     }
-  </style>
+    h3 {
+      font-size: 30px !important;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .box-container {
+      grid-template-columns: 1fr;
+    }
+    h3 {
+      font-size: 30px !important;
+    }
+  }
+</style>
 
 <!-- Banner Section -->
 
@@ -68,15 +119,19 @@
   >
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <div class="image-layer" style=" background-image: url({% static "images/india/home/banner.jpg" %}); " >
+        <div class="image-layer" style=" background-image: url({% static
+        "images/india/home/banner.jpg" %}); " >
       </div>
       <!-- /.image-layer -->
       <div class="auto-container">
         <div class="slider-six__content">
-          {% comment %} <p class="slider-six__text"><span>Server Maintenance</span></p> {% endcomment %}
+          {% comment %}
+          <p class="slider-six__text"><span>Server Maintenance</span></p>
+          {% endcomment %}
           <!-- /.slider-six__text -->
-          <h2 class="slider-six__title">
-            Powering Businesses with Reliable IT Hardware</h2>
+          <h1 class="slider-six__title">
+            Powering Businesses with Reliable IT Hardware
+          </h1>
           <!-- /.slider-six__title -->
           <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
           <!-- /.thm-btn__six -->
@@ -84,7 +139,8 @@
         <!-- /.slider-six__content -->
       </div>
     </div>
-    {% comment %} <div class="swiper-slide">
+    {% comment %}
+    <div class="swiper-slide">
       <div
         class="image-layer"
         style="
@@ -92,7 +148,8 @@
         "
       ></div>
       <!-- /.image-layer -->
-    </div> {% endcomment %}
+    </div>
+    {% endcomment %}
   </div>
   <!-- If we need navigation buttons -->
   <!-- <div class="slider-bottom-box clearfix">
@@ -108,143 +165,207 @@
 </section>
 <!-- /.slider-six -->
 
-
-
-
-
 <div>
-<section class="about-thirteen">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 d-flex align-items-center wow fadeInLeft" data-wow-delay="200ms">
-        <div class="about-thirteen__content">
-          <div class="sec-title-thirteen">
-            {% comment %} <div class="sec-title-thirteen__tagline"><span class="sec-title-thirteen__tagline__bar"></span>About Zaco</div> {% endcomment %}
-            <h2 class="sec-title-thirteen__title">Two Decades of Trusted IT Excellence</h2>
+  <section class="about-thirteen">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-lg-6 d-flex align-items-center wow fadeInLeft"
+          data-wow-delay="200ms"
+        >
+          <div class="about-thirteen__content">
+            <div class="sec-title-thirteen">
+              {% comment %}
+              <div class="sec-title-thirteen__tagline">
+                <span class="sec-title-thirteen__tagline__bar"></span>About Zaco
+              </div>
+              {% endcomment %}
+              <h2 class="sec-title-thirteen__title">
+                Two Decades of Trusted IT Excellence
+              </h2>
+            </div>
+            <p class="about-thirteen__content__text">
+              Zaco Computers Pvt. Ltd. is a trusted name in providing
+              high-quality refurbished servers, IT hardware, and end-to-end IT
+              solutions. With a strong presence in India, the UK, and the UAE,
+              we support businesses worldwide through enterprise-grade servers,
+              storage systems, networking products, and managed IT services. Our
+              expertly refurbished equipment undergoes rigorous testing to
+              ensure reliability and performance. We offer tailored
+              infrastructure solutions, flexible service-level agreements, and
+              multi-vendor support to meet diverse business needs.
+            </p>
+
+            <ul class="list-unstyled about-thirteen__content__list">
+              <li>
+                <i class="fa fa-check-circle"></i>
+                IT Hardware Solutions
+              </li>
+              <li>
+                <i class="fa fa-check-circle"></i>
+                Infrastructure Managed Services (IMS)
+              </li>
+              <li>
+                <i class="fa fa-check-circle"></i>
+                IT Software Solutions
+              </li>
+
+              <li>
+                <i class="fa fa-check-circle"></i>
+                Server Maintenance & Installation Services
+              </li>
+            </ul>
+            <a href="{% url 'about_us' %}" class="thm-btn-thirteen"
+              >Discover More</a
+            >
           </div>
-          <p class="about-thirteen__content__text">
-            Zaco Computers Pvt. Ltd. is a trusted name in providing high-quality refurbished servers, 
-            IT hardware, and end-to-end IT solutions. With a strong presence in India, the UK, and the UAE,
-             we support businesses worldwide through enterprise-grade servers, storage systems, networking 
-             products, and managed IT services. Our expertly refurbished equipment undergoes rigorous 
-             testing to ensure reliability and performance. We offer tailored infrastructure solutions, 
-             flexible service-level agreements, and multi-vendor support to meet diverse business needs. 
-             
-
-
-           
-          </p>
-          
-          <ul class="list-unstyled about-thirteen__content__list">
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                IT Hardware Solutions
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                Infrastructure Managed Services (IMS)
-
-
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                IT Software Solutions
-
-                              </li>
-
-                              <li>
-                                <i class="fa fa-check-circle"></i>
-                                Server Maintenance & Installation Services
-                              </li>
-                        </ul>
-          <a href="{% url 'about_us' %}" class="thm-btn-thirteen">Discover More</a>
         </div>
-      </div>
-      <div class="col-lg-6 wow fadeInRight" data-wow-delay="100ms">
-        <div class="about-thirteen__image">
-          <img src="{% static "images/india/home/server371 2.jpg" %}" alt="linoor">
-          <div class="about-thirteen__image__two">
-            <img src="{% static "images/india/home/server323.jpg" %}" alt="linoor">
-          </div>
-          <div class="about-thirteen__image__experiance">
-            <div class="about-thirteen__image__experiance__inner">
-              <div class="about-thirteen__image__experiance__icon"><i class="linoor-icon-three-awareness-1"></i></div>
-              <span class="count-box"><span class="count-text" data-speed="4000" data-stop="20"></span></span>+
-              <br>Year of Experience
+        <div class="col-lg-6 wow fadeInRight" data-wow-delay="100ms">
+          <div class="about-thirteen__image">
+            <img src="{% static "images/india/home/server371 2.jpg" %}"
+            alt="linoor">
+            <div class="about-thirteen__image__two">
+              <img src="{% static "images/india/home/server323.jpg" %}"
+              alt="linoor">
+            </div>
+            <div class="about-thirteen__image__experiance">
+              <div class="about-thirteen__image__experiance__inner">
+                <div class="about-thirteen__image__experiance__icon">
+                  <i class="linoor-icon-three-awareness-1"></i>
+                </div>
+                <span class="count-box"
+                  ><span
+                    class="count-text"
+                    data-speed="4000"
+                    data-stop="20"
+                  ></span></span
+                >+ <br />Year of Experience
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </div>
 
-
-
-  {% comment %} <div class="sec-title-thirteen__tagline"><span class="sec-title-thirteen__tagline__bar"></span>About Zaco</div> {% endcomment %}
-  <h2 class="sec-title-thirteen__title" style="text-align:center;">Our Quality Refurbished Servers India Collection
+{% comment %}
+<div class="sec-title-thirteen__tagline">
+  <span class="sec-title-thirteen__tagline__bar"></span>About Zaco
+</div>
+{% endcomment %}
+<h2 class="sec-title-thirteen__title" style="text-align: center">
+  Our Quality Refurbished Servers India Collection
 </h2>
 
 <div class="box-container">
-  <div class="box"><a href="{% url 'refurbished-servers-mumbai' %}">Refurbished Servers Mumbai</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-banglore' %}">Refurbished Servers Banglore</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-hyderabad' %}">Refurbished Servers Hyderabad</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-ahmedabad' %}">Refurbished Servers Ahmedabad</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-kolkata' %}">Refurbished Servers Kolkata</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-chennai' %}">Refurbished Servers Chennai</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-pune' %}">Refurbished Servers Pune</a></div>
-  <div class="box"><a href="{% url 'refurbished-servers-delhi' %}">Refurbished Servers Delhi</a></div>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-mumbai' %}"
+      >Refurbished Servers Mumbai</a
+    >
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-banglore' %}"
+      >Refurbished Servers Banglore</a
+    >
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-hyderabad' %}"
+      >Refurbished Servers Hyderabad</a
+    >
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-ahmedabad' %}"
+      >Refurbished Servers Ahmedabad</a
+    >
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-kolkata' %}"
+      >Refurbished Servers Kolkata</a
+    >
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-chennai' %}"
+      >Refurbished Servers Chennai</a
+    >
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-pune' %}">Refurbished Servers Pune</a>
+  </h3>
+  <h3 class="box">
+    <a href="{% url 'refurbished-servers-delhi' %}"
+      >Refurbished Servers Delhi</a
+    >
+  </h3>
 </div>
-
 
 <section class="about-section">
   <div class="auto-container">
-      <div class="row clearfix">
-          <!--Image Column-->
-          <div class="image-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
-              <div class="inner">
-                  <div class="image-block wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img
-                          src="{% static "images/india/home/server3-1.jpg" %}" alt=""></div>
-                  <div class="image-block wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms"><img
-                          src="{% static "images/india/home/server4.jpg" %}" alt=""></div>
-              </div>
+    <div class="row clearfix">
+      <!--Image Column-->
+      <div class="image-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+        <div class="inner">
+          <div
+            class="image-block wow fadeInLeft"
+            data-wow-delay="0ms"
+            data-wow-duration="1500ms"
+          >
+            <img src="{% static "images/india/home/server3-1.jpg" %}" alt="">
           </div>
-          <!--Text Column-->
-          <div class="text-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
-              <div class="inner">
-                  <div class="sec-title pb-1">
-                      <h2>Reliable Refurbished Servers</h2>
-                     {% comment %} <div class="lower-text">We are committed to providing our customers with exceptional
-                          service while offering our employees the best training.</div> {% endcomment %}
-                  </div> 
-                  <div class="text">
-                      <p>Zaco offers a wide range of high-quality refurbished servers from leading 
-                        brands like HP, DELL, IBM, Cisco, and more. Our servers undergo rigorous testing
-                         to ensure they meet the highest standards of reliability and performance, making 
-                         them ideal for businesses seeking cost-effective IT infrastructure solutions without 
-                         compromising on quality.<br>
-                        Whether you need low to high-end configurations, our inventory covers a variety 
-                        of options to meet your specific requirements. We specialize in delivering servers
-                         that are fully functional and optimized for seamless operations. Our team provides
-                          expert guidance to help you choose the right servers for your business needs, 
-                          ensuring compatibility and scalability. <br>
-                        We also offer customized server configurations, enabling you to tailor your systems
-                         to your unique specifications. In addition, we provide comprehensive support for 
-                         server installation, maintenance, and upgrades, ensuring smooth integration into your existing infrastructure. <br>
-                        
-                        </p>
-                  </div>
-                  
-                  {% comment %} <div class="link-box">
-                      <a class="theme-btn btn-style-one" href="about.html">
-                          <i class="btn-curve"></i>
-                          <span class="btn-title">Discover More</span>
-                      </a>
-                  </div> {% endcomment %}
-              </div>
+          <div
+            class="image-block wow fadeInUp"
+            data-wow-delay="300ms"
+            data-wow-duration="1500ms"
+          >
+            <img src="{% static "images/india/home/server4.jpg" %}" alt="">
           </div>
+        </div>
       </div>
+      <!--Text Column-->
+      <div class="text-column col-xl-6 col-lg-12 col-md-12 col-sm-12">
+        <div class="inner">
+          <div class="sec-title pb-1">
+            <h2>Reliable Refurbished Servers</h2>
+            {% comment %}
+            <div class="lower-text">
+              We are committed to providing our customers with exceptional
+              service while offering our employees the best training.
+            </div>
+            {% endcomment %}
+          </div>
+          <div class="text">
+            <p>
+              Zaco offers a wide range of high-quality refurbished servers from
+              leading brands like HP, DELL, IBM, Cisco, and more. Our servers
+              undergo rigorous testing to ensure they meet the highest standards
+              of reliability and performance, making them ideal for businesses
+              seeking cost-effective IT infrastructure solutions without
+              compromising on quality.<br />
+              Whether you need low to high-end configurations, our inventory
+              covers a variety of options to meet your specific requirements. We
+              specialize in delivering servers that are fully functional and
+              optimized for seamless operations. Our team provides expert
+              guidance to help you choose the right servers for your business
+              needs, ensuring compatibility and scalability. <br />
+              We also offer customized server configurations, enabling you to
+              tailor your systems to your unique specifications. In addition, we
+              provide comprehensive support for server installation,
+              maintenance, and upgrades, ensuring smooth integration into your
+              existing infrastructure. <br />
+            </p>
+          </div>
+
+          {% comment %}
+          <div class="link-box">
+            <a class="theme-btn btn-style-one" href="about.html">
+              <i class="btn-curve"></i>
+              <span class="btn-title">Discover More</span>
+            </a>
+          </div>
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -277,33 +398,29 @@
 						}
 					}}'
     >
-      <div class="swiper-wrapper" style="justify-content: center;">
-          {% comment %} <div class="swiper-slide">
-            <div class="project-eight__item">
-              <img
-                src="{% static 'images/home/Zaco India.jpg' %}"
-                alt=""
-              />
-              <div class="project-eight__content">
-                <a class="project-eight__link" href="portfolio-single.html"
-                  ><i class="flaticon-right-arrow"></i
-                ></a>
-                <h3 class="project-eight__title">
-                  <a href="portfolio-single.html">India</a>
-                </h3>
-                <!-- /.project-eight__title -->
-              </div>
-              <!-- /.project-eight__content -->
+      <div class="swiper-wrapper" style="justify-content: center">
+        {% comment %}
+        <div class="swiper-slide">
+          <div class="project-eight__item">
+            <img src="{% static 'images/home/Zaco India.jpg' %}" alt="" />
+            <div class="project-eight__content">
+              <a class="project-eight__link" href="portfolio-single.html"
+                ><i class="flaticon-right-arrow"></i
+              ></a>
+              <h3 class="project-eight__title">
+                <a href="portfolio-single.html">India</a>
+              </h3>
+              <!-- /.project-eight__title -->
             </div>
-            <!-- /.project-eight__item -->
-          </div> {% endcomment %}
+            <!-- /.project-eight__content -->
+          </div>
+          <!-- /.project-eight__item -->
+        </div>
+        {% endcomment %}
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
           <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco UK.jpg' %}"
-              alt=""
-            />
+            <img src="{% static 'images/home/Zaco UK.jpg' %}" alt="" />
             <div class="project-eight__content">
               <a class="project-eight__link" href="{% url 'uk-home' %}"
                 ><i class="flaticon-right-arrow"></i
@@ -320,10 +437,7 @@
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
           <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco UAE.jpg' %}"
-              alt=""
-            />
+            <img src="{% static 'images/home/Zaco UAE.jpg' %}" alt="" />
             <div class="project-eight__content">
               <a class="project-eight__link" href="{% url 'uae-home' %}"
                 ><i class="flaticon-right-arrow"></i
@@ -338,12 +452,10 @@
           <!-- /.project-eight__item -->
         </div>
         <!-- /.swiper-slide -->
-        {% comment %} <div class="swiper-slide">
+        {% comment %}
+        <div class="swiper-slide">
           <div class="project-eight__item">
-            <img
-              src="{% static 'images/home/Zaco Canada.jpg' %}"
-              alt=""
-            />
+            <img src="{% static 'images/home/Zaco Canada.jpg' %}" alt="" />
             <div class="project-eight__content">
               <a class="project-eight__link" href="portfolio-single.html"
                 ><i class="flaticon-right-arrow"></i
@@ -356,7 +468,8 @@
             <!-- /.project-eight__content -->
           </div>
           <!-- /.project-eight__item -->
-        </div> {% endcomment %}
+        </div>
+        {% endcomment %}
         <!-- /.swiper-slide -->
       </div>
     </div>
@@ -364,50 +477,66 @@
   <!-- /.auto-container -->
 </section>
 
-
 <section class="about-me-one">
   <div class="auto-container">
-      <div class="row">
-          <div class="col-md-12 col-lg-6">
-              <div class="about-me-one__image">
-                  <img src="{% static "images/india/home/server5.jpg" %}" alt="">
-              </div><!-- /.about-me-one__image -->
-          </div><!-- /.col-md-12 -->
-          <div class="col-md-12 col-lg-6">
-              <div class="about-me-one__content">
-                  <div class="sec-title pb-2">
-                      <h2>Why Zaco is the Right IT Partner for Your Business</h2>
-                  </div>
-                  
-                  <p class="about-me-one__text">Zaco stands out as a trusted IT solutions provider 
-                    with over 20 years of experience in delivering reliable and high-performance 
-                    refurbished servers. We focus on quality, ensuring that every server undergoes 
-                    thorough testing before it reaches you. Our wide product range from leading 
-                    global brands is tailored to meet diverse business needs, offering flexibility 
-                    and cost savings without compromising performance. With expert support at every 
-                    stage—from consultation to installation and maintenance—we simplify IT complexities 
-                    for businesses of all sizes. Backed by a strong global presence and a commitment to 
-                    customer satisfaction, Zaco is the partner you can rely on for long-term IT success.
+    <div class="row">
+      <div class="col-md-12 col-lg-6">
+        <div class="about-me-one__image">
+          <img src="{% static "images/india/home/server5.jpg" %}" alt="">
+        </div>
+        <!-- /.about-me-one__image -->
+      </div>
+      <!-- /.col-md-12 -->
+      <div class="col-md-12 col-lg-6">
+        <div class="about-me-one__content">
+          <div class="sec-title pb-2">
+            <h2>Why Zaco is the Right IT Partner for Your Business</h2>
+          </div>
 
+          <p class="about-me-one__text">
+            Zaco stands out as a trusted IT solutions provider with over 20
+            years of experience in delivering reliable and high-performance
+            refurbished servers. We focus on quality, ensuring that every server
+            undergoes thorough testing before it reaches you. Our wide product
+            range from leading global brands is tailored to meet diverse
+            business needs, offering flexibility and cost savings without
+            compromising performance. With expert support at every stage—from
+            consultation to installation and maintenance—we simplify IT
+            complexities for businesses of all sizes. Backed by a strong global
+            presence and a commitment to customer satisfaction, Zaco is the
+            partner you can rely on for long-term IT success.
+          </p>
 
+          {% comment %}
+          <p class="about-me-one__qoute">
+            I help my clients stand out and they help me grow.
+          </p>
+          {% endcomment %}
+          <!-- /.about-me-one__qoute -->
 
-
-                  </p>
-
-                  {% comment %} <p class="about-me-one__qoute">I help my clients stand out and they help me grow.</p> {% endcomment %}
-                  <!-- /.about-me-one__qoute -->
-
-                  <div class="row about-me-one__certificate-row">
-                      <div class="col-md-6">
-                          {% comment %} <img src="{% static "images/update-26-02-2021/resources/about-certificate-1.jpg" %}" alt=""> {% endcomment %}
-                      </div><!-- /.col-md-6 -->
-                      <div class="col-md-6">
-                          {% comment %} <img src="{% static "images/update-26-02-2021/resources/about-certificate-2.jpg" %}" alt=""> {% endcomment %}
-                      </div><!-- /.col-md-6 -->
-                  </div><!-- /.row -->
-              </div><!-- /.about-me-one__content -->
-          </div><!-- /.col-md-12 -->
-      </div><!-- /.row -->
-  </div><!-- /.auto-container -->
-</section><!-- /.about-me-one -->
+          <div class="row about-me-one__certificate-row">
+            <div class="col-md-6">
+              {% comment %} <img src="{% static
+              "images/update-26-02-2021/resources/about-certificate-1.jpg" %}"
+              alt=""> {% endcomment %}
+            </div>
+            <!-- /.col-md-6 -->
+            <div class="col-md-6">
+              {% comment %} <img src="{% static
+              "images/update-26-02-2021/resources/about-certificate-2.jpg" %}"
+              alt=""> {% endcomment %}
+            </div>
+            <!-- /.col-md-6 -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.about-me-one__content -->
+      </div>
+      <!-- /.col-md-12 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.auto-container -->
+</section>
+<!-- /.about-me-one -->
 {% endblock %}

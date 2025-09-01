@@ -47,8 +47,11 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('order-success/<int:order_id>/', views.order_success,
          name='order_success'),
+         
+    path("blog/create/", views.create_blog, name="create_blog"),
 
-
+    path('blogs/', views.blog_list, name='blog_list'),
+    path('blogs/<slug:slug>/', views.blog_detail, name='blog_detail'),
 
     path('signup/', views.signup_view, name='signup'),
     path('signin/', views.signin_view, name='signin'),
@@ -60,9 +63,9 @@ urlpatterns = [
 
 # urls.py
 
-path('shop/', views.shop, name='shop'),
-path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
-path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
+    path('shop/', views.shop, name='shop'),
+    path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
+    path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
 
 ]
 

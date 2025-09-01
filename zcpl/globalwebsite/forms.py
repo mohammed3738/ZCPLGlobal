@@ -104,3 +104,18 @@ class ContactForm(forms.Form):
         widget=ReCaptchaV2Checkbox,
         required=True
     )
+
+
+
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ['title', 'content','image']  # author is excluded, set in view
+
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'phone', 'subject', 'message']
