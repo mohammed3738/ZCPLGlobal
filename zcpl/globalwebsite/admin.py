@@ -41,8 +41,66 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Blog)
+# admin.site.register(Blog)
 admin.site.register(Comment)
 
 
 
+from django.utils.html import format_html
+
+# ------------------------
+# Category Admin
+# ------------------------
+class SubCategoryBlogInline(admin.TabularInline):
+    model = SubCategoryBlog
+    extra = 1
+    fields = ('name', 'slug')
+    readonly_fields = ('slug',)
+
+@admin.register(CategoryBlog)
+class CategoryBlogAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'subcategories_count')
+    search_fields = ('name',)
+    inlines = [SubCategoryBlogInline]
+    prepopulated_fields = {"slug": ("name",)}
+
+    def subcategories_count(self, obj):
+        return obj.subcategories.count()
+    subcategories_count.short_description = "SubCategories"
+
+
+# ------------------------
+# SubCategory Admin
+# ------------------------
+@admin.register(SubCategoryBlog)
+class SubCategoryBlogAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'slug')
+    list_filter = ('category',)
+    search_fields = ('name', 'category__name')
+    prepopulated_fields = {"slug": ("name",)}
+
+
+# ------------------------
+# Tag Admin
+# ------------------------
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    search_fields = ('name',)
+    prepopulated_fields = {"slug": ("name",)}
+
+
+# ------------------------
+# Blog Admin
+# ------------------------
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'subcategory', 'author', 'created_at', 'updated_at', 'tag_list')
+    list_filter = ('category', 'subcategory', 'tags', 'author', 'created_at')
+    search_fields = ('title', 'content', 'category__name', 'subcategory__name', 'tags__name', 'author__username')
+    prepopulated_fields = {"slug": ("title",)}
+    date_hierarchy = 'created_at'  # This provides the archive by year/month
+
+    def tag_list(self, obj):
+        return ", ".join([tag.name for tag in obj.tags.all()])
+    tag_list.short_description = "Tags"

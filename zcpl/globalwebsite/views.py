@@ -18,6 +18,9 @@ from django.contrib.auth.decorators import login_required
 # from django.conf import settings
 # Create your views here.
 
+from django.db.models import Count
+from django.utils.timezone import now
+
 
 def home(request):
     return render(request,'main/index.html')
@@ -793,18 +796,30 @@ def logout_view(request):
 
 # Blog List View
 def blog_list(request):
-    blogs = Blog.objects.all()
-    return render(request, 'blog/blog_list.html', {'blogs': blogs})
+    blogs = Blog.objects.all().order_by('-created_at')
+    categories = CategoryBlog.objects.annotate(num_posts=Count('blog'))
+    sub_categories = SubCategoryBlog.objects.annotate(num_posts=Count('blog'))
+    tags = Tag.objects.all()
+    archives = Blog.objects.dates('created_at', 'month', order='DESC')
+
+    context = {
+        'blogs': blogs,
+        'categories': categories,
+        'tags': tags,
+        'archives': archives,
+    }
+    return render(request, 'blog/blog_list.html', context)
 
 @login_required
 def create_blog(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = BlogForm(request.POST)
         if form.is_valid():
             blog = form.save(commit=False)
-            blog.author = request.user   # set logged in user as author
+            blog.author = request.user
             blog.save()
-            return redirect('blog_detail', slug=blog.slug)
+            form.save_m2m()
+            return redirect(blog.get_absolute_url())
     else:
         form = BlogForm()
     return render(request, 'blog/blog_form.html', {'form': form})
@@ -836,13 +851,36 @@ def create_blog(request):
 #     return render(request, 'blog/blog_detail.html', context)
 
 
+def blogs_by_category(request, slug):
+    category = get_object_or_404(CategoryBlog, slug=slug)
+    blogs = Blog.objects.filter(category=category)
+    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'selected_category': category})
+
+def blogs_by_subcategory(request, slug):
+    subcategory = get_object_or_404(SubCategoryBlog, slug=slug)
+    blogs = Blog.objects.filter(sub_category=subcategory)
+    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'selected_subcategory': subcategory})
+
+
+def blogs_by_tag(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    blogs = Blog.objects.filter(tags=tag)
+    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'selected_tag': tag})
+
+def blogs_by_archive(request, year, month):
+    blogs = Blog.objects.filter(created_at__year=year, created_at__month=month)
+    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'archive_date': f"{month}-{year}"})
+
 
 def blog_detail(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
     comments = blog.comments.all().order_by('-created_at')
-
     latest_posts = Blog.objects.order_by("-created_at")[:3]  # for sidebar
 
+    # Sidebar data
+    categories = CategoryBlog.objects.annotate(num_posts=Count('blog'))
+    tags = Tag.objects.all()
+    archives = Blog.objects.dates('created_at', 'month', order='DESC')
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -858,7 +896,10 @@ def blog_detail(request, slug):
         "blog": blog,
         "comments": comments,
         "form": form,
-        "latest_posts":latest_posts
+        "latest_posts": latest_posts,
+        "categories": categories,
+        "tags": tags,
+        "archives": archives,
     })
 
 

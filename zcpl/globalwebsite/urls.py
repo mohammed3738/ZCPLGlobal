@@ -52,6 +52,11 @@ urlpatterns = [
 
     path('blogs/', views.blog_list, name='blog_list'),
     path('blogs/<slug:slug>/', views.blog_detail, name='blog_detail'),
+    path('category/<slug:slug>/', views.blogs_by_category, name='blogs_by_category'),
+    path('subcategory/<slug:slug>/', views.blogs_by_subcategory, name='blogs_by_subcategory'),
+
+    path('tag/<slug:slug>/', views.blogs_by_tag, name='blogs_by_tag'),
+    path('archive/<int:year>/<int:month>/', views.blogs_by_archive, name='blogs_by_archive'),
 
     path('signup/', views.signup_view, name='signup'),
     path('signin/', views.signin_view, name='signin'),

@@ -25,28 +25,28 @@
 
 <div class="sidebar-page-container">
     <div class="auto-container">
-        <div class="row justify-content-center">  <!-- Center align row -->
+        <div class="row clearfix">
 
-            <!-- Full-width content but centered -->
-            <div class="content-side col-lg-10 col-md-12 col-sm-12">
+            <!-- Blog Content -->
+            <div class="content-side col-lg-8 col-md-12 col-sm-12">
                 <div class="blog-details">
 
                     <!-- Blog Post -->
                     <div class="post-details">
                         <div class="inner-box">
                             <div class="image-box text-center">
-                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid">
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid w-100" style="max-height:400px; object-fit:cover;">
                             </div>
-                            <div class="lower-box">
-                                <div class="post-meta text-center">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> {{ blog.created_at }}</li>
+                            <div class="lower-box mt-3">
+                                <div class="post-meta text-center mb-3">
+                                    <ul class="clearfix" style="font-size:13px;">
+                                        <li><span class="far fa-clock"></span> {{ blog.created_at|date:"d M, Y" }}</li>
                                         <li><span class="far fa-user-circle"></span> {{ blog.author.username }}</li>
                                         <li><span class="far fa-comments"></span> {{ comments.count }} Comments</li>
                                     </ul>
                                 </div>
                                 <h2>{{ blog.title }}</h2>
-                                <div class="text mt-3">
+                                <div class="text mt-3" style="font-size:14px;">
                                     <p>{{ blog.content }}</p>
                                 </div>
                             </div>
@@ -115,6 +115,53 @@
                     </div>
 
                 </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                <aside class="sidebar" style="font-size:14px;">
+
+                    <!-- Categories -->
+                    <div class="sidebar-widget categories mb-4">
+                        <h5 class="widget-title" style="font-size:16px;">Categories</h5>
+                        <ul>
+                            {% for category in categories %}
+                            <li>
+                                <a href="{% url 'blogs_by_category' category.slug %}">
+                                    {{ category.name }} ({{ category.num_posts }})
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="sidebar-widget tags mb-4">
+                        <h5 class="widget-title" style="font-size:16px;">Tags</h5>
+                        <ul class="d-flex flex-wrap">
+                            {% for tag in tags %}
+                            <li style="margin:2px;">
+                                <a href="{% url 'blogs_by_tag' tag.slug %}" class="badge bg-secondary text-white p-1">{{ tag.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Archives -->
+                    <div class="sidebar-widget archives">
+                        <h5 class="widget-title" style="font-size:16px;">Archives</h5>
+                        <ul>
+                            {% for date in archives %}
+                            <li>
+                                <a href="{% url 'blogs_by_archive' date.year date.month %}">
+                                    {{ date|date:"F Y" }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </aside>
             </div>
 
         </div>
