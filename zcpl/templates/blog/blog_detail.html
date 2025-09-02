@@ -1,5 +1,17 @@
-{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}{{ blog.meta_title }} 
+{% endblock %}
+
+{% endblock %}
+{% block meta_description %}{{ blog.meta_desc }} 
+{% endblock %}
+{% block canonical %}
+  <link rel="canonical" href="https://zacocomputer.com/about-us/">
+{% endblock %}
+
+
+
 {% block content %}
 
 <!-- Banner Section -->

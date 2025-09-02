@@ -64,6 +64,20 @@
                 {{ form.image }}
                 {{ form.image.errors }}
             </div>
+
+            <div class="mb-3">
+                {{ form.meta_title.label_tag }}
+                {{ form.meta_title }}
+                {{ form.meta_title.errors }}
+
+            </div>
+
+                        <div class="mb-3">
+                {{ form.meta_desc.label_tag }}
+                {{ form.meta_desc }}
+                {{ form.meta_desc.errors }}
+
+            </div>
             
             <button type="submit" class="btn btn-primary">Create Blog</button>
         </form>
