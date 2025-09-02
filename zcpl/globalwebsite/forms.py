@@ -108,11 +108,23 @@ class ContactForm(forms.Form):
 
 
 
+# class BlogForm(forms.ModelForm):
+#     class Meta:
+#         model = Blog
+#         fields = ['title', 'content','image']  # author is excluded, set in view
+
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['title', 'content','image']  # author is excluded, set in view
-
+        fields = ['title', 'content', 'category', 'subcategory', 'tags', 'image']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter blog title'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'subcategory': forms.Select(attrs={'class': 'form-control'}),
+            'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
 
 
 class CommentForm(forms.ModelForm):

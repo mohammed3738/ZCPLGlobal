@@ -1,9 +1,73 @@
-{% comment %} {% extends "base.html" %}
-{% block content %} {% endcomment %}
-  <h2>Create Blog</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Publish</button>
-  </form>
-{% comment %} {% endblock %} {% endcomment %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section class="page-banner">
+    <div class="image-layer" style="background-image:url(images/background/image-7.jpg);"></div>
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1>Blog Posts</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li class="active">Blog Posts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <h2>Create New Blog</h2>
+    <div class="card p-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            
+            <div class="mb-3">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.content.label_tag }}
+                {{ form.content }}
+                {{ form.content.errors }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.category.label_tag }}
+                {{ form.category }}
+                {{ form.category.errors }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.subcategory.label_tag }}
+                {{ form.subcategory }}
+                {{ form.subcategory.errors }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.tags.label_tag }}
+                {{ form.tags }}
+                {{ form.tags.errors }}
+            </div>
+            
+            <div class="mb-3">
+                {{ form.image.label_tag }}
+                {{ form.image }}
+                {{ form.image.errors }}
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Create Blog</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

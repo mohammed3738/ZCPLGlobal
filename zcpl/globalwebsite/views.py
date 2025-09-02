@@ -813,16 +813,16 @@ def blog_list(request):
 @login_required
 def create_blog(request):
     if request.method == 'POST':
-        form = BlogForm(request.POST)
+        form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.author = request.user
             blog.save()
             form.save_m2m()
-            return redirect(blog.get_absolute_url())
+            return redirect('blog_list')
     else:
         form = BlogForm()
-    return render(request, 'blog/blog_form.html', {'form': form})
+    return render(request, 'blog/create_blog.html', {'form': form})
 
 # def blog_detail(request, slug):
 #     blog = get_object_or_404(Blog, slug=slug)
