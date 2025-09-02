@@ -235,6 +235,8 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blogs")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    meta_title = models.CharField(max_length=255, null=True, blank=True)
+    meta_desc = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         ordering = ['-created_at']

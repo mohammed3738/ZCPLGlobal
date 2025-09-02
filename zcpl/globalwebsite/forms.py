@@ -116,7 +116,7 @@ class ContactForm(forms.Form):
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['title', 'content', 'category', 'subcategory', 'tags', 'image']
+        fields = ['title', 'content', 'category', 'subcategory', 'tags', 'image','meta_title','meta_desc']  # author is excluded, set in view
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter blog title'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
