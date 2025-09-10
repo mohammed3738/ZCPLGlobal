@@ -74,7 +74,7 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():  # ✅ Validate including captcha
-            name = request.POST.get('username')
+            name = request.POST.get('name')
             email = request.POST.get('email')
             phone = request.POST.get('phone')
             subject = request.POST.get('subject')
