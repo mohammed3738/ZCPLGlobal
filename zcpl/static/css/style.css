@@ -3762,6 +3762,72 @@ img.lazy-image.loaded {
   text-decoration: underline;
 }
 
+
+
+
+
+
+
+
+
+
+.service-block .inner-box h3 {
+  position: relative;
+  margin: 0;
+  margin-top: 90px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.1em;
+}
+
+.service-block .inner-box h3 a {
+  color: #ffffff;
+  transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+
+.services-section .row .service-block .inner-box:hover:before,
+.service-block .inner-box:hover .count,
+.service-block .inner-box:hover h3,
+.service-block .inner-box:hover h3 a {
+  color: var(--thm-black);
+}
+
+.service-block .inner-box h3 a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* service three block */
 .service-block-three {
   padding-top: 90px;
@@ -4789,6 +4855,29 @@ img.lazy-image.loaded {
 .gallery-item .cap-box h5 a:hover {
   text-decoration: underline;
 }
+
+
+
+.gallery-item .cap-box h3 {
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.gallery-item .cap-box h3 a {
+  color: #ffffff;
+}
+
+.gallery-item .cap-box h3 a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
 
 .gallery-block-three {
   background-color: #eff1f4;
@@ -6652,6 +6741,18 @@ img.lazy-image.loaded {
   margin-bottom: 30px;
 }
 
+.main-footer h5 {
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 30px;
+}
+
+
+
 .main-footer .logo-widget {
   position: relative;
 }
@@ -7408,6 +7509,49 @@ img.lazy-image.loaded {
 .service-block-two .inner-box h5 a:hover {
   text-decoration: underline;
 }
+
+
+
+
+
+
+.service-block-two .inner-box h3 {
+  font-size: 30px;
+  text-transform: uppercase;
+  color: var(--thm-black);
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.1em;
+  margin: 0;
+}
+
+.service-block-two .inner-box h3 a {
+  color: var(--thm-black);
+  transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+
+.service-block-two .inner-box:hover h3,
+.service-block-two .inner-box:hover h3 a {
+  color: #ffffff;
+}
+
+.service-block-two .inner-box h3 a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
 
 .service-block-two .text {
   position: relative;
