@@ -92,11 +92,11 @@ def india_contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():  # ✅ Validate including captcha
-            name = form.cleaned_data.get('name')
-            email = form.cleaned_data.get('email')
-            phone = form.cleaned_data.get('phone')
-            subject = form.cleaned_data.get('subject')
-            message = form.cleaned_data.get('message')
+            name = form.POST.get('name')
+            email = form.POST.get('email')
+            phone = form.POST.get('phone')
+            subject = form.POST.get('subject')
+            message = form.POST.get('message')
 
             # Save to database
             ContactMessage.objects.create(
