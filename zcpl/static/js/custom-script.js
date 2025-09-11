@@ -408,37 +408,72 @@
     });
   }
 
-  //Main Slider / Banner Carousel
-  if ($(".banner-carousel").length) {
-    $(".banner-carousel").owlCarousel({
-      loop: true,
-      animateOut: "fadeOut",
-      animateIn: "fadeIn",
-      margin: 0,
-      nav: true,
-      smartSpeed: 500,
-      autoplay: 6000,
-      autoplayTimeout: 7000,
-      navText: [
-        '<span class="icon fa fa-angle-left"></span>',
-        '<span class="icon fa fa-angle-right"></span>'
-      ],
-      responsive: {
-        0: {
-          items: 1
-        },
-        600: {
-          items: 1
-        },
-        800: {
-          items: 1
-        },
-        992: {
-          items: 1
-        }
-      }
-    });
-  }
+  // //Main Slider / Banner Carousel
+  // if ($(".banner-carousel").length) {
+  //   $(".banner-carousel").owlCarousel({
+  //     loop: true,
+  //     animateOut: "fadeOut",
+  //     animateIn: "fadeIn",
+  //     margin: 0,
+  //     nav: true,
+  //     smartSpeed: 500,
+  //     autoplay: 6000,
+  //     autoplayTimeout: 7000,
+  //     navText: [
+  //       '<span class="icon fa fa-angle-left"></span>',
+  //       '<span class="icon fa fa-angle-right"></span>'
+  //     ],
+  //     responsive: {
+  //       0: {
+  //         items: 1
+  //       },
+  //       600: {
+  //         items: 1
+  //       },
+  //       800: {
+  //         items: 1
+  //       },
+  //       992: {
+  //         items: 1
+  //       }
+  //     }
+  //   });
+  // }
+
+
+
+
+  // Main Slider / Banner Carousel
+if ($(".banner-carousel").length) {
+  $(".banner-carousel").owlCarousel({
+    loop: true,
+    animateOut: "fadeOut",
+    animateIn: "fadeIn",
+    margin: 0,
+    nav: true,
+    smartSpeed: 500,
+    autoplay: 6000,
+    autoplayTimeout: 7000,
+    navText: [
+      '<span class="icon fa fa-angle-left"></span>',
+      '<span class="icon fa fa-angle-right"></span>'
+    ],
+    responsive: {
+      0: { items: 1 },
+      600: { items: 1 },
+      800: { items: 1 },
+      992: { items: 1 }
+    }
+  });
+
+  // cloned slides ke H1 ko aria-hidden lagao
+  $(".banner-carousel").on(
+    "initialized.owl.carousel translated.owl.carousel refreshed.owl.carousel",
+    function () {
+      $(".owl-item.cloned h1").attr("aria-hidden", "true").addClass("sr-only");
+    }
+  );
+}
 
   //portfolio horizontal
   if ($(".portfolio-horizontal__carousel").length) {

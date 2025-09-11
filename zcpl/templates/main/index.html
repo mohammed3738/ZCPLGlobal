@@ -13,7 +13,19 @@
 
 {% block content %}
 
+<style>
+  .sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+}
 
+</style>
 
 <!-- Banner Section -->
 <section class="banner-section banner-one">
@@ -41,200 +53,120 @@
     </div>
   </div>
 
-  <div class="banner-carousel owl-theme owl-carousel">
-    <!-- Slide Item -->
 
 
-    
-
-
-
-
-    <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/REFURBISHED SERVERS & STORAGES.jpg" %})"
-      ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">Trusted Global Leader in New & Refurbished Servers & Storage</div>
-              <h1>
-                Reliable, Cost-Effective IT Solutions Worldwide
-              </h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url 'server-maintenance' %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide Item -->
-    {% comment %} <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/Global IT Business Solutions Provider.jpg" %})"
-      ></div>
-
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">IT Hardware Solutions & Services</div>
-              <h1>Efficient, Reliable, and Scalable IT Infrastructure</h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url 'contact' %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Contact Us</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> {% endcomment %}
-    <!-- Slide Item -->
-    {% comment %} <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/Free IT Hardware Assessment.jpg" %})"
-      ></div>
-      <div class="left-top-line"></div>
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">"Free IT Hardware Assessment</div>
-              <h1>Get Expert Insights at No Cost</h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url 'it-hardware' %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> {% endcomment %}
-    <!-- Slide Item -->
-    <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/Seamless Data Center Support & Logistics for Your Business.jpg" %})"
-      ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">Seamless Data Center Support & Logistics for Your Business</div>
-              <h1>Comprehensive IT Solutions Across India and UAE for Global Operations</h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url 'global-it' %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Slide Item -->
-    <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/Third-Party Support for All Microsoft Software.jpg" %})"
-      ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">Third-Party Support for All Microsoft Software</div>
-              <h1>Expert Solutions for Seamless Microsoft Software Management</h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url "about_us" %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Slide Item -->
-    <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/server upgrade.jpg" %})"
-      ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">Need to Modernize Your IT Systems?</div>
-              <h1>Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Learn More</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Slide Item -->
-    <div class="slide-item">
-      <div
-        class="image-layer"
-        style="background-image: url({% static "images/main-slider/IT Infrastructure Management.jpg" %})"
-      ></div>
-      {% comment %} <div class="left-top-line"></div> {% endcomment %}
-      <div class="right-bottom-curve"></div>
-      <div class="right-top-curve"></div>
-      <div class="auto-container">
-        <div class="content-box">
-          <div class="content">
-            <div class="inner">
-              <div class="sub-title">Comprehensive IT Infrastructure Management</div>
-              <h1>Expert Managed Services for Seamless Infrastructure Performance</h1>
-              <div class="link-box">
-                <a class="theme-btn btn-style-one" href="{% url "infrastructure-managed-service" %}">
-                  <i class="btn-curve"></i>
-                  <span class="btn-title">Discover More</span>
-                </a>
-              </div>
+<div class="banner-carousel owl-carousel owl-theme">
+  <!-- Slide Item -->
+  <div class="slide-item">
+    <div class="image-layer" style="background-image: url({% static 'images/main-slider/REFURBISHED SERVERS & STORAGES.jpg' %})"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <div class="content">
+          <div class="inner">
+            <div class="sub-title">Trusted Global Leader in New & Refurbished Servers & Storage</div>
+            <h1>Reliable, Cost-Effective IT Solutions Worldwide</h1>
+            <div class="link-box">
+              <a class="theme-btn btn-style-one" href="{% url 'server-maintenance' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Discover More</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Slide Item -->
+  <div class="slide-item">
+    <div class="image-layer" style="background-image: url({% static 'images/main-slider/Seamless Data Center Support & Logistics for Your Business.jpg' %})"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <div class="content">
+          <div class="inner">
+            <div class="sub-title">Seamless Data Center Support & Logistics for Your Business</div>
+            <h1>Comprehensive IT Solutions Across India and UAE for Global Operations</h1>
+            <div class="link-box">
+              <a class="theme-btn btn-style-one" href="{% url 'global-it' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Discover More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Item -->
+  <div class="slide-item">
+    <div class="image-layer" style="background-image: url({% static 'images/main-slider/Third-Party Support for All Microsoft Software.jpg' %})"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <div class="content">
+          <div class="inner">
+            <div class="sub-title">Third-Party Support for All Microsoft Software</div>
+            <h1>Expert Solutions for Seamless Microsoft Software Management</h1>
+            <div class="link-box">
+              <a class="theme-btn btn-style-one" href="{% url 'about_us' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Discover More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Item -->
+  <div class="slide-item">
+    <div class="image-layer" style="background-image: url({% static 'images/main-slider/server upgrade.jpg' %})"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <div class="content">
+          <div class="inner">
+            <div class="sub-title">Need to Modernize Your IT Systems?</div>
+            <h1>Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h1>
+            <div class="link-box">
+              <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide Item -->
+  <div class="slide-item">
+    <div class="image-layer" style="background-image: url({% static 'images/main-slider/IT Infrastructure Management.jpg' %})"></div>
+    <div class="auto-container">
+      <div class="content-box">
+        <div class="content">
+          <div class="inner">
+            <div class="sub-title">Comprehensive IT Infrastructure Management</div>
+            <h1>Expert Managed Services for Seamless Infrastructure Performance</h1>
+            <div class="link-box">
+              <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Discover More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 </section>
 <!--End Banner Section -->
 
@@ -1904,6 +1836,40 @@
 <!-- /.project-six -->
 
 
+
+<script>
+  if ($(".banner-carousel").length) {
+  $(".banner-carousel").owlCarousel({
+    loop: true,
+    animateOut: "fadeOut",
+    animateIn: "fadeIn",
+    margin: 0,
+    nav: true,
+    smartSpeed: 500,
+    autoplay: 6000,
+    autoplayTimeout: 7000,
+    navText: [
+      '<span class="icon fa fa-angle-left"></span>',
+      '<span class="icon fa fa-angle-right"></span>'
+    ],
+    responsive: {
+      0: { items: 1 },
+      600: { items: 1 },
+      800: { items: 1 },
+      992: { items: 1 }
+    }
+  });
+
+  // Fix: cloned slides ke H1 ko hide karo
+  $(".banner-carousel").on(
+    "initialized.owl.carousel translated.owl.carousel refreshed.owl.carousel",
+    function () {
+      $(".owl-item.cloned h1").attr("aria-hidden", "true").addClass("sr-only");
+    }
+  );
+}
+
+</script>
 
 
 
