@@ -78,7 +78,8 @@ def uk_contact(request):
                 [settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,
             )
-            success = True  # success only after valid submission
+            request.session['form_submitted'] = True
+            return redirect('thank_you')
     else:
         form = ContactForm()
 

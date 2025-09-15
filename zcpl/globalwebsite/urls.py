@@ -62,6 +62,9 @@ urlpatterns = [
     path('signin/', views.signin_view, name='signin'),
     path('logout/', views.logout_view, name='logout'),
 
+    path('thank-you/', views.thank_you, name='thank_you'),
+
+
 
 
 

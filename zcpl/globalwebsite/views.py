@@ -69,16 +69,17 @@ def about_us(request):
 
 
 
+
+
 def contact(request):
-    success = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():  # ✅ Validate including captcha
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            phone = request.POST.get('phone')
-            subject = request.POST.get('subject')
-            message = request.POST.get('message')
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            phone = form.cleaned_data.get('phone')
+            subject = form.cleaned_data.get('subject')
+            message = form.cleaned_data.get('message')
 
             # Save to database
             ContactMessageGlobal.objects.create(
@@ -98,15 +99,25 @@ def contact(request):
                 [settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,
             )
-            success = True  # success only after valid submission
+
+            # ✅ Set session flag for thank you page access
+            request.session['form_submitted'] = True  
+            return redirect('thank_you')
     else:
         form = ContactForm()
 
-    return render(request, 'main/contact.html', {'form': form, 'success': success})
+    return render(request, 'main/contact.html', {'form': form})
 
 
+def thank_you(request):
+    # ✅ Only allow access if session flag is set
+    if not request.session.get('form_submitted'):
+        return redirect('/')  # or redirect('contact')
 
+    # Remove flag after showing once (prevents refresh hack)
+    del request.session['form_submitted']  
 
+    return render(request, 'main/thank_you.html')
 
 
 def services(request):
