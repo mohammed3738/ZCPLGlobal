@@ -75,11 +75,11 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():  # ✅ Validate including captcha
-            name = form.cleaned_data.get('name')
-            email = form.cleaned_data.get('email')
-            phone = form.cleaned_data.get('phone')
-            subject = form.cleaned_data.get('subject')
-            message = form.cleaned_data.get('message')
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
 
             # Save to database
             ContactMessageGlobal.objects.create(
