@@ -228,7 +228,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    content = RichTextUploadingField()
+    content = RichTextField(blank=True, null=True)
     category = models.ForeignKey(CategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
     # subcategory = models.ForeignKey(SubCategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
