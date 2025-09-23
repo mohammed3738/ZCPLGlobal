@@ -1,9 +1,12 @@
+
+{% extends 'base.html' %}
 {% load static %}
+{% comment %} {% block content %} {% endcomment %}
 
 {% block title %}{{ blog.meta_title }} 
 {% endblock %}
 
-{% endblock %}
+{% comment %} {% endblock %} {% endcomment %}
 {% block meta_description %}{{ blog.meta_desc }} 
 {% endblock %}
 {% block canonical %}
@@ -59,7 +62,7 @@
                                 </div>
                                 <h2>{{ blog.title }}</h2>
                                 <div class="text mt-3" style="font-size:14px;">
-                                    <p>{{ blog.content }}</p>
+                                    <p>{{ blog.content|safe }}</p>
                                 </div>
                             </div>
                         </div>

@@ -88,7 +88,7 @@
                                 <a href="{% url 'blogs_by_category' category.slug %}">
                                     {{ category.name }} ({{ category.num_posts }})
                                 </a>
-                                {% if category.subcategories.all %}
+                                {% comment %} {% if category.subcategories.all %}
                                 <ul>
                                     {% for sub in category.subcategories.all %}
                                     <li>
@@ -98,7 +98,7 @@
                                     </li>
                                     {% endfor %}
                                 </ul>
-                                {% endif %}
+                                {% endif %} {% endcomment %}
                             </li>
                             {% endfor %}
                         </ul>

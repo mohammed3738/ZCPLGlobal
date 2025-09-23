@@ -809,7 +809,7 @@ def logout_view(request):
 def blog_list(request):
     blogs = Blog.objects.all().order_by('-created_at')
     categories = CategoryBlog.objects.annotate(num_posts=Count('blog'))
-    sub_categories = SubCategoryBlog.objects.annotate(num_posts=Count('blog'))
+    # sub_categories = SubCategoryBlog.objects.annotate(num_posts=Count('blog'))
     tags = Tag.objects.all()
     archives = Blog.objects.dates('created_at', 'month', order='DESC')
 
@@ -862,15 +862,31 @@ def create_blog(request):
 #     return render(request, 'blog/blog_detail.html', context)
 
 
+@login_required
+def add_blog(request):
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user
+            blog.save()
+            form.save_m2m()  # Save tags
+            return redirect("blog_detail", slug=blog.slug)
+    else:
+        form = BlogForm()
+    return render(request, "blog/create_blog.html", {"form": form})
+
+
+
 def blogs_by_category(request, slug):
     category = get_object_or_404(CategoryBlog, slug=slug)
     blogs = Blog.objects.filter(category=category)
     return render(request, 'blog/blog_list.html', {'blogs': blogs, 'selected_category': category})
 
-def blogs_by_subcategory(request, slug):
-    subcategory = get_object_or_404(SubCategoryBlog, slug=slug)
-    blogs = Blog.objects.filter(sub_category=subcategory)
-    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'selected_subcategory': subcategory})
+# def blogs_by_subcategory(request, slug):
+#     subcategory = get_object_or_404(SubCategoryBlog, slug=slug)
+#     blogs = Blog.objects.filter(sub_category=subcategory)
+#     return render(request, 'blog/blog_list.html', {'blogs': blogs, 'selected_subcategory': subcategory})
 
 
 def blogs_by_tag(request, slug):

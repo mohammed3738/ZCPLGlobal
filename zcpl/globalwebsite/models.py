@@ -5,6 +5,7 @@ from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from django.utils import timezone
 from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 from django.db import models
@@ -177,29 +178,29 @@ class CategoryBlog(models.Model):
 # ------------------------
 # SubCategory Model
 # ------------------------
-class SubCategoryBlog(models.Model):
-    name = models.CharField(max_length=100)
-    category = models.ForeignKey('globalwebsite.CategoryBlog', on_delete=models.CASCADE, related_name='subcategories')
-    slug = models.SlugField(unique=True, blank=True)
+# class SubCategoryBlog(models.Model):
+#     name = models.CharField(max_length=100)
+#     category = models.ForeignKey('globalwebsite.CategoryBlog', on_delete=models.CASCADE, related_name='subcategories')
+#     slug = models.SlugField(unique=True, blank=True)
 
-    class Meta:
-        verbose_name_plural = "SubCategories"
-        ordering = ['name']
+#     class Meta:
+#         verbose_name_plural = "SubCategories"
+#         ordering = ['name']
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base_slug = slugify(self.name)
-            slug = base_slug
-            counter = 1
-            # Ensure slug is unique
-            while SubCategory.objects.filter(slug=slug).exists():
-                slug = f"{base_slug}-{counter}"
-                counter += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         if not self.slug:
+#             base_slug = slugify(self.name)
+#             slug = base_slug
+#             counter = 1
+#             # Ensure slug is unique
+#             while SubCategory.objects.filter(slug=slug).exists():
+#                 slug = f"{base_slug}-{counter}"
+#                 counter += 1
+#             self.slug = slug
+#         super().save(*args, **kwargs)
 
-    def __str__(self):
-        return f"{self.name} ({self.category.name})"
+#     def __str__(self):
+#         return f"{self.name} ({self.category.name})"
 
 
 # ------------------------
@@ -227,11 +228,11 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    content = models.TextField()
+    content = RichTextUploadingField()
     category = models.ForeignKey(CategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
-    subcategory = models.ForeignKey(SubCategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
+    # subcategory = models.ForeignKey(SubCategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    image = models.ImageField(upload_to="blog/gallery/", null=True, blank=True)
+    image = models.ImageField(upload_to="blog/thumbnails/", null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blogs")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -251,6 +252,8 @@ class Blog(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
+    
+
 
     def __str__(self):
         return self.title

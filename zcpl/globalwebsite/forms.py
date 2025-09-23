@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
+from ckeditor.widgets import CKEditorWidget
 
 # class ProductForm(forms.ModelForm):
 #     class Meta:
@@ -114,19 +115,20 @@ class ContactForm(forms.Form):
 #         fields = ['title', 'content','image']  # author is excluded, set in view
 
 class BlogForm(forms.ModelForm):
+    # content = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
         model = Blog
-        fields = ['title', 'content', 'category', 'subcategory', 'tags', 'image','meta_title','meta_desc']  # author is excluded, set in view
+        fields = ['title', 'content', 'category', 'tags', 'image','meta_title','meta_desc']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter blog title'}),
             'meta_title': forms.TextInput(attrs={'class': 'form-control'}),
             'meta_desc': forms.TextInput(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
             'category': forms.Select(attrs={'class': 'form-control'}),
-            'subcategory': forms.Select(attrs={'class': 'form-control'}),
             'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
+
 
 
 class CommentForm(forms.ModelForm):

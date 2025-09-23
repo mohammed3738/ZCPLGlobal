@@ -47,13 +47,14 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('order-success/<int:order_id>/', views.order_success,
          name='order_success'),
-         
-    path("blog/create/", views.create_blog, name="create_blog"),
+    # path("add/", views.add_blog, name="add_blog"),
+
+    path("blog/create/", views.add_blog, name="create_blog"),
 
     path('blogs/', views.blog_list, name='blog_list'),
     path('blogs/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('category/<slug:slug>/', views.blogs_by_category, name='blogs_by_category'),
-    path('subcategory/<slug:slug>/', views.blogs_by_subcategory, name='blogs_by_subcategory'),
+    # path('subcategory/<slug:slug>/', views.blogs_by_subcategory, name='blogs_by_subcategory'),
 
     path('tag/<slug:slug>/', views.blogs_by_tag, name='blogs_by_tag'),
     path('archive/<int:year>/<int:month>/', views.blogs_by_archive, name='blogs_by_archive'),
