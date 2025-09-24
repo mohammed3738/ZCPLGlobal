@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+		<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/46.1.1/ckeditor5.css">
 
   <title>{% if editing %}Edit Blog{% else %}Add Blog{% endif %}</title>
   {{ form.media }}   <!-- ✅ loads CKEditor + uploader -->
@@ -25,9 +25,8 @@
       {% if editing %}Update{% else %}Add{% endif %} Blog
     </button>
   </form>
-<script>
-  CKEDITOR.replace('id_content');
-</script>
+		<script src="https://cdn.ckeditor.com/ckeditor5/46.1.1/ckeditor5.umd.js"></script>
+
 
 </body>
 </html>
