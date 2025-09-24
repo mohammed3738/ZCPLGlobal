@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'uk',
     'canada',
     'ckeditor',
-    'ckeditor_uploader',
     'captcha',
 
 ]
@@ -173,14 +172,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store uploaded file
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
-
 CKEDITOR_CONFIGS = {
     "default": {
         "toolbar": "full",
-        "extraPlugins": ",".join(["uploadimage"]),  # ✅ allow image upload
-        "removePlugins": "image",                  # remove old URL-only plugin
     }
 }
+
+
+
+# CKEDITOR_CONFIGS = {
+#     "default": {
+#         "toolbar": "full",
+#         "extraPlugins": ",".join(["uploadimage"]),  # ✅ allow image upload
+#         "removePlugins": "image",                  # remove old URL-only plugin
+#     }
+# }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
