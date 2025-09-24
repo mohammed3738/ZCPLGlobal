@@ -43,13 +43,24 @@ INSTALLED_APPS = [
     'uk',
     'canada',
     'ckeditor',
+    'ckeditor_uploader',
     'captcha',
 
 ]
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# Optional: Allow all images
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 
-
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'extraPlugins': 'uploadimage,image2',
+        'removePlugins': 'image',
+    }
+}
 
 
 
@@ -169,14 +180,13 @@ LOGIN_URL = '/signin/'
 MEDIA_URL = '/media/'  # URL for accessing media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store uploaded files
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
-CKEDITOR_CONFIGS = {
-    "default": {
-        "toolbar": "full",
-    }
-}
+# CKEDITOR_CONFIGS = {
+#     "default": {
+#         "toolbar": "full",
+#     }
+# }
 
 
 

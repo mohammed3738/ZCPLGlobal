@@ -24,12 +24,12 @@ from . import redirects
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
     path('',include('globalwebsite.urls')),
     path('ca/',include('canada.urls')),
     path('in/',include('india.urls')),
     path('uk/',include('uk.urls')),
     path('uae/',include('uae.urls')),
-    path("ckeditor/", include("ckeditor_uploader.urls")),
     path('sitemap.xml', views.sitemap, name='sitemap'),
     path('robots.txt', views.robots_txt, name='robots_txt'),
     *redirects.redirect_urlpatterns,

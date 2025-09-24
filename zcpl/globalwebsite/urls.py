@@ -49,7 +49,8 @@ urlpatterns = [
          name='order_success'),
     # path("add/", views.add_blog, name="add_blog"),
 
-    path("blog/create/", views.add_blog, name="create_blog"),
+    path("blog/add/", views.add_blog, name="add_blog"),
+    path("blog/<int:blog_id>/edit/", views.edit_blog, name="edit_blog"),
 
     path('blogs/', views.blog_list, name='blog_list'),
     path('blogs/<slug:slug>/', views.blog_detail, name='blog_detail'),

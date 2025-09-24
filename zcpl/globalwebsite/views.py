@@ -862,19 +862,19 @@ def create_blog(request):
 #     return render(request, 'blog/blog_detail.html', context)
 
 
-@login_required
-def add_blog(request):
-    if request.method == "POST":
-        form = BlogForm(request.POST, request.FILES)
-        if form.is_valid():
-            blog = form.save(commit=False)
-            blog.author = request.user
-            blog.save()
-            form.save_m2m()  # Save tags
-            return redirect("blog_detail", slug=blog.slug)
-    else:
-        form = BlogForm()
-    return render(request, "blog/create_blog.html", {"form": form})
+# @login_required
+# def add_blog(request):
+#     if request.method == "POST":
+#         form = BlogForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             blog = form.save(commit=False)
+#             blog.author = request.user
+#             blog.save()
+#             form.save_m2m()  # Save tags
+#             return redirect("blog_detail", slug=blog.slug)
+#     else:
+#         form = BlogForm()
+#     return render(request, "blog/create_blog.html", {"form": form})
 
 
 
@@ -928,6 +928,101 @@ def blog_detail(request, slug):
         "tags": tags,
         "archives": archives,
     })
+
+
+
+# @login_required
+# def manage_blogs(request):
+#     editing = False
+#     blog_to_edit = None
+#     error = None
+
+#     # ----- Edit Blog -----
+#     if "edit" in request.GET:
+#         editing = True
+#         blog_to_edit = get_object_or_404(Blog, id=request.GET.get("edit"))
+
+#         if request.method == "POST":
+#             form = BlogForm(request.POST, request.FILES, instance=blog_to_edit)
+#             if form.is_valid():
+#                 blog = form.save(commit=False)
+#                 blog.author = request.user  # keep current author
+#                 blog.save()
+#                 form.save_m2m()  # save tags
+#                 return redirect("blog_detail", slug=blog.slug)
+#             else:
+#                 error = "Please correct the errors below."
+#         else:
+#             form = BlogForm(instance=blog_to_edit)
+
+#     # ----- Delete Blog -----
+#     elif "delete" in request.GET:
+#         blog = get_object_or_404(Blog, id=request.GET.get("delete"))
+#         blog.delete()
+#         return redirect("blog_detail", slug=blog.slug)
+#     # ----- Add Blog -----
+#     else:
+#         if request.method == "POST":
+#             form = BlogForm(request.POST, request.FILES)
+#             if form.is_valid():
+#                 blog = form.save(commit=False)
+#                 blog.author = request.user  # set author
+#                 blog.save()
+#                 form.save_m2m()
+#                 return redirect("blog_detail", slug=blog.slug)
+#             else:
+#                 error = "Please correct the errors below."
+#         else:
+#             form = BlogForm()
+
+#     # ----- Blog List -----
+#     blogs = Blog.objects.all()
+#     categories = CategoryBlog.objects.all()
+#     tags = Tag.objects.all()
+
+#     return render(request, "blog/create_blog.html", {
+#         "form": form,
+#         "blogs": blogs,
+#         "categories": categories,
+#         "tags": tags,
+#         "editing": editing,
+#         "blog_to_edit": blog_to_edit,
+#         "error": error,
+#     })
+
+
+def add_blog(request):
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.author = request.user if request.user.is_authenticated else None
+            blog.save()
+            form.save_m2m()  # save tags/categories relations
+            messages.success(request, "Blog added successfully!")
+            return redirect("blog_list")  # change this to your blog list URL name
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = BlogForm()
+
+    return render(request, "blog/create_blog.html", {"form": form})
+
+
+def edit_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Blog updated successfully!")
+            return redirect("blog_list")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = BlogForm(instance=blog)
+
+    return render(request, "blog/create_blog.html", {"form": form, "editing": True})
 
 
 

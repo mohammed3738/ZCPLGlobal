@@ -23,7 +23,7 @@ class ContactMessageGlobal(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} - {self.subject}"
+        return f"{self.name} - {self.subject} - {self.submitted_at}"
 
 
 
@@ -228,7 +228,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
-    content = RichTextField(blank=True, null=True)
+    content = RichTextUploadingField()
     category = models.ForeignKey(CategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
     # subcategory = models.ForeignKey(SubCategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)

@@ -108,7 +108,7 @@ from django.utils.html import format_html
 # Blog Form for Admin
 # -------------------------
 class BlogAdminForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())  # CKEditor in admin
+    content = forms.CharField(widget=CKEditorUploadingWidget())  # CKEditor in admin
 
     class Meta:
         model = Blog

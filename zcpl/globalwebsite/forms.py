@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # class ProductForm(forms.ModelForm):
 #     class Meta:
@@ -115,7 +116,7 @@ class ContactForm(forms.Form):
 #         fields = ['title', 'content','image']  # author is excluded, set in view
 
 class BlogForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorWidget())  # ✅ text editor only
+    content = forms.CharField(widget=CKEditorUploadingWidget())  # ✅ text editor only
 
     class Meta:
         model = Blog
