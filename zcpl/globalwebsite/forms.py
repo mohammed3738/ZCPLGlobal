@@ -116,19 +116,12 @@ class ContactForm(forms.Form):
 #         fields = ['title', 'content','image']  # author is excluded, set in view
 
 class BlogForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorUploadingWidget())  # ✅ text editor only
+    content = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Blog
         fields = ['title', 'content', 'category', 'tags', 'image', 'meta_title', 'meta_desc']
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter blog title'}),
-            'meta_title': forms.TextInput(attrs={'class': 'form-control'}),
-            'meta_desc': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
-            'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-        }
+
 
 
 
