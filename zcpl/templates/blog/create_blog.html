@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
   <title>{% if editing %}Edit Blog{% else %}Add Blog{% endif %}</title>
   {{ form.media }}   <!-- ✅ loads CKEditor + uploader -->
 </head>
