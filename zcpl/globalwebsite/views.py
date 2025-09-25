@@ -821,19 +821,19 @@ def blog_list(request):
     }
     return render(request, 'blog/blog_list.html', context)
 
-@login_required
-def create_blog(request):
-    if request.method == 'POST':
-        form = BlogForm(request.POST, request.FILES)
-        if form.is_valid():
-            blog = form.save(commit=False)
-            blog.author = request.user
-            blog.save()
-            form.save_m2m()
-            return redirect('blog_list')
-    else:
-        form = BlogForm()
-    return render(request, 'blog/create_blog.html', {'form': form})
+# @login_required
+# def create_blog(request):
+#     if request.method == 'POST':
+#         form = BlogForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             blog = form.save(commit=False)
+#             blog.author = request.user
+#             blog.save()
+#             form.save_m2m()
+#             return redirect('blog_list')
+#     else:
+#         form = BlogForm()
+#     return render(request, 'blog/create_blog.html', {'form': form})
 
 # def blog_detail(request, slug):
 #     blog = get_object_or_404(Blog, slug=slug)
@@ -990,7 +990,7 @@ def blog_detail(request, slug):
 #         "error": error,
 #     })
 
-
+@login_required
 def add_blog(request):
     if request.method == "POST":
         form = BlogForm(request.POST, request.FILES)
@@ -1008,7 +1008,7 @@ def add_blog(request):
 
     return render(request, "blog/create_blog.html", {"form": form})
 
-
+@login_required
 def edit_blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
     if request.method == "POST":
