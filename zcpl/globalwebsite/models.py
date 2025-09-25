@@ -163,7 +163,7 @@ class CategoryBlog(models.Model):
     slug = models.SlugField(unique=True, blank=True)
 
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name_plural = "Categories_blog"
         ordering = ['name']
 
     def save(self, *args, **kwargs):

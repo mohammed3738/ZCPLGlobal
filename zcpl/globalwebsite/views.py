@@ -815,7 +815,7 @@ def blog_list(request):
 
     context = {
         'blogs': blogs,
-        'categories': categories,
+        'categories_blog': categories,
         'tags': tags,
         'archives': archives,
     }
@@ -924,7 +924,7 @@ def blog_detail(request, slug):
         "comments": comments,
         "form": form,
         "latest_posts": latest_posts,
-        "categories": categories,
+        "categories_blog": categories,
         "tags": tags,
         "archives": archives,
     })
