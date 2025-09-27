@@ -3,7 +3,4 @@ Disallow: /wp-admin/
 Disallow: /search?s
 Disallow: /checkout/
 
-Sitemap: https://www.zacocomputer.com/sitemap_index.xml
-Sitemap: https://www.zacocomputer.com/page-sitemap.xml
-Sitemap: https://www.zacocomputer.com/product-sitemap.xml
-Sitemap: https://www.zacocomputer.com/post-sitemap.xml
+Sitemap: https://zacocomputer.com/sitemap.xml
