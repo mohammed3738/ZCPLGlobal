@@ -83,10 +83,10 @@
                     <div class="sidebar-widget categories mb-4">
                         <h5 class="widget-title">Categories</h5>
                         <ul>
-                            {% for category in categories %}
+                            {% for category1 in categories_blog %}
                             <li>
-                                <a href="{% url 'blogs_by_category' category.slug %}">
-                                    {{ category.name }} ({{ category.num_posts }})
+                                <a href="{% url 'blogs_by_category' category1.slug %}">
+                                    {{ category1.name }} ({{ category1.num_posts }})
                                 </a>
                                 {% comment %} {% if category.subcategories.all %}
                                 <ul>
