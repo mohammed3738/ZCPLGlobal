@@ -107,7 +107,19 @@ class ContactForm(forms.Form):
         required=True
     )
 
+class ShopContactForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
 
+    class Meta:
+        model = ContactMessageGlobal
+        fields = ['name', 'email', 'phone', 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Your Email', 'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Phone Number (optional)', 'class': 'form-control'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Subject', 'class': 'form-control'}),
+            'message': forms.Textarea(attrs={'placeholder': 'Your Message', 'class': 'form-control', 'rows': 4}),
+        }
 
 
 # class BlogForm(forms.ModelForm):
@@ -129,3 +141,22 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['name', 'email', 'phone', 'subject', 'message']
+
+
+
+
+class CategoryForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Category
+        fields = ['name', 'slug', 'description']
+
+class SubCategoryForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = SubCategory
+        fields = ['category', 'name', 'slug', 'description']
+        
+        

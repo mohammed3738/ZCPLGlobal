@@ -9,9 +9,9 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 admin.site.register(ContactMessageGlobal)
 # admin.site.register(Product)
-admin.site.register(Category)
+# admin.site.register(Category)
 admin.site.register(Review)
-admin.site.register(SubCategory)
+# admin.site.register(SubCategory)
 admin.site.register(Order)
 
 
@@ -164,3 +164,31 @@ class BlogAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+class CategoryAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
+class SubCategoryAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+
+    class Meta:
+        model = SubCategory
+        fields = '__all__'
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    form = CategoryAdminForm
+    list_display = ['name', 'slug']
+
+
+class SubCategoryAdmin(admin.ModelAdmin):
+    form = SubCategoryAdminForm
+    list_display = ['name', 'slug', 'category']
+
+
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(SubCategory, SubCategoryAdmin)

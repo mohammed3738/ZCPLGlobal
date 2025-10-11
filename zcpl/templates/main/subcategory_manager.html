@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SubCategory Manager</title>
+</head>
+<body>
+  <h1>{% if editing %}Edit{% else %}Create{% endif %} SubCategory</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if editing %}Update{% else %}Create{% endif %}</button>
+  </form>
+
+  <h2>All SubCategories</h2>
+  <ul>
+    {% for sub in subcategories %}
+      <li>
+        <strong>{{ sub.name }}</strong> (Category: {{ sub.category.name }}) - 
+        <a href="{% url 'edit_subcategory' sub.id %}">Edit</a>
+        {% if sub.description %}
+          <div>{{ sub.description|safe }}</div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No subcategories found.</li>
+    {% endfor %}
+  </ul>
+
+  <!-- CKEditor JS -->
+  <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+  <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+</body>
+</html>
