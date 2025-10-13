@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import SignUpForm, SignInForm
 # from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, ShopContactForm
 from django.contrib.auth.decorators import login_required
 # from django.core.mail import send_mail
 # from django.conf import settings
@@ -568,7 +568,7 @@ def product_detail(request, slug):
 
         elif 'email' in request.POST and 'message' in request.POST:
             # Request Quote form submission
-            contact_form = ContactForm(request.POST)
+            contact_form = ShopContactForm(request.POST)
             if contact_form.is_valid():
                 contact_form.save()
                 messages.success(request, "Your quote request has been sent!")
