@@ -1075,7 +1075,7 @@ def robots_txt(request):
 
 
 
-
+@login_required
 def category_manager(request, category_id=None):
     if category_id:
         instance = get_object_or_404(Category, id=category_id)
@@ -1096,7 +1096,7 @@ def category_manager(request, category_id=None):
     })
     
     
-    
+@login_required   
 def subcategory_manager(request, subcategory_id=None):
     if subcategory_id:
         instance = get_object_or_404(SubCategory, id=subcategory_id)
