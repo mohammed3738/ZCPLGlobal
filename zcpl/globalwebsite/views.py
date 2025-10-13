@@ -463,6 +463,7 @@ def shop(request, category_slug=None, subcategory_slug=None):
             )
             
             contact_success = True
+            return redirect('thank_you')
 
     return render(request, 'main/shop.html', {
         'category': category,
@@ -572,7 +573,8 @@ def product_detail(request, slug):
             if contact_form.is_valid():
                 contact_form.save()
                 messages.success(request, "Your quote request has been sent!")
-                return redirect('product_detail', slug=slug)
+                # return redirect('product_detail', slug=slug)
+                return redirect('thank_you')
             else:
                 messages.error(request, "Please fix the errors in the form.")
 
