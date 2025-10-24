@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Category Manager</title>
+</head>
+<body>
+  <h1>{% if editing %}Edit{% else %}Create{% endif %} Category</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if editing %}Update{% else %}Create{% endif %}</button>
+  </form>
+
+  <h2>All Categories</h2>
+  <ul>
+    {% for cat in categories %}
+      <li>
+        <strong>{{ cat.name }}</strong> - <a href="{% url 'edit_category' cat.id %}">Edit</a>
+        {% if cat.description %}
+          <div>{{ cat.description|safe }}</div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No categories found.</li>
+    {% endfor %}
+  </ul>
+
+  <!-- CKEditor JS -->
+  <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+  <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+</body>
+</html>

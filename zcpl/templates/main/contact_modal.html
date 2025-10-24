@@ -1,0 +1,158 @@
+<!-- Contact Us Popup Modal -->
+<div id="contactPopup" class="contact-popup" style="display:none;">
+  <div class="contact-popup-content">
+    <span class="close-btn" onclick="closeContactPopup()">&times;</span>
+    <h5>Unable to find what you're looking for?</h5>
+    <p>We’re here to help!</p>
+    
+    {% if contact_success %}
+      <div class="alert alert-success">Thank you! Your message has been sent successfully.</div>
+    {% endif %}
+    
+    <form method="post" action="{% url 'shop' %}" id="contactForm">
+      {% csrf_token %}
+      {{ contact_form.non_field_errors }}
+      
+      <input type="hidden" name="contact_form_submit" value="1" />
+
+      <div class="form-row">
+        <div class="form-group col-half">
+          {{ contact_form.name.label_tag }}
+          {{ contact_form.name }}
+          {{ contact_form.name.errors }}
+        </div>
+
+        <div class="form-group col-half">
+          {{ contact_form.email.label_tag }}
+          {{ contact_form.email }}
+          {{ contact_form.email.errors }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-half">
+          {{ contact_form.phone.label_tag }}
+          {{ contact_form.phone }}
+          {{ contact_form.phone.errors }}
+        </div>
+
+        <div class="form-group col-half">
+          {{ contact_form.subject.label_tag }}
+          {{ contact_form.subject }}
+          {{ contact_form.subject.errors }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ contact_form.message.label_tag }}
+        {{ contact_form.message }}
+        {{ contact_form.message.errors }}
+      </div>
+<div class="form-group">
+  {{ contact_form.captcha.errors }}
+  {{ contact_form.captcha }}
+</div>
+      <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<style>
+/* Popup styling */
+.contact-popup {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.contact-popup-content {
+  background: white;
+  padding: 25px 30px;
+  width: 450px;
+  max-width: 100%;
+  border-radius: 8px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px; top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+h5 {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Form layout */
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.col-half {
+  flex: 1 1 48%; /* roughly half width with gap */
+  min-width: 150px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.btn-block {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+</style>
+
+<script>
+// Show popup on first visit (use localStorage to track)
+document.addEventListener('DOMContentLoaded', function() {
+  if (!localStorage.getItem('contactPopupShown')) {
+    document.getElementById('contactPopup').style.display = 'flex';
+    localStorage.setItem('contactPopupShown', 'true');
+  }
+});
+
+function closeContactPopup() {
+  document.getElementById('contactPopup').style.display = 'none';
+}
+</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+

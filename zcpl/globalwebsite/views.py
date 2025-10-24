@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import SignUpForm, SignInForm
 # from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, ShopContactForm
 from django.contrib.auth.decorators import login_required
 # from django.core.mail import send_mail
 # from django.conf import settings
@@ -442,11 +442,36 @@ def shop(request, category_slug=None, subcategory_slug=None):
     paginator = Paginator(products, 9)
     page_obj = paginator.get_page(page_number)
 
+    # Contact form handling
+    contact_form = ShopContactForm()
+    contact_success = False
+
+    if request.method == 'POST' and 'contact_form_submit' in request.POST:
+        contact_form = ShopContactForm(request.POST)
+        if contact_form.is_valid():
+            contact_form.save()  # Save to ContactMessageGlobal model
+            
+            cd = contact_form.cleaned_data
+            full_message = f"Name: {cd['name']}\nEmail: {cd['email']}\nPhone: {cd['phone']}\n\nMessage:\n{cd['message']}"
+            
+            send_mail(
+                cd['subject'],
+                full_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+            
+            contact_success = True
+            return redirect('thank_you')
+
     return render(request, 'main/shop.html', {
         'category': category,
         'subcategory': subcategory,
         'products': page_obj,
         'categories': Category.objects.all(),
+        'contact_form': contact_form,
+        'contact_success': contact_success,
     })
 
 def cart_add(request, product_id):
@@ -523,27 +548,42 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
     reviews = product.reviews.all().order_by('-created_at')
     cart_product_form = CartAddProductForm()
-    
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        comment = request.POST.get('comment')
-        rating = request.POST.get('rating')
+    contact_form = ContactForm()
 
-        if name and comment and rating:
-            Review.objects.create(
-                product=product,
-                name=name,
-                comment=comment,
-                rating=int(rating)
-            )
-            return redirect('product_detail', slug=product.slug)
+    if request.method == 'POST':
+        if 'comment' in request.POST and 'rating' in request.POST:
+            # Review form submission
+            name = request.POST.get('name')
+            comment = request.POST.get('comment')
+            rating = request.POST.get('rating')
+
+            if name and comment and rating:
+                Review.objects.create(
+                    product=product,
+                    name=name,
+                    comment=comment,
+                    rating=int(rating)
+                )
+                messages.success(request, "Thank you for your review!")
+                return redirect('product_detail', slug=slug)
+
+        elif 'email' in request.POST and 'message' in request.POST:
+            # Request Quote form submission
+            contact_form = ShopContactForm(request.POST)
+            if contact_form.is_valid():
+                contact_form.save()
+                messages.success(request, "Your quote request has been sent!")
+                # return redirect('product_detail', slug=slug)
+                return redirect('thank_you')
+            else:
+                messages.error(request, "Please fix the errors in the form.")
 
     return render(request, 'main/product_detail.html', {
         'product': product,
         'cart_product_form': cart_product_form,
         'reviews': reviews,
-        'review_count': reviews.count()
-
+        'review_count': reviews.count(),
+        'form': contact_form
     })
 
 
@@ -1033,3 +1073,45 @@ def robots_txt(request):
     return render(request,'robots.txt', content_type="text/plain")
 
 
+
+
+@login_required
+def category_manager(request, category_id=None):
+    if category_id:
+        instance = get_object_or_404(Category, id=category_id)
+        form = CategoryForm(request.POST or None, instance=instance)
+    else:
+        instance = None
+        form = CategoryForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('category_manager')
+
+    categories = Category.objects.all()
+    return render(request, 'main/category_manager.html', {
+        'form': form,
+        'categories': categories,
+        'editing': category_id is not None,
+    })
+    
+    
+@login_required   
+def subcategory_manager(request, subcategory_id=None):
+    if subcategory_id:
+        instance = get_object_or_404(SubCategory, id=subcategory_id)
+        form = SubCategoryForm(request.POST or None, instance=instance)
+    else:
+        instance = None
+        form = SubCategoryForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('subcategory_manager')
+
+    subcategories = SubCategory.objects.select_related('category').all()
+    return render(request, 'main/subcategory_manager.html', {
+        'form': form,
+        'subcategories': subcategories,
+        'editing': subcategory_id is not None,
+    })

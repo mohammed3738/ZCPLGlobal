@@ -100,7 +100,7 @@ Get the {{ product.name }} at the best price from Zaco Computers. High-performan
             <div class="banner-inner">
                 <div class="auto-container">
                     <div class="inner-container clearfix">
-                        <h1>{{ product.name }}</h1>
+                        <h1 style="font-size: 55px;">{{ product.name }}</h1>
                         <div class="page-nav">
                             <ul class="bread-crumb clearfix">
                                 <li><a href="{% url 'home' %}">Home</a></li>
@@ -166,23 +166,30 @@ Get the {{ product.name }} at the best price from Zaco Computers. High-performan
                 <!-- Add to Cart Button -->
                 <form action="{% url 'cart_add' product.id %}" method="post" class="form-inline">
                     {% csrf_token %}
-                    <div class="product-details__quantity">
-                        <h3>Choose Quantity</h3>
+                    <div class="product-details__quantity" style="align-items: baseline;column-gap: 10px;">
+                        <h3 style="font-size: 22px;">Choose Quantity</h3>
                         {{ cart_product_form.quantity }}
                         {{ cart_product_form.override }}
                     </div>
                     <div class="product-details__buttons">
                         {% if product.price != 0 %}
-                            <button type="submit" class="theme-btn btn-style-one">
+                            <!-- Trigger the modal instead of submitting form -->
+                            <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                                <i class="btn-curve"></i>                              
+                                <span class="btn-title">Request Quote</span>
+                            </button>
+
+                            <button type="submit" class="theme-btn btn-style-one" style="background: #1a3546; color: #41b974;">
                                 <i class="btn-curve"></i>                              
                                 <span class="btn-title">Add to cart</span>
                             </button>
                         {% else %}
-                            <a href="{% url 'contact' %}" class="theme-btn btn-style-one" style="color: aliceblue;">
+                            <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal">
                                 <i class="btn-curve"></i>                              
                                 <span class="btn-title">Request Quote</span>
-                            </a>
+                            </button>
                         {% endif %}
+                    </div>
                     </div>
                 </form>
             </div><!-- /.col-md-12 col-lg-6 -->
@@ -373,5 +380,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 </script>
 
+{% include "main/request_quote_modal.html" %}
 
         {% endblock %}

@@ -1,5 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+<style>
+.arrow-down, .arrow-up {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+.arrow-up {
+  transform: rotate(-135deg);
+}
+
+.arrow-toggle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(45deg);
+  margin-left: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.arrow-toggle.open {
+  transform: rotate(-135deg);
+}
+</style>
 
 {% block title %}
   {% if subcategory %}
@@ -62,7 +93,7 @@
   <div class="banner-inner">
     <div class="auto-container">
       <div class="inner-container clearfix">
-        <h1>Online Store</h1>
+        <h1 style="font-size: 55px;">Online Store</h1>
         <div class="page-nav">
           <ul class="bread-crumb clearfix">
             <li><a href="{% url 'home' %}">Home</a></li>
@@ -101,13 +132,17 @@
           <!-- Categories -->
 <!-- Categories -->
 <div class="shop-category shop-sidebar__single">
-  <h3 class="shop-sidebar__title">Categories</h3>
-  <ul class="list-unstyled">
+  <h6 class="shop-sidebar__title" onclick="toggleCategoryList()" style="cursor: pointer;font-size: larger;">
+    Filter by Category
+    <span id="category-toggle-arrow" class="arrow-down" style="margin-left: 8px;"></span>
+  </h6>
+
+  <ul id="category-list" class="list-unstyled" style="display: none;">
     <li><a href="{% url 'shop' %}">All</a></li>
     {% for cat in categories %}
       <li>
         <div class="category-header">
-          <a href="{% url 'shop_by_category' cat.slug %}" class="">{{ cat.name }}</a>
+          <a href="{% url 'shop_by_category' cat.slug %}">{{ cat.name }}</a>
           <span class="arrow-toggle" onclick="toggleSubcategories(this)"></span>
         </div>
         <ul class="subcategory-list" style="display: none; padding-left: 15px;">
@@ -119,6 +154,7 @@
     {% endfor %}
   </ul>
 </div>
+
         </div>
       </div>
 
@@ -197,10 +233,24 @@
           </ul>
         </div>
 
+        {% if subcategory and subcategory.description %}
+          <section class="category-description container my-4">
+            <h2 style="font-size: 38px !important;;">{{ subcategory.name }}</h2>
+            <div>{{ subcategory.description|safe }}</div>
+          </section>
+        {% elif category and category.description %}
+          <section class="category-description container my-4">
+            <h2 style="font-size: 38px !important;;">{{ category.name }}</h2>
+            <div>{{ category.description|safe }}</div>
+          </section>
+        {% endif %}
+
+
       </div>
     </div>
   </div>
 </section>
+
 <!-- /.shop-page -->
 <script>
   function toggleSubcategories(el) {
@@ -215,5 +265,27 @@
     }
   }
 </script>
+
+<script>
+function toggleCategoryList() {
+  const list = document.getElementById('category-list');
+  const arrow = document.getElementById('category-toggle-arrow');
+  const isVisible = list.style.display === 'block';
+
+  list.style.display = isVisible ? 'none' : 'block';
+  arrow.className = isVisible ? 'arrow-down' : 'arrow-up';
+}
+
+function toggleSubcategories(element) {
+  const subcategoryList = element.parentElement.nextElementSibling;
+  const isVisible = subcategoryList.style.display === 'block';
+
+  subcategoryList.style.display = isVisible ? 'none' : 'block';
+  element.classList.toggle('open', !isVisible);
+}
+</script>
+
+
+{% include 'main/contact_modal.html' %}
 
 {% endblock %}

@@ -76,6 +76,12 @@ urlpatterns = [
     path('shop/', views.shop, name='shop'),
     path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
     path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
+    
+    path('categories/', views.category_manager, name='category_manager'),
+    path('categories/edit/<int:category_id>/', views.category_manager, name='edit_category'),
+
+    path('subcategories/', views.subcategory_manager, name='subcategory_manager'),
+    path('subcategories/edit/<int:subcategory_id>/', views.subcategory_manager, name='edit_subcategory'),
 
 ]
 
