@@ -1,36 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-<style>
-.arrow-down, .arrow-up {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid #333;
-  border-bottom: 2px solid #333;
-  transform: rotate(45deg);
-  transition: transform 0.3s ease;
-}
-
-.arrow-up {
-  transform: rotate(-135deg);
-}
-
-.arrow-toggle {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid #333;
-  border-bottom: 2px solid #333;
-  transform: rotate(45deg);
-  margin-left: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.arrow-toggle.open {
-  transform: rotate(-135deg);
-}
-</style>
 
 {% block title %}
   {% if subcategory %}
@@ -52,42 +21,31 @@
   {% endif %}
 {% endblock %}
 
-
-
 {% block content %}
+
 <style>
-.category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.category-link {
-  flex-grow: 1;
-  text-decoration: none;
-  color: inherit;
-  white-space: nowrap; /* prevent wrapping */
-}
-
-.arrow-toggle::after {
-  content: "\25B6"; /* ▶ right arrow */
-  font-size: 12px;
+/* Arrow toggle for categories */
+.arrow-toggle, .arrow-down, .arrow-up {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+  margin-left: 8px;
   cursor: pointer;
-  padding-left: 10px;
 }
 
-/* Toggle arrow direction when open */
-.arrow-toggle.open::after {
-  content: "\25BC"; /* ▼ down arrow */
-}
+.arrow-up { transform: rotate(-135deg); }
+.arrow-toggle.open { transform: rotate(-135deg); }
+.category-header { display: flex; justify-content: space-between; align-items: center; }
+.category-link { flex-grow: 1; text-decoration: none; color: inherit; white-space: nowrap; }
 </style>
 
-<!-- Banner Section -->
+<!-- Banner -->
 <section class="page-banner">
-  <div
-    class="image-layer"
-    style="background-image: url(images/background/image-7.jpg)"
-  ></div>
+  <div class="image-layer" style="background-image: url(images/background/image-7.jpg)"></div>
   <div class="shape-1"></div>
   <div class="shape-2"></div>
   <div class="banner-inner">
@@ -104,25 +62,20 @@
     </div>
   </div>
 </section>
-<!--End Banner Section -->
 
+<!-- Shop Section -->
 <section class="shop-page">
   <div class="auto-container">
     <div class="row">
+
       <!-- Sidebar -->
       <div class="col-lg-3">
         <div class="shop-sidebar">
-          <!-- Search and Sort -->
+
+          <!-- Search -->
           <div class="shop-search shop-sidebar__single">
-            <form method="get" action="">
+            <form method="get">
               <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}">
-              {% comment %} <select name="sort" class="custom-select-box" style="margin-top: 10px;">
-                <option value="">Sort by</option>
-                <option value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Price: Low to High</option>
-                <option value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Price: High to Low</option>
-                <option value="date" {% if request.GET.sort == "date" %}selected{% endif %}>Newest First</option>
-                <option value="rating" {% if request.GET.sort == "rating" %}selected{% endif %}>Top Rated</option>
-              </select> {% endcomment %}
               <button type="submit" style="margin-top: 10px;">
                 <i class="flaticon-magnifying-glass"></i>
               </button>
@@ -130,58 +83,54 @@
           </div>
 
           <!-- Categories -->
-<!-- Categories -->
-<div class="shop-category shop-sidebar__single">
-  <h6 class="shop-sidebar__title" onclick="toggleCategoryList()" style="cursor: pointer;font-size: larger;">
-    Filter by Category
-    <span id="category-toggle-arrow" class="arrow-down" style="margin-left: 8px;"></span>
-  </h6>
+          <div class="shop-category shop-sidebar__single">
+            <h6 class="shop-sidebar__title" onclick="toggleCategoryList()" style="cursor:pointer;font-size:larger;">
+              Filter by Category
+              <span id="category-toggle-arrow" class="arrow-down"></span>
+            </h6>
 
-  <ul id="category-list" class="list-unstyled" style="display: none;">
-    <li><a href="{% url 'shop' %}">All</a></li>
-    {% for cat in categories %}
-      <li>
-        <div class="category-header">
-          <a href="{% url 'shop_by_category' cat.slug %}">{{ cat.name }}</a>
-          <span class="arrow-toggle" onclick="toggleSubcategories(this)"></span>
-        </div>
-        <ul class="subcategory-list" style="display: none; padding-left: 15px;">
-          {% for subcat in cat.subcategories.all %}
-            <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
-          {% endfor %}
-        </ul>  
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+            <ul id="category-list" class="list-unstyled" style="display:none;">
+              <li><a href="{% url 'shop' %}">All</a></li>
+              {% for cat in categories %}
+              <li>
+                <div class="category-header">
+                  <a href="{% url 'shop_by_category' cat.slug %}">{{ cat.name }}</a>
+                  {% if cat.subcategories.count %}
+                    <span class="arrow-toggle" onclick="toggleSubcategories(this)"></span>
+                  {% endif %}
+                </div>
+                {% if cat.subcategories.count %}
+                <ul class="subcategory-list" style="display:none; padding-left:15px;">
+                  {% for subcat in cat.subcategories.all %}
+                  <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
 
         </div>
       </div>
 
       <!-- Products -->
       <div class="col-lg-9">
-        <div class="product-sorting default-form">
+        <div class="product-sorting default-form mb-3">
           <p>Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results</p>
         </div>
 
-        {% comment %} uncomment here  {% endcomment %}
-     <div class="row"> 
+        <div class="row">
           {% for product in products %}
-          <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
             <div class="product-card">
               <div class="product-card__image">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" class="img-fluid">
                 {% else %}
-                    <img src="{% static 'images/no-image.png' %}" alt="No Image Available" />
+                  <img src="{% static 'images/no-image.png' %}" alt="No Image Available" loading="lazy" class="img-fluid">
                 {% endif %}
                 <div class="product-card__buttons">
-                  {% comment %} <a class="theme-btn btn-style-one" href="{% url 'cart_add' product.id %}">
-                    <i class="btn-curve"></i>
-                    <input type="number" name="quantity" value="1" min="1" />
-                    <input type="hidden" name="override" value="False" />
-                    <span class="btn-title">Add To Cart</span>
-                  </a> {% endcomment %}
                   <a class="theme-btn btn-style-two" href="{% url 'product_detail' product.slug %}">
                     <i class="btn-curve"></i>
                     <span class="btn-title">Quick View</span>
@@ -189,27 +138,24 @@
                 </div>
               </div>
               <div class="product-card__content">
-                <h3 class="product-card__title" style="font-size: 16px; line-height: 1.2;">
+                <h3 class="product-card__title" style="font-size:16px; line-height:1.2;">
                   <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
                 </h3>
                 {% if product.price != 0 %}
-                
-                <p class="product-card__price">₹{{ product.price }}</p>
-                {% else %}
-                <p></p>
+                  <p class="product-card__price">₹{{ product.price }}</p>
                 {% endif %}
               </div>
             </div>
           </div>
           {% endfor %}
-        </div> 
+        </div>
 
         <!-- Pagination -->
         <div class="pagination-wrapper text-center mt-4">
           <ul class="pagination justify-content-center">
             {% if products.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="?q={{ request.GET.q }}&sort={{ request.GET.sort }}&page={{ products.previous_page_number }}">&laquo;</a>
+              <a class="page-link" href="?q={{ request.GET.q }}&page={{ products.previous_page_number }}">&laquo;</a>
             </li>
             {% else %}
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
@@ -219,13 +165,13 @@
               {% if products.number == num %}
               <li class="page-item active"><span class="page-link">{{ num }}</span></li>
               {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
-              <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&sort={{ request.GET.sort }}&page={{ num }}">{{ num }}</a></li>
+              <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&page={{ num }}">{{ num }}</a></li>
               {% endif %}
             {% endfor %}
 
             {% if products.has_next %}
             <li class="page-item">
-              <a class="page-link" href="?q={{ request.GET.q }}&sort={{ request.GET.sort }}&page={{ products.next_page_number }}">&raquo;</a>
+              <a class="page-link" href="?q={{ request.GET.q }}&page={{ products.next_page_number }}">&raquo;</a>
             </li>
             {% else %}
             <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
@@ -234,57 +180,37 @@
         </div>
 
         {% if subcategory and subcategory.description %}
-          <section class="category-description container my-4">
-            <h2 style="font-size: 38px !important;;">{{ subcategory.name }}</h2>
-            <div>{{ subcategory.description|safe }}</div>
-          </section>
+        <section class="category-description container my-4">
+          <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
+          <div>{{ subcategory.description|safe }}</div>
+        </section>
         {% elif category and category.description %}
-          <section class="category-description container my-4">
-            <h2 style="font-size: 38px !important;;">{{ category.name }}</h2>
-            <div>{{ category.description|safe }}</div>
-          </section>
+        <section class="category-description container my-4">
+          <h2 style="font-size:38px;">{{ category.name }}</h2>
+          <div>{{ category.description|safe }}</div>
+        </section>
         {% endif %}
-
-
       </div>
     </div>
   </div>
 </section>
-
-<!-- /.shop-page -->
-<script>
-  function toggleSubcategories(el) {
-    const subList = el.closest('li').querySelector('.subcategory-list');
-    
-    if (subList.style.display === "none") {
-      subList.style.display = "block";
-      el.classList.add('open');
-    } else {
-      subList.style.display = "none";
-      el.classList.remove('open');
-    }
-  }
-</script>
 
 <script>
 function toggleCategoryList() {
   const list = document.getElementById('category-list');
   const arrow = document.getElementById('category-toggle-arrow');
   const isVisible = list.style.display === 'block';
-
   list.style.display = isVisible ? 'none' : 'block';
   arrow.className = isVisible ? 'arrow-down' : 'arrow-up';
 }
 
-function toggleSubcategories(element) {
-  const subcategoryList = element.parentElement.nextElementSibling;
-  const isVisible = subcategoryList.style.display === 'block';
-
-  subcategoryList.style.display = isVisible ? 'none' : 'block';
-  element.classList.toggle('open', !isVisible);
+function toggleSubcategories(el) {
+  const subList = el.closest('li').querySelector('.subcategory-list');
+  const isVisible = subList.style.display === 'block';
+  subList.style.display = isVisible ? 'none' : 'block';
+  el.classList.toggle('open', !isVisible);
 }
 </script>
-
 
 {% include 'main/contact_modal.html' %}
 

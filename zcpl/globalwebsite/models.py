@@ -7,8 +7,12 @@ from django.utils import timezone
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 
-# Create your models here.
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFit, Transpose
 from django.db import models
+from django.contrib.auth.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -61,20 +65,41 @@ class SubCategory(models.Model):
 #         return self.name
 
 class Product(models.Model):
-    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='products', blank=True, null=True)
-    categories = models.ManyToManyField(SubCategory, related_name='product', blank=True, null=True)
+    category = models.ForeignKey(
+        'SubCategory',
+        on_delete=models.CASCADE,
+        related_name='products',
+        blank=True,
+        null=True
+    )
+    categories = models.ManyToManyField(
+        'SubCategory',
+        related_name='product',
+        blank=True
+    )
 
     name = models.CharField(max_length=200)
-    description = RichTextField(blank=True)
-    short_description = RichTextField(blank=True, null=True)
+    description = RichTextUploadingField(blank=True)
+    short_description = RichTextUploadingField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='products/', blank=True, null=True)
+
+    # Optimized main image
+    image = ProcessedImageField(
+        upload_to='products/',
+        processors=[Transpose(), ResizeToFit(800, 800)],
+        format='WEBP',
+        options={'quality': 80},
+        null=True,
+        blank=True
+    )
+
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
     def save(self, *args, **kwargs):
         if not self.slug:
             base_slug = slugify(self.name)
@@ -89,13 +114,26 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
-    image = models.ImageField(upload_to="products/gallery/",null=True,blank=True)
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
+
+    # Optimized gallery images
+    image = ProcessedImageField(
+        upload_to="products/gallery/",
+        processors=[Transpose(), ResizeToFit(800, 800)],
+        format='WEBP',
+        options={'quality': 80},
+        null=True,
+        blank=True
+    )
+
     alt_text = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return f"{self.product.name} - Image"
-
 
 class Review(models.Model):
     product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
@@ -230,10 +268,24 @@ class Blog(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
     content = RichTextUploadingField()
-    category = models.ForeignKey(CategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
-    # subcategory = models.ForeignKey(SubCategoryBlog, on_delete=models.SET_NULL, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
-    image = models.ImageField(upload_to="blog/thumbnails/", null=True, blank=True)
+    category = models.ForeignKey(
+        'CategoryBlog',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    tags = models.ManyToManyField('Tag', blank=True)
+
+    # Optimized blog thumbnail
+    image = ProcessedImageField(
+        upload_to="blog/thumbnails/",
+        processors=[Transpose(), ResizeToFit(1200, 800)],
+        format='WEBP',
+        options={'quality': 80},
+        null=True,
+        blank=True
+    )
+
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blogs")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -253,12 +305,9 @@ class Blog(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
-    
-
 
     def __str__(self):
         return self.title
-
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, related_name="comments", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

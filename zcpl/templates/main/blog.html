@@ -2,173 +2,84 @@
 {% load static %}
 {% block content %}
 
-        
-        <!-- Banner Section -->
-        <section class="page-banner">
-            <div class="image-layer" style="background-image:url(images/background/image-7.jpg);"></div>
-            <div class="shape-1"></div>
-            <div class="shape-2"></div>
-            <div class="banner-inner">
-                <div class="auto-container">
-                    <div class="inner-container clearfix">
-                        <h1>Blog Posts</h1>
-                        <div class="page-nav">
-                            <ul class="bread-crumb clearfix">
-                                <li><a href="index-main.html">Home</a></li>
-                                <li class="active">Blog Posts</li>
+<!-- Banner Section -->
+<section class="page-banner">
+    <div class="image-layer" style="background-image:url({% static 'images/background/image-7.jpg' %});"></div>
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1>Blog Posts</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li class="active">Blog Posts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+
+<!-- News Section -->
+<section class="news-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+            {% for blog in blogs %}
+            <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="{{ forloop.counter0|add:"0" }}ms"
+                data-wow-duration="1500ms">
+                <div class="inner-box">
+                    <div class="image-box">
+                        {% if blog.image %}
+                        <a href="{% url 'blog_detail' blog.slug %}">
+                            <img src="{{ blog.image.url }}" 
+                                 alt="{{ blog.title }}" 
+                                 width="1200" 
+                                 height="800" 
+                                 loading="lazy" 
+                                 style="max-width:100%; height:auto;">
+                        </a>
+                        {% else %}
+                        <a href="{% url 'blog_detail' blog.slug %}">
+                            <img src="{% static 'images/resource/news-placeholder.jpg' %}" 
+                                 alt="{{ blog.title }}" 
+                                 width="1200" 
+                                 height="800" 
+                                 loading="lazy" 
+                                 style="max-width:100%; height:auto;">
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="lower-box">
+                        <div class="post-meta">
+                            <ul class="clearfix">
+                                <li><span class="far fa-clock"></span> {{ blog.created_at|date:"d M" }}</li>
+                                <li><span class="far fa-user-circle"></span> {{ blog.author.get_full_name|default:blog.author.username }}</li>
+                                <li><span class="far fa-comments"></span> {{ blog.comments.count }} Comments</li>
                             </ul>
                         </div>
+                        <h5><a href="{% url 'blog_detail' blog.slug %}">{{ blog.title }}</a></h5>
+                        <div class="text">{{ blog.content|truncatewords:20 }}</div>
+                        <div class="link-box">
+                            <a class="theme-btn" href="{% url 'blog_detail' blog.slug %}">
+                                <span class="flaticon-next-1"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!--End Banner Section -->
+            {% endfor %}
+        </div>
 
-        <!-- News Section -->
-        <section class="news-section">
-            <div class="auto-container">
-
-                <div class="row clearfix">
-                    <!--News Block-->
-                    <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <a href="blog-single.html"><img src="images/resource/news-1.jpg" alt=""></a>
-                            </div>
-                            <div class="lower-box">
-                                <div class="post-meta">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> 20 Mar</li>
-                                        <li><span class="far fa-user-circle"></span> Admin</li>
-                                        <li><span class="far fa-comments"></span> 2 Comments</li>
-                                    </ul>
-                                </div>
-                                <h5><a href="blog-single.html">basic rules of running web agency business</a></h5>
-                                <div class="text">Lorem ipsum is simply free text used by copytyping refreshing.</div>
-                                <div class="link-box"><a class="theme-btn" href="blog-single.html"><span
-                                            class="flaticon-next-1"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--News Block-->
-                    <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="300ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <a href="blog-single.html"><img src="images/resource/news-2.jpg" alt=""></a>
-                            </div>
-                            <div class="lower-box">
-                                <div class="post-meta">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> 20 Mar</li>
-                                        <li><span class="far fa-user-circle"></span> Admin</li>
-                                        <li><span class="far fa-comments"></span> 2 Comments</li>
-                                    </ul>
-                                </div>
-                                <h5><a href="blog-single.html">Delivering the best digital marketing</a></h5>
-                                <div class="text">Lorem ipsum is simply free text used by copytyping refreshing.</div>
-                                <div class="link-box"><a class="theme-btn" href="blog-single.html"><span
-                                            class="flaticon-next-1"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--News Block-->
-                    <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <a href="blog-single.html"><img src="images/resource/news-3.jpg" alt=""></a>
-                            </div>
-                            <div class="lower-box">
-                                <div class="post-meta">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> 20 Mar</li>
-                                        <li><span class="far fa-user-circle"></span> Admin</li>
-                                        <li><span class="far fa-comments"></span> 2 Comments</li>
-                                    </ul>
-                                </div>
-                                <h5><a href="blog-single.html">Introducing the latest linoor features</a></h5>
-                                <div class="text">Lorem ipsum is simply free text used by copytyping refreshing.</div>
-                                <div class="link-box"><a class="theme-btn" href="blog-single.html"><span
-                                            class="flaticon-next-1"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--News Block-->
-                    <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <a href="blog-single.html"><img src="images/resource/news-4.jpg" alt=""></a>
-                            </div>
-                            <div class="lower-box">
-                                <div class="post-meta">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> 20 Mar</li>
-                                        <li><span class="far fa-user-circle"></span> Admin</li>
-                                        <li><span class="far fa-comments"></span> 2 Comments</li>
-                                    </ul>
-                                </div>
-                                <h5><a href="blog-single.html">EXPERIENCES THAT CONNECT WITH PEOPLE</a></h5>
-                                <div class="text">Lorem ipsum is simply free text used by copytyping refreshing.</div>
-                                <div class="link-box"><a class="theme-btn" href="blog-single.html"><span
-                                            class="flaticon-next-1"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--News Block-->
-                    <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="300ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <a href="blog-single.html"><img src="images/resource/news-5.jpg" alt=""></a>
-                            </div>
-                            <div class="lower-box">
-                                <div class="post-meta">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> 20 Mar</li>
-                                        <li><span class="far fa-user-circle"></span> Admin</li>
-                                        <li><span class="far fa-comments"></span> 2 Comments</li>
-                                    </ul>
-                                </div>
-                                <h5><a href="blog-single.html">A DEEP UNDERSTANDING OF OUR AUDIENCE</a></h5>
-                                <div class="text">Lorem ipsum is simply free text used by copytyping refreshing.</div>
-                                <div class="link-box"><a class="theme-btn" href="blog-single.html"><span
-                                            class="flaticon-next-1"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--News Block-->
-                    <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms"
-                        data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <a href="blog-single.html"><img src="images/resource/news-6.jpg" alt=""></a>
-                            </div>
-                            <div class="lower-box">
-                                <div class="post-meta">
-                                    <ul class="clearfix">
-                                        <li><span class="far fa-clock"></span> 20 Mar</li>
-                                        <li><span class="far fa-user-circle"></span> Admin</li>
-                                        <li><span class="far fa-comments"></span> 2 Comments</li>
-                                    </ul>
-                                </div>
-                                <h5><a href="blog-single.html">WE BUILD AND ACTIVATE BRANDS INSIGHT</a></h5>
-                                <div class="text">Lorem ipsum is simply free text used by copytyping refreshing.</div>
-                                <div class="link-box"><a class="theme-btn" href="blog-single.html"><span
-                                            class="flaticon-next-1"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="more-box">
-                    <a class="theme-btn btn-style-one" href="blog.html">
-                        <i class="btn-curve"></i>
-                        <span class="btn-title">Load more posts</span>
-                    </a>
-                </div>
-            </div>
-        </section>
+        <div class="more-box">
+            <a class="theme-btn btn-style-one" href="{% url 'blog_list' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Load more posts</span>
+            </a>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
