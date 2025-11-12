@@ -299,6 +299,10 @@ def manage_products(request):
         description = request.POST.get('description')
         image = request.FILES.get('image')
 
+        # ✅ New SEO fields
+        meta_title = request.POST.get('meta_title')
+        meta_description = request.POST.get('meta_description')
+
         # Multiple category selection
         category_ids = request.POST.getlist('categories')
         selected_subcategories = SubCategory.objects.filter(id__in=category_ids)
@@ -314,6 +318,8 @@ def manage_products(request):
                     available=available,
                     short_description=short_description,
                     description=description,
+                    meta_title=meta_title,
+                    meta_description=meta_description,
                 )
                 product.categories.set(selected_subcategories)
                 if image:
@@ -327,6 +333,8 @@ def manage_products(request):
                 product.available = available
                 product.short_description = short_description
                 product.description = description
+                product.meta_title = meta_title
+                product.meta_description = meta_description
                 if image:
                     product.image = image
                 product.save()
@@ -364,8 +372,6 @@ def manage_products(request):
         'products': products,
         'error': error
     })
-
-
 
 from django.core.paginator import Paginator
 
@@ -573,17 +579,24 @@ def product_detail(request, slug):
             if contact_form.is_valid():
                 contact_form.save()
                 messages.success(request, "Your quote request has been sent!")
-                # return redirect('product_detail', slug=slug)
                 return redirect('thank_you')
             else:
                 messages.error(request, "Please fix the errors in the form.")
+
+    # ✅ Pass meta fields to template
+    meta_title = product.meta_title or product.name
+    meta_description = product.meta_description or (
+        product.short_description if product.short_description else ''
+    )
 
     return render(request, 'main/product_detail.html', {
         'product': product,
         'cart_product_form': cart_product_form,
         'reviews': reviews,
         'review_count': reviews.count(),
-        'form': contact_form
+        'form': contact_form,
+        'meta_title': meta_title,
+        'meta_description': meta_description,
     })
 
 
@@ -1085,7 +1098,13 @@ def category_manager(request, category_id=None):
         form = CategoryForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        form.save()
+        category = form.save(commit=False)
+        # Auto-fill meta title and description if empty
+        if not category.meta_title:
+            category.meta_title = category.name
+        if not category.meta_description:
+            category.meta_description = category.description[:160]  # First 160 chars
+        category.save()
         return redirect('category_manager')
 
     categories = Category.objects.all()
@@ -1094,9 +1113,9 @@ def category_manager(request, category_id=None):
         'categories': categories,
         'editing': category_id is not None,
     })
-    
-    
-@login_required   
+
+
+@login_required
 def subcategory_manager(request, subcategory_id=None):
     if subcategory_id:
         instance = get_object_or_404(SubCategory, id=subcategory_id)
@@ -1106,7 +1125,13 @@ def subcategory_manager(request, subcategory_id=None):
         form = SubCategoryForm(request.POST or None)
 
     if request.method == 'POST' and form.is_valid():
-        form.save()
+        subcategory = form.save(commit=False)
+        # Auto-fill meta title and description if empty
+        if not subcategory.meta_title:
+            subcategory.meta_title = f"{subcategory.name} | {subcategory.category.name}"
+        if not subcategory.meta_description:
+            subcategory.meta_description = subcategory.description[:160]  # First 160 chars
+        subcategory.save()
         return redirect('subcategory_manager')
 
     subcategories = SubCategory.objects.select_related('category').all()

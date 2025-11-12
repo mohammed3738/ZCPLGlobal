@@ -1,11 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Buy {{ product.name }} Online at Best Price | Zaco Computers
- {% endblock %} {% block meta_description%}
-Get the {{ product.name }} at the best price from Zaco Computers. High-performance, reliable IT hardware with expert support. Available across India and globally.
-{%endblock %} 
-{% block content %}
 {% load custom_tags %}
+
+{% block title %}
+    {% if product.meta_title %}
+        {{product.meta_title}}
+    {% else %}
+        Buy {{ product.name }} Online at Best Price | Zaco Computers
+    {% endif %}
+{% endblock %}
+
+{% block meta_description %}
+    {% if product.meta_description %}
+        {{ product.meta_description|striptags|truncatechars:160 }}
+    {% else %}
+        Get the {{ product.name }} at the best price from Zaco Computers. 
+        High-performance, reliable IT hardware with expert support. 
+        Available across India and globally.
+    {% endif %}
+{% endblock %}
+
+{% block extra_meta %}
+    <meta property="og:title" content="{{ product.meta_title|default:product.name }}">
+    <meta property="og:description" content="{{ product.meta_description|default:product.short_description|striptags|truncatechars:200 }}">
+    {% if product.image %}
+        <meta property="og:image" content="{{ product.image.url }}">
+    {% endif %}
+    <meta property="og:type" content="product">
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block content %}
 
 <style>
 .star-rating i {
@@ -16,25 +41,6 @@ Get the {{ product.name }} at the best price from Zaco Computers. High-performan
 .star-rating i.text-warning {
     color: #ffc107;
 }
-
-
-
-{% comment %} .img-zoom-container {
-  position: relative;
-}
-
-.img-zoom-result {
-  border: 1px solid #d4d4d4;
-  width: 700px;
-  height: 500px;
-  position: absolute;
-  top: 0;
-  left: 420px; /* adjust based on your layout */
-  background-repeat: no-repeat;
-  background-size: 800px 800px; /* depends on your image size */
-  display: none;
-  z-index:100;
-} {% endcomment %}
 
 .img-zoom-container {
     position: relative;
@@ -66,7 +72,6 @@ Get the {{ product.name }} at the best price from Zaco Computers. High-performan
 
 .ckeditor-content table {
   width: 100%;
-  max-width: 100%;
   border-collapse: collapse;
 }
 
@@ -77,215 +82,171 @@ Get the {{ product.name }} at the best price from Zaco Computers. High-performan
   border: 1px solid #ddd;
 }
 
-
 .thumbnail-gallery img {
-    cursor: pointer; /* show pointer cursor */
+    cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .thumbnail-gallery img:hover {
-    transform: scale(1.1); /* zoom on hover */
+    transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-
-
 </style>
 
-     <!-- Banner Section -->
-        <section class="page-banner">
-            {% comment %} <div class="image-layer" style="background-image:url({{ product.image.url }});"></div> {% endcomment %}
-            <div class="shape-1"></div>
-            <div class="shape-2"></div>
-            <div class="banner-inner">
-                <div class="auto-container">
-                    <div class="inner-container clearfix">
-                        <h1 style="font-size: 55px;">{{ product.name }}</h1>
-                        <div class="page-nav">
-                            <ul class="bread-crumb clearfix">
-                                <li><a href="{% url 'home' %}">Home</a></li>
-                                <li class="active">Shop</li>
-                            </ul>
-                        </div>
-                    </div>
+<!-- Banner Section -->
+<section class="page-banner">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1 style="font-size: 55px;">{{ product.name }}</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li class="active">Shop</li>
+                    </ul>
                 </div>
             </div>
-        </section>
-        <!--End Banner Section -->
+        </div>
+    </div>
+</section>
 
+<!-- Product Details -->
 <section class="product-details">
     <div class="auto-container">
         <div class="row">
             <div class="col-lg-12 col-xl-6">
                 <div class="img-zoom-container">
-                    <!-- Main Image -->
-<img 
-    id="mainImage" 
-    src="{{ product.image.url }}" 
-    alt="{{ product.name }}" 
-    width="500" 
-    height="400" 
-    loading="lazy" 
-    style="object-fit:cover;"
-/>
+                    <img 
+                        id="mainImage" 
+                        src="{{ product.image.url }}" 
+                        alt="{{ product.name }}" 
+                        width="500" height="400"
+                        loading="lazy" style="object-fit:cover;"
+                    />
                 </div>
 
-                <!-- Thumbnails -->
+                <!-- Thumbnail Gallery -->
                 <div class="thumbnail-gallery">
-                    <!-- Reset to Original Image -->
-<img 
-    src="{{ product.image.url }}" 
-    alt="Original Image of {{ product.name }}" 
-    class="thumbnail" 
-    width="100" 
-    height="100" 
-    loading="lazy" 
-    onclick="resetMainImage()" 
-    title="Show Original Image"
-/>
-
+                    <img 
+                        src="{{ product.image.url }}" 
+                        alt="Original Image of {{ product.name }}" 
+                        class="thumbnail" 
+                        width="100" height="100"
+                        loading="lazy"
+                        onclick="resetMainImage()"
+                        title="Show Original Image"
+                    />
 
                     {% for img in product.images.all %}
                         <img 
-    src="{{ img.image.url }}" 
-    alt="{{ img.alt_text|default:product.name }}" 
-    class="thumbnail" 
-    width="100" 
-    height="100"
-    loading="lazy" 
-    onclick="changeMainImage(this.src)"
-/>
-
+                            src="{{ img.image.url }}" 
+                            alt="{{ img.alt_text|default:product.name }}" 
+                            class="thumbnail" 
+                            width="100" height="100"
+                            loading="lazy"
+                            onclick="changeMainImage(this.src)"
+                        />
                     {% endfor %}
                 </div>
-
-            </div><!-- /.col-md-12 col-lg-6 -->
+            </div>
 
             <div class="col-lg-12 col-xl-6">
-                <!-- Your existing product info remains unchanged -->
                 <div class="product-details__top">
                     <h3 class="product-details__title">{{ product.name }}</h3>
                 </div>
+
                 <div class="product-details__reveiw">
                     <i class="fa fa-star"></i><i class="fa fa-star"></i>
                     <i class="fa fa-star"></i><i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <span>{{ review_count }} Customer Review{{ review_count|pluralize }}</span>
                 </div>
+
                 {% if product.price != 0 %}
                     <div class="product-details__price">₹{{ product.price }}</div>
                 {% endif %}
+
                 <div class="ckeditor-content">{{ product.short_description|safe }}</div>
                 <p>Available in store</p>
-                <!-- Add to Cart Button -->
+
+                <!-- Add to Cart & Quote Buttons -->
                 <form action="{% url 'cart_add' product.id %}" method="post" class="form-inline">
                     {% csrf_token %}
-                    <div class="product-details__quantity" style="align-items: baseline;column-gap: 10px;">
+                    <div class="product-details__quantity" style="align-items: baseline; column-gap: 10px;">
                         <h3 style="font-size: 22px;">Choose Quantity</h3>
                         {{ cart_product_form.quantity }}
                         {{ cart_product_form.override }}
                     </div>
+
                     <div class="product-details__buttons">
                         {% if product.price != 0 %}
-                            <!-- Trigger the modal instead of submitting form -->
                             <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal">
-                                <i class="btn-curve"></i>                              
+                                <i class="btn-curve"></i>
                                 <span class="btn-title">Request Quote</span>
                             </button>
 
                             <button type="submit" class="theme-btn btn-style-one" style="background: #1a3546; color: #41b974;">
-                                <i class="btn-curve"></i>                              
+                                <i class="btn-curve"></i>
                                 <span class="btn-title">Add to cart</span>
                             </button>
                         {% else %}
                             <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal">
-                                <i class="btn-curve"></i>                              
+                                <i class="btn-curve"></i>
                                 <span class="btn-title">Request Quote</span>
                             </button>
                         {% endif %}
                     </div>
-                    </div>
                 </form>
-            </div><!-- /.col-md-12 col-lg-6 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section><!-- /.product-details -->
+            </div>
+        </div>
+    </div>
+</section>
 
-      <section class="product-description">
-            <div class="auto-container">
-                <h3 class="product-description__title">Description</h3><!-- /.product-title -->
-                {{ product.description|safe }}
-                {% comment %} <p class="product-description__text">Aliquam et facilisis arcuut olestie augue. Suspendisse sodales
-                    tortor nunc quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit in voluptate
-                    velit esse cill doloreeu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt
-                    in culpa qui officia deserunt mollit anim id est laborum. Vivaus sed delly molestie sapien. Aliquam
-                    et facilisis arcuut molestie augue. </p> {% endcomment %}
-            </div><!-- /.container -->
-        </section><!-- /.product-description --> 
+<!-- Product Description -->
+<section class="product-description">
+    <div class="auto-container">
+        <h3 class="product-description__title">Description</h3>
+        <div class="ckeditor-content">{{ product.description|safe }}</div>
+    </div>
+</section>
 
-        <section class="review-one">
-            <div class="auto-container">
-                <div class="comments-area">
-                    <div class="comments-title">
-                        <h3>Comments</h3>
-                    </div>
-                    <div class="comment-box">
-                        
+<!-- Reviews -->
+<section class="review-one">
+    <div class="auto-container">
+        <div class="comments-area">
+            <div class="comments-title">
+                <h3>Comments</h3>
+            </div>
 
-                        {% for review in reviews %}
-                        <div class="comment">
-                            {% comment %} <div class="author-thumb">
-                                <figure class="thumb"><img src="images/resource/author-7.jpg" alt="">
-                                </figure>
-                            </div> {% endcomment %}
-                            <div class="info">
-                                <div class="name">{{ review.name }}</div>
-                                <div class="date">{{ review.created_at|date:"M d, Y H:i" }}</div>
-                            </div>
-                            <div class="text">{{ review.comment }}</div>
-
-                            <div class="reply-btn">
-                            <p class="mb-1">
-                                {% for _ in review.rating|times %}
-                                    <i class="fa fa-star text-warning"></i>
-                                {% endfor %}
-                                {% for _ in 5|subtract:review.rating|times %}
-                                    <i class="fa fa-star text-secondary"></i>
-                                {% endfor %}
-                            </p>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    {% comment %} <div class="comment-box">
-                        <div class="comment">
-                            <div class="author-thumb">
-                                <figure class="thumb"><img src="images/resource/author-8.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="info">
-                                <div class="name">David Martin</div>
-                                <div class="date">20 May, 2020 . 4:00 pm</div>
-                            </div>
-                            <div class="text">Aliquam et facilisis arcuut olestie augue. Suspendisse sodales tortor nunc
-                                quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit in voluptate
-                                velit esse cill doloreeu fugiat nulla pariatur excepteur sint</div>
-                            <div class="reply-btn">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
-
+            {% for review in reviews %}
+            <div class="comment">
+                <div class="info">
+                    <div class="name">{{ review.name }}</div>
+                    <div class="date">{{ review.created_at|date:"M d, Y H:i" }}</div>
                 </div>
+                <div class="text">{{ review.comment }}</div>
 
-            </div><!-- /.container -->
-        </section><!-- /.review-one -->
+                <div class="reply-btn">
+                    <p class="mb-1">
+                        {% for _ in review.rating|times %}
+                            <i class="fa fa-star text-warning"></i>
+                        {% endfor %}
+                        {% for _ in 5|subtract:review.rating|times %}
+                            <i class="fa fa-star text-secondary"></i>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            {% empty %}
+                <p>No reviews yet. Be the first to write one!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
+<!-- Review Form -->
 <section class="review-form">
     <div class="auto-container">
         <h3 class="review-form__title">Add a review</h3>
@@ -326,47 +287,48 @@ Get the {{ product.name }} at the best price from Zaco Computers. High-performan
     </div>
 </section>
 
-
+<!-- Scripts -->
 <script>
-    const stars = document.querySelectorAll('.star-rating i');
-    const ratingInput = document.getElementById('rating-value');
+const stars = document.querySelectorAll('.star-rating i');
+const ratingInput = document.getElementById('rating-value');
 
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            const rating = star.getAttribute('data-value');
-            ratingInput.value = rating;
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-value');
+        ratingInput.value = rating;
 
-            stars.forEach(s => {
-                s.classList.remove('text-warning');
-                if (s.getAttribute('data-value') <= rating) {
-                    s.classList.add('text-warning');
-                }
-            });
+        stars.forEach(s => {
+            s.classList.remove('text-warning');
+            if (s.getAttribute('data-value') <= rating) {
+                s.classList.add('text-warning');
+            }
         });
     });
-</script>
+});
 
-<script>
-function changeImage(src) {
-    let mainImg = document.getElementById('mainImage');
-    mainImg.src = src;
+const mainImage = document.getElementById('mainImage');
+const originalImageSrc = mainImage.src;
+
+function changeMainImage(src) {
+    mainImage.src = src;
 }
 
-// Amazon-style zoom effect
+function resetMainImage() {
+    mainImage.src = originalImageSrc;
+}
+
+// Simple zoom effect
 document.addEventListener("DOMContentLoaded", function() {
     const img = document.getElementById('mainImage');
     const container = img.parentElement;
-
     container.style.position = "relative";
     container.style.overflow = "hidden";
-
-    let zoomScale = 2.5; // zoom level
+    let zoomScale = 2.5;
 
     container.addEventListener('mousemove', function(e) {
         const rect = img.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
-
         img.style.transformOrigin = `${x}% ${y}%`;
         img.style.transform = `scale(${zoomScale})`;
     });
@@ -377,23 +339,5 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-
-
-<script>
-    const mainImage = document.getElementById('mainImage');
-    const originalImageSrc = mainImage.src; // store original image URL
-
-    // Change main image
-    function changeMainImage(src) {
-        mainImage.src = src;
-    }
-
-    // Reset to original
-    function resetMainImage() {
-        mainImage.src = originalImageSrc;
-    }
-</script>
-
 {% include "main/request_quote_modal.html" %}
-
-        {% endblock %}
+{% endblock %}

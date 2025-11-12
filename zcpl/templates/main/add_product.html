@@ -4,12 +4,23 @@
   <title>Manage Products</title>
   <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
     th { background-color: #f2f2f2; }
     .form-group { margin-bottom: 15px; }
     .thumb-preview { margin: 5px; display: inline-block; }
     .thumb-preview img { border: 1px solid #ccc; padding: 3px; }
+    button { padding: 8px 15px; cursor: pointer; }
+    input[type="text"], input[type="number"], textarea, select {
+      width: 100%;
+      max-width: 600px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 <body>
@@ -26,6 +37,7 @@
       <input type="hidden" name="product_id" value="{{ product_to_edit.id }}">
     {% endif %}
 
+    <!-- Categories -->
     <div class="form-group">
       <label>Categories (you can select multiple):</label><br>
       <select name="categories" multiple required size="7">
@@ -38,16 +50,19 @@
       </select>
     </div>
 
+    <!-- Product Name -->
     <div class="form-group">
       <label>Product Name:</label><br>
       <input type="text" name="name" value="{% if editing %}{{ product_to_edit.name }}{% endif %}" required>
     </div>
 
+    <!-- Price -->
     <div class="form-group">
       <label>Price:</label><br>
       <input type="number" step="0.01" name="price" value="{% if editing %}{{ product_to_edit.price }}{% endif %}" required>
     </div>
 
+    <!-- Available -->
     <div class="form-group">
       <label>Available:</label>
       <input type="checkbox" name="available"
@@ -56,6 +71,7 @@
         {% else %}checked{% endif %}>
     </div>
 
+    <!-- Main Image -->
     <div class="form-group">
       <label>Main Image:</label><br>
       <input type="file" name="image"><br>
@@ -64,6 +80,7 @@
       {% endif %}
     </div>
 
+    <!-- Gallery Images -->
     <div class="form-group">
       <label>Gallery Images (you can select multiple):</label><br>
       <input type="file" name="gallery_images" multiple>
@@ -80,16 +97,30 @@
       {% endif %}
     </div>
 
+    <!-- ✅ Meta Fields -->
+    <div class="form-group">
+      <label>Meta Title:</label><br>
+      <input type="text" name="meta_title" value="{% if editing %}{{ product_to_edit.meta_title }}{% endif %}" placeholder="Optional SEO title">
+    </div>
+
+    <div class="form-group">
+      <label>Meta Description:</label><br>
+      <textarea name="meta_description" rows="3" placeholder="Optional SEO description">{% if editing %}{{ product_to_edit.meta_description }}{% endif %}</textarea>
+    </div>
+
+    <!-- Short Description -->
     <div class="form-group">
       <label>Short Description:</label><br>
       <textarea name="short_description" id="short_description">{% if editing %}{{ product_to_edit.short_description }}{% endif %}</textarea>
     </div>
 
+    <!-- Full Description -->
     <div class="form-group">
       <label>Full Description:</label><br>
       <textarea name="description" id="description">{% if editing %}{{ product_to_edit.description }}{% endif %}</textarea>
     </div>
 
+    <!-- Submit -->
     <button type="submit">{% if editing %}Update{% else %}Add{% endif %} Product</button>
   </form>
 
@@ -102,6 +133,7 @@
 
   <h2>Product List</h2>
 
+  <!-- Search & Sort -->
   <form method="get" style="margin-bottom: 15px;">
     <input type="text" name="search" placeholder="Search by name" value="{{ request.GET.search }}">
     <select name="sort">
@@ -113,6 +145,7 @@
     <button type="submit">Apply</button>
   </form>
 
+  <!-- Product Table -->
   <table>
     <thead>
       <tr>
@@ -143,7 +176,7 @@
               <img src="{{ product.image.url }}" width="50" />
             {% else %}N/A{% endif %}
           </td>
-          <td>{{ product.created }}</td>
+          <td>{{ product.created|date:"Y-m-d H:i" }}</td>
           <td>
             <a href="?edit={{ product.id }}">Edit</a> |
             <a href="?delete={{ product.id }}" onclick="return confirm('Delete product?')">Delete</a>
@@ -154,7 +187,9 @@
       {% endfor %}
     </tbody>
   </table>
-<script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/static/ckeditor/ckeditor-init.js"></script>
+
+  <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+  <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js"></script>
+
 </body>
 </html>

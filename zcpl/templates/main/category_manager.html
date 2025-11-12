@@ -3,29 +3,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Category Manager</title>
+  <title>{% if form.instance.meta_title %}{{ form.instance.meta_title }}{% else %}Category Manager{% endif %}</title>
+  <meta name="description" content="{% if form.instance.meta_description %}{{ form.instance.meta_description|truncatechars:160 }}{% else %}Manage categories for your site.{% endif %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <h1>{% if editing %}Edit{% else %}Create{% endif %} Category</h1>
+  
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>
+      <label for="id_name">Name:</label><br>
+      {{ form.name }}
+    </p>
+    <p>
+      <label for="id_slug">Slug:</label><br>
+      {{ form.slug }}
+    </p>
+    <p>
+      <label for="id_description">Description:</label><br>
+      {{ form.description }}
+    </p>
+    <p>
+      <label for="id_meta_title">Meta Title:</label><br>
+      {{ form.meta_title }}
+    </p>
+    <p>
+      <label for="id_meta_description">Meta Description:</label><br>
+      {{ form.meta_description }}
+    </p>
+
     <button type="submit">{% if editing %}Update{% else %}Create{% endif %}</button>
   </form>
 
   <h2>All Categories</h2>
-  <ul>
-    {% for cat in categories %}
-      <li>
-        <strong>{{ cat.name }}</strong> - <a href="{% url 'edit_category' cat.id %}">Edit</a>
-        {% if cat.description %}
-          <div>{{ cat.description|safe }}</div>
-        {% endif %}
-      </li>
-    {% empty %}
-      <li>No categories found.</li>
-    {% endfor %}
-  </ul>
+  <table border="1" cellspacing="0" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Meta Title</th>
+            <th>Meta Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cat in categories %}
+        <tr>
+            <td>{{ cat.name }}</td>
+            <td>{% if cat.description %}{{ cat.description|safe }}{% else %}-{% endif %}</td>
+            <td>{% if cat.meta_title %}{{ cat.meta_title }}{% else %}-{% endif %}</td>
+            <td>{% if cat.meta_description %}{{ cat.meta_description|truncatechars:160 }}{% else %}-{% endif %}</td>
+            <td><a href="{% url 'edit_category' cat.id %}">Edit</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align:center;">No categories found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
   <!-- CKEditor JS -->
   <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>

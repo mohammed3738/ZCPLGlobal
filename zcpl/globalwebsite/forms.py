@@ -15,8 +15,29 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['category', 'name', 'description', 'short_description', 'price', 'image', 'available']
-
+        fields = [
+            'category',
+            'categories',           # if you want to include the M2M field too
+            'name',
+            'description',
+            'short_description',
+            'price',
+            'image',
+            'available',
+            'meta_title',           # ✅ new SEO field
+            'meta_description',     # ✅ new SEO field
+        ]
+        widgets = {
+            'meta_title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter custom meta title (optional)',
+            }),
+            'meta_description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Enter meta description (optional)',
+            }),
+        }
 
 
 
@@ -146,17 +167,22 @@ class CommentForm(forms.ModelForm):
 
 
 class CategoryForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorWidget())
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+    meta_title = forms.CharField(max_length=150, required=False)
+    meta_description = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
         model = Category
-        fields = ['name', 'slug', 'description']
+        fields = ['name', 'slug', 'description', 'meta_title', 'meta_description']
+
 
 class SubCategoryForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditorWidget())
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+    meta_title = forms.CharField(max_length=150, required=False)
+    meta_description = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
         model = SubCategory
-        fields = ['category', 'name', 'slug', 'description']
+        fields = ['category', 'name', 'slug', 'description', 'meta_title', 'meta_description']
         
         

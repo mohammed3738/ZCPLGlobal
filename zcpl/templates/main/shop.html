@@ -2,23 +2,23 @@
 {% load static %}
 
 {% block title %}
-  {% if subcategory %}
-    Buy {{ subcategory.name|title }} Online at Best Price | Zaco Computers
-  {% elif category %}
-    Buy {{ category.name|title }} Products Online at Best Price | Zaco Computers
-  {% else %}
-    Shop Enterprise IT Hardware Online | Zaco Computers
-  {% endif %}
+    {% if subcategory.meta_title %}
+        {{subcategory.meta_title}}
+    {% elif category.meta_title %}
+        {{category.meta_title}}
+    {% else %}
+        Shop Enterprise IT Hardware Online | Zaco Computers
+    {% endif %}
 {% endblock %}
 
 {% block meta_description %}
-  {% if subcategory %}
-   Explore top-quality {{ subcategory.name|title }} at Zaco Computers. Reliable enterprise IT hardware with expert support and global delivery.
-  {% elif category %}
-   Browse a wide range of {{ category.name|title }} products at Zaco Computers. Trusted supplier of IT hardware with 24x7 support and fast shipping.
-  {% else %}
-   Shop enterprise-grade IT hardware including servers, storage, and networking at Zaco Computers. Your trusted global IT infrastructure partner.
-  {% endif %}
+    {% if subcategory.meta_description %}
+        {{subcategory.meta_description}}
+    {% elif category.meta_description %}
+        {{category.meta_description}}
+    {% else %}
+        Shop enterprise-grade IT hardware including servers, storage, and networking at Zaco Computers. Your trusted global IT infrastructure partner.
+    {% endif %}
 {% endblock %}
 
 {% block content %}

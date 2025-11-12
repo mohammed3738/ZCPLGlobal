@@ -34,20 +34,64 @@ class ContactMessageGlobal(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
-    description = RichTextField(blank=True, null=True)  # NEW
+    description = RichTextField(blank=True, null=True)
+
+    # ✅ SEO fields
+    meta_title = models.CharField(max_length=150, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        # Auto-generate slug if missing
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        # Auto-generate meta_title and meta_description if not provided
+        if not self.meta_title:
+            self.meta_title = f"{self.name} | Zaco Computers"
+        if not self.meta_description and self.description:
+            self.meta_description = (
+                self.description[:155].replace('\n', ' ')
+                if len(self.description) > 155 else self.description
+            )
+
+        super().save(*args, **kwargs)
+
 
 class SubCategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='subcategories')
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='subcategories'
+    )
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
-    description = RichTextField(blank=True, null=True)  # NEW
+    description = RichTextField(blank=True, null=True)
+
+    # ✅ SEO fields
+    meta_title = models.CharField(max_length=150, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.category.name} -> {self.name}"
+        return f"{self.category.name} → {self.name}"
+
+    def save(self, *args, **kwargs):
+        # Auto-generate slug if missing
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        # Auto-generate meta fields if missing
+        if not self.meta_title:
+            self.meta_title = f"{self.name} | {self.category.name} | Zaco Computers"
+        if not self.meta_description and self.description:
+            self.meta_description = (
+                self.description[:155].replace('\n', ' ')
+                if len(self.description) > 155 else self.description
+            )
+
+        super().save(*args, **kwargs)
 
 
 
@@ -97,10 +141,15 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
+    # ✅ New SEO fields
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(max_length=500, blank=True, null=True)
+
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
+        # Generate unique slug if not set
         if not self.slug:
             base_slug = slugify(self.name)
             slug = base_slug
@@ -109,6 +158,15 @@ class Product(models.Model):
                 slug = f"{base_slug}-{counter}"
                 counter += 1
             self.slug = slug
+
+        # Auto-fill meta title and description if empty
+        if not self.meta_title:
+            self.meta_title = self.name[:255]
+        if not self.meta_description and self.short_description:
+            # Remove HTML tags (optional)
+            from django.utils.html import strip_tags
+            self.meta_description = strip_tags(self.short_description)[:500]
+
         super().save(*args, **kwargs)
 
 
