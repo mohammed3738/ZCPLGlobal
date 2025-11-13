@@ -170,8 +170,8 @@ class Product(models.Model):
             self.meta_description = strip_tags(self.meta_description or "")[:500]
 
         # Clean short_description as well (for fallback)
-        if self.short_description:
-            self.short_description = strip_tags(self.short_description)
+        # if self.short_description:
+        #     self.short_description = strip_tags(self.short_description)
 
         super().save(*args, **kwargs)
 
