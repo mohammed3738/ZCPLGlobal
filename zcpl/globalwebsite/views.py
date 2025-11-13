@@ -5,6 +5,8 @@ from django.conf import settings
 from .models import *
 from .cart import Cart
 from .forms import *
+import json
+
 from django.db.models import Q, Avg
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
