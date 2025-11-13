@@ -6,7 +6,7 @@ from .models import *
 from .cart import Cart
 from .forms import *
 import json
-
+import html
 from django.db.models import Q, Avg
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
@@ -551,50 +551,53 @@ def cart_detail(request):
 
 
 
+# ---------- Helpers ----------
+
 def clean_text_for_jsonld(text, max_chars=500):
     """
-    Strip HTML, replace newlines/tabs with spaces, collapse whitespace and truncate.
+    - strip HTML tags
+    - unescape HTML entities (&nbsp;, &amp;, etc.)
+    - replace CR/LF and NBSP with spaces
+    - collapse multiple spaces and truncate
     """
     if not text:
         return ""
+    # remove tags
     t = strip_tags(text)
-    t = t.replace("\r", " ").replace("\n", " ").replace("\t", " ")
-    t = " ".join(t.split())
-    return t[:max_chars].strip()
+    # unescape HTML entities (turn &nbsp; -> non-breaking space, &amp; -> &)
+    t = html.unescape(t)
+    # replace NBSP and other Unicode non-breaking spaces with normal space
+    t = t.replace('\u00A0', ' ')
+    # replace CR/LF/tabs with space
+    t = t.replace('\r', ' ').replace('\n', ' ').replace('\t', ' ')
+    # collapse multiple spaces
+    t = ' '.join(t.split())
+    if max_chars:
+        return t[:max_chars].strip()
+    return t.strip()
 
-# Known brands list — extend if needed
 KNOWN_BRANDS = ["DELL", "HPE", "IBM", "CISCO"]
 
 def extract_brand_token_from_text(text, known_brands=None):
-    """
-    Try to find a known brand token inside text (case-insensitive).
-    Returns the brand token (from known_brands) or None.
-    """
     if not text:
         return None
     if known_brands is None:
         known_brands = KNOWN_BRANDS
     txt = text.strip().upper()
     for b in known_brands:
-        if txt == b:
-            return b
-        if txt.startswith(b + " "):
-            return b
-        if f" {b} " in f" {txt} ":
+        if txt == b or txt.startswith(b + " ") or f" {b} " in f" {txt} ":
             return b
     return None
 
 def derive_brand_using_subcategory_category(product):
     """
-    Resolve brand using:
-      1) product.brand.name (if present)
-      2) product.category.category.name (subcategory -> category)
-      3) product.category.name (subcategory)
-      4) product.name scanning
-      5) fallback 'Generic'
-    Defensive checks for missing attributes included.
+    1) product.brand.name (if exists)
+    2) product.category.category.name (subcategory -> category)
+    3) product.category.name (subcategory)
+    4) product.name (scan)
+    5) fallback Generic
     """
-    # 1) explicit product.brand.name
+    # 1) explicit brand
     try:
         if hasattr(product, 'brand') and getattr(product, 'brand') is not None:
             brand_obj = getattr(product, 'brand')
@@ -605,7 +608,7 @@ def derive_brand_using_subcategory_category(product):
     except Exception:
         pass
 
-    # 2) subcategory -> category (preferred)
+    # 2) subcategory -> category
     try:
         subcat = getattr(product, 'category', None)
         if subcat is not None:
@@ -615,7 +618,7 @@ def derive_brand_using_subcategory_category(product):
                 tok = extract_brand_token_from_text(parent_name)
                 if tok:
                     return tok
-            # 3) try subcategory name itself
+            # 3) subcategory name
             subcat_name = getattr(subcat, 'name', None) or ""
             tok = extract_brand_token_from_text(subcat_name)
             if tok:
@@ -623,7 +626,7 @@ def derive_brand_using_subcategory_category(product):
     except Exception:
         pass
 
-    # 4) scan product name
+    # 4) product name
     try:
         pnm = getattr(product, 'name', '') or ''
         tok = extract_brand_token_from_text(pnm)
@@ -632,22 +635,22 @@ def derive_brand_using_subcategory_category(product):
     except Exception:
         pass
 
-    # 5) fallback
     return "Generic"
 
 def build_jsonld_dicts(request, product):
     """
-    Build product_ld and breadcrumb_ld Python dicts (cleaned).
+    Build Product and Breadcrumb JSON-LD dicts and return them.
     """
     base = f"{request.scheme}://{request.get_host()}"
 
-    # description
+    # description cleaned (removes &nbsp; etc.)
+    desc = ""
     if hasattr(product, 'meta_description') and product.meta_description:
         desc = clean_text_for_jsonld(product.meta_description, 500)
     else:
         desc = clean_text_for_jsonld(getattr(product, 'short_description', ''), 500)
 
-    # images (absolute urls)
+    # images absolute urls
     images = []
     if hasattr(product, 'image') and getattr(product, 'image', None):
         try:
@@ -665,7 +668,7 @@ def build_jsonld_dicts(request, product):
         except Exception:
             pass
 
-    # brand (resolve using subcategory->category)
+    # brand resolution
     jsonld_brand = derive_brand_using_subcategory_category(product)
 
     # price only if numeric > 0
@@ -678,7 +681,7 @@ def build_jsonld_dicts(request, product):
         except Exception:
             jsonld_price = None
 
-    # product JSON-LD dict
+    # Product dict
     product_ld = {
         "@context": "https://schema.org/",
         "@type": "Product",
@@ -704,7 +707,7 @@ def build_jsonld_dicts(request, product):
             }
         }
 
-    # breadcrumbs: include subcategory (product.category) if available
+    # Breadcrumbs (subcategory -> product)
     breadcrumb_items = [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{base}/"},
         {"@type": "ListItem", "position": 2, "name": "Shop", "item": f"{base}/shop/"},
@@ -713,11 +716,11 @@ def build_jsonld_dicts(request, product):
         subcat = getattr(product, 'category', None)
         if subcat is not None and getattr(subcat, 'name', None):
             breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": subcat.name, "item": f"{base}/shop/{getattr(subcat, 'slug', '')}/"})
-            breadcrumb_items.append({"@type": "ListItem", "position": 4, "name": product.name, "item": request.build_absolute_uri()})
+            breadcrumb_items.append({"@type": "ListItem", "position": 4, "name": strip_tags(getattr(product, 'name', '')), "item": request.build_absolute_uri()})
         else:
-            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": product.name, "item": request.build_absolute_uri()})
+            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": strip_tags(getattr(product, 'name', '')), "item": request.build_absolute_uri()})
     except Exception:
-        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": product.name, "item": request.build_absolute_uri()})
+        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": strip_tags(getattr(product, 'name', '')), "item": request.build_absolute_uri()})
 
     breadcrumb_ld = {
         "@context": "https://schema.org",
@@ -726,7 +729,6 @@ def build_jsonld_dicts(request, product):
     }
 
     return product_ld, breadcrumb_ld
-
 # ---------- View ----------
 
 def product_detail(request, slug):
