@@ -385,19 +385,19 @@ document.addEventListener("DOMContentLoaded", function() {
   "image": [
     "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}"
     {% for img in product.images.all %}
-    ,"{{ request.scheme }}://{{ request.get_host }}{{ img.image.url }}"
+      , "{{ request.scheme }}://{{ request.get_host }}{{ img.image.url }}"
     {% endfor %}
   ],
   "description": "{{ product.meta_description|default:product.short_description|striptags|truncatechars:500|escapejs }}",
   "brand": {
     "@type": "Brand",
-    "name": "{% if 'dell' in product.name|lower %}Dell{% else %}Zaco Computers{% endif %}"
+    "name": "{{ product.brand.name|default_if_none:'Generic'|escapejs }}"
   },
   "offers": {
     "@type": "Offer",
     "url": "{{ request.build_absolute_uri }}",
     "priceCurrency": "INR",
-    "price": "{{ product.price|floatformat:2 }}",
+    "price": "{{ product.price }}",
     "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
     "seller": {
       "@type": "Organization",
@@ -406,6 +406,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 }
 </script>
+
 
 
 {% endblock %}
