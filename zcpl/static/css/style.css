@@ -31336,6 +31336,18 @@ img.lazy-image.loaded {
 
 
 
+/* strict stacking */
+.modal-backdrop {
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1040 !important;
+}
+.modal {
+  z-index: 2000 !important; /* big number ensures modal above many theme elements */
+}
 
 
 

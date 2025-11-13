@@ -1,58 +1,220 @@
+<!-- Put this AFTER bootstrap and theme CSS -->
+<style>
+/* Ensure backdrop covers screen but remains under the modal */
+.modal-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 1040 !important;     /* default backdrop z-index but forced */
+  pointer-events: auto !important;
+}
+
+/* Force modal to sit above backdrop */
+.modal {
+  z-index: 11000 !important;    /* very high to beat theme conflicts */
+}
+
+/* If you use .modal.show explicitly */
+.modal.show {
+  z-index: 11000 !important;
+}
+
+/* Prevent other page elements from creating higher stacking contexts */
+/* Lower likely offenders — adjust class names if your layout uses different ones */
+.header, .topbar, .navbar-fixed-top, .page-banner, .site-header, .site-wrapper {
+  z-index: 1000 !important;
+}
+
+/* Make sure body doesn't create an unexpected stacking context */
+body {
+  position: static !important; /* reset if theme set position relative/fixed */
+}
+
+/* Safety: if some theme rules set huge z-index on backdrop, override them */
+.modal-backdrop.show {
+  z-index: 1040 !important;
+}
+</style>
+
+
+
+
+
 <!-- Request Quote Modal -->
-<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel"
+     aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
+
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content p-4">
+
+      <!-- Modal Header -->
       <div class="modal-header">
-        <h5 class="modal-title" id="quoteModalLabel">Request a Quote for {{ product.name }}</h5>
+        <h5 class="modal-title" id="quoteModalLabel">
+          Request a Quote for {{ product.name }}
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
+      <!-- Form -->
       <form method="post" action="">
         {% csrf_token %}
+
         <div class="modal-body">
           <div class="row">
+
+            <!-- Name -->
             <div class="col-md-6 mb-3">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <input type="text" name="subject" class="form-control" value="Quote Request for {{ product.name }}" required>
-            </div>
-            <div class="col-12 mb-3">
-              <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
+              <input type="text" name="name" class="form-control"
+                     placeholder="Your Name" required>
             </div>
 
-            {% if form.captcha %}
-            <div class="form-group col-lg-12">
-              {{ form.captcha }}
-              {% if form.captcha.errors %}
-              <div class="error text-danger">
-                {% for error in form.captcha.errors %}
-                <small>{{ error }}</small>
-                {% endfor %}
-              </div>
-              {% endif %}
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+              <input type="email" name="email" class="form-control"
+                     placeholder="Email Address" required>
             </div>
+
+            <!-- Phone -->
+            <div class="col-md-6 mb-3">
+              <input type="text" name="phone" class="form-control"
+                     placeholder="Phone Number" required>
+            </div>
+
+            <!-- Subject -->
+            <div class="col-md-6 mb-3">
+              <input type="text" name="subject" class="form-control"
+                     value="Quote Request for {{ product.name }}" required>
+            </div>
+
+            <!-- Message -->
+            <div class="col-12 mb-3">
+              <textarea name="message" class="form-control" rows="4"
+                        placeholder="Your Message" required></textarea>
+            </div>
+
+            <!-- Captcha (Only if exists) -->
+            {% if form.captcha %}
+              <div class="form-group col-lg-12 mb-3">
+                {{ form.captcha }}
+
+                {% if form.captcha.errors %}
+                  <div class="error text-danger mt-1">
+                    {% for error in form.captcha.errors %}
+                      <small>{{ error }}</small>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
             {% endif %}
+
           </div>
         </div>
+
+        <!-- Modal Footer -->
         <div class="modal-footer justify-content-center">
           <button type="submit" class="btn btn-primary px-4">Send Request</button>
         </div>
+
       </form>
+
     </div>
   </div>
+
 </div>
-{% if messages %}
-  <div class="container mt-3">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+
+
+
+
+
+<script>
+(function () {
+  'use strict';
+
+  // Helper: numeric z-index from an element (0 if none)
+  function zIndexOf(el) {
+    if (!el) return 0;
+    const z = window.getComputedStyle(el).zIndex;
+    return Number.isFinite(Number(z)) ? Number(z) : 0;
+  }
+
+  // Move modal node to body to avoid ancestor stacking contexts
+  function ensureModalInBody(modalEl) {
+    if (!modalEl) return;
+    if (modalEl.parentNode !== document.body) {
+      document.body.appendChild(modalEl);
+      // ensure it remains visible after moving
+      modalEl.style.display = modalEl.style.display || '';
+    }
+  }
+
+  // Ensure only one backdrop exists and compute highest backdrop z
+  function highestBackdropZIndex() {
+    const backdrops = Array.from(document.querySelectorAll('.modal-backdrop'));
+    if (!backdrops.length) return 0;
+    return backdrops.reduce((max, b) => Math.max(max, zIndexOf(b)), 0);
+  }
+
+  // Fix modals: set z-index above highest backdrop and tidies duplicates
+  function fixModalStacking(modalEl) {
+    try {
+      ensureModalInBody(modalEl);
+      const highestBackdrop = highestBackdropZIndex();
+      // Choose desired modal z-index at least 20 above backdrop, but not below our CSS override
+      const cssForced = 11000;
+      const desiredZ = Math.max(cssForced, highestBackdrop + 20);
+      modalEl.style.zIndex = desiredZ;
+      // Also ensure modal-backdrop z-index is lower but still covers page
+      document.querySelectorAll('.modal-backdrop').forEach(b => {
+        // keep it slightly below modal
+        b.style.zIndex = Math.min(desiredZ - 10, Math.max(1040, zIndexOf(b)));
+      });
+
+      // Remove duplicate backdrops (leave one)
+      const backdrops = Array.from(document.querySelectorAll('.modal-backdrop'));
+      if (backdrops.length > 1) {
+        // leave the last one (Bootstrap usually appends)
+        backdrops.slice(0, -1).forEach(b => b.parentNode && b.parentNode.removeChild(b));
+        console.debug('[modal-fix] Removed duplicate backdrops:', backdrops.length - 1);
+      }
+    } catch (err) {
+      console.error('modal stacking fix error', err);
+    }
+  }
+
+  // Hook into Bootstrap modal events
+  document.addEventListener('shown.bs.modal', function (ev) {
+    const modalEl = ev.target;
+    // small timeout to allow backdrop to be inserted
+    setTimeout(function () {
+      fixModalStacking(modalEl);
+    }, 10);
+  });
+
+  // Also run on DOM ready for modals that may be already open
+  document.addEventListener('DOMContentLoaded', function () {
+    // if a modal is already `.show`, fix it
+    const openModals = document.querySelectorAll('.modal.show');
+    openModals.forEach(m => fixModalStacking(m));
+  });
+
+  // Observe DOM for backdrop additions and re-fix stacking
+  const mo = new MutationObserver(function (mutations) {
+    const added = mutations.some(m => Array.from(m.addedNodes || []).some(n => n && n.classList && n.classList.contains && n.classList.contains('modal-backdrop')));
+    if (added) {
+      // if any modal is open, re-run fix on the topmost modal
+      const top = document.querySelector('.modal.show');
+      if (top) fixModalStacking(top);
+    }
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+
+  // Optional: expose a debug helper on window
+  window.__modalStackingDebug = {
+    zIndexOf,
+    highestBackdropZIndex,
+    fixModalStacking
+  };
+})();
+</script>
