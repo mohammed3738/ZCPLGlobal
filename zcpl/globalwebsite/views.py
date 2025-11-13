@@ -551,8 +551,8 @@ def cart_detail(request):
 
 def clean_text_for_jsonld(text, max_chars=500):
     """
-    Strip HTML, convert CR/LF/tabs to spaces, collapse whitespace and truncate.
-    Returns a safe single-line string suitable for embedding inside JSON-LD.
+    Remove HTML, replace newlines/tabs with spaces, collapse whitespace and truncate.
+    Returns a clean string safe to include in JSON-LD.
     """
     if not text:
         return ""
@@ -563,57 +563,54 @@ def clean_text_for_jsonld(text, max_chars=500):
         return t[:max_chars].strip()
     return t.strip()
 
-
 def derive_brand_from_category_or_name(category, product_name, known_brands=None):
     """
-    Try to derive a brand string from the category name or product name.
-    known_brands should be a list of brand tokens to match against (case-insensitive).
-    Returns the brand token (as provided in known_brands) or None.
+    Try to derive standardized brand from the category or product name.
+    Returns brand string or None.
     """
     if known_brands is None:
         known_brands = ["DELL", "HPE", "IBM", "CISCO"]
 
-    # Normalize inputs
     cat_name = (category.name if getattr(category, 'name', None) else "").strip().upper() if category else ""
     prod_name = (product_name or "").strip().upper()
 
-    # Check category exact match or startswith (covers e.g. "DELL RACK SERVER")
+    # Check category tokens (exact or starting with)
     for b in known_brands:
-        if cat_name == b or cat_name.startswith(b + " ") or cat_name.find(b + " ") != -1:
+        if cat_name == b or cat_name.startswith(b + " ") or (" " + b + " ") in (" " + cat_name + " "):
             return b
 
-    # Fallback: check if product name contains the brand token
+    # Check product name contains brand token
     for b in known_brands:
         if f" {b} " in f" {prod_name} " or prod_name.startswith(b + " ") or prod_name.endswith(" " + b):
             return b
 
     return None
 
-
-# Update build_jsonld_context to include jsonld_brand
-def build_jsonld_context(request, product, max_description_chars=500):
+def build_jsonld_dicts(request, product, max_description_chars=500):
     """
-    Build JSON-LD friendly pieces: cleaned description, absolute image URLs,
-    numeric price (or None), breadcrumbs and jsonld_brand.
+    Build two JSON-LD Python dicts:
+      - product_ld: Product structured data (conditionally includes offers)
+      - breadcrumb_ld: BreadcrumbList structured data
+    Returns (product_ld, breadcrumb_ld)
     """
     scheme = request.scheme
     host = request.get_host()
     base = f"{scheme}://{host}"
 
-    # meta description (unchanged)
+    # description
     if getattr(product, 'meta_description', None):
-        meta_description = clean_text_for_jsonld(product.meta_description, max_description_chars)
+        desc = clean_text_for_jsonld(product.meta_description, max_description_chars)
     else:
-        meta_description = clean_text_for_jsonld(getattr(product, 'short_description', ''), max_description_chars)
+        desc = clean_text_for_jsonld(getattr(product, 'short_description', ''), max_description_chars)
 
-    # images (unchanged)
+    # images absolute URLs
     images = []
     try:
         if getattr(product, 'image', None):
+            # push primary image
             images.append(f"{base}{product.image.url}")
     except Exception:
         pass
-
     try:
         related_images = getattr(product, 'images', None)
         if related_images is not None:
@@ -626,38 +623,24 @@ def build_jsonld_context(request, product, max_description_chars=500):
     except Exception:
         pass
 
-    # price normalization (unchanged)
-    jsonld_price = None
-    raw_price = getattr(product, 'price', None)
-    if raw_price is not None and raw_price != '':
-        try:
-            price_decimal = Decimal(raw_price)
-            if price_decimal > 0:
-                jsonld_price = price_decimal
-        except (InvalidOperation, TypeError, ValueError):
-            jsonld_price = None
-
-    # brand resolution: prefer explicit product.brand.name if present and non-empty
+    # brand resolution: prefer explicit product.brand.name
     jsonld_brand = None
     try:
         if getattr(product, 'brand', None) and getattr(product.brand, 'name', None):
-            # strip and use the provided brand name
             bn = str(product.brand.name).strip()
             if bn:
                 jsonld_brand = bn
     except Exception:
         jsonld_brand = None
 
-    # if explicit brand not present, try to derive from category or product name
+    # derive if missing
     if not jsonld_brand:
         derived = derive_brand_from_category_or_name(getattr(product, 'category', None), getattr(product, 'name', None))
         if derived:
             jsonld_brand = derived
         else:
-            # finally try product.name for keywords like "Dell PowerEdge" etc.
-            pnm = getattr(product, 'name', '') or ''
-            # simple checks (case-insensitive)
-            pn_upper = pnm.upper()
+            pn = getattr(product, 'name', '') or ''
+            pn_upper = pn.upper()
             if "DELL" in pn_upper:
                 jsonld_brand = "DELL"
             elif "HPE" in pn_upper or "HEWLETT" in pn_upper:
@@ -666,35 +649,74 @@ def build_jsonld_context(request, product, max_description_chars=500):
                 jsonld_brand = "IBM"
             elif "CISCO" in pn_upper:
                 jsonld_brand = "CISCO"
-
-    # fallback to Generic if still not found
     if not jsonld_brand:
         jsonld_brand = "Generic"
 
-    # breadcrumbs (unchanged)
-    breadcrumbs = [
-        {"position": 1, "name": "Home", "item": f"{base}/"},
-        {"position": 2, "name": "Shop", "item": f"{base}/shop/"},
+    # price: numeric only if > 0
+    jsonld_price = None
+    raw_price = getattr(product, 'price', None)
+    if raw_price is not None and raw_price != '':
+        try:
+            price_decimal = Decimal(raw_price)
+            if price_decimal > 0:
+                # keep Decimal for now
+                jsonld_price = price_decimal
+        except (InvalidOperation, TypeError, ValueError):
+            jsonld_price = None
+
+    # build product JSON-LD dict
+    product_ld = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": strip_tags(product.name) if getattr(product, 'name', None) else "",
+        # images as array (may be empty)
+        "image": images,
+        "description": desc,
+        "brand": {
+            "@type": "Brand",
+            "name": jsonld_brand
+        }
+    }
+
+    # add offers only if price exists
+    if jsonld_price is not None:
+        # convert Decimal to float for JSON serialization (or string if you prefer)
+        product_ld["offers"] = {
+            "@type": "Offer",
+            "url": request.build_absolute_uri(),
+            "priceCurrency": "INR",
+            "price": float(jsonld_price),
+            "availability": "https://schema.org/InStock" if getattr(product, 'available', True) else "https://schema.org/OutOfStock",
+            "seller": {
+                "@type": "Organization",
+                "name": "Zaco Computers Pvt. Ltd."
+            }
+        }
+
+    # build breadcrumb JSON-LD
+    breadcrumb_items = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{base}/"},
+        {"@type": "ListItem", "position": 2, "name": "Shop", "item": f"{base}/shop/"},
     ]
     if getattr(product, 'category', None):
         parent = getattr(product.category, 'parent', None)
         if parent:
-            breadcrumbs.append({"position": 3, "name": parent.name, "item": f"{base}/shop/{parent.slug}/"})
-            breadcrumbs.append({"position": 4, "name": product.category.name, "item": f"{base}/shop/{parent.slug}/{product.category.slug}/"})
-            breadcrumbs.append({"position": 5, "name": product.name, "item": request.build_absolute_uri()})
+            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": parent.name, "item": f"{base}/shop/{parent.slug}/"})
+            breadcrumb_items.append({"@type": "ListItem", "position": 4, "name": product.category.name, "item": f"{base}/shop/{parent.slug}/{product.category.slug}/"})
+            breadcrumb_items.append({"@type": "ListItem", "position": 5, "name": product.name, "item": request.build_absolute_uri()})
         else:
-            breadcrumbs.append({"position": 3, "name": product.category.name, "item": f"{base}/shop/{product.category.slug}/"})
-            breadcrumbs.append({"position": 4, "name": product.name, "item": request.build_absolute_uri()})
+            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": product.category.name, "item": f"{base}/shop/{product.category.slug}/"})
+            breadcrumb_items.append({"@type": "ListItem", "position": 4, "name": product.name, "item": request.build_absolute_uri()})
     else:
-        breadcrumbs.append({"position": 3, "name": product.name, "item": request.build_absolute_uri()})
+        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": product.name, "item": request.build_absolute_uri()})
 
-    return {
-        "meta_description": meta_description,
-        "jsonld_images": images,
-        "jsonld_price": jsonld_price,
-        "breadcrumbs": breadcrumbs,
-        "jsonld_brand": jsonld_brand,
+    breadcrumb_ld = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumb_items
     }
+
+    return product_ld, breadcrumb_ld
 
 
 # -------------------------
@@ -809,6 +831,11 @@ def product_detail(request: HttpRequest, slug: str) -> HttpResponse:
 
     # JSON-LD context pieces
     schema_ctx = build_jsonld_context(request, product)
+    product_ld, breadcrumb_ld = build_jsonld_dicts(request, product)
+
+    # Dump to JSON strings for template. ensure_ascii=False prevents \uXXXX escaping.
+    product_jsonld_str = json.dumps(product_ld, ensure_ascii=False, indent=2)
+    breadcrumb_jsonld_str = json.dumps(breadcrumb_ld, ensure_ascii=False, indent=2)
 
     # Build template context
     context = {
@@ -823,7 +850,8 @@ def product_detail(request: HttpRequest, slug: str) -> HttpResponse:
         # JSON-LD keys (from helper)
         'jsonld_images': schema_ctx['jsonld_images'],
         'jsonld_price': schema_ctx['jsonld_price'],
-        'breadcrumbs': schema_ctx['breadcrumbs'],
+        "product_jsonld": product_jsonld_str,
+        "breadcrumb_jsonld": breadcrumb_jsonld_str,
     }
 
     # If ReviewForm was used and had errors, include it so template can render errors

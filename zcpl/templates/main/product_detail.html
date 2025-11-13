@@ -341,62 +341,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 {% include "main/request_quote_modal.html" %}
 
-{# === JSON-LD Schema blocks === #}
-{# === Product JSON-LD === #}
+{# Insert these exactly where you want the JSON-LD scripts to appear #}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Product",
-  "name": "{{ product.name|striptags|escapejs }}",
-  "image": [
-    {% if jsonld_images %}
-      {% for img in jsonld_images %}
-        "{{ img }}"{% if not forloop.last %},{% endif %}
-      {% endfor %}
-    {% else %}
-      {% if product.image %}
-        "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}"
-      {% else %}
-        ""
-      {% endif %}
-    {% endif %}
-  ],
-  "description": "{{ meta_description|escapejs }}",
-  "brand": {
-    "@type": "Brand",
-    "name": "{{ product.category.category.name }}"
-  }{% if jsonld_price %},
-  "offers": {
-    "@type": "Offer",
-    "url": "{{ request.build_absolute_uri|escapejs }}",
-    "priceCurrency": "INR",
-    "price": {{ jsonld_price|floatformat:"2" }},
-    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-    "seller": {
-      "@type": "Organization",
-      "name": "Zaco Computers Pvt. Ltd."
-    }
-  }{% endif %}
-}
+{{ product_jsonld|safe }}
 </script>
 
-{# === BreadcrumbList JSON-LD === #}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {% for crumb in breadcrumbs %}
-    {
-      "@type": "ListItem",
-      "position": {{ crumb.position }},
-      "name": "{{ crumb.name|escapejs }}",
-      "item": "{{ crumb.item|escapejs }}"
-    }{% if not forloop.last %},{% endif %}
-    {% endfor %}
-  ]
-}
+{{ breadcrumb_jsonld|safe }}
 </script>
-
 
 {% endblock %}
