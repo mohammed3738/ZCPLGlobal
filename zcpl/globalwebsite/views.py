@@ -556,9 +556,10 @@ def product_detail(request, slug):
     cart_product_form = CartAddProductForm()
     contact_form = ContactForm()
 
+    # --- Handle form submissions (unchanged from yours) ---
     if request.method == 'POST':
         if 'comment' in request.POST and 'rating' in request.POST:
-            # Review form submission
+            # Review submission
             name = request.POST.get('name')
             comment = request.POST.get('comment')
             rating = request.POST.get('rating')
@@ -574,7 +575,7 @@ def product_detail(request, slug):
                 return redirect('product_detail', slug=slug)
 
         elif 'email' in request.POST and 'message' in request.POST:
-            # Request Quote form submission
+            # Request Quote form
             contact_form = ShopContactForm(request.POST)
             if contact_form.is_valid():
                 contact_form.save()
@@ -583,12 +584,58 @@ def product_detail(request, slug):
             else:
                 messages.error(request, "Please fix the errors in the form.")
 
-    # ✅ Pass meta fields to template
+    # --- SEO meta data ---
     meta_title = product.meta_title or product.name
     meta_description = product.meta_description or (
-        product.short_description if product.short_description else ''
+        strip_tags(product.short_description)[:500] if product.short_description else ''
     )
 
+    # --- ✅ Breadcrumb schema data ---
+    breadcrumbs = [
+        {"position": 1, "name": "Home", "item": "https://www.zacocomputer.com/"},
+        {"position": 2, "name": "Shop", "item": "https://www.zacocomputer.com/shop/"},
+    ]
+
+    # Dynamically add category levels if they exist
+    if product.category:
+        # Example assumes SubCategory may have a parent field (optional)
+        parent = getattr(product.category, "parent", None)
+        if parent:
+            breadcrumbs.append({
+                "position": 3,
+                "name": parent.name,
+                "item": f"https://www.zacocomputer.com/shop/{parent.slug}/"
+            })
+            breadcrumbs.append({
+                "position": 4,
+                "name": product.category.name,
+                "item": f"https://www.zacocomputer.com/shop/{parent.slug}/{product.category.slug}/"
+            })
+            breadcrumbs.append({
+                "position": 5,
+                "name": product.name,
+                "item": f"https://www.zacocomputer.com/product/{product.slug}/"
+            })
+        else:
+            breadcrumbs.append({
+                "position": 3,
+                "name": product.category.name,
+                "item": f"https://www.zacocomputer.com/shop/{product.category.slug}/"
+            })
+            breadcrumbs.append({
+                "position": 4,
+                "name": product.name,
+                "item": f"https://www.zacocomputer.com/product/{product.slug}/"
+            })
+    else:
+        # fallback
+        breadcrumbs.append({
+            "position": 3,
+            "name": product.name,
+            "item": f"https://www.zacocomputer.com/product/{product.slug}/"
+        })
+
+    # --- Render page with schemas + meta ---
     return render(request, 'main/product_detail.html', {
         'product': product,
         'cart_product_form': cart_product_form,
@@ -597,6 +644,7 @@ def product_detail(request, slug):
         'form': contact_form,
         'meta_title': meta_title,
         'meta_description': meta_description,
+        'breadcrumbs': breadcrumbs,  # 👈 important for JSON-LD
     })
 
 
