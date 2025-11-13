@@ -4,7 +4,7 @@
 
 {% block title %}
     {% if product.meta_title %}
-        {{ product.meta_title }}
+        {{product.meta_title}}
     {% else %}
         Buy {{ product.name }} Online at Best Price | Zaco Computers
     {% endif %}
@@ -33,39 +33,24 @@
 {% block content %}
 
 <style>
-/* kept your styles, with small additions */
 .star-rating i {
     cursor: pointer;
     font-size: 24px;
     color: #ccc;
-    outline: none;
 }
 .star-rating i.text-warning {
     color: #ffc107;
-}
-.star-rating i:focus {
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
-    border-radius: 4px;
 }
 
 .img-zoom-container {
     position: relative;
     display: inline-block;
-    overflow: hidden;
-}
-
-#mainImage {
-    max-width: 100%;
-    height: auto;
-    transition: transform 0.2s ease;
-    display: block;
 }
 
 .thumbnail-gallery {
     margin-top: 10px;
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
 }
 
 .thumbnail {
@@ -73,9 +58,6 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: transform 0.2s;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
 }
 
 .thumbnail:hover {
@@ -113,7 +95,21 @@
 
 <!-- Banner Section -->
 <section class="page-banner">
-  ...
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1 style="font-size: 55px;">{{ product.name }}</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li class="active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Product Details -->
@@ -121,7 +117,7 @@
     <div class="auto-container">
         <div class="row">
             <div class="col-lg-12 col-xl-6">
-                <div class="img-zoom-container" aria-hidden="false">
+                <div class="img-zoom-container">
                     <img 
                         id="mainImage" 
                         src="{{ product.image.url }}" 
@@ -132,29 +128,25 @@
                 </div>
 
                 <!-- Thumbnail Gallery -->
-                <div class="thumbnail-gallery" role="list">
+                <div class="thumbnail-gallery">
                     <img 
                         src="{{ product.image.url }}" 
-                        data-src="{{ product.image.url }}"
                         alt="Original Image of {{ product.name }}" 
                         class="thumbnail" 
                         width="100" height="100"
                         loading="lazy"
                         onclick="resetMainImage()"
                         title="Show Original Image"
-                        role="listitem"
                     />
 
                     {% for img in product.images.all %}
                         <img 
                             src="{{ img.image.url }}" 
-                            data-src="{{ img.image.url }}"
                             alt="{{ img.alt_text|default:product.name }}" 
                             class="thumbnail" 
                             width="100" height="100"
                             loading="lazy"
-                            onclick="changeMainImage(this.dataset.src)"
-                            role="listitem"
+                            onclick="changeMainImage(this.src)"
                         />
                     {% endfor %}
                 </div>
@@ -165,10 +157,10 @@
                     <h3 class="product-details__title">{{ product.name }}</h3>
                 </div>
 
-                <div class="product-details__reveiw" aria-hidden="true">
-                    <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                <div class="product-details__reveiw">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                     <span>{{ review_count }} Customer Review{{ review_count|pluralize }}</span>
                 </div>
 
@@ -212,26 +204,66 @@
     </div>
 </section>
 
-<!-- Product Description, Reviews and Review Form -->
-<section class="product-description"> ... </section>
-<section class="review-one"> ... </section>
+<!-- Product Description -->
+<section class="product-description">
+    <div class="auto-container">
+        <h3 class="product-description__title">Description</h3>
+        <div class="ckeditor-content">{{ product.description|safe }}</div>
+    </div>
+</section>
+
+<!-- Reviews -->
+<section class="review-one">
+    <div class="auto-container">
+        <div class="comments-area">
+            <div class="comments-title">
+                <h3>Comments</h3>
+            </div>
+
+            {% for review in reviews %}
+            <div class="comment">
+                <div class="info">
+                    <div class="name">{{ review.name }}</div>
+                    <div class="date">{{ review.created_at|date:"M d, Y H:i" }}</div>
+                </div>
+                <div class="text">{{ review.comment }}</div>
+
+                <div class="reply-btn">
+                    <p class="mb-1">
+                        {% for _ in review.rating|times %}
+                            <i class="fa fa-star text-warning"></i>
+                        {% endfor %}
+                        {% for _ in 5|subtract:review.rating|times %}
+                            <i class="fa fa-star text-secondary"></i>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            {% empty %}
+                <p>No reviews yet. Be the first to write one!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Review Form -->
 <section class="review-form">
     <div class="auto-container">
         <h3 class="review-form__title">Add a review</h3>
 
-        <form action="" method="post" class="review-form__form default-form" aria-label="Add product review">
+        <form action="" method="post" class="review-form__form default-form">
             {% csrf_token %}
             <p class="review-form__text">
                 Rate this Product?
-                <span class="star-rating" role="radiogroup" aria-label="Product rating">
-                    <i class="fa fa-star" data-value="1" tabindex="0" role="radio" aria-checked="false" title="1 star"></i>
-                    <i class="fa fa-star" data-value="2" tabindex="0" role="radio" aria-checked="false" title="2 stars"></i>
-                    <i class="fa fa-star" data-value="3" tabindex="0" role="radio" aria-checked="false" title="3 stars"></i>
-                    <i class="fa fa-star" data-value="4" tabindex="0" role="radio" aria-checked="false" title="4 stars"></i>
-                    <i class="fa fa-star" data-value="5" tabindex="0" role="radio" aria-checked="false" title="5 stars"></i>
+                <span class="star-rating">
+                    <i class="fa fa-star" data-value="1"></i>
+                    <i class="fa fa-star" data-value="2"></i>
+                    <i class="fa fa-star" data-value="3"></i>
+                    <i class="fa fa-star" data-value="4"></i>
+                    <i class="fa fa-star" data-value="5"></i>
                 </span>
             </p>
-            <input type="hidden" name="rating" id="rating-value" aria-hidden="true">
+            <input type="hidden" name="rating" id="rating-value">
 
             <div class="row">
                 <div class="col-lg-12">
@@ -257,100 +289,53 @@
 
 <!-- Scripts -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const stars = Array.from(document.querySelectorAll('.star-rating i'));
-    const ratingInput = document.getElementById('rating-value');
+const stars = document.querySelectorAll('.star-rating i');
+const ratingInput = document.getElementById('rating-value');
 
-    // Keep originalImageSrc here (after DOM load and lazy image set)
-    const mainImage = document.getElementById('mainImage');
-    const originalImageSrc = mainImage.getAttribute('src');
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-value');
+        ratingInput.value = rating;
 
-    function setStars(rating) {
-        const r = parseInt(rating, 10) || 0;
         stars.forEach(s => {
-            const val = parseInt(s.getAttribute('data-value'), 10);
-            s.classList.toggle('text-warning', val <= r);
-            s.setAttribute('aria-checked', val === r ? 'true' : 'false');
-        });
-    }
-
-    // click + keyboard support
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            const rating = parseInt(star.getAttribute('data-value'), 10);
-            ratingInput.value = rating;
-            setStars(rating);
-        });
-        star.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const rating = parseInt(star.getAttribute('data-value'), 10);
-                ratingInput.value = rating;
-                setStars(rating);
-            }
-            // optionally support arrow keys to change rating
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                const current = parseInt(ratingInput.value || '0', 10);
-                const newVal = Math.max(1, current - 1);
-                ratingInput.value = newVal;
-                setStars(newVal);
-                stars[newVal-1].focus();
-            }
-            if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-                e.preventDefault();
-                const current = parseInt(ratingInput.value || '0', 10);
-                const newVal = Math.min(5, current + 1);
-                ratingInput.value = newVal;
-                setStars(newVal);
-                stars[newVal-1].focus();
+            s.classList.remove('text-warning');
+            if (s.getAttribute('data-value') <= rating) {
+                s.classList.add('text-warning');
             }
         });
     });
+});
 
-    // Image swapping
-    window.changeMainImage = function(src) {
-        if (!src) return;
-        mainImage.src = src;
-    };
+const mainImage = document.getElementById('mainImage');
+const originalImageSrc = mainImage.src;
 
-    window.resetMainImage = function() {
-        mainImage.src = originalImageSrc;
-    };
+function changeMainImage(src) {
+    mainImage.src = src;
+}
 
-    // Simple zoom effect
-    const container = mainImage.parentElement;
-    let zoomScale = 2.5;
+function resetMainImage() {
+    mainImage.src = originalImageSrc;
+}
+
+// Simple zoom effect
+document.addEventListener("DOMContentLoaded", function() {
+    const img = document.getElementById('mainImage');
+    const container = img.parentElement;
     container.style.position = "relative";
     container.style.overflow = "hidden";
-
-    // Enable zoom only on pointer devices and sufficiently large screens
-    function isZoomActive() {
-        return window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)').matches;
-    }
+    let zoomScale = 2.5;
 
     container.addEventListener('mousemove', function(e) {
-        if (!isZoomActive()) return;
-        const rect = mainImage.getBoundingClientRect();
+        const rect = img.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
-        mainImage.style.transformOrigin = `${x}% ${y}%`;
-        mainImage.style.transform = `scale(${zoomScale})`;
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transform = `scale(${zoomScale})`;
     });
 
     container.addEventListener('mouseleave', function() {
-        mainImage.style.transform = "scale(1)";
+        img.style.transform = "scale(1)";
     });
-
-    // touch: simple tap-to-zoom toggle (optional)
-    let touchedOnce = false;
-    container.addEventListener('touchstart', function(e) {
-        // allow scrolling with two-finger or long touch
-        if (e.touches.length > 1) return;
-        touchedOnce = !touchedOnce;
-        mainImage.style.transform = touchedOnce ? `scale(${zoomScale})` : 'scale(1)';
-        setTimeout(() => { touchedOnce = false; }, 3000);
-    }, { passive: true });
 });
 </script>
 
@@ -380,23 +365,17 @@ document.addEventListener("DOMContentLoaded", function() {
       "name": "{{ product.category.name|escapejs }}",
       "item": "{{ request.scheme }}://{{ request.get_host }}{{ product.category.get_absolute_url }}"
     }
-    ,{
+    {% endif %},
+    {
       "@type": "ListItem",
-      "position": 4,
+      "position": {% if product.category %}4{% else %}3{% endif %},
       "name": "{{ product.name|striptags|escapejs }}",
       "item": "{{ request.build_absolute_uri }}"
     }
-    {% else %}
-    ,{
-      "@type": "ListItem",
-      "position": 3,
-      "name": "{{ product.name|striptags|escapejs }}",
-      "item": "{{ request.build_absolute_uri }}"
-    }
-    {% endif %}
   ]
 }
 </script>
+
 
 <script type="application/ld+json">
 {
@@ -404,7 +383,10 @@ document.addEventListener("DOMContentLoaded", function() {
   "@type": "Product",
   "name": "{{ product.name|striptags|escapejs }}",
   "image": [
-    "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}"{% for img in product.images.all %},{% spaceless %} "{{ request.scheme }}://{{ request.get_host }}{{ img.image.url }}"{% endspaceless %}{% endfor %}
+    "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}"
+    {% for img in product.images.all %}
+      , "{{ request.scheme }}://{{ request.get_host }}{{ img.image.url }}"
+    {% endfor %}
   ],
   "description": "{{ product.meta_description|default:product.short_description|striptags|truncatechars:500|escapejs }}",
   "brand": {
@@ -424,5 +406,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 }
 </script>
+
+
 
 {% endblock %}
