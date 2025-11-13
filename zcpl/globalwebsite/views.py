@@ -550,6 +550,9 @@ def cart_detail(request):
 
 
 def clean_text_for_jsonld(text, max_chars=500):
+    """
+    Strip HTML, replace newlines/tabs with spaces, collapse whitespace and truncate.
+    """
     if not text:
         return ""
     t = strip_tags(text)
@@ -557,182 +560,262 @@ def clean_text_for_jsonld(text, max_chars=500):
     t = " ".join(t.split())
     return t[:max_chars].strip()
 
+# Known brands list — extend if needed
+KNOWN_BRANDS = ["DELL", "HPE", "IBM", "CISCO"]
 
-# BRAND DETECTOR
-def derive_brand_from_category_or_name(category, product_name):
-    known_brands = ["DELL", "HPE", "IBM", "CISCO"]
-
-    cat = (category.name.strip().upper() if category else "")
-    name = (product_name or "").strip().upper()
-
+def extract_brand_token_from_text(text, known_brands=None):
+    """
+    Try to find a known brand token inside text (case-insensitive).
+    Returns the brand token (from known_brands) or None.
+    """
+    if not text:
+        return None
+    if known_brands is None:
+        known_brands = KNOWN_BRANDS
+    txt = text.strip().upper()
     for b in known_brands:
-        if cat.startswith(b) or f" {b} " in f" {cat} ":
+        if txt == b:
             return b
-
-    for b in known_brands:
-        if name.startswith(b) or f" {b} " in f" {name} ":
+        if txt.startswith(b + " "):
             return b
-
+        if f" {b} " in f" {txt} ":
+            return b
     return None
 
+def derive_brand_using_subcategory_category(product):
+    """
+    Resolve brand using:
+      1) product.brand.name (if present)
+      2) product.category.category.name (subcategory -> category)
+      3) product.category.name (subcategory)
+      4) product.name scanning
+      5) fallback 'Generic'
+    Defensive checks for missing attributes included.
+    """
+    # 1) explicit product.brand.name
+    try:
+        if hasattr(product, 'brand') and getattr(product, 'brand') is not None:
+            brand_obj = getattr(product, 'brand')
+            if hasattr(brand_obj, 'name') and brand_obj.name:
+                bn = str(brand_obj.name).strip()
+                if bn:
+                    return bn
+    except Exception:
+        pass
 
-# BUILD JSON-LD IN PYTHON
+    # 2) subcategory -> category (preferred)
+    try:
+        subcat = getattr(product, 'category', None)
+        if subcat is not None:
+            parent_cat = getattr(subcat, 'category', None)
+            if parent_cat is not None:
+                parent_name = getattr(parent_cat, 'name', None) or ""
+                tok = extract_brand_token_from_text(parent_name)
+                if tok:
+                    return tok
+            # 3) try subcategory name itself
+            subcat_name = getattr(subcat, 'name', None) or ""
+            tok = extract_brand_token_from_text(subcat_name)
+            if tok:
+                return tok
+    except Exception:
+        pass
+
+    # 4) scan product name
+    try:
+        pnm = getattr(product, 'name', '') or ''
+        tok = extract_brand_token_from_text(pnm)
+        if tok:
+            return tok
+    except Exception:
+        pass
+
+    # 5) fallback
+    return "Generic"
+
 def build_jsonld_dicts(request, product):
+    """
+    Build product_ld and breadcrumb_ld Python dicts (cleaned).
+    """
     base = f"{request.scheme}://{request.get_host()}"
 
-    # DESCRIPTION
-    if product.meta_description:
+    # description
+    if hasattr(product, 'meta_description') and product.meta_description:
         desc = clean_text_for_jsonld(product.meta_description, 500)
     else:
-        desc = clean_text_for_jsonld(product.short_description, 500)
+        desc = clean_text_for_jsonld(getattr(product, 'short_description', ''), 500)
 
-    # IMAGES
+    # images (absolute urls)
     images = []
-    try:
-        images.append(f"{base}{product.image.url}")
-    except:
-        pass
+    if hasattr(product, 'image') and getattr(product, 'image', None):
+        try:
+            images.append(f"{base}{product.image.url}")
+        except Exception:
+            pass
+    if hasattr(product, 'images') and getattr(product, 'images', None) is not None:
+        try:
+            for img in product.images.all():
+                if getattr(img, 'image', None):
+                    try:
+                        images.append(f"{base}{img.image.url}")
+                    except Exception:
+                        continue
+        except Exception:
+            pass
 
-    try:
-        for img in product.images.all():
-            images.append(f"{base}{img.image.url}")
-    except:
-        pass
+    # brand (resolve using subcategory->category)
+    jsonld_brand = derive_brand_using_subcategory_category(product)
 
-    # BRAND
-    if product.brand and product.brand.name:
-        brand = product.brand.name.strip()
-    else:
-        brand = derive_brand_from_category_or_name(product.category, product.name) or "Generic"
-
-    # PRICE
+    # price only if numeric > 0
     jsonld_price = None
-    try:
-        if product.price and Decimal(product.price) > 0:
-            jsonld_price = float(Decimal(product.price))
-    except:
-        pass
+    if hasattr(product, 'price') and product.price not in (None, ''):
+        try:
+            p = Decimal(product.price)
+            if p > 0:
+                jsonld_price = float(p)
+        except Exception:
+            jsonld_price = None
 
-    # PRODUCT JSON-LD
+    # product JSON-LD dict
     product_ld = {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": strip_tags(product.name),
+        "name": strip_tags(getattr(product, 'name', '') or ""),
         "image": images,
         "description": desc,
         "brand": {
             "@type": "Brand",
-            "name": brand
+            "name": jsonld_brand
         }
     }
 
-    if jsonld_price:
+    if jsonld_price is not None:
         product_ld["offers"] = {
             "@type": "Offer",
             "url": request.build_absolute_uri(),
             "priceCurrency": "INR",
             "price": jsonld_price,
-            "availability": "https://schema.org/InStock",
+            "availability": "https://schema.org/InStock" if getattr(product, 'available', True) else "https://schema.org/OutOfStock",
             "seller": {
                 "@type": "Organization",
                 "name": "Zaco Computers Pvt. Ltd."
             }
         }
 
-    # BREADCRUMBS JSON-LD
-    breadcrumbs = [
+    # breadcrumbs: include subcategory (product.category) if available
+    breadcrumb_items = [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{base}/"},
         {"@type": "ListItem", "position": 2, "name": "Shop", "item": f"{base}/shop/"},
     ]
-
-    if product.category:
-        breadcrumbs.append({
-            "@type": "ListItem",
-            "position": 3,
-            "name": product.category.name,
-            "item": f"{base}/shop/{product.category.slug}/"
-        })
-        breadcrumbs.append({
-            "@type": "ListItem",
-            "position": 4,
-            "name": product.name,
-            "item": request.build_absolute_uri()
-        })
-    else:
-        breadcrumbs.append({
-            "@type": "ListItem",
-            "position": 3,
-            "name": product.name,
-            "item": request.build_absolute_uri()
-        })
+    try:
+        subcat = getattr(product, 'category', None)
+        if subcat is not None and getattr(subcat, 'name', None):
+            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": subcat.name, "item": f"{base}/shop/{getattr(subcat, 'slug', '')}/"})
+            breadcrumb_items.append({"@type": "ListItem", "position": 4, "name": product.name, "item": request.build_absolute_uri()})
+        else:
+            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": product.name, "item": request.build_absolute_uri()})
+    except Exception:
+        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": product.name, "item": request.build_absolute_uri()})
 
     breadcrumb_ld = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": breadcrumbs
+        "itemListElement": breadcrumb_items
     }
 
     return product_ld, breadcrumb_ld
 
+# ---------- View ----------
 
-# FULL PRODUCT DETAIL VIEW
 def product_detail(request, slug):
+    """
+    Full product_detail view.
+    Adjust forms and models import names if your project differs.
+    """
     product = get_object_or_404(Product, slug=slug)
-    reviews_qs = product.reviews.all().order_by('-created_at')
 
-    # Pagination
-    paginator = Paginator(reviews_qs, 10)
-    page = request.GET.get("page")
-    reviews = paginator.get_page(page)
+    # Reviews & pagination (defensive)
+    reviews_qs = product.reviews.all().order_by('-created_at') if hasattr(product, 'reviews') else []
+    paginator = Paginator(reviews_qs, 8) if reviews_qs else None
+    page_num = request.GET.get('page', 1)
+    if paginator:
+        try:
+            reviews = paginator.page(page_num)
+        except:
+            reviews = paginator.page(1)
+    else:
+        reviews = []
 
-    # Average rating
-    avg_rating = reviews_qs.aggregate(avg=Avg("rating"))["avg"] or 0
+    review_count = reviews_qs.count() if reviews_qs else 0
+    avg_rating = reviews_qs.aggregate(avg=Avg('rating'))['avg'] if reviews_qs else 0
+    try:
+        avg_rating = round(float(avg_rating), 2) if avg_rating else 0.0
+    except Exception:
+        avg_rating = 0.0
 
-    # FORMS
-    cart_form = CartAddProductForm()
+    # Forms
+    cart_product_form = CartAddProductForm()
     contact_form = ShopContactForm()
 
-    # POST: Review
-    if request.method == "POST" and "comment" in request.POST:
-        name = request.POST.get("name")
-        comment = request.POST.get("comment")
-        rating = int(request.POST.get("rating", 0))
+    # POST handling: review or quote
+    if request.method == 'POST':
+        # Review submit
+        if 'comment' in request.POST and 'rating' in request.POST:
+            name = request.POST.get('name', '').strip()
+            comment = request.POST.get('comment', '').strip()
+            try:
+                rating = int(request.POST.get('rating', '0'))
+            except Exception:
+                rating = None
 
-        if name and comment and rating:
-            Review.objects.create(
-                product=product,
-                name=name,
-                comment=comment,
-                rating=rating
-            )
-            messages.success(request, "Review submitted!")
-            return redirect("product_detail", slug=slug)
+            if name and comment and rating:
+                rating = max(1, min(5, rating))
+                try:
+                    with transaction.atomic():
+                        Review.objects.create(product=product, name=name, comment=comment, rating=rating)
+                    messages.success(request, "Thank you for your review!")
+                    return redirect('product_detail', slug=slug)
+                except Exception as e:
+                    messages.error(request, "Could not save review: " + str(e))
+            else:
+                messages.error(request, "Please provide name, comment and rating.")
 
-    # POST: Quote form
-    if request.method == "POST" and "email" in request.POST:
-        contact_form = ShopContactForm(request.POST)
-        if contact_form.is_valid():
-            contact_form.save()
-            messages.success(request, "Your quote request has been sent!")
-            return redirect("product_detail", slug=slug)
+        # Quote form submit
+        elif 'email' in request.POST and 'message' in request.POST:
+            contact_form = ShopContactForm(request.POST)
+            if contact_form.is_valid():
+                contact_form.save()
+                messages.success(request, "Your quote request has been sent!")
+                return redirect('product_detail', slug=slug)
+            else:
+                messages.error(request, "Please fix errors in the quote form.")
 
-    # Build JSON-LD dicts
+    # Meta fallbacks
+    meta_title = product.meta_title if hasattr(product, 'meta_title') and product.meta_title else getattr(product, 'name', '')
+    if hasattr(product, 'meta_description') and product.meta_description:
+        meta_description = clean_text_for_jsonld(product.meta_description, 500)
+    else:
+        meta_description = clean_text_for_jsonld(getattr(product, 'short_description', ''), 500)
+
+    # Build JSON-LD dicts and dump to strings (prevent \u escapes)
     product_ld, breadcrumb_ld = build_jsonld_dicts(request, product)
+    product_jsonld_str = json.dumps(product_ld, ensure_ascii=False, indent=2)
+    breadcrumb_jsonld_str = json.dumps(breadcrumb_ld, ensure_ascii=False, indent=2)
 
     context = {
-        "product": product,
-        "reviews": reviews,
-        "review_count": reviews_qs.count(),
-        "avg_rating": avg_rating,
-        "cart_product_form": cart_form,
-        "contact_form": contact_form,
-
-        # JSON strings for template
-        "product_jsonld": json.dumps(product_ld, ensure_ascii=False, indent=2),
-        "breadcrumb_jsonld": json.dumps(breadcrumb_ld, ensure_ascii=False, indent=2),
+        'product': product,
+        'cart_product_form': cart_product_form,
+        'contact_form': contact_form,
+        'reviews': reviews,
+        'review_count': review_count,
+        'avg_rating': avg_rating,
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'product_jsonld': product_jsonld_str,
+        'breadcrumb_jsonld': breadcrumb_jsonld_str,
     }
 
-    return render(request, "main/product_detail.html", context)
+    return render(request, 'main/product_detail.html', context)
 
 
 
