@@ -108,6 +108,9 @@ class SubCategory(models.Model):
 #     def __str__(self):
 #         return self.name
 
+from django.utils.html import strip_tags
+from django.utils.text import slugify
+
 class Product(models.Model):
     category = models.ForeignKey(
         'SubCategory',
@@ -126,8 +129,6 @@ class Product(models.Model):
     description = RichTextUploadingField(blank=True)
     short_description = RichTextUploadingField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-
-    # Optimized main image
     image = ProcessedImageField(
         upload_to='products/',
         processors=[Transpose(), ResizeToFit(800, 800)],
@@ -136,12 +137,11 @@ class Product(models.Model):
         null=True,
         blank=True
     )
-
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
 
-    # ✅ New SEO fields
+    # SEO fields
     meta_title = models.CharField(max_length=255, blank=True, null=True)
     meta_description = models.TextField(max_length=500, blank=True, null=True)
 
@@ -149,7 +149,7 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Generate unique slug if not set
+        # ✅ Generate unique slug
         if not self.slug:
             base_slug = slugify(self.name)
             slug = base_slug
@@ -159,15 +159,26 @@ class Product(models.Model):
                 counter += 1
             self.slug = slug
 
-        # Auto-fill meta title and description if empty
+        # ✅ Auto-fill meta title and description
         if not self.meta_title:
             self.meta_title = self.name[:255]
+
+        # Clean HTML for meta_description
         if not self.meta_description and self.short_description:
-            # Remove HTML tags (optional)
-            from django.utils.html import strip_tags
             self.meta_description = strip_tags(self.short_description)[:500]
+        else:
+            self.meta_description = strip_tags(self.meta_description or "")[:500]
+
+        # Clean short_description as well (for fallback)
+        if self.short_description:
+            self.short_description = strip_tags(self.short_description)
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('product_detail', args=[self.slug])
+
 
 
 

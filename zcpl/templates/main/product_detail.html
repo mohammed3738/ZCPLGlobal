@@ -341,7 +341,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 {% include "main/request_quote_modal.html" %}
 
-{# ✅ Breadcrumb Schema #}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org", 
@@ -370,24 +369,24 @@ document.addEventListener("DOMContentLoaded", function() {
     {
       "@type": "ListItem", 
       "position": {% if product.category %}4{% else %}3{% endif %}, 
-      "name": "{{ product.name|escapejs }}",
+      "name": "{{ product.name|striptags|escapejs }}",
       "item": "{{ request.build_absolute_uri }}"
     }
   ]
 }
 </script>
 
-{# ✅ Product Schema (without SKU or MPN) #}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "Product",
-  "name": "{{ product.name|escapejs }}",
+  "name": "{{ product.name|striptags|escapejs }}",
   "image": "{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}",
-  "description": "{{ product.meta_description|default:product.short_description|striptags|escapejs }}",
+  "description": "{{ product.meta_description|default:product.short_description|striptags|truncatechars:500|escapejs }}",
   "brand": {
     "@type": "Brand",
-    "name": "{% if product.category %}{{ product.category.name|escapejs }}{% else %}Zaco Computers{% endif %}"
+    "name": "Zaco Computers"
   },
   "offers": {
     "@type": "Offer",
@@ -402,5 +401,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 }
 </script>
+
 
 {% endblock %}
