@@ -1,0 +1,48 @@
+/* ===============================
+   BLOG BANNER CUSTOM FIXES
+   =============================== */
+
+/* Reduce banner height */
+.page-banner {
+    padding: 60px 0 !important;
+}
+
+/* Control banner background image height */
+.page-banner .image-layer {
+    height: 260px !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+/* Reduce banner title font size */
+.page-banner h1 {
+    font-size: 32px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+}
+
+/* Hide default breadcrumb inside banner */
+.page-banner .page-nav {
+    display: none !important;
+}
+
+/* New breadcrumb styling below the banner */
+.custom-breadcrumb {
+    margin: 25px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.custom-breadcrumb a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.custom-breadcrumb span {
+    color: #333;
+}
+
+/* Hide repeated title inside blog detail content */
+.blog-detail-title {
+    display: none !important;
+}
