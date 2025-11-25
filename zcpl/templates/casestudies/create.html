@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- CKEditor Scripts -->
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+<!-- Input Field Outlines -->
+<style>
+input[type="text"],
+input[type="email"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+    outline: none;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+</style>
+
+<section class="page-banner">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1>Create Case Study</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="auto-container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+
+            <div class="shadow-sm p-4 rounded" style="background:#fff;">
+
+                <h3 class="mb-4">Add New Case Study</h3>
+
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Please fix the errors below:</strong>
+                </div>
+                {% endif %}
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Category -->
+                    <div class="form-group mb-3">
+                        <label for="id_category">Category</label>
+                        {{ form.category }}
+                        {% if form.category.errors %}
+                            <small class="text-danger">{{ form.category.errors }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form-group mb-3">
+                        <label for="id_title">Title</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <small class="text-danger">{{ form.title.errors }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Short Description -->
+                    <div class="form-group mb-3">
+                        <label for="id_short_description">Short Description</label>
+                        {{ form.short_description }}
+                        {% if form.short_description.errors %}
+                            <small class="text-danger">{{ form.short_description.errors }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Thumbnail -->
+                    <div class="form-group mb-3">
+                        <label for="id_thumbnail">Thumbnail Image</label>
+                        {{ form.thumbnail }}
+                        {% if form.thumbnail.errors %}
+                            <small class="text-danger">{{ form.thumbnail.errors }}</small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Detailed Description -->
+                    <div class="form-group mb-4">
+                        <label for="id_detailed_description">Detailed Description</label>
+                        {{ form.detailed_description }}
+                        {% if form.detailed_description.errors %}
+                            <small class="text-danger">{{ form.detailed_description.errors }}</small>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="theme-btn btn-style-one">
+                        <span class="btn-title">Create Case Study</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

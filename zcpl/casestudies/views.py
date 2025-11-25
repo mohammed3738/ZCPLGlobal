@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import CaseStudyForm
 
 # Create your views here.
 from django.shortcuts import render, get_object_or_404
@@ -39,3 +40,32 @@ def case_studies_by_category(request, slug):
         "case_study_categories": categories,
         "selected_category": category,
     })
+
+
+
+def create_case_study(request):
+    if request.method == "POST":
+        form = CaseStudyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("case_study_list")
+    else:
+        form = CaseStudyForm()
+
+    return render(request, "casestudies/create.html", {"form": form})
+
+
+
+from django.contrib import messages
+
+def create_case_study(request):
+    if request.method == "POST":
+        form = CaseStudyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Case study created successfully!")
+            return redirect("case_study_list")
+    else:
+        form = CaseStudyForm()
+
+    return render(request, "casestudies/create.html", {"form": form})
