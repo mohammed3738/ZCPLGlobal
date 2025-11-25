@@ -18,14 +18,29 @@
             {% else %}
                 {% static 'images/default-case-study.jpg' %}
             {% endif %}
-         );">
+         ); background-position: top; background-size: cover;">
     </div>
+
     <div class="shape-1"></div>
     <div class="shape-2"></div>
+
     <div class="banner-inner">
         <div class="auto-container">
-            <div class="inner-container clearfix">
-                <h1>{{ case_study.title }}</h1>
+            <div class="inner-container clearfix text-start">
+
+                <!-- Title (Camel Case) -->
+                <h1 style="font-size:30px; text-align:left; line-height:1.2;">
+                    {{ case_study.title|title }}
+                </h1>
+
+                <!-- Date Under Title -->
+                <ul class="clearfix" style="padding-left:0; margin-top:10px; font-size:14px; list-style:none; text-align:left;">
+                    <li>
+                        <span class="far fa-clock"></span>
+                        {{ case_study.created_at|date:"d M, Y" }}
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>
@@ -57,7 +72,7 @@
                                      class="img-fluid w-100"
                                      style="max-height:400px; object-fit:cover;"
                                      loading="lazy">
-                            </div>
+                            </div> 
 
                             <div class="lower-box mt-3">
 
@@ -67,7 +82,7 @@
                                         <li>
                                             <span class="far fa-folder-open"></span>
                                             {{ case_study.category.name }}
-                                        </li>
+                                        </li> 
                                         <li>
                                             <span class="far fa-clock"></span>
                                             {{ case_study.created_at|date:"d M, Y" }}
@@ -76,7 +91,7 @@
                                 </div>
 
                                 <!-- Title -->
-                                <h2 class="mb-3">{{ case_study.title }}</h2>
+                                {% comment %} <h2 class="mb-3">{{ case_study.title }}</h2> {% endcomment %}
 
                                 <!-- Summary / Short Description -->
                                 <p class="lead" style="font-size:17px; color:#444;">
@@ -144,7 +159,7 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+            {% comment %} <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                 <aside class="sidebar" style="font-size:14px;">
 
                     <!-- Categories -->
@@ -162,7 +177,7 @@
                     </div>
 
                 </aside>
-            </div>
+            </div> {% endcomment %}
 
         </div>
     </div>

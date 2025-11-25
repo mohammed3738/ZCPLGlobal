@@ -8,12 +8,14 @@ class CaseStudyForm(forms.ModelForm):
     class Meta:
         model = CaseStudy
         fields = [
-            "category",
             "title",
+            "meta_title",
+            "meta_desc",
             "short_description",
             "thumbnail",
             "detailed_description",
         ]
         widgets = {
             "short_description": forms.Textarea(attrs={"rows": 4}),
+            "meta_desc": forms.Textarea(attrs={"rows": 3}),
         }
