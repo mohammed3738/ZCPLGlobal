@@ -17,6 +17,7 @@ from .forms import SignUpForm, SignInForm
 from .forms import ProductForm, ShopContactForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
+from django.template.loader import render_to_string
 
 
 from django.db.models import Count
@@ -1362,3 +1363,47 @@ def subcategory_manager(request, subcategory_id=None):
         'subcategories': subcategories,
         'editing': subcategory_id is not None,
     })
+
+
+
+
+
+def google_xml_feed(request):
+    response = HttpResponse(content_type="application/xml")
+    response.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    response.write('<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n')
+    response.write('<channel>\n')
+    response.write('<title>Zaco Computers Product Feed</title>\n')
+    response.write('<link>https://zacocomputers.com</link>\n')
+    response.write('<description>Live product feed for Google Merchant Center</description>\n')
+
+    products = Product.objects.filter(available=True)
+
+    for product in products:
+
+        response.write("<item>\n")
+
+        response.write(f"<g:id>{product.id}</g:id>\n")
+        response.write(f"<title><![CDATA[{product.name}]]></title>\n")
+
+        description = strip_tags(product.meta_description or product.short_description or product.description)
+        response.write(f"<description><![CDATA[{description}]]></description>\n")
+
+        response.write(f"<link>https://zacocomputers.com{product.get_absolute_url()}</link>\n")
+
+        if product.image:
+            response.write(f"<g:image_link>https://zacocomputers.com{product.image.url}</g:image_link>\n")
+
+        response.write(f"<g:condition>new</g:condition>\n")
+        response.write(f"<g:availability>{'in stock' if product.available else 'out of stock'}</g:availability>\n")
+        response.write(f"<g:price>{product.price} INR</g:price>\n")
+
+        # Optional recommended values
+        response.write("<g:brand>Zaco Computers</g:brand>\n")
+        response.write(f"<g:product_type>{product.category}</g:product_type>\n")
+
+        response.write("</item>\n")
+
+    response.write("</channel>\n</rss>")
+
+    return response
