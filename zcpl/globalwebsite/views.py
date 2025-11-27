@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.template.loader import render_to_string
 
+from django.db import transaction
 
 from django.db.models import Count
 from django.utils.timezone import now
@@ -301,7 +302,7 @@ def manage_products(request):
         description = request.POST.get('description')
         image = request.FILES.get('image')
 
-        # ✅ New SEO fields
+        # SEO fields
         meta_title = request.POST.get('meta_title')
         meta_description = request.POST.get('meta_description')
 
@@ -312,8 +313,8 @@ def manage_products(request):
         if not all([name, price]) or not selected_subcategories:
             error = "Name, Price, and at least one Category are required."
         else:
+
             if not editing:
-                # Create product
                 product = Product.objects.create(
                     name=name,
                     price=price,
@@ -323,12 +324,10 @@ def manage_products(request):
                     meta_title=meta_title,
                     meta_description=meta_description,
                 )
-                product.categories.set(selected_subcategories)
                 if image:
                     product.image = image
                     product.save()
             else:
-                # Update product
                 product = product_to_edit
                 product.name = name
                 product.price = price
@@ -337,22 +336,31 @@ def manage_products(request):
                 product.description = description
                 product.meta_title = meta_title
                 product.meta_description = meta_description
+
                 if image:
                     product.image = image
-                product.save()
-                product.categories.set(selected_subcategories)
 
-            # Handle multiple gallery images
+                product.save()
+
+            product.categories.set(selected_subcategories)
+
+            # 🔥 Handle deleting selected gallery images
+            delete_gallery = request.POST.getlist("delete_gallery")
+            if delete_gallery:
+                ProductImage.objects.filter(id__in=delete_gallery).delete()
+
+            # 🔥 Handle uploading NEW gallery images
             gallery_images = request.FILES.getlist('gallery_images')
             for g_image in gallery_images:
                 ProductImage.objects.create(product=product, image=g_image)
 
+            messages.success(request, "Product updated successfully!" if editing else "Product added successfully!")
             return redirect('add_or_edit_product')
 
-    # Fetch all subcategories
+    # Fetch subcategories
     subcategories = SubCategory.objects.all()
 
-    # Search & sort
+    # Search & sorting
     search = request.GET.get('search', '')
     sort = request.GET.get('sort', '-created')
 
