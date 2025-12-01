@@ -82,19 +82,30 @@
 
     <!-- Gallery Images -->
     <div class="form-group">
-      <label>Gallery Images (you can select multiple):</label><br>
+      <label>Gallery Images (add more if needed):</label><br>
       <input type="file" name="gallery_images" multiple>
+
       {% if editing %}
-        <div>
+        <div style="margin-top: 10px;">
+          <strong>Existing Images:</strong><br>
+
           {% for img in product_to_edit.images.all %}
-            <div class="thumb-preview">
-              <img src="{{ img.image.url }}" width="80">
+            <div class="thumb-preview" style="display:inline-block; margin:10px; text-align:center;">
+              <img src="{{ img.image.url }}" width="100" style="border:1px solid #ccc; display:block;">
+              <label style="font-size:12px;">
+                <input type="checkbox" name="delete_gallery" value="{{ img.id }}">
+                Delete
+              </label>
             </div>
           {% empty %}
-            <p>No extra images</p>
+            <p>No gallery images uploaded.</p>
           {% endfor %}
         </div>
       {% endif %}
+
+      <p style="font-size:11px; color:#666; margin-top:5px;">
+        You can delete selected images and upload new ones — both will be applied after saving.
+      </p>
     </div>
 
     <!-- ✅ Meta Fields -->
