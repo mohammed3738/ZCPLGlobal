@@ -30,6 +30,7 @@ urlpatterns = [
     path('in/',include('india.urls')),
     path('uk/',include('uk.urls')),
     path('uae/',include('uae.urls')),
+    path('case-studies/',include('casestudies.urls')),
     path('sitemap.xml', views.sitemap, name='sitemap'),
     path('robots.txt', views.robots_txt, name='robots_txt'),
     *redirects.redirect_urlpatterns,

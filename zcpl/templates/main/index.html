@@ -4,15 +4,99 @@
 {% load static %}
 
 
-{% block title %}Refurbished Servers From Dell, HPE &amp; IBM | Zaco Global
+{% block title %}New & Refurbished Servers &amp; Data Centre Equipment - Zaco Computers
 
 {% endblock %}
-{% block meta_description %}Shop refurbished servers online and spare parts with Zaco Computers. Trusted global IT solutions provider offering cost-effective hardware &amp; IT services.
+{% block meta_description %}Buy Dell, HPE, IBM &amp; Cisco servers, storage &amp; networking gear from Zaco Computers, your trusted source for reliable IT hardware solutions at the best prices.
 
+{% endblock %}
+
+{% block extra_head %}
+<meta property="og:title" content="Zaco Computer Pvt. Ltd. - Trusted IT Hardware & Refurbished Servers Provider">
+<meta property="og:site_name" content="Zaco Computer Pvt. Ltd.">
+<meta property="og:url" content="https://www.zacocomputer.com/">
+<meta property="og:description" content="Buy Dell, HPE, IBM and Cisco servers, storage and networking equipment from Zaco Computers, a global provider of high-quality multi-vendor IT hardware solutions at the best prices.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.zacocomputer.com/static/images/services/IT%20Hardware%20Solutions.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zaco Computer Pvt. Ltd. - Trusted IT Hardware & Refurbished Servers Provider">
+<meta name="twitter:description" content="Buy Dell, HPE, IBM and Cisco servers, storage and networking equipment from Zaco Computers, a global provider of high-quality multi-vendor IT hardware solutions at the best prices.">
+<meta name="twitter:image" content="https://www.zacocomputer.com/static/images/services/IT%20Hardware%20Solutions.jpg">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Zaco Computer Pvt. Ltd.",
+  "image": "https://www.zacocomputer.com/static/images/Zacow1.png",
+  "url": "https://www.zacocomputer.com/",
+  "telephone": "98111 83994",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3, DLH Park, Goregaon (West)",
+    "addressLocality": "Mumbai",
+    "postalCode": "400062",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 19.1635793,
+    "longitude": 72.8458804
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Thursday",
+      "Wednesday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "10:00",
+    "closes": "19:00"
+  },
+  "sameAs": [
+    "https://www.facebook.com/zacoitsolved",
+    "https://x.com/zacoitsolved",
+    "https://www.instagram.com/zacoitsolutions/",
+    "https://www.linkedin.com/company/zaco-computers-pvt-ltd/",
+    "https://www.youtube.com/channel/UCVmJtibv1RRlnXuJ5HmjUhQ",
+    "https://in.pinterest.com/zacoitsolved/"
+  ] 
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zaco Computer Pvt. Ltd.",
+  "url": "https://www.zacocomputer.com/",
+  "logo": "https://www.zacocomputer.com/static/images/Zacow1.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "98111 83994",
+    "contactType": "customer service",
+    "areaServed": "IN",
+    "availableLanguage": "en"
+  },
+  "sameAs": [
+    "https://www.facebook.com/zacoitsolved",
+    "https://x.com/zacoitsolved",
+    "https://www.instagram.com/zacoitsolutions/",
+    "https://www.linkedin.com/company/zaco-computers-pvt-ltd/",
+    "https://www.youtube.com/channel/UCVmJtibv1RRlnXuJ5HmjUhQ",
+    "https://in.pinterest.com/zacoitsolved/"
+  ]
+}
+</script>
 {% endblock %}
 
 {% block content %}
 
+<!-- test -->
 <style>
   .sr-only {
   position: absolute !important;
@@ -59,12 +143,19 @@
   <!-- Slide Item 1 -->
   <div class="slide-item">
     <div class="image-layer" style="background-image: url({% static 'images/main-slider/REFURBISHED SERVERS & STORAGES.jpg' %})"></div>
+
+      <!-- Hidden img for SEO / accessibility -->
+  <img src="{% static 'images/main-slider/REFURBISHED SERVERS & STORAGES.jpg' %}" 
+       alt="Refurbished Servers & Storage" 
+       title="Refurbished Servers & Storage" 
+       style="display:none;" />
+
     <div class="auto-container">
       <div class="content-box">
         <div class="content">
           <div class="inner">
             <div class="sub-title">Trusted Global Leader in New & Refurbished Servers & Storage</div>
-            <h1>Reliable, Cost-Effective IT Solutions Worldwide</h1>
+            <h2 style="color:#ffffff; font-weight:700; text-transform:uppercase;">Reliable, Cost-Effective IT Solutions Worldwide</h2>
             <div class="link-box">
               <a class="theme-btn btn-style-one" href="{% url 'server-maintenance' %}">
                 <i class="btn-curve"></i>
@@ -80,12 +171,19 @@
   <!-- Slide Item 2 -->
   <div class="slide-item">
     <div class="image-layer" style="background-image: url({% static 'images/main-slider/Seamless Data Center Support & Logistics for Your Business.jpg' %})"></div>
+
+      <!-- Hidden img for SEO / accessibility -->
+  <img src="{% static 'images/main-slider/Seamless Data Center Support & Logistics for Your Business.jpg' %}" 
+       alt="Seamless Data Center Support" 
+       title="Seamless Data Center Support" 
+       style="display:none;" />
+
     <div class="auto-container">
       <div class="content-box">
         <div class="content">
           <div class="inner">
             <div class="sub-title">Seamless Data Center Support & Logistics for Your Business</div>
-            <h1>Comprehensive IT Solutions Across India and UAE for Global Operations</h1>
+            <h2 style="color:#ffffff; font-weight:700; text-transform:uppercase;">Comprehensive IT Solutions Across India and UAE for Global Operations</h2>
             <div class="link-box">
               <a class="theme-btn btn-style-one" href="{% url 'global-it' %}">
                 <i class="btn-curve"></i>
@@ -106,7 +204,7 @@
         <div class="content">
           <div class="inner">
             <div class="sub-title">Third-Party Support for All Microsoft Software</div>
-            <h1>Expert Solutions for Seamless Microsoft Software Management</h1>
+            <h2 style="color:#ffffff; font-weight:700; text-transform:uppercase;">Expert Solutions for Seamless Microsoft Software Management</h2>
             <div class="link-box">
               <a class="theme-btn btn-style-one" href="{% url 'about_us' %}">
                 <i class="btn-curve"></i>
@@ -122,12 +220,19 @@
   <!-- Slide Item 4 -->
   <div class="slide-item">
     <div class="image-layer" style="background-image: url({% static 'images/main-slider/server upgrade.jpg' %})"></div>
+
+      <!-- Hidden img for SEO / accessibility -->
+  <img src="{% static 'images/main-slider/server upgrade.jpg' %}" 
+       alt="Enterprise Server Upgrade Services by Zaco Computers" 
+       title="Enterprise Server Upgrade Services by Zaco Computers" 
+       style="display:none;" />
+       
     <div class="auto-container">
       <div class="content-box">
         <div class="content">
           <div class="inner">
             <div class="sub-title">Need to Modernize Your IT Systems?</div>
-            <h1>Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h1>
+            <h2 style="color:#ffffff; font-weight:700; text-transform:uppercase;">Upgrade Your IT Infrastructure for Greater Efficiency and Performance</h2>
             <div class="link-box">
               <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
                 <i class="btn-curve"></i>
@@ -143,12 +248,19 @@
   <!-- Slide Item 5 -->
   <div class="slide-item">
     <div class="image-layer" style="background-image: url({% static 'images/main-slider/IT Infrastructure Management.jpg' %})"></div>
+
+      <!-- Hidden img for SEO / accessibility -->
+  <img src="{% static 'images/main-slider/IT Infrastructure Management.jpg' %}" 
+       alt="Comprehensive IT Infrastructure Management Solutions"
+       title="Comprehensive IT Infrastructure Management Solutions" 
+       style="display:none;" />
+
     <div class="auto-container">
       <div class="content-box">
         <div class="content">
           <div class="inner">
             <div class="sub-title">Comprehensive IT Infrastructure Management</div>
-            <h1>Expert Managed Services for Seamless Infrastructure Performance</h1>
+            <h2 style="color:#ffffff; font-weight:700; text-transform:uppercase;">Expert Managed Services for Seamless Infrastructure Performance</h2>
             <div class="link-box">
               <a class="theme-btn btn-style-one" href="{% url 'infrastructure-managed-service' %}">
                 <i class="btn-curve"></i>
@@ -293,9 +405,9 @@
     <div class="sec-title-eight text-center">
       <!-- <p class="sec-title-eight__text">From the Blog</p> -->
       <!-- /.sec-title-eight__text -->
-      <h2 class="sec-title-eight__title">
-        Unlock the Power of Exceptional IT Services
-      </h2>
+      <h1 class="sec-title-eight__title">
+        Your Trusted Partner for New &amp; Refurbished Servers, Storage & Networking Hardware Solutions
+      </h1>
       <!-- /.sec-title-eight__title -->
     </div>
     <!-- /.sec-title-eight -->
@@ -328,7 +440,7 @@
       <div class="col-md-12 col-lg-3">
         <div class="blog-eight__card">
           <div class="blog-eight__image">
-            <img src="{% static 'images/services/IT Software Solutions.jpg' %}" alt="" />
+            <img src="{% static 'images/services/IT Software Solutions.jpg' %}" alt="End-to-End IT Software Solutions for Businesses" />
           </div>
           <!-- /.blog-eight__image -->
           <div class="blog-eight__content">
@@ -349,7 +461,7 @@
       <div class="col-md-12 col-lg-3">
         <div class="blog-eight__card">
           <div class="blog-eight__image">
-            <img src="{% static 'images/services/Microsoft Software Support.jpg' %}" alt="" />
+            <img src="{% static 'images/services/Microsoft Software Support.jpg' %}" alt="Third-party Support for all Microsoft Software" />
           </div>
           <!-- /.blog-eight__image -->
           <div class="blog-eight__content">
@@ -443,7 +555,7 @@
 
                                   <a href="https://zacocomputer.com/shop/dell/dell-storage/" 
                                         >
-                                    <figure class="image"><img src="{% static "images/products/server.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/server.png" %}" alt="Dell Server Storage" title="Dell Server Storage" /></figure>
                                     </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -462,7 +574,7 @@
                                 <div class="inner-box">
                                   <a href="https://zacocomputer.com/shop/dell/dell-hard-drive/" 
                                         >
-                                    <figure class="image"><img src="{% static "images/products/hard-disk.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/hard-disk.png" %}" alt="Dell Hard Drive" title="Dell Hard Drive" /></figure>
                                     </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -480,7 +592,7 @@
                                 <div class="inner-box">
                                          <a href="https://zacocomputer.com/shop/dell/dell-rack-server/" 
                                         >
-                                    <figure class="image"><img src="{% static "images/products/server1.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/server1.png" %}" alt="Dell Rack Server" title="Dell Rack Server" /></figure>
                                     </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -498,7 +610,7 @@
                                 <div class="inner-box">
                                         <a href="https://zacocomputer.com/shop/cisco/cisco-firewall/"
                                         >
-                                    <figure class="image"><img src="{% static "images/products/firewall1.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/firewall1.png" %}" alt="Cisco Firewall" title="Cisco Firewall" /></figure>
                                   </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -516,7 +628,7 @@
                                 <div class="inner-box">
                                   <a href="https://zacocomputer.com/shop/cisco/cisco-switch/"
                                         >
-                                    <figure class="image"><img src="{% static "images/products/switch1.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/switch1.png" %}" alt="Cisco Switch" title="Cisco Switch" /></figure>
                                     </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -534,7 +646,7 @@
                                 <div class="inner-box">
                                      <a href="https://zacocomputer.com/shop/dell/dell-memory/"
                                         >
-                                    <figure class="image"><img src="{% static "images/products/ram.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/ram.png" %}" alt="HP Server Memory" title="HP Server Memory" /></figure>
                                  </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -552,7 +664,7 @@
                                 <div class="inner-box">
                                    <a href="https://store.zacocomputer.com/product-category/server-processor/" 
                                         >
-                                    <figure class="image"><img src="{% static "images/products/server processor.png" %}" alt=""></figure>
+                                    <figure class="image"><img src="{% static "images/products/server processor.png" %}" alt="Intel Server Processor" title="Intel Server Processor" /></figure>
                                    </a>
                                     <div class="cap-box">
                                         <div class="cap-inner">
@@ -649,7 +761,7 @@
           <!--Left Column-->
           <div class="left-col col-lg-6 col-md-12 col-sm-12">
               <div class="inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                  <div class="image-box"><img src="{% static "images/home/Refurbished server.jpg" %}" alt=""></div>
+                  <div class="image-box"><img src="{% static "images/home/Refurbished server.jpg" %}" alt="Affordable Refurbished Servers"></div>
               </div>
           </div>
           <!--Right Column-->
@@ -729,39 +841,39 @@
     >
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img src="{% static 'images/home/hpe.jpg' %}" alt="" />
+          <img src="{% static 'images/home/hpe.jpg' %}" alt="Hewlett Packard Enterprise (HPE)" title="Hewlett Packard Enterprise (HPE)" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/dell.jpg' %}" alt="" />
+          <img src="{% static 'images/home/dell.jpg' %}" alt="Dell" title="Dell" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/ibm.jpg' %}" alt="" />
+          <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM" title="IBM" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/lenovo.jpg' %}" alt="" />
+          <img src="{% static 'images/home/lenovo.jpg' %}" alt="Lenovo" title="Lenovo" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/cisco.jpg' %}" alt="" />
+          <img src="{% static 'images/home/cisco.jpg' %}" alt="Cisco" title="Cisco" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/fortinet.jpg' %}" alt="" />
+          <img src="{% static 'images/home/fortinet.jpg' %}" alt="Fortinet" title="Fortinet" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/vm.jpg' %}" alt="" />
+          <img src="{% static 'images/home/vm.jpg' %}" alt="VMware" title="VMware" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/microsoft.jpg' %}" alt="" />
+          <img src="{% static 'images/home/microsoft.jpg' %}" alt="Microsoft" title="Microsoft" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/veeam.jpg' %}" alt="" />
+          <img src="{% static 'images/home/veeam.jpg' %}" alt="Veeam" title="Veeam" />
         </div>
         <!-- /.swiper-slide -->
         {% comment %} <div class="swiper-slide">
@@ -769,7 +881,7 @@
         </div> {% endcomment %}
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/redhat.jpg' %}" alt="" />
+          <img src="{% static 'images/home/redhat.jpg' %}" alt="Red Hat" title="Red Hat" />
         </div>
         <!-- /.swiper-slide -->
 
@@ -874,7 +986,8 @@
         <div class="about-six__image">
           <img
             src="{% static 'images/home/cisco_eng.jpg' %}"
-            alt=""
+            alt="New & Refurbished Cisco Networking Solutions"
+            title="New & Refurbished Cisco Networking Solutions"
           />
         </div>
         <!-- /.about-six__image -->
@@ -951,7 +1064,7 @@
   data-imgPosition="50% 80%"
 >
   <!-- <div class="image-layer" style="background-image: url(images/background/image-1.jpg);"></div> -->
-  <img src="{% static 'images/background/Why Zaco.jpg' %}" alt="" class="jarallax-img" />
+  <img src="{% static 'images/background/Why Zaco.jpg' %}" alt="Reliable Partner for Refurbished IT Solutions" title="Reliable Partner for Refurbished IT Solutions" class="jarallax-img" />
   <div class="auto-container">
     <div class="inner-container">
       <div class="fact-counter">
@@ -1069,7 +1182,7 @@
             </div>
             <div class="featured-block-two clearfix">
               <div class="image">
-                <img src="{% static 'images/resource/Server Management.jpg' %}" alt="" />
+                <img src="{% static 'images/resource/Server Management.jpg' %}" alt="IT Lifecycle Management" title="IT Lifecycle Management" />
               </div>
               <div class="text">
                 <ul>
@@ -1098,14 +1211,14 @@
             data-wow-delay="0ms"
             data-wow-duration="1500ms"
           >
-            <img src="{% static 'images/resource/Infrastructure Managed Services.jpg' %}" alt="" />
+            <img src="{% static 'images/resource/Infrastructure Managed Services.jpg' %}" alt="IT Infrastructure Services" title="IT Infrastructure Services" />
           </div>
           <div
             class="image-block wow fadeInUp"
             data-wow-delay="300ms"
             data-wow-duration="1500ms"
           >
-            <img src="{% static 'images/resource/Reliable IT Services 1.jpg' %}" alt="" />
+            <img src="{% static 'images/resource/Reliable IT Services 1.jpg' %}" alt="Reliable IT Hardware Solutions" title="Reliable IT Hardware Solutions" />
           </div>
         </div>
       </div>
@@ -1296,31 +1409,31 @@
     >
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img src="{% static 'images/home/honeywell.jpg' %}" alt="" />
+          <img src="{% static 'images/home/honeywell.jpg' %}" alt="Honeywell" title="Honeywell" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/Reliance Life.jpg' %}" alt="" />
+          <img src="{% static 'images/home/Reliance Life.jpg' %}" alt="Reliance Life Insurance" title="Reliance Life Insurance" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/Edelweiss.jpg' %}" alt="" />
+          <img src="{% static 'images/home/Edelweiss.jpg' %}" alt="Edelweiss" title="Edelweiss" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/L&T.jpg' %}" alt="" />
+          <img src="{% static 'images/home/L&T.jpg' %}" alt="Larsen & Toubro" title="Larsen & Toubro" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/Just Dial.jpg' %}" alt="" />
+          <img src="{% static 'images/home/Just Dial.jpg' %}" alt="Justdial" title="Justdial" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/TATA Steel.jpg' %}" alt="" />
+          <img src="{% static 'images/home/TATA Steel.jpg' %}" alt="Tata Steel" title="Tata Steel" />
         </div>
         <!-- /.swiper-slide -->
         <div class="swiper-slide">
-          <img src="{% static 'images/home/Tata Power.jpg' %}" alt="" />
+          <img src="{% static 'images/home/Tata Power.jpg' %}" alt="Tata Power" title="Tata Power" />
         </div>
         <!-- /.swiper-slide -->
 
@@ -1343,7 +1456,7 @@
               <div class="inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                   <div class="round-box">
                       <div class="image-box">
-                          <img src="{% static "images/home/why zaco.jpg" %}" alt="">
+                          <img src="{% static "images/home/why zaco.jpg" %}" alt="Global IT Infrastructure Solutions Partner" title="Global IT Infrastructure Solutions Partner">
                       </div>
                       <div class="vid-link">
                           <a href="https://www.youtube.com/watch?v=ZybluLhHgJI" class="lightbox-image">
@@ -1427,7 +1540,8 @@
           <div class="project-eight__item">
             <img
               src="{% static 'images/home/Zaco India.jpg' %}"
-              alt=""
+              alt="Zaco Computers India Location"
+              title="Zaco Computers India Location"
             />
             <div class="project-eight__content">
               <a class="project-eight__link" href="{% url "india-contact" %}"
@@ -1447,7 +1561,8 @@
           <div class="project-eight__item">
             <img
               src="{% static 'images/home/Zaco UK.jpg' %}"
-              alt=""
+              alt="Zaco Computers UK Location"
+              title="Zaco Computers UK Location"
             />
             <div class="project-eight__content">
               <a class="project-eight__link" href="{% url "uk-contact" %}"
@@ -1467,7 +1582,8 @@
           <div class="project-eight__item">
             <img
               src="{% static 'images/home/Zaco UAE.jpg' %}"
-              alt=""
+              alt="Zaco Computers UAE Location"
+              title="Zaco Computers UAE Location"
             />
             <div class="project-eight__content">
               <a class="project-eight__link" href="{% url "uae-contact" %}"

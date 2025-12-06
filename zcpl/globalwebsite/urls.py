@@ -68,6 +68,7 @@ urlpatterns = [
 
 
 
+    path("gmc.xml", views.google_xml_feed, name="google_xml_feed"),
 
 
 

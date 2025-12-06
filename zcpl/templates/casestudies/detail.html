@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ case_study.meta_title|default:case_study.title }}{% endblock %}
+{% block meta_description %}{{ case_study.meta_desc|default:case_study.short_description }}{% endblock %}
+{% block canonical %}
+<link rel="canonical" href="https://zacocomputer.com/case-studies/{{ case_study.slug }}/">
+{% endblock %}
+
+{% block content %}
+
+<!-- Banner Section -->
+<section class="page-banner">
+    <div class="image-layer"
+         style="background-image:url(
+            {% if case_study.thumbnail %}
+                {{ case_study.thumbnail.url }}
+            {% else %}
+                {% static 'images/default-case-study.jpg' %}
+            {% endif %}
+         ); background-position: top; background-size: cover;">
+    </div>
+
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix text-start">
+
+                <!-- Title (Camel Case) -->
+                <h1 style="font-size:30px; text-align:left; line-height:1.2;">
+                    {{ case_study.title|title }}
+                </h1>
+
+                <!-- Date Under Title -->
+                <ul class="clearfix" style="padding-left:0; margin-top:10px; font-size:14px; list-style:none; text-align:left;">
+                    <li>
+                        <span class="far fa-clock"></span>
+                        {{ case_study.created_at|date:"d M, Y" }}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Breadcrumb -->
+<div class="custom-breadcrumb auto-container">
+    <a href="{% url 'home' %}">Home</a> →
+    <a href="{% url 'case_study_list' %}">Case Studies</a> →
+    <span>{{ case_study.title }}</span>
+</div>
+
+<!-- Case Study Detail Section -->
+<div class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+
+            <!-- Main Content -->
+            <div class="content-side col-lg-8 col-md-12 col-sm-12">
+                <div class="blog-details">
+
+                    <div class="post-details">
+                        <div class="inner-box">
+
+                            <!-- Thumbnail -->
+                            <div class="text-center">
+                                <img src="{% if case_study.thumbnail %}{{ case_study.thumbnail.url }}{% else %}{% static 'images/default-case-study.jpg' %}{% endif %}"
+                                     alt="{{ case_study.title }}"
+                                     class="img-fluid w-100"
+                                     style="max-height:400px; object-fit:cover;"
+                                     loading="lazy">
+                            </div> 
+
+                            <div class="lower-box mt-3">
+
+                                <!-- Meta Info -->
+                                <div class="post-meta text-center mb-3">
+                                    <ul class="clearfix" style="font-size:13px;">
+                                        <li>
+                                            <span class="far fa-folder-open"></span>
+                                            {{ case_study.category.name }}
+                                        </li> 
+                                        <li>
+                                            <span class="far fa-clock"></span>
+                                            {{ case_study.created_at|date:"d M, Y" }}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Title -->
+                                {% comment %} <h2 class="mb-3">{{ case_study.title }}</h2> {% endcomment %}
+
+                                <!-- Summary / Short Description -->
+                                <p class="lead" style="font-size:17px; color:#444;">
+                                    {{ case_study.short_description }}
+                                </p>
+
+                                <!-- Detailed Description -->
+                                <div class="blog-content mt-4" style="font-size:16px; line-height:1.75;">
+                                    {{ case_study.detailed_description|safe }}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Related Case Studies -->
+                    {% if related_case_studies %}
+                    <div class="related-posts mt-5">
+                        <h3 class="mb-4">Related Case Studies</h3>
+                        <div class="row clearfix">
+
+                            {% for item in related_case_studies %}
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                <div class="inner-box" style="border:1px solid #eee; border-radius:8px; overflow:hidden;">
+                                    <a href="{% url 'case_study_detail' item.slug %}">
+                                        <div class="image-box" style="height:160px; overflow:hidden;">
+                                            {% if item.thumbnail %}
+                                                <img src="{{ item.thumbnail.url }}"
+                                                     alt="{{ item.title }}"
+                                                     class="img-fluid w-100"
+                                                     style="height:100%; object-fit:cover;">
+                                            {% else %}
+                                                <img src="{% static 'images/default-case-study.jpg' %}"
+                                                     class="img-fluid w-100"
+                                                     style="height:100%; object-fit:cover;">
+                                            {% endif %}
+                                        </div>
+                                    </a>
+
+                                    <div class="lower-box p-3">
+                                        <h5 style="font-size:16px;">
+                                            <a href="{% url 'case_study_detail' item.slug %}">
+                                                {{ item.title }}
+                                            </a>
+                                        </h5>
+                                        <p style="font-size:14px; color:#555;">
+                                            {{ item.short_description|truncatechars:80 }}
+                                        </p>
+                                        <a href="{% url 'case_study_detail' item.slug %}" 
+                                           class="theme-btn" 
+                                           style="padding:5px 12px;">
+                                            Read More →
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            {% comment %} <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                <aside class="sidebar" style="font-size:14px;">
+
+                    <!-- Categories -->
+                    <div class="sidebar-widget categories mb-4">
+                        <h5 class="widget-title" style="font-size:16px;">Categories</h5>
+                        <ul>
+                            {% for category in case_study_categories %}
+                            <li>
+                                <a href="{% url 'case_studies_by_category' category.slug %}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </aside>
+            </div> {% endcomment %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

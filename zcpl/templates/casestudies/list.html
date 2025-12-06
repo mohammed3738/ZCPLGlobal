@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Zaco Computers Case Studies - Enterprise IT Success Stories {% endblock %}
+{% block meta_description %}Explore Zaco’s case studies featuring transformative IT & data center solutions, driving measurable value & operational excellence across key industries. {% endblock %} 
+
+{% block content %}
+<!-- Banner Section -->
+<section class="page-banner">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1>Case Studies</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li class="active">Case Studies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+
+<!-- Case Study Section -->
+<section class="news-section">
+    <div class="auto-container">
+        <div class="row clearfix">
+
+            <!-- Case Study List -->
+            <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="row clearfix">
+
+                    {% for cs in case_studies %}
+                    <div class="news-block col-lg-6 col-md-6 col-sm-12 mb-4">
+                        <div class="inner-box" style="font-size:14px;">
+                            
+                            <!-- Thumbnail -->
+                            <div class="" style="height:250px; overflow:hidden;">
+                                <a href="{% url 'case_study_detail' cs.slug %}">
+                                    {% if cs.thumbnail %}
+                                        <img src="{{ cs.thumbnail.url }}"
+                                             alt="{{ cs.title }}"
+                                             class="img-fluid w-100"
+                                             style="height:100%; object-fit:cover;"
+                                             width="600" height="400"
+                                             loading="lazy">
+                                    {% else %}
+                                        <img src="{% static 'images/default-case-study.jpg' %}"
+                                             alt="Default Case Study Image"
+                                             class="img-fluid w-100"
+                                             style="height:100%; object-fit:cover;"
+                                             width="600" height="400"
+                                             loading="lazy">
+                                    {% endif %}
+                                </a>
+                            </div>
+
+                            <div class="lower-box mt-2">
+
+                                <!-- Meta -->
+                                <div class="post-meta mb-2" style="font-size:13px;">
+                                    <ul class="clearfix">
+                                        <li><span class="far fa-clock"></span> {{ cs.created_at|date:"d M, Y" }}</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Title -->
+                                <h5 style="font-size:16px; margin-bottom:5px;">
+                                    <a href="{% url 'case_study_detail' cs.slug %}">{{ cs.title }}</a>
+                                </h5>
+
+                                <!-- Short Description -->
+                                <div class="text" style="font-size:14px;">
+                                    {{ cs.short_description|truncatechars:120 }}
+                                </div>
+
+                                <!-- Read More -->
+                                <div class="link-box mt-2">
+                                    <a class="theme-btn" href="{% url 'case_study_detail' cs.slug %}">
+                                        <span class="flaticon-next-1"></span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Load More -->
+                <div class="more-box text-center mt-4">
+                    <a class="theme-btn btn-style-one" href="{% url 'case_study_list' %}">
+                        <i class="btn-curve"></i>
+                        <span class="btn-title">Load more case studies</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                <aside class="sidebar" style="font-size:14px;">
+
+                    <!-- Categories -->
+                    <div class="sidebar-widget categories mb-4">
+                        <h5 class="widget-title">Categories</h5>
+                        <ul>
+                            {% for category in case_study_categories %}
+                            <li>
+                                <a href="{% url 'case_studies_by_category' category.slug %}">
+                                    {{ category.name }} ({{ category.num_items }})
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="sidebar-widget tags mb-4">
+                        <h5 class="widget-title">Tags</h5>
+                        <ul class="d-flex flex-wrap">
+                            {% for tag in case_study_tags %}
+                            <li style="margin:2px;">
+                                <a href="{% url 'case_studies_by_tag' tag.slug %}"
+                                   class="badge bg-secondary text-white p-1">{{ tag.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Archives -->
+                    <div class="sidebar-widget archives">
+                        <h5 class="widget-title">Archives</h5>
+                        <ul>
+                            {% for date in case_study_archives %}
+                            <li>
+                                <a href="{% url 'case_studies_by_archive' date.year date.month %}">
+                                    {{ date|date:"F Y" }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

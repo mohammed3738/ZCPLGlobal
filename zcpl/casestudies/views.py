@@ -1,0 +1,65 @@
+from django.shortcuts import render, redirect
+from .forms import CaseStudyForm
+
+# Create your views here.
+from django.shortcuts import render, get_object_or_404
+from .models import *
+
+def case_study_list(request):
+    case_studies = CaseStudy.objects.all().order_by('-created_at')
+
+    return render(request, "casestudies/list.html", {
+        "case_studies": case_studies,
+    })
+
+
+def case_study_detail(request, slug):
+    case_study = get_object_or_404(CaseStudy, slug=slug)
+
+    related = CaseStudy.objects.exclude(id=case_study.id).order_by('-created_at')[:3]
+
+    return render(request, "casestudies/detail.html", {
+        "case_study": case_study,
+        "related_case_studies": related,
+    })
+
+
+# def case_studies_by_category(request, slug):
+#     category = get_object_or_404(CaseStudyCategory, slug=slug)
+#     case_studies = CaseStudy.objects.filter(category=category)
+#     categories = CaseStudyCategory.objects.all()
+
+#     return render(request, "casestudies/list.html", {
+#         "case_studies": case_studies,
+#         "case_study_categories": categories,
+#         "selected_category": category,
+#     })
+
+
+
+def create_case_study(request):
+    if request.method == "POST":
+        form = CaseStudyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("case_study_list")
+    else:
+        form = CaseStudyForm()
+
+    return render(request, "casestudies/create.html", {"form": form})
+
+
+
+from django.contrib import messages
+
+def create_case_study(request):
+    if request.method == "POST":
+        form = CaseStudyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Case study created successfully!")
+            return redirect("case_study_list")
+    else:
+        form = CaseStudyForm()
+
+    return render(request, "casestudies/create.html", {"form": form})
