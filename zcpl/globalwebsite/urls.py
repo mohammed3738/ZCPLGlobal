@@ -70,6 +70,7 @@ urlpatterns = [
 
     path("gmc.xml", views.google_xml_feed, name="google_xml_feed"),
 
+    path("search-ajax/", views.ajax_product_search, name="ajax_product_search"),
 
 
 # urls.py

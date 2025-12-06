@@ -1383,7 +1383,7 @@ def google_xml_feed(request):
     response.write('<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n')
     response.write('<channel>\n')
     response.write('<title>Zaco Computers Product Feed</title>\n')
-    response.write('<link>https://zacocomputers.com</link>\n')
+    response.write('<link>https://www.zacocomputer.com</link>\n')
     response.write('<description>Live product feed for Google Merchant Center</description>\n')
 
     products = Product.objects.filter(available=True)
@@ -1398,10 +1398,10 @@ def google_xml_feed(request):
         description = strip_tags(product.meta_description or product.short_description or product.description)
         response.write(f"<description><![CDATA[{description}]]></description>\n")
 
-        response.write(f"<link>https://zacocomputers.com{product.get_absolute_url()}</link>\n")
+        response.write(f"<link>https://www.zacocomputer.com/{product.get_absolute_url()}</link>\n")
 
         if product.image:
-            response.write(f"<g:image_link>https://zacocomputers.com{product.image.url}</g:image_link>\n")
+            response.write(f"<g:image_link>https://www.zacocomputer.com/{product.image.url}</g:image_link>\n")
 
         response.write(f"<g:condition>new</g:condition>\n")
         response.write(f"<g:availability>{'in stock' if product.available else 'out of stock'}</g:availability>\n")
@@ -1462,3 +1462,34 @@ def request_quote_api(request):
 
     # Form invalid
     return JsonResponse({"success": False, "errors": form.errors}, status=400)
+
+
+
+
+def custom_404(request, exception=None):
+    recommended = Product.objects.filter(available=True).order_by("?")[:4]
+
+    return render(request, "404.html", {"recommended": recommended}, status=404)
+
+
+
+def ajax_product_search(request):
+    query = request.GET.get("q", "")
+    results = []
+
+    if query:
+        products = Product.objects.filter(
+            Q(name__icontains=query) | 
+            Q(description__icontains=query)
+        )[:8]
+
+        results = [
+            {
+                "name": p.name,
+                "url": p.get_absolute_url(),
+                "image": p.image.url if p.image else None
+            }
+            for p in products
+        ]
+
+    return JsonResponse({"results": results})

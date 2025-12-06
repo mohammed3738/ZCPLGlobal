@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="page-banner">
+    <div class="image-layer"
+         style="background-image:url({% static 'images/contact/contact-ind.jpg' %}); background-position: top;">
+    </div>
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1>Page Not Found</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'india-home' %}">Home</a></li>
+                        <li class="active">404 Error</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="error-section text-center py-5">
+    <h1 class="display-2 text-danger fw-bold">404</h1>
+    <p class="lead">Oops! The page you are looking for does not exist. Try searching or return to the <a href="{% url 'home' %}">homepage</a>.
+</p>
+
+    <div class="search-box mx-auto" style="max-width: 500px;">
+        <input id="liveSearchInput" type="text" class="form-control"
+               placeholder="Search for products...">
+        <div id="liveResults" class="mt-3"></div>
+    </div>
+
+    <a href="{% url 'shop' %}" class="theme-btn btn-style-one mt-4">
+        <span class="btn-title">Go Shop</span>
+    </a>
+</section>
+
+<hr class="my-5">
+
+<section class="recommended-section text-center">
+    <h3>🔥 Recommended Products</h3>
+    <div class="row justify-content-center mt-4">
+
+        {% for product in recommended %}
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="product-card p-3 shadow rounded">
+                <img src="{{ product.image.url }}" class="img-fluid rounded mb-2" alt="{{ product.name }}">
+                <h6>{{ product.name }}</h6>
+                <a href="{{ product.get_absolute_url }}" class="theme-btn btn-style-two mt-2 w-100">
+                    <span class="btn-title">View Product</span>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+<script>
+document.getElementById("liveSearchInput").addEventListener("keyup", function() {
+    let query = this.value.trim();
+
+    if (query.length < 2) {
+        document.getElementById("liveResults").innerHTML = "";
+        return;
+    }
+
+    fetch(`/search-ajax/?q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            let html = "";
+
+            if (data.results.length > 0) {
+                html = `<ul class='list-group'>`;
+                data.results.forEach(item => {
+                    html += `
+                    <li class="list-group-item d-flex align-items-center">
+                        ${item.image ? `<img src="${item.image}" width="40" class="me-2 rounded">` : ""}
+                        <a href="${item.url}" class="ms-2">${item.name}</a>
+                    </li>`;
+                });
+                html += `</ul>`;
+            } else {
+                html = `<p class="text-muted mt-2">No results found.</p>`;
+            }
+
+            document.getElementById("liveResults").innerHTML = html;
+        });
+});
+</script>
+
+<style>
+.product-card:hover {
+    transform: translateY(-4px);
+    transition: .3s;
+}
+</style>
+
+{% endblock %}
