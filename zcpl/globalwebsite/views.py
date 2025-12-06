@@ -14,9 +14,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import SignUpForm, SignInForm
 # from .models import Product
-from .forms import ProductForm, ShopContactForm
+from .forms import ProductForm, ShopContactForm, ContactMessageGlobalForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
 
 
 from django.db.models import Count
@@ -1362,3 +1363,49 @@ def subcategory_manager(request, subcategory_id=None):
         'subcategories': subcategories,
         'editing': subcategory_id is not None,
     })
+
+
+
+
+@require_POST
+def request_quote_api(request):
+    """
+    Handle AJAX submission from the fixed 'Request Quote' drawer.
+    Saves ContactMessageGlobal and emails abhiraj@zacocomputer.com.
+    Returns JSON.
+    """
+    form = ContactMessageGlobalForm(request.POST)
+    if form.is_valid():
+        obj = form.save()
+
+        # Build email
+        subject = f"New Quote Request from {obj.name}"
+        message = (
+            "You have received a new quote request from the website.\n\n"
+            f"Name: {obj.name}\n"
+            f"Email: {obj.email}\n"
+            f"Phone: {obj.phone}\n"
+            f"Company: {obj.subject}\n\n"
+            f"Message:\n{obj.message}\n\n"
+            f"Submitted at: {obj.submitted_at}\n"
+        )
+
+        from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@zacocomputer.com")
+        to_emails = ["abhiraj@zacocomputer.com"]
+
+        try:
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=from_email,
+                recipient_list=to_emails,
+                fail_silently=False,
+            )
+        except Exception as e:
+            # Log or print the error – but still return success to user
+            print("Error sending quote email:", e)
+
+        return JsonResponse({"success": True})
+
+    # Form invalid
+    return JsonResponse({"success": False, "errors": form.errors}, status=400)

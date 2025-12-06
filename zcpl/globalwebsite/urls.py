@@ -83,5 +83,7 @@ urlpatterns = [
     path('subcategories/', views.subcategory_manager, name='subcategory_manager'),
     path('subcategories/edit/<int:subcategory_id>/', views.subcategory_manager, name='edit_subcategory'),
 
+    path('api/request-quote/', views.request_quote_api, name='request_quote_api'),
+
 ]
 

@@ -1,0 +1,309 @@
+{% load static %}
+
+<style>
+/* ===========================
+   HIDE WHATSAPP + TIDIO WHEN DRAWER OPEN
+   =========================== */
+/* GetButton: any id starting with gb-widget */
+/* Tidio: root + any id containing 'tidio' to be safe */
+body.quote-drawer-open [id^="gb-widget"],
+body.quote-drawer-open #tidio-chat-root,
+body.quote-drawer-open [id*="tidio"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ===========================
+   FIXED REQUEST QUOTE BUTTON
+   =========================== */
+.request-quote-fixed-btn {
+  position: fixed;
+  right: 0;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  background-color: #1a3546;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Overlay behind drawer */
+.quote-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Drawer (desktop: slide from right) */
+.quote-drawer {
+  position: fixed;
+  top: 0;
+  right: -420px; /* hidden off-screen */
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 9999;
+  box-shadow: -4px 0 16px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+
+/* When active (desktop) */
+.quote-drawer-open #quoteDrawer {
+  right: 0;
+}
+.quote-drawer-open #quoteDrawerOverlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Drawer header/body */
+.quote-drawer-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e1e1e1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quote-drawer-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.quote-drawer-close-btn {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.quote-drawer-body {
+  padding: 16px 20px 24px;
+  overflow-y: auto;
+}
+
+/* Success popup (centered) */
+.quote-success-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.quote-success-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+.quote-success-popup-inner {
+  background: #fff;
+  padding: 24px 28px;
+  border-radius: 8px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* ===========================
+   MOBILE: BUTTON + BOTTOM SHEET
+   =========================== */
+@media (max-width: 767px) {
+  /* Button at bottom-right */
+  .request-quote-fixed-btn {
+    top: auto;
+    bottom: 20px;
+    right: 16px;
+    transform: none;
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  /* Drawer as bottom sheet */
+  .quote-drawer {
+    top: auto;
+    bottom: -100%;  /* hidden below */
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 80%;    /* 80% screen height */
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+    transition: bottom 0.3s ease;
+  }
+
+  .quote-drawer-open #quoteDrawer {
+    bottom: 0;
+  }
+
+  .quote-drawer-body {
+    padding-bottom: 32px;
+  }
+}
+</style>
+
+{# Fixed Request Quote Button #}
+<button
+  type="button"
+  class="request-quote-fixed-btn"
+  onclick="openQuoteDrawer()"
+>
+  Request Quote
+</button>
+
+{# Drawer Overlay #}
+<div id="quoteDrawerOverlay" class="quote-drawer-overlay" onclick="closeQuoteDrawer()"></div>
+
+{# Drawer Panel #}
+<div id="quoteDrawer" class="quote-drawer">
+  <div class="quote-drawer-header">
+    <h3>Request a Quote</h3>
+    <button type="button" class="quote-drawer-close-btn" onclick="closeQuoteDrawer()">&times;</button>
+  </div>
+  <div class="quote-drawer-body">
+    <form id="quoteDrawerForm">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text" name="phone" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Company</label>
+        <input type="text" name="subject" class="form-control"  required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Message</label>
+        <textarea name="message" class="form-control" rows="4" placeholder="Tell us what you need" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" id="quoteDrawerSubmitBtn">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+{# Success Popup #}
+<div id="quoteSuccessPopup" class="quote-success-popup">
+  <div class="quote-success-popup-inner">
+    <h4>Thank you!</h4>
+    <p>We received your request and our team will contact you soon.</p>
+    <button type="button" class="btn btn-primary btn-sm" onclick="closeQuoteSuccessPopup()">OK</button>
+  </div>
+</div>
+
+<script>
+// CSRF from cookie (Django pattern)
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+// Open/close drawer (just toggles body class)
+function openQuoteDrawer() {
+  document.body.classList.add('quote-drawer-open');
+}
+function closeQuoteDrawer() {
+  document.body.classList.remove('quote-drawer-open');
+}
+
+// Success popup
+function showQuoteSuccessPopup() {
+  document.getElementById('quoteSuccessPopup').classList.add('show');
+}
+function closeQuoteSuccessPopup() {
+  document.getElementById('quoteSuccessPopup').classList.remove('show');
+}
+
+// AJAX submit
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('quoteDrawerForm');
+  const submitBtn = document.getElementById('quoteDrawerSubmitBtn');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const formData = new FormData(form);
+
+    fetch("{% url 'request_quote_api' %}", {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      },
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(data => { throw data; });
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        form.reset();
+        closeQuoteDrawer();
+        showQuoteSuccessPopup();
+      } else {
+        alert('Please fix the errors and try again.');
+      }
+    })
+    .catch(err => {
+      console.error('Request quote error:', err);
+      alert('Something went wrong. Please try again.');
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    });
+  });
+});
+</script>

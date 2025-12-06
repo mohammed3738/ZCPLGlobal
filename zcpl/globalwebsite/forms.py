@@ -186,3 +186,35 @@ class SubCategoryForm(forms.ModelForm):
         fields = ['category', 'name', 'slug', 'description', 'meta_title', 'meta_description']
         
         
+class ContactMessageGlobalForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessageGlobal
+        fields = ['name', 'email', 'phone', 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Your Name',
+                'required': True
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Email Address',
+                'required': True
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Phone Number',
+                'required': True
+            }),
+            'subject': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Subject',
+                'required': True
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Tell us what you need',
+                'required': True
+            }),
+        }
