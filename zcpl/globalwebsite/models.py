@@ -22,7 +22,7 @@ class ContactMessageGlobal(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
-    subject = models.CharField(max_length=200)
+    subject = models.CharField(max_length=200, blank=True, null=True)
     message = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
 
