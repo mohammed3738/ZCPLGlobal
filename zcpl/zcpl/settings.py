@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o8#vzyqkh9qwkq(m*8qxte+=4=p-l_e2zd*%tkx+i-9m7vfm=a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 DEBUG = False
-# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -173,7 +173,7 @@ STATIC_URL = '/static/'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Only if you have a static folder in project
 
 
 LOGIN_URL = '/signin/'
