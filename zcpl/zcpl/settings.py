@@ -68,7 +68,7 @@ CKEDITOR_CONFIGS = {
 
 
 # CKEDITOR_CONFIGS = {
-#     'default': {
+#      'default': {
 #         'toolbar': 'full',
 #         'extraPlugins': 'uploadimage',
 #         'filebrowserUploadUrl': '/ckeditor/upload/',       # ✅ Upload endpoint
@@ -85,6 +85,7 @@ CKEDITOR_CONFIGS = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -225,3 +226,4 @@ RECAPTCHA_PUBLIC_KEY = '6LfaCZMrAAAAAJxdbefcTWNIcr8x3B92YYgyFjMf'
 RECAPTCHA_PRIVATE_KEY = '6LfaCZMrAAAAAFWsNm_QzfmQEt8qfBq15jtOpmQS'
 # RECAPTCHA_PUBLIC_KEY = '6LcL9ZIrAAAAABqTwm1NNe6PQ63La_AIQztS4um5'
 # RECAPTCHA_PRIVATE_KEY = '6LcL9ZIrAAAAAK-HCSZZ7HBKX8fuZV-RLSlbmfnO'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
