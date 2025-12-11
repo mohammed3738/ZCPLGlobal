@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'captcha',
     'casestudies',
+    'django.contrib.sitemaps',
 
 ]
 

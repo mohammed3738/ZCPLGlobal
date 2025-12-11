@@ -3,6 +3,14 @@ from django.urls import path
 
 from globalwebsite import views
 
+from django.contrib.sitemaps.views import sitemap
+from globalwebsite.sitemaps import ProductSitemap
+
+sitemaps = {
+    'products': ProductSitemap,
+}
+
+
 urlpatterns = [    
     path('',views.home,name="home"),
     path('about-us/',views.about_us,name="about_us"),
@@ -86,6 +94,9 @@ urlpatterns = [
     path('subcategories/edit/<int:subcategory_id>/', views.subcategory_manager, name='edit_subcategory'),
 
     path('api/request-quote/', views.request_quote_api, name='request_quote_api'),
+
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
+
 
 ]
 
