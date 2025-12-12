@@ -114,12 +114,12 @@ def contact(request):
 
 
 def thank_you(request):
-    # ✅ Only allow access if session flag is set
-    if not request.session.get('form_submitted'):
-        return redirect('/')  # or redirect('contact')
+    # # ✅ Only allow access if session flag is set
+    # if not request.session.get('form_submitted'):
+    #     return redirect('/')  # or redirect('contact')
 
-    # Remove flag after showing once (prevents refresh hack)
-    del request.session['form_submitted']  
+    # # Remove flag after showing once (prevents refresh hack)
+    # del request.session['form_submitted']  
 
     return render(request, 'main/thank_you.html')
 
