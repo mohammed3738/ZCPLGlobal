@@ -1,4 +1,4 @@
-{% comment %} {% load static %}
+{% load static %}
 
 <style>
 /* ===========================
@@ -225,89 +225,6 @@ body.quote-drawer-open [id*="tidio"] {
     <button type="button" class="btn btn-primary btn-sm" onclick="closeQuoteSuccessPopup()">OK</button>
   </div>
 </div>
-
-<script>
-// CSRF from cookie (Django pattern)
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
-
-// Open/close drawer (just toggles body class)
-function openQuoteDrawer() {
-  document.body.classList.add('quote-drawer-open');
-}
-function closeQuoteDrawer() {
-  document.body.classList.remove('quote-drawer-open');
-}
-
-// Success popup
-function showQuoteSuccessPopup() {
-  document.getElementById('quoteSuccessPopup').classList.add('show');
-}
-function closeQuoteSuccessPopup() {
-  document.getElementById('quoteSuccessPopup').classList.remove('show');
-}
-
-// AJAX submit
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('quoteDrawerForm');
-  const submitBtn = document.getElementById('quoteDrawerSubmitBtn');
-  if (!form) return;
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-
-    const formData = new FormData(form);
-
-    fetch("{% url 'request_quote_api' %}", {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': csrftoken,
-      },
-      body: formData
-    })
-    .then(response => {
-      if (!response.ok) {
-        return response.json().then(data => { throw data; });
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (data.success) {
-        form.reset();
-        closeQuoteDrawer();
-        showQuoteSuccessPopup();
-      } else {
-        alert('Please fix the errors and try again.');
-      }
-    })
-    .catch(err => {
-      console.error('Request quote error:', err);
-      alert('Something went wrong. Please try again.');
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit';
-    });
-  });
-});
-</script> {% endcomment %}
-
 
 <script>
 function getCookie(name) {
