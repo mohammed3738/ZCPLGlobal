@@ -1529,7 +1529,7 @@ def request_quote_api(request):
     if primary:
         recipients.append(primary)
     # add abhiraj as requested
-    recipients.append("abhiraj@zacocomputer.com")
+    recipients.append("info@zacocomputer.com")
 
     from_email = getattr(settings, "DEFAULT_FROM_EMAIL", None) or settings.EMAIL_HOST_USER
 
