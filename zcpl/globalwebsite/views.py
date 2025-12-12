@@ -1420,13 +1420,54 @@ def google_xml_feed(request):
 
 
 
+# @require_POST
+# def request_quote_api(request):
+#     """
+#     Handle AJAX submission from the fixed 'Request Quote' drawer.
+#     Saves ContactMessageGlobal and emails abhiraj@zacocomputer.com.
+#     Returns JSON.
+#     """
+#     form = ContactMessageGlobalForm(request.POST)
+#     if form.is_valid():
+#         obj = form.save()
+
+#         # Build email
+#         subject = f"New Quote Request from {obj.name}"
+#         message = (
+#             "You have received a new quote request from the website.\n\n"
+#             f"Name: {obj.name}\n"
+#             f"Email: {obj.email}\n"
+#             f"Phone: {obj.phone}\n"
+#             f"Company: {obj.subject}\n\n"
+#             f"Message:\n{obj.message}\n\n"
+#             f"Submitted at: {obj.submitted_at}\n"
+#         )
+
+#         from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@zacocomputer.com")
+#         to_emails = ["abhiraj@zacocomputer.com"]
+
+#         try:
+#             send_mail(
+#                 subject=subject,
+#                 message=message,
+#                 from_email=from_email,
+#                 recipient_list=to_emails,
+#                 fail_silently=False,
+#             )
+#         except Exception as e:
+#             # Log or print the error – but still return success to user
+#             print("Error sending quote email:", e)
+
+#         return JsonResponse({"success": True})
+
+#     # Form invalid
+#     return JsonResponse({"success": False, "errors": form.errors}, status=400)
+
+
+
+
 @require_POST
 def request_quote_api(request):
-    """
-    Handle AJAX submission from the fixed 'Request Quote' drawer.
-    Saves ContactMessageGlobal and emails abhiraj@zacocomputer.com.
-    Returns JSON.
-    """
     form = ContactMessageGlobalForm(request.POST)
     if form.is_valid():
         obj = form.save()
@@ -1443,8 +1484,8 @@ def request_quote_api(request):
             f"Submitted at: {obj.submitted_at}\n"
         )
 
-        from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@zacocomputer.com")
-        to_emails = ["abhiraj@zacocomputer.com"]
+        from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@site.com")
+        to_emails = ["info@zacocomputer.com"]
 
         try:
             send_mail(
@@ -1455,14 +1496,17 @@ def request_quote_api(request):
                 fail_silently=False,
             )
         except Exception as e:
-            # Log or print the error – but still return success to user
-            print("Error sending quote email:", e)
+            print("Error sending email:", e)
 
-        return JsonResponse({"success": True})
+        # 🔥 Return absolute URL to prevent redirecting to home
+        redirect_url = request.build_absolute_uri(reverse("thank_you"))
 
-    # Form invalid
+        return JsonResponse({
+            "success": True,
+            "redirect_url": redirect_url
+        })
+
     return JsonResponse({"success": False, "errors": form.errors}, status=400)
-
 
 
 

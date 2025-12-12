@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 
 <style>
 /* ===========================
@@ -299,6 +299,254 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(err => {
       console.error('Request quote error:', err);
       alert('Something went wrong. Please try again.');
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    });
+  });
+});
+</script> {% endcomment %}
+
+
+{% load static %}
+
+<style>
+/* ===========================
+   HIDE WHATSAPP + TIDIO WHEN DRAWER OPEN
+   =========================== */
+body.quote-drawer-open [id^="gb-widget"],
+body.quote-drawer-open #tidio-chat-root,
+body.quote-drawer-open [id*="tidio"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ===========================
+   FIXED REQUEST QUOTE BUTTON
+   =========================== */
+.request-quote-fixed-btn {
+  position: fixed;
+  right: 0;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  background-color: #1a3546;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  writing-mode: vertical-rl;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Overlay */
+.quote-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Drawer */
+.quote-drawer {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 9999;
+  box-shadow: -4px 0 16px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+
+.quote-drawer-open #quoteDrawer {
+  right: 0;
+}
+.quote-drawer-open #quoteDrawerOverlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Drawer header/body */
+.quote-drawer-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e1e1e1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quote-drawer-header h3 { margin: 0; font-size: 18px; }
+.quote-drawer-close-btn {
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+.quote-drawer-body {
+  padding: 16px 20px 24px;
+  overflow-y: auto;
+}
+
+/* Success popup */
+.quote-success-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.quote-success-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+.quote-success-popup-inner {
+  background: #fff;
+  padding: 24px 28px;
+  border-radius: 8px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 767px) {
+  .request-quote-fixed-btn {
+    bottom: 20px;
+    right: 16px;
+    writing-mode: horizontal-tb;
+    border-radius: 24px;
+  }
+  .quote-drawer {
+    top: auto;
+    bottom: -100%;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    border-radius: 16px 16px 0 0;
+    transition: bottom 0.3s ease;
+  }
+  .quote-drawer-open #quoteDrawer { bottom: 0; }
+}
+</style>
+
+<!-- BUTTON -->
+<button type="button" class="request-quote-fixed-btn" onclick="openQuoteDrawer()">
+  Request Quote
+</button>
+
+<!-- OVERLAY -->
+<div id="quoteDrawerOverlay" class="quote-drawer-overlay" onclick="closeQuoteDrawer()"></div>
+
+<!-- DRAWER -->
+<div id="quoteDrawer" class="quote-drawer">
+  <div class="quote-drawer-header">
+    <h3>Request a Quote</h3>
+    <button type="button" class="quote-drawer-close-btn" onclick="closeQuoteDrawer()">&times;</button>
+  </div>
+
+  <div class="quote-drawer-body">
+    <form id="quoteDrawerForm">
+      {% csrf_token %}
+      <div class="mb-3"><label>Name</label><input type="text" name="name" class="form-control" required></div>
+      <div class="mb-3"><label>Email</label><input type="email" name="email" class="form-control" required></div>
+      <div class="mb-3"><label>Phone</label><input type="text" name="phone" class="form-control" required></div>
+      <div class="mb-3"><label>Company</label><input type="text" name="subject" class="form-control" required></div>
+      <div class="mb-3"><label>Message</label><textarea name="message" class="form-control" rows="4" required></textarea></div>
+
+      <button type="submit" class="btn btn-primary w-100" id="quoteDrawerSubmitBtn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS POPUP -->
+<div id="quoteSuccessPopup" class="quote-success-popup">
+  <div class="quote-success-popup-inner">
+    <h4>Thank you!</h4>
+    <p>We received your request.</p>
+    <button onclick="closeQuoteSuccessPopup()" class="btn btn-primary btn-sm">OK</button>
+  </div>
+</div>
+
+<script>
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+function openQuoteDrawer() { document.body.classList.add('quote-drawer-open'); }
+function closeQuoteDrawer() { document.body.classList.remove('quote-drawer-open'); }
+
+function showQuoteSuccessPopup() {
+  document.getElementById('quoteSuccessPopup').classList.add('show');
+}
+function closeQuoteSuccessPopup() {
+  document.getElementById('quoteSuccessPopup').classList.remove('show');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('quoteDrawerForm');
+  const submitBtn = document.getElementById('quoteDrawerSubmitBtn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    fetch("{% url 'request_quote_api' %}", {
+      method: 'POST',
+      headers: { 'X-CSRFToken': csrftoken },
+      body: new FormData(form)
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      if (data.success) {
+
+        // 🔥 Critical part — redirect using absolute URL
+        if (data.redirect_url) {
+          window.location.href = data.redirect_url;
+          return;
+        }
+
+        // Fallback to popup
+        form.reset();
+        closeQuoteDrawer();
+        showQuoteSuccessPopup();
+      }
+
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Something went wrong.');
     })
     .finally(() => {
       submitBtn.disabled = false;
