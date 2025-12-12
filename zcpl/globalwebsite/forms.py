@@ -129,7 +129,7 @@ class ContactForm(forms.Form):
     )
 
 class ShopContactForm(forms.ModelForm):
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
+    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
 
     class Meta:
         model = ContactMessageGlobal

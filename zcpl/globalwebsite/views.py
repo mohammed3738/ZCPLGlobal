@@ -798,9 +798,41 @@ def product_detail(request, slug):
         elif 'email' in request.POST and 'message' in request.POST:
             contact_form = ShopContactForm(request.POST)
             if contact_form.is_valid():
-                contact_form.save()
+                # Save form and get the instance
+                obj = contact_form.save()
+                print("Quote request saved to database.", contact_form.cleaned_data)
+
+                # Prepare email using the saved instance
+                subject = f"New Quote Request from {obj.name}"
+                message = (
+                    f"You received a new quote request.\n\n"
+                    f"Name: {obj.name}\n"
+                    f"Email: {obj.email}\n"
+                    f"Phone: {obj.phone}\n"
+                    f"Company: {obj.subject}\n"
+                    f"Message:\n{obj.message}\n\n"
+                    f"Submitted At: {obj.submitted_at}"
+                )
+
+                from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@zacocomputer.com")
+                to_emails = ["info@zacocomputer.com"]
+
+                try:
+                    send_mail(
+                        subject,
+                        message,
+                        from_email,
+                        to_emails,
+                        fail_silently=False,
+                    )
+                    print("Quote Email Sent Successfully.")
+                except Exception as e:
+                    print("Error sending quote email:", e)
+
+                # Success message and redirect
                 messages.success(request, "Your quote request has been sent!")
-                return redirect('product_detail', slug=slug)
+                return redirect('thank_you')
+
             else:
                 messages.error(request, "Please fix errors in the quote form.")
 
