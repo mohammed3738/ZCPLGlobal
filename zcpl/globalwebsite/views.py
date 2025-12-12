@@ -1464,49 +1464,63 @@ def google_xml_feed(request):
 #     return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
 
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 @require_POST
 def request_quote_api(request):
     form = ContactMessageGlobalForm(request.POST)
-    if form.is_valid():
-        obj = form.save()
+    if not form.is_valid():
+        # Return form errors to client for display/handling
+        return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
-        # Build email
-        subject = f"New Quote Request from {obj.name}"
-        message = (
-            "You have received a new quote request from the website.\n\n"
-            f"Name: {obj.name}\n"
-            f"Email: {obj.email}\n"
-            f"Phone: {obj.phone}\n"
-            f"Company: {obj.subject}\n\n"
-            f"Message:\n{obj.message}\n\n"
-            f"Submitted at: {obj.submitted_at}\n"
+    obj = form.save()
+
+    # Build email
+    subject = f"New Quote Request from {obj.name}"
+    message = (
+        "You have received a new quote request from the website.\n\n"
+        f"Name: {obj.name}\n"
+        f"Email: {obj.email}\n"
+        f"Phone: {obj.phone}\n"
+        f"Company: {obj.subject}\n\n"
+        f"Message:\n{obj.message}\n\n"
+        f"Submitted at: {obj.submitted_at}\n"
+        f"Source URL: {request.META.get('HTTP_REFERER', 'unknown')}\n"
+    )
+
+    # Determine recipients
+    primary = getattr(settings, "CONTACT_RECEIVER_EMAIL", None) or getattr(settings, "DEFAULT_FROM_EMAIL", None)
+    recipients = []
+    if primary:
+        recipients.append(primary)
+    # add abhiraj as requested
+    recipients.append("abhiraj@zacocomputer.com")
+
+    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", None) or settings.EMAIL_HOST_USER
+
+    # Try sending mail; don't fail the request if email has issues
+    try:
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=recipients,
+            fail_silently=False,
         )
+    except Exception as e:
+        # Log the error so it can be investigated
+        logger.exception("Error sending quote notification email for ContactMessageGlobal id=%s: %s", obj.id, e)
 
-        from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@site.com")
-        to_emails = ["info@zacocomputer.com"]
+    # Return absolute redirect URL (client will redirect)
+    redirect_url = request.build_absolute_uri(reverse("thank_you"))
 
-        try:
-            send_mail(
-                subject=subject,
-                message=message,
-                from_email=from_email,
-                recipient_list=to_emails,
-                fail_silently=False,
-            )
-        except Exception as e:
-            print("Error sending email:", e)
-
-        # 🔥 Return absolute URL to prevent redirecting to home
-        redirect_url = request.build_absolute_uri(reverse("thank_you"))
-
-        return JsonResponse({
-            "success": True,
-            "redirect_url": redirect_url
-        })
-
-    return JsonResponse({"success": False, "errors": form.errors}, status=400)
+    return JsonResponse({
+        "success": True,
+        "redirect_url": redirect_url
+    })
 
 
 
