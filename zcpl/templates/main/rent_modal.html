@@ -1,0 +1,67 @@
+<!-- Rent This Server Modal (Styled Same as Quote Modal) -->
+<div class="modal fade" id="rentModal" tabindex="-1" aria-labelledby="rentModalLabel"
+     aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
+
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-4">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="rentModalLabel">
+          Rent This Server – {{ product.name }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- RENT FORM -->
+      <form method="post" action="">
+        {% csrf_token %}
+        <input type="hidden" name="rent_request" value="1">
+
+        <div class="modal-body">
+          <div class="row">
+
+            <!-- Name -->
+            <div class="col-md-6 mb-3">
+              <input type="text" name="name" class="form-control"
+                     placeholder="Your Name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+              <input type="email" name="email" class="form-control"
+                     placeholder="Email Address" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="col-md-6 mb-3">
+              <input type="text" name="phone" class="form-control"
+                     placeholder="Phone Number" required>
+            </div>
+
+            <!-- Requirement Title Auto-filled -->
+            <div class="col-md-6 mb-3">
+              <input type="text" name="subject" class="form-control"
+                     value="Rent Request for {{ product.name }}" required>
+            </div>
+
+            <!-- Message -->
+            <div class="col-12 mb-3">
+              <textarea name="message" class="form-control" rows="4"
+                        placeholder="Tell us your rental requirement" required></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer justify-content-center">
+          <button type="submit" class="btn btn-primary px-4">Submit Rent Request</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
