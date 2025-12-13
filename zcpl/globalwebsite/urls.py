@@ -31,9 +31,9 @@ urlpatterns = [
     # path('shop',views.shop,name="shop"),
     # path('add/', views.add_product, name='add_product'),
     path('add-product/', views.manage_products, name='add_or_edit_product'),
-    path('shop/', views.shop, name='shop'),
+    # path('shop/', views.shop, name='shop'),
     # path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
-    path('shop/category/<slug:category_slug>/', views.shop, name='shop_by_category'),
+    # path('shop/category/<slug:category_slug>/', views.shop, name='shop_by_category'),
 
     # path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
 
@@ -95,7 +95,7 @@ urlpatterns = [
 
     path('api/request-quote/', views.request_quote_api, name='request_quote_api'),
 
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
 
 
 ]

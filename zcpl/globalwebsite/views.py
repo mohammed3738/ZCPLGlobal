@@ -1484,8 +1484,8 @@ def edit_blog(request, blog_id):
 
 
 
-def sitemap(request):
-    return render(request,'sitemap.xml', content_type="application/xml")
+# def sitemap(request):
+#     return render(request,'sitemap.xml', content_type="application/xml")
 
 def robots_txt(request):
     return render(request,'robots.txt', content_type="text/plain")
