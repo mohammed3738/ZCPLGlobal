@@ -4,10 +4,21 @@ from django.urls import path
 from globalwebsite import views
 
 from django.contrib.sitemaps.views import sitemap
-from globalwebsite.sitemaps import ProductSitemap
+from india.sitemaps import IndiaStaticSitemap
+from uae.sitemaps import UAESitemap
+from uk.sitemaps import UKSitemap
+from globalwebsite.sitemaps import *
+from casestudies.sitemaps import CaseStudyListSitemap, CaseStudyDetailSitemap
 
 sitemaps = {
-    'products': ProductSitemap,
+    "india": IndiaStaticSitemap,
+    "uae": UAESitemap,
+    "uk": UKSitemap,
+    "products": ProductSitemap,
+    "case_studies": CaseStudyDetailSitemap,
+    "categories": CategorySitemap,
+    "subcategories": SubCategorySitemap,
+
 }
 
 
@@ -94,9 +105,20 @@ urlpatterns = [
     path('subcategories/edit/<int:subcategory_id>/', views.subcategory_manager, name='edit_subcategory'),
 
     path('api/request-quote/', views.request_quote_api, name='request_quote_api'),
+    path(
+        "sitemap-main.xml",
+        sitemap,
+        {"sitemaps": {"main": StaticViewSitemap,"sub-category": SubCategorySitemap,'categorys': CategorySitemap,}}),
 
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
+    path("sitemap.xml", views.sitemap_index, name="sitemap_index"),
+    path("sitemap-india.xml", sitemap, {"sitemaps": {"india": IndiaStaticSitemap}}),
+    path("sitemap-uae.xml", sitemap, {"sitemaps": {"uae": UAESitemap}}),
+    path("sitemap-uk.xml", sitemap, {"sitemaps": {"uk": UKSitemap}}),
+    path("sitemap-products.xml", sitemap, {"sitemaps": {"products": ProductSitemap}}),
+    path("sitemap-case-studies.xml",sitemap,{"sitemaps": {"case_list": CaseStudyListSitemap,"case_detail": CaseStudyDetailSitemap,}}),
+    path("sitemap-blogs.xml", sitemap, {"sitemaps": {"blogs": BlogSitemap}}),
 
+    # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
 
 ]
 

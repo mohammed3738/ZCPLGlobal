@@ -2,5 +2,14 @@ User-agent: *
 Disallow: /wp-admin/
 Disallow: /search?s
 Disallow: /checkout/
+Disallow: /tag/
+Disallow: /category/
+Disallow: /archive/
+
+# Allow everything else
+Allow: /
+
+
 
 Sitemap: https://www.zacocomputer.com/sitemap.xml
+
