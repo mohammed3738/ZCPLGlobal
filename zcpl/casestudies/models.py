@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 
+from django.urls import reverse
 
 
 
@@ -44,3 +45,5 @@ class CaseStudy(models.Model):
 
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse("case_study_detail", args=[self.slug])

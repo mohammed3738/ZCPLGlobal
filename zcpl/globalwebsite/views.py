@@ -1484,8 +1484,8 @@ def edit_blog(request, blog_id):
 
 
 
-def sitemap(request):
-    return render(request,'sitemap.xml', content_type="application/xml")
+# def sitemap(request):
+#     return render(request,'sitemap.xml', content_type="application/xml")
 
 def robots_txt(request):
     return render(request,'robots.txt', content_type="text/plain")
@@ -1724,3 +1724,34 @@ def ajax_product_search(request):
         ]
 
     return JsonResponse({"results": results})
+
+
+
+
+
+def sitemap_index(request):
+    base = request.build_absolute_uri("/")[:-1]
+
+    sitemaps = [
+        f"{base}/sitemap-main.xml",
+        f"{base}/sitemap-products.xml",
+        f"{base}/sitemap-case-studies.xml",
+        f"{base}/sitemap-blogs.xml",
+        f"{base}/sitemap-india.xml",
+        f"{base}/sitemap-uae.xml",
+        f"{base}/sitemap-uk.xml",
+    ]
+
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for sm in sitemaps:
+        xml.append(f"""
+        <sitemap>
+            <loc>{sm}</loc>
+        </sitemap>
+        """)
+
+    xml.append("</sitemapindex>")
+
+    return HttpResponse("".join(xml), content_type="application/xml")

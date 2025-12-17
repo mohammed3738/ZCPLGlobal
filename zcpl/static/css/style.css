@@ -31547,3 +31547,31 @@ body {
 /* custom css */
 
 
+.absolute-footer {
+    background: #0f172a; /* slightly darker than footer */
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 18px 0;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.absolute-footer-inner {
+    text-align: center;
+    line-height: 1.8;
+}
+
+.absolute-footer a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.absolute-footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.absolute-footer strong {
+    color: #ffffff;
+    font-weight: 600;
+}

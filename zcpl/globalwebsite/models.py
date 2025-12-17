@@ -366,6 +366,8 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+    
+    
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, related_name="comments", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
