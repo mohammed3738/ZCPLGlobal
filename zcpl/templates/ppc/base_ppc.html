@@ -1,25 +1,26 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% include "rfq.html" %}
     <meta charset="utf-8" />
-    {% comment %} <title>Refurbished Servers In India From DELL, HPE & IBM</title> {% endcomment %}
+    {% comment %} <title>Refurbished Servers In India From DELL, HPE & IBM </title> {% endcomment %}
+    {% include "rfq.html" %}
+
     <title>{% block title %}Refurbished Servers Globally From DELL, HPE & IBM{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Default meta description.{% endblock %}">
   {% block canonical %}
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
   {% endblock %}
-
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800;900&family=Teko:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -44,8 +45,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}" />
     <link href="{% static 'css/custom-animate.css' %}" rel="stylesheet" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    <link href="{% static "css/jquery.fancybox.min.css" %}" rel="stylesheet">
-
     <!-- rtl css -->
     <link href="{% static 'css/rtl.css' %}" rel="stylesheet" />
     <!-- Responsive File -->
@@ -84,11 +83,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+    
+    {% block extra_head %}{% endblock %}
+  </head>
+<style>
 
-{% block extra_head %}
-{% endblock %}
-  <style>
-    /* Mega menu container */
+
+
+
+
+/* Mega menu container */
 .mega-menu-wrapper {
   position: absolute;
   top: 100%;
@@ -178,18 +182,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 }
 
-  </style>
-  </head>
+</style>
 
-<body>
+
+  <body>
 
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2PWXWXK"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+
     <div class="page-wrapper">
-     
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 
       <!--Mobile Menu-->
       <div class="side-menu__block">
@@ -216,11 +230,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               Linoor is a premium Template for Digital Agencies, Start Ups,
               Small Business and a wide range of other agencies.
             </p> {% endcomment %}
+
             <p>
               <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
               <br />
               <a href="tel:+91-22-69288800">+91 22 69288800</a>
             </p>
+
+  <!-- 🌍 Country Dropdown -->
+<div class="mobile-country-selector" style="margin-top: 15px; max-width: 250px;">
+  <label for="mobile-country" style="color: #fff; font-weight: bold; font-size: 14px;">Select Country:</label><br />
+  <select
+    id="mobile-country"
+    class="form-select"
+    onchange="redirectToPage(this.value)"
+    style="
+      margin-top: 5px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+    "
+  >
+    <option value="/in/">India</option>
+    <option value="/uk/">United Kingdom</option>
+    <option value="/uae/">United Arab Emirates</option>
+    <option value="/">Global</option>
+  </select>
+</div>
+
+
             <div class="side-menu__social">
               <a href="https://www.facebook.com/zacoitsolved"><i class="fab fa-facebook-square"></i></a>
               <a href="https://twitter.com/zacoitsolved"><i class="fab fa-twitter"></i></a>
@@ -265,13 +306,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             style="
               background-color: #ffaa17;
               color: white;
-              padding: 10px 0;
+              {% comment %} padding: 10px 0; {% endcomment %}
               text-align: center;
               position: relative;
+              {% comment %} display:flex; {% endcomment %}
             "
           >
             <div
-              class="auto-container d-flex justify-content-between align-items-center flex-wrap"
+              class="auto-container d-flex justify-content-between align-items-center flex-wrap "
             >
               <div class="support-text">
                 <strong>24x7 Support</strong> | Toll-Free:
@@ -289,7 +331,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="header-upper">
           <div class="topbar-four">
             <div class="auto-container">
-              <p>Your Trusted IT Infrastructure Partner.</p>
+              <p>Your Trusted IT Infrastructure Partner</p>
               <div class="right-content">
                 <div class="contact-info d-flex align-items-center">
                   <div class="phone d-flex align-items-center me-3">
@@ -305,17 +347,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       >info@zacocomputer.com</a
                     >
                   </div>
-                  <div class="email d-flex align-items-center ms-3">
-                    <div>
-                    <select id="country" class="form-select" onchange="redirectToPage(this.value)">
-                      <option value="/in/">India</option>
-                      <option value="/uk/">United Kingdom</option>
-                      <option value="/uae/">United Arab Emirates</option>
-                      {% comment %} <option value="/ca/">Canada</option> {% endcomment %}
-                      <option value="/">Global</option> <!-- Global LAST -->
-                    </select>
-                    </div>
-                  </div>
                 </div>
 
                 <!-- /.phone -->
@@ -327,20 +358,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- /.auto-container -->
           </div>
           <!-- /.topbar -->
+           
           <div class="inner-container clearfix">
             <div class="auto-container">
               <!--Logo-->
               <div class="logo-box">
                 <div class="logo">
-                 <a
-                    href="{% url 'india-home' %}"
-                    title="Zaco Computers Private Limited"
-                    ><img
+                  <a href="{% url 'home' %}" title="Zaco Computers Private Limited">
+                    <img
                       src="{% static 'images/Zacow1.png' %}"
                       id="thm-logo"
-                      alt="Zaco Computers Private Limited"
-                      title="Zaco Computers Private Limited"
-                  /></a>
+                      alt="Zaco Computers Pvt. Ltd. – Global Provider of Reliable IT Hardware Solutions & Refurbished Servers"
+                      title="Zaco Computers Pvt. Ltd. – Global Provider of Reliable IT Hardware Solutions & Refurbished Servers" />
+                  </a>
+
                 </div>
               </div>
               <div class="nav-outer clearfix">
@@ -354,15 +385,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <nav class="main-menu navbar-expand-md navbar-light">
                   <ul class="navigation clearfix">
                     <li class="dropdown">
-                      <a href="{% url 'india-home' %}">Home</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="{% url 'about_us' %}">About Us</a>
+                      <a href="{% url 'home' %}">Home</a>
                     </li>
                     {% comment %} <li class="dropdown">
-                      <a href="{% url 'shop' %}">Online Store</a>
+                      <a href="{% url 'about_us' %}">About Us</a>
                     </li> {% endcomment %}
-                    <li class="dropdown megamenu">
+                    <!-- <li class="dropdown">
+                      <a href="{% url 'shop' %}">Online Store</a>
+                    </li> -->
+
+
+<!-- /////////////////////////////////////////////////////// -->
+
+{% comment %} <li class="dropdown megamenu">
   <a href="{% url 'shop' %}">Online Store</a>
   <div class="mega-menu-wrapper">
     <div class="mega-menu">
@@ -380,64 +415,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       {% endfor %}
     </div>
   </div>
-</li>
+</li> {% endcomment %}
 
-                    <li class="dropdown">
-                      <a href="{% url 'india-services' %}">Services</a>
+
+
+<!-- ////////////////////////////////////////////// -->
+
+                    {% comment %} <li class="dropdown">
+                      <a href="{% url 'services' %}">Services</a>
                       <ul>
                         <li>
-                          <a href="{% url 'it-hardware-india' %}">IT Hardware Solution</a>
+                          <a href="{% url 'it-hardware' %}">IT Hardware</a>
                         </li>
                         <li>
-                          <a href="{% url 'server-maintenance-india' %}"
+                          <a href="{% url 'server-maintenance' %}"
                             >Server Maintenance</a
                           >
                         </li>
 
                         <li>
-                          <a href="{% url 'storage-maintenance-india' %}"
+                          <a href="{% url 'storage-maintenance' %}"
                             >Storage Maintenance</a
                           >
                         </li>
                         <li>
-                          <a href="{% url 'network-maintenance-india' %}"
+                          <a href="{% url 'network-maintenance' %}"
                             >Network Maintenance</a
                           >
                         </li>
                         <li>
-                          <a href="{% url 'rental-services-india' %}"
+                          <a href="{% url 'rental-services' %}"
                             >Rental Services</a
                           >
                         </li>
                         <li>
-                          <a href="{% url 'infrastructure-managed-service-india' %}"
+                          <a href="{% url 'infrastructure-managed-service' %}"
                             >Infrastructure Managed Service</a
                           >
                         </li>
-                       
+
                       </ul>
                     </li>
-                    
                     <li class="dropdown">
                       <a href="{% url 'global-it' %}">Global IT Support</a>
-                      
-                    </li>
-                    <li class="dropdown">
-                      <a href="{% url 'itad-services' %}">ITAD Services</a>
-                     
-                    </li>
-
-               
-                    <li class="dropdown">
-                      <a href="{% url 'india-contact' %}">Contact Us</a>
 
                     </li>
                     <li class="dropdown">
+                      <a href="{% url 'itad-services' %}">IT Buyback</a>
+
+                    </li> {% endcomment %}
+
+
+                    <li class="dropdown">
+                      <a href="{% url 'contact' %}">Contact Us</a>
+
+                    </li>
+                    {% comment %} <li class="dropdown">
                       <a href="{% url 'cart_detail' %}">
   Cart ({{ request.session.cart|length|default:0 }})
 </a>
 
-                    </li>
+
+                    </li> {% endcomment %}
                   </ul>
                 </nav>
               </div>
@@ -451,7 +490,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       {% block content %}{% endblock %}
 
-        {% include "india/footer.html" %}
+        {% comment %} {% include "footer.html" %} {% endcomment %}
+{% comment %} <section class="call-to-section">
+    <div class="auto-container">
+        <div class="inner clearfix ">
+            <div class="shape-1 wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"></div>
+            <div class="shape-2 wow fadeInDown" data-wow-delay="0ms" data-wow-duration="1500ms"></div>
+            <h2 style="font-size: 48px;line-height: 0.99em;">We're always here to help!</h2>
+            <div class="link-box" style="margin-top: -15px;">
+                <a class="theme-btn btn-style-two" href="{% url "contact" %}">
+                    <i class="btn-curve"></i>
+                    <span class="btn-title">Contact us</span>
+                </a>
+            </div>
+        </div>
+    </div>
+  </section> {% endcomment %}
+  
+  
+
+
+<footer class="main-footer">
+  <div class="footer-bottom">
+    <div class="auto-container">
+      <div class="inner clearfix">
+        &copy; 2025 Zaco Computer Pvt. Ltd. All rights reserved.
+        <div class="developed-by">
+          Developed and managed by
+          <a href="https://zacoinfotech.com/" target="_blank">
+            Zaco Information Technology Pvt. Ltd.
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  </div>
+  <!--End pagewrapper-->
+  
+  <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+  
+  
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -464,6 +546,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="{% static 'js/appear.js' %}"></script>
     <script src="{% static 'js/wow.js' %}"></script>
     <script src="{% static 'js/jQuery.style.switcher.min.js' %}"></script>
+    <script src="{% static 'js/custom_js.js' %}"></script>
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"
@@ -489,20 +572,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const select = document.getElementById("country");
     if (!select) return;
 
+    console.log("Current Path:", currentPath);
+
     const options = select.options;
     let matched = false;
 
     for (let i = 0; i < options.length; i++) {
       const optionPath = new URL(options[i].value, window.location.origin).pathname;
+      console.log(`Checking if "${currentPath}" starts with "${optionPath}"`);
+
       if (currentPath.startsWith(optionPath)) {
         options[i].selected = true;
         matched = true;
+        console.log("Matched:", optionPath);
         break;
       }
     }
 
     if (!matched) {
       const savedValue = localStorage.getItem("selectedCountry");
+      console.log("No match. Falling back to saved value:", savedValue);
       if (savedValue) {
         for (let i = 0; i < options.length; i++) {
           if (options[i].value === savedValue) {
@@ -515,6 +604,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   };
 </script>
 {% include "tidio.html" %}
-
-</body>
+  </body>
 </html>

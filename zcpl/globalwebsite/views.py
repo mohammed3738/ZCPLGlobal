@@ -1755,3 +1755,30 @@ def sitemap_index(request):
     xml.append("</sitemapindex>")
 
     return HttpResponse("".join(xml), content_type="application/xml")
+
+
+
+
+def ppc_product_detail(request, slug):
+    product = get_object_or_404(
+        PPCProduct,
+        slug=slug,
+        is_active=True
+    )
+
+    if request.method == "POST":
+        PPCQuote.objects.create(
+            product=product,
+            name=request.POST.get("name"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            company=request.POST.get("company"),
+            message=request.POST.get("message"),
+        )
+        return redirect("thank_you")
+
+    return render(
+        request,
+        "ppc/product_detail.html",
+        {"product": product}
+    )

@@ -192,3 +192,9 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
+
+
+@admin.register(PPCProduct)
+class PPCProductAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ("name", "is_active", "created_at")

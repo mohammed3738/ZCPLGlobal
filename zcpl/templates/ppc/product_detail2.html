@@ -1,0 +1,156 @@
+{% extends "ppc/base_ppc.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- HERO -->
+<!-- HERO -->
+<section class="ppc-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- LEFT CONTENT -->
+      <div class="col-lg-7">
+        <img src="{% static 'images/Zacow1.png' %}" height="40" class="mb-4">
+
+        <h1 class="fw-bold">{{ product.name }}</h1>
+        <h4 class="text-warning mb-3">for Enterprise Businesses</h4>
+
+        <p class="text-secondary mb-4">
+{{ product.sub_heading }}        </p>
+
+        <div class="d-flex gap-3 mb-4">
+          <a href="tel:9811183994" class="btn btn-yellow px-4 py-2">
+            📞 Call for Best Price
+          </a>
+          <a href="#quote-form" class="btn btn-green px-4 py-2">
+            Get a Custom Quote
+          </a>
+        </div>
+
+        <ul class="list-unstyled feature-check">
+              {{ product.pointer|safe }}
+
+        </ul>
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div class="col-lg-5 text-center">
+<div class="hero-image-wrapper">
+  <img src="{{ product.hero_image.url }}"
+       class="img-fluid rounded shadow hero-product-img"
+       alt="{{ product.name }}">
+</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<!-- WHY CHOOSE + FORM -->
+<section class="section-dark" id="quote-form">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+
+      <!-- LEFT CONTENT -->
+      <div class="col-lg-7">
+        <h3 class="text-warning mb-4">
+          Why Choose {{ product.name }}?
+        </h3>
+
+        {% comment %} <ul class="feature-check">
+          <li>✔ Built for Mission-Critical Applications</li>
+          <li>✔ Up to 12TB Memory for Enterprise Needs</li>
+          <li>✔ Reliable Performance for Virtualization & Databases</li>
+          <li>✔ Ideal for Data Centers & Large Businesses</li>
+        </ul> {% endcomment %}
+            {{ product.description|safe }}
+
+
+        {% comment %} <h5 class="text-warning mt-4">Ideal For</h5>
+        <ul class="feature-check">
+          <li>🏢 Enterprises & Data Centers</li>
+          <li>🧩 ERP & Virtualization</li>
+          <li>🗄 High-Memory Databases</li>
+          <li>🛡 Mission-Critical IT</li>
+        </ul> {% endcomment %}
+      </div>
+
+      <!-- RIGHT FORM -->
+      <div class="col-lg-5">
+        <div class="card quote-card p-4 text-dark">
+          <h5 class="fw-bold mb-3">Request a Business Quote</h5>
+
+          <form method="post">
+            {% csrf_token %}
+
+            <input class="form-control mb-2"
+                   name="company"
+                   placeholder="Company Name"
+                   required>
+
+            <input class="form-control mb-2"
+                   name="name"
+                   placeholder="Contact Person"
+                   required>
+
+            <input class="form-control mb-2"
+                   name="email"
+                   placeholder="Work Email"
+                   required>
+
+            <input class="form-control mb-2"
+                   name="phone"
+                   placeholder="Phone Number"
+                   required>
+
+            <select class="form-select mb-2" name="servers">
+              <option>Number of Servers Needed</option>
+              <option>1–5</option>
+              <option>5–10</option>
+              <option>10+</option>
+            </select>
+
+            <select class="form-select mb-3" name="timeline">
+              <option>Purchase Timeline</option>
+              <option>Immediate</option>
+              <option>Within 1 Month</option>
+              <option>Later</option>
+            </select>
+
+            <button class="btn btn-success w-100 py-2">
+              Get Enterprise Pricing
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECH SPECS -->
+<section class="section-dark pt-0">
+  <div class="container">
+    <h4 class="text-warning mb-3">Technical Overview</h4>
+    {% comment %} <ul class="feature-check">
+      <li>• Processors: Intel Xeon E7 Series</li>
+      <li>• Memory: Up to 12TB DDR4 RAM</li>
+      <li>• Storage: Up to 24× 2.5” SAS / SSD</li>
+      <li>• Power: Redundant 760W / 1100W PSU</li>
+    </ul> {% endcomment %}
+
+    {{ product.short_description|safe }}
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-bar text-center">
+  <div class="container">
+    Talk to Our Server Experts Today! <br>
+    Call: <strong>98111 83994</strong>
+  </div>
+</div>
+
+{% endblock %}

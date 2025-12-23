@@ -12,7 +12,7 @@ from imagekit.processors import ResizeToFit, Transpose
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.utils.text import slugify
+from django.utils.html import strip_tags
 
 # Create your models here.
 
@@ -168,6 +168,74 @@ class Product(models.Model):
         from django.urls import reverse
         return reverse('product_detail', args=[self.slug])
 
+
+
+
+class PPCProduct(models.Model):
+    name = models.CharField(max_length=200)
+    sub_heading = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    short_description = RichTextUploadingField(blank=True)
+    pointer = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True)
+
+    hero_image = ProcessedImageField(
+        upload_to='ppc/products/',
+        processors=[Transpose(), ResizeToFit(1200, 1200)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+
+    is_active = models.BooleanField(default=True)
+
+    # SEO (important for landing page quality score)
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+
+            while PPCProduct.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+
+            self.slug = slug
+
+        if not self.meta_title:
+            self.meta_title = self.name
+
+        if not self.meta_description and self.short_description:
+            self.meta_description = strip_tags(self.short_description)[:160]
+
+        super().save(*args, **kwargs)
+
+
+
+class PPCQuote(models.Model):
+    product = models.ForeignKey(
+        PPCProduct,
+        on_delete=models.CASCADE,
+        related_name="quotes"
+    )
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    company = models.CharField(max_length=200, blank=True)
+    message = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.product.name}"
 
 
 
