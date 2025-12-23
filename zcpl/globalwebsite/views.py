@@ -14,9 +14,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from .forms import SignUpForm, SignInForm
 # from .models import Product
-from .forms import ProductForm, ShopContactForm
+from .forms import ProductForm, ShopContactForm, ContactMessageGlobalForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
 
 from django.db import transaction
@@ -113,12 +114,12 @@ def contact(request):
 
 
 def thank_you(request):
-    # ✅ Only allow access if session flag is set
-    if not request.session.get('form_submitted'):
-        return redirect('/')  # or redirect('contact')
+    # # ✅ Only allow access if session flag is set
+    # if not request.session.get('form_submitted'):
+    #     return redirect('/')  # or redirect('contact')
 
-    # Remove flag after showing once (prevents refresh hack)
-    del request.session['form_submitted']  
+    # # Remove flag after showing once (prevents refresh hack)
+    # del request.session['form_submitted']  
 
     return render(request, 'main/thank_you.html')
 
@@ -740,96 +741,269 @@ def build_jsonld_dicts(request, product):
     return product_ld, breadcrumb_ld
 # ---------- View ----------
 
+# def product_detail(request, slug):
+#     """
+#     Full product_detail view.
+#     Adjust forms and models import names if your project differs.
+#     """
+#     product = get_object_or_404(Product, slug=slug)
+#     SERVER_RENTABLE_CATEGORIES = [
+#         "DELL RACK SERVER", "DELL TOWER SERVER", "DELL BLADE SERVER",
+#         "HPE RACK SERVER", "HPE TOWER SERVER", "HPE BLADE SERVER",
+#         "IBM RACK SERVER", "IBM TOWER SERVER", "IBM BLADE SERVER",
+#     ]
+
+#     print(product.subcategory.upper())
+#     show_rent_button = False
+#     # try:
+#         if product.subcategory.upper() in SERVER_RENTABLE_CATEGORIES:
+#             show_rent_button = True
+#     # except:
+#     #     pass
+
+#     # Reviews & pagination (defensive)
+#     reviews_qs = product.reviews.all().order_by('-created_at') if hasattr(product, 'reviews') else []
+#     paginator = Paginator(reviews_qs, 8) if reviews_qs else None
+#     page_num = request.GET.get('page', 1)
+#     if paginator:
+#         try:
+#             reviews = paginator.page(page_num)
+#         except:
+#             reviews = paginator.page(1)
+#     else:
+#         reviews = []
+
+#     review_count = reviews_qs.count() if reviews_qs else 0
+#     avg_rating = reviews_qs.aggregate(avg=Avg('rating'))['avg'] if reviews_qs else 0
+#     try:
+#         avg_rating = round(float(avg_rating), 2) if avg_rating else 0.0
+#     except Exception:
+#         avg_rating = 0.0
+
+#     # Forms
+#     cart_product_form = CartAddProductForm()
+#     contact_form = ShopContactForm()
+
+#     # POST handling: review or quote
+#     if request.method == 'POST':
+#         # Review submit
+#         if 'comment' in request.POST and 'rating' in request.POST:
+#             name = request.POST.get('name', '').strip()
+#             comment = request.POST.get('comment', '').strip()
+#             try:
+#                 rating = int(request.POST.get('rating', '0'))
+#             except Exception:
+#                 rating = None
+
+#             if name and comment and rating:
+#                 rating = max(1, min(5, rating))
+#                 try:
+#                     with transaction.atomic():
+#                         Review.objects.create(product=product, name=name, comment=comment, rating=rating)
+#                     messages.success(request, "Thank you for your review!")
+#                     return redirect('product_detail', slug=slug)
+#                 except Exception as e:
+#                     messages.error(request, "Could not save review: " + str(e))
+#             else:
+#                 messages.error(request, "Please provide name, comment and rating.")
+
+#         # Quote form submit
+#         elif 'email' in request.POST and 'message' in request.POST:
+#             contact_form = ShopContactForm(request.POST)
+#             if contact_form.is_valid():
+#                 # Save form and get the instance
+#                 obj = contact_form.save()
+#                 print("Quote request saved to database.", contact_form.cleaned_data)
+
+#                 # Prepare email using the saved instance
+#                 subject = f"New Quote Request from {obj.name}"
+#                 message = (
+#                     f"You received a new quote request.\n\n"
+#                     f"Name: {obj.name}\n"
+#                     f"Email: {obj.email}\n"
+#                     f"Phone: {obj.phone}\n"
+#                     f"Company: {obj.subject}\n"
+#                     f"Message:\n{obj.message}\n\n"
+#                     f"Submitted At: {obj.submitted_at}"
+#                 )
+
+#                 from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@zacocomputer.com")
+#                 to_emails = ["info@zacocomputer.com"]
+
+#                 try:
+#                     send_mail(
+#                         subject,
+#                         message,
+#                         from_email,
+#                         to_emails,
+#                         fail_silently=False,
+#                     )
+#                     print("Quote Email Sent Successfully.")
+#                 except Exception as e:
+#                     print("Error sending quote email:", e)
+
+#                 # Success message and redirect
+#                 messages.success(request, "Your quote request has been sent!")
+#                 return redirect('thank_you')
+
+#             else:
+#                 messages.error(request, "Please fix errors in the quote form.")
+
+#     # Meta fallbacks
+#     meta_title = product.meta_title if hasattr(product, 'meta_title') and product.meta_title else getattr(product, 'name', '')
+#     if hasattr(product, 'meta_description') and product.meta_description:
+#         meta_description = clean_text_for_jsonld(product.meta_description, 500)
+#     else:
+#         meta_description = clean_text_for_jsonld(getattr(product, 'short_description', ''), 500)
+
+#     # Build JSON-LD dicts and dump to strings (prevent \u escapes)
+#     product_ld, breadcrumb_ld = build_jsonld_dicts(request, product)
+#     product_jsonld_str = json.dumps(product_ld, ensure_ascii=False, indent=2)
+#     breadcrumb_jsonld_str = json.dumps(breadcrumb_ld, ensure_ascii=False, indent=2)
+
+#     context = {
+#         'product': product,
+#         'cart_product_form': cart_product_form,
+#         'contact_form': contact_form,
+#         'reviews': reviews,
+#         'review_count': review_count,
+#         'avg_rating': avg_rating,
+#         'meta_title': meta_title,
+#         'meta_description': meta_description,
+#         'product_jsonld': product_jsonld_str,
+#         'breadcrumb_jsonld': breadcrumb_jsonld_str,
+#         'show_rent_button': show_rent_button,
+#     }
+
+#     return render(request, 'main/product_detail.html', context)
+
+
+
 def product_detail(request, slug):
-    """
-    Full product_detail view.
-    Adjust forms and models import names if your project differs.
-    """
     product = get_object_or_404(Product, slug=slug)
 
-    # Reviews & pagination (defensive)
-    reviews_qs = product.reviews.all().order_by('-created_at') if hasattr(product, 'reviews') else []
-    paginator = Paginator(reviews_qs, 8) if reviews_qs else None
-    page_num = request.GET.get('page', 1)
-    if paginator:
-        try:
-            reviews = paginator.page(page_num)
-        except:
-            reviews = paginator.page(1)
-    else:
-        reviews = []
+    # ---------------------------------------------
+    # RENTABLE CATEGORIES
+    # ---------------------------------------------
+    SERVER_RENTABLE_CATEGORIES = [
+        "DELL RACK SERVER", "DELL TOWER SERVER", "DELL BLADE SERVER",
+        "HPE RACK SERVER", "HPE TOWER SERVER", "HPE BLADE SERVER",
+        "IBM RACK SERVER", "IBM TOWER SERVER", "IBM BLADE SERVER",
+    ]
 
-    review_count = reviews_qs.count() if reviews_qs else 0
-    avg_rating = reviews_qs.aggregate(avg=Avg('rating'))['avg'] if reviews_qs else 0
+    show_rent_button = False
     try:
-        avg_rating = round(float(avg_rating), 2) if avg_rating else 0.0
-    except Exception:
-        avg_rating = 0.0
+        if product.category.name.upper() in SERVER_RENTABLE_CATEGORIES:
+            show_rent_button = True
+    except:
+        pass
 
-    # Forms
+    # ---------------------------------------------
+    # Reviews & forms
+    # ---------------------------------------------
+    reviews_qs = product.reviews.all().order_by("-created_at")
+    paginator = Paginator(reviews_qs, 8)
+    page_num = request.GET.get("page", 1)
+
+    try:
+        reviews = paginator.page(page_num)
+    except:
+        reviews = paginator.page(1)
+
+    review_count = reviews_qs.count()
+    avg_rating = reviews_qs.aggregate(avg=Avg("rating"))["avg"] or 0
+
+    try:
+        avg_rating = round(float(avg_rating), 2)
+    except:
+        avg_rating = 0
+
     cart_product_form = CartAddProductForm()
     contact_form = ShopContactForm()
+    rent_form = ShopContactForm()
 
-    # POST handling: review or quote
-    if request.method == 'POST':
-        # Review submit
-        if 'comment' in request.POST and 'rating' in request.POST:
-            name = request.POST.get('name', '').strip()
-            comment = request.POST.get('comment', '').strip()
-            try:
-                rating = int(request.POST.get('rating', '0'))
-            except Exception:
-                rating = None
+    # --------------------------------------------------
+    # HANDLE RENT REQUEST FORM
+    # --------------------------------------------------
+    if request.method == "POST" and "rent_request" in request.POST:
+        rent_form = ShopContactForm(request.POST)
+        if rent_form.is_valid():
+            obj = rent_form.save(commit=False)
+            obj.subject = f"Rent Request for {product.name}"
+            obj.save()
 
-            if name and comment and rating:
-                rating = max(1, min(5, rating))
-                try:
-                    with transaction.atomic():
-                        Review.objects.create(product=product, name=name, comment=comment, rating=rating)
-                    messages.success(request, "Thank you for your review!")
-                    return redirect('product_detail', slug=slug)
-                except Exception as e:
-                    messages.error(request, "Could not save review: " + str(e))
-            else:
-                messages.error(request, "Please provide name, comment and rating.")
+            subject = obj.subject
+            message = (
+                f"Rent Request for Product: {product.name}\n\n"
+                f"Name: {obj.name}\n"
+                f"Email: {obj.email}\n"
+                f"Phone: {obj.phone}\n\n"
+                f"Message:\n{obj.message}\n\n"
+                f"Submitted At: {obj.submitted_at}"
+            )
 
-        # Quote form submit
-        elif 'email' in request.POST and 'message' in request.POST:
-            contact_form = ShopContactForm(request.POST)
-            if contact_form.is_valid():
-                contact_form.save()
-                messages.success(request, "Your quote request has been sent!")
-                return redirect('product_detail', slug=slug)
-            else:
-                messages.error(request, "Please fix errors in the quote form.")
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
+            )
 
-    # Meta fallbacks
-    meta_title = product.meta_title if hasattr(product, 'meta_title') and product.meta_title else getattr(product, 'name', '')
-    if hasattr(product, 'meta_description') and product.meta_description:
-        meta_description = clean_text_for_jsonld(product.meta_description, 500)
-    else:
-        meta_description = clean_text_for_jsonld(getattr(product, 'short_description', ''), 500)
+            return redirect("thank_you")
 
-    # Build JSON-LD dicts and dump to strings (prevent \u escapes)
+    # --------------------------------------------------
+    # HANDLE QUOTE REQUEST FORM
+    # --------------------------------------------------
+    if request.method == "POST" and "quote_request" in request.POST:
+        contact_form = ShopContactForm(request.POST)
+        if contact_form.is_valid():
+            obj = contact_form.save()
+
+            subject = f"New Quote Request for {product.name}"
+            message = (
+                f"Quote Request for Product: {product.name}\n\n"
+                f"Name: {obj.name}\n"
+                f"Email: {obj.email}\n"
+                f"Phone: {obj.phone}\n"
+                f"Company: {obj.subject}\n\n"
+                f"Message:\n{obj.message}"
+            )
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
+            )
+
+            return redirect("thank_you")
+
+    # --------------------------------------------------
+    # JSON-LD
+    # --------------------------------------------------
     product_ld, breadcrumb_ld = build_jsonld_dicts(request, product)
-    product_jsonld_str = json.dumps(product_ld, ensure_ascii=False, indent=2)
-    breadcrumb_jsonld_str = json.dumps(breadcrumb_ld, ensure_ascii=False, indent=2)
+    product_jsonld = json.dumps(product_ld, ensure_ascii=False)
+    breadcrumb_jsonld = json.dumps(breadcrumb_ld, ensure_ascii=False)
 
+    # --------------------------------------------------
+    # CONTEXT
+    # --------------------------------------------------
     context = {
-        'product': product,
-        'cart_product_form': cart_product_form,
-        'contact_form': contact_form,
-        'reviews': reviews,
-        'review_count': review_count,
-        'avg_rating': avg_rating,
-        'meta_title': meta_title,
-        'meta_description': meta_description,
-        'product_jsonld': product_jsonld_str,
-        'breadcrumb_jsonld': breadcrumb_jsonld_str,
+        "product": product,
+        "reviews": reviews,
+        "review_count": review_count,
+        "avg_rating": avg_rating,
+        "cart_product_form": cart_product_form,
+        "contact_form": contact_form,
+        "rent_form": rent_form,
+        "show_rent_button": show_rent_button,
+        "product_jsonld": product_jsonld,
+        "breadcrumb_jsonld": breadcrumb_jsonld,
     }
 
-    return render(request, 'main/product_detail.html', context)
-
+    return render(request, "main/product_detail.html", context)
 
 
 
@@ -1310,8 +1484,8 @@ def edit_blog(request, blog_id):
 
 
 
-def sitemap(request):
-    return render(request,'sitemap.xml', content_type="application/xml")
+# def sitemap(request):
+#     return render(request,'sitemap.xml', content_type="application/xml")
 
 def robots_txt(request):
     return render(request,'robots.txt', content_type="text/plain")
@@ -1382,7 +1556,7 @@ def google_xml_feed(request):
     response.write('<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n')
     response.write('<channel>\n')
     response.write('<title>Zaco Computers Product Feed</title>\n')
-    response.write('<link>https://zacocomputers.com</link>\n')
+    response.write('<link>https://www.zacocomputer.com</link>\n')
     response.write('<description>Live product feed for Google Merchant Center</description>\n')
 
     products = Product.objects.filter(available=True)
@@ -1397,10 +1571,10 @@ def google_xml_feed(request):
         description = strip_tags(product.meta_description or product.short_description or product.description)
         response.write(f"<description><![CDATA[{description}]]></description>\n")
 
-        response.write(f"<link>https://zacocomputers.com{product.get_absolute_url()}</link>\n")
+        response.write(f"<link>https://www.zacocomputer.com/{product.get_absolute_url()}</link>\n")
 
         if product.image:
-            response.write(f"<g:image_link>https://zacocomputers.com{product.image.url}</g:image_link>\n")
+            response.write(f"<g:image_link>https://www.zacocomputer.com/{product.image.url}</g:image_link>\n")
 
         response.write(f"<g:condition>new</g:condition>\n")
         response.write(f"<g:availability>{'in stock' if product.available else 'out of stock'}</g:availability>\n")
@@ -1415,3 +1589,169 @@ def google_xml_feed(request):
     response.write("</channel>\n</rss>")
 
     return response
+
+
+
+
+# @require_POST
+# def request_quote_api(request):
+#     """
+#     Handle AJAX submission from the fixed 'Request Quote' drawer.
+#     Saves ContactMessageGlobal and emails abhiraj@zacocomputer.com.
+#     Returns JSON.
+#     """
+#     form = ContactMessageGlobalForm(request.POST)
+#     if form.is_valid():
+#         obj = form.save()
+
+#         # Build email
+#         subject = f"New Quote Request from {obj.name}"
+#         message = (
+#             "You have received a new quote request from the website.\n\n"
+#             f"Name: {obj.name}\n"
+#             f"Email: {obj.email}\n"
+#             f"Phone: {obj.phone}\n"
+#             f"Company: {obj.subject}\n\n"
+#             f"Message:\n{obj.message}\n\n"
+#             f"Submitted at: {obj.submitted_at}\n"
+#         )
+
+#         from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "no-reply@zacocomputer.com")
+#         to_emails = ["abhiraj@zacocomputer.com"]
+
+#         try:
+#             send_mail(
+#                 subject=subject,
+#                 message=message,
+#                 from_email=from_email,
+#                 recipient_list=to_emails,
+#                 fail_silently=False,
+#             )
+#         except Exception as e:
+#             # Log or print the error – but still return success to user
+#             print("Error sending quote email:", e)
+
+#         return JsonResponse({"success": True})
+
+#     # Form invalid
+#     return JsonResponse({"success": False, "errors": form.errors}, status=400)
+
+
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+@require_POST
+def request_quote_api(request):
+    form = ContactMessageGlobalForm(request.POST)
+    if not form.is_valid():
+        # Return form errors to client for display/handling
+        return JsonResponse({"success": False, "errors": form.errors}, status=400)
+
+    obj = form.save()
+
+    # Build email
+    subject = f"New Quote Request from {obj.name}"
+    message = (
+        "You have received a new quote request from the website.\n\n"
+        f"Name: {obj.name}\n"
+        f"Email: {obj.email}\n"
+        f"Phone: {obj.phone}\n"
+        f"Company: {obj.subject}\n\n"
+        f"Message:\n{obj.message}\n\n"
+        f"Submitted at: {obj.submitted_at}\n"
+        f"Source URL: {request.META.get('HTTP_REFERER', 'unknown')}\n"
+    )
+
+    # Determine recipients
+    primary = getattr(settings, "CONTACT_RECEIVER_EMAIL", None) or getattr(settings, "DEFAULT_FROM_EMAIL", None)
+    recipients = []
+    if primary:
+        recipients.append(primary)
+    # add abhiraj as requested
+    recipients.append("info@zacocomputer.com")
+
+    from_email = getattr(settings, "DEFAULT_FROM_EMAIL", None) or settings.EMAIL_HOST_USER
+
+    # Try sending mail; don't fail the request if email has issues
+    try:
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=recipients,
+            fail_silently=False,
+        )
+    except Exception as e:
+        # Log the error so it can be investigated
+        logger.exception("Error sending quote notification email for ContactMessageGlobal id=%s: %s", obj.id, e)
+
+    # Return absolute redirect URL (client will redirect)
+    redirect_url = request.build_absolute_uri(reverse("thank_you"))
+
+    return JsonResponse({
+        "success": True,
+        "redirect_url": redirect_url
+    })
+
+
+
+def custom_404(request, exception=None):
+    recommended = Product.objects.filter(available=True).order_by("?")[:4]
+
+    return render(request, "404.html", {"recommended": recommended}, status=404)
+
+
+
+def ajax_product_search(request):
+    query = request.GET.get("q", "")
+    results = []
+
+    if query:
+        products = Product.objects.filter(
+            Q(name__icontains=query) | 
+            Q(description__icontains=query)
+        )[:8]
+
+        results = [
+            {
+                "name": p.name,
+                "url": p.get_absolute_url(),
+                "image": p.image.url if p.image else None
+            }
+            for p in products
+        ]
+
+    return JsonResponse({"results": results})
+
+
+
+
+
+def sitemap_index(request):
+    base = request.build_absolute_uri("/")[:-1]
+
+    sitemaps = [
+        f"{base}/sitemap-main.xml",
+        f"{base}/sitemap-products.xml",
+        f"{base}/sitemap-case-studies.xml",
+        f"{base}/sitemap-blogs.xml",
+        f"{base}/sitemap-india.xml",
+        f"{base}/sitemap-uae.xml",
+        f"{base}/sitemap-uk.xml",
+    ]
+
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for sm in sitemaps:
+        xml.append(f"""
+        <sitemap>
+            <loc>{sm}</loc>
+        </sitemap>
+        """)
+
+    xml.append("</sitemapindex>")
+
+    return HttpResponse("".join(xml), content_type="application/xml")

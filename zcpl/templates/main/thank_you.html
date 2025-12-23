@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<div style="display: none;">{% include "base.html" %}</div>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -23,14 +24,14 @@
     }
 
     h1 {
-      font-size: 3rem;
-      color: #28a745;
+      font-size: 4rem;
+      color: #000;
       margin-bottom: 20px;
     }
 
     p {
       font-size: 1.3rem;
-      color: #555;
+      color: #000;
       margin-bottom: 30px;
     }
 
@@ -68,12 +69,12 @@
 </head>
 <body>
   <div class="thank-you-container">
-    <h1>🎉 Thank You!</h1>
+    <h1>Thank You!</h1>
     <p>Your message has been successfully submitted.<br>We’ll get back to you soon!</p>
     <a href="/">Back to Home</a>
   </div>
 
-  <script>
+  {% comment %} <script>
     function createConfetti() {
       const colors = ['#FFC107', '#28A745', '#007BFF', '#DC3545', '#FF69B4'];
       for (let i = 0; i < 100; i++) {
@@ -92,6 +93,6 @@
     }
 
     setInterval(createConfetti, 500);
-  </script>
+  </script> {% endcomment %}
 </body>
 </html>

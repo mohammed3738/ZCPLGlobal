@@ -197,6 +197,17 @@
                                 <span class="btn-title">Request Quote</span>
                             </button>
                         {% endif %}
+
+                            <!-- Rent Server Button -->
+                      {% if show_rent_button %}
+                        <button type="button" class="theme-btn btn-style-one"
+                                data-bs-toggle="modal" data-bs-target="#rentModal">
+                            <i class="btn-curve"></i>
+                            <span class="btn-title">Rent This Server</span>
+                        </button>
+                        {% endif %}
+
+
                     </div>
                 </form>
             </div>
@@ -340,6 +351,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 {% include "main/request_quote_modal.html" %}
+{% comment %} {% include "main/request_quote_modal.html" %} {% endcomment %}
+{% include "main/rent_modal.html" %}
 
 {# Insert these exactly where you want the JSON-LD scripts to appear #}
 <script type="application/ld+json">

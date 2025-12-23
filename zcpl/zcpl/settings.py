@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o8#vzyqkh9qwkq(m*8qxte+=4=p-l_e2zd*%tkx+i-9m7vfm=a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'captcha',
     'casestudies',
+    'django.contrib.sitemaps',
 
 ]
 
@@ -67,7 +68,7 @@ CKEDITOR_CONFIGS = {
 
 
 # CKEDITOR_CONFIGS = {
-#     'default': {
+#      'default': {
 #         'toolbar': 'full',
 #         'extraPlugins': 'uploadimage',
 #         'filebrowserUploadUrl': '/ckeditor/upload/',       # ✅ Upload endpoint
@@ -84,6 +85,7 @@ CKEDITOR_CONFIGS = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -173,7 +175,7 @@ STATIC_URL = '/static/'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Only if you have a static folder in project
 
 
 LOGIN_URL = '/signin/'
@@ -224,3 +226,4 @@ RECAPTCHA_PUBLIC_KEY = '6LfaCZMrAAAAAJxdbefcTWNIcr8x3B92YYgyFjMf'
 RECAPTCHA_PRIVATE_KEY = '6LfaCZMrAAAAAFWsNm_QzfmQEt8qfBq15jtOpmQS'
 # RECAPTCHA_PUBLIC_KEY = '6LcL9ZIrAAAAABqTwm1NNe6PQ63La_AIQztS4um5'
 # RECAPTCHA_PRIVATE_KEY = '6LcL9ZIrAAAAAK-HCSZZ7HBKX8fuZV-RLSlbmfnO'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
