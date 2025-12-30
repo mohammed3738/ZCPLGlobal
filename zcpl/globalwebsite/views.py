@@ -1782,3 +1782,69 @@ def ppc_product_detail(request, slug):
         "ppc/product_detail.html",
         {"product": product}
     )
+
+
+def ppc_product_manage(request):
+    editing = False
+    product_to_edit = None
+
+    # -----------------------
+    # DELETE (GET)
+    # -----------------------
+    delete_id = request.GET.get('delete')
+    if delete_id:
+        product = get_object_or_404(PPCProduct, id=delete_id)
+        product.delete()
+        return redirect('ppc-product-manage')
+
+    # -----------------------
+    # EDIT MODE (GET)
+    # -----------------------
+    edit_id = request.GET.get('edit')
+    if edit_id:
+        product_to_edit = get_object_or_404(PPCProduct, id=edit_id)
+        editing = True
+
+    # -----------------------
+    # CREATE / UPDATE (POST)
+    # -----------------------
+    if request.method == "POST":
+        product_id = request.POST.get('product_id')
+
+        if product_id:
+            product = get_object_or_404(PPCProduct, id=product_id)
+            editing = True
+        else:
+            product = PPCProduct()
+
+        product.name = request.POST.get('name')
+        product.sub_heading = request.POST.get('sub_heading')
+        product.price = request.POST.get('price')
+        product.is_active = True if request.POST.get('is_active') == 'on' else False
+
+        product.short_description = request.POST.get('short_description')
+        product.pointer = request.POST.get('pointer')
+        product.description = request.POST.get('description')
+
+        product.meta_title = request.POST.get('meta_title')
+        product.meta_description = request.POST.get('meta_description')
+
+        if request.FILES.get('hero_image'):
+            product.hero_image = request.FILES.get('hero_image')
+
+        product.save()
+        return redirect('ppc-product-manage')
+
+    products = PPCProduct.objects.all().order_by('-created_at')
+
+    return render(request, 'ppc/product_manage.html', {
+        'products': products,
+        'editing': editing,
+        'product_to_edit': product_to_edit,
+    })
+
+
+def ppc_product_delete(request, pk):
+    product = get_object_or_404(PPCProduct, pk=pk)
+    product.delete()
+    return redirect('ppc-product-manage')

@@ -53,6 +53,11 @@ urlpatterns = [
     path('product/<slug:slug>/', views.product_detail, name='product_detail'),
     path('cart/update_all/', views.cart_update_all, name='cart_update_all'),
     
+
+    path('ppc/products/', views.ppc_product_manage, name='ppc-product-manage'),
+    path('ppc/products/edit/<int:pk>/', views.ppc_product_manage, name='ppc-product-edit'),
+    path('ppc/products/delete/<int:pk>/', views.ppc_product_delete, name='ppc-product-delete'),
+
     path(
         'ppc/<slug:slug>/',
         views.ppc_product_detail,

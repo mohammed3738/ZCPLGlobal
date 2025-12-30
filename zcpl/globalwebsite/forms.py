@@ -41,6 +41,33 @@ class ProductForm(forms.ModelForm):
 
 
 
+
+
+class PPCProductForm(forms.ModelForm):
+    class Meta:
+        model = PPCProduct
+        fields = [
+            'name',
+            'sub_heading',
+            'price',
+            'short_description',
+            'pointer',
+            'description',
+            'hero_image',
+            'is_active',
+            'meta_title',
+            'meta_description',
+        ]
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'sub_heading': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'meta_title': forms.TextInput(attrs={'class': 'form-control'}),
+            'meta_description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+        }
+
+
 class CartAddProductForm(forms.Form):
     quantity = forms.IntegerField(min_value=1, initial=1)
     override = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)

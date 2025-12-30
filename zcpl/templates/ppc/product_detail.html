@@ -761,25 +761,51 @@
   <div class="product-grid">
     <!-- LEFT: IMAGES -->
     <div class="product-images">
-      <div class="main-image">
-        <span class="badge-stock" style="background: #0071bd !important;">In Stock</span>
-                    <img 
-                        id="mainImage" 
-                        src="{{ product.hero_image.url }}" 
-                        alt="{{ product.name }}" 
-                        width="500" height="400"
-                        loading="lazy" style="object-fit:cover;"
-                    />
-      </div>
-      <div class="key-features">
-        <h4>Key Features</h4>
-        {{ product.short_description|safe }}
-      </div>
+<div class="main-image">
+  <span class="badge-stock" style="background: #0071bd !important;">
+    In Stock
+  </span>
+
+  {% if product.hero_image %}
+    <img
+      id="mainImage"
+      src="{{ product.hero_image.url }}"
+      alt="{{ product.name }}"
+      width="500"
+      height="400"
+      loading="lazy"
+      style="object-fit:cover;"
+    />
+  {% else %}
+    <img
+      id="mainImage"
+      src="{% static 'img/no-image.png' %}"
+      alt="No image available"
+      width="500"
+      height="400"
+      loading="lazy"
+      style="object-fit:contain; opacity:0.6;"
+    />
+  {% endif %}
+</div>
+<div class="key-features">
+  <h4>Key Features</h4>
+
+  {% if product.short_description %}
+    {{ product.short_description|safe }}
+  {% else %}
+    <ul class="feature-list">
+      <li>Enterprise-grade performance</li>
+      <li>Reliable hardware configuration</li>
+      <li>Business-ready deployment</li>
+    </ul>
+  {% endif %}
+</div>
     </div>
 
     <!-- RIGHT: PRODUCT INFO -->
     <div class="product-info">
-      <div class="product-header">
+      <div class="product-header"> 
         <h1 class="product-title">{{ product.name }}</h1>
         <p class="product-subtitle">{{ product.sub_heading }}</p>
         
@@ -801,7 +827,13 @@
       <div class="price-section">
         <div class="price-label">Starting From</div>
         <div class="price-display">
-          <span class="current-price">{{ product.price }}</span>
+<span class="current-price">
+  {% if product.price %}
+    ₹{{ product.price }}
+  {% else %}
+    Contact for Price
+  {% endif %}
+</span>
           {% comment %} <span class="original-price">₹17,50,000</span>
           <span class="discount-badge">14% OFF</span> {% endcomment %}
         </div>
@@ -886,9 +918,15 @@
 <div class="key-features2">
   <h4>Technical Overview</h4>
 
-  <div class="spec-content collapsed" id="specContent">
+<div class="spec-content collapsed" id="specContent">
+  {% if product.description %}
     {{ product.description|safe }}
-  </div>
+  {% else %}
+    <p class="text-muted">
+      Detailed specifications will be shared on request.
+    </p>
+  {% endif %}
+</div>
 
   <button
     type="button"

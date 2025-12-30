@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PPC Product Manager</title>
+
+  <!-- CKEditor CDN -->
+  <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      max-width: 900px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    th {
+      background: #f2f2f2;
+    }
+
+    button {
+      padding: 10px 18px;
+      cursor: pointer;
+    }
+
+    img {
+      border: 1px solid #ccc;
+      padding: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>{% if editing %}Edit Product{% else %}Add Product{% endif %}</h2>
+
+<form method="post" enctype="multipart/form-data">
+
+  {% csrf_token %}
+{% if editing %}
+  <input type="hidden" name="product_id" value="{{ product_to_edit.id }}">
+{% endif %}
+
+  <div class="form-group">
+    <label>Product Name</label>
+    <input type="text" name="name" required
+           value="{% if editing %}{{ product_to_edit.name }}{% endif %}">
+  </div>
+
+  <div class="form-group">
+    <label>Sub Heading</label>
+    <input type="text" name="sub_heading"
+           value="{% if editing %}{{ product_to_edit.sub_heading }}{% endif %}">
+  </div>
+
+  <div class="form-group">
+    <label>Price</label>
+    <input type="number" step="0.01" name="price" required
+           value="{% if editing %}{{ product_to_edit.price }}{% endif %}">
+  </div>
+
+  <div class="form-group">
+    <label>Main Image</label>
+    <input type="file" name="hero_image">
+    {% if editing and product_to_edit.hero_image %}
+      <br><img src="{{ product_to_edit.hero_image.url }}" width="120">
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    <label>Short Description</label>
+    <textarea id="short_description" name="short_description">
+{% if editing %}{{ product_to_edit.short_description|safe }}{% endif %}
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Pointer</label>
+    <textarea id="pointer" name="pointer">
+{% if editing %}{{ product_to_edit.pointer|safe }}{% endif %}
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Full Description</label>
+    <textarea id="description" name="description">
+{% if editing %}{{ product_to_edit.description|safe }}{% endif %}
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label>is aActive</label>
+    <input type="checkbox" name="is_active"
+           {% if editing %}
+             {% if product_to_edit.is_active %}checked{% endif %}
+           {% else %}checked{% endif %}>
+  </div>
+
+
+  <div class="form-group">
+    <label>Meta Title</label>
+    <input type="text" name="meta_title"
+           value="{% if editing %}{{ product_to_edit.meta_title }}{% endif %}">
+  </div>
+
+  <div class="form-group">
+    <label>Meta Description</label>
+    <textarea name="meta_description" rows="3">
+{% if editing %}{{ product_to_edit.meta_description }}{% endif %}
+    </textarea>
+  </div>
+
+  <button type="submit">
+    {% if editing %}Update{% else %}Create{% endif %}
+  </button>
+</form>
+
+<hr>
+
+<h2>Products</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+
+  {% for p in products %}
+  <tr>
+    <td>    <a href="{% url 'ppc_product_detail' p.slug %}">{{ p.name }}</a>
+  </td>
+    <td>₹{{ p.price }}</td>
+    <td>{{ p.is_active }}</td>
+    <td>
+      <a href="?edit={{ p.id }}">Edit</a> |
+      <a href="?delete={{ p.id }}" onclick="return confirm('Delete?')">Delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="4">No products found</td></tr>
+  {% endfor %}
+</table>
+
+<script>
+  CKEDITOR.replace('short_description', { height: 120 });
+  CKEDITOR.replace('pointer', { height: 100 });
+  CKEDITOR.replace('description', { height: 300 });
+</script>
+
+</body>
+</html>
