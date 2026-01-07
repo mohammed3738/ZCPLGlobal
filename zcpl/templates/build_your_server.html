@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Build Your Own Server | Zaco Computers{% endblock %}
+
+{% block content %}
+
+<style>
+.build-server {
+  background: #f6f8fb;
+  padding: 60px 0;
+}
+
+.build-server h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #555;
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.config-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.config-box h4 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #1a3546;
+  padding-left: 12px;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.dynamic-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.dynamic-row button {
+  height: 38px;
+}
+
+.submit-btn {
+  background: #1a3546;
+  color: #fff;
+  padding: 14px 36px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+.submit-btn:hover {
+  background: #142a38;
+}
+</style>
+
+<section class="page-banner" style="padding: 220px 0 60px;">
+  <div class="banner-inner">
+    <div class="auto-container">
+      <h1 style="font-size: 36px;">Select Server Configuration</h1>
+    </div>
+  </div>
+</section>
+
+<section class="build-server">
+  <div class="auto-container">
+
+    <p class="subtitle">
+      Your needs define your server. Select server components, OS, and configuration
+      options to get the best business outcomes.
+    </p>
+
+    <form method="post" action="{% url 'build_your_server' %}">
+      {% csrf_token %}
+
+      <!-- SERVER BASICS -->
+      <div class="config-box">
+        <h4>Server Basics</h4>
+        <div class="row">
+
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Server Brand</label>
+            <select class="form-control" id="serverBrand" name="server_brand" required>
+              <option value="">Select</option>
+              <option value="Dell">Dell</option>
+              <option value="HPE">HPE</option>
+              <option value="IBM">IBM</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Server Type</label>
+            <select class="form-control" name="server_type" required>
+              <option value="New">New</option>
+              <option value="Refurbished">Refurbished</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Form Factor</label>
+            <select class="form-control" id="formFactor" name="form_factor" required>
+              <option value="">Select</option>
+              <option value="rack">Rack Server</option>
+              <option value="tower">Tower Server</option>
+              <option value="blade">Blade Server</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Server Model</label>
+            <select class="form-control" id="serverModel" name="server_model" required>
+              <option value="">Select Brand & Type</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CORE CONFIG -->
+      <div class="config-box">
+        <h4>Core Configuration</h4>
+        <div class="row">
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Processor</label>
+            <select class="form-control" name="processor">
+              <option>8 Cores</option>
+              <option>10 Cores</option>
+              <option>16 Cores</option>
+              <option>24 Cores</option>
+              <option>32 Cores</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Memory</label>
+            <select class="form-control" name="memory">
+              <option>32 GB</option>
+              <option>64 GB</option>
+              <option>128 GB</option>
+              <option>256 GB</option>
+            </select>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Ethernet Card</label>
+            <select class="form-control" name="ethernet_card">
+              <option>1G</option>
+              <option>2 Port 10G</option>
+              <option>4 Port 10G</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STORAGE -->
+      <div class="config-box">
+        <h4>Storage Configuration</h4>
+
+        <label class="form-label">SSD</label>
+        <div id="ssdContainer"></div>
+        <button type="button" class="btn btn-sm btn-outline-primary"
+          onclick="addRow('ssdContainer')">+ Add SSD</button>
+
+        <hr>
+
+        <label class="form-label">Hard Drive</label>
+        <div id="hddContainer"></div>
+        <button type="button" class="btn btn-sm btn-outline-primary"
+          onclick="addRow('hddContainer')">+ Add HDD</button>
+      </div>
+
+      <!-- OTHER COMPONENTS -->
+      <div class="config-box">
+        <h4>Other Components</h4>
+        <label><input type="checkbox" name="other_components[]" value="Rail Kit"> Rail Kit</label><br>
+        <label><input type="checkbox" name="other_components[]" value="Redundant PSU"> Redundant PSU</label><br>
+        <label><input type="checkbox" name="other_components[]" value="Graphic Card"> Graphic Card</label>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="config-box">
+        <h4>Contact Details</h4>
+        <div class="row">
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Name *</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Phone *</label>
+            <input type="text" class="form-control" name="phone" required>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Email *</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">Additional Requirement</label>
+            <textarea class="form-control" name="message" rows="3"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="submit-btn">
+          Submit Configuration Request
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<script>
+const models = {
+  Dell: {
+    rack: ["PowerEdge R620", "PowerEdge R730", "PowerEdge R740"],
+    tower: ["PowerEdge T40", "PowerEdge T140"],
+    blade: ["PowerEdge M630"]
+  },
+  HPE: {
+    rack: ["ProLiant DL360", "ProLiant DL380"],
+    tower: ["ProLiant ML110", "ProLiant ML350"],
+    blade: ["ProLiant BL460c"]
+  },
+  IBM: {
+    rack: ["System x3550", "System x3650"],
+    tower: ["System x3100"],
+    blade: ["BladeCenter HS23"]
+  }
+};
+
+const brandEl = document.getElementById("serverBrand");
+const factorEl = document.getElementById("formFactor");
+const modelEl = document.getElementById("serverModel");
+
+function updateModels() {
+  modelEl.innerHTML = '<option value="">Select</option>';
+  const brand = brandEl.value;
+  const factor = factorEl.value;
+  if (models[brand] && models[brand][factor]) {
+    models[brand][factor].forEach(m => {
+      const opt = document.createElement("option");
+      opt.value = m;
+      opt.textContent = m;
+      modelEl.appendChild(opt);
+    });
+  }
+}
+
+brandEl.addEventListener("change", updateModels);
+factorEl.addEventListener("change", updateModels);
+
+function addRow(containerId) {
+  const container = document.getElementById(containerId);
+  const isSSD = containerId === "ssdContainer";
+
+  const row = document.createElement("div");
+  row.className = "dynamic-row";
+  row.innerHTML = `
+    <input class="form-control" name="${isSSD ? 'ssd[]' : 'hdd[]'}" placeholder="Capacity & Type">
+    <input class="form-control" name="${isSSD ? 'ssd_qty[]' : 'hdd_qty[]'}" placeholder="Qty" style="max-width:80px">
+    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">×</button>
+  `;
+  container.appendChild(row);
+}
+</script>
+
+{% endblock %}

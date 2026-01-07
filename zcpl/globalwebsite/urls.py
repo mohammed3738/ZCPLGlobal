@@ -129,6 +129,13 @@ urlpatterns = [
     path("sitemap-case-studies.xml",sitemap,{"sitemaps": {"case_list": CaseStudyListSitemap,"case_detail": CaseStudyDetailSitemap,}}),
     path("sitemap-blogs.xml", sitemap, {"sitemaps": {"blogs": BlogSitemap}}),
 
+
+    path(
+        'build-your-server/',
+        views.build_your_server,
+        name='build_your_server'
+    ),
+
     # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
 
 ]

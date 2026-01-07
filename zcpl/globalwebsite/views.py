@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
@@ -19,12 +20,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
+from django.views.decorators.http import require_http_methods
 
 from django.db import transaction
 
 from django.db.models import Count
 from django.utils.timezone import now
+import logging
 
+logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request,'main/index.html')
@@ -1848,3 +1852,141 @@ def ppc_product_delete(request, pk):
     product = get_object_or_404(PPCProduct, pk=pk)
     product.delete()
     return redirect('ppc-product-manage')
+
+
+
+
+@require_http_methods(["GET", "POST"])
+def build_your_server(request):
+
+    if request.method == "POST":
+
+        # ============================
+        # Required fields
+        # ============================
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        phone = request.POST.get("phone", "").strip()
+
+        if not name or not email or not phone:
+            messages.error(request, "Name, Email and Phone are required.")
+            return redirect("build_your_server")
+
+        # ============================
+        # Helper
+        # ============================
+        def g(key):
+            return request.POST.get(key, "").strip()
+
+        # ============================
+        # Core selections
+        # ============================
+        server_brand = g("server_brand")
+        server_type = g("server_type")
+        form_factor = g("form_factor")
+        server_model = g("server_model")
+
+        processor = g("processor")
+        memory = g("memory")
+        ethernet_card = g("ethernet_card")
+        server_purpose = g("server_purpose")
+        additional_requirement = g("additional_requirement")
+
+        # ============================
+        # Dynamic rows
+        # ============================
+        ssd_list = request.POST.getlist("ssd[]")
+        ssd_qty_list = request.POST.getlist("ssd_qty[]")
+
+        hdd_list = request.POST.getlist("hdd[]")
+        hdd_qty_list = request.POST.getlist("hdd_qty[]")
+
+        other_components = request.POST.getlist("other_components[]")
+
+        # ============================
+        # Build message
+        # ============================
+        lines = [
+            "BUILD YOUR OWN SERVER REQUEST",
+            "-----------------------------------",
+            f"Server Brand: {server_brand}",
+            f"Server Type: {server_type}",
+            f"Form Factor: {form_factor}",
+            f"Server Model: {server_model}",
+            "",
+            f"Processor: {processor}",
+            f"Memory: {memory}",
+            "",
+            "SSD Configuration:",
+        ]
+
+        if ssd_list:
+            for ssd, qty in zip(ssd_list, ssd_qty_list):
+                if ssd:
+                    lines.append(f"- {ssd} × {qty or '1'}")
+        else:
+            lines.append("- None")
+
+        lines.append("")
+        lines.append("HDD Configuration:")
+
+        if hdd_list:
+            for hdd, qty in zip(hdd_list, hdd_qty_list):
+                if hdd:
+                    lines.append(f"- {hdd} × {qty or '1'}")
+        else:
+            lines.append("- None")
+
+        lines.append("")
+        lines.append("Other Components:")
+
+        if other_components:
+            for comp in other_components:
+                lines.append(f"- {comp}")
+        else:
+            lines.append("- None")
+
+        lines.extend([
+            "",
+            f"Ethernet Card: {ethernet_card}",
+            "",
+            f"Server Purpose:\n{server_purpose}",
+            "",
+            f"Additional Requirement:\n{additional_requirement}",
+        ])
+
+        final_message = "\n".join(lines)
+
+        # ============================
+        # Save to DB
+        # ============================
+        try:
+            with transaction.atomic():
+                ContactMessageGlobal.objects.create(
+                    name=name,
+                    email=email,
+                    phone=phone,
+                    subject="Build Your Own Server Request",
+                    message=strip_tags(final_message),
+                )
+        except Exception as exc:
+            messages.error(request, "Unable to save request.")
+            return redirect("build_your_server")
+
+        # ============================
+        # Email
+        # ============================
+        try:
+            send_mail(
+                subject="BUILD YOUR OWN SERVER REQUEST",
+                message=final_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=["abhiraj@zacocomputer.com"],
+                fail_silently=False,
+            )
+        except Exception as e:
+            logger.error("Build Server email failed: %s", str(e))
+
+        return redirect("thank_you")
+
+    return render(request, "build_your_server.html")
