@@ -1990,3 +1990,8 @@ def build_your_server(request):
         return redirect("thank_you")
 
     return render(request, "build_your_server.html")
+
+
+
+def careers(request):
+    return render(request, "main/careers.html")

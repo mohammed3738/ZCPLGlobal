@@ -135,6 +135,7 @@ urlpatterns = [
         views.build_your_server,
         name='build_your_server'
     ),
+    path("careers/", views.careers, name="careers"),
 
     # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
 
