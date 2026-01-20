@@ -40,6 +40,19 @@ class ProductForm(forms.ModelForm):
         }
 
 
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
+
+class PPCQuoteForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=20)
+    company = forms.CharField(max_length=100)
+    requirements = forms.CharField(widget=forms.Textarea)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+
+
 
 
 

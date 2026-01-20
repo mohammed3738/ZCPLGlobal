@@ -743,8 +743,8 @@
 {% block content %}
 
 <!-- BREADCRUMB -->
-<div class="breadcrumb-section" style="margin-top: 200px;">
-  <nav class="breadcrumb">
+<div class="" style="margin-top: 200px;">
+  {% comment %} <nav class="breadcrumb">
     <a class="breadcrumb-item" href="#">Home</a>
     <span class="breadcrumb-item">/</span>
     <a class="breadcrumb-item" href="#">Products</a>
@@ -752,7 +752,7 @@
     <a class="breadcrumb-item" href="#">Servers</a>
     <span class="breadcrumb-item">/</span>
     <span class="breadcrumb-item active">Enterprise Server Pro X1000</span>
-  </nav>
+  </nav> {% endcomment %}
 </div>
 
 <!-- PRODUCT SECTION -->
@@ -789,7 +789,6 @@
   {% endif %}
 </div>
 <div class="key-features">
-  <h4>Key Features</h4>
 
   {% if product.short_description %}
     {{ product.short_description|safe }}
@@ -868,7 +867,7 @@
 
       <!-- QUOTE FORM -->
       <div class="quote-card">
-        <h5>Request a Business Quote</h5>
+        <h5>Request a quote now!</h5>
 
         <form method="post">
           {% csrf_token %}
@@ -900,6 +899,10 @@
                     placeholder="Requirement"
                     required></textarea>
 
+    <!-- CAPTCHA -->
+    <div style="margin: 15px 0;">
+      {{ form.captcha }}
+    </div>
 
 
     <button type="submit" class="theme-btn btn-style-two btn-22">
@@ -946,14 +949,24 @@
 <section class="cta-server">
   <div class="cta-top">
     <h2>Talk to Our Server Experts Today!</h2>
-    <p>Call now for immediate assistance and pricing!</p>
+    <p>Call or email us for immediate assistance and pricing!</p>
   </div>
 
-  <div class="cta-bottom">
-    <a href="tel:9811183994">
-      Call: <span>98111 83994</span>
-    </a>
-  </div>
+<div class="cta-bottom">
+  <a href="tel:9811183994">
+    <i class="fa-solid fa-phone"></i>
+    <span>98111 83994</span>
+  </a>
+
+  <span style="font-size: 30px; margin: 0 10px;">|</span>
+
+  <a href="mailto:info@zacocomputer.com">
+    <i class="fa-solid fa-envelope"></i>
+    info@zacocomputer.com
+  </a>
+</div>
+
+
 </section>
 
 
