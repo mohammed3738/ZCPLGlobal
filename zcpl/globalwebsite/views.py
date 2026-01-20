@@ -1798,6 +1798,8 @@ Requirement:
 {quote.message}
 """
 
+
+
             send_mail(
                 subject,
                 message,
