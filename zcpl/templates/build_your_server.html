@@ -92,12 +92,11 @@
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Brand</label>
-            <select class="form-control" id="serverBrand" name="server_brand" required>
+            <select class="form-control" id="serverBrand" required>
               <option value="">Select</option>
-              <option value="Dell">Dell</option>
-              <option value="HPE">HPE</option>
-              <option value="IBM">IBM</option>
-              <option value="Other">Other</option>
+              <option value="dell">Dell</option>
+              <option value="hpe">HPE</option>
+              <option value="ibm">IBM</option>
             </select>
           </div>
 
@@ -111,18 +110,18 @@
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Form Factor</label>
-            <select class="form-control" id="formFactor" name="form_factor" required>
-              <option value="">Select</option>
-              <option value="rack">Rack Server</option>
-              <option value="tower">Tower Server</option>
-              <option value="blade">Blade Server</option>
-            </select>
+              <select class="form-control" id="formFactor" required>
+                <option value="">Select</option>
+                <option value="rack">Rack Server</option>
+                <option value="tower">Tower Server</option>
+                <option value="blade">Blade Server</option>
+              </select>
           </div>
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Model</label>
-            <select class="form-control" id="serverModel" name="server_model" required>
-              <option value="">Select Brand & Type</option>
+            <select class="form-control" id="serverModel" required>
+            <option value="">Select brand & type</option>
             </select>
           </div>
 
@@ -232,58 +231,46 @@
 </section>
 
 <script>
-const models = {
-  Dell: {
-    rack: ["PowerEdge R620", "PowerEdge R730", "PowerEdge R740"],
-    tower: ["PowerEdge T40", "PowerEdge T140"],
-    blade: ["PowerEdge M630"]
-  },
-  HPE: {
-    rack: ["ProLiant DL360", "ProLiant DL380"],
-    tower: ["ProLiant ML110", "ProLiant ML350"],
-    blade: ["ProLiant BL460c"]
-  },
-  IBM: {
-    rack: ["System x3550", "System x3650"],
-    tower: ["System x3100"],
-    blade: ["BladeCenter HS23"]
-  }
-};
-
 const brandEl = document.getElementById("serverBrand");
 const factorEl = document.getElementById("formFactor");
 const modelEl = document.getElementById("serverModel");
 
+function resetModels() {
+  modelEl.innerHTML = '<option value="">Select brand & type</option>';
+}
+
 function updateModels() {
-  modelEl.innerHTML = '<option value="">Select</option>';
   const brand = brandEl.value;
   const factor = factorEl.value;
-  if (models[brand] && models[brand][factor]) {
-    models[brand][factor].forEach(m => {
-      const opt = document.createElement("option");
-      opt.value = m;
-      opt.textContent = m;
-      modelEl.appendChild(opt);
+
+  resetModels();
+
+  if (!brand || !factor) return;
+
+  fetch(`/api/server-models/?brand=${brand}&form_factor=${factor}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.models.length) {
+        modelEl.innerHTML = '<option value="">No models found</option>';
+        return;
+      }
+
+      data.models.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.name;
+        opt.textContent = item.name;
+        modelEl.appendChild(opt);
+      });
+    })
+    .catch(err => {
+      console.error("Server model fetch error:", err);
+      modelEl.innerHTML = '<option value="">Error loading models</option>';
     });
-  }
 }
 
 brandEl.addEventListener("change", updateModels);
 factorEl.addEventListener("change", updateModels);
-
-function addRow(containerId) {
-  const container = document.getElementById(containerId);
-  const isSSD = containerId === "ssdContainer";
-
-  const row = document.createElement("div");
-  row.className = "dynamic-row";
-  row.innerHTML = `
-    <input class="form-control" name="${isSSD ? 'ssd[]' : 'hdd[]'}" placeholder="Capacity & Type">
-    <input class="form-control" name="${isSSD ? 'ssd_qty[]' : 'hdd_qty[]'}" placeholder="Qty" style="max-width:80px">
-    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">×</button>
-  `;
-  container.appendChild(row);
-}
 </script>
+
 
 {% endblock %}

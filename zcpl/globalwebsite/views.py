@@ -20,7 +20,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_GET
 
 from django.db import transaction
 
@@ -1995,3 +1995,22 @@ def build_your_server(request):
 
 def careers(request):
     return render(request, "main/careers.html")
+
+
+@require_GET
+def get_server_models(request):
+    brand = request.GET.get("brand", "").lower()
+    form_factor = request.GET.get("form_factor", "").lower()
+
+    if not brand or not form_factor:
+        return JsonResponse({"models": []})
+
+    products = (
+        Product.objects.filter(available=True)
+        .filter(categories__name__icontains=brand)
+        .filter(categories__name__icontains=form_factor)
+     )
+
+    data = [{"id": p.id, "name": p.name} for p in products]
+    return JsonResponse({"models": data})
+

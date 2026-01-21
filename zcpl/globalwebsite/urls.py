@@ -136,6 +136,7 @@ urlpatterns = [
         name='build_your_server'
     ),
     path("careers/", views.careers, name="careers"),
+    path("api/server-models/", views.get_server_models, name="get_server_models"),
 
     # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
 
