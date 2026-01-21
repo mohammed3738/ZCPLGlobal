@@ -218,6 +218,8 @@ class PPCProduct(models.Model):
 
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("ppc_product_detail", kwargs={"slug": self.slug})
 
 
 class PPCQuote(models.Model):

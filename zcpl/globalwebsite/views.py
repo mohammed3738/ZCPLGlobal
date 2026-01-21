@@ -1763,29 +1763,64 @@ def sitemap_index(request):
 
 
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 def ppc_product_detail(request, slug):
-    product = get_object_or_404(
-        PPCProduct,
-        slug=slug,
-        is_active=True
-    )
+    product = get_object_or_404(PPCProduct, slug=slug, is_active=True)
 
     if request.method == "POST":
-        PPCQuote.objects.create(
-            product=product,
-            name=request.POST.get("name"),
-            email=request.POST.get("email"),
-            phone=request.POST.get("phone"),
-            company=request.POST.get("company"),
-            message=request.POST.get("message"),
-        )
-        return redirect("thank_you")
+        form = PPCQuoteForm(request.POST)
+        if form.is_valid():
+
+            quote = PPCQuote.objects.create(
+                product=product,
+                name=form.cleaned_data["name"],
+                email=form.cleaned_data["email"],
+                phone=form.cleaned_data["phone"],
+                company=form.cleaned_data["company"],
+                message=form.cleaned_data["requirements"],
+            )
+
+            # -------- EMAIL CONTENT --------
+            subject = f"New Quote Request – {product.name}"
+            message = f"""
+New Quote Request Received
+
+Product: {product.name}
+
+Name: {quote.name}
+Email: {quote.email}
+Phone: {quote.phone}
+Company: {quote.company}
+
+Requirement:
+{quote.message}
+"""
+
+
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
+            )
+
+            return redirect("thank_you")
+    else:
+        form = PPCQuoteForm()
 
     return render(
         request,
         "ppc/product_detail.html",
-        {"product": product}
+        {
+            "product": product,
+            "form": form,
+        }
     )
+
 
 
 def ppc_product_manage(request):
