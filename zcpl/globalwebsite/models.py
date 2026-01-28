@@ -13,6 +13,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.html import strip_tags
+from django.utils.html import strip_tags
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -97,8 +99,6 @@ class SubCategory(models.Model):
 
 
 
-from django.utils.html import strip_tags
-from django.utils.text import slugify
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -218,6 +218,8 @@ class PPCProduct(models.Model):
 
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("ppc_product_detail", kwargs={"slug": self.slug})
 
 
 class PPCQuote(models.Model):

@@ -4,13 +4,19 @@
   <head>
     <meta charset="utf-8" />
     {% comment %} <title>Refurbished Servers In India From DELL, HPE & IBM </title> {% endcomment %}
-    {% include "rfq.html" %}
+    {% comment %} {% include "rfq.html" %} {% endcomment %}
 
     <title>{% block title %}Refurbished Servers Globally From DELL, HPE & IBM{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Default meta description.{% endblock %}">
   {% block canonical %}
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
   {% endblock %}
+
+  {% block meta %}
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+{% endblock %}
+
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -180,6 +186,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .mega-menu .column {
     width: 100%;
   }
+}
+
+
+.product-subtitle{
+  color: #161d22 !important;
 }
 
 </style>

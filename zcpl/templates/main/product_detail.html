@@ -179,6 +179,14 @@
                         {{ cart_product_form.quantity }}
                         {{ cart_product_form.override }}
                     </div>
+{% if show_rent_button %}
+  <a href="{% url 'build_your_server' %}"
+     class="theme-btn btn-style-one"
+     >
+      <i class="btn-curve"></i>
+      <span class="btn-title">Build Your Own Server</span>
+  </a>
+{% endif %}
 
                     <div class="product-details__buttons">
                         {% if product.price != 0 %}
@@ -191,6 +199,7 @@
                                 <i class="btn-curve"></i>
                                 <span class="btn-title">Add to cart</span>
                             </button>
+                            
                         {% else %}
                             <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal">
                                 <i class="btn-curve"></i>

@@ -198,3 +198,4 @@ admin.site.register(SubCategory, SubCategoryAdmin)
 class PPCProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ("name", "is_active", "created_at")
+    view_on_site = True

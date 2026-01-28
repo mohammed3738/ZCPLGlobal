@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Careers at Zaco Computers | Join Our Team{% endblock %}
+
+{% block meta_description %}
+Explore career opportunities at Zaco Computers. Join our growing team of IT professionals and build a future in enterprise IT solutions, servers, networking, and infrastructure services.
+{% endblock %}
+
+{% block content %}
+
+<style>
+/* ===============================
+   CAREERS PAGE STYLES
+   =============================== */
+.career-hero {
+    background: linear-gradient(rgba(26,53,70,0.85), rgba(26,53,70,0.85)),
+                url("{% static 'images/background/career-bg.jpg' %}") center/cover no-repeat;
+    padding: 140px 0 100px;
+    color: #fff;
+}
+
+.career-hero h1 {
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.career-hero p {
+    max-width: 800px;
+    margin-top: 15px;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.career-section {
+    padding: 70px 0;
+}
+
+.career-section h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.career-section p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.career-box {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    height: 100%;
+}
+
+.career-box h4 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #1a3546;
+}
+
+.career-box ul {
+    padding-left: 18px;
+}
+
+.career-box ul li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.career-email-box {
+    background: #f6f8fb;
+    border-left: 5px solid #1a3546;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.career-email-box h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.career-email-box a {
+    color: #1a3546;
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.career-email-box a:hover {
+    text-decoration: underline;
+}
+
+.culture-list li {
+    margin-bottom: 12px;
+}
+</style>
+
+<!-- ===============================
+     HERO SECTION
+     =============================== -->
+
+<section class="page-banner">
+    <div class="image-layer" style="background-image:url(images/background/image-7.jpg);"></div>
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix">
+                <h1 style="font-size: 46px; font-weight: 700;"> Build Your Career with Zaco Computers </h1>
+                <br>
+                
+                <p>             We are always looking for passionate, skilled, and driven professionals
+            to join our growing team and help organizations succeed with reliable
+            IT infrastructure solutions. </p>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        {% comment %} <li><a href="#">Careers</a></li> {% endcomment %}
+                        <li class="active">Careers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ 
+
+<!-- ===============================
+     WHY JOIN US
+     =============================== -->
+<section class="career-section">
+    <div class="auto-container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4">
+                <h2 class ="pt-md-2">Why Work at Zaco Computers?</h2>
+                <p>
+                    At Zaco Computers, we believe our people are our strongest asset.
+                    We foster a culture of continuous learning, collaboration, and
+                    innovation. Whether you are an experienced professional or just
+                    starting your career, we provide the platform to grow and succeed.
+                </p>
+                <ul class="culture-list">
+                    <li>Exposure to global enterprise IT projects</li>
+                    <li>Collaborative and growth-oriented work culture</li>
+                    <li>Opportunities to work with leading hardware brands</li>
+                    <li>Learning and upskilling opportunities</li>
+                    <li>Performance-driven career growth</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images\career-team.jpg' %}" alt="Careers at Zaco Computers" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===============================
+     CAREER OPPORTUNITIES
+     =============================== -->
+<section class="career-section" style="background:#f6f8fb;">
+    <div class="auto-container">
+        <div class="text-center mb-5">
+            <h2>Career Opportunities</h2>
+            <p>
+                We offer diverse career paths across business, technology, sales, and customer service
+                for professionals looking to grow with a global IT solutions provider.
+            </p>
+        </div>
+
+        <div class="row">
+
+            <!-- Accounts -->
+            <div class="col-lg-4 mb-4">
+                <div class="career-box">
+                    <h4>Accounts</h4>
+                    <ul>
+                        <li>Account Executive</li>
+                        <li>Account Manager</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sales -->
+            <div class="col-lg-4 mb-4">
+                <div class="career-box">
+                    <h4>Sales</h4>
+                    <ul>
+                        <li>Business Development Manager</li>
+                        <li>Lead Generation Executive</li>
+                        <li>Sales Coordinator</li>
+                        <li>Inside Sales Executive</li>
+                        <li>Field Sales Executive</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Digital Marketing -->
+            <div class="col-lg-4 mb-4">
+                <div class="career-box">
+                    <h4>Digital Marketing</h4>
+                    <ul>
+                        <li>Digital Marketing Specialist</li>
+                        <li>SEO Executive</li>
+                        <li>Graphic Designer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Software & Engineering -->
+            <div class="col-lg-4 mb-4">
+                <div class="career-box">
+                    <h4>Software & Engineering</h4>
+                    <ul>
+                        <li>Software Engineer</li>
+                        <li>Server Engineer</li>
+                        <li>Network Engineer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="col-lg-4 mb-4">
+                <div class="career-box">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li>Service Support Executive</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ===============================
+     APPLY SECTION
+     =============================== -->
+<section class="career-section">
+    <div class="auto-container">
+        <div class="career-email-box text-center">
+            <h3>Apply for a Position</h3>
+            <p>
+                If you are interested in joining Zaco Computers, we would love to hear from you.
+                Please share your updated CV along with a brief introduction.
+            </p>
+
+            <p>
+                📧 Email your CV to:<br>
+                <a href="mailto:hr@zacocomputer.com">hr@zacocomputer.com</a>
+            </p>
+
+            <p style="margin-top:15px; color:#666;">
+                Our HR team will review your profile and get in touch if there is a suitable opportunity.
+            </p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

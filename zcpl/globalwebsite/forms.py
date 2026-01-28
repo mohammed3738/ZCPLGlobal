@@ -40,6 +40,46 @@ class ProductForm(forms.ModelForm):
         }
 
 
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
+
+class PPCQuoteForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=20)
+    company = forms.CharField(max_length=100)
+    requirements = forms.CharField(widget=forms.Textarea)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+
+
+
+
+
+class PPCProductForm(forms.ModelForm):
+    class Meta:
+        model = PPCProduct
+        fields = [
+            'name',
+            'sub_heading',
+            'price',
+            'short_description',
+            'pointer',
+            'description',
+            'hero_image',
+            'is_active',
+            'meta_title',
+            'meta_description',
+        ]
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'sub_heading': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'meta_title': forms.TextInput(attrs={'class': 'form-control'}),
+            'meta_description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+        }
+
 
 class CartAddProductForm(forms.Form):
     quantity = forms.IntegerField(min_value=1, initial=1)

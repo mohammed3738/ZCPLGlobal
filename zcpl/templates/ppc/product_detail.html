@@ -746,8 +746,8 @@
 {% block content %}
 
 <!-- BREADCRUMB -->
-<div class="breadcrumb-section" style="margin-top: 200px;">
-  <nav class="breadcrumb">
+<div class="" style="margin-top: 200px;">
+  {% comment %} <nav class="breadcrumb">
     <a class="breadcrumb-item" href="#">Home</a>
     <span class="breadcrumb-item">/</span>
     <a class="breadcrumb-item" href="#">Products</a>
@@ -755,7 +755,7 @@
     <a class="breadcrumb-item" href="#">Servers</a>
     <span class="breadcrumb-item">/</span>
     <span class="breadcrumb-item active">Enterprise Server Pro X1000</span>
-  </nav>
+  </nav> {% endcomment %}
 </div>
 
 <!-- PRODUCT SECTION -->
@@ -764,25 +764,50 @@
   <div class="product-grid">
     <!-- LEFT: IMAGES -->
     <div class="product-images">
-      <div class="main-image">
-        <span class="badge-stock" style="background: #0071bd !important;">In Stock</span>
-                    <img 
-                        id="mainImage" 
-                        src="{{ product.hero_image.url }}" 
-                        alt="{{ product.name }}" 
-                        width="500" height="400"
-                        loading="lazy" style="object-fit:cover;"
-                    />
-      </div>
-      <div class="key-features">
-        <h4>Key Features</h4>
-        {{ product.short_description|safe }}
-      </div>
+<div class="main-image">
+  <span class="badge-stock" style="background: #0071bd !important;">
+    In Stock
+  </span>
+
+  {% if product.hero_image %}
+    <img
+      id="mainImage"
+      src="{{ product.hero_image.url }}"
+      alt="{{ product.name }}"
+      width="500"
+      height="400"
+      loading="lazy"
+      style="object-fit:cover;"
+    />
+  {% else %}
+    <img
+      id="mainImage"
+      src="{% static 'img/no-image.png' %}"
+      alt="No image available"
+      width="500"
+      height="400"
+      loading="lazy"
+      style="object-fit:contain; opacity:0.6;"
+    />
+  {% endif %}
+</div>
+<div class="key-features">
+
+  {% if product.short_description %}
+    {{ product.short_description|safe }}
+  {% else %}
+    <ul class="feature-list">
+      <li>Enterprise-grade performance</li>
+      <li>Reliable hardware configuration</li>
+      <li>Business-ready deployment</li>
+    </ul>
+  {% endif %}
+</div>
     </div>
 
     <!-- RIGHT: PRODUCT INFO -->
     <div class="product-info">
-      <div class="product-header">
+      <div class="product-header"> 
         <h1 class="product-title">{{ product.name }}</h1>
         <p class="product-subtitle">{{ product.sub_heading }}</p>
         
@@ -804,7 +829,13 @@
       <div class="price-section">
         <div class="price-label">Starting From</div>
         <div class="price-display">
-          <span class="current-price">{{ product.price }}</span>
+<span class="current-price">
+  {% if product.price %}
+    ₹{{ product.price }}
+  {% else %}
+    Contact for Price
+  {% endif %}
+</span>
           {% comment %} <span class="original-price">₹17,50,000</span>
           <span class="discount-badge">14% OFF</span> {% endcomment %}
         </div>
@@ -839,7 +870,7 @@
 
       <!-- QUOTE FORM -->
       <div class="quote-card">
-        <h5>Request a Business Quote</h5>
+        <h5>Request a quote now!</h5>
 
         <form method="post">
           {% csrf_token %}
@@ -871,6 +902,10 @@
                     placeholder="Requirement"
                     required></textarea>
 
+    <!-- CAPTCHA -->
+    <div style="margin: 15px 0;">
+      {{ form.captcha }}
+    </div>
 
 
     <button type="submit" class="theme-btn btn-style-two btn-22">
@@ -889,9 +924,15 @@
 <div class="key-features2">
   <h4>Technical Overview</h4>
 
-  <div class="spec-content collapsed" id="specContent">
+<div class="spec-content collapsed" id="specContent">
+  {% if product.description %}
     {{ product.description|safe }}
-  </div>
+  {% else %}
+    <p class="text-muted">
+      Detailed specifications will be shared on request.
+    </p>
+  {% endif %}
+</div>
 
   <button
     type="button"
@@ -911,14 +952,24 @@
 <section class="cta-server">
   <div class="cta-top">
     <h2>Talk to Our Server Experts Today!</h2>
-    <p>Call now for immediate assistance and pricing!</p>
+    <p>Call or email us for immediate assistance and pricing!</p>
   </div>
 
-  <div class="cta-bottom">
-    <a href="tel:9811183994">
-      Call: <span>98111 83994</span>
-    </a>
-  </div>
+<div class="cta-bottom">
+  <a href="tel:9811183994">
+    <i class="fa-solid fa-phone"></i>
+    <span>98111 83994</span>
+  </a>
+
+  <span style="font-size: 30px; margin: 0 10px;">|</span>
+
+  <a href="mailto:info@zacocomputer.com">
+    <i class="fa-solid fa-envelope"></i>
+    info@zacocomputer.com
+  </a>
+</div>
+
+
 </section>
 
 

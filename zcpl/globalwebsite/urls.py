@@ -53,6 +53,11 @@ urlpatterns = [
     path('product/<slug:slug>/', views.product_detail, name='product_detail'),
     path('cart/update_all/', views.cart_update_all, name='cart_update_all'),
     
+
+    path('ppc/products/', views.ppc_product_manage, name='ppc-product-manage'),
+    path('ppc/products/edit/<int:pk>/', views.ppc_product_manage, name='ppc-product-edit'),
+    path('ppc/products/delete/<int:pk>/', views.ppc_product_delete, name='ppc-product-delete'),
+
     path(
         'ppc/<slug:slug>/',
         views.ppc_product_detail,
@@ -123,6 +128,15 @@ urlpatterns = [
     path("sitemap-products.xml", sitemap, {"sitemaps": {"products": ProductSitemap}}),
     path("sitemap-case-studies.xml",sitemap,{"sitemaps": {"case_list": CaseStudyListSitemap,"case_detail": CaseStudyDetailSitemap,}}),
     path("sitemap-blogs.xml", sitemap, {"sitemaps": {"blogs": BlogSitemap}}),
+
+
+    path(
+        'build-your-server/',
+        views.build_your_server,
+        name='build_your_server'
+    ),
+    path("careers/", views.careers, name="careers"),
+    path("api/server-models/", views.get_server_models, name="get_server_models"),
 
     # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
 

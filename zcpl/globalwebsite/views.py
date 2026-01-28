@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
@@ -19,12 +20,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
+from django.views.decorators.http import require_http_methods, require_GET
 
 from django.db import transaction
 
 from django.db.models import Count
 from django.utils.timezone import now
+import logging
 
+logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request,'main/index.html')
@@ -1759,26 +1763,289 @@ def sitemap_index(request):
 
 
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 def ppc_product_detail(request, slug):
-    product = get_object_or_404(
-        PPCProduct,
-        slug=slug,
-        is_active=True
-    )
+    product = get_object_or_404(PPCProduct, slug=slug, is_active=True)
 
     if request.method == "POST":
-        PPCQuote.objects.create(
-            product=product,
-            name=request.POST.get("name"),
-            email=request.POST.get("email"),
-            phone=request.POST.get("phone"),
-            company=request.POST.get("company"),
-            message=request.POST.get("message"),
-        )
-        return redirect("thank_you")
+        form = PPCQuoteForm(request.POST)
+        if form.is_valid():
+
+            quote = PPCQuote.objects.create(
+                product=product,
+                name=form.cleaned_data["name"],
+                email=form.cleaned_data["email"],
+                phone=form.cleaned_data["phone"],
+                company=form.cleaned_data["company"],
+                message=form.cleaned_data["requirements"],
+            )
+
+            # -------- EMAIL CONTENT --------
+            subject = f"New Quote Request – {product.name}"
+            message = f"""
+New Quote Request Received
+
+Product: {product.name}
+
+Name: {quote.name}
+Email: {quote.email}
+Phone: {quote.phone}
+Company: {quote.company}
+
+Requirement:
+{quote.message}
+"""
+
+
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
+            )
+
+            return redirect("thank_you")
+    else:
+        form = PPCQuoteForm()
 
     return render(
         request,
         "ppc/product_detail.html",
-        {"product": product}
+        {
+            "product": product,
+            "form": form,
+        }
     )
+
+
+
+def ppc_product_manage(request):
+    editing = False
+    product_to_edit = None
+
+    # -----------------------
+    # DELETE (GET)
+    # -----------------------
+    delete_id = request.GET.get('delete')
+    if delete_id:
+        product = get_object_or_404(PPCProduct, id=delete_id)
+        product.delete()
+        return redirect('ppc-product-manage')
+
+    # -----------------------
+    # EDIT MODE (GET)
+    # -----------------------
+    edit_id = request.GET.get('edit')
+    if edit_id:
+        product_to_edit = get_object_or_404(PPCProduct, id=edit_id)
+        editing = True
+
+    # -----------------------
+    # CREATE / UPDATE (POST)
+    # -----------------------
+    if request.method == "POST":
+        product_id = request.POST.get('product_id')
+
+        if product_id:
+            product = get_object_or_404(PPCProduct, id=product_id)
+            editing = True
+        else:
+            product = PPCProduct()
+
+        product.name = request.POST.get('name')
+        product.sub_heading = request.POST.get('sub_heading')
+        product.price = request.POST.get('price')
+        product.is_active = True if request.POST.get('is_active') == 'on' else False
+
+        product.short_description = request.POST.get('short_description')
+        product.pointer = request.POST.get('pointer')
+        product.description = request.POST.get('description')
+
+        product.meta_title = request.POST.get('meta_title')
+        product.meta_description = request.POST.get('meta_description')
+
+        if request.FILES.get('hero_image'):
+            product.hero_image = request.FILES.get('hero_image')
+
+        product.save()
+        return redirect('ppc-product-manage')
+
+    products = PPCProduct.objects.all().order_by('-created_at')
+
+    return render(request, 'ppc/product_manage.html', {
+        'products': products,
+        'editing': editing,
+        'product_to_edit': product_to_edit,
+    })
+
+
+def ppc_product_delete(request, pk):
+    product = get_object_or_404(PPCProduct, pk=pk)
+    product.delete()
+    return redirect('ppc-product-manage')
+
+
+
+
+@require_http_methods(["GET", "POST"])
+def build_your_server(request):
+
+    if request.method == "POST":
+
+        # ============================
+        # Required fields
+        # ============================
+        name = request.POST.get("name", "").strip()
+        email = request.POST.get("email", "").strip()
+        phone = request.POST.get("phone", "").strip()
+
+        if not name or not email or not phone:
+            messages.error(request, "Name, Email and Phone are required.")
+            return redirect("build_your_server")
+
+        # ============================
+        # Helper
+        # ============================
+        def g(key):
+            return request.POST.get(key, "").strip()
+
+        # ============================
+        # Core selections
+        # ============================
+        server_brand = g("server_brand")
+        server_type = g("server_type")
+        form_factor = g("form_factor")
+        server_model = g("server_model")
+
+        processor = g("processor")
+        memory = g("memory")
+        ethernet_card = g("ethernet_card")
+        server_purpose = g("server_purpose")
+        additional_requirement = g("additional_requirement")
+
+        # ============================
+        # Dynamic rows
+        # ============================
+        ssd_list = request.POST.getlist("ssd[]")
+        ssd_qty_list = request.POST.getlist("ssd_qty[]")
+
+        hdd_list = request.POST.getlist("hdd[]")
+        hdd_qty_list = request.POST.getlist("hdd_qty[]")
+
+        other_components = request.POST.getlist("other_components[]")
+
+        # ============================
+        # Build message
+        # ============================
+        lines = [
+            "BUILD YOUR OWN SERVER REQUEST",
+            "-----------------------------------",
+            f"Server Brand: {server_brand}",
+            f"Server Type: {server_type}",
+            f"Form Factor: {form_factor}",
+            f"Server Model: {server_model}",
+            "",
+            f"Processor: {processor}",
+            f"Memory: {memory}",
+            "",
+            "SSD Configuration:",
+        ]
+
+        if ssd_list:
+            for ssd, qty in zip(ssd_list, ssd_qty_list):
+                if ssd:
+                    lines.append(f"- {ssd} × {qty or '1'}")
+        else:
+            lines.append("- None")
+
+        lines.append("")
+        lines.append("HDD Configuration:")
+
+        if hdd_list:
+            for hdd, qty in zip(hdd_list, hdd_qty_list):
+                if hdd:
+                    lines.append(f"- {hdd} × {qty or '1'}")
+        else:
+            lines.append("- None")
+
+        lines.append("")
+        lines.append("Other Components:")
+
+        if other_components:
+            for comp in other_components:
+                lines.append(f"- {comp}")
+        else:
+            lines.append("- None")
+
+        lines.extend([
+            "",
+            f"Ethernet Card: {ethernet_card}",
+            "",
+            f"Server Purpose:\n{server_purpose}",
+            "",
+            f"Additional Requirement:\n{additional_requirement}",
+        ])
+
+        final_message = "\n".join(lines)
+
+        # ============================
+        # Save to DB
+        # ============================
+        try:
+            with transaction.atomic():
+                ContactMessageGlobal.objects.create(
+                    name=name,
+                    email=email,
+                    phone=phone,
+                    subject="Build Your Own Server Request",
+                    message=strip_tags(final_message),
+                )
+        except Exception as exc:
+            messages.error(request, "Unable to save request.")
+            return redirect("build_your_server")
+
+        # ============================
+        # Email
+        # ============================
+        try:
+            send_mail(
+                subject="BUILD YOUR OWN SERVER REQUEST",
+                message=final_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=["abhiraj@zacocomputer.com"],
+                fail_silently=False,
+            )
+        except Exception as e:
+            logger.error("Build Server email failed: %s", str(e))
+
+        return redirect("thank_you")
+
+    return render(request, "build_your_server.html")
+
+
+
+def careers(request):
+    return render(request, "main/careers.html")
+
+
+@require_GET
+def get_server_models(request):
+    brand = request.GET.get("brand", "").lower()
+    form_factor = request.GET.get("form_factor", "").lower()
+
+    if not brand or not form_factor:
+        return JsonResponse({"models": []})
+
+    products = (
+        Product.objects.filter(available=True)
+        .filter(categories__name__icontains=brand)
+        .filter(categories__name__icontains=form_factor)
+     )
+
+    data = [{"id": p.id, "name": p.name} for p in products]
+    return JsonResponse({"models": data})
+
