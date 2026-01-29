@@ -3,9 +3,16 @@
 
 {% block title %}Build Your Own Server | Zaco Computers{% endblock %}
 
+{% block meta_description %}
+Build your own server configuration with Zaco Computers. Select server brand, form factor, CPU, RAM, storage, and components. Submit your requirements and get a tailored quotation.
+{% endblock %}
+
 {% block content %}
 
 <style>
+/* ===============================
+   BUILD SERVER – GLOBAL STYLES
+   =============================== */
 .build-server {
   background: #f6f8fb;
   padding: 60px 0;
@@ -17,10 +24,11 @@
   margin-bottom: 10px;
 }
 
-.subtitle {
+.build-server p.subtitle {
   color: #555;
   max-width: 900px;
   margin-bottom: 40px;
+  line-height: 1.7;
 }
 
 .config-box {
@@ -36,20 +44,24 @@
   margin-bottom: 20px;
   border-left: 4px solid #1a3546;
   padding-left: 12px;
+  font-weight: 700;
+  color: #1a3546;
 }
 
 .form-label {
   font-weight: 600;
+  margin-bottom: 6px;
 }
 
 .dynamic-row {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  align-items: center;
 }
 
-.dynamic-row button {
-  height: 38px;
+.dynamic-row input {
+  flex: 1;
 }
 
 .submit-btn {
@@ -59,44 +71,78 @@
   font-size: 16px;
   border-radius: 6px;
   border: none;
+  transition: 0.2s ease;
 }
 
 .submit-btn:hover {
   background: #142a38;
 }
+
+.btn-outline-primary {
+  border-color: #1a3546 !important;
+  color: #1a3546 !important;
+}
+
+.btn-outline-primary:hover {
+  background: #1a3546 !important;
+  color: #fff !important;
+}
+
+.note-small {
+  font-size: 13px;
+  color: #777;
+  margin-top: 6px;
+}
 </style>
 
-<section class="page-banner" style="padding: 220px 0 60px;">
-  <div class="banner-inner">
-    <div class="auto-container">
-      <h1 style="font-size: 36px;">Select Server Configuration</h1>
+<!-- Banner -->
+<section class="page-banner">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="banner-inner">
+        <div class="auto-container">
+            <div class="inner-container clearfix" style="padding: 251px 0px 47px !important;">
+                <h1 style="font-size: 42px;">Select Server Configuration</h1>
+                <div class="page-nav">
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'shop' %}">Shop</a></li>
+                        <li class="active">Build Your Server</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
+<!-- Main Form -->
 <section class="build-server">
   <div class="auto-container">
 
     <p class="subtitle">
-      Your needs define your server. Select server components, OS, and configuration
-      options to get the best business outcomes.
+      Your needs define your server. Select the server component specifications, OS, and other configuration settings
+      based on your business application, and get the best business outcomes.
     </p>
 
-    <form method="post" action="{% url 'build_your_server' %}">
+    <!-- ✅ IMPORTANT: normal POST form -->
+    <form id="buildServerForm" method="POST" action="">
       {% csrf_token %}
 
-      <!-- SERVER BASICS -->
+      <!-- =========================
+           SERVER BASIC DETAILS
+           ========================= -->
       <div class="config-box">
         <h4>Server Basics</h4>
-        <div class="row">
 
+        <div class="row">
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Brand</label>
-            <select class="form-control" id="serverBrand" required>
+            <select class="form-control" id="serverBrand" name="server_brand" required>
               <option value="">Select</option>
               <option value="dell">Dell</option>
               <option value="hpe">HPE</option>
               <option value="ibm">IBM</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
@@ -110,91 +156,125 @@
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Form Factor</label>
-              <select class="form-control" id="formFactor" required>
-                <option value="">Select</option>
-                <option value="rack">Rack Server</option>
-                <option value="tower">Tower Server</option>
-                <option value="blade">Blade Server</option>
-              </select>
+            <select class="form-control" id="formFactor" name="form_factor" required>
+              <option value="">Select</option>
+              <option value="rack">Rack Server</option>
+              <option value="tower">Tower Server</option>
+              <option value="blade">Blade Server</option>
+            </select>
           </div>
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Model</label>
-            <select class="form-control" id="serverModel" required>
-            <option value="">Select brand & type</option>
+            <select class="form-control" id="serverModel" name="server_model" required>
+              <option value="">Select brand & form factor</option>
             </select>
+            <div class="note-small">
+              Models will appear based on your selected brand & form factor.
+            </div>
           </div>
-
         </div>
       </div>
 
-      <!-- CORE CONFIG -->
+      <!-- =========================
+           CORE CONFIGURATION
+           ========================= -->
       <div class="config-box">
         <h4>Core Configuration</h4>
-        <div class="row">
 
+        <div class="row">
           <div class="col-md-4 mb-3">
-            <label class="form-label">Processor</label>
-            <select class="form-control" name="processor">
-              <option>8 Cores</option>
-              <option>10 Cores</option>
-              <option>16 Cores</option>
-              <option>24 Cores</option>
-              <option>32 Cores</option>
+            <label class="form-label">Processor Cores</label>
+            <select class="form-control" name="processor_cores">
+              <option value="8 Cores">8 Cores</option>
+              <option value="10 Cores">10 Cores</option>
+              <option value="16 Cores">16 Cores</option>
+              <option value="24 Cores">24 Cores</option>
+              <option value="32 Cores">32 Cores</option>
             </select>
           </div>
 
           <div class="col-md-4 mb-3">
-            <label class="form-label">Memory</label>
+            <label class="form-label">Memory (RAM)</label>
             <select class="form-control" name="memory">
-              <option>32 GB</option>
-              <option>64 GB</option>
-              <option>128 GB</option>
-              <option>256 GB</option>
+              <option value="32 GB">32 GB</option>
+              <option value="64 GB">64 GB</option>
+              <option value="128 GB">128 GB</option>
+              <option value="256 GB">256 GB</option>
             </select>
           </div>
 
           <div class="col-md-4 mb-3">
             <label class="form-label">Ethernet Card</label>
             <select class="form-control" name="ethernet_card">
-              <option>1G</option>
-              <option>2 Port 10G</option>
-              <option>4 Port 10G</option>
+              <option value="1 Port 1G">1 Port 1G</option>
+              <option value="2 Port 10G">2 Port 10G</option>
+              <option value="4 Port 10G">4 Port 10G</option>
             </select>
           </div>
-
         </div>
       </div>
 
-      <!-- STORAGE -->
+      <!-- =========================
+           STORAGE CONFIGURATION
+           ========================= -->
       <div class="config-box">
         <h4>Storage Configuration</h4>
 
-        <label class="form-label">SSD</label>
-        <div id="ssdContainer"></div>
-        <button type="button" class="btn btn-sm btn-outline-primary"
-          onclick="addRow('ssdContainer')">+ Add SSD</button>
+        <div class="mb-2">
+          <label class="form-label">SSD</label>
+          <div id="ssdContainer"></div>
+          <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="addSsdBtn">
+            + Add SSD
+          </button>
+        </div>
 
         <hr>
 
-        <label class="form-label">Hard Drive</label>
-        <div id="hddContainer"></div>
-        <button type="button" class="btn btn-sm btn-outline-primary"
-          onclick="addRow('hddContainer')">+ Add HDD</button>
+        <div class="mb-2">
+          <label class="form-label">Hard Drive</label>
+          <div id="hddContainer"></div>
+          <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="addHddBtn">
+            + Add HDD
+          </button>
+        </div>
       </div>
 
-      <!-- OTHER COMPONENTS -->
+      <!-- =========================
+           OTHER COMPONENTS
+           ========================= -->
       <div class="config-box">
         <h4>Other Components</h4>
-        <label><input type="checkbox" name="other_components[]" value="Rail Kit"> Rail Kit</label><br>
-        <label><input type="checkbox" name="other_components[]" value="Redundant PSU"> Redundant PSU</label><br>
-        <label><input type="checkbox" name="other_components[]" value="Graphic Card"> Graphic Card</label>
+
+        <div class="row">
+          <div class="col-md-3 mb-2">
+            <label><input type="checkbox" name="other_components[]" value="Rail Kit"> Rail Kit</label>
+          </div>
+          <div class="col-md-3 mb-2">
+            <label><input type="checkbox" name="other_components[]" value="Redundant PSU"> Redundant PSU</label>
+          </div>
+          <div class="col-md-3 mb-2">
+            <label><input type="checkbox" name="other_components[]" value="Graphic Card"> Graphic Card</label>
+          </div>
+        </div>
       </div>
 
-      <!-- CONTACT -->
+      <!-- =========================
+           PURPOSE & CONTACT
+           ========================= -->
       <div class="config-box">
-        <h4>Contact Details</h4>
+        <h4>Server Purpose & Contact</h4>
+
         <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Server Purpose</label>
+            <input type="text" class="form-control" name="server_purpose" placeholder="ERP / Database / Virtualization">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Additional Requirement</label>
+            <input type="text" class="form-control" name="additional_requirement" placeholder="Any special requirement">
+          </div>
 
           <div class="col-md-4 mb-3">
             <label class="form-label">Name *</label>
@@ -202,7 +282,7 @@
           </div>
 
           <div class="col-md-4 mb-3">
-            <label class="form-label">Phone *</label>
+            <label class="form-label">Phone No *</label>
             <input type="text" class="form-control" name="phone" required>
           </div>
 
@@ -210,12 +290,6 @@
             <label class="form-label">Email *</label>
             <input type="email" class="form-control" name="email" required>
           </div>
-
-          <div class="col-md-12">
-            <label class="form-label">Additional Requirement</label>
-            <textarea class="form-control" name="message" rows="3"></textarea>
-          </div>
-
         </div>
       </div>
 
@@ -226,51 +300,104 @@
       </div>
 
     </form>
-
   </div>
 </section>
 
+<!-- ✅ DATABASE MODELS + SSD/HDD DYNAMIC ROWS -->
 <script>
-const brandEl = document.getElementById("serverBrand");
-const factorEl = document.getElementById("formFactor");
-const modelEl = document.getElementById("serverModel");
+document.addEventListener("DOMContentLoaded", function () {
 
-function resetModels() {
-  modelEl.innerHTML = '<option value="">Select brand & type</option>';
-}
+  const brandEl = document.getElementById("serverBrand");
+  const factorEl = document.getElementById("formFactor");
+  const modelEl = document.getElementById("serverModel");
 
-function updateModels() {
-  const brand = brandEl.value;
-  const factor = factorEl.value;
+  const ssdContainer = document.getElementById("ssdContainer");
+  const hddContainer = document.getElementById("hddContainer");
 
-  resetModels();
+  const addSsdBtn = document.getElementById("addSsdBtn");
+  const addHddBtn = document.getElementById("addHddBtn");
 
-  if (!brand || !factor) return;
+  function resetModels() {
+    modelEl.innerHTML = '<option value="">Select brand & form factor</option>';
+  }
 
-  fetch(`/api/server-models/?brand=${brand}&form_factor=${factor}`)
-    .then(res => res.json())
-    .then(data => {
-      if (!data.models.length) {
-        modelEl.innerHTML = '<option value="">No models found</option>';
-        return;
-      }
+  function updateModels() {
+    const brand = brandEl.value;
+    const factor = factorEl.value;
 
-      data.models.forEach(item => {
-        const opt = document.createElement("option");
-        opt.value = item.name;
-        opt.textContent = item.name;
-        modelEl.appendChild(opt);
+    resetModels();
+
+    if (!brand || !factor) return;
+
+    fetch(`/api/server-models/?brand=${brand}&form_factor=${factor}`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.models || !data.models.length) {
+          modelEl.innerHTML = '<option value="">No models found</option>';
+          return;
+        }
+
+        data.models.forEach(item => {
+          const opt = document.createElement("option");
+          opt.value = item.name;
+          opt.textContent = item.name;
+          modelEl.appendChild(opt);
+        });
+      })
+      .catch(err => {
+        console.error("Server model fetch error:", err);
+        modelEl.innerHTML = '<option value="">Error loading models</option>';
       });
-    })
-    .catch(err => {
-      console.error("Server model fetch error:", err);
-      modelEl.innerHTML = '<option value="">Error loading models</option>';
+  }
+
+  brandEl.addEventListener("change", updateModels);
+  factorEl.addEventListener("change", updateModels);
+
+  function createStorageRow(type) {
+    const row = document.createElement("div");
+    row.className = "dynamic-row";
+
+    const nameField = document.createElement("input");
+    nameField.className = "form-control";
+    nameField.placeholder = type === "ssd"
+      ? "SSD Capacity & Type (e.g. 960GB SSD)"
+      : "HDD Capacity & Type (e.g. 1TB 2.5 SAS 7.2K)";
+    nameField.name = type === "ssd" ? "ssd[]" : "hdd[]";
+
+    const qtyField = document.createElement("input");
+    qtyField.className = "form-control";
+    qtyField.placeholder = "Qty";
+    qtyField.style.maxWidth = "90px";
+    qtyField.name = type === "ssd" ? "ssd_qty[]" : "hdd_qty[]";
+    qtyField.type = "number";
+    qtyField.min = "1";
+    qtyField.value = "1";
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "btn btn-danger btn-sm";
+    removeBtn.textContent = "×";
+
+    removeBtn.addEventListener("click", function () {
+      row.remove();
     });
-}
 
-brandEl.addEventListener("change", updateModels);
-factorEl.addEventListener("change", updateModels);
+    row.appendChild(nameField);
+    row.appendChild(qtyField);
+    row.appendChild(removeBtn);
+
+    return row;
+  }
+
+  addSsdBtn.addEventListener("click", function () {
+    ssdContainer.appendChild(createStorageRow("ssd"));
+  });
+
+  addHddBtn.addEventListener("click", function () {
+    hddContainer.appendChild(createStorageRow("hdd"));
+  });
+
+});
 </script>
-
 
 {% endblock %}
