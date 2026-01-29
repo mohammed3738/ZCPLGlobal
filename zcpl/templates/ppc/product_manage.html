@@ -102,9 +102,7 @@
 
   <div class="form-group">
     <label>Full Description</label>
-    <textarea id="description" name="description">
-{% if editing %}{{ product_to_edit.description|safe }}{% endif %}
-    </textarea>
+<textarea id="description" name="description">{% if editing %}{{ product_to_edit.description|safe }}{% endif %}</textarea>
   </div>
   <div class="form-group">
     <label>is aActive</label>
