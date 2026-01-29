@@ -16,3 +16,9 @@ def custom_filename(filename):
 
     today = datetime.now().strftime("%Y/%m/%d")
     return f"uploads/blogs/{slug}/{today}/{filename}"
+
+
+
+
+
+

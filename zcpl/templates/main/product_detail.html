@@ -33,6 +33,23 @@
 {% block content %}
 
 <style>
+
+{% comment %} 
+.ckeditor-content h2,
+.ckeditor-content h3,
+.ckeditor-content h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.ckeditor-content p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+} {% endcomment %}
+
+
+
+
 .star-rating i {
     cursor: pointer;
     font-size: 24px;
@@ -91,6 +108,69 @@
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
+
+
+
+  .ck-reset {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #222;
+  }
+ 
+  .ck-reset h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+ 
+  .ck-reset h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 28px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+ 
+  .ck-reset h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 20px 0 6px;
+  }
+ 
+  .ck-reset p {
+    margin: 0 0 12px;
+  }
+ 
+  .ck-reset ul,
+  .ck-reset ol {
+    margin: 6px 0 16px 20px;
+    padding: 0;
+  }
+ 
+  .ck-reset li {
+    margin-bottom: 8px;
+  }
+ 
+  .ck-reset table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+ 
+  .ck-reset th {
+    background: #f5f5f5;
+    font-weight: 600;
+  }
+ 
+  .ck-reset th,
+  .ck-reset td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
 </style>
 
 <!-- Banner Section -->
@@ -228,7 +308,11 @@
 <section class="product-description">
     <div class="auto-container">
         <h3 class="product-description__title">Description</h3>
-        <div class="ckeditor-content">{{ product.description|safe }}</div>
+<div class="ckeditor-content">
+    <div class="ck-reset">
+    {{ product.description|safe }}
+    </div>
+</div>
     </div>
 </section>
 
