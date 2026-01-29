@@ -1,3 +1,4 @@
+{% load static %}
 <section class="call-to-section">
     <div class="auto-container">
         <div class="inner clearfix">
@@ -26,7 +27,7 @@
                     <div class="footer-widget logo-widget">
                         <div class="widget-content">
                             <div class="logo">
-                                <a href="index.html"><img id="fLogo" src="images/footer-logo.png" alt="" /></a>
+                                <a href="{% url 'home' %}"><img id="fLogo" src="{% static 'images/Zacow1.png' %}" alt="" /></a>
                             </div>
                             <div class="text">Zaco Computers delivers reliable global IT infrastructure solutions with expert support, quality hardware, and flexible services..</div>
                              <ul class="social-links clearfix">
