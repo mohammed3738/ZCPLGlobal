@@ -872,50 +872,48 @@
       <div class="quote-card">
         <h5>Request a quote now!</h5>
 
-        <form method="post">
-          {% csrf_token %}
+<form method="post">
+  {% csrf_token %}
 
-          <input class="form-input"
-                 type="text"
-                 name="name"
-                 placeholder="Contact Person"
-                 required>
-            <input class="form-input"
-                        type="email"
-                        name="email"
-                        placeholder="Work Email"
-                        required>
+  <input class="form-input"
+         type="text"
+         name="name"
+         placeholder="Contact Person"
+         required>
 
-                        <input class="form-input"
-                               type="tel"
-                               name="phone"
-                               placeholder="Phone Number"
-                               required>
-          <input class="form-input"
-                 type="text"
-                 name="company"
-                 placeholder="Company Name"
-                 required>
-          <textarea class="form-input"
-                    name="requirements"
-                    rows="4"
-                    placeholder="Requirement"
-                    required></textarea>
+  <input class="form-input"
+         type="email"
+         name="email"
+         placeholder="Work Email"
+         required>
 
-    <!-- CAPTCHA -->
-    <div style="margin: 15px 0;">
-      {{ form.captcha }}
-    </div>
+  <input class="form-input"
+         type="tel"
+         name="phone"
+         placeholder="Phone Number"
+         required>
 
+  <input class="form-input"
+         type="text"
+         name="company"
+         placeholder="Company Name"
+         required>
 
-    <button type="submit" class="theme-btn btn-style-two btn-22">
-        <i class="btn-curve"></i>
-        <span class="btn-title" style="background: #0071bd !important;">
-            <i class="fa-solid fa-cart-shopping me-2"></i>
-            Get Enterprise Pricing
-        </span>
-    </button>
-        </form>
+  <textarea class="form-input"
+            name="requirements"
+            rows="4"
+            placeholder="Requirement"
+            required></textarea>
+
+  <!-- CAPTCHA -->
+  <div style="margin: 15px 0;">
+    {{ form.captcha }}
+  </div>
+
+  <button type="submit" class="theme-btn btn-style-two btn-22">
+    <span class="btn-title">Get Enterprise Pricing</span>
+  </button>
+</form>
       </div>
     </div>
   </div>

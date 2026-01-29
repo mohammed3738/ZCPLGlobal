@@ -1762,9 +1762,9 @@ def sitemap_index(request):
 
 
 
-
 from django.core.mail import send_mail
 from django.conf import settings
+from django.shortcuts import get_object_or_404, redirect, render
 
 def ppc_product_detail(request, slug):
     product = get_object_or_404(PPCProduct, slug=slug, is_active=True)
@@ -1772,7 +1772,6 @@ def ppc_product_detail(request, slug):
     if request.method == "POST":
         form = PPCQuoteForm(request.POST)
         if form.is_valid():
-
             quote = PPCQuote.objects.create(
                 product=product,
                 name=form.cleaned_data["name"],
@@ -1782,7 +1781,6 @@ def ppc_product_detail(request, slug):
                 message=form.cleaned_data["requirements"],
             )
 
-            # -------- EMAIL CONTENT --------
             subject = f"New Quote Request – {product.name}"
             message = f"""
 New Quote Request Received
@@ -1797,8 +1795,6 @@ Company: {quote.company}
 Requirement:
 {quote.message}
 """
-
-
 
             send_mail(
                 subject,
