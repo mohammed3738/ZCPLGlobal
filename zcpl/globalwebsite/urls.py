@@ -139,6 +139,7 @@ urlpatterns = [
     path("api/server-models/", views.get_server_models, name="get_server_models"),
 
     # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
+    path("newsletter/subscribe/", views.newsletter_subscribe, name="newsletter_subscribe"),
 
 ]
 

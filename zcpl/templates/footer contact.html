@@ -12,7 +12,7 @@
                     <div class="footer-widget logo-widget">
                         <div class="widget-content">
                             <div class="logo">
-                                <a href="index.html"><img id="fLogo" src="images/footer-logo.png" alt="" /></a>
+                                <a href="{% url 'home' %}"><img id="fLogo" src="{% static 'images/Zacow1.png' %}" alt="" /></a>
                             </div>
                             <div class="text">Zaco Computers delivers reliable global IT infrastructure solutions with expert support, quality hardware, and flexible services.</div>
                              <ul class="social-links clearfix">
@@ -82,12 +82,16 @@
                         <div class="widget-content">
                             <h6>Newsletter</h6>
                             <div class="newsletter-form">
-                                <form method="post" action="contact.html">
+                                <form method="post" action="{% url 'newsletter_subscribe' %}">
+                                    {% csrf_token %}
                                     <div class="form-group clearfix">
-                                        <input type="email" name="email" value="" placeholder="Email Address"
-                                            required="">
-                                        <button type="submit" class="theme-btn"><span
-                                                class="fa fa-envelope"></span></button>
+                                        <input type="email"
+                                            name="email"
+                                            placeholder="Email Address"
+                                            required>
+                                        <button type="submit" class="theme-btn">
+                                            <span class="fa fa-envelope"></span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

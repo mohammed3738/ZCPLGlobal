@@ -101,12 +101,16 @@
                         <div class="widget-content">
                             <h5>Newsletter</h5>
                             <div class="newsletter-form">
-                                <form method="post" action="contact.html">
+                                <form method="post" action="{% url 'newsletter_subscribe' %}">
+                                    {% csrf_token %}
                                     <div class="form-group clearfix">
-                                        <input type="email" name="email" value="" placeholder="Email Address"
-                                            required="">
-                                        <button type="submit" class="theme-btn"><span
-                                                class="fa fa-envelope"></span></button>
+                                        <input type="email"
+                                            name="email"
+                                            placeholder="Email Address"
+                                            required>
+                                        <button type="submit" class="theme-btn">
+                                            <span class="fa fa-envelope"></span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

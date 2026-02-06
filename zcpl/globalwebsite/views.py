@@ -2048,3 +2048,21 @@ def get_server_models(request):
     data = [{"id": p.id, "name": p.name} for p in products]
     return JsonResponse({"models": data})
 
+
+
+
+
+def newsletter_subscribe(request):
+    if request.method == "POST":
+        form = NewsletterForm(request.POST)
+
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+
+            if NewsletterSubscriber.objects.filter(email=email).exists():
+                messages.info(request, "You are already subscribed.")
+            else:
+                form.save()
+                messages.success(request, "Thanks for subscribing!")
+
+        return redirect(request.META.get("HTTP_REFERER", "/"))

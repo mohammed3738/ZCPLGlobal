@@ -1,5 +1,6 @@
 
 
+{% load static %} 
 <section class="call-to-section">
     <div class="auto-container">
         <div class="inner clearfix">
@@ -28,23 +29,16 @@
                     <div class="footer-widget logo-widget">
                         <div class="widget-content">
                             <div class="logo">
-                                <a href="index.html"><img id="fLogo" src="images/footer-logo.png" alt="" /></a>
+                                <a href="{% url 'home' %}"><img id="fLogo" src="{% static 'images/Zacow1.png' %}" alt="" /></a>
                             </div>
                             <div class="text">Zaco Computers delivers reliable global IT infrastructure solutions with expert support, quality hardware, and flexible services.</div>
                              <ul class="social-links clearfix">
-<<<<<<< HEAD
-                                <li><a href="https://www.facebook.com/zacocomputers"><span class="fab fa-facebook-square"></span></a></li>
-                                <li><a href="https://x.com/zacoitsolved"><span class="fab fa-twitter"></span></a></li>
-                                <li><a href="https://www.instagram.com/zacoitsolutions/"><span class="fab fa-instagram"></span></a></li>
-                                <li><a href="https://in.pinterest.com/zacoitsolved/"><span class="fab fa-pinterest-p"></span></a></li>
-=======
                                 <li><a href="https://www.facebook.com/zacocomputers" target="_blank"><span class="fab fa-facebook-square"></span></a></li>
                                 <li><a href="https://x.com/zacoitsolved" target="_blank"><span class="fab fa-twitter"></span></a></li>
                                 <li><a href="https://www.instagram.com/zaco_computers/" target="_blank"><span class="fab fa-instagram"></span></a></li>
                                 <li><a href="https://in.pinterest.com/zacoitsolved/" target="_blank"><span class="fab fa-pinterest-p"></span></a></li>
                                 <li><a href="https://www.youtube.com/@zacoitsolved" target="_blank"><span class="fab fa-youtube"></span></a></li>
 
->>>>>>> 3718e99ac09815569bf4c84762cf56d5e124b4ae
                             </ul> 
                         </div>
                     </div>
@@ -67,7 +61,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <ul>
-                                        <li><a href="https://store.zacocomputer.com/">Online Store</a></li>
+                                        <li><a href="https://www.zacocomputer.com/shop/">Online Store</a></li>
                                         <li><a href="https://itservicedesk.zacocomputer.com/login?next=/">Support</a></li>
                                         <li><a href="{% url "privacy" %}">Privacy Policy</a></li>
                                         <li><a href="{% url "term" %}">Terms of Use</a></li>
@@ -105,12 +99,16 @@
                         <div class="widget-content">
                             <h5>Newsletter</h5>
                             <div class="newsletter-form">
-                                <form method="post" action="contact.html">
+                                <form method="post" action="{% url 'newsletter_subscribe' %}">
+                                    {% csrf_token %}
                                     <div class="form-group clearfix">
-                                        <input type="email" name="email" value="" placeholder="Email Address"
-                                            required="">
-                                        <button type="submit" class="theme-btn"><span
-                                                class="fa fa-envelope"></span></button>
+                                        <input type="email"
+                                            name="email"
+                                            placeholder="Email Address"
+                                            required>
+                                        <button type="submit" class="theme-btn">
+                                            <span class="fa fa-envelope"></span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

@@ -413,11 +413,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <li class="dropdown megamenu">
   <a href="{% url 'shop' %}">Online Store</a>
+
   <div class="mega-menu-wrapper">
     <div class="mega-menu">
+
       {% for category in categories %}
         <div class="mega-column">
-          <h4>{{ category.name }}</h4>
+
+          <!-- MAIN CATEGORY LINK -->
+          <h4>
+            <a href="{% url 'shop_by_category' category.slug %}">
+              {{ category.name }}
+            </a>
+          </h4>
+
+          <!-- SUB CATEGORIES -->
           <div class="menu-section">
             {% for subcategory in category.subcategories.all %}
               <a href="{% url 'shop_by_subcategory' category.slug subcategory.slug %}">
@@ -425,11 +435,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </a>
             {% endfor %}
           </div>
+
         </div>
       {% endfor %}
+
     </div>
   </div>
 </li>
+
 
 
 
