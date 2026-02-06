@@ -218,8 +218,8 @@ EMAIL_HOST_USER = 'zacoitsolution@gmail.com'
 EMAIL_HOST_PASSWORD = 'rulf vgep fomh brsi'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
-# CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
+# CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
+CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
 
 
 RECAPTCHA_PUBLIC_KEY = '6LfaCZMrAAAAAJxdbefcTWNIcr8x3B92YYgyFjMf'

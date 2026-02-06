@@ -1949,6 +1949,9 @@ def build_your_server(request):
             f"Memory: {memory}",
             "",
             "SSD Configuration:",
+            f"Name: {name}",
+            f"Email: {email}",
+            f"Phone: {phone}",
         ]
 
         if ssd_list:
