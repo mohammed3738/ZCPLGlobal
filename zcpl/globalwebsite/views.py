@@ -2015,7 +2015,7 @@ def build_your_server(request):
                 subject="BUILD YOUR OWN SERVER REQUEST",
                 message=final_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=["abhiraj@zacocomputer.com"],
+                recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,
             )
         except Exception as e:
