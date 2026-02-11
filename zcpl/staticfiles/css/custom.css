@@ -9,14 +9,14 @@
 
 /* Control banner background image height */
 .page-banner .image-layer {
-    height: 260px !important;
+    height: 567px !important;
     background-size: cover !important;
     background-position: center !important;
 }
 
 /* Reduce banner title font size */
 .page-banner h1 {
-    font-size: 32px !important;
+    font-size: 100px !important;
     font-weight: 600 !important;
     line-height: 1.2 !important;
 }
