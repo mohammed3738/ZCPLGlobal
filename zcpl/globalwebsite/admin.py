@@ -13,7 +13,25 @@ admin.site.register(ContactMessageGlobal)
 admin.site.register(Review)
 # admin.site.register(SubCategory)
 admin.site.register(Order)
+admin.site.register(PPCQuote)
 
+
+class SSDInline(admin.TabularInline):
+    model = ServerSSD
+    extra = 0
+
+class HDDInline(admin.TabularInline):
+    model = ServerHDD
+    extra = 0
+
+class OtherComponentInline(admin.TabularInline):
+    model = ServerOtherComponent
+    extra = 0
+
+@admin.register(BuildServerRequest)
+class BuildServerRequestAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", "server_brand", "created_at")
+    inlines = [SSDInline, HDDInline, OtherComponentInline]
 
 
 class ProductAdminForm(forms.ModelForm):
