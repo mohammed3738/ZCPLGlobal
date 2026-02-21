@@ -1887,6 +1887,145 @@ def ppc_product_delete(request, pk):
 
 
 
+# @require_http_methods(["GET", "POST"])
+# def build_your_server(request):
+
+#     if request.method == "POST":
+
+#         # ============================
+#         # Required fields
+#         # ============================
+#         name = request.POST.get("name", "").strip()
+#         email = request.POST.get("email", "").strip()
+#         phone = request.POST.get("phone", "").strip()
+
+#         if not name or not email or not phone:
+#             messages.error(request, "Name, Email and Phone are required.")
+#             return redirect("build_your_server")
+
+#         # ============================
+#         # Helper
+#         # ============================
+#         def g(key):
+#             return request.POST.get(key, "").strip()
+
+#         # ============================
+#         # Core selections
+#         # ============================
+#         server_brand = g("server_brand")
+#         server_type = g("server_type")
+#         form_factor = g("form_factor")
+#         server_model = g("server_model")
+
+#         processor = g("processor")
+#         memory = g("memory")
+#         ethernet_card = g("ethernet_card")
+#         server_purpose = g("server_purpose")
+#         additional_requirement = g("additional_requirement")
+
+#         # ============================
+#         # Dynamic rows
+#         # ============================
+#         ssd_list = request.POST.getlist("ssd[]")
+#         ssd_qty_list = request.POST.getlist("ssd_qty[]")
+
+#         hdd_list = request.POST.getlist("hdd[]")
+#         hdd_qty_list = request.POST.getlist("hdd_qty[]")
+
+#         other_components = request.POST.getlist("other_components[]")
+
+#         # ============================
+#         # Build message
+#         # ============================
+#         lines = [
+#             "BUILD YOUR OWN SERVER REQUEST",
+#             "-----------------------------------",
+#             f"Server Brand: {server_brand}",
+#             f"Server Type: {server_type}",
+#             f"Form Factor: {form_factor}",
+#             f"Server Model: {server_model}",
+#             "",
+#             f"Processor: {processor}",
+#             f"Memory: {memory}",
+#             "",
+#             "SSD Configuration:",
+#             f"Name: {name}",
+#             f"Email: {email}",
+#             f"Phone: {phone}",
+#         ]
+
+#         if ssd_list:
+#             for ssd, qty in zip(ssd_list, ssd_qty_list):
+#                 if ssd:
+#                     lines.append(f"- {ssd} × {qty or '1'}")
+#         else:
+#             lines.append("- None")
+
+#         lines.append("")
+#         lines.append("HDD Configuration:")
+
+#         if hdd_list:
+#             for hdd, qty in zip(hdd_list, hdd_qty_list):
+#                 if hdd:
+#                     lines.append(f"- {hdd} × {qty or '1'}")
+#         else:
+#             lines.append("- None")
+
+#         lines.append("")
+#         lines.append("Other Components:")
+
+#         if other_components:
+#             for comp in other_components:
+#                 lines.append(f"- {comp}")
+#         else:
+#             lines.append("- None")
+
+#         lines.extend([
+#             "",
+#             f"Ethernet Card: {ethernet_card}",
+#             "",
+#             f"Server Purpose:\n{server_purpose}",
+#             "",
+#             f"Additional Requirement:\n{additional_requirement}",
+#         ])
+
+#         final_message = "\n".join(lines)
+
+#         # ============================
+#         # Save to DB
+#         # ============================
+#         try:
+#             with transaction.atomic():
+#                 ContactMessageGlobal.objects.create(
+#                     name=name,
+#                     email=email,
+#                     phone=phone,
+#                     subject="Build Your Own Server Request",
+#                     message=strip_tags(final_message),
+#                 )
+#         except Exception as exc:
+#             messages.error(request, "Unable to save request.")
+#             return redirect("build_your_server")
+
+#         # ============================
+#         # Email
+#         # ============================
+#         try:
+#             send_mail(
+#                 subject="BUILD YOUR OWN SERVER REQUEST",
+#                 message=final_message,
+#                 from_email=settings.DEFAULT_FROM_EMAIL,
+#                 recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
+#                 fail_silently=False,
+#             )
+#         except Exception as e:
+#             logger.error("Build Server email failed: %s", str(e))
+
+#         return redirect("thank_you")
+
+#     return render(request, "build_your_server.html")
+
+
 @require_http_methods(["GET", "POST"])
 def build_your_server(request):
 
@@ -1935,87 +2074,114 @@ def build_your_server(request):
         other_components = request.POST.getlist("other_components[]")
 
         # ============================
-        # Build message
+        # Save to DB
+        # ============================
+        try:
+            with transaction.atomic():
+
+                server_request = BuildServerRequest.objects.create(
+                    name=name,
+                    email=email,
+                    phone=phone,
+                    server_brand=server_brand,
+                    server_type=server_type,
+                    form_factor=form_factor,
+                    server_model=server_model,
+                    processor=processor,
+                    memory=memory,
+                    ethernet_card=ethernet_card,
+                    server_purpose=server_purpose,
+                    additional_requirement=additional_requirement,
+                )
+
+                for ssd, qty in zip(ssd_list, ssd_qty_list):
+                    if ssd:
+                        ServerSSD.objects.create(
+                            server_request=server_request,
+                            name=ssd,
+                            quantity=int(qty or 1)
+                        )
+
+                for hdd, qty in zip(hdd_list, hdd_qty_list):
+                    if hdd:
+                        ServerHDD.objects.create(
+                            server_request=server_request,
+                            name=hdd,
+                            quantity=int(qty or 1)
+                        )
+
+                for comp in other_components:
+                    if comp:
+                        ServerOtherComponent.objects.create(
+                            server_request=server_request,
+                            name=comp
+                        )
+
+        except Exception as e:
+            logger.error("Build Server save failed: %s", str(e))
+            messages.error(request, "Unable to save your request.")
+            return redirect("build_your_server")
+
+        # ============================
+        # Build email FROM DB
         # ============================
         lines = [
             "BUILD YOUR OWN SERVER REQUEST",
             "-----------------------------------",
-            f"Server Brand: {server_brand}",
-            f"Server Type: {server_type}",
-            f"Form Factor: {form_factor}",
-            f"Server Model: {server_model}",
+            f"Name: {server_request.name}",
+            f"Email: {server_request.email}",
+            f"Phone: {server_request.phone}",
             "",
-            f"Processor: {processor}",
-            f"Memory: {memory}",
+            f"Server Brand: {server_request.server_brand}",
+            f"Server Type: {server_request.server_type}",
+            f"Form Factor: {server_request.form_factor}",
+            f"Server Model: {server_request.server_model}",
+            "",
+            f"Processor: {server_request.processor}",
+            f"Memory: {server_request.memory}",
             "",
             "SSD Configuration:",
-            f"Name: {name}",
-            f"Email: {email}",
-            f"Phone: {phone}",
         ]
 
-        if ssd_list:
-            for ssd, qty in zip(ssd_list, ssd_qty_list):
-                if ssd:
-                    lines.append(f"- {ssd} × {qty or '1'}")
+        ssds = server_request.ssds.all()
+        if ssds:
+            for ssd in ssds:
+                lines.append(f"- {ssd.name} × {ssd.quantity}")
         else:
             lines.append("- None")
 
         lines.append("")
         lines.append("HDD Configuration:")
 
-        if hdd_list:
-            for hdd, qty in zip(hdd_list, hdd_qty_list):
-                if hdd:
-                    lines.append(f"- {hdd} × {qty or '1'}")
-        else:
-            lines.append("- None")
-
-        lines.append("")
-        lines.append("Other Components:")
-
-        if other_components:
-            for comp in other_components:
-                lines.append(f"- {comp}")
+        hdds = server_request.hdds.all()
+        if hdds:
+            for hdd in hdds:
+                lines.append(f"- {hdd.name} × {hdd.quantity}")
         else:
             lines.append("- None")
 
         lines.extend([
             "",
-            f"Ethernet Card: {ethernet_card}",
+            f"Ethernet Card: {server_request.ethernet_card or 'N/A'}",
             "",
-            f"Server Purpose:\n{server_purpose}",
+            "Server Purpose:",
+            server_request.server_purpose or "N/A",
             "",
-            f"Additional Requirement:\n{additional_requirement}",
+            "Additional Requirement:",
+            server_request.additional_requirement or "N/A",
         ])
 
         final_message = "\n".join(lines)
 
         # ============================
-        # Save to DB
-        # ============================
-        try:
-            with transaction.atomic():
-                ContactMessageGlobal.objects.create(
-                    name=name,
-                    email=email,
-                    phone=phone,
-                    subject="Build Your Own Server Request",
-                    message=strip_tags(final_message),
-                )
-        except Exception as exc:
-            messages.error(request, "Unable to save request.")
-            return redirect("build_your_server")
-
-        # ============================
-        # Email
+        # Send Email
         # ============================
         try:
             send_mail(
                 subject="BUILD YOUR OWN SERVER REQUEST",
                 message=final_message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
+                # from_email=settings.DEFAULT_FROM_EMAIL,
+                # recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,
             )
         except Exception as e:
@@ -2024,6 +2190,7 @@ def build_your_server(request):
         return redirect("thank_you")
 
     return render(request, "build_your_server.html")
+
 
 
 

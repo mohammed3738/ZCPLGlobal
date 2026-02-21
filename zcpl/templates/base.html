@@ -533,7 +533,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="{% static 'js/appear.js' %}"></script>
     <script src="{% static 'js/wow.js' %}"></script>
     <script src="{% static 'js/jQuery.style.switcher.min.js' %}"></script>
-    <script src="{% static 'js/custom_js.js' %}"></script>
+    <script src="{% static 'js/custom_js.js' %}"></script> 
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"
@@ -590,6 +590,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   };
 </script>
+
+{% block extra_js %}{% endblock %}
 {% include "tidio.html" %}
   </body>
 </html>

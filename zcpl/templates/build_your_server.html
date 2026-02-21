@@ -93,6 +93,49 @@ Build your own server configuration with Zaco Computers. Select server brand, fo
   color: #777;
   margin-top: 6px;
 }
+
+/* ===============================
+   SWITCHABLE FIELD (Select → Input)
+   =============================== */
+.switchable-field {
+  position: relative;
+}
+
+.switchable-text-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.switchable-text-input input {
+  flex: 1;
+  border: 2px solid #1a3546 !important;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.switchable-text-input input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 53, 70, 0.15);
+}
+
+.btn-switch-back {
+  background: transparent;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  color: #777;
+  font-size: 12px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-switch-back:hover {
+  border-color: #1a3546;
+  color: #1a3546;
+}
 </style>
 
 <!-- Banner -->
@@ -137,38 +180,51 @@ Build your own server configuration with Zaco Computers. Select server brand, fo
         <div class="row">
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Brand</label>
-            <select class="form-control" id="serverBrand" name="server_brand" required>
-              <option value="">Select</option>
-              <option value="dell">Dell</option>
-              <option value="hpe">HPE</option>
-              <option value="ibm">IBM</option>
-              <option value="other">Other</option>
-            </select>
+            <div class="switchable-field" id="serverBrandWrapper">
+              <select class="form-control switchable-select" id="serverBrand" name="server_brand" required data-field-label="Server Brand">
+                <option value="">Select</option>
+                <option value="dell">Dell</option>
+                <option value="hpe">HPE</option>
+                <option value="ibm">IBM</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
+
+
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Type</label>
-            <select class="form-control" name="server_type" required>
-              <option value="New">New</option>
-              <option value="Refurbished">Refurbished</option>
-            </select>
+            <div class="switchable-field">
+              <select class="form-control switchable-select" name="server_type" required data-field-label="Server Type">
+                <option value="New">New</option>
+                <option value="Refurbished">Refurbished</option>
+                {% comment %} <option value="other">Other</option> {% endcomment %}
+              </select>
+            </div>
           </div>
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Form Factor</label>
-            <select class="form-control" id="formFactor" name="form_factor" required>
-              <option value="">Select</option>
-              <option value="rack">Rack Server</option>
-              <option value="tower">Tower Server</option>
-              <option value="blade">Blade Server</option>
-            </select>
+            <div class="switchable-field" id="formFactorWrapper">
+              <select class="form-control switchable-select" id="formFactor" name="form_factor" required data-field-label="Form Factor">
+                <option value="">Select</option>
+                <option value="rack">Rack Server</option>
+                <option value="tower">Tower Server</option>
+                <option value="blade">Blade Server</option>
+                {% comment %} <option value="other">Other</option> {% endcomment %}
+              </select>
+            </div>
           </div>
 
           <div class="col-md-3 mb-3">
             <label class="form-label">Server Model</label>
-            <select class="form-control" id="serverModel" name="server_model" required>
-              <option value="">Select brand & form factor</option>
-            </select>
+            <div class="switchable-field" id="serverModelWrapper">
+              <select class="form-control switchable-select" id="serverModel" name="server_model" required data-field-label="Server Model">
+                <option value="">Select brand &amp; form factor</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
             <div class="note-small">
               Models will appear based on your selected brand & form factor.
             </div>
@@ -185,32 +241,41 @@ Build your own server configuration with Zaco Computers. Select server brand, fo
         <div class="row">
           <div class="col-md-4 mb-3">
             <label class="form-label">Processor Cores</label>
-            <select class="form-control" name="processor_cores">
-              <option value="8 Cores">8 Cores</option>
-              <option value="10 Cores">10 Cores</option>
-              <option value="16 Cores">16 Cores</option>
-              <option value="24 Cores">24 Cores</option>
-              <option value="32 Cores">32 Cores</option>
-            </select>
+            <div class="switchable-field">
+              <select class="form-control switchable-select" name="processor" data-field-label="Processor Cores">
+                <option value="8 Cores">8 Cores</option>
+                <option value="10 Cores">10 Cores</option>
+                <option value="16 Cores">16 Cores</option>
+                <option value="24 Cores">24 Cores</option>
+                <option value="32 Cores">32 Cores</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4 mb-3">
             <label class="form-label">Memory (RAM)</label>
-            <select class="form-control" name="memory">
-              <option value="32 GB">32 GB</option>
-              <option value="64 GB">64 GB</option>
-              <option value="128 GB">128 GB</option>
-              <option value="256 GB">256 GB</option>
-            </select>
+            <div class="switchable-field">
+              <select class="form-control switchable-select" name="memory" data-field-label="Memory (RAM)">
+                <option value="32 GB">32 GB</option>
+                <option value="64 GB">64 GB</option>
+                <option value="128 GB">128 GB</option>
+                <option value="256 GB">256 GB</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4 mb-3">
             <label class="form-label">Ethernet Card</label>
-            <select class="form-control" name="ethernet_card">
-              <option value="1 Port 1G">1 Port 1G</option>
-              <option value="2 Port 10G">2 Port 10G</option>
-              <option value="4 Port 10G">4 Port 10G</option>
-            </select>
+            <div class="switchable-field">
+              <select class="form-control switchable-select" name="ethernet_card" data-field-label="Ethernet Card">
+                <option value="1 Port 1G">1 Port 1G</option>
+                <option value="2 Port 10G">2 Port 10G</option>
+                <option value="4 Port 10G">4 Port 10G</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -283,7 +348,7 @@ Build your own server configuration with Zaco Computers. Select server brand, fo
 
           <div class="col-md-4 mb-3">
             <label class="form-label">Phone No *</label>
-            <input type="text" class="form-control" name="phone" required>
+            <input type="number" class="form-control" name="phone" required>
           </div>
 
           <div class="col-md-4 mb-3">
@@ -307,6 +372,8 @@ Build your own server configuration with Zaco Computers. Select server brand, fo
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
+  let serverModelIsCustom = false; 
+
   const brandEl = document.getElementById("serverBrand");
   const factorEl = document.getElementById("formFactor");
   const modelEl = document.getElementById("serverModel");
@@ -317,11 +384,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const addSsdBtn = document.getElementById("addSsdBtn");
   const addHddBtn = document.getElementById("addHddBtn");
 
+  //function resetModels() {
+    //modelEl.innerHTML = '<option value="">Select brand & form factor</option>';
+  //}
+
   function resetModels() {
-    modelEl.innerHTML = '<option value="">Select brand & form factor</option>';
+    modelEl.options.length = 0;
+
+    modelEl.add(new Option("Select brand & form factor", ""));
+    modelEl.add(new Option("Other", "other"));
   }
 
+
+
   function updateModels() {
+
+    if (serverModelIsCustom) return; 
+
     const brand = brandEl.value;
     const factor = factorEl.value;
 
@@ -333,7 +412,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(res => res.json())
       .then(data => {
         if (!data.models || !data.models.length) {
-          modelEl.innerHTML = '<option value="">No models found</option>';
+          //modelEl.innerHTML = '<option value="">No models found</option>';
+          resetModels();
           return;
         }
 
@@ -343,15 +423,110 @@ document.addEventListener("DOMContentLoaded", function () {
           opt.textContent = item.name;
           modelEl.appendChild(opt);
         });
+
+        // Always append Other at the end
+        //const otherOpt = document.createElement("option");
+        //otherOpt.value = "other";
+        //otherOpt.textContent = "Other";
+        //modelEl.appendChild(otherOpt);
       })
       .catch(err => {
         console.error("Server model fetch error:", err);
-        modelEl.innerHTML = '<option value="">Error loading models</option>';
+        //modelEl.innerHTML = '<option value="">Error loading models</option>';
+        resetModels();
       });
   }
 
   brandEl.addEventListener("change", updateModels);
   factorEl.addEventListener("change", updateModels);
+
+  // ================================
+  // SWITCHABLE SELECT → TEXT INPUT
+  // ================================
+  function enableSwitchableSelects() {
+    document.querySelectorAll(".switchable-select").forEach(function (select) {
+      select.addEventListener("change", function () {
+        if (this.value === "other") {
+          // Prevent updateModels from firing for brand/factor when Other is chosen
+          convertToTextInput(this);
+        }
+      });
+    });
+  }
+
+  function convertToTextInput(selectEl) {
+
+    if (selectEl.id === "serverModel") {
+      serverModelIsCustom = true;   // ✅ ADD THIS
+    }
+
+    const wrapper = selectEl.closest(".switchable-field");
+    const fieldName = selectEl.name;
+    const isRequired = selectEl.required;
+    const placeholder = "Type " + (selectEl.dataset.fieldLabel || "value") + " here...";
+
+    // Build replacement HTML
+    const container = document.createElement("div");
+    container.className = "switchable-text-input";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "form-control";
+    input.name = fieldName;
+    input.placeholder = placeholder;
+    input.required = isRequired;
+    input.autocomplete = "off";
+
+    const backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "btn-switch-back";
+    backBtn.textContent = "↩ Select";
+    backBtn.title = "Switch back to dropdown";
+
+    backBtn.addEventListener("click", function () {
+      restoreSelect(wrapper, selectEl, container);
+    });
+
+    container.appendChild(input);
+    container.appendChild(backBtn);
+
+    // Swap out the select for the text input
+    wrapper.replaceChild(container, selectEl);
+    input.focus();
+  }
+
+  function restoreSelect(wrapper, originalSelect, currentContainer) {
+
+    if (originalSelect.id === "serverModel") {
+      serverModelIsCustom = false;   // ✅ ADD THIS
+    }
+    // Reset the select value back to empty so "Other" isn't pre-selected
+    originalSelect.value = "";
+
+    // Also re-trigger model reset if this is the brand or factor select
+    if (originalSelect.id === "serverBrand" || originalSelect.id === "formFactor") {
+      resetModels();
+    }
+
+    wrapper.replaceChild(originalSelect, currentContainer);
+
+    // Re-attach change listener in case it was lost
+    originalSelect.addEventListener("change", function () {
+      if (this.value === "other") {
+        convertToTextInput(this);
+      }
+    });
+
+    // Re-wire brand/factor model update listeners
+    if (originalSelect.id === "serverBrand") {
+      originalSelect.addEventListener("change", updateModels);
+    }
+    if (originalSelect.id === "formFactor") {
+      originalSelect.addEventListener("change", updateModels);
+    }
+  }
+
+  enableSwitchableSelects();
 
   function createStorageRow(type) {
     const row = document.createElement("div");

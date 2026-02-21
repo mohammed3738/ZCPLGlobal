@@ -458,3 +458,107 @@ class NewsletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+
+# ********************************Vaishnavi
+
+# Build Server Request Model
+# class BuildServerRequest(models.Model):
+
+#     # Contact Info
+#     name        = models.CharField(max_length=200)
+#     email       = models.EmailField()
+#     phone       = models.CharField(max_length=20)
+
+#     # Server Basics
+#     server_brand  = models.CharField(max_length=100, blank=True)
+#     server_type   = models.CharField(max_length=100, blank=True)
+#     form_factor   = models.CharField(max_length=100, blank=True)
+#     server_model  = models.CharField(max_length=100, blank=True)
+
+#     # Core Config
+#     processor_cores = models.CharField(max_length=100, blank=True)
+#     memory          = models.CharField(max_length=100, blank=True)
+#     ethernet_card   = models.CharField(max_length=100, blank=True)
+
+#     # Storage — stored as text (each entry on a new line e.g. "960GB SSD × 2")
+#     ssd_config = models.TextField(blank=True)
+#     hdd_config = models.TextField(blank=True)
+
+#     # Other
+#     other_components      = models.TextField(blank=True)
+#     server_purpose        = models.TextField(blank=True)
+#     additional_requirement = models.TextField(blank=True)
+
+#     # Meta
+#     submitted_at = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         ordering = ['-submitted_at']
+#         verbose_name        = "Build Server Request"
+#         verbose_name_plural = "Build Server Requests"
+
+#     def __str__(self):
+#         return f"{self.name} — {self.server_brand} {self.server_model} ({self.submitted_at.strftime('%d %b %Y')})"
+
+
+class BuildServerRequest(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.IntegerField(max_length=12)
+
+    server_brand = models.CharField(max_length=100)
+    server_type = models.CharField(max_length=100)
+    form_factor = models.CharField(max_length=100)
+    server_model = models.CharField(max_length=100)
+
+    processor = models.CharField(max_length=200)
+    memory = models.CharField(max_length=100)
+    ethernet_card = models.CharField(max_length=100, blank=True)
+
+    server_purpose = models.TextField(blank=True)
+    additional_requirement = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.server_brand}"
+
+
+class ServerSSD(models.Model):
+    server_request = models.ForeignKey(
+        BuildServerRequest,
+        related_name="ssds",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=100)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.name} x {self.quantity}"
+
+class ServerHDD(models.Model):
+    server_request = models.ForeignKey(
+        BuildServerRequest,
+        related_name="hdds",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=100)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.name} x {self.quantity}"
+
+
+class ServerOtherComponent(models.Model):
+    server_request = models.ForeignKey(
+        BuildServerRequest,
+        related_name="other_components",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
