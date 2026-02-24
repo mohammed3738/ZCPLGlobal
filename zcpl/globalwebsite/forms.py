@@ -139,27 +139,80 @@ class BankTransferForm(forms.Form):
     payer_bank_name = forms.CharField(max_length=100)
 
 
-class SignUpForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
+# class SignUpForm(forms.ModelForm):
+#     password = forms.CharField(widget=forms.PasswordInput)
+#     confirm_password = forms.CharField(widget=forms.PasswordInput)
 
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'password']
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-        if password != confirm_password:
-            raise forms.ValidationError("Passwords do not match.")
-        return cleaned_data
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         password = cleaned_data.get("password")
+#         confirm_password = cleaned_data.get("confirm_password")
+#         if password != confirm_password:
+#             raise forms.ValidationError("Passwords do not match.")
+#         return cleaned_data
+
+
+# class SignInForm(AuthenticationForm):
+#     username = forms.CharField(label="Username or Email")
+#     password = forms.CharField(widget=forms.PasswordInput)
+
+
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
+class SignUpForm(forms.Form):
+    username = forms.CharField(
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Your Name',
+            'class': 'form-control'
+        })
+    )
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Enter Email Address',
+            'class': 'form-control'
+        })
+    )
+    password1 = forms.CharField(
+        max_length=128,
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Your Password',
+            'class': 'form-control'
+        })
+    )
+    password2 = forms.CharField(
+        max_length=128,
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Confirm Password',
+            'class': 'form-control'
+        })
+    )
 
 
 class SignInForm(AuthenticationForm):
-    username = forms.CharField(label="Username or Email")
-    password = forms.CharField(widget=forms.PasswordInput)
-
+    username = forms.CharField(
+        label="Username or Email",
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Username or Email',
+            'class': 'form-control',
+            'autofocus': True,
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Password',
+            'class': 'form-control',
+        })
+    )
 
 
 class ContactForm(forms.Form):

@@ -14,6 +14,7 @@ admin.site.register(Review)
 # admin.site.register(SubCategory)
 admin.site.register(Order)
 admin.site.register(PPCQuote)
+admin.site.register(PPCCategory)
 
 
 class SSDInline(admin.TabularInline):

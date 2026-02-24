@@ -6,22 +6,12 @@
     <title>Refurbished Servers In India From DELL, HPE & IBM /</title>
     <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800;900&family=Teko:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;600;700;800;900&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512,..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P2PWXWXK');</script>
-<!-- End Google Tag Manager -->
-
-
-
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P2PWXWXK');</script>
+    <!-- End Google Tag Manager -->
 
     <!-- reey font -->
     <link rel="stylesheet" href="{% static 'css/reey-font.css' %}" />
@@ -38,59 +28,72 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}" />
     <link href="{% static 'css/custom-animate.css' %}" rel="stylesheet" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    <!-- rtl css -->
     <link href="{% static 'css/rtl.css' %}" rel="stylesheet" />
-    <!-- Responsive File -->
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
-
-    <!-- variable update -->
     <link rel="stylesheet" href="{% static 'css/variables/index-6.css' %}" />
+    <link rel="stylesheet" id="jssDefault" href="{% static 'css/colors/color-10.css' %}" />
 
-    <!-- Color css -->
-    <link
-      rel="stylesheet"
-      id="jssDefault"
-      href="{% static 'css/colors/color-10.css' %}"
-    />
+    <link rel="shortcut icon" href="{% static 'images/android-chrome-512x512.png' %}" id="fav-shortcut" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/android-chrome-512x512.png' %}" id="fav-icon" type="image/x-icon" />
+    <link rel="icon" href="{% static 'favicon.ico' %}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/Zacow1.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/Zacow1.png' %}">
 
-    <link
-      rel="shortcut icon"
-      href="{% static 'images/android-chrome-512x512.png' %}"
-      id="fav-shortcut"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="{% static 'images/android-chrome-512x512.png' %}"
-      id="fav-icon"
-      type="image/x-icon"
-    />
-<link rel="icon" href="{% static 'favicon.ico' %}" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/Zacow1.png' %}">
-<link rel="apple-touch-icon" href="{% static 'images/Zacow1.png' %}">
-
-    <!-- Responsive Settings -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <!--[if lt IE 9
-      ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
-    ><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+    <style>
+      /* ACTIVE MENU UNDERLINE WITH HOVER EFFECT */
+      .main-menu .navigation > li > a:before {
+        display: none !important;
+      }
+
+      /* Underline for active link */
+      .main-menu .navigation > li > a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: #19c74a !important;
+        display: block !important;
+        transition: all 0.3s ease;
+      }
+
+      /* Underline on hover (for all links) */
+      .main-menu .navigation > li > a:hover::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: #19c74a !important;
+        display: block !important;
+        transition: all 0.3s ease;
+      }
+
+      /* Hide underline for inactive links that are not hovered */
+      .navigation a:not(.active):not(:hover)::after {
+        display: none !important;
+      }
+
+      .main-menu .navigation a {
+        position: relative !important;
+      }
+    </style>
   </head>
 
   <body>
 
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2PWXWXK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2PWXWXK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <div class="page-wrapper">
-
 
       <!--Mobile Menu-->
       <div class="side-menu__block">
@@ -98,28 +101,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="cursor"></div>
           <div class="cursor-follower"></div>
         </div>
-        <!-- /.side-menu__block-overlay -->
         <div class="side-menu__block-inner">
           <div class="side-menu__top justify-content-end">
-            <a href="#" class="side-menu__toggler side-menu__close-btn"
-              ><img src="{% static 'images/icons/close-1-1.png' %}" alt=""
-            /></a>
+            <a href="#" class="side-menu__toggler side-menu__close-btn"><img src="{% static 'images/icons/close-1-1.png' %}" alt=""/></a>
           </div>
-          <!-- /.side-menu__top -->
 
           <nav class="mobile-nav__container">
             <!-- content is loading via js -->
           </nav>
           <div class="side-menu__sep"></div>
-          <!-- /.side-menu__sep -->
           <div class="side-menu__content">
-            {% comment %} <p>
-              Linoor is a premium Template for Digital Agencies, Start Ups,
-              Small Business and a wide range of other agencies.
-            </p> {% endcomment %}
             <p>
-              <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
-              <br />
+              <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a><br />
               <a href="tel:+91-22-69288800">+91 22 69288800</a>
             </p>
             <div class="side-menu__social">
@@ -129,11 +122,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a href="https://www.pinterest.com/zacoitsolved/"><i class="fab fa-pinterest-p"></i></a>
             </div>
           </div>
-          <!-- /.side-menu__content -->
         </div>
-        <!-- /.side-menu__block-inner -->
       </div>
-      <!-- /.side-menu__block -->
 
       <!--Search Popup-->
       <div class="search-popup">
@@ -141,47 +131,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="cursor"></div>
           <div class="cursor-follower"></div>
         </div>
-        <!-- /.search-popup__overlay -->
         <div class="search-popup__inner">
           <form action="#" class="search-popup__form">
-            <input
-              type="text"
-              name="search"
-              placeholder="Type here to Search...."
-            />
+            <input type="text" name="search" placeholder="Type here to Search...." />
             <button type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
-        <!-- /.search-popup__inner -->
       </div>
-      <!-- /.search-popup -->
 
       <!-- Main Header -->
       <header class="main-header header-style-one header-style-seven">
         <div class="topbar-four">
-          <!-- Closable Support Topbar -->
-          <div
-            class="topbar-support"
-            id="supportBar"
-            style="
-              background-color: #ffaa17;
-              color: white;
-              {% comment %} padding: 10px 0; {% endcomment %}
-              text-align: center;
-              position: relative;
-              {% comment %} display:flex; {% endcomment %}
-            "
-          >
-            <div
-              class="auto-container d-flex justify-content-between align-items-center flex-wrap "
-            >
+          <div class="topbar-support" id="supportBar" style="background-color: #ffaa17; color: white; text-align: center; position: relative;">
+            <div class="auto-container d-flex justify-content-between align-items-center flex-wrap">
               <div class="support-text">
-                <strong>24x7 Support</strong> | Toll-Free:
-                <a
-                  href="tel:18002091986"
-                  style="color: white; text-decoration: underline"
-                  >+91 1800 209 1986</a
-                >
+                <strong>24x7 Support</strong> | Toll-Free: <a href="tel:18002091986" style="color: white; text-decoration: underline">+91 1800 209 1986</a>
               </div>
             </div>
           </div>
@@ -203,138 +167,82 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                   <div class="email d-flex align-items-center ms-3">
                     <span class="icon flaticon-email me-1"></span>
-                    <a href="mailto:info@zacocomputer.com"
-                      >info@zacocomputer.com</a
-                    >
+                    <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>
                   </div>
                   <div class="email d-flex align-items-center ms-3">
                     <div>
-                      <select
-                        id="country"
-                        name="country"
-                        class="form-select"
-                        onchange="redirectToPage(this.value)"
-                      >
+                      <select id="country" name="country" class="form-select" onchange="redirectToPage(this.value)">
                         <option value="{% url "home" %}">Global</option>
-                        <option value="{% url 'uk-home' %}">
-                          United Kingdom
-                        </option>
+                        <option value="{% url 'uk-home' %}">United Kingdom</option>
                         <option value="{% url "india-home" %}">India</option>
-                        <option value="{% url 'uae-home' %}">
-                          United Arab Emirates
-                        </option>
+                        <option value="{% url 'uae-home' %}">United Arab Emirates</option>
                       </select>
                     </div>
                   </div>
                 </div>
-
-                <!-- /.phone -->
-
-                <!-- /.social-links -->
               </div>
-              <!-- /.right-content -->
             </div>
-            <!-- /.auto-container -->
           </div>
-          <!-- /.topbar -->
+
           <div class="inner-container clearfix">
             <div class="auto-container">
               <!--Logo-->
               <div class="logo-box">
                 <div class="logo">
-                  <a
-                    href="{% url 'home' %}"
-                    title="Zaco Computers Private Limited"
-                    ><img
-                      src="{% static 'images/Zacow1.png' %}"
-                      id="thm-logo"
-                      alt="Zaco Computers Private Limited"
-                      title="Zaco Computers Private Limited"
-                  /></a>
+                  <a href="{% url 'home' %}" title="Zaco Computers Private Limited">
+                    <img src="{% static 'images/Zacow1.png' %}" id="thm-logo" alt="Zaco Computers Private Limited" title="Zaco Computers Private Limited" />
+                  </a>
                 </div>
               </div>
               <div class="nav-outer clearfix">
                 <!--Mobile Navigation Toggler-->
                 <div class="mobile-nav-toggler">
-                  <span class="icon flaticon-menu-2"></span
-                  ><span class="txt">Menu</span>
+                  <span class="icon flaticon-menu-2"></span><span class="txt">Menu</span>
                 </div>
 
                 <!-- Main Menu -->
                 <nav class="main-menu navbar-expand-md navbar-light">
                   <ul class="navigation clearfix">
                     <li class="dropdown">
-                      <a href="{% url 'home' %}">Home</a>
+                      <a href="{% url 'home' %}" data-url="{% url 'home' %}">Home</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'about_us' %}">About Us</a>
+                      <a href="{% url 'about_us' %}" data-url="{% url 'about_us' %}">About Us</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'shop' %}">Online Store</a>
+                      <a href="{% url 'shop' %}" data-url="{% url 'shop' %}">Online Store</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'services' %}">Services</a>
+                      <a href="{% url 'services' %}" data-url="{% url 'services' %}">Services</a>
                       <ul>
-                        <li>
-                          <a href="{% url 'it-hardware' %}">IT Hardware</a>
-                        </li>
-                        <li>
-                          <a href="{% url 'server-maintenance' %}"
-                            >Server Maintenance</a
-                          >
-                        </li>
-
-                        <li>
-                          <a href="{% url 'storage-maintenance' %}"
-                            >Storage Maintenance</a
-                          >
-                        </li>
-                        <li>
-                          <a href="{% url 'network-maintenance' %}"
-                            >Network Maintenance</a
-                          >
-                        </li>
-                        <li>
-                          <a href="{% url 'rental-services' %}"
-                            >Rental Services</a
-                          >
-                        </li>
-                        <li>
-                          <a href="{% url 'infrastructure-managed-service' %}"
-                            >Infrastructure Managed Service</a
-                          >
-                        </li>
-
+                        <li><a href="{% url 'it-hardware' %}">IT Hardware</a></li>
+                        <li><a href="{% url 'server-maintenance' %}">Server Maintenance</a></li>
+                        <li><a href="{% url 'storage-maintenance' %}">Storage Maintenance</a></li>
+                        <li><a href="{% url 'network-maintenance' %}">Network Maintenance</a></li>
+                        <li><a href="{% url 'rental-services' %}">Rental Services</a></li>
+                        <li><a href="{% url 'infrastructure-managed-service' %}">Infrastructure Managed Service</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'global-it' %}">Global IT Support</a>
-
+                      <a href="{% url 'global-it' %}" data-url="{% url 'global-it' %}">Global IT Support</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'itad-services' %}">IT Buyback</a>
-
+                      <a href="{% url 'itad-services' %}" data-url="{% url 'itad-services' %}">IT Buyback</a>
                     </li>
-
-
                     <li class="dropdown">
-                      <a href="{% url 'contact' %}">Contact Us</a>
-
+                      <a href="{% url 'contact' %}" data-url="{% url 'contact' %}">Contact Us</a>
                     </li>
                   </ul>
                 </nav>
               </div>
             </div>
-            <!-- /.auto-container -->
           </div>
         </div>
-        <!--End Header Upper-->
       </header>
-      <!-- End Main Header -->
 
       {% block content %}{% endblock %}
 
-        {% include "footer contact.html" %}
+      {% include "footer contact.html" %}
 
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -347,10 +255,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="{% static 'js/appear.js' %}"></script>
     <script src="{% static 'js/wow.js' %}"></script>
     <script src="{% static 'js/jQuery.style.switcher.min.js' %}"></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"
-    ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
     <script src="{% static 'js/jquery.easing.min.js' %}"></script>
     <script src="{% static 'js/jarallax.min.js' %}"></script>
     <script src="{% static 'js/swiper.min.js' %}"></script>
@@ -359,6 +264,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="{% static 'js/lang.js' %}"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="{% static 'js/color-switcher.js' %}"></script>
+
+    <!-- ACTIVE MENU HIGHLIGHTING - Inline Script -->
+    <script>
+    (function() {
+      'use strict';
+
+      function activateMenu() {
+        console.log('🔍 Checking active menu...');
+        
+        const currentPath = window.location.pathname;
+        console.log('📍 Current path:', currentPath);
+
+        const navLinks = document.querySelectorAll('.navigation a[data-url]');
+        console.log('🔗 Found', navLinks.length, 'nav links with data-url');
+
+        navLinks.forEach(link => {
+          if (link.classList.contains('active')) {
+            link.classList.remove('active');
+          }
+        });
+
+        navLinks.forEach(link => {
+          const linkPath = link.getAttribute('data-url');
+          
+          if (!linkPath) return;
+
+          let normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+          let normalizedLink = linkPath.replace(/\/$/, '') || '/';
+
+          console.log(`Comparing: "${normalizedCurrent}" vs "${normalizedLink}"`);
+
+          const isMatch = (normalizedCurrent === normalizedLink) || 
+                          (normalizedLink !== '/' && currentPath.startsWith(normalizedLink + '/'));
+
+          if (isMatch) {
+            console.log('✅ MATCH FOUND:', link.textContent.trim());
+            link.classList.add('active');
+            
+            link.style.display = 'inline-block';
+            setTimeout(() => {
+              link.style.display = '';
+            }, 50);
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', activateMenu);
+      } else {
+        activateMenu();
+      }
+
+      setTimeout(activateMenu, 100);
+      setTimeout(activateMenu, 500);
+
+      window.addEventListener('load', activateMenu);
+    })();
+    </script>
+
     <script>
       function redirectToPage(value) {
         if (value) {
@@ -367,12 +331,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
 
       window.onload = function () {
-        const currentURL = window.location.pathname.replace(/\/$/, ""); // Remove trailing slash
+        const currentURL = window.location.pathname.replace(/\/$/, "");
         const selectElement = document.getElementById("country");
+        if (!selectElement) return;
+        
         const options = selectElement.options;
 
         for (let i = 0; i < options.length; i++) {
-          const optionValue = options[i].value.replace(/\/$/, ""); // Normalize trailing slash
+          const optionValue = options[i].value.replace(/\/$/, "");
           if (optionValue && (currentURL === optionValue)) {
             options[i].selected = true;
             break;

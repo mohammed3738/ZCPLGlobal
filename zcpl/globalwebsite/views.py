@@ -137,6 +137,9 @@ def itadservices(request):
 
 def it_hardware(request):
     return render(request,'services/it_hardware.html')
+    
+def vmware_support(request):
+    return render(request,'services/vmware_support.html')
 
 def server_maintenance(request):
     return render(request,'services/server_maintenance.html')
@@ -1222,7 +1225,7 @@ def signup_view(request):
 
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already registered.")
-            return redirect('signup')
+            return redirect('signin')
 
         # Create user
         user = User.objects.create_user(username=username, email=email, password=password1)
@@ -1256,7 +1259,8 @@ def signin_view(request):
             login(request, user)
             return redirect('shop')
         else:
-            messages.error(request, "Invalid credentials.")
+            messages.error(request, "Invalid username or password.")
+            # return redirect('signin')
     else:
         form = SignInForm()
     return render(request, 'auth/signin.html', {'form': form})
@@ -1264,6 +1268,7 @@ def signin_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, "You have been logged out.")
     return redirect('signin')
 
 
@@ -1765,6 +1770,16 @@ def sitemap_index(request):
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
+
+
+def ppc_category_detail(request, slug):
+
+    category = get_object_or_404(PPCCategory, slug=slug)
+    products = Product.objects.filter(category=category)
+    return render(request, "ppc/ppc_category.html", {
+        "category": category,
+        "products": products,
+    })
 
 def ppc_product_detail(request, slug):
     product = get_object_or_404(PPCProduct, slug=slug, is_active=True)

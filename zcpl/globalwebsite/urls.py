@@ -30,6 +30,7 @@ urlpatterns = [
     path('contact-us/',views.contact,name="contact"),
     path('itad-services/',views.itadservices,name="itad-services"),
     path('it-hardware/',views.it_hardware,name="it-hardware"),
+    path('vmware-support/',views.vmware_support,name="vmware-support"),
     path('server-maintenance/',views.server_maintenance,name="server-maintenance"),
     path('storage-maintenance/',views.storage_maintenance,name="storage-maintenance"),
     path('network-maintenance/',views.network_maintenance,name="network-maintenance"),
@@ -57,7 +58,7 @@ urlpatterns = [
     path('ppc/products/', views.ppc_product_manage, name='ppc-product-manage'),
     path('ppc/products/edit/<int:pk>/', views.ppc_product_manage, name='ppc-product-edit'),
     path('ppc/products/delete/<int:pk>/', views.ppc_product_delete, name='ppc-product-delete'),
-
+    path('ppc/category/<slug:slug>/', views.ppc_category_detail, name='ppc-category-detail'),
     path(
         'ppc/<slug:slug>/',
         views.ppc_product_detail,

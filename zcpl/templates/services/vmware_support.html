@@ -1,0 +1,563 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Managed IT Infrastructure Services | Zaco Computers Global
+{% endblock %}
+{% block meta_description %}Optimize your IT operations with Zaco’s Managed Infrastructure Services. From monitoring to support, we ensure efficiency, security, and 24/7 uptime.
+{% endblock %}
+{% comment %} {% block canonical %}
+  <link rel="canonical" href="https://zacocomputer.com/about-us/">
+{% endblock %} {% endcomment %} 
+{% block content %}
+<!-- Banner Section -->
+<style>
+    
+    .problem { background: var(--navy-mid); }
+    .problem-grid {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 32px; margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .problem-card {
+        background: #fff;;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px; padding: 28px 30px;
+        transition: border-color 0.2s;
+        
+    }
+    .problem-card:hover { border-color: rgba(45,125,210,0.3); }
+    .problem-card .icon {
+        width: 42px; height: 42px; border-radius: 10px;
+        background: rgba(224,82,82,0.12); display: flex; align-items: center; justify-content: center;
+        margin-bottom: 18px; font-size: 1.2rem;
+    }
+    .problem-card h4 { font-size: 1.05rem; margin-bottom: 10px; color: var(--white); }
+    .problem-card p { font-size: 0.9rem; color: var(--gray-mid); line-height: 1.65; }
+    .problem-card .highlight { color: var(--danger); font-weight: 600; }
+
+    /* COST VISUAL */
+    .cost-visual{
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px; padding: 40px;
+        margin-top: 50px;
+        border-bottom: #020202;
+    }
+    .cost-visual h4 { font-size: 1rem; color: var(--gray-mid); margin-bottom: 28px; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+    .cost-bars { display: flex; flex-direction: column; gap: 18px; }
+    .cost-bar-row { display: flex; align-items: center; gap: 16px; }
+    .cost-bar-label { width: 160px; font-size: 0.85rem; color: var(--gray-mid); flex-shrink: 0; }
+    .cost-bar-track { flex: 1; background: rgba(255,255,255,0.06); border-radius: 100px; height: 32px; position: relative; overflow: hidden; }
+    .cost-bar-fill {
+        height: 100%; border-radius: 100px;
+        display: flex; align-items: center; padding-left: 14px;
+        font-size: 0.8rem; font-weight: 600; transition: width 0.8s ease;
+    }
+    .bar-broadcom { background: linear-gradient(90deg, #E05252, #C0392B); color: #fff; }
+    .bar-zaco { background: linear-gradient(90deg, #00B4A2, #00D4BE); color: var(--navy); }
+
+    .table-note {
+        font-size: 0.78rem; color: var(--gray-mid);
+        margin-top: 18px; font-style: italic;
+    }
+</style>
+
+
+<section class="slider-six">
+  <div class="slider-six__curv">
+    <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 122">
+                <path fill="currentColor"
+                    d="M0,122.005S80.814,20.129,283.871,2.426C526.255-18.706,550.388,91.2,792.025,102.115c243.565,11.006,299.815-108,520.765-97.662,220.1,10.3,273.86,88.036,415.09,98.26C1878.57,113.62,1920,51.068,1920,51.068V-862.995H0v985Z" />
+            </svg> -->
+  </div>
+  <!-- /.slider-six__curv -->
+  <div
+    class="swiper-container thm-swiper__slider"
+    data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="
+            background-image: url({% static "images/it-hardware/server-back.jpg" %});
+          "
+        ></div>
+        <!-- /.image-layer -->
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text"><span>VMware Support</span></p>
+            <!-- /.slider-six__text -->
+            <h1 class="slider-six__title">
+                VMware Third-Party Software Support
+            </h1>
+            <p style="color: azure;">Need reliable VMware extended support without the burden of escalating OEM costs? We’ve got you covered!</p>
+            <!-- /.slider-six__title -->
+            <!-- <a href="#" class="slider-six__btn thm-btn__six">Discover More</a> -->
+            <!-- /.thm-btn__six -->
+          </div>
+          <!-- /.slider-six__content -->
+        </div>
+      </div>
+      {% comment %} <div class="swiper-slide">
+        <div
+          class="image-layer"
+          style="
+            background-image: url(images/update-01-10-2021/slider/slider-six-1-2.jpg);
+          "
+        ></div>
+        <!-- /.image-layer -->
+     
+      </div> {% endcomment %}
+    </div>
+    <!-- If we need navigation buttons -->
+    <!-- <div class="slider-bottom-box clearfix">
+                <div class="main-slider__nav">
+                    <div class="swiper-button-prev" id="main-slider__swiper-button-next">
+                        <span class="fa fa-angle-left"></span>
+                    </div>
+                    <div class="swiper-button-next" id="main-slider__swiper-button-prev">
+                        <span class="fa fa-angle-right"></span>
+                    </div>
+                </div>
+            </div> -->
+  </div>
+</section>
+<!-- /.slider-six -->
+
+<div class="auto-container" style="padding-block: 100px">
+    <div class="about-six__text">
+            Since <a href="https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware" rel="nofollow">Broadcom acquired VMware in 2023</a>, it ended perpetual licences and support renewals, forcing customers toward expensive VMware vSphere Foundation (VVF) / VMware Cloud Foundation (VCF) subscriptions. TThis has driven annual costs up by more than 2×, pushing many organisations to seek third-party support to maintain their perpetual licences, strengthen existing VMware environments, or move away from Broadcom's services altogether.
+    </div>
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="about-six__content">
+        <div class="sec-title-six" style="margin-bottom:20px">
+        </div>
+        <!-- /.sec-title-six -->
+        
+        <div class="about-six__text">
+            For organisations seeking to retain their existing virtualisation investments, this represents a significant and sudden financial burden. Seeking an alternative VMware support model has become an essential consideration for teams looking to control costs without compromising service quality.
+        <div class="about-six__text">
+            <br>As a global leader of end-to-end third-party enterprise software support providers, Zaco Computers understands the importance of maintaining operational continuity for your existing VMware environment, without forcing costly upgrades or unnecessary licence bundles. 
+        </div>
+        <!-- /.about-six__text -->
+        <div class="link-box" style="margin-top:20px">
+            <a class="theme-btn btn-style-one" href="{% url "contact" %}">
+              <i class="btn-curve"></i>
+              <span class="btn-title">Contact Us</span>
+            </a>
+          </div>
+          <!-- /.about-six__content -->
+        </div>
+    </div>
+    <!-- /.col-md-12 col-lg-5 -->
+    {% comment %} <div class="col-md-7 col-lg-6 wow fadeInRight" data-wow-duration="1500ms">
+      <div class="about-six__image">
+        <img
+          src="{% static 'images/update-01-10-2021/resources/IMSINTRO-1.png' %}"
+          alt=""
+        />
+      </div>
+      <!-- /.about-six__image -->
+    </div> {% endcomment %}
+    <!-- /.col-md-12 col-lg-7 -->
+  </div>
+  <!-- /.row -->
+
+  <!-- /.row -->
+</div>
+<!-- /.auto-container -->
+
+
+
+
+<section class="problem">
+  <div class="inner">
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">📈</div>
+        <h4><b>Major Increase in VMware License Spend</b></h4>
+        <p>Broadcom ended perpetual license renewals and restructured VMware software into mandatory VVF or VCF bundles. Organisations report VMware license cost increases of more than 2× their prior annual spend.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📦</div>
+        <h4><b>Forced Product Bundling</b></h4>
+        <p>VMware technical support under Broadcom now requires purchasing VMware vSphere Foundation (VVF) or VMware Cloud Foundation (VCF), a bundled stack that includes VMware products many organisations do not need and did not budget for.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🔒</div>
+        <h4><b>Perpetual Licences Left Without Coverage</b></h4>
+        <p>Broadcom no longer offers support renewals for perpetual VMware licences. Organisations that paid for and rely on VMware vSphere environments are now left without OEM-backed VMware technical support.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">👥</div>
+        <h4><b>Internal Skills Shortage</b></h4>
+        <p>Managing VMware ESXi hosts, vCenter, DRS, Distributed Switch and HA configurations in-house requires deep expertise. Building and retaining that capability internally is costly, particularly when the environment is already stable and meeting operational needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="we-do-section">
+    <div class="auto-container">
+        <div style="text-align:left; margin-left: 70px; ">COST COMPARISON</div>
+        <div class="sec-title-eight__title" style="text-align:center; padding-bottom:5px; line-height: 80px">
+            <h2>
+                <b>What Third-Party VMware Support Actually Costs</b>
+            </h2>
+        </div>
+        <div>
+            <p style="padding-inline: 100px;">A side-by-side view of how Broadcom's subscription model compares with independent VMware managed services for organisations retaining perpetual licences.</p>
+        </div>
+        <div class="cost-visual">
+            <h4>Indicative annual support cost: same environment, different model</h4>
+            <div class="cost-bars">
+                <div class="cost-bar-row">
+                <span class="cost-bar-label">Broadcom OEM (VCF)</span>
+                <div class="cost-bar-track">
+                    <div class="cost-bar-fill bar-broadcom" style="width:90%">2–10× cost uplift</div>
+                </div>
+                </div>
+                <div class="cost-bar-row">
+                <span class="cost-bar-label">Third-Party Support</span>
+                <div class="cost-bar-track">
+                    <div class="cost-bar-fill bar-zaco" style="width:45%">Up to 50%* savings</div>
+                </div>
+                </div>
+            </div>
+            <p class="table-note">* Up to 50% savings are indicative, based on comparable engagements, and depend on environment size, vmware license cost spend, and configuration. Contact us for an environment-specific assessment.</p>
+        </div>
+
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <section class="about-ten">
+    <div class="auto-container">
+        <div class="row" style="margin-block:20px">
+        
+            <div class="col-lg-7 d-flex">
+                <div class="my-auto">
+
+                    <div class="about-ten__content">
+                        <div class="sec-title-eight text-start">
+                            {% comment %} <p class="sec-title-eight__text">Why Choose Us</p><!-- /.sec-title-eight__text --> {% endcomment %}
+                            <h2 class="sec-title-eight__title">Choose Zaco for reliable IT solutions in VMware, Linux, Windows, Azure, Cyber Security & Veeam.
+
+                                </h2><!-- /.sec-title-eight__title -->
+                        </div><!-- /.sec-title-eight -->
+   
+                        <div class="">
+                            {% comment %} <h3 class="about-ten__box__title">Customer Experience</h3> {% endcomment %}
+                            <!-- /.about-ten__box__title -->
+                            <p class="about-ten__box__text">Unlock the full potential of your IT infrastructure with Zaco’s highly experienced team of IT hardware and software experts. We specialize in delivering end-to-end IT solutions across VMware, Red Hat Linux, Microsoft Windows, Microsoft Azure, Seceon (Cybersecurity), and Veeam (Backup and Recovery). Our services cover a wide spectrum including virtualization with VMware vSphere, cloud setup and management, Windows and Linux installations, Active Directory management, and complete IT Infrastructure Managed Services (IMS).
+
+                                With Zaco, you get a one-stop solution for comprehensive hardware and software management—so you can focus on growing your business while we take care of your IT.</p>
+                            <!-- /.about-ten__box__text -->
+                        </div><!-- /.about-ten__box -->
+                      
+                    </div><!-- /.about-ten__content -->
+                </div><!-- /.my-auto -->
+            </div><!-- /.col-lg-7 -->
+            <div class="col-lg-5 wow fadeInRight" data-wow-duration="1500ms">
+                <div class="about-ten__image">
+                    <img src="  {% static 'images/update-01-10-2021/resources/server-maintainance-1.jpg' %}" alt="">
+                </div><!-- /.about-ten__image -->
+            </div><!-- /.col-lg-5 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section><!-- /.about-ten -->
+
+
+
+
+<!--We DO Section-->
+<section class="we-do-section">
+    <div class="auto-container">
+        <div class="sec-title " style="text-align:center;padding-bottom:5px ">
+            <h2>
+                Benefits of Choosing Our Managed Services
+              
+            </h2>
+          </div>
+        <div class="sec-title">
+        
+      <div class="row clearfix">
+        <!--Left Column-->
+        <div class="left-col col-lg-6 col-md-12 col-sm-12 wow fadeInLeft" data-wow-duration="1500ms" >
+            <div class="">
+                <img
+                  src="{% static 'images/update-01-10-2021/resources/BenefitsIMS.png' %}"
+                  alt=""
+                />
+              </div>
+        </div>
+        <!--Right Column-->
+        <div class="right-col col-lg-6 col-md-12 col-sm-12">
+            
+          <div class="inner">
+            <div class="faq-box">
+              <ul class="accordion-box clearfix">
+                <!--Block-->
+                <li class="accordion block active-block">
+                  <div class="acc-btn active">
+                    <span class="count">1.</span> Affordable Solutions
+
+                  </div>
+                  <div class="acc-content current">
+                    <div class="content">
+                      <div class="text">
+                        Our IMS provides cost-effectiveness without compromising on quality. Value-driven services ensure you get the most out of your investment.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">2.</span> Tailored Service Contracts
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        We believe in flexibility. We customize the service level agreements (SLAs) to meet your unique requirements.This adapts precise alignment with your business needs.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">3.</span>  Remote Support
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Geography is no barrier for us. Our expert team provides seamless remote assistance. Uninterrupted service delivery ensures that all your operations run smoothly.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+  <section class="about-ten">
+    <div class="auto-container">
+        <div class="row" style="margin-block:20px">
+        
+            <div class="col-lg-7 d-flex">
+                <div class="my-auto">
+
+                    <div class="about-ten__content">
+                        <div class="sec-title-eight text-start">
+                            {% comment %} <p class="sec-title-eight__text">Why Choose Us</p><!-- /.sec-title-eight__text --> {% endcomment %}
+                            <h2 class="sec-title-eight__title">Choose Zaco for reliable IT solutions in VMware, Linux, Windows, Azure, Cyber Security & Veeam.
+
+
+
+
+
+
+
+
+
+                                </h2><!-- /.sec-title-eight__title -->
+                        </div><!-- /.sec-title-eight -->
+   
+                        <div class="">
+                            {% comment %} <h3 class="about-ten__box__title">Customer Experience</h3> {% endcomment %}
+                            <!-- /.about-ten__box__title -->
+                            <p class="about-ten__box__text">Unlock the full potential of your IT infrastructure with Zaco’s highly experienced team of IT hardware and software experts. We specialize in delivering end-to-end IT solutions across VMware, Red Hat Linux, Microsoft Windows, Microsoft Azure, Seceon (Cybersecurity), and Veeam (Backup and Recovery). Our services cover a wide spectrum including virtualization with VMware vSphere, cloud setup and management, Windows and Linux installations, Active Directory management, and complete IT Infrastructure Managed Services (IMS).
+
+                                With Zaco, you get a one-stop solution for comprehensive hardware and software management—so you can focus on growing your business while we take care of your IT.</p>
+                            <!-- /.about-ten__box__text -->
+                        </div><!-- /.about-ten__box -->
+                      
+                    </div><!-- /.about-ten__content -->
+                </div><!-- /.my-auto -->
+            </div><!-- /.col-lg-7 -->
+            <div class="col-lg-5 wow fadeInRight" data-wow-duration="1500ms">
+                <div class="about-ten__image">
+                    <img src="  {% static 'images/update-01-10-2021/resources/server-maintainance-1.jpg' %}" alt="">
+                </div><!-- /.about-ten__image -->
+            </div><!-- /.col-lg-5 -->
+        </div><!-- /.row -->
+    </div><!-- /.auto-container -->
+</section><!-- /.about-ten -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--We DO Section-->
+<section class="we-do-section">
+    <div class="auto-container">
+        <div class="sec-title " style="text-align:center;padding-bottom:5px ">
+            <h2>
+                Why Opt for IT Infrastructure Managed Services with a Third-Party Organization?
+              
+            </h2>
+          </div>
+        <div class="sec-title">
+        
+      <div class="row clearfix">
+        <!--Left Column-->
+        <div class="left-col col-lg-6 col-md-12 col-sm-12 wow fadeInLeft" data-wow-duration="1500ms">
+            <div class="">
+                <img
+                  src="{% static 'images/update-01-10-2021/resources/3238538639.jpg' %}"
+                  alt=""
+                />
+              </div>
+        </div>
+        <!--Right Column-->
+        <div class=" col-lg-6 col-md-12 col-sm-12">
+            
+          <div class="inner">
+            <div class="faq-box">
+              <ul class="accordion-box clearfix">
+                <!--Block-->
+                <li class="accordion block active-block">
+                  <div class="acc-btn active">
+                    <span class="count">1.</span>  Focus on your Core Competency
+
+                  </div>
+                  <div class="acc-content current">
+                    <div class="content">
+                      <div class="text">
+                        Entrust your IT infrastructure to us, allowing your internal teams to concentrate on strategic initiatives for your core competency. Our experts will handle all intricate IT Infrastructure Management tasks.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">2.</span>  Streamlined Operations
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Reduce the need for an extensive in-house IT staff. Our experienced team efficiently manages your IT needs ensuring operational efficiency.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">3.</span>   Proven Expertise
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Benefit from our collective knowledge and successful project deliveries. We bring peak efficiency to your IT infrastructure.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix" style="padding-block:40px">
+        <div class=" col-lg-6 col-md-12 col-sm-12">
+            
+          <div class="inner">
+            <div class="faq-box">
+              <ul class="accordion-box clearfix">
+                <!--Block-->
+                <li class="accordion block active-block">
+                  <div class="acc-btn active">
+                    <span class="count">4.</span>  Cost Savings
+
+                  </div>
+                  <div class="acc-content current">
+                    <div class="content">
+                      <div class="text">
+                        Our solutions are cost-effective compared to maintaining an in-house IT sub-department for IMS. Also, we ensure that the quality is not compromised.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">5.</span>  Customized SLAs
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        Service Level Agreements (SLAs) can be tailored to meet your specific needs. Enjoy our personalized service and support.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+  
+                <!--Block-->
+                <li class="accordion block">
+                  <div class="acc-btn">
+                    <span class="count">6.</span>   Co-location Services
+                  </div>
+                  <div class="acc-content">
+                    <div class="content">
+                      <div class="text">
+                        At Zaco, we offer co-location services that are cost-efficient, secure and reliable. Technical Support is from our experts for hardware maintenance including servers, storage systems, and network equipment.
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--Left Column-->
+        <div class="left-col col-lg-6 col-md-12 col-sm-12 wow fadeInRight" data-wow-duration="1500ms">
+            <div class="">
+                <img
+                  src="{% static 'images/update-01-10-2021/resources/c904d88433.jpg' %}"
+                  alt=""
+                />
+              </div>
+        </div>
+        <!--Right Column-->
+
+      </div>
+    </div>
+</section>
+
+  {% endblock %}

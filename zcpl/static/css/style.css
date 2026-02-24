@@ -158,11 +158,11 @@ h2 {
 }
 
 h3 {
-  font-size: 60px;
+  font-size: 20px !important;
 }
 
 h4 {
-  font-size: 40px;
+  font-size: 18px !important;
 }
 
 h5 {
@@ -18374,15 +18374,15 @@ img.lazy-image.loaded {
   padding-top: 90px;
 }
 
-.sponsor-six img {
+/* .sponsor-six img {
   opacity: 0.2;
   -webkit-transition: all 500ms ease;
   transition: all 500ms ease;
-}
+} */
 
-.sponsor-six img:hover {
+/* .sponsor-six img:hover {
   opacity: 0.6;
-}
+} */
 
 /* about six */
 .about-six {

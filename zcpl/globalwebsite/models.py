@@ -171,6 +171,36 @@ class Product(models.Model):
 
 
 
+class PPCCategory(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    description = RichTextField(blank=True, null=True)
+
+    # ✅ SEO fields
+    meta_title = models.CharField(max_length=150, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        # Auto-generate slug if missing
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        # Auto-generate meta_title and meta_description if not provided
+        if not self.meta_title:
+            self.meta_title = f"{self.name} | Zaco Computers"
+        if not self.meta_description and self.description:
+            self.meta_description = (
+                self.description[:155].replace('\n', ' ')
+                if len(self.description) > 155 else self.description
+            )
+
+        super().save(*args, **kwargs)
+
+
+
 class PPCProduct(models.Model):
     name = models.CharField(max_length=200)
     sub_heading = models.CharField(max_length=200)
@@ -507,7 +537,7 @@ class NewsletterSubscriber(models.Model):
 class BuildServerRequest(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.IntegerField(max_length=12)
+    phone = models.IntegerField()
 
     server_brand = models.CharField(max_length=100)
     server_type = models.CharField(max_length=100)
