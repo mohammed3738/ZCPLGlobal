@@ -423,7 +423,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   };
 </script>
-{% include "tidio.html" %}
+{% comment %} {% include "tidio.html" %} {% endcomment %}
+<style>
+    @media (max-width: 767px) {
+  /* Push WhatsApp bubble slightly above RFQ button */
+  [id^="gb-widget"] {
+    bottom: 70px !important;  /* adjust as needed */
+    right: 16px !important;   /* keep it aligned with RFQ button */
+  }
+}
+
+    </style>
+
+<script src="//code.tidio.co/2aucvkbzdmwq651fkqopnc51v5gagjx1.js" async></script>
+
+
+<!-- GetButton.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            whatsapp: "+971566254023", // Your WhatsApp number
+            call_to_action: "Need help? Chat with us!", // More engaging CTA
+            position: "right", // 'right' or 'left'
+            pre_filled_message: "Hi there! I'm interested and would like to know more.", // Message user sends on click
+            tooltip: "Chat with our support team on WhatsApp" // Optional: text shown on hover
+        };
+        var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
+<!-- /GetButton.io widget -->
 
   </body>
 </html>
