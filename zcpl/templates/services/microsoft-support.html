@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Third-Party Microsoft Support | Windows Server, SQL Server &amp; Infrastructure | Zaco Computer</title>
+<meta name="description" content="Third-party Microsoft support for Windows Server 2012–2025, SQL Server 2008–2022, Active Directory, Azure DevOps and all 16 infrastructure components. Reduce costs vs. Unified Support. 24x7x365 service desk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────── */
+:root {
+  --bg:   #0B1A2C; --bg2: #0F2336; --bg3: #142B42;
+  --blue: #0078D4; --blue2: #1E90E8;
+  --sky:  #38BDF8; --sky2: #BAE6FD;
+  --amb:  #F59E0B; --amb-bg: rgba(245,158,11,.10);
+  --red:  #F04438; --red-bg: rgba(240,68,56,.08);
+  --grn:  #17B26A; --grn-bg: rgba(23,178,106,.08);
+  --fg2:  #94B3CC; --fg3: #5D7E9C;
+  --ln:   rgba(255,255,255,.07);
+  --bln:  rgba(0,120,212,.20);
+  --w:    #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--w);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* ── UTILITY ────────────────────────────── */
+.serif{font-family:'Instrument Serif',serif}
+.sec{padding:80px 60px}
+.sec-inner{max-width:1120px;margin:0 auto}
+.alt{background:var(--bg2)}
+.mid{background:var(--bg3)}
+.kicker{font-size:.68rem;font-weight:700;letter-spacing:2.6px;text-transform:uppercase;color:var(--sky);margin-bottom:10px}
+.sec-h{font-family:'Instrument Serif',serif;font-size:clamp(1.55rem,2.6vw,2.1rem);color:var(--w);margin-bottom:14px;line-height:1.2}
+.sec-sub{font-size:.95rem;color:var(--fg2);line-height:1.82;max-width:640px}
+.btn{padding:13px 26px;border-radius:8px;font-weight:700;font-size:.88rem;text-decoration:none;display:inline-block;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+.btn-solid{background:var(--blue);color:#fff}.btn-solid:hover{background:var(--blue2);transform:translateY(-1px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.2);color:#fff}.btn-ghost:hover{border-color:var(--sky);color:var(--sky)}
+
+/* source link style — small, dimmed, underlined */
+.src{font-size:.68rem;color:var(--fg3);text-decoration:underline;text-underline-offset:2px;word-break:break-all;line-height:1.4}
+.src:hover{color:var(--sky)}
+
+/* ── NAV ────────────────────────────────── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 60px;position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,26,44,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--ln)}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.3px}.logo span{color:var(--sky)}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 22px;border-radius:6px;font-weight:700;font-size:.84rem;text-decoration:none;transition:background .2s}.nav-cta:hover{background:var(--blue2)}
+
+/* ── HERO ───────────────────────────────── */
+.hero{padding:128px 60px 72px;background:var(--bg);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-160px;width:580px;height:580px;background:radial-gradient(circle,rgba(0,120,212,.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:54px 54px;pointer-events:none}
+.hero-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center;position:relative;z-index:2}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:2.8px;text-transform:uppercase;color:var(--sky);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:26px;height:2px;background:var(--sky);flex-shrink:0}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,3.6vw,3rem);line-height:1.15;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:var(--sky)}
+.hero-sub{font-size:1rem;font-weight:700;margin-bottom:18px}
+.hero-desc{font-size:.95rem;color:var(--fg2);line-height:1.82;max-width:490px;margin-bottom:32px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* EOL panel */
+.eol-panel{background:var(--bg2);border:1px solid var(--bln);border-radius:14px;overflow:hidden}
+.eol-head{padding:14px 20px;background:rgba(0,120,212,.1);border-bottom:1px solid var(--bln);font-size:.69rem;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:var(--sky)}
+.eol-head-sub{font-size:.64rem;font-weight:400;color:var(--fg3);letter-spacing:.5px;text-transform:none;margin-top:3px}
+.eol-row{display:flex;align-items:center;padding:12px 20px;border-bottom:1px solid var(--ln);gap:10px}
+.eol-row:last-of-type{border-bottom:none}
+.eol-name{flex:1;font-size:.85rem;font-weight:600}
+.eol-date{font-size:.72rem;color:var(--fg3);white-space:nowrap}
+.pill{font-size:.64rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.pr{background:var(--red-bg);color:var(--red)}
+.pa{background:var(--amb-bg);color:var(--amb)}
+.pg{background:var(--grn-bg);color:var(--grn)}
+.eol-src{margin:0 20px 14px;font-size:.65rem;color:var(--fg3)}
+.eol-src a{color:var(--fg3);text-decoration:underline;text-underline-offset:2px;word-break:break-all}
+.eol-src a:hover{color:var(--sky)}
+.eol-callout{margin:0 20px 16px;padding:12px 14px;background:rgba(0,120,212,.07);border:1px solid var(--bln);border-radius:8px;font-size:.78rem;color:var(--fg2);line-height:1.65}
+.eol-callout strong{color:var(--sky)}
+
+/* ── TRUST BAR ──────────────────────────── */
+.trust-bar{background:var(--bg2);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);padding:18px 60px;display:flex;gap:52px;overflow-x:auto;white-space:nowrap}
+.ti{display:flex;flex-direction:column;flex-shrink:0}
+.tv{font-family:'Instrument Serif',serif;font-size:1.5rem;color:var(--sky);line-height:1}
+.tl{font-size:.69rem;color:var(--fg3);margin-top:4px}
+
+/* ── CONTEXT: 2-col editorial + sourced stat cards ── */
+.ctx-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:44px;align-items:start}
+.ctx-text p{font-size:.94rem;color:var(--fg2);line-height:1.85;margin-bottom:18px}
+.ctx-text p:last-child{margin-bottom:0}
+.ctx-text strong{color:var(--w);font-weight:600}
+.stat-stack{display:flex;flex-direction:column;gap:14px}
+.stat-card{background:var(--bg);border:1px solid var(--ln);border-left:3px solid var(--blue);border-radius:10px;padding:18px 20px 14px;transition:border-left-color .2s}
+.stat-card:hover{border-left-color:var(--sky)}
+.stat-big{font-family:'Instrument Serif',serif;font-size:1.85rem;color:var(--sky);line-height:1;margin-bottom:6px}
+.stat-desc{font-size:.79rem;color:var(--fg3);line-height:1.55;margin-bottom:8px}
+.stat-src{display:block;font-size:.65rem;color:var(--fg3);text-decoration:underline;text-underline-offset:2px;word-break:break-all;line-height:1.5}
+.stat-src:hover{color:var(--sky)}
+
+/* ── PAIN POINTS ────────────────────────── */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+.pain-card{background:var(--bg2);border:1px solid var(--ln);border-radius:12px;padding:26px 24px;transition:border-color .2s}
+.pain-card:hover{border-color:var(--bln)}
+.pain-icon{font-size:1.3rem;margin-bottom:12px;display:block}
+.pain-card h4{font-size:.92rem;font-weight:700;margin-bottom:8px}
+.pain-card p{font-size:.85rem;color:var(--fg3);line-height:1.72}
+.pain-card p strong{color:var(--amb)}
+.pain-ref{display:block;font-size:.64rem;color:var(--fg3);text-decoration:underline;text-underline-offset:2px;margin-top:8px;word-break:break-all}
+.pain-ref:hover{color:var(--sky)}
+
+/* ── SERVICES ───────────────────────────── */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.svc-card{background:var(--bg2);border:1px solid var(--ln);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:all .25s}
+.svc-card:hover{border-color:var(--bln);transform:translateY(-2px)}
+.svc-num{font-family:'Instrument Serif',serif;font-size:2.2rem;color:rgba(56,189,248,.14);line-height:1}
+.svc-card h3{font-family:'Instrument Serif',serif;font-size:1.05rem;color:var(--w);line-height:1.25}
+.svc-card p{font-size:.84rem;color:var(--fg3);line-height:1.72;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{font-size:.67rem;padding:3px 9px;border-radius:4px;background:rgba(0,120,212,.1);color:var(--sky2);font-weight:600}
+
+/* ── PRODUCT LIST ───────────────────────── */
+.prod-layout{display:grid;grid-template-columns:340px 1fr;gap:52px;margin-top:44px;align-items:start}
+.prod-intro p{font-size:.93rem;color:var(--fg2);line-height:1.85;margin-bottom:16px}
+.prod-intro p:last-child{margin-bottom:0}
+.prod-intro strong{color:var(--w)}
+.eol-note-box{margin-top:20px;padding:14px 16px;background:var(--amb-bg);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:.81rem;color:var(--fg2);line-height:1.65}
+.eol-note-box strong{color:var(--amb)}
+.eol-note-box a{color:var(--amb);font-size:.64rem;text-decoration:underline;text-underline-offset:2px;display:block;margin-top:6px;word-break:break-all}
+.eol-note-box a:hover{color:var(--sky)}
+
+.cat-grid{display:flex;flex-direction:column;gap:12px}
+.cat-block{background:var(--bg2);border:1px solid var(--ln);border-radius:10px;overflow:hidden;transition:border-color .2s}
+.cat-block:hover{border-color:var(--bln)}
+.cat-head{padding:12px 18px;display:flex;align-items:center;gap:10px;background:rgba(0,120,212,.08);border-bottom:1px solid var(--ln)}
+.cat-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.cat-title{font-size:.82rem;font-weight:700;color:var(--w)}
+.chip-row{padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);padding:5px 12px;border-radius:100px;font-size:.76rem;color:var(--fg2);transition:all .15s}
+.chip::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.chip:hover{background:rgba(0,120,212,.12);border-color:var(--bln);color:var(--w)}
+
+/* ── LIFECYCLE ──────────────────────────── */
+.lc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:44px;align-items:start}
+.lc-text p{font-size:.93rem;color:var(--fg2);line-height:1.85;margin-bottom:16px}
+.lc-text p:last-child{margin-bottom:0}
+.lc-text strong{color:var(--w)}
+.lc-src{display:block;font-size:.65rem;color:var(--fg3);text-decoration:underline;text-underline-offset:2px;margin-top:8px;word-break:break-all}
+.lc-src:hover{color:var(--sky)}
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--ln)}
+.tl-item:last-child{border-bottom:none}
+.tl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dg{background:var(--grn)} .da{background:var(--amb)} .dr{background:var(--red)} .db{background:var(--blue)}
+.tl-item h5{font-size:.87rem;font-weight:700;margin-bottom:4px}
+.tl-item p{font-size:.81rem;color:var(--fg3);line-height:1.65}
+
+/* ── COMPARISON TABLE ───────────────────── */
+.table-wrap{overflow-x:auto;margin-top:40px}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:600px}
+thead th{padding:14px 18px;text-align:left;font-size:.78rem;font-weight:700}
+thead th:first-child{color:var(--fg3);width:40%}
+th.oem{background:var(--red-bg);color:var(--red);border-radius:8px 8px 0 0;text-align:center}
+th.ours{background:rgba(0,120,212,.1);color:var(--sky);border-radius:8px 8px 0 0;text-align:center}
+tbody tr{border-bottom:1px solid var(--ln)}
+tbody tr:last-child{border-bottom:none}
+tbody td{padding:13px 18px;vertical-align:middle;color:var(--fg3)}
+tbody td:first-child{color:var(--w);font-weight:500;font-size:.83rem}
+td.oem{background:rgba(240,68,56,.03);text-align:center}
+td.ours{background:rgba(0,120,212,.04);text-align:center}
+.ty{color:var(--grn)} .tn{color:var(--red)} .tp{color:var(--amb)}
+.table-note{font-size:.73rem;color:var(--fg3);margin-top:12px;font-style:italic;line-height:1.6}
+
+/* ── ENGAGEMENT ─────────────────────────── */
+.eng-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px}
+.eng-card{background:var(--bg2);border:1px solid var(--ln);border-radius:14px;padding:30px 26px;position:relative;overflow:hidden}
+.eng-card.feat{border-color:var(--bln)}
+.eng-card.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--sky))}
+.eng-label{font-size:.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sky);margin-bottom:12px}
+.eng-card h3{font-family:'Instrument Serif',serif;font-size:1.1rem;margin-bottom:10px}
+.eng-card>p{font-size:.85rem;color:var(--fg3);line-height:1.72;margin-bottom:16px}
+.eng-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.eng-list li{font-size:.84rem;color:var(--fg2);display:flex;gap:10px;align-items:flex-start}
+.eng-list li::before{content:'→';color:var(--blue);flex-shrink:0;margin-top:2px}
+.eng-note{margin-top:16px;font-size:.76rem;color:var(--fg3);font-style:italic}
+
+/* ── WHY ZACO ───────────────────────────── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.why-card{background:var(--bg2);border:1px solid var(--ln);border-radius:12px;padding:26px 22px;transition:border-color .2s}
+.why-card:hover{border-color:var(--bln)}
+.why-num{font-size:.68rem;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.why-card h4{font-size:.91rem;font-weight:700;margin-bottom:8px}
+.why-card p{font-size:.83rem;color:var(--fg3);line-height:1.7}
+
+/* ── INDUSTRIES ─────────────────────────── */
+.ind-intro{font-size:.93rem;color:var(--fg2);line-height:1.82;max-width:660px;margin:32px 0 22px}
+.ind-tags{display:flex;flex-wrap:wrap;gap:10px}
+.ind-tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);padding:8px 16px;border-radius:100px;font-size:.82rem;color:var(--fg2);transition:all .2s}
+.ind-tag:hover{border-color:var(--sky);color:var(--w)}
+
+/* ── FAQ ────────────────────────────────── */
+.faq-wrap{max-width:760px;margin-top:44px}
+.faq-item{border-bottom:1px solid var(--ln)}
+.faq-q{padding:18px 0;font-size:.92rem;font-weight:600;color:var(--w);display:flex;justify-content:space-between;align-items:center;gap:18px;cursor:pointer}
+.faq-q::after{content:'+';font-size:1.3rem;color:var(--blue);flex-shrink:0;font-weight:300}
+.faq-a{padding-bottom:18px;font-size:.86rem;color:var(--fg3);line-height:1.78}
+.faq-a p{margin-bottom:10px}
+.faq-a p:last-child{margin-bottom:0}
+.faq-a a{color:var(--sky);text-decoration:underline;text-underline-offset:2px;font-size:.77rem;word-break:break-all}
+
+/* ── CTA ────────────────────────────────── */
+.cta-sec{background:var(--bg2);padding:88px 60px;border-top:1px solid var(--ln);position:relative;overflow:hidden}
+.cta-sec::after{content:'';position:absolute;bottom:-140px;right:-140px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,120,212,.12) 0%,transparent 70%);pointer-events:none}
+.cta-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:72px;align-items:center;position:relative;z-index:2}
+.cta-inner h2{font-family:'Instrument Serif',serif;font-size:clamp(1.6rem,2.6vw,2.2rem);margin-bottom:12px}
+.cta-inner>div:first-child>p{font-size:.93rem;color:var(--fg2);margin-bottom:26px;line-height:1.82}
+.cta-disc{font-size:.74rem;color:var(--fg3);font-style:italic;margin-top:10px}
+.c-cards{display:flex;flex-direction:column;gap:12px}
+.c-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.03);border:1px solid var(--ln);padding:14px 18px;border-radius:10px;text-decoration:none;color:var(--w);transition:border-color .2s}
+.c-card:hover{border-color:var(--bln)}
+.c-icon{font-size:1.1rem;flex-shrink:0}
+.c-label{font-size:.67rem;color:var(--fg3);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.c-val{font-size:.9rem;font-weight:700;color:var(--sky)}
+
+footer{background:var(--bg);border-top:1px solid var(--ln);padding:22px 60px;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--fg3);flex-wrap:wrap;gap:10px}
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media(max-width:1020px){
+  nav,.sec,.hero,.cta-sec,footer,.trust-bar{padding-left:24px;padding-right:24px}
+  .hero-inner,.ctx-grid,.prod-layout,.lc-grid,.cta-inner{grid-template-columns:1fr}
+  .svc-grid,.why-grid{grid-template-columns:1fr 1fr}
+  .pain-grid,.eng-grid{grid-template-columns:1fr}
+  .hero{padding-top:96px}
+}
+@media(max-width:580px){.svc-grid,.why-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Zaco<span>.</span>Computer</div>
+  <a href="mailto:info@zacocomputer.com" class="nav-cta">Request a Consultation</a>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow">Reliable Third-Party Support for Microsoft Products</p>
+      <h1>Secured Third-Party<br><em>Microsoft Support</em> Solution</h1>
+      <p class="hero-sub">Stop Overpaying &amp; Reduce Costs up to 50%</p>
+      <p class="hero-desc">End-to-end managed microsoft support across Windows Server, SQL Server, Active Directory, Azure, and 16 infrastructure components. Your migration schedule, not Microsoft's product calendar, sets the pace.</p>
+      <div class="hero-btns">
+        <a href="mailto:info@zacocomputer.com" class="btn btn-solid">Request a Consultation</a>
+        <a href="#products" class="btn btn-ghost">See What We Cover</a>
+      </div>
+    </div>
+
+    <!-- EOL status panel — dates sourced from Microsoft Lifecycle pages -->
+    <div>
+      <div class="eol-panel">
+        <div class="eol-head">
+          Microsoft Product EOL Status
+          <div class="eol-head-sub">Dates sourced from Microsoft Lifecycle Policy pages</div>
+        </div>
+        <div class="eol-row"><span class="eol-name">SQL Server 2012</span><span class="eol-date">12 Jul 2022</span><span class="pill pr">EOL</span></div>
+        <div class="eol-row"><span class="eol-name">Windows Server 2012 R2</span><span class="eol-date">10 Oct 2023</span><span class="pill pr">EOL</span></div>
+        <div class="eol-row"><span class="eol-name">SQL Server 2014</span><span class="eol-date">9 Jul 2024</span><span class="pill pr">EOL</span></div>
+        <div class="eol-row"><span class="eol-name">Windows Server 2016</span><span class="eol-date">12 Jan 2027</span><span class="pill pa">Approaching</span></div>
+        <div class="eol-row"><span class="eol-name">SQL Server 2019</span><span class="eol-date">8 Jan 2030</span><span class="pill pg">In Support</span></div>
+        <div class="eol-row"><span class="eol-name">Windows Server 2022</span><span class="eol-date">14 Oct 2031</span><span class="pill pg">In Support</span></div>
+        <div class="eol-src">
+          Sources:
+          <a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2012-r2" target="_blank" rel="noopener">learn.microsoft.com, Windows Server 2012 R2 Lifecycle</a>
+          <a href="https://learn.microsoft.com/en-us/lifecycle/announcements/sql-server-2012-windows-server-2012-2012-r2-end-of-support" target="_blank" rel="noopener">learn.microsoft.com, SQL Server 2012 EOL</a>
+          <a href="https://learn.microsoft.com/en-us/sql/sql-server/end-of-support/extended-security-updates-frequently-asked-questions" target="_blank" rel="noopener">learn.microsoft.com, SQL Server 2014 EOL</a>
+        </div>
+        <div class="eol-callout"><strong>We cover all versions above,</strong> including those past Microsoft's EOL date. Our microsoft it support delivers break/fix incident resolution and active security cover while you plan migration at your own pace.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="ti"><span class="tv">Up to 50%*</span><span class="tl">Cost reduction vs. Microsoft Unified Support</span></div>
+  <div class="ti"><span class="tv">24×7×365</span><span class="tl">Service desk availability</span></div>
+  <div class="ti"><span class="tv">SQL 2008–2022</span><span class="tl">Legacy SQL Server versions covered</span></div>
+  <div class="ti"><span class="tv">16 Components</span><span class="tl">Microsoft server &amp; infrastructure covered</span></div>
+  <div class="ti"><span class="tv">Custom SLAs</span><span class="tl">Per system, per criticality level</span></div>
+</div>
+
+<!-- ══════ CONTEXT ══════ -->
+<section class="sec alt">
+  <div class="sec-inner">
+    <p class="kicker">The Microsoft Support Landscape</p>
+    <h2 class="sec-h">Why Organisations Are Reconsidering Their Microsoft Support Costs</h2>
+    <div class="ctx-grid">
+      <div class="ctx-text">
+        <p>Microsoft's Fixed Lifecycle Policy runs on a fixed commercial schedule. Once a product version crosses its end-of-life date, Microsoft withdraws all security patches, bug fixes, and technical support, regardless of whether the software is stable, embedded in critical operations, or simply not yet ready for replacement.</p>
+        <p>At the same time, <strong>Microsoft Unified Support, the replacement for the now-retired Premier Support, is priced as a percentage of your total annual Microsoft spend.</strong> Every time Azure consumption grows, a new Microsoft 365 seat is added, or a Dynamics 365 module is deployed, the Unified Support baseline rises automatically at renewal. Organisations report their annual microsoft support costs increasing year on year without any corresponding increase in the number of incidents raised or the quality of support received.</p>
+        <p>Zaco Computers, an established it infrastructure solutions provider specialising in microsoft managed services, that decouple the support relationship from the OEM lifecycle and the OEM pricing model. Organisations receive expert microsoft it support scoped to their actual environment, covering EOL and current versions, with SLAs defined by system criticality rather than billing tier.</p>
+        <p>Third-party support models for enterprise software have been operating at scale globally since the mid-2000s. The same model now applies across Microsoft infrastructure: organisations that evaluate the alternative consistently find that independent microsoft third party support delivers faster incident resolution at materially lower annual cost.</p>
+      </div>
+      <div class="stat-stack">
+
+        <div class="stat-card">
+          <div class="stat-big">$50,000</div>
+          <div class="stat-desc">Minimum annual cost for Microsoft Unified Support Core tier, regardless of how much support is actually consumed. Advanced tier minimum is higher.</div>
+          <a class="stat-src" href="https://www.directionsonmicrosoft.com/busting-four-of-the-biggest-microsoft-support-myths/" target="_blank" rel="noopener">Source: Directions on Microsoft, "The minimum contract price is $50,000 and rates start at 8–10% of customers' annual Microsoft IT spend"</a>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-big">8–10%</div>
+          <div class="stat-desc">Of your total annual Microsoft spend charged for Unified Support (Core/Advanced tiers). The more you invest in Azure and Microsoft 365, the more you pay for support, even with zero additional incidents.</div>
+          <a class="stat-src" href="https://microsoftnegotiations.com/unified-support-pricing-101-understand-your-cost-drivers/" target="_blank" rel="noopener">Source: Microsoft Negotiations, Unified Support Pricing 101</a>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-big">30–200%+</div>
+          <div class="stat-desc">Cost increase reported when organisations move from retired Premier Support to Unified Support. The range is wide: 30% for smaller environments, 200%+ for organisations with large Azure or M365 footprints.</div>
+          <a class="stat-src" href="https://samexpert.com/microsoft-unified-vs-premier-support/" target="_blank" rel="noopener">Source: SAMexpert, Microsoft Unified vs Premier Support Cost Analysis</a>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-big">10%+ p.a.</div>
+          <div class="stat-desc">Typical annual cost increase for Unified Support once transition discounts expire, driven by growing Microsoft cloud and licensing spend, not by increased support usage.</div>
+          <a class="stat-src" href="https://microsoftnegotiations.com/unified-support-pricing-101-understand-your-cost-drivers/" target="_blank" rel="noopener">Source: Microsoft Negotiations, "not uncommon to see the Unified Support fee jump 10% or more annually if unchecked"</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PAIN POINTS ══════ -->
+<section class="sec">
+  <div class="sec-inner">
+    <p class="kicker">Common Challenges</p>
+    <h2 class="sec-h">Four Microsoft-Specific Situations Where Independent Support Provides Immediate Value</h2>
+    <div class="pain-grid">
+
+      <div class="pain-card">
+        <span class="pain-icon">📅</span>
+        <h4>End-of-Life Environments Running in Production</h4>
+        <p>Windows Server 2012 R2 reached end of life on <strong>10 October 2023</strong>. SQL Server 2014 reached EOL on <strong>9 July 2024</strong>. SQL Server 2012 reached EOL on <strong>12 July 2022</strong>. When Microsoft's EOL date passes, all OEM support and patching stops instantly. A structured infrastructure migration takes months; the EOL date does not wait.</p>
+        <a class="pain-ref" href="https://learn.microsoft.com/en-us/lifecycle/announcements/windows-server-2012-r2-end-of-support" target="_blank" rel="noopener">Source: learn.microsoft.com, Windows Server 2012 R2 end of support announcement</a>
+      </div>
+
+      <div class="pain-card">
+        <span class="pain-icon">📈</span>
+        <h4>Unified Support Costs That Rise With Every Cloud Addition</h4>
+        <p>Unified Support is priced as a percentage of total Microsoft expenditure. Every new Azure workload, every additional Microsoft 365 licence, every Dynamics 365 deployment <strong>automatically increases the Unified Support baseline at renewal</strong>, independent of whether support incident volume changes. Premier Support, which had per-hour pricing, no longer exists for most organisations.</p>
+        <a class="pain-ref" href="https://www.directionsonmicrosoft.com/busting-four-of-the-biggest-microsoft-support-myths/" target="_blank" rel="noopener">Source: Directions on Microsoft, Microsoft Unified Support pricing and Premier retirement</a>
+      </div>
+
+      <div class="pain-card">
+        <span class="pain-icon">🔀</span>
+        <h4>Premier Support Is Now Retired</h4>
+        <p>Microsoft formally ended Premier Support for commercial organisations as of <strong>July 2022</strong>, and for public sector organisations as of <strong>July 2024</strong>. Premier offered per-hour billing and named Technical Account Managers. Unified Support, its replacement, operates on a percentage-of-spend model with higher baseline costs and fixed-tier service structures that many organisations find less suited to their actual support patterns.</p>
+        <a class="pain-ref" href="https://www.directionsonmicrosoft.com/busting-four-of-the-biggest-microsoft-support-myths/" target="_blank" rel="noopener">Source: Directions on Microsoft, Premier Support retirement timeline (April 2025)</a>
+      </div>
+
+      <div class="pain-card">
+        <span class="pain-icon">🧩</span>
+        <h4>Multi-Version Environments With Mixed Lifecycle Status</h4>
+        <p>Most enterprise Microsoft environments run multiple product versions at the same time, some within active OEM lifecycle, some at or past EOL, some in hybrid cloud configurations. Paying a Unified Support percentage across the full Microsoft spend when only certain sql server support services or specific Windows Server versions need active incident cover <strong>is rarely cost-efficient for the organisation.</strong></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SERVICES ══════ -->
+<section class="sec alt">
+  <div class="sec-inner">
+    <p class="kicker">What We Deliver</p>
+    <h2 class="sec-h">Three Core Microsoft IT Support Services</h2>
+    <p class="sec-sub">Each service addresses a distinct requirement: resolving live incidents, maintaining security posture in EOL environments, and providing objective guidance on whether to continue, upgrade, or migrate.</p>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <h3>Break / Fix Incident Resolution</h3>
+        <p>Diagnosis and resolution of incidents across Windows Server, SQL Server, Active Directory, Hyper-V, IIS, and connected Microsoft infrastructure. Engineers hold hands-on expertise across the full Microsoft server and infrastructure stack, covering on-premises, hybrid, and Azure-connected environments.</p>
+        <p>Response and resolution times are governed by SLAs agreed during onboarding. Production environments and business-critical databases carry the highest response priority.</p>
+        <div class="tags"><span class="tag">Windows Server</span><span class="tag">SQL Server</span><span class="tag">Active Directory</span><span class="tag">Hyper-V</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <h3>Security &amp; Vulnerability Management</h3>
+        <p>Microsoft products past their EOL date receive no further OEM security patches. According to Microsoft's own documentation, Extended Security Updates cover only critical and important security patches, they do not include non-security hotfixes, bug fixes, incident support, or configuration guidance.</p>
+        <p>We actively monitor your environment for known CVEs specific to your deployed versions, assess exposure, advise on mitigations, and implement security controls. This service is especially critical for windows server 2012 r2 end of life environments and legacy SQL Server deployments still in production.</p>
+        <div class="tags"><span class="tag">EOL Coverage</span><span class="tag">CVE Monitoring</span><span class="tag">Patch Advisory</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <h3>Technology Advisory &amp; Migration Planning</h3>
+        <p>A Microsoft EOL date is a commercial decision by the vendor, not an operational mandate for your organisation. Many enterprises run stable Microsoft environments that do not require immediate infrastructure replacement. Our advisory service provides the objective technical assessment to evaluate that determination correctly.</p>
+        <p>We review your Windows Server, SQL Server, and connected Microsoft infrastructure, then advise on options: continue with managed it services cover, upgrade in place, or migrate toward azure managed services or a newer infrastructure platform.</p>
+        <div class="tags"><span class="tag">Migration Planning</span><span class="tag">Azure Advisory</span><span class="tag">Upgrade Guidance</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PRODUCT LIST ══════ -->
+<section class="sec mid" id="products">
+  <div class="sec-inner">
+    <p class="kicker">Coverage</p>
+    <h2 class="sec-h">Microsoft Server &amp; Infrastructure Components We Support</h2>
+    <div class="prod-layout">
+
+      <div class="prod-intro">
+        <p>Our microsoft third party support covers 16 Microsoft server, identity, database, remote access, and cloud infrastructure components, spanning end-of-life product versions through to current supported releases.</p>
+        <p>Coverage scope is confirmed during onboarding based on your actual deployed environment. <strong>No fixed-tier product bundles.</strong> You define which systems require active cover; SLAs are matched to each system's operational criticality.</p>
+        <p>Both on-premises environments and hybrid on-premises-to-Azure configurations are within scope. Our microsoft 365 managed services and Azure DevOps coverage extends the service to cloud-connected components as well.</p>
+        <div class="eol-note-box">
+          <strong>On Microsoft's ESUs for Windows Server 2012 R2 and legacy SQL Server:</strong> Microsoft's Extended Security Updates cover only critical security patches. According to Microsoft's own documentation, they do not include non-security hotfixes, incident support, or configuration guidance, leaving a significant support gap that our microsoft it support fills.
+          <a href="https://learn.microsoft.com/en-us/windows-server/get-started/extended-security-updates-overview" target="_blank" rel="noopener">Source: learn.microsoft.com, Extended Security Updates overview</a>
+        </div>
+      </div>
+
+      <div class="cat-grid">
+
+        <div class="cat-block">
+          <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Windows Server: 2012 to 2025</span></div>
+          <div class="chip-row">
+            <span class="chip">Windows Server 2012 / R2</span>
+            <span class="chip">Windows Server 2016</span>
+            <span class="chip">Windows Server 2019</span>
+            <span class="chip">Windows Server 2022</span>
+            <span class="chip">Windows Server 2025</span>
+            <span class="chip">Windows Deployment Imaging</span>
+          </div>
+        </div>
+
+        <div class="cat-block">
+          <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">SQL Server Deployment: 2008 to 2022</span></div>
+          <div class="chip-row">
+            <span class="chip">SQL Server 2008 / R2</span>
+            <span class="chip">SQL Server 2012</span>
+            <span class="chip">SQL Server 2014</span>
+            <span class="chip">SQL Server 2016</span>
+            <span class="chip">SQL Server 2017</span>
+            <span class="chip">SQL Server 2019</span>
+            <span class="chip">SQL Server 2022</span>
+          </div>
+        </div>
+
+        <div class="cat-block">
+          <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Identity &amp; Directory Services</span></div>
+          <div class="chip-row">
+            <span class="chip">Active Directory (AD)</span>
+            <span class="chip">AD Federation Services (ADFS)</span>
+            <span class="chip">AD Certificate Services</span>
+            <span class="chip">Domain Name System (DNS)</span>
+            <span class="chip">Dynamic Host Configuration Protocol (DHCP)</span>
+            <span class="chip">Distributed File System (DFS)</span>
+          </div>
+        </div>
+
+        <div class="cat-block">
+          <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Remote Access &amp; Application Services</span></div>
+          <div class="chip-row">
+            <span class="chip">Remote Desktop Services</span>
+            <span class="chip">Remote Desktop Gateway</span>
+            <span class="chip">Network Policy Server</span>
+            <span class="chip">Remote Access</span>
+            <span class="chip">Internet Information Services (IIS)</span>
+            <span class="chip">Hyper-V</span>
+            <span class="chip">Dynamics CRM Deployment</span>
+          </div>
+        </div>
+
+        <div class="cat-block">
+          <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Cloud &amp; DevOps</span></div>
+          <div class="chip-row">
+            <span class="chip">Azure DevOps</span>
+            <span class="chip">Azure Infrastructure</span>
+            <span class="chip">Microsoft 365 Administration</span>
+            <span class="chip">Microsoft 365 Managed Services</span>
+            <span class="chip">Hybrid On-Premises / Azure</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ LIFECYCLE ══════ -->
+<section class="sec">
+  <div class="sec-inner">
+    <p class="kicker">Understanding the Lifecycle</p>
+    <h2 class="sec-h">How Microsoft's Fixed Lifecycle Policy Works, and Where the Support Gap Occurs</h2>
+    <div class="lc-grid">
+      <div class="lc-text">
+        <p>Microsoft's Fixed Lifecycle Policy provides a structured 10-year support window for Business and Developer products such as SQL Server and Windows Server. This is divided into five years of <strong>Mainstream Support</strong> (full feature updates, security patches, design change requests, and free incident support) followed by five years of <strong>Extended Support</strong> (security patches and paid incident support only).</p>
+        <p>When Extended Support ends, the product reaches End-of-Life. Microsoft stops all updates, bug fixes, and technical support. The only OEM option available post-EOL is the purchase of <strong>Extended Security Updates (ESUs)</strong> for up to three years, but according to Microsoft's own documentation, ESUs cover only critical and important security patches. They explicitly do not include non-security hotfixes, incident support, or configuration guidance. This is the operational gap that our microsoft it support fills.</p>
+        <a class="lc-src" href="https://learn.microsoft.com/en-us/windows-server/get-started/extended-security-updates-overview" target="_blank" rel="noopener">Source: learn.microsoft.com, Extended Security Updates for Windows Server overview (what ESUs do and do not include)</a>
+        <a class="lc-src" href="https://learn.microsoft.com/en-us/lifecycle/faq/extended-security-updates" target="_blank" rel="noopener">Source: learn.microsoft.com, Product Lifecycle FAQ: Extended Security Updates</a>
+        <p style="margin-top:16px">Our microsoft managed services provides full incident resolution, active vulnerability management, and technical advisory across all lifecycle stages, including environments well past Microsoft's official EOL date. The migration schedule is set by your organisation's requirements, not by Microsoft's product calendar.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot dg"></div>
+          <div>
+            <h5 style="color:var(--grn)">Mainstream Support: Years 1 to 5</h5>
+            <p>Full OEM coverage: new feature development, security updates, design changes, and free incident support. Microsoft is fully engaged during this phase.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot da"></div>
+          <div>
+            <h5 style="color:var(--amb)">Extended Support: Years 6 to 10</h5>
+            <p>Security patches and paid incident support only. No new features or design changes. Many enterprises are still running these versions when the EOL date arrives.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot dr"></div>
+          <div>
+            <h5 style="color:var(--red)">End-of-Life, All OEM Support Stops</h5>
+            <p>All Microsoft patches and technical support cease. ESUs available for up to 3 further years, critical security patches only, no incident support or bug fixes. Windows Server 2012 R2, SQL Server 2012, and SQL Server 2014 are at this stage.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot db"></div>
+          <div>
+            <h5 style="color:var(--sky)">Zaco Microsoft IT Support, All Lifecycle Stages</h5>
+            <p>Full break/fix incident resolution, security vulnerability management, and migration advisory across all lifecycle stages, including well past Microsoft's official EOL. No forced version changes, no product restrictions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ COMPARISON ══════ -->
+<section class="sec alt">
+  <div class="sec-inner">
+    <p class="kicker">Direct Comparison</p>
+    <h2 class="sec-h">Microsoft Unified Support vs. Zaco Third-Party Microsoft Support</h2>
+    <p class="sec-sub">A structured comparison of cost model, coverage scope, and service flexibility between Microsoft's current OEM support offering and independent microsoft it support.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th class="oem">Microsoft Unified Support</th>
+            <th class="ours">Zaco Third-Party Microsoft Support</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Coverage for EOL microsoft products</td><td class="oem"><span class="tn">✗</span> Ceases entirely at EOL date</td><td class="ours"><span class="ty">✓</span> Full incident and security cover past EOL</td></tr>
+          <tr><td>Windows Server 2012 R2 / SQL 2012 / SQL 2014</td><td class="oem"><span class="tn">✗</span> No OEM support post-EOL</td><td class="ours"><span class="ty">✓</span> Active break/fix and CVE cover</td></tr>
+          <tr><td>Pricing model</td><td class="oem"><span class="tn">✗</span> % of total Microsoft annual spend</td><td class="ours"><span class="ty">✓</span> Fixed scope based on actual environment</td></tr>
+          <tr><td>Annual cost trend</td><td class="oem"><span class="tn">✗</span> Increases with every cloud or licence addition</td><td class="ours"><span class="ty">✓</span> Agreed upfront, predictable at renewal</td></tr>
+          <tr><td>Minimum contract commitment</td><td class="oem"><span class="tn">✗</span> $50,000/yr Core; $175,000/yr Performance</td><td class="ours"><span class="ty">✓</span> Scoped to your specific environment</td></tr>
+          <tr><td>SLA customisation</td><td class="oem"><span class="tp">◑</span> Fixed tier structure only</td><td class="ours"><span class="ty">✓</span> Per system, per operational criticality</td></tr>
+          <tr><td>24×7 engineer access</td><td class="oem"><span class="tp">◑</span> Depends on tier purchased</td><td class="ours"><span class="ty">✓</span> 24×7×365 service desk across all engagements</td></tr>
+          <tr><td>SQL Server legacy (2008–2014)</td><td class="oem"><span class="tn">✗</span> No coverage post-EOL</td><td class="ours"><span class="ty">✓</span> Full sql server support services 2008–2022</td></tr>
+          <tr><td>Migration advisory independence</td><td class="oem"><span class="tn">✗</span> Microsoft Azure and Microsoft ecosystem only</td><td class="ours"><span class="ty">✓</span> Environment-led, objective recommendation</td></tr>
+          <tr><td>Engagement model</td><td class="oem"><span class="tn">✗</span> Annual subscription only</td><td class="ours"><span class="ty">✓</span> Annual managed services or on-call</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Unified Support pricing data sourced from: <a href="https://www.directionsonmicrosoft.com/busting-four-of-the-biggest-microsoft-support-myths/" target="_blank" rel="noopener" style="color:var(--fg3)">Directions on Microsoft</a> and <a href="https://redresscompliance.com/the-complete-guide-to-microsoft-premier-support/" target="_blank" rel="noopener" style="color:var(--fg3)">Redress Compliance</a>. * Savings of up to 50% are indicative and depend on current Unified Support spend, environment scope, and product mix.</p>
+  </div>
+</section>
+
+<!-- ══════ ENGAGEMENT ══════ -->
+<section class="sec mid">
+  <div class="sec-inner">
+    <p class="kicker">How We Engage</p>
+    <h2 class="sec-h">Two Engagement Models, Built Around Your Operations</h2>
+    <p class="sec-sub">No two Microsoft environments share the same version mix, criticality profile, or support history. Choose the model that reflects your actual requirements, or use both for different system tiers.</p>
+    <div class="eng-grid">
+      <div class="eng-card feat">
+        <p class="eng-label">Annual Managed Services</p>
+        <h3>Continuous Microsoft Managed Services</h3>
+        <p>An annual engagement delivering ongoing microsoft managed services, designed for organisations that require predictable cost, proactive monitoring, and a structured support relationship across their Microsoft infrastructure.</p>
+        <ul class="eng-list">
+          <li>Custom SLAs per system tier, defined by production criticality</li>
+          <li>24×7×365 service desk with India toll-free line included</li>
+          <li>Proactive vulnerability monitoring and patch advisory across all covered versions</li>
+          <li>Quarterly environment health reviews and infrastructure capacity planning</li>
+          <li>Microsoft licence procurement where genuinely required, no surprise true-up billing</li>
+          <li>Compliance documentation and audit trail records for regulated environments</li>
+        </ul>
+      </div>
+      <div class="eng-card">
+        <p class="eng-label">On-Call Support</p>
+        <h3>As-Needed Microsoft IT Support</h3>
+        <p>On-call microsoft it support for organisations that need expert technical assistance when incidents occur, without committing to a standing annual managed it services agreement.</p>
+        <ul class="eng-list">
+          <li>Engineer access on a per-incident or per-project basis</li>
+          <li>Response SLAs agreed at engagement initiation</li>
+          <li>Suited to stable environments with infrequent incidents</li>
+          <li>Scope can be limited to specific components, SQL Server, Active Directory, Azure, without full-environment cover</li>
+          <li>Convertible to an annual managed it services agreement at any point</li>
+        </ul>
+        <p class="eng-note">Both engagement models include India toll-free service desk access.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ WHY ZACO ══════ -->
+<section class="sec">
+  <div class="sec-inner">
+    <p class="kicker">Why Zaco Computer</p>
+    <h2 class="sec-h">Six Reasons Organisations Choose Our Microsoft Support</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <p class="why-num">01</p>
+        <h4>Reduce Microsoft Support Costs Without Reducing Coverage</h4>
+        <p>Independent microsoft third party support removes the percentage-of-spend pricing mechanism entirely. Support cost is based on your actual environment, not the size of your Azure footprint. Organisations with growing cloud investments typically see the largest savings relative to Unified Support renewal.</p>
+      </div>
+      <div class="why-card">
+        <p class="why-num">02</p>
+        <h4>Active Security Cover After Microsoft's EOL Date</h4>
+        <p>Microsoft's ESUs provide critical security patches, not incident resolution, not configuration guidance, not bug fixes. Our microsoft it support delivers the complete scope that EOL environments require while a controlled migration is planned. No security exposure gap between Microsoft's EOL date and your actual readiness to migrate.</p>
+      </div>
+      <div class="why-card">
+        <p class="why-num">03</p>
+        <h4>SLAs Matched to Each System's Criticality</h4>
+        <p>A production SQL Server running business-critical workloads carries a materially different response requirement than a development Windows Server instance. Our microsoft support agreements are structured at the system level, granularity that Unified Support's fixed performance tiers cannot replicate.</p>
+      </div>
+      <div class="why-card">
+        <p class="why-num">04</p>
+        <h4>24×7×365 Service Desk With India Toll-Free Line</h4>
+        <p>Our microsoft it support operates continuously. India-based organisations have a dedicated toll-free number for direct access to our service desk. International clients have equivalent around-the-clock access. No after-hours surcharges, no escalation friction, the same level of access regardless of when an incident occurs.</p>
+      </div>
+      <div class="why-card">
+        <p class="why-num">05</p>
+        <h4>Internal Teams Freed for Strategic Work</h4>
+        <p>Outsourcing microsoft managed services to an external it infrastructure solutions provider removes reactive infrastructure management from internal engineering resources. Internal teams stop managing EOL incident queues and start working on business outcomes, a shift most organisations identify as an immediate operational benefit.</p>
+      </div>
+      <div class="why-card">
+        <p class="why-num">06</p>
+        <h4>Compliance Documentation for Regulated Environments</h4>
+        <p>Regulated industries require documented evidence of patch management activity, incident response, and change records for all production systems, including those past OEM EOL. Our managed it services engagements produce the vulnerability reports, change logs, and process records that internal audit, external auditors, and compliance frameworks expect.</p>
+      </div>
+    </div>
+    <p style="font-size:.74rem;color:var(--fg3);margin-top:20px;font-style:italic">* Savings up to 50% are indicative, based on comparable engagements versus Microsoft Unified Support. Actual savings depend on current Microsoft spend, environment scope, and product mix.</p>
+  </div>
+</section>
+
+<!-- ══════ INDUSTRIES ══════ -->
+<section class="sec alt">
+  <div class="sec-inner">
+    <p class="kicker">Industries Served</p>
+    <h2 class="sec-h">Microsoft Infrastructure Support Across Regulated and Non-Regulated Sectors</h2>
+    <p class="ind-intro">Any organisation running Microsoft server or infrastructure components, from on-premises Windows Server estates to Azure-connected hybrid environments, can benefit from independent microsoft support and managed services. We serve teams in sectors where Microsoft infrastructure directly affects business continuity, data security, and compliance obligations.</p>
+    <div class="ind-tags">
+      <span class="ind-tag">Banking &amp; Financial Services</span>
+      <span class="ind-tag">Manufacturing</span>
+      <span class="ind-tag">Retail &amp; E-commerce</span>
+      <span class="ind-tag">Healthcare</span>
+      <span class="ind-tag">Telecommunications</span>
+      <span class="ind-tag">Education</span>
+      <span class="ind-tag">Government &amp; Public Sector</span>
+      <span class="ind-tag">Energy &amp; Utilities</span>
+      <span class="ind-tag">Logistics &amp; Supply Chain</span>
+      <span class="ind-tag">Professional Services</span>
+      <span class="ind-tag">Pharmaceuticals &amp; Life Sciences</span>
+      <span class="ind-tag">Real Estate &amp; Infrastructure</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FAQ ══════ -->
+<section class="sec">
+  <div class="sec-inner">
+    <p class="kicker">Frequently Asked Questions</p>
+    <h2 class="sec-h">Microsoft Support: Questions We Are Asked Most Often</h2>
+    <div class="faq-wrap">
+
+      <div class="faq-item">
+        <p class="faq-q">What is Microsoft third-party support and how does it differ from Unified Support?</p>
+        <div class="faq-a">
+          <p>Microsoft third party support means engaging an independent provider for break/fix incident resolution, security vulnerability management, and technical guidance across your Microsoft infrastructure, rather than purchasing support directly from Microsoft.</p>
+          <p>The core differences are pricing model and coverage scope. Microsoft Unified Support is priced as a percentage of your total annual Microsoft spend, with a minimum annual contract of $50,000 for the Core tier (as reported by Directions on Microsoft: <a href="https://www.directionsonmicrosoft.com/busting-four-of-the-biggest-microsoft-support-myths/" target="_blank" rel="noopener">directionsonmicrosoft.com</a>). Our microsoft support is scoped to your actual environment, pricing reflects the systems you need covered, not your entire Microsoft spend.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">What does windows server 2012 r2 end of life mean for our environment?</p>
+        <div class="faq-a">
+          <p>Windows server 2012 r2 end of life arrived on 10 October 2023, as confirmed by Microsoft's official lifecycle documentation (<a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2012-r2" target="_blank" rel="noopener">learn.microsoft.com</a>). From that date, Microsoft no longer issues security patches, non-security hotfixes, bug fixes, or technical support for the product. Any vulnerability discovered after that date remains unpatched by the OEM indefinitely.</p>
+          <p>Microsoft's Extended Security Updates (ESUs) offer up to three further years of critical security patches only. They do not include incident support or configuration guidance. Our microsoft it support provides the full scope: active vulnerability management, break/fix incident resolution, and technical advisory, enabling your organisation to remain protected while a migration is planned at a controlled pace.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">How do sql server support services work for EOL versions like SQL 2008, SQL 2012, or SQL 2014?</p>
+        <div class="faq-a">
+          <p>We provide break/fix incident resolution, performance management, and security vulnerability advisory for SQL Server 2008 through 2022. SQL Server 2012 reached EOL on 12 July 2022, and SQL Server 2014 reached EOL on 9 July 2024, both confirmed by Microsoft Learn (<a href="https://learn.microsoft.com/en-us/sql/sql-server/end-of-support/extended-security-updates-frequently-asked-questions" target="_blank" rel="noopener">learn.microsoft.com SQL EOL FAQ</a>).</p>
+          <p>For EOL versions, we monitor known CVEs specific to those versions, advise on available mitigations, and help maintain a documented security posture. SLAs for sql server support services are matched to each database environment's criticality, production databases hosting business-critical workloads carry faster response and resolution targets than development or test instances.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Does your coverage include Azure DevOps, microsoft 365 managed services, and Active Directory?</p>
+        <div class="faq-a">
+          <p>Yes. All 16 Microsoft server and infrastructure components listed on this page are within scope. This includes Azure DevOps, Azure infrastructure, microsoft 365 managed services, Active Directory, ADFS, AD Certificate Services, DNS, DHCP, DFS, Hyper-V, IIS, Remote Desktop Services, Remote Desktop Gateway, Network Policy Server, Remote Access, and Dynamics CRM Deployment, in addition to the full Windows Server and SQL Server version ranges.</p>
+          <p>Hybrid configurations linking on-premises infrastructure to Azure or Microsoft 365 environments are also covered under the same engagement.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Can you help evaluate whether to stay on current Microsoft versions or plan a migration?</p>
+        <div class="faq-a">
+          <p>Yes. Our Technology Advisory service provides this assessment objectively. We review your Windows Server, SQL Server, and connected Microsoft infrastructure and give a clear, documented recommendation based on your operational requirements, security exposure, and cost position, not Microsoft's commercial roadmap or Azure migration incentives.</p>
+          <p>Where migration makes sense, we advise on practical pathways: upgrade in place, transition to azure managed services, or migration to a newer on-premises infrastructure platform. The scope and timeline of any migration is the organisation's decision, our role is to provide the technical analysis needed to make it with confidence.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">How are SLAs structured for Microsoft managed services agreements?</p>
+        <div class="faq-a">
+          <p>SLAs are fully customisable at the individual system level. A production SQL Server hosting mission-critical data carries a different response and resolution target from a test Windows Server instance, a level of granularity that Microsoft Unified Support's fixed performance tiers do not offer.</p>
+          <p>Both annual managed it services agreements and on-call engagements include SLAs agreed during onboarding. Annual contracts provide predictable cost and highest-priority response. On-call arrangements suit organisations that need expert microsoft it support as incidents arise, without a standing commitment.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Can you supply Microsoft licences as well as providing support?</p>
+        <div class="faq-a">
+          <p>Yes. We supply new and renewal Microsoft product licences alongside our microsoft support and managed services engagements. We review actual usage and licence position before recommending any purchase and handle procurement directly when a renewal or new licence is genuinely needed, with transparent pricing and no surprise true-up billing.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">How do we get started?</p>
+        <div class="faq-a">
+          <p>Contact us at info@zacocomputer.com or call +91 98111 83994 with a brief overview of your Microsoft environment, the product versions in use, whether any have crossed end-of-life, and the type of microsoft support required. Our team will schedule a scoping call and provide a proposal covering SLA options and pricing specific to your environment. Most organisations complete onboarding within two to three weeks of agreement.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CTA ══════ -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <div>
+      <h2>Ready to Review Your Microsoft Support Costs?</h2>
+      <p>Our team will assess your Microsoft environment, identify coverage gaps and cost reduction opportunities, and recommend a tailored microsoft support model, at no obligation. Most environment assessments are completed within five business days of first contact.</p>
+      <a href="mailto:info@zacocomputer.com" class="btn btn-solid">Request a Consultation</a>
+      <p class="cta-disc">* Cost savings up to 50% are indicative and depend on current Microsoft Unified Support spend, environment scope, and product mix. Contact us for an environment-specific assessment.</p>
+    </div>
+    <div class="c-cards">
+      <a href="mailto:info@zacocomputer.com" class="c-card">
+        <span class="c-icon">✉</span>
+        <div><div class="c-label">Email Us</div><div class="c-val">info@zacocomputer.com</div></div>
+      </a>
+      <a href="tel:+919811183994" class="c-card">
+        <span class="c-icon">📞</span>
+        <div><div class="c-label">Call Us</div><div class="c-val">+91 98111 83994</div></div>
+      </a>
+      <a href="tel:18002091986" class="c-card">
+        <span class="c-icon">📞</span>
+        <div><div class="c-label">India Toll-Free</div><div class="c-val">1800 209 1986</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Zaco Computer. All rights reserved.</span>
+  <span>24×7×365 Microsoft IT Support &nbsp;|&nbsp; India &amp; Global Coverage</span>
+</footer>
+
+</body>
+</html>

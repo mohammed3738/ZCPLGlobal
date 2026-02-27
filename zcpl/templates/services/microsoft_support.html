@@ -1,0 +1,1107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Trusted Third Party Microsoft Support for for EOL & Live Versions
+{% endblock %}
+{% block meta_description %}
+Zaco provides expert Microsoft IT support at 30–50% lower cost than Unified Support, with full EOL coverage, custom SLAs, and 24×7 engineer access.
+{% endblock %}
+
+{% block content %}
+<!-- Enhanced Styles -->
+<style>
+    /* Problem Section Styles */
+    .problem { background: var(--navy-mid); }
+    .problem-grid {
+        display: grid; 
+        grid-template-columns: 1fr 1fr;
+        gap: 32px; 
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+    @media (max-width: 768px) {
+        .problem-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .problem-card {
+        background: #fff;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px; 
+        padding: 28px 30px;
+        transition: all 0.3s ease;
+    }
+    .problem-card:hover { 
+        border-color: rgba(45,125,210,0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .problem-card .icon {
+        width: 42px; 
+        height: 42px; 
+        border-radius: 10px;
+        background: rgba(224,82,82,0.12); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        margin-bottom: 18px; 
+        font-size: 1.2rem;
+    }
+    .problem-card h4 { 
+        font-size: 1.05rem; 
+        margin-bottom: 10px; 
+        color: var(--navy-dark);
+        font-weight: 600;
+    }
+    .problem-card p { 
+        font-size: 0.9rem; 
+        color: #555; 
+        line-height: 1.65; 
+    }
+    .problem-card .highlight { 
+        color: var(--danger); 
+        font-weight: 600; 
+    }
+
+    /* Cost Comparison Styles */
+    .cost-visual {
+        background: rgba(45, 125, 210, 0.05);
+        border: 2px solid rgba(45, 125, 210, 0.15);
+        border-radius: 16px; 
+        padding: 40px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    .cost-visual h4 { 
+        font-size: 1.1rem; 
+        color: var(--navy-dark); 
+        margin-bottom: 28px; 
+        font-weight: 600;
+    }
+    .cost-bars { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 20px; 
+    }
+    .cost-bar-row { 
+        display: flex; 
+        align-items: center; 
+        gap: 20px;
+    }
+    .cost-bar-label { 
+        width: 180px; 
+        font-size: 0.9rem; 
+        color: var(--navy-dark);
+        flex-shrink: 0;
+        font-weight: 500;
+    }
+    .cost-bar-track { 
+        flex: 1; 
+        background: rgba(255,255,255,0.06); 
+        border-radius: 100px; 
+        height: 36px; 
+        position: relative; 
+        overflow: hidden;
+    }
+    .cost-bar-fill {
+        height: 100%; 
+        border-radius: 100px;
+        display: flex; 
+        align-items: center; 
+        padding-left: 14px;
+        font-size: 0.8rem; 
+        font-weight: 600; 
+        transition: width 0.8s ease;
+    }
+    .bar-broadcom { 
+        background: linear-gradient(90deg, #E05252, #C0392B); 
+        color: #fff; 
+    }
+    .bar-zaco { 
+        background: linear-gradient(90deg, #00B4A2, #00D4BE); 
+        color: var(--navy); 
+    }
+
+    /* Comparison Table Styles */
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 40px 0;
+        background: rgba(45,125,210,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .comparison-table th {
+        background: var(--navy-mid);
+        color: #000000;
+        padding: 16px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-bottom: 2px solid rgba(45,125,210,0.15);
+    }
+    .comparison-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(45, 125, 210, 0.15);
+        font-size: 0.9rem;
+    }
+    .comparison-table tr:last-child td {
+        border-bottom: none;
+    }
+    .comparison-table tbody tr:hover {
+        background: rgba(45, 125, 210, 0.15);
+    }
+
+    /* Service Grid Styles */
+    .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        margin: 50px 0;
+    }
+    @media (max-width: 1024px) {
+        .service-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        .service-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .service-card {
+        background: rgba(255,255,255,0.97);
+        border: 1px solid rgba(45,125,210,0.1);
+        border-radius: 12px;
+        padding: 32px;
+        transition: all 0.3s ease;
+    }
+    .service-card:hover {
+        border-color: rgba(45,125,210,0.3);
+        box-shadow: 0 8px 32px rgba(45,125,210,0.12);
+        transform: translateY(-4px);
+    }
+    .service-card .number {
+        display: inline-block;
+        background: linear-gradient(135deg, #2D7DD2, #1E5BA8);
+        color: #fff;
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    .service-card h3 {
+        font-size: 1.15rem;
+        color: var(--navy-dark);
+        margin-bottom: 16px;
+        font-weight: 600;
+    }
+    .service-card p {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.7;
+    }
+
+    /* Coverage List Styles */
+    .coverage-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 40px;
+        margin: 30px 0;
+    }
+    @media (max-width: 768px) {
+        .coverage-list {
+            grid-template-columns: 1fr;
+        }
+    }
+    .coverage-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .coverage-item::before {
+        content: "✓";
+        color: #00B4A2;
+        font-weight: bold;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+    .coverage-item p {
+        font-size: 0.95rem;
+        color: #333;
+        margin: 0;
+    }
+
+    /* Timeline Styles */
+    .lifecycle-timeline {
+        position: relative;
+        padding: 40px 0;
+        margin: 50px 0;
+    }
+    .timeline-item {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 40px;
+        margin-bottom: 50px;
+        position: relative;
+    }
+    @media (max-width: 768px) {
+        .timeline-item {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+    .timeline-header {
+        background: linear-gradient(135deg, #2D7DD2, #1E5BA8);
+        color: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80px;
+        text-align: center;
+    }
+    .timeline-content {
+        background: rgba(45,125,210,0.05);
+        border-left: 4px solid #00B4A2;
+        padding: 24px;
+        border-radius: 8px;
+    }
+    .timeline-content h4 {
+        color: var(--navy-dark);
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+    .timeline-content p {
+        color: #555;
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+
+    /* Benefit Cards */
+    .benefit-card {
+        transition: all 0.3s ease;
+    }
+
+    /* FAQ Section */
+    /* FAQ Section */
+    .faq-section {
+        background: rgba(233, 229, 14, 0.02);
+        padding: 40px;
+        border-radius: 12px;
+        margin: 40px 0;
+    }
+    .faq-item {
+        margin-bottom: 24px;
+        border-bottom: 2px solid rgba(45,125,210,0.1);
+        padding-bottom: 24px;
+    }
+    .faq-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    .faq-question {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1a3546;
+        margin-bottom: 12px;
+        cursor: pointer;
+    }
+    .faq-answer {
+        color: #000000;
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 100%);
+        color: #020202;
+        border-radius: 16px;
+        text-align: center;
+    }
+    .cta-section > div:first-child {
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.8);
+        margin-bottom: 16px;
+    }
+    .cta-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+    .cta-section p {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 16px;
+        opacity: 0.95;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+
+    /* Hero Section Enhancement */
+    .hero-section {
+        background: linear-gradient(135deg, rgba(30, 91, 168, 0.95) 0%, rgba(45, 125, 210, 0.95) 100%);
+        color: #fff;
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        margin-top: -100px;
+        margin-right: -100px;
+    }
+    .hero-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 24px;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+    }
+    .hero-section p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+        background: #028ef814 ;
+        border: 2px solid #037dda14;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 40px 0;
+        text-align: center;
+    }
+    .highlight-box .value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--navy-dark);
+        margin-bottom: 10px;
+    }
+    .highlight-box .label {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    /* Section Headers */
+    .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .section-header .subtitle {
+        color: #2D7DD2;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .section-header h2 {
+        font-size: 2rem;
+        color: var(--navy-dark);
+        margin-bottom: 16px;
+        font-weight: 700;
+    }
+    .section-header p {
+        font-size: 1.05rem;
+        color: #666;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+
+    .eol-status-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 40px 0;
+        background: rgba(45,125,210,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .eol-status-table th {
+        background: linear-gradient(135deg, #2e4f64, #1a3546);
+        color: #ffffff;
+        padding: 18px 16px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-bottom: 2px solid rgba(45,125,210,0.2);
+        letter-spacing: 0.5px;
+    }
+
+    .eol-status-table th:last-child {
+        text-align: center;
+    }
+
+    .eol-status-table td {
+        padding: 16px 16px;
+        border-bottom: 1px solid rgba(45, 125, 210, 0.15);
+        font-size: 0.95rem;
+        color: #333;
+    }
+
+    .eol-status-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .eol-status-table tbody tr:hover {
+        background: rgba(45, 125, 210, 0.1);
+        transition: background 0.3s ease;
+    }
+
+    .eol-status-table td a {
+        color: #2D7DD2;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .eol-status-table td a:hover {
+        color: #1E5BA8;
+        text-decoration: underline;
+    }
+
+    .eol-status-table td:last-child {
+        text-align: center;
+    }
+    /* Status Badge Styles */
+    .status-badge {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .status-badge.eol {
+        background: #FFE5E5;
+        color: #C0392B;
+        border: 1px solid rgba(192, 57, 43, 0.2);
+    }
+
+    .status-badge.eol:hover {
+        background: #FFD5D5;
+        box-shadow: 0 2px 8px rgba(192, 57, 43, 0.15);
+    }
+
+    .status-badge.approaching {
+        background: #FFF4E5;
+        color: #E67E22;
+        border: 1px solid rgba(230, 126, 34, 0.2);
+    }
+
+    .status-badge.approaching:hover {
+        background: #FFEAD5;
+        box-shadow: 0 2px 8px rgba(230, 126, 34, 0.15);
+    }
+
+    .status-badge.in-support {
+        background: #E5F9F7;
+        color: #00B4A2;
+        border: 1px solid rgba(0, 180, 162, 0.2);
+    }
+
+    .status-badge.in-support:hover {
+        background: #D5F5F1;
+        box-shadow: 0 2px 8px rgba(0, 180, 162, 0.15);
+    }
+
+    .cat-grid{display:flex;flex-direction:column;gap:12px}
+    .cat-block{background:var(--bg6);border:2px solid var(--ln);border-radius:10px;overflow:hidden;transition:border-color .2s}
+    .cat-block:hover{border-color:var(--bln)}
+    .cat-head{padding:12px 18px; font-weight: 600; color: #1a3546 ;display:flex;align-items:center;gap:10px;background:rgba(2, 142, 248, 0.08);border-bottom:1px solid var(--ln)}
+    .cat-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+    .cat-title{font-size:.82rem;font-weight:700;color:var(--w)}
+    .chip-row{padding:14px 18px;display:flex;flex-wrap:wrap;gap:8px }
+    .chip{display:inline-flex;align-items:center;gap:6px;background:rgba(45, 125, 210, 0.05);border:1px solid rgba(226, 17, 17, 0.09);padding:5px 12px;border-radius:100px;font-size:.76rem;color:var(--fg2);transition:all .15s}
+    .chip::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--blue);flex-shrink:0}
+    .chip:hover{background:rgba(0,120,212,.12);border-color:var(--bln);color:var(--w)}
+
+</style>
+
+<!-- Banner Section -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/server-back.jpg' %});"></div>
+        <div class="auto-container">
+        <div class="slider-six__content">
+            <p class="slider-six__text"><span>Reliable Third-party support for Microsoft products</span></p>
+            <h1 class="slider-six__title">Microsoft Third-Party Software Support Solution</h1>
+            <p style="color: azure; font-size: 1.1rem;">Stop Overpaying & Reduce Costs up-to 50% with end-to-end managed support across the entire Microsoft platform !</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /.slider-six -->
+
+<!-- Main Content -->
+<div class="auto-container" style="padding-block: 80px">
+
+    <!-- Problem Section -->
+    <section class="problem" style="border-radius: 16px; margin-bottom: 80px;">
+        <div class="auto-container">
+            {% comment %} <div class="about-six__text" style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px; color: #000000;">
+                <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">Microsoft Lifecycle Pressures and Rising Support Gaps</h2>
+            </div> {% endcomment %}
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div>
+                        <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">Microsoft Lifecycle Pressures and Rising Support Gaps</h2>
+                        <p style="color: rgba(0, 0, 0, 0.9); font-size: 1rem; line-height: 1.8; margin-bottom: 30px;">Microsoft support for software products follows a fixed lifecycle. Once a version reaches end-of-life, official patches, security updates, and direct Microsoft IT support cease entirely. Organisations are then expected to upgrade — regardless of whether their current environment is stable and meeting operational needs.</p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 text-center">
+                    <img 
+                        src="{% static 'images/services/microsoft_first.png' %}" 
+                        alt="Microsoft Third-Party Support"
+                        style="max-width: 100%; height: auto;"
+                    >
+                </div>
+        </div>
+        </div>
+        <h2 style="color: #1a3546; text-align: center; margin-top: 50px;  margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;"> Microsoft Product EOL Status</h2>
+    
+        <table class="eol-status-table">
+    <thead>
+        <tr>
+            <th>Listing</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://learn.microsoft.com/en-us/lifecycle/announcements/sql-server-2012-windows-server-2012-2012-r2-end-of-support" rel="nofollow">SQL Server 2012</a></td>
+            <td>12 Jul 2022</td>
+            <td><span class="status-badge eol">EOL</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2012-r2" rel="nofollow">Windows Server 2012 R2</a></td>
+            <td>10 Oct 2023</td>
+            <td><span class="status-badge eol">EOL</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://learn.microsoft.com/en-us/lifecycle/products/sql-server-2014" rel="nofollow">SQL Server 2014</a></td>
+            <td>9 Jul 2024</td>
+            <td><span class="status-badge eol">EOL</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016" rel="nofollow">Windows Server 2016</a></td>
+            <td>12 Jan 2027</td>
+            <td><span class="status-badge approaching">Approaching</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://learn.microsoft.com/en-us/lifecycle/products/sql-server-2019" rel="nofollow">SQL Server 2019</a></td>
+            <td>8 Jan 2030</td>
+            <td><span class="status-badge in-support">In Support</span></td>
+        </tr>
+        <tr>
+            <td><a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2022" rel="nofollow">Windows Server 2022</a></td>
+            <td>14 Oct 2031</td>
+            <td><span class="status-badge in-support">In Support</span></td>
+        </tr>
+    </tbody>
+</table>
+<p style="color: rgba(0, 0, 0, 0.9); font-size: 1rem;" >*We cover all versions above, including those past Microsoft's EOL date. Our Microsoft IT support delivers break/fix incident resolution.</p>
+    </section>
+
+    <!-- The Microsoft Support Landscape -->
+    <section style="margin-bottom: 80px;">
+        <div class="section-header">
+            <p>THE MICROSOFT SUPPORT LANDSCAPE<p>
+            <h2 style="color: #1a3546;">Why Organisations Are Reconsidering Their Microsoft Support Costs</h2>
+        </div>
+
+        <div>
+            <p style="color: #000000;">Microsoft Unified Support, and the replacement for the now-retired Premier Support, is priced as a percentage of your total annual Microsoft spend. Every time Azure consumption grows, a new Microsoft 365 seat is added, or a Dynamics 365 module is deployed, the Unified Support baseline rises automatically at renewal.</p>
+            <p style="color: #000000;">Zaco Computers, an established IT infrastructure solutions provider specialising in Microsoft managed services, that decouple the support relationship from the OEM lifecycle and the OEM pricing model. Organisations receive expert Microsoft IT support scoped to their actual environment, covering EOL and current versions, with SLAs defined by system criticality rather than billing tier.</p>
+            <p style="color: #000000;">Third-party support models for enterprise software have been operating at scale globally since the mid-2000s. The same model now applies across Microsoft infrastructure: organisations that evaluate the alternative often find that independent Microsoft third party support delivers faster incident resolution at materially lower annual cost.</p>
+        </div>
+
+
+        <div class="highlight-box">
+            <div class="value" style="text-align: left;">$50,000</div>
+            <div class="label" style="text-align: left; color: #000000;">Minimum annual cost for Microsoft Unified Support Core tier, regardless of how much support is actually consumed. The Advanced tier has a minimum contract price of $50,000 (as on 25/02/2026).</div>
+        </div>
+    </section>
+
+    <!-- Four Microsoft-Specific Situations -->
+    <section style="margin-bottom: 80px;">
+        <div class="section-header">
+            <h2 style="color: #1a3546;">Four Microsoft-Specific Situations Where Independent Support Provides Immediate Value</h2>
+        </div>
+
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="icon">📅</div>
+                <h4 style="color: #1a3546;">End-of-Life Environments Running in Production</h4>
+                <p>When Microsoft's EOL date passes, all OEM support and patching stops instantly. A structured infrastructure migration takes months; the EOL date does not wait.</p>
+            </div>
+
+            <div class="problem-card">
+                <div class="icon">📈</div>
+                <h4 style="color: #1a3546;">Unified Support Costs That Rise With Every Cloud Addition</h4>
+                <p>Unified Support is priced as a percentage of total Microsoft expenditure. Every new Azure workload, every additional Microsoft 365 licence, every Dynamics 365 deployment automatically increases the Unified Support baseline at renewal, independent of whether support incident volume changes. Premier Support, which had per-hour pricing, no longer exists for most organisations.</p>
+            </div>
+
+            <div class="problem-card">
+                <div class="icon">🔀</div>
+                <h4 style="color: #1a3546;">Premier Support Is Now Retired</h4>
+                <p>Microsoft formally ended Premier Support for commercial organisations as of July 2022, and for public sector organisations as of July 2024. Premier offered per-hour billing and named Technical Account Managers. Unified Support, its replacement, operates on a percentage-of-spend model with higher baseline costs and fixed-tier service structures that many organisations find less suited to their actual support patterns.</p>
+            </div>
+
+            <div class="problem-card">
+                <div class="icon">🧩</div>
+                <h4 style="color: #1a3546;">Multi-Version Environments With Mixed Lifecycle Status</h4>
+                <p>Most enterprise Microsoft environments run multiple product versions at the same time, some within active OEM lifecycle, some at or past EOL, some in hybrid cloud configurations. Paying a Unified Support percentage across the full Microsoft spend when only certain sql server support services or specific Windows Server versions need active incident cover is rarely cost-efficient for the organisation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Deliver -->
+    <section style="margin-bottom: 40px;">
+        <div class="section-header" style="margin-bottom: 20px ;">
+            <p>WHAT WE DELIVER</p>
+            <h2 style="color: #1a3546;">Core Microsoft IT Support Services</h2>
+            
+        </div>
+        <div>
+            <p style="text-align: center; color: #000000; font-size: 1rem; line-height: 1.7; margin-bottom: 50px;">Each service addresses a distinct requirement: resolving live incidents, maintaining security posture in EOL environments, and providing objective guidance on whether to continue, upgrade, or migrate.</p>
+        </div>
+
+        
+        <div style="display:flex; gap:50px; align-items:flex-start;">
+
+        <!-- LEFT COLUMN (STACKED CARDS) -->
+        <div style="flex:1;">
+            <div class="service-grid" style="display:flex; flex-direction:column; gap:24px;">
+        
+            <div class="service-card">
+                <h3 style="color: #1a3546;"><b>🔧 Break / Fix Incident Resolution</b></h3>
+                <p >Diagnosis and resolution of incidents across Windows Server, SQL Server, Active Directory, Hyper-V, IIS, and connected Microsoft infrastructure. Engineers hold hands-on expertise across the full Microsoft server and infrastructure stack, covering on-premises, hybrid, and Azure-connected environments.<br>Response and resolution times are governed by SLAs agreed during onboarding. Production environments and business-critical databases carry the highest response priority.</p></div>
+
+            <div class="service-card">
+                <h3 style="color: #1a3546;"><b>📋 Technology Advisory & Migration Planning</b></h3>
+                <p>A Microsoft EOL date is a commercial decision by the vendor, not an operational mandate for your organisation. Many enterprises run stable Microsoft environments that do not require immediate infrastructure replacement. Our advisory service provides the objective technical assessment to evaluate that determination correctly.<br>We review your Windows Server, SQL Server, and connected Microsoft infrastructure, then advise on options: continue with managed IT services cover, upgrade in place, or migrate toward azure managed services or a newer infrastructure platform.</p></div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN (IMAGE) -->
+        <div style="flex:1; margin-top: 70px;">
+            <img 
+            style="max-width: 80%; height: auto;"
+            src={% static 'images/services/microsoftsupport-01.jpg' %} 
+            > 
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Microsoft Server & Infrastructure Components -->
+    <section style="margin-bottom: 80px; ">
+        <div class="section-header">
+            <p>COVERAGE</p>
+            <h2 style="color: #1a3546;" >Microsoft Server & Infrastructure Components We Support</h2>
+        </div>
+
+        <p style="color: #000000;">Our microsoft third party support covers 16 Microsoft server, identity, database, remote access, and cloud infrastructure components, spanning end-of-life product versions through to current supported releases.<br>Coverage scope is confirmed during onboarding based on your actual deployed environment. <strong>No fixed-tier product bundles.</strong> You define which systems require active cover; SLAs are matched to each system's operational criticality.<br>Both on-premises environments and hybrid on-premises-to-Azure configurations are within scope. Our microsoft 365 managed services and Azure DevOps coverage extends the service to cloud-connected components as well.</p>
+         
+        <div class="cat-grid" style="margin-top: 40px;">
+
+                <div class="cat-block">
+                <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Windows Server: 2012 to 2025</span></div>
+                <div class="chip-row">
+                    <span class="chip">Windows Server 2012 / R2</span>
+                    <span class="chip">Windows Server 2016</span>
+                    <span class="chip">Windows Server 2019</span>
+                    <span class="chip">Windows Server 2022</span>
+                    <span class="chip">Windows Server 2025</span>
+                    <span class="chip">Windows Deployment Imaging</span>
+                </div>
+                </div>
+
+                <div class="cat-block">
+                <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">SQL Server Deployment: 2008 to 2022</span></div>
+                <div class="chip-row">
+                    <span class="chip">SQL Server 2008 / R2</span>
+                    <span class="chip">SQL Server 2012</span>
+                    <span class="chip">SQL Server 2014</span>
+                    <span class="chip">SQL Server 2016</span>
+                    <span class="chip">SQL Server 2017</span>
+                    <span class="chip">SQL Server 2019</span>
+                    <span class="chip">SQL Server 2022</span>
+                </div>
+                </div>
+
+                <div class="cat-block">
+                <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Identity &amp; Directory Services</span></div>
+                <div class="chip-row">
+                    <span class="chip">Active Directory (AD)</span>
+                    <span class="chip">AD Federation Services (ADFS)</span>
+                    <span class="chip">AD Certificate Services</span>
+                    <span class="chip">Domain Name System (DNS)</span>
+                    <span class="chip">Dynamic Host Configuration Protocol (DHCP)</span>
+                    <span class="chip">Distributed File System (DFS)</span>
+                </div>
+                </div>
+
+                <div class="cat-block">
+                <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Remote Access &amp; Application Services</span></div>
+                <div class="chip-row">
+                    <span class="chip">Remote Desktop Services</span>
+                    <span class="chip">Remote Desktop Gateway</span>
+                    <span class="chip">Network Policy Server</span>
+                    <span class="chip">Remote Access</span>
+                    <span class="chip">Internet Information Services (IIS)</span>
+                    <span class="chip">Hyper-V</span>
+                    <span class="chip">Dynamics CRM Deployment</span>
+                </div>
+                </div>
+
+                <div class="cat-block">
+                <div class="cat-head"><span class="cat-dot"></span><span class="cat-title">Cloud &amp; DevOps</span></div>
+                <div class="chip-row">
+                    <span class="chip">Azure DevOps</span>
+                    <span class="chip">Azure Infrastructure</span>
+                    <span class="chip">Microsoft 365 Administration</span>
+                    <span class="chip">Microsoft 365 Managed Services</span>
+                    <span class="chip">Hybrid On-Premises / Azure</span>
+                </div>
+                </div>
+
+            </div>
+    </section>
+
+    
+
+
+    <!-- Microsoft Lifecycle -->
+    <section style="margin-bottom: 40px;">
+        <div class="section-header">
+            <h2 style="color: #1a3546 ;">How Microsoft's Fixed Lifecycle Policy Works, and Where the Support Gap Occurs</h2>
+        </div>
+
+        <div class="lifecycle-timeline">
+            <div class="timeline-item">
+                <div class="timeline-header">Mainstream Support<br>(Years 1-5)</div>
+                <div class="timeline-content">
+                    <h4>Full OEM Coverage</h4>
+                    <p>New feature development, security updates, design changes, and free incident support. Microsoft is fully engaged during this phase.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">Extended Support<br>(Years 6-10)</div>
+                <div class="timeline-content">
+                    <h4>Security Patches Only</h4>
+                    <p>Security patches and paid incident support only. No new features or design changes. Many enterprises are still running these versions when the EOL date arrives.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">End-of-Life<br>(All OEM Support Stops)</div>
+                <div class="timeline-content">
+                    <h4>Support Gap Emerges</h4>
+                    <p>All Microsoft patches and technical support cease. ESUs available for up to 3 further years, critical security patches only, no incident support or bug fixes. Windows Server 2012 R2, SQL Server 2012, and SQL Server 2014 are at this stage.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">Zaco Support<br>(All Lifecycle Stages)</div>
+                <div class="timeline-content">
+                    <h4>Continuous Coverage</h4>
+                    <p>Full break/fix incident resolution, and migration advisory across all lifecycle stages, including well past Microsoft's official EOL. No forced version changes, no product restrictions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section style="margin-bottom: 120px;">
+        <div class="section-header">
+            <h2 style="color: #1a3546;">Microsoft Unified Support vs. Zaco Third-Party Microsoft Support</h2>
+            <p style="color: #000000;">A structured comparison of cost model, coverage scope, and service flexibility</p>
+        </div>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%; color: #000000;">Criterion</th>
+                    <th style="width: 35%; color: #e05252;">Microsoft Unified Support</th>
+                    <th style="width: 35%; color: #00b4a2;">Zaco Third-Party Microsoft Support</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Coverage for EOL Microsoft products</strong></td>
+                    <td>Ceases entirely at EOL date</td>
+                    <td>✅Full incident cover past EOL</td>
+                </tr>
+                <tr>
+                    <td><strong>Windows Server 2012 R2 / SQL 2012 / SQL 2014</strong></td>
+                    <td>❌ No OEM support post-EOL</td>
+                    <td>Active break/fix cover</td>
+                </tr>
+                <tr>
+                    <td><strong>Pricing model</strong></td>
+                    <td>8-10% of total Microsoft annual spend</td>
+                    <td>✅ Fixed scope based on actual environment</td>
+                </tr>
+                <tr>
+                    <td><strong>Annual cost trend</strong></td>
+                    <td>❌ Increases with every cloud or licence addition</td>
+                    <td>✅ Agreed upfront, predictable at renewal</td>
+                </tr>
+                <tr>
+                    <td><strong>SLA customisation</strong></td>
+                    <td>⚠️ Fixed tier structure only</td>
+                    <td>Per system, per operational criticality</td>
+                </tr>
+                <tr>
+                    <td><strong>24×7 engineer access</strong></td>
+                    <td>⚠️ Depends on tier purchased</td>
+                    <td>24×7×365 service desk across all engagements</td>
+                </tr>
+                <tr>
+                    <td><strong>SQL Server legacy (2008–2014)</strong></td>
+                    <td>❌ No coverage post-EOL</td>
+                    <td>Full sql server support services 2008–2022</td>
+                </tr>
+                <tr>
+                    <td><strong>Migration advisory independence</strong></td>
+                    <td>Microsoft Azure and Microsoft ecosystem only</td>
+                    <td>Environment-led, objective recommendation</td>
+                </tr>
+                <tr>
+                    <td><strong>Engagement model</strong></td>
+                    <td>Annual subscription only</td>
+                    <td>Annual managed services or on-call</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- How We Engage -->
+    <section style="margin-bottom: 120px;">
+        <div class="section-header">
+            <p>HOW WE ENGAGE<p>
+            <h2 style="color: #1a3546;">Two Engagement Models, Built Around Your Operations</h2>
+        </div>
+
+        <p style="text-align: center; color: #000000; font-size: 1rem; line-height: 1.7; margin-bottom: 50px;">No two Microsoft environments share the same version mix, criticality profile, or support history. Choose the model that reflects your actual requirements, or use both for different system tiers.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div style="background: rgba(45,125,210,0.05); border: 2px solid rgba(45,125,210,0.15); border-radius: 12px; padding: 32px;">
+                <h3 style="color: #1a3546; font-size: 1.2rem; margin-bottom: 20px; font-weight: 600;">Annual Managed Services</h3>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;"><strong>Continuous Microsoft Managed Services</strong></p>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">An annual engagement delivering ongoing Microsoft managed services, designed for organisations that require predictable cost, proactive monitoring, and a structured support relationship across their Microsoft infrastructure.</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Custom SLAs per system tier, defined by production criticality</li>
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> 24×7×365 service desk service included</li>
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Quarterly environment health reviews and infrastructure capacity planning</li>
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Microsoft licence procurement, including new and renewal Microsoft third party license options where genuinely required, with no surprise true‑up billing</li>
+                    <li style="color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Compliance documentation and audit trail records for regulated environments</li>
+                </ul>
+            </div>
+
+            <div style="background: rgba(0,180,162,0.05); border: 2px solid rgba(0,180,162,0.15); border-radius: 12px; padding: 32px;">
+                <h3 style="color: #1a3546; font-size: 1.2rem; margin-bottom: 20px; font-weight: 600;">On-Call Support</h3>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;"><strong>As-Needed Microsoft IT Support</strong></p>
+                <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">On-call Microsoft support services help organisations that need expert technical assistance when incidents occur, without committing to a standing annual managed IT services agreement.</p>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Engineer access on a per-incident or per-project basis</li>
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Response SLAs agreed at engagement initiation</li>
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Suited to stable environments with infrequent incidents</li>
+                    <li style="margin-bottom: 12px; color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Scope can be limited to specific components, SQL Server, Active Directory, Azure, without full-environment cover</li>
+                    <li style="color: #555; font-size: 0.9rem;"><strong>&#10003</strong> Convertible to an annual managed IT services agreement at any point
+
+</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Zaco -->
+    <section style="margin-bottom: 10px;">
+        <div class="section-header">
+            <h2 style="color: #1a3546;">Why Organisations Choose Zaco Computers for Microsoft Support</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; transition: all 0.3s ease;" class="benefit-card">
+                <div style="font-size: 1.5rem; margin-bottom: 16px;">💰</div>
+                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Guaranteed Cost Reduction Without Compromising Coverage</h3>
+                <p style="color: #000000; font-size: 0.9rem; line-height: 1.7;">Zaco replaces the percentage‑based pricing of Microsoft Unified Support with a fixed, environment‑specific model. Organisations typically reduce their Microsoft support costs by up to 50%, without reducing coverage or service quality. This approach removes the automatic cost increases tied to Azure growth, Microsoft 365 expansion, or additional Microsoft products. Renewals remain predictable, and support expenditure aligns directly with the systems in use.</p></div>
+
+            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; transition: all 0.3s ease;" class="benefit-card">
+                <div style="font-size: 1.5rem; margin-bottom: 16px;">⚡</div>
+                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Faster Response Times with 24×7×365 Engineering Access</h3>
+                <p style="color: #000000; font-size: 0.9rem; line-height: 1.7;">Zaco provides continuous access to experienced Microsoft engineers through a global service desk. There are no tier‑based restrictions or after‑hours limitations. This structure consistently delivers faster response times, quicker escalation handling, and shorter resolution cycles compared to traditional OEM support. Organisations benefit from reduced downtime and more stable Microsoft IT support across their infrastructure.</p></div>
+
+            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; transition: all 0.3s ease;" class="benefit-card">
+                <div style="font-size: 1.5rem; margin-bottom: 16px;">🏆</div>
+                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Deep Microsoft Expertise Without Hiring or Training Costs</h3>
+                <p style="color: #000000; font-size: 0.9rem; line-height: 1.7;">Zaco provides direct access to a skilled engineering team covering Windows Server, SQL Server, Active Directory, ADFS, DNS, DHCP, IIS, Hyper‑V, Azure DevOps, and hybrid cloud environments, eliminating recruitment delays.</p>
+            </div>
+
+            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; transition: all 0.3s ease;" class="benefit-card">
+                <div style="font-size: 1.5rem; margin-bottom: 16px;">🎯</div>
+                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">SLAs Matched to Each System's Criticality</h3>
+                <p style="color: #000000; font-size: 0.9rem; line-height: 1.7;">A production SQL Server running business-critical workloads carries a materially different response requirement than a development Windows Server instance. </p></div>
+
+            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; transition: all 0.3s ease;" class="benefit-card">
+                <div style="font-size: 1.5rem; margin-bottom: 16px;">🔄</div>
+                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Freedom From Forced Upgrades and Vendor‑Driven Timelines</h3>
+                <p style="color: #000000; font-size: 0.9rem; line-height: 1.7;">Zaco enables teams to continue running stable, customised environments without pressure to migrate immediately. Whether the plan is to maintain current systems, transition to azure managed services, or modernise selectively, Zaco supports the chosen direction without imposing vendor‑driven timelines.</p></div>
+
+            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; transition: all 0.3s ease;" class="benefit-card">
+                <div style="font-size: 1.5rem; margin-bottom: 16px;">✅</div>
+                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600;">Faster Incident Resolution Across the Microsoft Stack</h3>
+                <p style="color: #000000; font-size: 0.9rem; line-height: 1.7;">Independent support models have demonstrated consistently shorter time‑to‑resolution compared to OEM support. Zaco’s engineering structure avoids multi‑layered escalation queues and focuses directly on diagnosing and resolving issues. This contributes to faster response times, reduced operational disruption, and more stable Microsoft managed services across on‑premises, hybrid, and cloud environments.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- FAQ Section -->
+<section style="background: #f8f9fa; padding: 80px 0; ">
+    <div class="auto-container">
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px;">FREQUENTLY ASKED QUESTIONS</p>
+        <h2 style="font-size: 1.8rem; color: #1a3546; text-align: center; margin-bottom: 50px; font-weight: 600;">Frequently Asked Questions about Third-Party Microsoft Support Services</h2>
+
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question"> 1. What is Microsoft third-party support and how does it differ from Unified Support?</div>
+                <div class="faq-answer">
+                    -   Microsoft third party support means engaging an independent provider for break/fix incident resolution, and technical guidance across your Microsoft infrastructure, rather than purchasing support directly from Microsoft.<br>The core differences are pricing model and coverage scope. Microsoft Unified Support is priced as a percentage of your total annual Microsoft spend, with a minimum annual contract of $50,000 for the Core tier (price as on 25/02/2026). Our Microsoft support is scoped to your actual environment, pricing reflects the systems you need covered, not your entire Microsoft spend.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question"> 2. Which Microsoft components and versions are covered under your managed services?</div>
+                <div class="faq-answer">
+                    -	Our Microsoft third party support covers Windows Server 2012 through 2025, SQL Server 2008 through 2022, Active Directory, DNS, DHCP, DFS, Azure DevOps, Hyper-V, Dynamics CRM, ADFS, Remote Desktop Services, IIS, and more. Microsoft 365 managed services and Azure-based environments are also within scope. See the full component list in the Microsoft section above.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question"> 3. We are running Windows Server 2012 R2, which has passed end-of-life. Can you still support it?</div>
+                <div class="faq-answer">
+                    -	Yes. Windows server 2012 r2 end of life from Microsoft means the OEM no longer issues security patches or provides direct microsoft it support. However, organisations often need time for a controlled migration. We provide active support, and advisory for these environments while a migration strategy is developed at the organisation's pace.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question"> 4. Does your third-party support extend to Microsoft 365 or Azure cloud environments?</div>
+                <div class="faq-answer">
+                    -	Yes. Our support covers Azure infrastructure environments — including Azure DevOps, Azure-hosted workloads, and hybrid on-premises-to-Azure configurations. For Microsoft 365, we cover configuration, administration, and integration with your on-premises Active Directory and ADFS. We manage the layers your team is responsible for — identity, connectivity, and access — which is where most real-world issues occur.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question"> 5. Can you help evaluate whether to stay on current Microsoft versions or plan a migration?</div>
+                <div class="faq-answer">
+                    -	Yes. Our Technology Advisory service provides this assessment objectively. We review your Windows Server, SQL Server, and connected Microsoft infrastructure and give a clear, documented recommendation based on your operational requirements, security exposure, and cost position, not Microsoft's commercial roadmap or Azure migration incentives. Where migration makes sense, we advise on practical pathways: upgrade in place, transition to azure managed services, or migration to a newer on-premises infrastructure platform.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question"> 6. How are SLAs structured for Microsoft managed services agreements?</div>
+                <div class="faq-answer">
+                    -   SLAs are fully customisable at the individual system level. A production SQL Server hosting mission-critical data carries a different response and resolution target from a test Windows Server instance, a level of granularity that Microsoft Unified Support's fixed performance tiers do not offer. Both annual managed IT services agreements and on-call engagements include SLAs agreed during onboarding. Annual contracts provide predictable cost and highest-priority response. On-call arrangements suit organisations that need expert Microsoft IT support as incidents arise, without a standing commitment.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question"> 7. Can you supply Microsoft licences as well as providing support?</div>
+                <div class="faq-answer">
+                    -	Yes. We supply new and renewal Microsoft product licences alongside our Microsoft support and managed services engagements. We review actual usage and licence position before recommending any purchase and handle procurement directly when a renewal or new licence is genuinely needed, with transparent pricing and no surprise true-up billing.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<div class="auto-container" style="padding-block: 80px">
+    <div class="cta-section">
+        <h2><b>Know Your Real Microsoft Support Costs Before You Commit</b></h2>
+        <p>Get a brief Zaco assessment to understand true market pricing and potential savings of up to 50%.<br>Reach us at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> or <a href="tel:+919811183994">+91 98111 83994</a> to strengthen your Microsoft support strategy.</p>
+        <div class="link-box" style="margin-top: 30px; justify-content: center;">
+            <a class="theme-btn btn-style-one" href="{% url 'contact' %}" >
+                <i class="btn-curve"></i>
+                <span class="btn-title">Request a Consultation</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Add smooth hover effect for benefit cards
+    document.querySelectorAll('.benefit-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 8px 24px rgba(45,125,210,0.15)';
+            this.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.boxShadow = '0 0 0 rgba(0,0,0,0)';
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Add FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+            const faqItem = this.closest('.faq-item');
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            allItems.forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            faqItem.classList.toggle('active');
+        });
+    });
+</script>
+
+{% endblock %}
