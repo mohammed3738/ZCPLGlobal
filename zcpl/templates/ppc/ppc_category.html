@@ -1,723 +1,576 @@
 {% extends "ppc/base_ppc.html" %}
 {% load static %}
 
-{% block extra_head %}  
+{% block title %}{{ category.meta_title }}{% endblock %}
+{% block meta_description %}{{ category.meta_description }}{% endblock %}
 
+{% block extra_head %}
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #003d7a 0%, #0052a3 100%);
-            color: white;
-            padding: 12px 0;
-            border-bottom: 3px solid #ffc107;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .header-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .header-links a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .header-links a:hover {
-            color: #ffc107;
-        }
-
-        .support-btn {
-            background-color: #ffc107;
-            color: #003d7a;
-            padding: 8px 15px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #003d7a 0%, #0052a3 100%);
-            color: white;
-            padding: 50px 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .hero-text p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        .hero-features {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .hero-feature {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-
-        .hero-feature-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #ffc107;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #003d7a;
-            font-weight: bold;
-        }
-
-        .hero-image {
-            text-align: center;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
-        }
-
-        /* Quote Form */
-        .quote-form {
-            position: absolute;
-            right: 40px;
-            top: 400px;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-            width: 320px;
-            z-index: 10;
-        }
-
-        .quote-form h3 {
-            color: #003d7a;
-            font-size: 18px;
-            margin-bottom: 20px;
-            text-align: center;
-            border-bottom: 2px solid #ffc107;
-            padding-bottom: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 13px;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #003d7a;
-            box-shadow: 0 0 5px rgba(0, 61, 122, 0.2);
-        }
-
-        .quote-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #ffc107;
-            color: #003d7a;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .quote-btn:hover {
-            background-color: #ffb300;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        /* Products Section */
-        .products-section {
-            padding: 60px 20px;
-            background: white;
-        }
-
-        .section-title {
-            font-size: 32px;
-            color: #003d7a;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 14px;
-        }
-
-        .product-types {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .product-type {
-            text-align: center;
-            padding: 20px;
-            border-radius: 8px;
-            background: #f9f9f9;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-
-        .product-type:hover {
-            border-color: #003d7a;
-            background: #f0f5ff;
-        }
-
-        .product-type-icon {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .product-type h4 {
-            color: #003d7a;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        /* Benefits Section */
-        .benefits-section {
-            padding: 60px 20px;
-            background: #f9f9f9;
-        }
-
-        .benefits-title {
-            font-size: 28px;
-            color: #003d7a;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .benefit-card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            text-align: center;
-            border-top: 4px solid #ffc107;
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            transform: translateY(-5px);
-        }
-
-        .benefit-card h4 {
-            color: #003d7a;
-            font-size: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .benefit-card p {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .checkmark {
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        /* Models Section */
-        .models-section {
-            padding: 60px 20px;
-            background: white;
-        }
-
-        .models-title {
-            font-size: 28px;
-            color: #003d7a;
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .models-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .model-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .model-card:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transform: translateY(-8px);
-        }
-
-        .model-image {
-            background: #f0f0f0;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .model-image img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
-        .model-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .model-info h4 {
-            color: #003d7a;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .model-specs {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #003d7a 0%, #0052a3 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .cta-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cta-text {
-            font-size: 18px;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            padding: 12px 30px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-
-        .cta-btn-primary {
-            background-color: #ffc107;
-            color: #003d7a;
-        }
-
-        .cta-btn-primary:hover {
-            background-color: #ffb300;
-        }
-
-        .cta-btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .cta-btn-secondary:hover {
-            background-color: white;
-            color: #003d7a;
-        }
-
-        /* Footer */
-        .footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 13px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-info a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-
-        .footer-info a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-            }
-
-            .quote-form {
-                position: static;
-                width: 100%;
-                margin-top: 30px;
-            }
-
-            .product-types,
-            .benefits-grid,
-            .models-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-text h1 {
-                font-size: 32px;
-            }
-
-            .header-links {
-                flex-direction: column;
-                gap: 10px;
-                font-size: 11px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <div class="header">
-        <div class="header-top">
-            <div class="logo">⚙️ ZACO COMPUTER</div>
-            <div class="header-links">
-                <a href="tel:+919811183994">📞 9811 183 994</a>
-                <a href="mailto:info@zacocomputer.com">📧 Platform Chat Support</a>
-                <a href="#quote" class="support-btn">Get Support</a>
-            </div>
+  /* ============================================
+     ZACO PPC CATEGORY PAGE - Matching site theme
+     Primary: #1a3c6e (dark blue nav)
+     Accent:  #f5a623 (yellow CTA)
+     Text:    #1a3c6e / #333
+  ============================================ */
+  :root {
+    --zaco-blue: #1a3c6e;
+    --zaco-blue-mid: #1e4d8c;
+    --zaco-yellow: #f5a623;
+    --zaco-yellow-dark: #e09010;
+    --zaco-teal: #008080;
+    --zaco-light-bg: #f4f7fb;
+    --zaco-border: #dce6f0;
+  }
+
+  /* ---- TOP BADGE BAR ---- */
+  .ppc-badge-bar {
+    background: var(--zaco-blue);
+    color: #fff;
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ppc-badge-bar .badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 20px;
+  }
+  .ppc-badge-bar .badge-item i { color: var(--zaco-yellow); }
+
+  /* ---- HERO SECTION ---- */
+  .ppc-hero {
+    background: linear-gradient(135deg, var(--zaco-blue) 0%, var(--zaco-blue-mid) 60%, #2b6cb0 100%);
+    padding: 48px 0 40px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin-top: 150px;
+  }
+  .ppc-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .ppc-hero h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .ppc-hero .sub-heading {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0;
+  }
+  .ppc-hero-img {
+    max-height: 220px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.35));
+  }
+
+  /* ---- QUOTE FORM CARD ---- */
+  .quote-card {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    padding: 22px 24px 24px;
+  }
+  .quote-card h5 {
+    background: var(--zaco-blue);
+    color: #fff;
+    margin: -22px -24px 18px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px 6px 0 0;
+  }
+  .quote-card .form-control {
+    border: 1px solid #cdd8e8;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 7px 10px;
+    margin-bottom: 10px;
+  }
+  .quote-card .form-control:focus {
+    border-color: var(--zaco-blue);
+    box-shadow: 0 0 0 2px rgba(26,60,110,0.15);
+  }
+  .quote-card label { font-size: 12px; font-weight: 600; color: #444; margin-bottom: 3px; }
+  .btn-quote {
+    background: var(--zaco-yellow);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    transition: background 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-quote:hover { background: var(--zaco-yellow-dark); color: #fff; }
+
+  /* ---- SUBCATEGORY TABS ---- */
+  .subcategory-tabs {
+    background: #fff;
+    border-bottom: 3px solid var(--zaco-blue);
+    padding: 0;
+  }
+  .subcategory-tabs .nav-link {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 0;
+    padding: 12px 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subcategory-tabs .nav-link:hover { color: var(--zaco-blue); background: var(--zaco-light-bg); }
+  .subcategory-tabs .nav-link.active {
+    color: #fff;
+    background: var(--zaco-blue);
+  }
+  .subcategory-tabs .nav-link img { width: 22px; height: 22px; object-fit: contain; }
+
+  /* ---- FEATURE ICONS ROW ---- */
+  .feature-icon-wrap {
+    text-align: center;
+    padding: 18px 10px;
+  }
+  .feature-icon-wrap .icon-circle {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, #e8f0fb, #c8d8f5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 24px;
+    color: var(--zaco-blue);
+  }
+  .feature-icon-wrap p { font-size: 13px; font-weight: 700; color: var(--zaco-blue); margin: 0; }
+
+  /* ---- SECTION HEADING ---- */
+  .section-heading {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--zaco-blue);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--zaco-yellow);
+    display: inline-block;
+  }
+
+  /* ---- WHY CHOOSE CARDS ---- */
+  .why-section { background: var(--zaco-light-bg); padding: 40px 0; }
+  .why-card {
+    background: #fff;
+    border: 1px solid var(--zaco-border);
+    border-radius: 8px;
+    padding: 22px 18px;
+    height: 100%;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .why-card:hover { box-shadow: 0 6px 20px rgba(26,60,110,0.12); transform: translateY(-3px); }
+  .why-card h6 {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 700; color: var(--zaco-blue); font-size: 15px; margin-bottom: 10px;
+  }
+  .why-card h6 i { color: var(--zaco-yellow); font-size: 18px; }
+  .why-card ul { padding-left: 0; list-style: none; margin: 0; }
+  .why-card ul li {
+    font-size: 13px; color: #555; padding: 3px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+  }
+  .why-card ul li::before { content: '✔'; color: var(--zaco-teal); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+  /* ---- TOP MODELS SECTION ---- */
+  .models-section { padding: 40px 0; }
+  .model-card {
+    border: 1px solid var(--zaco-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .model-card:hover { box-shadow: 0 6px 24px rgba(26,60,110,0.15); transform: translateY(-4px); color: inherit; }
+  .model-card-header {
+    background: var(--zaco-blue);
+    color: #fff;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .model-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    padding: 16px;
+    background: #f8fafc;
+  }
+  .model-card-body { padding: 12px 14px; }
+  .model-card-body .price {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--zaco-blue);
+  }
+  .model-card-body .price small { font-size: 11px; color: #888; font-weight: 400; }
+  .btn-view-product {
+    background: var(--zaco-yellow);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 7px 14px;
+    width: 100%;
+    margin-top: 8px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-view-product:hover { background: var(--zaco-yellow-dark); color: #fff; }
+
+  /* ---- SUBCATEGORY GRID ---- */
+  .subcat-card {
+    border: 1px solid var(--zaco-border);
+    border-radius: 8px;
+    background: #fff;
+    padding: 20px 16px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .subcat-card:hover { box-shadow: 0 6px 20px rgba(26,60,110,0.12); transform: translateY(-3px); color: inherit; }
+  .subcat-card img { width: 56px; height: 56px; object-fit: contain; margin-bottom: 10px; }
+  .subcat-icon-placeholder {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #e8f0fb, #c8d8f5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 24px; color: var(--zaco-blue);
+  }
+  .subcat-card h6 { font-weight: 700; font-size: 14px; color: var(--zaco-blue); margin-bottom: 4px; }
+  .subcat-card p { font-size: 12px; color: #666; margin: 0; }
+
+  /* ---- PARTNER FOOTER STRIP ---- */
+  .partner-strip {
+    background: #fff;
+    border-top: 3px solid var(--zaco-blue);
+    padding: 24px 0;
+  }
+  .partner-strip .partner-logo { max-height: 55px; object-fit: contain; }
+  .testimonial-text {
+    font-style: italic;
+    color: #555;
+    font-size: 13px;
+    position: relative;
+    padding-left: 20px;
+  }
+  .testimonial-text::before {
+    content: '\201C';
+    font-size: 48px;
+    color: var(--zaco-border);
+    position: absolute;
+    left: -6px; top: -12px;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* ---- BOTTOM CTA BAR ---- */
+  .bottom-cta-bar {
+    background: var(--zaco-blue);
+    color: #fff;
+    padding: 14px 0;
+    font-size: 13px;
+  }
+  .bottom-cta-bar .cta-item { display: inline-flex; align-items: center; gap: 6px; margin: 0 16px; }
+  .bottom-cta-bar i { color: var(--zaco-yellow); }
+  .btn-live-chat {
+    background: var(--zaco-yellow);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 18px;
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-live-chat:hover { background: var(--zaco-yellow-dark); color: #fff; }
+
+  @media (max-width: 768px) {
+    .ppc-hero h1 { font-size: 1.5rem; }
+    .quote-card { margin-top: 24px; }
+    .ppc-hero-img { max-height: 160px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- ===== BADGE BAR ===== -->
+<div class="ppc-badge-bar text-center mt-8">
+  {% if category.badge_1 %}
+  <span class="badge-item"><i class="fas fa-shield-alt"></i> {{ category.badge_1 }}</span>
+  {% endif %}
+  {% if category.badge_2 %}
+  <span class="badge-item"><i class="fas fa-headset"></i> {{ category.badge_2 }}</span>
+  {% endif %}
+  {% if category.badge_3 %}
+  <span class="badge-item"><i class="fas fa-shipping-fast"></i> {{ category.badge_3 }}</span>
+  {% endif %}
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="ppc-hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-4 mb-md-0">
+        <h1>{{ category.heading }}</h1>
+        {% if category.sub_heading %}
+          <p class="sub-heading">{{ category.sub_heading }}</p>
+        {% endif %}
+
+        {% if subcategories %}
+        <div class="mt-4 d-flex flex-wrap gap-2">
+          {% for sub in subcategories %}
+          <a href="{{ sub.get_absolute_url }}"
+             class="badge rounded-pill px-3 py-2 text-decoration-none"
+             style="background:rgba(255,255,255,0.15); color:#fff; font-size:13px; font-weight:600; border:1px solid rgba(255,255,255,0.35);">
+            {{ sub.name }}
+          </a>
+          {% endfor %}
         </div>
-    </div>
+        {% endif %}
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Dell PowerEdge Servers for Your Enterprise</h1>
-                    <p>Rack, Tower & Blade Servers Available</p>
-                    
-                    <div class="hero-features">
-                        <div class="hero-feature">
-                            <div class="hero-feature-icon">✓</div>
-                            <span>Unbeatable Prices</span>
-                        </div>
-                        <div class="hero-feature">
-                            <div class="hero-feature-icon">✓</div>
-                            <span>24/7 Tech Support</span>
-                        </div>
-                        <div class="hero-feature">
-                            <div class="hero-feature-icon">✓</div>
-                            <span>Fast Delivery</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-image">
-                    <div style="width: 100%; height: 300px; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 120px;">
-                        🖥️
-                    </div>
-                </div>
+        <!-- Feature icons -->
+        <div class="row mt-4">
+          <div class="col-4">
+            <div class="feature-icon-wrap" style="color:#fff;">
+              <div class="icon-circle" style="background:rgba(255,255,255,0.15); color:#fff;">
+                <i class="fas fa-tachometer-alt"></i>
+              </div>
+              <p style="color:#fff;">High Performance</p>
             </div>
+          </div>
+          <div class="col-4">
+            <div class="feature-icon-wrap">
+              <div class="icon-circle" style="background:rgba(255,255,255,0.15); color:#fff;">
+                <i class="fas fa-expand-arrows-alt"></i>
+              </div>
+              <p style="color:#fff;">Scalability</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="feature-icon-wrap">
+              <div class="icon-circle" style="background:rgba(255,255,255,0.15); color:#fff;">
+                <i class="fas fa-lock"></i>
+              </div>
+              <p style="color:#fff;">Secure Solutions</p>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- Quote Form -->
-    <div class="quote-form" id="quote">
-        <h3>Get a Quick Quote</h3>
-        <form>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" placeholder="your@email.com" required>
-            </div>
-            <div class="form-group">
-                <label>Phone</label>
-                <input type="tel" placeholder="+91 XXXXX XXXXX" required>
-            </div>
-            <div class="form-group">
-                <label>Company</label>
-                <input type="text" placeholder="Company Name">
-            </div>
-            <div class="form-group">
-                <label>Server Requirements</label>
-                <select required>
-                    <option value="">Select Server Type</option>
-                    <option value="rack">Rack Servers</option>
-                    <option value="tower">Tower Servers</option>
-                    <option value="blade">Blade Servers</option>
-                </select>
-            </div>
-            <button type="submit" class="quote-btn">Get a Quote</button>
-        </form>
-    </div>
+      <div class="col-md-3 text-center d-none d-md-block">
+        {% if category.hero_image %}
+          <img src="{{ category.hero_image.url }}" alt="{{ category.name }}" class="ppc-hero-img img-fluid">
+        {% endif %}
+      </div>
 
-    <!-- Products Section -->
-    <div class="products-section">
-        <div class="container">
-            <h2 class="section-title">High-Performance Dell Servers</h2>
-            
-            <div class="product-types">
-                <div class="product-type">
-                    <div class="product-type-icon">🖥️</div>
-                    <h4>Rack Servers</h4>
-                    <p>Space-efficient 1U/2U design</p>
-                </div>
-                <div class="product-type">
-                    <div class="product-type-icon">📦</div>
-                    <h4>Tower Servers</h4>
-                    <p>Standalone multi-socket systems</p>
-                </div>
-                <div class="product-type">
-                    <div class="product-type-icon">⚡</div>
-                    <h4>Blade Servers</h4>
-                    <p>Ultra-dense modular architecture</p>
-                </div>
+      <div class="col-md-4">
+        <div class="quote-card">
+          <h5>Request a Free Quote</h5>
+          <form method="post" action="{% url 'ppc_quote_submit' %}">
+            {% csrf_token %}
+            <input type="hidden" name="category" value="{{ category.slug }}">
+            <div class="mb-0">
+              <label>Name</label>
+              <input type="text" name="name" class="form-control" required>
             </div>
+            <div class="mb-0">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-0">
+              <label>Phone</label>
+              <input type="tel" name="phone" class="form-control" required>
+            </div>
+            <div class="mb-0">
+              <label>Company</label>
+              <input type="text" name="company" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label>Server Requirements</label>
+              <textarea name="requirements" class="form-control" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn-quote">Get a Quote</button>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Benefits Section -->
-    <div class="benefits-section">
-        <div class="container">
-            <h2 class="benefits-title">Why Choose Dell Servers?</h2>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h4><span class="checkmark">✓</span> PowerEdge R740</h4>
-                    <p>Dual-socket Xeon Scalable processors with exceptional memory capacity and flexibility for virtualization</p>
-                </div>
-                <div class="benefit-card">
-                    <h4><span class="checkmark">✓</span> PowerEdge T440</h4>
-                    <p>Enterprise-grade tower with modular design, enhanced cooling, and advanced management capabilities</p>
-                </div>
-                <div class="benefit-card">
-                    <h4><span class="checkmark">✓</span> PowerEdge M640</h4>
-                    <p>Blade-based remote presence and live migration for containerized and cloud-native workloads</p>
-                </div>
-            </div>
+<!-- ===== SUBCATEGORY TABS ===== -->
+{% if subcategories %}
+<div class="subcategory-tabs sticky-top" style="top:0; z-index:100; border-top:1px solid #dce6f0;">
+  <div class="container">
+    <nav class="nav">
+      {% for sub in subcategories %}
+      <a class="nav-link" href="{{ sub.get_absolute_url }}">
+        {% if sub.icon %}
+          <img src="{{ sub.icon.url }}" alt="{{ sub.name }}">
+        {% else %}
+          <i class="fas fa-server text-warning"></i>
+        {% endif %}
+        {{ sub.name }}
+      </a>
+      {% endfor %}
+    </nav>
+  </div>
+</div>
+{% endif %}
 
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h4>🔒 Enterprise-Grade Security</h4>
-                    <p>Built-in security features with secure boot, TPM 2.0, and encrypted storage options</p>
-                </div>
-                <div class="benefit-card">
-                    <h4>⚙️ Flexible Configuration</h4>
-                    <p>Customize CPU, RAM, and storage based on your specific workload requirements</p>
-                </div>
-                <div class="benefit-card">
-                    <h4>📈 Robust Scalability</h4>
-                    <p>Scale your infrastructure with ease using industry-standard components and management</p>
-                </div>
+<!-- ===== SUBCATEGORY GRID ===== -->
+{% if subcategories %}
+<section style="padding:40px 0; background:#fff;">
+  <div class="container">
+    <h2 class="section-heading">Powerful &amp; Reliable {{ category.name }}</h2>
+    <div class="row g-3">
+      {% for sub in subcategories %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{{ sub.get_absolute_url }}" class="subcat-card">
+          {% if sub.icon %}
+            <img src="{{ sub.icon.url }}" alt="{{ sub.name }}">
+          {% else %}
+            <div class="subcat-icon-placeholder">
+              <i class="fas fa-server"></i>
             </div>
-        </div>
+          {% endif %}
+          <h6>{{ sub.name }}</h6>
+          {% if sub.short_description %}
+            <p>{{ sub.short_description|striptags|truncatechars:60 }}</p>
+          {% endif %}
+        </a>
+      </div>
+      {% endfor %}
     </div>
+  </div>
+</section>
+{% endif %}
 
-    <!-- Models Section -->
-    <div class="models-section">
-        <div class="container">
-            <h2 class="models-title">Best-Selling Dell Models</h2>
-            
-            <div class="models-grid">
-                <div class="model-card">
-                    <div class="model-image">
-                        <div style="font-size: 80px;">📟</div>
-                    </div>
-                    <div class="model-info">
-                        <h4>PowerEdge R740</h4>
-                        <div class="model-specs">2U Rack Server • 2 x Intel Xeon</div>
-                    </div>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-image">
-                        <div style="font-size: 80px;">📦</div>
-                    </div>
-                    <div class="model-info">
-                        <h4>PowerEdge T440</h4>
-                        <div class="model-specs">Tower Server • Dual Socket</div>
-                    </div>
-                </div>
-
-                <div class="model-card">
-                    <div class="model-image">
-                        <div style="font-size: 80px;">⚡</div>
-                    </div>
-                    <div class="model-info">
-                        <h4>PowerEdge M1000e</h4>
-                        <div class="model-specs">Blade Enclosure • Ultra-Dense</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Partnership Section -->
-            <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px;">
-                <p style="color: #666; margin-bottom: 15px; font-size: 13px;">Authorised Partner of:</p>
-                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; align-items: center;">
-                    <strong style="color: #003d7a; font-size: 18px;">DELL EMC</strong>
-                </div>
-            </div>
-        </div>
+<!-- ===== WHY CHOOSE ===== -->
+<section class="why-section">
+  <div class="container">
+    <h2 class="section-heading">{{ category.why_choose_heading }}</h2>
+    {% if category.description %}
+    <div class="mb-4" style="color:#555; font-size:14px;">
+      {{ category.description|safe }}
     </div>
+    {% endif %}
 
-    <!-- CTA Section -->
-    <div class="cta-section">
-        <div class="cta-content">
-            <h2 style="font-size: 32px; margin-bottom: 20px;">Talk to Our Server Experts Today</h2>
-            <div class="cta-text">
-                Get enterprise-grade solutions tailored to your business needs. Call or email us for immediate assistance and competitive pricing.
-            </div>
-            <div class="cta-buttons">
-                <a href="tel:+919811183994" class="cta-btn cta-btn-primary">📞 Call Us Now</a>
-                <a href="mailto:info@zacocomputer.com" class="cta-btn cta-btn-secondary">📧 Send an Email</a>
-                <a href="#quote" class="cta-btn cta-btn-primary">💬 Live Chat</a>
-            </div>
+    {% if subcategories %}
+    <div class="row g-3">
+      {% for sub in subcategories %}
+      <div class="col-md-4">
+        <div class="why-card">
+          <h6>
+            <i class="fas fa-server"></i>
+            <a href="{{ sub.get_absolute_url }}" style="color:inherit; text-decoration:none;">{{ sub.name }}</a>
+          </h6>
+          {% if sub.description %}
+          <div style="font-size:13px; color:#555;">{{ sub.description|safe|truncatechars_html:200 }}</div>
+          {% elif sub.short_description %}
+          <div style="font-size:13px; color:#555;">{{ sub.short_description|safe }}</div>
+          {% endif %}
         </div>
+      </div>
+      {% endfor %}
     </div>
+    {% endif %}
+  </div>
+</section>
 
-    <!-- Footer -->
-    {% comment %} <div class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <span>✓ Trusted & Reliable</span>
-                <span>✓ Warranty & Support</span>
-                <a href="tel:+919811183994">📞 Call Us Now</a>
-                <a href="#" onclick="alert('Live chat would open here'); return false;">💬 Live Chat</a>
+<!-- ===== TOP PRODUCTS / MODELS ===== -->
+{% if products %}
+<section class="models-section">
+  <div class="container">
+    <h2 class="section-heading">Best-Selling {{ category.name }}</h2>
+    <div class="row g-3">
+      {% for product in products %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{{ product.get_absolute_url }}" class="model-card">
+          <div class="model-card-header">{{ product.name }}</div>
+          {% if product.hero_image %}
+            <img src="{{ product.hero_image.url }}" alt="{{ product.name }}">
+          {% else %}
+            <div style="height:140px; background:#f0f4f8; display:flex; align-items:center; justify-content:center;">
+              <i class="fas fa-server fa-3x" style="color:#c8d8f5;"></i>
             </div>
-            <p>© 2025 Zaco Computer Pvt. Ltd. All rights reserved. | Enterprise IT Infrastructure Solutions</p>
-        </div>
-    </div> {% endcomment %}
+          {% endif %}
+          <div class="model-card-body">
+            <div class="price">
+              ₹{{ product.price|floatformat:0 }}
+              <small>Starting from</small>
+            </div>
+            {% if product.sub_heading %}
+              <p style="font-size:12px; color:#666; margin:6px 0 0;">{{ product.sub_heading }}</p>
+            {% endif %}
+            <span class="btn-view-product">View Details</span>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===== PARTNER / TESTIMONIAL STRIP ===== -->
+<div class="partner-strip">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        {% if category.partner_logo %}
+          <p style="font-size:12px; color:#888; margin-bottom:6px; font-weight:600;">{{ category.partner_label }}</p>
+          <img src="{{ category.partner_logo.url }}" alt="Partner" class="partner-logo">
+        {% endif %}
+      </div>
+      <div class="col-md-9">
+        {% if category.testimonial_text %}
+        <p class="testimonial-text">{{ category.testimonial_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BOTTOM CTA BAR ===== -->
+<div class="bottom-cta-bar">
+  <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+      <span class="cta-item"><i class="fas fa-shield-alt"></i> 100% Satisfaction Guaranteed</span>
+      <span class="cta-item"><i class="fas fa-tools"></i> Warranty &amp; Support</span>
+      <span class="cta-item"><i class="fas fa-phone"></i> 98111 83994</span>
+    </div>
+    <a href="https://wa.me/919811183994" target="_blank" class="btn-live-chat">
+      <i class="fab fa-whatsapp"></i> Live Chat
+    </a>
+  </div>
+</div>
 
 {% endblock %}

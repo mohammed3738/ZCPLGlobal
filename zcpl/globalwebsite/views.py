@@ -1773,16 +1773,36 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 
 def ppc_category_detail(request, slug):
+    category = get_object_or_404(PPCCategory, slug=slug, is_active=True)
+    subcategories = category.subcategories.filter(is_active=True)
+    # Get featured products directly under this category
+    products = PPCProduct.objects.filter(category=category, is_active=True)[:6]
 
-    category = get_object_or_404(PPCCategory, slug=slug)
-    products = Product.objects.filter(category=category)
-    return render(request, "ppc/ppc_category.html", {
-        "category": category,
-        "products": products,
-    })
+    context = {
+        'category': category,
+        'subcategories': subcategories,
+        'products': products,
+    }
+    return render(request, 'ppc/ppc_category.html', context)
+
+
+def ppc_subcategory_detail(request, slug):
+    subcategory = get_object_or_404(PPCSubcategory, slug=slug, is_active=True)
+    products = PPCProduct.objects.filter(subcategory=subcategory, is_active=True)
+
+    context = {
+        'subcategory': subcategory,
+        'category': subcategory.category,
+        'products': products,
+    }
+    return render(request, 'ppc/ppc_subcategory.html', context)
 
 def ppc_product_detail(request, slug):
     product = get_object_or_404(PPCProduct, slug=slug, is_active=True)
+    related_products = PPCProduct.objects.filter(
+        subcategory=product.subcategory,
+        is_active=True
+    ).exclude(pk=product.pk)[:3]
 
     if request.method == "POST":
         form = PPCQuoteForm(request.POST)
@@ -1829,8 +1849,49 @@ Requirement:
         {
             "product": product,
             "form": form,
+            "related_products": related_products,
         }
     )
+
+
+
+def ppc_quote_submit(request):
+    if request.method == 'POST':
+        from django.core.mail import send_mail
+        from django.contrib import messages
+        
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        company = request.POST.get('company', '')
+        requirements = request.POST.get('requirements', '')
+        category = request.POST.get('category', '')
+        subcategory = request.POST.get('subcategory', '')
+
+        subject = f"New PPC Quote Request — {category or subcategory}"
+        message = f"""
+New quote request received:
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Company: {company}
+Category: {category}
+Subcategory: {subcategory}
+Requirements: {requirements}
+        """
+
+        send_mail(
+            subject,
+            message,
+            'noreply@zacocomputer.com',
+            ['info@zacocomputer.com'],
+            fail_silently=True,
+        )
+
+        messages.success(request, "Thank you! Our team will contact you shortly.")
+    
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 

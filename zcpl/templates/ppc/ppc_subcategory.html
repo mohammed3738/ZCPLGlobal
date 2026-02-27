@@ -1,0 +1,222 @@
+{% extends "ppc/ppc_base.html" %}
+{% load static %}
+
+{% block title %}{{ subcategory.meta_title }}{% endblock %}
+{% block meta_description %}{{ subcategory.meta_description }}{% endblock %}
+
+{% block extra_head %}
+<style>
+  :root {
+    --zaco-blue: #1a3c6e;
+    --zaco-blue-mid: #1e4d8c;
+    --zaco-yellow: #f5a623;
+    --zaco-yellow-dark: #e09010;
+    --zaco-teal: #008080;
+    --zaco-light-bg: #f4f7fb;
+    --zaco-border: #dce6f0;
+  }
+
+  /* Reuse styles from category page */
+  .ppc-badge-bar { background: var(--zaco-blue); color:#fff; padding:8px 0; font-size:13px; font-weight:600; }
+  .ppc-badge-bar .badge-item { display:inline-flex; align-items:center; gap:6px; margin:0 20px; }
+  .ppc-badge-bar .badge-item i { color: var(--zaco-yellow); }
+
+  .ppc-hero {
+    background: linear-gradient(135deg, var(--zaco-blue) 0%, var(--zaco-blue-mid) 60%, #2b6cb0 100%);
+    padding: 44px 0 36px;
+    color: #fff;
+  }
+  .ppc-hero h1 { font-size:2rem; font-weight:800; color:#fff; margin-bottom:6px; }
+  .ppc-hero .sub-heading { font-size:1rem; color:rgba(255,255,255,0.85); }
+  .ppc-hero-img { max-height:200px; object-fit:contain; filter:drop-shadow(0 8px 20px rgba(0,0,0,0.35)); }
+
+  .quote-card { background:#fff; border-radius:6px; box-shadow:0 4px 24px rgba(0,0,0,0.15); padding:22px 24px 24px; }
+  .quote-card h5 { background:var(--zaco-blue); color:#fff; margin:-22px -24px 18px; padding:12px 20px; font-size:1rem; font-weight:700; border-radius:6px 6px 0 0; }
+  .quote-card .form-control { border:1px solid #cdd8e8; border-radius:4px; font-size:13px; padding:7px 10px; margin-bottom:10px; }
+  .quote-card label { font-size:12px; font-weight:600; color:#444; margin-bottom:3px; }
+  .btn-quote { background:var(--zaco-yellow); color:#fff; font-weight:700; font-size:15px; border:none; border-radius:4px; padding:10px; width:100%; transition:background 0.2s; }
+  .btn-quote:hover { background:var(--zaco-yellow-dark); color:#fff; }
+
+  .breadcrumb-strip { background:#fff; border-bottom:1px solid var(--zaco-border); padding:10px 0; font-size:13px; }
+  .breadcrumb-strip a { color:var(--zaco-blue); text-decoration:none; font-weight:600; }
+  .breadcrumb-strip a:hover { text-decoration:underline; }
+
+  .section-heading { font-size:1.4rem; font-weight:800; color:var(--zaco-blue); margin-bottom:20px; padding-bottom:8px; border-bottom:3px solid var(--zaco-yellow); display:inline-block; }
+
+  .product-card {
+    border:1px solid var(--zaco-border);
+    border-radius:8px;
+    background:#fff;
+    overflow:hidden;
+    transition:box-shadow 0.2s, transform 0.2s;
+    display:block;
+    text-decoration:none;
+    color:inherit;
+  }
+  .product-card:hover { box-shadow:0 6px 24px rgba(26,60,110,0.15); transform:translateY(-4px); color:inherit; }
+  .product-card-header { background:var(--zaco-blue); color:#fff; padding:10px 14px; font-weight:700; font-size:14px; }
+  .product-card img { width:100%; height:150px; object-fit:contain; padding:16px; background:#f8fafc; }
+  .product-card-body { padding:14px; }
+  .product-card-body .price { font-size:1.15rem; font-weight:800; color:var(--zaco-blue); }
+  .product-card-body .sub-text { font-size:12px; color:#666; margin:5px 0 0; }
+  .btn-view { background:var(--zaco-yellow); color:#fff; border:none; border-radius:4px; font-weight:700; font-size:13px; padding:7px 14px; width:100%; margin-top:10px; display:block; text-align:center; text-decoration:none; }
+  .btn-view:hover { background:var(--zaco-yellow-dark); color:#fff; }
+
+  .why-section { background:var(--zaco-light-bg); padding:40px 0; }
+  .feature-list li { font-size:14px; color:#444; padding:6px 0; display:flex; align-items:flex-start; gap:8px; list-style:none; }
+  .feature-list li::before { content:'✔'; color:var(--zaco-teal); font-size:12px; margin-top:2px; flex-shrink:0; }
+  .feature-list { padding-left:0; }
+
+  .bottom-cta-bar { background:var(--zaco-blue); color:#fff; padding:14px 0; font-size:13px; }
+  .bottom-cta-bar .cta-item { display:inline-flex; align-items:center; gap:6px; margin:0 16px; }
+  .bottom-cta-bar i { color:var(--zaco-yellow); }
+  .btn-live-chat { background:var(--zaco-yellow); color:#fff; font-weight:700; font-size:13px; padding:6px 18px; border-radius:4px; border:none; text-decoration:none; }
+  .btn-live-chat:hover { background:var(--zaco-yellow-dark); color:#fff; }
+
+  @media (max-width:768px) {
+    .ppc-hero h1 { font-size:1.5rem; }
+    .quote-card { margin-top:24px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- BADGE BAR -->
+<div class="ppc-badge-bar text-center">
+  <span class="badge-item"><i class="fas fa-shield-alt"></i> Best Prices Guaranteed</span>
+  <span class="badge-item"><i class="fas fa-headset"></i> Expert Support 24/7</span>
+  <span class="badge-item"><i class="fas fa-shipping-fast"></i> Fast Shipping</span>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-strip">
+  <div class="container">
+    <a href="/">Home</a>
+    <span class="mx-2 text-muted">/</span>
+    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+    <span class="mx-2 text-muted">/</span>
+    <span style="color:#555;">{{ subcategory.name }}</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="ppc-hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-5 mb-4 mb-md-0">
+        <h1>{{ subcategory.heading|default:subcategory.name }}</h1>
+        {% if subcategory.short_description %}
+          <div class="sub-heading">{{ subcategory.short_description|safe|striptags|truncatechars:180 }}</div>
+        {% endif %}
+        <div class="mt-3 d-flex flex-wrap gap-2">
+          <span class="badge px-3 py-2" style="background:rgba(255,255,255,0.15); color:#fff; font-size:13px;">
+            <i class="fas fa-check-circle me-1"></i> Enterprise-Grade
+          </span>
+          <span class="badge px-3 py-2" style="background:rgba(255,255,255,0.15); color:#fff; font-size:13px;">
+            <i class="fas fa-cogs me-1"></i> Flexible Configs
+          </span>
+          <span class="badge px-3 py-2" style="background:rgba(255,255,255,0.15); color:#fff; font-size:13px;">
+            <i class="fas fa-lock me-1"></i> Robust Security
+          </span>
+        </div>
+      </div>
+      <div class="col-md-3 text-center d-none d-md-block">
+        {% if subcategory.hero_image %}
+          <img src="{{ subcategory.hero_image.url }}" alt="{{ subcategory.name }}" class="ppc-hero-img img-fluid">
+        {% elif category.hero_image %}
+          <img src="{{ category.hero_image.url }}" alt="{{ category.name }}" class="ppc-hero-img img-fluid">
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        <div class="quote-card">
+          <h5>Get a Quick Quote</h5>
+          <form method="post" action="{% url 'ppc_quote_submit' %}">
+            {% csrf_token %}
+            <input type="hidden" name="subcategory" value="{{ subcategory.slug }}">
+            <div class="mb-0"><label>Name</label><input type="text" name="name" class="form-control" required></div>
+            <div class="mb-0"><label>Email</label><input type="email" name="email" class="form-control" required></div>
+            <div class="mb-0"><label>Phone</label><input type="tel" name="phone" class="form-control" required></div>
+            <div class="mb-0"><label>Company</label><input type="text" name="company" class="form-control"></div>
+            <div class="mb-3"><label>Server Requirements</label><textarea name="requirements" class="form-control" rows="2"></textarea></div>
+            <button type="submit" class="btn-quote">Get a Quote</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS GRID -->
+{% if products %}
+<section style="padding:40px 0; background:#fff;">
+  <div class="container">
+    <h2 class="section-heading">{{ subcategory.name }} — Available Models</h2>
+    <div class="row g-3">
+      {% for product in products %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{{ product.get_absolute_url }}" class="product-card">
+          <div class="product-card-header">{{ product.name }}</div>
+          {% if product.hero_image %}
+            <img src="{{ product.hero_image.url }}" alt="{{ product.name }}">
+          {% else %}
+            <div style="height:150px; background:#f0f4f8; display:flex; align-items:center; justify-content:center;">
+              <i class="fas fa-server fa-3x" style="color:#c8d8f5;"></i>
+            </div>
+          {% endif %}
+          <div class="product-card-body">
+            <div class="price">₹{{ product.price|floatformat:0 }} <small style="font-size:11px; font-weight:400; color:#888;">Starting</small></div>
+            {% if product.sub_heading %}<p class="sub-text">{{ product.sub_heading }}</p>{% endif %}
+            <span class="btn-view">View Details →</span>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- WHY CHOOSE / DESCRIPTION -->
+<section class="why-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2 class="section-heading">Why Choose {{ subcategory.name }}?</h2>
+        {% if subcategory.description %}
+          <div style="font-size:14px; color:#444; line-height:1.7;">{{ subcategory.description|safe }}</div>
+        {% endif %}
+      </div>
+      <div class="col-md-4">
+        <div style="background:#fff; border:1px solid var(--zaco-border); border-radius:8px; padding:20px;">
+          <h6 style="font-weight:700; color:var(--zaco-blue); margin-bottom:14px; font-size:15px;">
+            <i class="fas fa-phone-alt me-2" style="color:var(--zaco-yellow);"></i>Talk to an Expert
+          </h6>
+          <p style="font-size:13px; color:#555; margin-bottom:12px;">Not sure which {{ subcategory.name }} suits your needs? Our server specialists are ready to help.</p>
+          <a href="tel:+919811183994" class="btn-view" style="margin-top:0;">
+            <i class="fas fa-phone me-1"></i> Call: 98111 83994
+          </a>
+          <a href="mailto:info@zacocomputer.com" class="btn-view mt-2" style="background:var(--zaco-blue);">
+            <i class="fas fa-envelope me-1"></i> Email Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA BAR -->
+<div class="bottom-cta-bar">
+  <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+      <span class="cta-item"><i class="fas fa-shield-alt"></i> Trusted &amp; Reliable</span>
+      <span class="cta-item"><i class="fas fa-tools"></i> Warranty &amp; Support</span>
+      <span class="cta-item"><i class="fas fa-phone"></i> 98111 83994</span>
+    </div>
+    <a href="https://wa.me/919811183994" target="_blank" class="btn-live-chat">
+      <i class="fab fa-whatsapp"></i> Live Chat
+    </a>
+  </div>
+</div>
+
+{% endblock %}

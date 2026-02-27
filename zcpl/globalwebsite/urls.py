@@ -58,13 +58,17 @@ urlpatterns = [
     path('ppc/products/', views.ppc_product_manage, name='ppc-product-manage'),
     path('ppc/products/edit/<int:pk>/', views.ppc_product_manage, name='ppc-product-edit'),
     path('ppc/products/delete/<int:pk>/', views.ppc_product_delete, name='ppc-product-delete'),
-    path('ppc/category/<slug:slug>/', views.ppc_category_detail, name='ppc-category-detail'),
+    # PPC Category landing pages
+    path('ppc/category/<slug:slug>/', views.ppc_category_detail, name='ppc_category_detail'),
+
+    # PPC Subcategory pages
+    path('ppc/subcategory/<slug:slug>/', views.ppc_subcategory_detail, name='ppc_subcategory_detail'),
     path(
         'ppc/<slug:slug>/',
         views.ppc_product_detail,
         name='ppc_product_detail'
     ),
-
+    path('quote/submit/', views.ppc_quote_submit, name='ppc_quote_submit'),
 
     path('cart/', views.cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),

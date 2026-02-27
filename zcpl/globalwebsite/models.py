@@ -13,8 +13,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.html import strip_tags
-from django.utils.html import strip_tags
 from django.utils.text import slugify
+
 
 # Create your models here.
 
@@ -170,38 +170,163 @@ class Product(models.Model):
 
 
 
-
 class PPCCategory(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True)
-    description = RichTextField(blank=True, null=True)
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    heading = models.CharField(max_length=255, help_text="Main heading shown on landing page e.g. 'HPE Servers for Your Business Needs'")
+    sub_heading = models.CharField(max_length=255, blank=True, help_text="Subheading e.g. 'Rack, Tower & Blade Servers Available'")
 
-    # ✅ SEO fields
-    meta_title = models.CharField(max_length=150, blank=True, null=True)
+    badge_1 = models.CharField(max_length=100, blank=True, default="Best Prices Guaranteed")
+    badge_2 = models.CharField(max_length=100, blank=True, default="Expert Support 24/7")
+    badge_3 = models.CharField(max_length=100, blank=True, default="Fast Shipping")
+
+    why_choose_heading = models.CharField(max_length=255, blank=True, default="Why Choose Us?")
+    short_description = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True)
+
+    hero_image = ProcessedImageField(
+        upload_to='ppc/categories/',
+        processors=[Transpose(), ResizeToFit(1200, 800)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+
+    partner_logo = ProcessedImageField(
+        upload_to='ppc/categories/partners/',
+        processors=[Transpose(), ResizeToFit(400, 200)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True,
+        help_text="Partner/certification logo shown at bottom (e.g. HPE, Dell EMC logo)"
+    )
+    partner_label = models.CharField(max_length=100, blank=True, default="Certified Partner of:")
+
+    testimonial_text = models.TextField(blank=True)
+
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    # SEO
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
     meta_description = models.TextField(blank=True, null=True)
+
+    # created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = 'PPC Category'
+        verbose_name_plural = 'PPC Categories'
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Auto-generate slug if missing
         if not self.slug:
-            self.slug = slugify(self.name)
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+            while PPCCategory.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
 
-        # Auto-generate meta_title and meta_description if not provided
         if not self.meta_title:
-            self.meta_title = f"{self.name} | Zaco Computers"
-        if not self.meta_description and self.description:
-            self.meta_description = (
-                self.description[:155].replace('\n', ' ')
-                if len(self.description) > 155 else self.description
-            )
+            self.meta_title = self.heading or self.name
+
+        if not self.meta_description and self.short_description:
+            self.meta_description = strip_tags(self.short_description)[:160]
 
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("ppc_category_detail", kwargs={"slug": self.slug})
+
+
+class PPCSubcategory(models.Model):
+    category = models.ForeignKey(
+        PPCCategory,
+        on_delete=models.CASCADE,
+        related_name='subcategories'
+    )
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    heading = models.CharField(max_length=255, blank=True)
+    short_description = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True)
+
+    icon = ProcessedImageField(
+        upload_to='ppc/subcategories/icons/',
+        processors=[Transpose(), ResizeToFit(100, 100)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+    hero_image = ProcessedImageField(
+        upload_to='ppc/subcategories/',
+        processors=[Transpose(), ResizeToFit(800, 600)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    # SEO
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    # created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = 'PPC Subcategory'
+        verbose_name_plural = 'PPC Subcategories'
+
+    def __str__(self):
+        return f"{self.category.name} > {self.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+            while PPCSubcategory.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+
+        if not self.meta_title:
+            self.meta_title = self.heading or self.name
+
+        if not self.meta_description and self.short_description:
+            self.meta_description = strip_tags(self.short_description)[:160]
+
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("ppc_subcategory_detail", kwargs={"slug": self.slug})
 
 
 class PPCProduct(models.Model):
+    category = models.ForeignKey(
+    PPCCategory,
+    on_delete=models.SET_NULL,
+    related_name='products',
+    null=True, blank=True
+)
+    subcategory = models.ForeignKey(
+        PPCSubcategory,
+        on_delete=models.SET_NULL,
+        related_name='products',
+        null=True, blank=True
+    )
+
     name = models.CharField(max_length=200)
     sub_heading = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)

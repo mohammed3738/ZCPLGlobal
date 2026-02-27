@@ -14,7 +14,6 @@ admin.site.register(Review)
 # admin.site.register(SubCategory)
 admin.site.register(Order)
 admin.site.register(PPCQuote)
-admin.site.register(PPCCategory)
 
 
 class SSDInline(admin.TabularInline):
@@ -213,8 +212,85 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 
 
+
+
+
+
+
+
+
+
+@admin.register(PPCCategory)
+class PPCCategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug', 'is_active', 'order', 'created_at']
+    list_editable = ['is_active', 'order']
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name', 'heading']
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('name', 'slug', 'heading', 'sub_heading', 'is_active', 'order')
+        }),
+        ('Badge Bar', {
+            'fields': ('badge_1', 'badge_2', 'badge_3'),
+            'classes': ('collapse',)
+        }),
+        ('Content', {
+            'fields': ('why_choose_heading', 'short_description', 'description')
+        }),
+        ('Images', {
+            'fields': ('hero_image', 'partner_logo', 'partner_label')
+        }),
+        ('Testimonial', {
+            'fields': ('testimonial_text',),
+            'classes': ('collapse',)
+        }),
+        ('SEO', {
+            'fields': ('meta_title', 'meta_description'),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+class PPCProductInline(admin.TabularInline):
+    model = PPCProduct
+    fields = ['name', 'price', 'is_active']
+    extra = 0
+    show_change_link = True
+
+
+@admin.register(PPCSubcategory)
+class PPCSubcategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', 'slug', 'is_active', 'order', 'created_at']
+    list_editable = ['is_active', 'order']
+    list_filter = ['category', 'is_active']
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name', 'category__name']
+    raw_id_fields = ['category']
+    inlines = [PPCProductInline]
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('category', 'name', 'slug', 'heading', 'is_active', 'order')
+        }),
+        ('Content', {
+            'fields': ('short_description', 'description')
+        }),
+        ('Images', {
+            'fields': ('icon', 'hero_image')
+        }),
+        ('SEO', {
+            'fields': ('meta_title', 'meta_description'),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+
 @admin.register(PPCProduct)
 class PPCProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ("name", "is_active", "created_at")
+    list_display = ("name", "category", "subcategory", "is_active", "created_at")
+    # list_filter = ['category', 'subcategory', 'is_active']
+    raw_id_fields = ['category', 'subcategory']
+
     view_on_site = True
+
