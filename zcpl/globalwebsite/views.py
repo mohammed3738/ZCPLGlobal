@@ -141,6 +141,9 @@ def it_hardware(request):
 def vmware_support(request):
     return render(request,'services/vmware_support.html')
 
+def microsoft_support(request):
+    return render(request,'services/microsoft_support.html')
+
 def server_maintenance(request):
     return render(request,'services/server_maintenance.html')
 

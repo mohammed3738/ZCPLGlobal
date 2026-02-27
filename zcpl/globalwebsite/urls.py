@@ -31,6 +31,7 @@ urlpatterns = [
     path('itad-services/',views.itadservices,name="itad-services"),
     path('it-hardware/',views.it_hardware,name="it-hardware"),
     path('vmware-support/',views.vmware_support,name="vmware-support"),
+    path('microsoft-thirdparty-support/',views.microsoft_support,name="microsoft-thirdparty-support"),
     path('server-maintenance/',views.server_maintenance,name="server-maintenance"),
     path('storage-maintenance/',views.storage_maintenance,name="storage-maintenance"),
     path('network-maintenance/',views.network_maintenance,name="network-maintenance"),
