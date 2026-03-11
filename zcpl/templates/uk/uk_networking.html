@@ -1,0 +1,556 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}New & Refurbished Network Hardware - Switches, Routers & More
+{% endblock %}
+{% block meta_description %}
+ Explore new & refurbished enterprise networking hardware at Zaco, including cisco switches & routers designed for companies of all sizes across the UK.
+{% endblock %}
+
+{% block content %}
+<style>
+    /* ═══════════════════════════════════════════
+       ENTERPRISE NETWORKING UK PAGE — UNIQUE STYLES
+       Theme: --navy-dark (#0c2c4e), --accent (#2D7DD2), light backgrounds
+    ═══════════════════════════════════════════ */
+
+    /* ── INTRO SECTION ── */
+        .net-intro {
+            background: #f4f7fb;
+            padding: 60px 0;
+        }
+        .drv-label {
+            font-size: 1 rem; font-weight: 500; letter-spacing: 1px;
+            text-transform: uppercase; color: #666666; margin-bottom: 12px;
+            display: block; text-align: center;
+        }
+        .net-label {
+            font-size: 0.85rem; font-weight: 500; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #666; margin-bottom: 12px;
+            display: block; text-align: center;
+        }
+        .net-intro-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .net-intro-grid {
+            display: grid; grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px; align-items: center;
+        }
+        .net-intro-inner h2 {
+            font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+            color: #1a3546; font-weight: 800; line-height: 1.25;
+            margin-bottom: 30px;
+        }
+        .net-intro-grid p {
+            color: #000; font-size: 1rem; line-height: 1.85; margin-bottom: 16px;
+        }
+        .net-intro-grid p:last-child { margin-bottom: 0; }
+        .net-intro-img img {
+            border-radius: 14px; width: 500px; height: 300px;
+            box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+            object-fit: cover;
+        }
+        .net-cta-inline {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #0c2c4e; color: #fff; padding: 12px 26px;
+            border-radius: 6px; font-weight: 700; font-size: 0.9rem;
+            text-decoration: none; margin-top: 20px;
+            transition: background 0.2s;
+        }
+        .net-cta-inline:hover { background: #2D7DD2; color: #fff; }
+        @media (max-width: 860px) {
+            .net-intro-grid { grid-template-columns: 1fr; gap: 36px; }
+        }
+
+    /* ── FEATURED PRODUCTS: ROUTERS & SWITCHES ── */
+        .net-products-section {
+            background: #fff;
+            padding: 80px 0;
+        }
+        .net-products-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .net-section-header {
+            margin-bottom: 40px;
+        }
+        .net-section-header h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 14px; text-align: center;
+        }
+        .net-section-header p {
+            color: #000; font-size: 1rem; line-height: 1.85; text-align: center;
+            margin: 0 auto;
+        }
+
+    /* Product type rows — sidebar + body */
+        .net-type-row {
+            display: grid; grid-template-columns: 300px 1fr;
+            border-radius: 16px; overflow: hidden;
+            border: 1.5px solid #dde4ef;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 28px;
+            transition: box-shadow 0.3s;
+        }
+        .net-type-row:hover { box-shadow: 0 12px 40px rgba(45,125,210,0.13); }
+        .net-type-sidebar {
+            background: linear-gradient(160deg, #0c2c4e 0%, #0e3560 100%);
+            padding: 40px 30px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 260px;
+        }
+        .net-type-icon-big {
+            font-size: 2.8rem; margin-bottom: 20px; line-height: 1;
+        }
+        .net-type-name {
+            font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 12px; line-height: 1.2;
+        }
+        .net-type-tagline {
+            color: rgba(255,255,255,0.72); font-size: 0.85rem; line-height: 1.65;
+            margin-bottom: 24px; flex: 1;
+        }
+        .net-type-body {
+            background: #fff; padding: 36px 40px;
+            display: flex; flex-direction: column; justify-content: flex-start;
+        }
+        .net-type-body h3 {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            color: #0c2c4e; font-weight: 700; margin-bottom: 14px; text-align: left;
+        }
+        .net-type-desc {
+            color: #333; font-size: 0.95rem; line-height: 1.78;
+            margin-bottom: 24px;
+            padding-bottom: 20px; border-bottom: 1px solid #eef2f7;
+        }
+
+    /* Router / Switch sub-type list */
+        .net-subtype-list { list-style: none; padding: 0; margin: 0; }
+        .net-subtype-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f4fa;
+            display: flex; flex-direction: column; gap: 4px;
+        }
+        .net-subtype-list li:last-child { border-bottom: none; }
+        .net-subtype-title {
+            font-size: 0.88rem; font-weight: 700; color: #0c2c4e;
+        }
+        .net-subtype-models {
+            font-size: 0.82rem; color: #555; line-height: 1.55;
+        }
+
+        @media (max-width: 900px) {
+            .net-type-row { grid-template-columns: 1fr; }
+            .net-type-sidebar { min-height: auto; padding: 28px 24px; }
+            .net-type-body { padding: 28px 24px; }
+        }
+
+    /* ── COMPLETE CISCO RANGE — ICON GRID ── */
+        .net-range-section {
+            background: #f4f7fb;
+            padding: 80px 0;
+        }
+        .net-range-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .net-range-inner h2 {
+            font-size: clamp(1.5rem, 2.4vw, 2rem); text-align: center;
+            color: #1a3546; font-weight: 800; margin-bottom: 14px;
+        }
+        .net-range-inner p {
+            color: #000; font-size: 1rem; line-height: 1.85; 
+            text-align: center;
+        }
+        
+
+    /* Category cards */
+        .net-cat-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .net-cat-card {
+            background: #fff;
+            border-radius: 14px;
+            border: 1.5px solid #dde4ef;
+            padding: 28px 26px;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .net-cat-card:hover {
+            box-shadow: 0 10px 32px rgba(45,125,210,0.13);
+            border-color: #0c2c4e;
+        }
+        .net-cat-icon {
+            font-size: 2rem; margin-bottom: 14px; line-height: 1; text-align: center;
+        }
+        .net-cat-title {
+            font-size: 1rem; font-weight: 800; color: #0c2c4e; margin-bottom: 8px; text-align: center;
+        }
+        .net-cat-desc {
+            font-size: 0.87rem; color: #444; line-height: 1.65; text-align: center;
+        }
+        @media (max-width: 768px) {
+            .net-cat-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .net-cat-grid { grid-template-columns: 1fr; }
+        }
+
+    /* Can't find bar */
+        .net-cant-find {
+            margin-top: 36px;
+            background: linear-gradient(90deg, rgba(45,125,210,0.07) 0%, rgba(45,125,210,0.03) 100%);
+            border: 2px solid rgba(45,125,210,0.3);
+            border-radius: 14px; padding: 28px 32px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 20px; flex-wrap: wrap;
+        }
+        .net-cant-find p { color: #0c2c4e; font-weight: 700; font-size: 1.02rem; margin: 0; }
+        .net-cant-find span { color: #555; font-size: 0.88rem; font-weight: 400; display: block; margin-top: 4px; }
+
+    /* ── WHY ZACO SECTION ── */
+        .net-why-section {
+            background: #fff;
+            padding: 80px 0;
+        }
+        .net-why-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .net-why-grid {
+            display: grid; grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px; align-items: center;
+        }
+        .net-why-inner h2 {
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 20px;
+        }
+        .net-why-inner p {
+            color: #000; font-size: 1rem; line-height: 1.85; margin-bottom: 14px;
+        }
+        .net-why-check {
+            color: #000; font-size: 0.97rem; line-height: 1.7;
+            padding: 10px 0 10px 0;
+            border-bottom: 1px solid #eef2f7;
+            display: flex; gap: 12px; align-items: flex-start;
+        }
+        .net-why-check:last-child { border-bottom: none; }
+        .net-check-icon {
+            color: #2D7DD2; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;
+        }
+        .net-why-img img {
+            border-radius: 14px; width: 100%; height: auto;
+            box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+            object-fit: cover;
+        }
+        @media (max-width: 860px) {
+            .net-why-grid { grid-template-columns: 1fr; gap: 36px; }
+            .net-why-img { display: none; }
+        }
+
+    /* ── FAQ ── */
+        .faq-section {
+            background: #f4f7fb;
+            padding: 80px 0;
+        }
+        .faq-section-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .faq-section-header { margin-bottom: 30px; }
+        .faq-section-header h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 14px; text-align: center;
+        }
+        .faq-section-header p {
+            color: #000; font-size: 1rem; line-height: 1.85; text-align: center;
+            max-width: 820px; margin: 0 auto;
+        }
+        .faq-section-table {
+            border-radius: 14px; overflow: hidden;
+            border: 1.5px solid #dde4ef;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-top: 40px;
+            background: #fff;
+        }
+        .faq-item {
+            border-bottom: 2px solid rgba(45,125,210,0.1);
+            padding: 24px 30px;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
+            font-size: 1rem; font-weight: 600; color: #1a3546;
+            margin-bottom: 12px;
+        }
+        .faq-answer {
+            color: #000; line-height: 1.7; font-size: 0.95rem;
+        }
+
+    /* ── CTA BAND ── */
+        .net-cta {
+            background: #F2F2F2;
+            padding: 80px 0; text-align: center;
+        }
+        .net-cta-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .net-cta-inner h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 16px; line-height: 1.25;
+        }
+        .net-cta-inner p {
+            color: #000; font-size: 1rem; line-height: 1.75;
+            margin-bottom: 32px;
+        }
+        .net-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
+
+<!-- ═══════════════════════════════════════
+     BANNER SLIDER
+═══════════════════════════════════════ -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": {"el": "#main-slider-pagination", "type": "bullets", "clickable": true}, "navigation": {"nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev"}, "autoplay": {"delay": 5000}}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            {% comment %} <p class="slider-six__text"><span>Network Hardware</span></p> {% endcomment %}
+            <p class="slider-six__text"><span>NETWORK HARDWARE</span></p>
+            <h1 class="slider-six__title">Enterprise Networking Solutions for Enhanced Network Performance</h1>
+            <p style="color:azure; font-size:1.1rem;">Optimize your IT infrastructure with affordable enterprise networking solutions in the UK, such as Cisco switches, routers, access points, firewalls, transceivers &amp; more, to make your network a strategic asset for your enterprise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     INTRO
+═══════════════════════════════════════ -->
+<section class="net-intro">
+  <div class="net-intro-inner">
+    <h2>Your Trusted Source for Enterprise Networking in the UK</h2>
+    <div class="net-intro-grid">
+      <div>
+        <p>Zaco Computers UK Limited supplies new and certified refurbished Cisco networking equipment to businesses, IT teams, data centres, and managed service providers across the UK. Our inventory includes a wide range of Cisco products such as routers, switches, firewalls, access points, transceivers, wireless controllers, network modules, load balancers, and chassis.</p>
+        <p>We stock both current-generation and end-of-life Cisco hardware, which makes us a practical choice for organisations that need to maintain or extend existing infrastructure without a full platform refresh. All refurbished units are tested by our engineers before dispatch and covered by a warranty.</p>
+        <p>If you are looking for a specific model, send us your parts list. Our team will respond with availability and pricing within 24 hours.</p>
+      </div>
+      <div class="net-intro-img" >
+        <img src="{% static 'images/uk/networking1.jpeg' %}" alt="Enterprise Networking Equipment UK — Cisco Routers and Switches">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FEATURED PRODUCTS: ROUTERS & SWITCHES
+═══════════════════════════════════════ -->
+<section class="net-products-section">
+  <div class="net-products-inner">
+    <span class="drv-label">Featured Products</span>
+    <div class="net-section-header">
+      <h2>Cisco Routers &amp; Cisco Switches</h2>
+      <p>The backbone of enterprise networking. Zaco Computers UK Limited stocks a full range of Cisco routing and switching solutions. From branch-office ISR routers to high-density Nexus data centre switches, we provide ready-to-deploy networking hardware with new and certified refurbished options.</p>
+    </div>
+
+    <!-- CISCO ROUTERS -->
+    <div class="net-type-row">
+      <div class="net-type-sidebar">
+        <div>
+          <div class="net-type-icon-big"></div>
+          <div class="net-type-name">Cisco Routers</div>
+          <p class="net-type-tagline">Whether you need WAN edge routing, SD-WAN readiness, MPLS, or BGP connectivity, Zaco Computers UK Limited has a wide selection of routers available, including wired, wireless, core, edge, and VPN routers. No matter your specific requirements, we have routers in stock to help meet your needs, available in both new and refurbished options.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Get a Quote →</span>
+        </a>
+      </div>
+      <div class="net-type-body">
+        <h3>Types of Cisco Routers: </h3>
+        <ul class="net-subtype-list">
+          <li>
+            <span class="net-subtype-title">Branch Cisco Routers</span>
+            <span class="net-subtype-models">CISCO3900, CISCO2900, CISCO1900, CISCO800, ISR4000, ISR1000. Designed for remote offices and distributed enterprise sites needing secure WAN, VPN, and SD-WAN services. Available in a range of throughput capacities to match branch size.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">WAN Aggregation Services Routers (ASR)</span>
+            <span class="net-subtype-models">ASR1016, ASR1013, ASR1009-X, ASR1009, ASR1006-X, ASR1006, ASR1002-HX, ASR1002-X, ASR1001-HX, ASR1001-X. Multi-service WAN edge platforms supporting BGP routing, MPLS, site-to-site VPN, and throughput up to 10Gbps.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">Service Provider Routers (ASR 9000 / ASR 900)</span>
+            <span class="net-subtype-models">ASR9000, ASR900. High-scalability WAN aggregation for ISPs and large enterprises; supports 100Gbps links, large routing tables, and advanced HQoS for triple-play environments.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">Edge Platform: Catalyst 8000 Series</span>
+            <span class="net-subtype-models">C8200, C8300, C8500. Modern SD-WAN edge platforms built for cloud-first network architectures with intelligent WAN automation and application-aware routing.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CISCO SWITCHES -->
+    <div class="net-type-row">
+      <div class="net-type-sidebar">
+        <div>
+          <div class="net-type-icon-big"></div>
+          <div class="net-type-name">Cisco Switches</div>
+          <p class="net-type-tagline">Cisco switches form the access, distribution, and core layers of enterprise LANs and data centre fabrics. We stock the complete Catalyst and Nexus range, including previous-generation, legacy, and current-generation models, available in both new and certified refurbished options.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Get a Quote →</span>
+        </a>
+      </div>
+      <div class="net-type-body">
+        <h3>Types of Cisco Switches: </h3>
+        <ul class="net-subtype-list">
+          <li>
+            <span class="net-subtype-title">LAN Access Cisco Switches</span>
+            <span class="net-subtype-models">Catalyst 9300, 9200, 3850, 3750, 3750X, 3750G, 3750E, 3650, 2960X, 2960XR, 2960L, 2960+, C1300, C1200, C1000 — campus access layer with 24-port and 48-port PoE models available.Catalyst 9300, 9200, 3850, 3750, 3750X, 3750G, 3750E, 3650, 2960X, 2960XR, 2960L, 2960+, C1300, C1200, C1000. Campus access layer for connecting PCs, access points,. 24-port and 48-port PoE models available.</span>
+          <li>
+            <span class="net-subtype-title">LAN Core &amp; Distribution Switches</span>
+            <span class="net-subtype-models">Catalyst 9600, 9500, 9400, 6500, 4500. High-capacity modular and fixed-configuration switches for enterprise backbone and campus distribution layers.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">Data Centre Switches: Cisco Nexus</span>
+            <span class="net-subtype-models">Nexus 9000, 7000, 5000, 3000, 2000. Programmable, and high-density switches for leaf-spine data centre fabrics, cloud providers, and virtualised environments.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">Industrial Ethernet &amp; Compact Cisco Switches</span>
+            <span class="net-subtype-models">IE9300, IE5000, IE4000, IE3000, IE2000, IE1000. Compact range: Catalyst 9200CX, 3560CX, 2960C/CG, C1300, C1200, C1000. Rugged industrial switches for harsh environments; compact form factors for branch and space-limited deployments.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">SAN MDS Switches</span>
+            <span class="net-subtype-models">MDS 9100, 9200, 9300, 9500, 9700. Storage Area Network multilayer switches designed for scalable, high-availability SAN fabrics.</span>
+          </li>
+          <li>
+            <span class="net-subtype-title">Metro Ethernet Switches</span>
+            <span class="net-subtype-models">3000, 3400, 3600, 3800. Metro Ethernet switches designed for multi-point connectivity across metropolitan area networks.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     COMPLETE CISCO NETWORKING RANGE
+═══════════════════════════════════════ -->
+<section class="net-range-section">
+  <div class="net-range-inner">
+    <span class="drv-label">Complete Cisco Networking Range</span>
+    <h2>One Supplier for All Your Enterprise Network Hardware in the UK</h2>
+    <p>Alongside routers and switches, we supply the complete Cisco networking solutions across the United Kingdom, with all product categories available in both new and refurbished options.</p>
+
+    <div class="net-cat-grid">
+      <div class="net-cat-card">
+        <div class="net-cat-icon"></div>
+        <div class="net-cat-title">Cisco Firewalls</div>
+        <p class="net-cat-desc">Cisco ASA5510, ASA5520, ASA5585 and IPS-4240-K9 available new and refurbished. Network perimeter security and intrusion prevention for enterprise environments.</p>
+      </div>
+      <div class="net-cat-card">
+        <div class="net-cat-icon"></div>
+        <div class="net-cat-title">Cisco Access Points</div>
+        <p class="net-cat-desc">Cisco Catalyst and Aironet series access points for enterprise wireless deployments, available in controller-based and cloud-managed configurations.</p>
+      </div>
+      <div class="net-cat-card">
+        <div class="net-cat-icon"></div>
+        <div class="net-cat-title">Cisco Network Modules</div>
+        <p class="net-cat-desc">WAN, DSP, and interface modules for Cisco ISR and ASR routers. Extend existing routing capability without a full platform replacement.</p>
+      </div>
+      <div class="net-cat-card">
+        <div class="net-cat-icon"></div>
+        <div class="net-cat-title">Cisco Wireless Controllers</div>
+        <p class="net-cat-desc">Cisco Catalyst and legacy WLC platforms for centralised wireless LAN management across large-scale access point deployments.</p>
+      </div>
+      {% comment %} <div class="net-cat-card">
+        <div class="net-cat-icon">⚖️</div>
+        <div class="net-cat-title">Cisco Load Balancers</div>
+        <p class="net-cat-desc">Cisco ACE modules for application load balancing, SSL offloading, and server health monitoring in enterprise and data centre environments.</p>
+      </div> {% endcomment %}
+      <div class="net-cat-card">
+        <div class="net-cat-icon"></div>
+        <div class="net-cat-title">Cisco Chassis</div>
+        <p class="net-cat-desc">Modular chassis including the Cisco 7606 and Catalyst and Nexus platform chassis, line cards, and supervisor engines for scalable enterprise and data centre deployments.</p>
+      </div>
+    </div>
+
+    <div class="net-cant-find" style="justify-content: center;">
+      <div>
+        <p>Can't find the model you need? We specialise in sourcing end-of-life Cisco network equipment across all categories. Submit your parts list and we'll source it.</p>
+        {% comment %} <span>We specialise in sourcing end-of-life and legacy Cisco equipment across all categories. Submit your parts list and we'll respond within 24 hours.</span> {% endcomment %}
+      </div>
+      <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Request a Quote →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WHY BUSINESSES RELY ON ZACO
+═══════════════════════════════════════ -->
+<section class="net-why-section">
+  <div class="net-why-inner">
+    <h2>Why Businesses Rely on Zaco for Enterprise Networking in the UK</h2>
+    <div class="net-why-grid">
+      <div>
+        
+        <p>When organisations source enterprise networking hardware from Zaco Computers UK Limited, they work with a specialist team experienced in supplying Cisco infrastructure to businesses, IT teams, and data centres across the United Kingdom.</p>
+        <p>Our team helps organisations identify the right networking hardware for their environment, whether the requirement is for new Cisco equipment, certified refurbished hardware, or legacy models that are no longer available through OEM channels.</p>
+        <p>We support IT teams throughout the procurement process, from sourcing compatible hardware to locating difficult-to-find Cisco models and ensuring fast availability for infrastructure upgrades or replacements.</p>
+        <p>With responsive service and 24/7 remote support available, Zaco Computers UK Limited helps businesses maintain and expand their enterprise networks with minimal disruption and reliable hardware supply.</p>
+      </div>
+      <div class="net-why-img">
+        <img src="{% static 'images/uk/networking2.jpeg' %}" alt="Why Choose Zaco for Enterprise Networking UK">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+<section class="faq-section">
+  <div class="faq-section-inner">
+    <div class="faq-section-header">
+      <span class="drv-label">FAQ</span>
+      <h2>Commonly Asked Questions About Enterprise Networking Solutions</h2>
+    </div>
+    <div class="faq-section-table">
+      <div class="faq-item">
+        <div class="faq-question">1. What is an enterprise networking solution?</div>
+        <div class="faq-answer">- An enterprise networking solution is a combination of networking hardware, software, and related technologies that enable secure, reliable, and high-performance connectivity across an organisation's IT infrastructure. It typically includes routers, switches, and network management systems used to support business operations.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">2. Can you supply end-of-life (EOL) and legacy Cisco equipment?</div>
+        <div class="faq-answer">- Yes, this is one of our key specialisms. We source EOL Cisco models including legacy Catalyst, ISR, ASR, and Nexus hardware no longer available through OEM channels.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">3. What is the difference between Cisco Catalyst and Cisco Nexus switches?</div>
+        <div class="faq-answer">- Cisco Catalyst switches are designed for enterprise LAN environments, covering campus access, distribution, and core switching for offices and buildings. Cisco Nexus switches are built for data centre environments, offering higher port density, low latency, and support for leaf-spine architectures.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<section class="net-cta">
+  <div class="net-cta-inner">
+    <span class="net-label">Get Started</span>
+    <h2>Get a Same-Day Quote on Enterprise Networking Equipment</h2>
+    <p>Visit our <a href="{% url 'uk-contact' %}">Contact Us</a> page, give us a call on <a href="tel:+442034358060">+44 20 3435 8060</a>, or drop us an email on <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> to speak with our IT experts.</p>
+    <div class="net-cta-btns">
+      <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Request a Quote →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

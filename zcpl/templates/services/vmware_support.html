@@ -812,6 +812,74 @@
         }
     }
 
+    /* Services main layout */
+    .services-main-layout {
+        display: flex;
+        gap: 50px;
+        align-items: flex-start;
+    }
+    .services-left-col { flex: 1; }
+    .services-right-col { flex: 1; margin-top: 70px; }
+    .services-right-col img { width: 100%; height: auto; border-radius: 12px; }
+
+    @media (max-width: 768px) {
+        .services-main-layout {
+            flex-direction: column;
+            gap: 24px;
+        }
+        .services-right-col {
+            margin-top: 0;
+            width: 100%;
+        }
+        .auto-container[style*="padding-block: 100px"] {
+            padding-block: 50px !important;
+        }
+        .auto-container[style*="padding-block: 80px"] {
+            padding-block: 50px !important;
+        }
+        .comparison-table {
+            min-width: 520px;
+        }
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .migration-steps {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        .step-item {
+            flex: 0 0 calc(50% - 12px);
+            padding: 14px 8px;
+        }
+        .step-item::after {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .auto-container[style*="padding-block: 100px"] {
+            padding-block: 36px !important;
+        }
+        .auto-container[style*="padding-block: 80px"] {
+            padding-block: 36px !important;
+        }
+        .auto-container[style*="padding-block: 40px"] {
+            padding-block: 24px !important;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .step-item {
+            flex: 0 0 100%;
+        }
+    }
+
     /* Landscape orientation for mobile devices */
     @media (max-height: 500px) and (orientation: landscape) {
         .slider-six__content {
@@ -1001,7 +1069,7 @@
             <img 
                 src="{% static 'images/services/vmware_main.png' %}" 
                 alt="VMware Third-Party Support"
-                style="max-width: 100%; height: auto;"
+                style="border-radius:12px; width:100%; height:auto; box-shadow:0 10px 25px rgba(0,0,0,0.15);"
             >
         </div>
     </div>
@@ -1078,6 +1146,7 @@
     <h2 style="text-align: center; font-size: 1.6rem; color: #000; margin-bottom: 10px;"><b>Third-Party Support vs. OEM Subscription</b></h2>
     <p style="text-align: center; font-size: 1rem; color: #000; margin-bottom: 40px;">A clear comparison of what changes when organisations move from Broadcom to Zaco’s Third-Party Support</p>
     
+    <div class="comparison-table-wrapper">
     <table class="comparison-table">
         <thead > 
             <tr>
@@ -1129,6 +1198,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
 </div>
 
 <section style="background:#f8f9fa; padding:80px 0;">
@@ -1143,10 +1213,10 @@
     </div>
 
     <!-- MAIN LAYOUT -->
-    <div style="display:flex; gap:50px; align-items:flex-start;">
+    <div class="services-main-layout">
 
       <!-- LEFT COLUMN (STACKED CARDS) -->
-      <div style="flex:1;">
+      <div class="services-left-col">
         <div class="service-grid" style="display:flex; flex-direction:column; gap:24px;">
     
           <div class="service-card">
@@ -1163,7 +1233,7 @@
       </div>
 
       <!-- RIGHT COLUMN (IMAGE) -->
-      <div style="flex:1; margin-top: 70px;">
+      <div class="services-right-col">
         <img 
         src={% static 'images/services/vmware_support.jpeg' %} 
         >

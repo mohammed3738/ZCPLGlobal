@@ -337,9 +337,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </li> {% endcomment %}
 
                
+                   
                     <li class="dropdown">
+                      <a href="{% url 'uk-it-hardware' %}">IT Hardware</a>
+                      <ul>
+                        <li><a href="{% url 'uk-server' %}">Servers </a></li>
+                        <li><a href="{% url 'uk-server-storage' %}">Storage </a></li>
+                        <li><a href="{% url 'uk-networking' %}">Networking</a></li>
+                        <li><a href="{% url 'uk-server-hdd-sdd' %}">Server HDD & SSDs</a></li>
+                        <li><a href="{% url 'uk-server-components' %}">Server Components</a></li>
+                      </ul>
+                    </li>
+                    {% comment %} <li class="dropdown">
+                      <a href="{% url 'uk-server' %}">Services</a>
+                      <ul>
+                        <li><a href="{% url 'uk-server' %}">Server Maintenance</a></li>
+                        <li><a href="{% url 'uk-server' %}">Storage Maintenance</a></li>
+                        <li><a href="{% url 'uk-server' %}">Networking Maintenance</a></li>
+                        <li><a href="{% url 'uk-server' %}">VMware Support</a></li>
+                        <li><a href="{% url 'uk-server' %}">Microsoft Support</a></li>
+                        <li><a href="{% url 'uk-server' %}">Infrastructure Managed Services</a></li>
+                      </ul>
+                    </li> {% endcomment %}
+                     <li class="dropdown">
                       <a href="{% url 'uk-contact' %}">Contact Us</a>
-
                     </li>
                   </ul>
                 </nav>

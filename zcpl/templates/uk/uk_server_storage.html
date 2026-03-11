@@ -1,0 +1,1062 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}Custom Enterprise Storage Solution in UK – Dell, HPE & Lenovo
+{% endblock %}
+{% block meta_description %}
+Get custom enterprise storage systems in the UK from Dell, HPE & Lenovo at Zaco, designed to deliver reliable performance for businesses of all sizes.
+{% endblock %}
+
+{% block content %}
+<style>
+    /* ═══════════════════════════════════════════
+       SERVER STORAGE UK PAGE — UNIQUE STYLES
+       Theme: --navy-dark (#0c2c4e), --accent (#2D7DD2), light backgrounds
+    ═══════════════════════════════════════════ */
+
+    /* ── SHARED LABELS ── */
+        .ss-label {
+            font-size: 0.85rem; font-weight: 500; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #666; margin-bottom: 12px;
+            display: block; text-align: center;
+        }
+
+    /* ── INTRO SECTION ── */
+            .ss-intro {
+                background: #f4f7fb;
+                padding: 80px 0;
+            }
+            .ss-intro-inner {
+                max-width: 1500px; margin: 0 auto; padding: 0 5%;
+            }
+            .ss-intro-inner h2 {
+                font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+                color: #1a3546; font-weight: 800; line-height: 1.25;
+                text-align: left;
+            }
+            .ss-intro-grid {
+                display: grid; grid-template-columns: 1.2fr 0.8fr;
+                gap: 60px; align-items: center;
+            }
+            .ss-intro-grid p {
+                color: #000; font-size: 1rem; line-height: 1.85; margin-bottom: 16px;
+            }
+            .ss-intro-grid p:last-child { margin-bottom: 0; }
+            .ss-intro-img img {
+                border-radius: 14px; width: 100%; height: auto;
+                box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+                object-fit: cover;
+            }
+            @media (max-width: 860px) {
+                .ss-intro-grid { grid-template-columns: 1fr; gap: 36px; }
+            }
+
+    /* ── INVENTORY TRUST BAR ── */
+      .ss-trust-bar {
+          background: #ffffff;
+          padding: 50px 0;
+      }
+      .ss-trust-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-trust-inner h2 {
+          font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+          color: #1a3546; font-weight: 800; line-height: 1.25;
+          text-align: center;
+      }
+      .ss-trust-subtitle {
+          color: rgba(0, 0, 0, 0.65); text-align: center; font-size: 0.95rem;
+          margin-bottom: 36px;
+      }
+      .ss-inventory-grid {
+          display: grid; grid-template-columns: 1.1fr 0.9fr;
+          gap: 60px; align-items: center;
+      }
+      .ss-inv-card {
+          background: rgba(255,255,255,0.07);
+          border: 1px solid rgba(255,255,255,0.14);
+          border-radius: 12px;
+          padding: 22px 18px;
+          text-align: center;
+          transition: background 0.2s;
+      }
+      .ss-inv-card:hover { background: rgba(45,125,210,0.18); }
+      .ss-inv-name {
+          font-size: 0.95rem; font-weight: 700; color: #000000; margin-bottom: 8px;
+      }
+      .ss-inv-badge {
+          display: inline-block;
+          background: rgba(45,210,120,0.18);
+          color: #4ade80;
+          font-size: 0.78rem; font-weight: 700;
+          padding: 3px 10px; border-radius: 20px;
+          border: 1px solid rgba(74,222,128,0.3);
+      }
+      .ss-trust-pills {
+          display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;
+      }
+      .ss-trust-pill {
+          background: #fff;
+          border: 2px solid #e8edf2;
+          border-radius: 24px;
+          padding: 10px 22px;
+          display: flex; align-items: center; gap: 12px;
+          color: #000000; font-size: 0.9rem;
+          transition:  0.3s ease;
+      }
+      .ss-trust-pill:hover {
+          border-color: rgba(45,125,210,0.35);
+          box-shadow: 0 8px 24px rgba(45,125,210,0.12);
+          transform: translateY(-4px);
+      }
+      .ss-trust-pill-icon { font-size: 1.2rem; }
+      .ss-trust-pill strong { color: #0c2c4e; font-weight: 700; }
+      .ss-trust-pill span { color: rgb(0, 0, 0); font-size: 0.82rem; }
+      @media (max-width: 860px) {
+          .ss-inventory-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+          .ss-inventory-grid { grid-template-columns: 1fr; }
+      }
+
+      .ss-trust-pill2 {
+          transition:  0.3s ease;
+      }
+      .ss-trust-pill2:hover {
+          border-color: rgba(45,125,210,0.35);
+          box-shadow: 0 8px 24px rgba(45,125,210,0.12);
+          transform: translateY(-4px);
+      }
+
+    /* ── STORAGE TYPES / PRODUCT ROWS ── */
+      .ss-products-section {
+          background: #f4f7fb;
+          padding: 80px 0;
+      }
+      .ss-products-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-section-header {
+          margin-bottom: 40px; text-align: center;
+      }
+      .ss-section-header h2 {
+          font-size: clamp(1.5rem, 2.5vw, 2rem);
+          color: #1a3546; font-weight: 800; margin-bottom: 14px;
+      }
+      .ss-section-header p {
+          color: #000; font-size: 1rem; line-height: 1.85;
+          margin: 0 auto;
+      }
+
+    /* Product type rows — sidebar + body */
+      .ss-type-row {
+          display: grid; grid-template-columns: 400px 1fr;
+          border-radius: 16px; overflow: hidden;
+          border: 1.5px solid #dde4ef;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          margin-bottom: 28px;
+          transition: box-shadow 0.3s;
+      }
+      .ss-type-row:hover { box-shadow: 0 12px 40px rgba(45,125,210,0.13); }
+      .ss-type-sidebar {
+          background: linear-gradient(160deg, #0c2c4e 0%, #0e3560 100%);
+          padding: 40px 30px;
+          display: flex; flex-direction: column; justify-content: space-between;
+          min-height: 260px;
+      }
+      .ss-type-icon-big { font-size: 2.8rem; margin-bottom: 20px; line-height: 1; }
+      .ss-type-name {
+          font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 12px; line-height: 1.2;
+      }
+      .ss-type-tagline {
+          color: rgba(255,255,255,0.72); font-size: 0.85rem; line-height: 1.65;
+          margin-bottom: 24px; flex: 1;
+      }
+      .ss-type-body {
+          background: #fff; padding: 36px 40px;
+          display: flex; flex-direction: column; justify-content: flex-start;
+      }
+      .ss-type-body h3 {
+          font-size: clamp(1.2rem, 2vw, 1.6rem);
+          color: #0c2c4e; font-weight: 700; margin-bottom: 14px;
+      }
+      .ss-type-desc {
+          color: #333; font-size: 0.95rem; line-height: 1.78;
+          margin-bottom: 24px; padding-bottom: 20px;
+          border-bottom: 1px solid #eef2f7;
+      }
+      .ss-model-list { list-style: none; padding: 0; margin: 0 0 20px 0; }
+      .ss-model-list li {
+          padding: 12px 0;
+          border-bottom: 1px solid #f0f4fa;
+          display: flex; flex-direction: column; gap: 4px;
+      }
+      .ss-model-list li:last-child { border-bottom: none; }
+      .ss-model-title { font-size: 0.9rem; font-weight: 700; color: #0c2c4e; }
+      .ss-model-spec { font-size: 0.82rem; color: #555; line-height: 1.55; }
+      .ss-ideal {
+          background: #f4f7fb; border-radius: 8px;
+          padding: 12px 16px; font-size: 0.85rem;
+          color: #444; line-height: 1.6;
+          border-left: 3px solid #0c2c4e;
+          margin-bottom: 18px;
+      }
+      .ss-ideal strong { color: #0c2c4e; }
+      @media (max-width: 900px) {
+          .ss-type-row { grid-template-columns: 1fr; }
+          .ss-type-sidebar { min-height: auto; padding: 28px 24px; }
+          .ss-type-body { padding: 28px 24px; }
+      }
+
+    /* NAS/JBOD/DAS/AFA row — horizontal pills */
+     .ss-storage-pills {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);  /* 2 equal columns */
+      gap: 12px;
+      margin-bottom: 20px;
+      }
+
+      .ss-storage-pill {
+          background: #f4f7fb;
+          border: 1.5px solid #dde4ef;
+          border-radius: 8px;
+          padding: 10px 18px;
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: #0c2c4e;
+          text-align: left;
+          width: 100%;
+      }
+
+    /* ── REFURBISHED SECTION ── */
+      .ss-refurb-section {
+          background: #ffffff;
+          padding: 80px 0;
+      }
+      .ss-refurb-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-refurb-grid {
+          display: grid; grid-template-columns: 1fr 1fr;
+          gap: 60px; align-items: center; margin-top: 40px;
+      }
+      .ss-refurb-inner h2 {
+          font-size: clamp(1.5rem, 2.4vw, 2rem);
+          color: #1a3546; font-weight: 800; margin-bottom: 14px; text-align: center;
+      }
+      .ss-refurb-inner > p {
+          color: #000; font-size: 1rem; line-height: 1.85;
+          text-align: center; margin: 0 auto;
+      }
+      .ss-refurb-content p {
+          color: #000; font-size: 1rem; line-height: 1.85; margin-bottom: 20px;
+      }
+      .ss-refurb-checklist { list-style: none; padding: 0; margin: 0 0 28px 0; }
+      .ss-refurb-checklist li {
+          padding: 10px 0; border-bottom: 1px solid #dde4ef;
+          display: flex; align-items: center; gap: 12px;
+          color: #0c2c4e; font-weight: 600; font-size: 0.97rem;
+      }
+      .ss-refurb-checklist li:last-child { border-bottom: none; }
+      .ss-refurb-check { color: #0c2c4e; font-size: 1.1rem; flex-shrink: 0; }
+      .ss-refurb-img img {
+          border-radius: 14px; width: 100%; height: auto;
+          box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+          object-fit: cover;
+      }
+      @media (max-width: 860px) {
+          .ss-refurb-grid { grid-template-columns: 1fr; gap: 36px; }
+          .ss-refurb-img { display: none; }
+      }
+
+    /* ── SECTORS SECTION ── */
+      .ss-sectors-section {
+          background: #f4f7fb;
+          padding: 80px 0;
+      }
+      .ss-sectors-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-sectors-inner h2 {
+          font-size: clamp(1.5rem, 2.4vw, 2rem);
+          color: #1a3546; font-weight: 800; margin-bottom: 14px; text-align: center;
+      }
+      .ss-sectors-subtitle {
+          text-align: center; color: #000; font-size: 1rem; line-height: 1.85;
+          max-width: 820px; margin: 0 auto 40px;
+      }
+      .ss-sectors-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+      }
+      .ss-sector-card {
+          background: #fff;
+          border-radius: 14px;
+          border: 1.5px solid #dde4ef;
+          padding: 28px 26px;
+          transition: box-shadow 0.3s, border-color 0.3s;
+      }
+      .ss-sector-card:hover {
+          box-shadow: 0 10px 32px rgba(45,125,210,0.13);
+          border-color: #0c2c4e;
+      }
+      .ss-sector-icon { font-size: 2rem; margin-bottom: 14px; line-height: 1; }
+      .ss-sector-title { font-size: 1rem; font-weight: 800; color: #0c2c4e; margin-bottom: 8px; }
+      .ss-sector-desc { font-size: 0.87rem; color: #444; line-height: 1.65; }
+      @media (max-width: 768px) {
+          .ss-sectors-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+          .ss-sectors-grid { grid-template-columns: 1fr; }
+      }
+
+    /* ── PROCESS SECTION ── */
+      .ss-process-section {
+          background: #ffffff;
+          padding: 80px 0;
+      }
+      .ss-process-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-process-inner h2 {
+          font-size: clamp(1.5rem, 2.4vw, 2rem);
+          color: #1a3546f; font-weight: 800; margin-bottom: 24px; text-align: center;
+      }
+      .ss-process-subtitle {
+          color: rgba(0, 0, 0, 0.65); text-align: center; font-size: 1rem;
+          margin-bottom: 50px;
+      }
+      .ss-process-steps {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          position: relative;
+      }
+      .ss-process-steps::before {
+          content: '';
+          position: absolute;
+          top: 28px; left: 12.5%; right: 12.5%;
+          height: 2px;
+          background: #0c2c4e;
+          z-index: 0;
+      }
+      .ss-process-step {
+          text-align: center;
+          padding: 0 20px;
+          position: relative; z-index: 1;
+      }
+      .ss-step-num {
+          width: 56px; height: 56px;
+          border-radius: 50%;
+          background: #0c2c4e;
+          color: #fff; font-size: 1.3rem; font-weight: 900;
+          display: flex; align-items: center; justify-content: center;
+          margin: 0 auto 20px;
+          border: 3px solid #ffffff;
+          box-shadow: 0 0 0 2px #0c2c4e;
+      }
+      .ss-step-title {
+          font-size: 1rem; font-weight: 800; color: #0c2c4e; margin-bottom: 10px;
+      }
+      .ss-step-desc {
+          font-size: 0.86rem; color: #000000; line-height: 1.65;
+      }
+      @media (max-width: 768px) {
+          .ss-process-steps { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+          .ss-process-steps::before { display: none; }
+      }
+      @media (max-width: 480px) {
+          .ss-process-steps { grid-template-columns: 1fr; }
+      }
+
+    /* ── BRANDS SECTION ── */
+  
+      .srv-vendors{
+      background:#f4f7fb;
+      padding:80px 0;
+      }
+
+      .srv-vendors-inner{
+      max-width:1200px;
+      margin:auto;
+      padding:0 5%;
+      }
+
+      .srv-vendors-header{
+      text-align:center;
+      margin-bottom:50px;
+      }
+
+      .srv-vendors-header h2{
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      color: #1a3546; font-weight: 800; margin-bottom: 10px;
+      }
+
+      .srv-vendors-header p{
+      color: #000; font-size: 1rem; line-height: 1.85;
+      margin: 0 auto 40px;
+      }
+
+      /* grid layout */
+      .vendor-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:40px;
+      }
+
+      /* logo card */
+      .vendor-card{
+      background:white;
+      height:110px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+      box-shadow:0 3px 12px rgba(0,0,0,0.05);
+      transition:0.3s;
+      }
+
+      /* hover */
+      .vendor-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      }
+
+      /* logo image */
+      .vendor-card img{
+      max-width:120px;
+      max-height:120px;
+      object-fit:contain;
+      transition:0.3s;
+      }
+
+      @media (max-width: 768px){
+
+        .vendor-grid{
+          display:flex;
+          overflow-x:auto;
+          gap:20px;
+          scroll-snap-type:x mandatory;
+          padding-bottom:10px;
+          }
+
+          .vendor-card{
+          min-width:200px;
+          flex:0 0 auto;
+          scroll-snap-align:center;
+          }
+
+          .vendor-grid::-webkit-scrollbar{
+          display:none;
+          }
+
+          .srv-vendors{
+          position:relative;
+          overflow:hidden;
+          }
+      }
+
+    /* ── WHY ZACO ── */
+      .ss-why-section {
+          background: #fff;
+          padding: 80px 0;
+      }
+      .ss-why-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-why-inner h2 {
+          font-size: clamp(1.5rem, 2.4vw, 2rem);
+          color: #1a3546; font-weight: 800; margin-bottom: 40px; text-align: center;
+      }
+      .ss-why-grid {
+          display: grid; grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+      }
+      .ss-why-card {
+          background: #f4f7fb; border-radius: 14px;
+          border: 1.5px solid #dde4ef;
+          padding: 28px 26px;
+          display: flex; gap: 18px; align-items: flex-start;
+          transition: box-shadow 0.3s;
+      }
+      .ss-why-card:hover { box-shadow: 0 8px 28px rgba(45,125,210,0.1); }
+      .ss-why-icon { font-size: 2rem; flex-shrink: 0; }
+      .ss-why-text h4 {
+          font-size: 1rem; font-weight: 800; color: #0c2c4e; margin-bottom: 8px;
+      }
+      .ss-why-text p {
+          font-size: 0.88rem; color: #444; line-height: 1.65; margin: 0;
+      }
+      @media (max-width: 768px) {
+          .ss-why-grid { grid-template-columns: 1fr; }
+      }
+
+    /* ── FAQ ── */
+      .ss-faq-section {
+          background: #f4f7fb;
+          padding: 80px 0;
+      }
+      .ss-faq-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-faq-header { margin-bottom: 40px; text-align: center; }
+      .ss-faq-header h2 {
+          font-size: clamp(1.5rem, 2.5vw, 2rem);
+          color: #1a3546; font-weight: 800; margin-bottom: 14px;
+      }
+      .ss-faq-table {
+          border-radius: 14px; overflow: hidden;
+          border: 1.5px solid #dde4ef;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          background: #fff;
+      }
+      .ss-faq-item {
+          border-bottom: 2px solid rgba(45,125,210,0.1);
+          padding: 24px 30px;
+      }
+      .ss-faq-item:last-child { border-bottom: none; }
+      .ss-faq-question {
+          font-size: 1rem; font-weight: 600; color: #1a3546; margin-bottom: 12px;
+      }
+      .ss-faq-answer {
+          color: #000; line-height: 1.7; font-size: 0.95rem;
+      }
+
+    /* ── CTA BAND ── */
+      .ss-cta {
+          background: #F2F2F2;
+          padding: 80px 0; text-align: center;
+      }
+      .ss-cta-inner {
+          max-width: 1500px; margin: 0 auto; padding: 0 5%;
+      }
+      .ss-cta-inner h2 {
+          font-size: clamp(1.6rem, 3vw, 2.2rem);
+          color: #1a3546; font-weight: 800; margin-bottom: 16px; line-height: 1.25;
+      }
+      .ss-cta-inner p {
+          color: #000; font-size: 1rem; line-height: 1.75; margin-bottom: 32px;
+      }
+      .ss-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── CANT-FIND BAR ── */
+      .ss-cant-find {
+          margin-top: 36px;
+          background: linear-gradient(90deg, rgba(45,125,210,0.07) 0%, rgba(45,125,210,0.03) 100%);
+          border: 2px solid rgba(45,125,210,0.3);
+          border-radius: 14px; padding: 28px 32px;
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 20px; flex-wrap: wrap;
+      }
+      .ss-cant-find p { color: #0c2c4e; font-weight: 700; font-size: 1.02rem; margin: 0; }
+</style>
+
+<!-- ═══════════════════════════════════════
+     BANNER SLIDER
+═══════════════════════════════════════ -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": {"el": "#main-slider-pagination", "type": "bullets", "clickable": true}, "navigation": {"nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev"}, "autoplay": {"delay": 5000}}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            {% comment %} <p class="slider-six__text"><span>Server Storage Solutions</span></p> {% endcomment %}
+            <p class="slider-six__text"><span>SERVER STORAGE SOLUTIONS</span></p>
+            <h1 class="slider-six__title">New &amp; Refurbished Enterprise Server Storage Options in the UK</h1>
+            <p style="color:azure; font-size:1.1rem;">Scaling up your data centre? Building a backup and archive platform? Whatever the requirement, Zaco supplies customized SAN, NAS, All Flash Arrays, JBOD and DAS storage across the UK.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════
+     INTRO
+═══════════════════════════════════════ -->
+<section class="ss-intro">
+  <div class="ss-intro-inner">
+    <h2>Enterprise Storage Without the Enterprise Price Tag</h2>
+    <div class="ss-intro-grid">
+      <div>
+        <p>UK organisations, from fast growing SMBs to large data centres, are under constant pressure to handle more data without increasing infrastructure costs. Zaco Computers UK understands these challenges and provides certified new and refurbished server storage that meets OEM performance standards. Whether you need a cost effective refurbished NAS for your office or a high capacity SAN for a virtualised data centre, we configure the right solution for your requirements.</p>
+        <p>Every unit we supply, new or refurbished, is fully tested, warranted, and delivered to your door at significantly lower cost than buying new from the manufacturer.</p>
+      </div>
+      <div style="max-width: 70%;">
+        <img src="{% static 'images/uk/storage2.png' %}" alt="Enterprise Server Storage UK — SAN NAS JBOD All Flash Arrays">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     INVENTORY TRUST BAR
+═══════════════════════════════════════ -->
+<section class="ss-trust-bar">
+    <div class="ss-trust-inner">
+        <h2>Server Storage Inventory</h2>
+        {% comment %} <p class="ss-trust-subtitle">UK-Ready Stock</p> {% endcomment %}
+
+        <div class="ss-inventory-grid">
+            <div class="ss-trust-pills">
+                <div class="ss-trust-pill">
+                    <span class="ss-trust-pill-icon">🔬</span>
+                    <div>
+                    <strong>Rigorously Tested: </strong>
+                    <span>Every unit undergoes multi-point hardware diagnostics, drive health checks, and firmware validation before dispatch.</span>
+                    </div>
+                </div>
+                <div class="ss-trust-pill">
+                    <span class="ss-trust-pill-icon">🛡️</span>
+                    <div>
+                    <strong>Warranty-Backed: </strong>
+                    <span>All storage hardware ships with a minimum 1 year warranty. Extended cover available on request.</span>
+                    </div>
+                </div>
+                <div class="ss-trust-pill">
+                    <span class="ss-trust-pill-icon">⚙️</span>
+                    <div>
+                    <strong>Configured to Spec: </strong>
+                    <span>We build to your requirements — drive count, interface type (SAS/SATA/NVMe), form factor, and RAID configuration.</span>
+                    </div>
+                </div>
+                <div class="ss-trust-pill">
+                    <span class="ss-trust-pill-icon">🎧</span>
+                    <div>
+                    <strong>Dedicated Expert Assistance:</strong>
+                    <span>Zaco Computers UK Limited provides 24×7 remote customer support, with dedicated experts ready to assist with your storage needs across the United Kingdom.</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Storage Inventory Section -->
+            <div class="ss-trust-pill2" style="
+                background: #ffffff;
+                border: 1px solid #e8edf2;
+                border-radius: 10px;
+                padding: 32px 36px;
+                max-width: 480px;
+                font-family: 'Segoe UI', Arial, sans-serif;
+                {% comment %} box-shadow: 0 4px 20px rgba(0,0,0,0.07); {% endcomment %}
+                ">
+                <!-- Label -->
+                <p style="
+                    color: #2D7DD2;
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    margin: 0 0 6px 0;
+                ">Storage Inventory</p>
+
+                <!-- Heading -->
+                <h2 style="
+                    color: #0c2c4e;
+                    font-size: 26px;
+                    font-weight: 700;
+                    margin: 0 0 28px 0;
+                ">UK-Ready Stock</h2>
+
+                <!-- Row: All-Flash Arrays -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #0c2c4e; font-size: 15px; font-weight: 500;">All-Flash Arrays (NVMe)</span>
+                    <span style="color: #2D7DD2; font-size: 13px; font-weight: 600;">&#10003; In Stock</span>
+                    </div>
+                    <div style="background: #e8edf2; border-radius: 4px; height: 5px;">
+                    <div style="background: linear-gradient(90deg, #2D7DD2, #56aaff); width: 92%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                </div>
+
+                <!-- Row: SAN / iSCSI Arrays -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #0c2c4e; font-size: 15px; font-weight: 500;">SAN / iSCSI Arrays</span>
+                    <span style="color: #2D7DD2; font-size: 13px; font-weight: 600;">&#10003; In Stock</span>
+                    </div>
+                    <div style="background: #e8edf2; border-radius: 4px; height: 5px;">
+                    <div style="background: linear-gradient(90deg, #2D7DD2, #56aaff); width: 78%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                </div>
+
+                <!-- Row: JBOD / DAS Enclosures -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #0c2c4e; font-size: 15px; font-weight: 500;">JBOD / DAS Enclosures</span>
+                    <span style="color: #2D7DD2; font-size: 13px; font-weight: 600;">&#10003; In Stock</span>
+                    </div>
+                    <div style="background: #e8edf2; border-radius: 4px; height: 5px;">
+                    <div style="background: linear-gradient(90deg, #2D7DD2, #56aaff); width: 85%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                </div>
+
+                <!-- Row: Refurbished NAS Servers -->
+                <div style="margin-bottom: 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #0c2c4e; font-size: 15px; font-weight: 500;">Refurbished NAS Servers</span>
+                    <span style="color: #2D7DD2; font-size: 13px; font-weight: 600;">&#10003; Available</span>
+                    </div>
+                    <div style="background: #e8edf2; border-radius: 4px; height: 5px;">
+                    <div style="background: linear-gradient(90deg, #2D7DD2, #56aaff); width: 55%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     HIGH-DENSITY CUSTOMISED STORAGE SYSTEMS
+═══════════════════════════════════════ -->
+<section class="ss-products-section">
+  <div class="ss-products-inner">
+    {% comment %} <span class="ss-label">Featured Products</span> {% endcomment %}
+    <div class="ss-section-header">
+      <h2>High-Density Customized Storage Systems</h2>
+      <p>Every organisation stores data differently. Some need fast block storage for virtualised workloads. Others need high-capacity file storage for media or archive. Many need both. Below you will find the storage types we supply, configure and support across the United Kingdom. Each is available new or refurbished, from certified OEM stock, with warranty included.</p>
+    </div>
+
+    <!-- DELL POWERVAULT -->
+    <div class="ss-type-row">
+      <div class="ss-type-sidebar">
+        <div>
+          <div class="ss-type-icon-big"></div>
+          <div class="ss-type-name">Dell PowerVault Storage</div>
+          <p class="ss-type-tagline">The Dell PowerVault range covers both Fibre Channel and iSCSI SAN storage, designed for shared block storage across virtualised environments, databases and business applications. All units are refurbished, dual-controller and available in 2U form factor with SAS and SSD drive support.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Get a Quote →</span>
+        </a>
+      </div>
+      <div class="ss-type-body">
+        <h3>Models Available</h3>
+        <ul class="ss-model-list">
+          <li>
+            <span class="ss-model-title">PowerVault MD3600F</span>
+            <span class="ss-model-spec">12 x 3.5" LFF · Fibre Channel · Dual Controller</span>
+          </li>
+          <li>
+            <span class="ss-model-title">PowerVault MD3800F</span>
+            <span class="ss-model-spec">24 x 2.5" SFF · Fibre Channel · SAS and SSD</span>
+          </li>
+          <li>
+            <span class="ss-model-title">PowerVault MD3800i</span>
+            <span class="ss-model-spec">24 x 2.5" SFF · iSCSI 10GbE · SAS and SSD</span>
+          </li>
+        </ul>
+        <div class="ss-ideal">
+          <strong>Ideal for:</strong> VMware, Hyper-V and Oracle environments, SMB to mid-market SAN deployments, shared datastores and ERP workloads.
+        </div>
+      </div>
+    </div>
+
+    <!-- HPE MSA STORAGE -->
+    <div class="ss-type-row">
+      <div class="ss-type-sidebar">
+        <div>
+          <div class="ss-type-icon-big"></div>
+          <div class="ss-type-name">HPE MSA Storage</div>
+          <p class="ss-type-tagline">The HPE MSA range delivers modular SAN storage in both iSCSI and Fibre Channel configurations, with built-in auto-tiering that moves hot data to faster SSD automatically. A proven and reliable choice for growing businesses that need enterprise-class shared storage without enterprise-level complexity.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Get a Quote →</span>
+        </a>
+      </div>
+      <div class="ss-type-body">
+        <h3>Models Available</h3>
+        <ul class="ss-model-list">
+          <li>
+            <span class="ss-model-title">MSA 1040 Storage</span>
+            <span class="ss-model-spec">12 LFF or 24 SFF · iSCSI or FC · Auto-Tiering</span>
+          </li>
+          <li>
+            <span class="ss-model-title">MSA 2040 Storage</span>
+            <span class="ss-model-spec">24 SFF or 12 LFF · iSCSI or FC · SSD Cache, Snapshots, Replication</span>
+          </li>
+        </ul>
+        <div class="ss-ideal">
+          <strong>Ideal for:</strong> SMBs to mid-market, SQL Server, Oracle, virtualised workloads and data centres looking for a cost-effective HPE SAN platform.
+        </div>
+      </div>
+    </div>
+
+    <!-- NAS / JBOD / DAS / AFA -->
+    <div class="ss-type-row">
+      <div class="ss-type-sidebar">
+        <div>
+          {% comment %} <div class="ss-type-icon-big">🔍</div> {% endcomment %}
+          <div class="ss-type-name">NAS, JBOD, DAS and All-Flash Arrays</div>
+          <p class="ss-type-tagline">Need a NAS appliance for file sharing, a JBOD enclosure to expand existing capacity, a DAS unit, or an All-Flash Array for latency-sensitive workloads? We supply a wide range of enterprise storage beyond our listed inventory. Tell us what you need and we will find the right solution.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Enquire About Availability →</span>
+        </a>
+      </div>
+      <div class="ss-type-body">
+        <h3>Storage Types Available</h3>
+        <div class="ss-storage-pills">
+          <span class="ss-storage-pill">NAS</span>
+          <span class="ss-storage-pill">JBOD</span>
+          <span class="ss-storage-pill">DAS</span>
+          <span class="ss-storage-pill">All-Flash Arrays</span>
+          <span class="ss-storage-pill">Dell and HPE</span>
+        </div>
+        <div class="ss-ideal">
+          <strong>Ideal for:</strong> File storage, scale-out capacity expansion, archive workloads, media production and performance-critical environments.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     REFURBISHED SECTION
+═══════════════════════════════════════ -->
+<section class="ss-refurb-section">
+  <div class="ss-refurb-inner">
+    <span class="ss-label">Refurbished Storage: The Smarter Way to Procure</span>
+    <h2>Why UK IT Teams Choose Refurbished Storage Systems</h2>
+    {% comment %} <p>Refurbished enterprise storage from Dell, HPE and Lenovo is no longer a second-tier choice. Every unit sold by Zaco Computers UK Limited is professionally inspected, data-wiped, tested to manufacturer specification, and backed by warranty. You get the same assurance as new, at a fraction of the cost. For sustainability-focused organisations, refurbished hardware directly reduces Scope 3 carbon emissions.</p> {% endcomment %}
+    <div class="ss-refurb-grid">
+      
+      <div class="ss-refurb-content">
+        <p>Refurbished enterprise storage from Dell, HPE and Lenovo is no longer a second-tier choice. Every unit sold by Zaco Computers UK Limited is professionally inspected, data-wiped, tested to manufacturer specification, and backed by warranty. You get the same assurance as new, at a fraction of the cost. For sustainability-focused organisations, refurbished hardware directly reduces Scope 3 carbon emissions.</p>
+        <ul class="ss-refurb-checklist">
+          <li><span class="ss-refurb-check">✔</span> Up to 50% cost saving</li>
+          <li><span class="ss-refurb-check">✔</span> Faster availability vs new-build lead times</li>
+          <li><span class="ss-refurb-check">✔</span> Supports circular economy</li>
+          <li><span class="ss-refurb-check">✔</span> Warranty &amp; post-sale support included</li>
+        </ul>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Enquire About Refurbished Stock →</span>
+        </a>
+      </div>
+      <div class="ss-refurb-img">
+        <img src="{% static 'images/uk/storage1.jpeg' %}" alt="Refurbished Enterprise Server Storage UK — Dell HPE Lenovo">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTORS — WHO WE SERVE
+═══════════════════════════════════════ -->
+<section class="ss-sectors-section">
+  <div class="ss-sectors-inner">
+    <span class="ss-label">Who We Serve</span>
+    <h2>Storage Solutions Across Every UK Sector</h2>
+    <p class="ss-sectors-subtitle">From NHS trusts to fintech startups, our storage platforms support diverse workloads across the UK economy.</p>
+
+    <div class="ss-sectors-grid">
+      <div class="ss-sector-card">
+        <div class="ss-sector-icon">☁️</div>
+        <div class="ss-sector-title">Software-Defined Storage (SDS)</div>
+        <p class="ss-sector-desc">Run VMware vSAN, Ceph, Microsoft Storage Spaces Direct, or TrueNAS on our certified storage servers. Scale horizontally without proprietary lock-in.</p>
+      </div>
+      <div class="ss-sector-card">
+        <div class="ss-sector-icon">🏢</div>
+        <div class="ss-sector-title">Data Centre &amp; Colocation</div>
+        <p class="ss-sector-desc">High-density rack storage for UK colocation facilities and on-premises data centres. Optimised for power efficiency and rack unit density.</p>
+      </div>
+      <div class="ss-sector-card">
+        <div class="ss-sector-icon">💾</div>
+        <div class="ss-sector-title">Backup &amp; Disaster Recovery</div>
+        <p class="ss-sector-desc">Purpose-built backup appliances and high-capacity JBOD arrays for Veeam, Commvault, Veritas and other leading UK backup platforms.</p>
+      </div>
+      <div class="ss-sector-card">
+        <div class="ss-sector-icon">🎬</div>
+        <div class="ss-sector-title">Media &amp; Broadcast</div>
+        <p class="ss-sector-desc">High-throughput storage for 4K/8K video editing, post-production, broadcast playout, and media asset management workflows.</p>
+      </div>
+      <div class="ss-sector-card">
+        <div class="ss-sector-icon">📊</div>
+        <div class="ss-sector-title">Big Data &amp; Analytics</div>
+        <p class="ss-sector-desc">Large-capacity NVMe and hybrid storage nodes for Hadoop, Spark, and AI/ML training pipelines requiring sustained high-bandwidth throughput.</p>
+      </div>
+      <div class="ss-sector-card">
+        <div class="ss-sector-icon">🏥</div>
+        <div class="ss-sector-title">Healthcare &amp; Public Sector</div>
+        <p class="ss-sector-desc">GDPR-compliant storage configurations supporting PACS imaging, electronic patient records, and NHS digital transformation programmes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PROCESS — FROM ENQUIRY TO DEPLOYED
+═══════════════════════════════════════ -->
+<section class="ss-process-section">
+  <div class="ss-process-inner">
+    <span class="ss-label">Our Process</span>
+    <h2>From Enquiry to Deployed Storage in Days</h2>
+    {% comment %} <p class="ss-process-subtitle">A simple, efficient process from first contact to fully deployed storage.</p> {% endcomment %}
+
+    <div class="ss-process-steps">
+      <div class="ss-process-step">
+        <div class="ss-step-num">1</div>
+        <div class="ss-step-title">Discovery Call</div>
+        <p class="ss-step-desc">Tell us your workload, capacity, interface requirements, and budget. Our engineers scope the right platform.</p>
+      </div>
+      <div class="ss-process-step">
+        <div class="ss-step-num">2</div>
+        <div class="ss-step-title">Custom Quote</div>
+        <p class="ss-step-desc">Receive a detailed, no-obligation proposal (new or refurbished) configured to your exact specifications.</p>
+      </div>
+      <div class="ss-process-step">
+        <div class="ss-step-num">3</div>
+        <div class="ss-step-title">Test &amp; Certify</div>
+        <p class="ss-step-desc">Hardware is built, load-tested, firmware-updated, and certified. Refurbished units are securely data-wiped.</p>
+      </div>
+      <div class="ss-process-step">
+        <div class="ss-step-num">4</div>
+        <div class="ss-step-title">UK Delivery &amp; Support</div>
+        <p class="ss-step-desc">Dispatched from London. 24×7 post-sale technical support included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BRANDS WE SUPPLY
+═══════════════════════════════════════ -->
+
+<section class="srv-vendors">
+    <div class="auto-container">
+
+    <div class="srv-vendors-header">
+        <span class="ss-label">Brands We Supply</span>        
+        <h2>Stocking All Major Enterprise Storage Brands</h2>
+        <p>We supply and support Dell EMC, HPE, IBM, and NetApp storage, both new and refurbished, with multi-vendor expertise across your entire IT estate.</p>
+        </div>
+
+        <div class="vendor-grid">
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/hpe.jpg' %}" alt="HPE">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/uk/netapp.png' %}" alt="NetApp">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/uk/dellemc.jpg' %}" alt="Dell EMC">
+        </div>
+
+    </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WHY UK BUSINESSES TRUST ZACO
+═══════════════════════════════════════ -->
+<section class="ss-why-section">
+  <div class="ss-why-inner">
+    <h2>Why UK Businesses Trust Zaco for Storage Systems?</h2>
+    <div class="ss-why-grid">
+      <div class="ss-why-card">
+        <div class="ss-why-icon">🔒</div>
+        <div class="ss-why-text">
+          <h4>Secure Data Erasure</h4>
+          <p>All refurbished drives undergo certified data erasure to NIST 800-88 and HMG IS5 baseline standards before re-use. Full audit trail available on request.</p>
+        </div>
+      </div>
+      <div class="ss-why-card">
+        <div class="ss-why-icon">📜</div>
+        <div class="ss-why-text">
+          <h4>Warranty on Every Unit</h4>
+          <p>New and refurbished storage ships with warranty cover. Extended multi-year support contracts are available via Zaco managed services.</p>
+        </div>
+      </div>
+      <div class="ss-why-card">
+        <div class="ss-why-icon">📦</div>
+        <div class="ss-why-text">
+          <h4>Fast UK Nationwide Delivery</h4>
+          <p>UK-stocked inventory dispatched from London. We deliver across England, Scotland, Wales and Northern Ireland. Same-day quote turnaround available.</p>
+        </div>
+      </div>
+      <div class="ss-why-card">
+        <div class="ss-why-icon">🎧</div>
+        <div class="ss-why-text">
+          <h4>24/7 Free Remote Support</h4>
+          <p>Our service desk team is available 24 hours a day, 7 days a week to assist with configuration, troubleshooting and post-deployment queries at no additional cost.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+<section class="ss-faq-section">
+  <div class="ss-faq-inner">
+    <div class="ss-faq-header">
+      <span class="ss-label">FAQ</span>
+      <h2>Frequently Asked Questions About Server Storage</h2>
+    </div>
+    <div class="ss-faq-table">
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">1. What is server storage and why does it matter?</div>
+        <div class="ss-faq-answer">Server storage refers to the dedicated hardware used to store, manage and retrieve data within a business or data centre environment. Unlike consumer storage, enterprise server storage is built for continuous operation, high availability and shared access across multiple servers and users.</div>
+      </div>
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">2. What is the difference between a NAS, SAN, and JBOD?</div>
+        <div class="ss-faq-answer">A NAS (Network-Attached Storage) provides file-level access over standard network protocols such as NFS and SMB. A SAN (Storage Area Network) provides block-level storage over dedicated fabric (Fibre Channel or iSCSI) and is typically used for databases and virtualisation shared datastores. A JBOD (Just a Bunch of Disks) is a raw drive enclosure with no onboard intelligence; it expands capacity by connecting to a separate storage controller or head node.</div>
+      </div>
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">3. Is refurbished server storage reliable for enterprise use?</div>
+        <div class="ss-faq-answer">Yes. Every unit is fully tested, firmware-updated and certified before dispatch. All refurbished storage ships with warranty cover, giving you the same assurance as new at a significantly lower cost.</div>
+      </div>
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">4. Can you supply specific Dell or HPE storage models?</div>
+        <div class="ss-faq-answer">Yes. We stock Dell PowerVault and HPE MSA platforms, new and refurbished. If you have a specific model or part number in mind, contact us and we will confirm availability and lead time.</div>
+      </div>
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">5. Do you offer an all-flash array for AI or database workloads?</div>
+        <div class="ss-faq-answer">Yes. We supply NVMe and SAS SSD all-flash arrays suited for SQL, Oracle, SAP HANA and VDI workloads. Contact us to discuss your IOPS and latency requirements.</div>
+      </div>
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">6. Can I get ongoing support after purchasing storage hardware?</div>
+        <div class="ss-faq-answer">Yes. All purchases include free 24/7 remote technical support.</div>
+      </div>
+      <div class="ss-faq-item">
+        <div class="ss-faq-question">7. Which storage is best for enterprise servers?</div>
+        <div class="ss-faq-answer">It depends on the workload. SAN storage is best for virtualisation and databases requiring shared block access. NAS suits file sharing and backup. All-Flash Arrays deliver the highest performance for latency-sensitive applications. Most enterprise environments use a combination of these, sized to the specific workload.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<section class="ss-cta">
+  <div class="ss-cta-inner">
+    <span class="ss-label">Get Started</span>
+    <h2>Get a Same-Day Quote on Enterprise Server Storage</h2>
+    <p>Visit our <a href="{% url 'uk-contact' %}">Contact Us</a> page, give us a call on <a href="tel:+442034358060">+44 20 3435 8060</a>, or drop us an email on <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> to speak with our IT experts.</p>
+    <div class="ss-cta-btns">
+      <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Request a Quote →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

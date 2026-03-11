@@ -1,0 +1,807 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}Buy New & Refurbished Server Parts & Components in the UK{% endblock %}
+{% block meta_description %}
+Need server parts in the UK? Zaco Computers UK Limited supplies affordable new & refurbished server components including CPUs, RAM, & accessories.
+{% endblock %}
+
+{% block content %}
+<style>
+    /* ═══════════════════════════════════════════
+       SERVER COMPONENTS UK PAGE — UNIQUE STYLES
+       Theme: --navy-dark (#0c2c4e), --accent (#2D7DD2), light backgrounds
+    ═══════════════════════════════════════════ */
+
+    /* ── SHARED LABELS ── */
+    .sc-label {
+        font-size: 0.85rem; font-weight: 500; letter-spacing: 1.5px;
+        text-transform: uppercase; color: #666; margin-bottom: 12px;
+        display: block; text-align: center;
+    }
+
+    /* ══════════════════════════════════
+       INTRO SECTION
+    ══════════════════════════════════ */
+        .sc-intro {
+            background: #f4f7fb;
+            padding: 60px 0;
+        }
+        .sc-intro-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .sc-intro-inner h2 {
+            font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+            color: #1a3546; font-weight: 800; line-height: 1.25;
+            margin-bottom: 30px;
+        }
+        .sc-intro-grid {
+            display: grid; grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px; align-items: center;
+        }
+        .sc-intro-grid p {
+            color: #000; font-size: 1rem; line-height: 1.85; margin-bottom: 16px;
+        }
+        .sc-intro-grid p:last-child { margin-bottom: 0; }
+        .sc-intro-img img {
+            border-radius: 14px; width: 92%; height: 255px;
+            box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+            object-fit: cover;
+        }
+        @media (max-width: 860px) {
+            .sc-intro-grid { grid-template-columns: 1fr; gap: 36px; }
+            .sc-intro-img { display: none; }
+        }
+
+    /* ── TRUST BAR (4 icon pillars) ── */
+        .sc-trust-bar {
+            background: #028ef814;
+            padding: 0.75rem 5%;
+            display: flex; align-items: center; justify-content: center;
+            gap: 2rem; flex-wrap: wrap;
+        }
+        .sc-trust-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 109px;
+        }
+        .sc-trust-item {
+            display: flex; align-items: flex-start; gap: 16px;
+            border-right: 1px solid rgba(255,255,255,0.12);
+            padding-right: 20px;
+        }
+        .sc-trust-item:last-child { border-right: none; padding-right: 0; }
+        .sc-trust-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+        .sc-trust-title {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8rem; font-weight: 600; color: #1a3546;
+            letter-spacing: 0.3px;
+        }
+        .sc-trust-title .ti{
+            color: #0c2c4e; font-size: 1rem;
+        }
+        @media (max-width: 900px) {
+            .sc-trust-inner { grid-template-columns: repeat(2, 1fr); }
+            .sc-trust-item { border-right: none; padding-right: 0; }
+        }
+        @media (max-width: 480px) {
+            .sc-trust-inner { grid-template-columns: 1fr; }
+        }
+
+    /* ══════════════════════════════════
+       COMPONENT CATEGORIES
+    ══════════════════════════════════ */
+        .sc-categories-section {
+            background: #fff;
+            padding: 80px 0;
+        }
+        .sc-categories-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .sc-section-header {
+            margin-bottom: 44px; text-align: center;
+        }
+        .sc-section-header h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 14px;
+        }
+        .sc-section-header p {
+            color: #000; font-size: 1rem; line-height: 1.85;
+            margin: 0 auto;
+        }
+
+    /* Component type rows — sidebar + body */
+        .sc-type-row {
+            display: grid; grid-template-columns: 320px 1fr;
+            border-radius: 16px; overflow: hidden;
+            border: 1.5px solid #dde4ef;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 28px;
+            transition: box-shadow 0.3s;
+        }
+        .sc-type-row:hover { box-shadow: 0 12px 40px rgba(45,125,210,0.13); }
+        .sc-type-sidebar {
+            background: linear-gradient(160deg, #0c2c4e 0%, #0e3560 100%);
+            padding: 36px 28px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 240px;
+        }
+        .sc-type-icon { font-size: 2.6rem; margin-bottom: 16px; line-height: 1; }
+        .sc-type-name {
+            font-size: 1.2rem; font-weight: 900; color: #fff;
+            margin-bottom: 20px; line-height: 1.2;
+        }
+        .sc-type-tagline {
+            color: rgba(255,255,255,0.70); font-size: 0.82rem; line-height: 1.6;
+            margin-bottom: 20px; flex: 1;
+        }
+        .sc-enquire-btn {
+            display: inline-block; background: #2D7DD2; color: #fff;
+            padding: 10px 20px; border-radius: 6px; font-weight: 700;
+            font-size: 0.82rem; text-decoration: none; text-align: center;
+            transition: background 0.2s; white-space: nowrap;
+        }
+        .sc-enquire-btn:hover { background: #fff; color: #0c2c4e; }
+
+        .sc-type-body {
+            background: #fff; padding: 34px 38px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .sc-type-body h3 {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: #0c2c4e; font-weight: 700; margin-bottom: 10px;
+        }
+        .sc-type-desc {
+            color: #333; font-size: 0.95rem; line-height: 1.78;
+            margin-bottom: 20px;
+            padding-bottom: 18px; border-bottom: 1px solid #eef2f7;
+        }
+        .sc-spec-tags {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+        }
+        .sc-spec-tag {
+            background: #f0f5ff; border: 1px solid #c8d9f0;
+            color: #0c2c4e; font-size: 0.78rem; font-weight: 600;
+            padding: 5px 12px; border-radius: 20px; white-space: nowrap;
+        }
+
+        @media (max-width: 900px) {
+            .sc-type-row { grid-template-columns: 1fr; }
+            .sc-type-sidebar { min-height: auto; padding: 26px 22px; }
+            .sc-type-body { padding: 26px 22px; }
+        }
+
+    /* ── BRANDS SECTION ── */
+  
+      .srv-vendors{
+      background:#f4f7fb;
+      padding:80px 0;
+      }
+
+      .srv-vendors-inner{
+      max-width:1200px;
+      margin:auto;
+      padding:0 5%;
+      }
+
+      .srv-vendors-header{
+      text-align:center;
+      margin-bottom:50px;
+      }
+
+      .srv-vendors-header h2{
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      color: #1a3546; font-weight: 800; margin-bottom: 10px;
+      }
+
+      .srv-vendors-header p{
+      color: #000; font-size: 1rem; line-height: 1.85;
+      margin: 0 auto 40px;
+      }
+
+      /* grid layout */
+      .vendor-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:40px;
+      }
+
+      /* logo card */
+      .vendor-card{
+      background:white;
+      height:110px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+      box-shadow:0 3px 12px rgba(0,0,0,0.05);
+      transition:0.3s;
+      }
+
+      /* hover */
+      .vendor-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      }
+
+      /* logo image */
+      .vendor-card img{
+      max-width:120px;
+      max-height:120px;
+      object-fit:contain;
+      transition:0.3s;
+      }
+
+      @media (max-width: 768px){
+
+        .vendor-grid{
+          display:flex;
+          overflow-x:auto;
+          gap:20px;
+          scroll-snap-type:x mandatory;
+          padding-bottom:10px;
+          }
+
+          .vendor-card{
+          min-width:200px;
+          flex:0 0 auto;
+          scroll-snap-align:center;
+          }
+
+          .vendor-grid::-webkit-scrollbar{
+          display:none;
+          }
+
+          .srv-vendors{
+          position:relative;
+          overflow:hidden;
+          }
+      }
+        
+    
+    /* ══════════════════════════════════
+       WHY ZACO SECTION
+    ══════════════════════════════════ */
+        .sc-why-section {
+            background: #fff;
+            padding: 80px 0;
+        }
+        .sc-why-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .sc-why-inner > h2 {
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 14px;
+        }
+        .sc-why-inner > p {
+            color: #000; font-size: 1rem; line-height: 1.85; margin-bottom: 36px;
+        }
+        .sc-why-grid {
+            display: grid; grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px; align-items: start;
+        }
+        .sc-benefit-list { list-style: none; padding: 0; margin: 0; }
+        .sc-benefit-item {
+            display: flex; gap: 16px; align-items: flex-start;
+            padding: 18px 0;
+            border-bottom: 1px solid #eef2f7;
+        }
+        .sc-benefit-item:last-child { border-bottom: none; }
+        .sc-benefit-icon {
+            font-size: 1.5rem; flex-shrink: 0; width: 44px; height: 44px;
+            background: #f0f5ff; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .sc-benefit-title {
+            font-size: 0.95rem; font-weight: 800; color: #0c2c4e; margin-bottom: 4px;
+        }
+        .sc-benefit-desc {
+            font-size: 0.88rem; color: #444; line-height: 1.65;
+        }
+        .sc-why-img img {
+            width: 602px; height: 571px;
+            object-fit: cover;
+        }
+        @media (max-width: 860px) {
+            .sc-why-grid { grid-template-columns: 1fr; gap: 36px; }
+            .sc-why-img { display: none; }
+        }
+
+    /* ══════════════════════════════════
+       FAQ
+    ══════════════════════════════════ */
+        .sc-faq-section {
+            background: #f4f7fb;
+            padding: 80px 0;
+        }
+        .sc-faq-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .sc-faq-header { margin-bottom: 36px; text-align: center; }
+        .sc-faq-header h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: #1a3546; font-weight: 800;
+        }
+        .sc-faq-table {
+            border-radius: 14px; overflow: hidden;
+            border: 1.5px solid #dde4ef;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            background: #fff;
+        }
+        .sc-faq-item {
+            border-bottom: 2px solid rgba(45,125,210,0.1);
+            padding: 24px 30px;
+        }
+        .sc-faq-item:last-child { border-bottom: none; }
+        .sc-faq-question {
+            font-size: 1rem; font-weight: 600; color: #1a3546; margin-bottom: 12px;
+        }
+        .sc-faq-answer {
+            color: #000; line-height: 1.7; font-size: 0.95rem;
+        }
+
+    /* ══════════════════════════════════
+       CTA BAND
+    ══════════════════════════════════ */
+        .sc-cta {
+            background: #F2F2F2;
+            padding: 80px 0; text-align: center;
+        }
+        .sc-cta-inner {
+            max-width: 1500px; margin: 0 auto; padding: 0 5%;
+        }
+        .sc-cta-inner h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: #1a3546; font-weight: 800; margin-bottom: 16px; line-height: 1.25;
+        }
+        .sc-cta-inner p {
+            color: #000; font-size: 1rem; line-height: 1.75; margin-bottom: 32px;
+        }
+        .sc-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
+
+<!-- ═══════════════════════════════════════
+     BANNER SLIDER
+═══════════════════════════════════════ -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": {"el": "#main-slider-pagination", "type": "bullets", "clickable": true}, "navigation": {"nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev"}, "autoplay": {"delay": 5000}}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text"><span>RELIABLE SERVER COMPONENTS</span></p>
+            <h1 class="slider-six__title">High-Performance Server Components for UK Enterprises</h1>
+            <p style="color:azure; font-size:1.1rem;">Shop new & refurbished server components at Zaco Computers UK Limited, including CPUs, RAM, storage drives & server accessories to extend your IT infrastructure performance in the UK.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRUST BAR
+═══════════════════════════════════════ -->
+<section class="sc-trust-bar">
+  <div class="sc-trust-inner">
+    <div class="sc-trust-item">
+      <div>
+        <div class="sc-trust-title"><span class="ti">✔</span> Data Centre Ready</div>
+        {% comment %} <div class="sc-trust-desc">Rack, blade, and tower server components for all environments</div> {% endcomment %}
+      </div>
+    </div>
+    <div class="sc-trust-item">
+      <div>
+        <div class="sc-trust-title"><span class="ti">✔</span> New & Refurbished</div>
+        {% comment %} <div class="sc-trust-desc">Certified refurbished options for cost-conscious infrastructure</div> {% endcomment %}
+      </div>
+    </div>
+    <div class="sc-trust-item">
+      <div>
+        <div class="sc-trust-title"><span class="ti">✔</span> Multi-Platform</div>
+        {% comment %} <div class="sc-trust-desc">Dell, HPE, Lenovo, IBM, Cisco support</div> {% endcomment %}
+      </div>
+    </div>
+    <div class="sc-trust-item">
+      <div>
+        <div class="sc-trust-title"><span class="ti">✔</span> EOL Specialist</div>
+        {% comment %} <div class="sc-trust-desc">Discontinued & hard-to-source server spare parts</div> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════
+     INTRO
+═══════════════════════════════════════ -->
+<section class="sc-intro">
+  <div class="sc-intro-inner">
+    <h2>Enterprise Server Components for IT Infrastructure in the UK</h2>
+    <div class="sc-intro-grid">
+      <div>
+        <p>At Zaco Computers UK Limited, we supply new and certified refurbished server components to businesses, IT teams, managed service providers, and data centre operators across the United Kingdom. Whether you need a single replacement part or server components for an entire infrastructure build, our extensive inventory has you covered.</p>
+        <p>We specialise in supplying server components for Dell PowerEdge, HPE ProLiant, Lenovo ThinkSystem, IBM, and Cisco platforms, including hard-to-find and end-of-life server parts that OEMs no longer stock. Every component is tested, certified, and dispatched with warranty cover.</p>
+      </div>
+      <div class="sc-intro-img">
+        <img src="{% static 'images/uk/comp3.jpeg' %}" alt="Enterprise Server Components UK — CPUs, RAM, Storage">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     COMPONENT CATEGORIES
+═══════════════════════════════════════ -->
+<section class="sc-categories-section">
+  <div class="sc-categories-inner">
+    <span class="sc-label">SERVER COMPONENT CATEGORIES</span>
+    <div class="sc-section-header">
+      <h2>Server Components Available at Zaco Computers UK Limited</h2>
+      <p>We have a wide range of new and certified refurbished enterprise server components available spanning Dell PowerEdge, HPE ProLiant, Lenovo ThinkSystem, IBM, Cisco, and more, including discontinued and hard-to-find server spare parts. Whatever the age or complexity of your server environment, we have the right server component in stock, fully tested, warranty-backed, and ready to dispatch across the UK.</p>
+    </div>
+
+    <!-- SERVER PROCESSORS -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Server Processors (CPUs)</div>
+          {% comment %} <p class="sc-type-tagline">Intel Xeon Scalable and AMD EPYC processors for single and dual-socket enterprise servers. Socket-matched, QVL-verified, and tested before dispatch. We supply current-generation processors alongside legacy Xeon E5/E7 families for servers that OEMs no longer support.</p> {% endcomment %}
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+            </a>      
+        </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Server Processors (CPUs)</h3> {% endcomment %}
+        <p class="sc-type-desc">Intel Xeon Scalable and AMD EPYC processors for single and dual-socket enterprise servers. Socket-matched, QVL-verified, and tested before dispatch. We supply current-generation processors alongside legacy Xeon E5/E7 families for servers that OEMs no longer support.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">Intel Xeon Scalable</span>
+          <span class="sc-spec-tag">AMD EPYC</span>
+          <span class="sc-spec-tag">LGA3647 / LGA4677</span>
+          <span class="sc-spec-tag">SP3 / SP5</span>
+          <span class="sc-spec-tag">Xeon E5 / E7 Legacy</span>
+          <span class="sc-spec-tag">Socket Matched</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVER MEMORY -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Server Memory DIMMs</div>
+          {% comment %} <p class="sc-type-tagline">ECC RDIMM, LRDIMM, and UDIMM server memory in DDR3, DDR4, and DDR5. QVL-verified matched pairs and upgrade kits for all major server platforms. Ideal for capacity expansion, failed DIMM replacement, or new server builds.</p> {% endcomment %}
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+        </a>  
+      </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Server Memory DIMMs</h3> {% endcomment %}
+        <p class="sc-type-desc">ECC RDIMM, LRDIMM, and UDIMM server memory in DDR3, DDR4, and DDR5. QVL-verified matched pairs and upgrade kits for all major server platforms. Ideal for capacity expansion, failed DIMM replacement, or new server builds.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">DDR3 / DDR4 / DDR5</span>
+          <span class="sc-spec-tag">ECC RDIMM</span>
+          <span class="sc-spec-tag">LRDIMM</span>
+          <span class="sc-spec-tag">8GB–256GB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HDDs & SSDs -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Server Hard Drives (HDDs) & Solid State Drive (SSDs)</div>
+          {% comment %} <p class="sc-type-tagline">Enterprise SAS/SATA HDDs and NVMe/SAS/SATA SSDs for servers and storage arrays. Available in 2.5" and 3.5" form factors with matching caddies. Suitable for performance, capacity, and archival tiers.</p> {% endcomment %}
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}" >
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+            </a>
+      </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Server Hard Drives (HDDs) & Solid State Drive (SSDs)</h3> {% endcomment %}
+        <p class="sc-type-desc">Enterprise SAS/SATA HDDs and NVMe/SAS/SATA SSDs for servers and storage arrays. Available in 2.5" and 3.5" form factors with matching caddies. Suitable for performance, capacity, and archival tiers.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">SAS 12Gb/s</span>
+          <span class="sc-spec-tag">SATA 6Gb/s</span>
+          <span class="sc-spec-tag">NVMe PCIe Gen4</span>
+          <span class="sc-spec-tag">2.5" & 3.5"</span>
+          <span class="sc-spec-tag">Hot-Swap</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORAGE CONTROLLERS -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Storage Controllers</div>
+          {% comment %} <p class="sc-type-tagline">SAS and SATA storage controllers (HBAs in passthrough/JBOD mode) for direct connection of drives to the operating system or software RAID layers. Popular for ZFS, TrueNAS, and unRaid builds.</p> {% endcomment %}
+        </div>
+            <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}" >
+                            <i class="btn-curve"></i>
+                            <span class="btn-title">Enquire Now →</span>
+                        </a>      
+        </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Storage Controllers</h3> {% endcomment %}
+        <p class="sc-type-desc">SAS and SATA storage controllers (HBAs in passthrough/JBOD mode) for direct connection of drives to the operating system or software RAID layers. Popular for ZFS, TrueNAS, and unRaid builds.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">SAS / SATA HBA</span>
+          <span class="sc-spec-tag">JBOD / Passthrough</span>
+          <span class="sc-spec-tag">LSI / Broadcom</span>
+          <span class="sc-spec-tag">PCIe Gen3 / Gen4</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAID CONTROLLERS -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">RAID Controllers</div>
+          {% comment %} <p class="sc-type-tagline">Hardware RAID controller cards supporting RAID 0, 1, 5, 6, 10, 50, and 60 with BBU and flash-backed write cache options. Brands include Dell PERC, HPE Smart Array, LSI MegaRAID, and Broadcom.</p> {% endcomment %}
+        </div>
+       <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}" >
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+            </a>
+      </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>RAID Controllers</h3> {% endcomment %}
+        <p class="sc-type-desc">Hardware RAID controller cards supporting RAID 0, 1, 5, 6, 10, 50, and 60 with BBU and flash-backed write cache options. Brands include Dell PERC, HPE Smart Array, LSI MegaRAID, and Broadcom.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">RAID 5 / 6 / 10</span>
+          <span class="sc-spec-tag">Dell PERC</span>
+          <span class="sc-spec-tag">HPE Smart Array</span>
+          <span class="sc-spec-tag">LSI MegaRAID</span>
+          <span class="sc-spec-tag">BBU / FBWC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NICs -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Network Interface Cards (NICs)</div>
+          {% comment %} <p class="sc-type-tagline">1GbE, 10GbE, 25GbE, and 100GbE server NICs for rack and blade servers. Single and dual-port options. Brands include Intel, Broadcom, Mellanox/NVIDIA, and Chelsio — covering iSCSI, NFS, and RoCE workloads.</p> {% endcomment %}
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}" >
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+            </a>
+      </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Network Interface Cards (NICs)</h3> {% endcomment %}
+        <p class="sc-type-desc">1GbE, 10GbE, 25GbE, and 100GbE server NICs for rack and blade servers. Single and dual-port options. Brands include Intel, Broadcom, Mellanox/NVIDIA, and Chelsio — covering iSCSI, NFS, and RoCE workloads.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">1GbE / 10GbE</span>
+          <span class="sc-spec-tag">25GbE / 100GbE</span>
+          <span class="sc-spec-tag">Intel / Broadcom</span>
+          <span class="sc-spec-tag">Mellanox / NVIDIA</span>
+          <span class="sc-spec-tag">iSCSI / RoCE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POWER SUPPLIES -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Power Supplies</div>
+          {% comment %} <p class="sc-type-tagline">Hot-swap redundant and standard server PSUs matched by wattage, form factor, and OEM platform. 460W–2400W options across current and legacy Dell, HPE, IBM, and Lenovo platforms.</p> {% endcomment %}
+        </div>
+       <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}" >
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+            </a>
+      </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Power Supplies</h3> {% endcomment %}
+        <p class="sc-type-desc">Hot-swap redundant and standard server PSUs matched by wattage, form factor, and OEM platform. 460W–2400W options across current and legacy Dell, HPE, IBM, and Lenovo platforms.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">Hot-Swap</span>
+          <span class="sc-spec-tag">Redundant</span>
+          <span class="sc-spec-tag">460W–2400W</span>
+          <span class="sc-spec-tag">Platinum / Titanium</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTHERBOARDS -->
+    <div class="sc-type-row">
+      <div class="sc-type-sidebar">
+        <div>
+          <div class="sc-type-icon"></div>
+          <div class="sc-type-name">Motherboards</div>
+          {% comment %} <p class="sc-type-tagline">Replacement and upgrade server motherboards for Dell PowerEdge, HPE ProLiant, IBM, and Lenovo ThinkSystem platforms — new and quality-tested refurbished, matched by FRU / part number.</p> {% endcomment %}
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}" >
+                <i class="btn-curve"></i>
+                <span class="btn-title">Enquire Now →</span>
+            </a>
+      </div>
+      <div class="sc-type-body">
+        {% comment %} <h3>Motherboards</h3> {% endcomment %}
+        <p class="sc-type-desc">Replacement and upgrade server motherboards for Dell PowerEdge, HPE ProLiant, IBM, and Lenovo ThinkSystem platforms — new and quality-tested refurbished, matched by FRU / part number.</p>
+        <div class="sc-spec-tags">
+          <span class="sc-spec-tag">Dell PowerEdge</span>
+          <span class="sc-spec-tag">HPE ProLiant</span>
+          <span class="sc-spec-tag">1U / 2U / 4U</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     BRANDS WE SUPPLY
+═══════════════════════════════════════ -->
+
+<section class="srv-vendors">
+    <div class="auto-container">
+
+    <div class="srv-vendors-header">
+        {% comment %} <span class="ss-label">Brands We Supply</span>         {% endcomment %}
+        <h2>Supported OEMs</h2>
+        {% comment %} <p>We supply and support Dell EMC, HPE, IBM, and NetApp storage, both new and refurbished, with multi-vendor expertise across your entire IT estate.</p> {% endcomment %}
+        </div>
+
+        <div class="vendor-grid">
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/hpe.jpg' %}" alt="HPE">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/lenovo.jpg' %}" alt="Lenovo">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/uk/dellemc.jpg' %}" alt="Dell EMC">
+        </div>
+
+    </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WHY ZACO
+═══════════════════════════════════════ -->
+<section class="sc-why-section">
+  <div class="sc-why-inner">
+    <h2>Why Source Server Components from Zaco Computers UK Limited?</h2>
+    <p>Sourcing reliable server components is essential to maintaining performance and minimising downtime in enterprise IT. Zaco Computers UK Limited provides businesses across the UK with tested, compatible hardware, competitive pricing, and responsive support to extend server lifecycles and optimise system performance.</p>
+    <div class="sc-benefit-title">Key benefits of choosing Zaco include:</div>
+    <div class="sc-why-grid">
+      <ul class="sc-benefit-list">
+        <li class="sc-benefit-item">
+          {% comment %} <div class="sc-benefit-icon">🔍</div> {% endcomment %}
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+              <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
+          </div>
+          <div>
+            <div class="sc-benefit-title">Hard-to-Find Sourcing</div>
+            <div class="sc-benefit-desc">EOL, discontinued, and obsolete server components sourced through verified global supply chains when mainstream distributors cannot help.</div>
+          </div>
+        </li>
+        <li class="sc-benefit-item">
+          {% comment %} <div class="sc-benefit-icon">✅</div> {% endcomment %}
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
+                        </div>
+          <div>
+            <div class="sc-benefit-title">Compatibility Verified</div>
+            <div class="sc-benefit-desc">Socket type, QVL, firmware version, drive caddy, and NIC compatibility — all checked before we confirm your order. No guesswork.</div>
+          </div>
+        </li>
+        <li class="sc-benefit-item">
+          {% comment %} <div class="sc-benefit-icon">📞</div> {% endcomment %}
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
+                        </div>
+          <div>
+            <div class="sc-benefit-title">24/7 Free Remote Support</div>
+            <div class="sc-benefit-desc">Server infrastructure does not keep office hours. Our engineers are available around the clock at no additional charge to customers.</div>
+          </div>
+        </li>
+        <li class="sc-benefit-item">
+          {% comment %} <div class="sc-benefit-icon">🔧</div> {% endcomment %}
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
+                        </div>
+          <div>
+            <div class="sc-benefit-title">Hardware Customisation</div>
+            <div class="sc-benefit-desc">Custom server builds configured to your exact CPU, memory, storage, and RAID requirements — for system integrators and enterprise IT teams.</div>
+          </div>
+        </li>
+        <li class="sc-benefit-item">
+          {% comment %} <div class="sc-benefit-icon">🛡️</div> {% endcomment %}
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
+                        </div>
+          <div>
+            <div class="sc-benefit-title">All Parts Tested & Warranted</div>
+            <div class="sc-benefit-desc">Every server component, whether new or refurbished, is tested before dispatch and supplied with a warranty.</div>
+          </div>
+        </li>
+      </ul>
+      <div class="sc-why-img">
+        <img src="{% static 'images/uk/comp2.jpeg' %}" alt="Why Source Server Components from Zaco UK">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+<section class="sc-faq-section">
+  <div class="sc-faq-inner">
+    <div class="sc-faq-header">
+      <span class="sc-label">FAQs</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="sc-faq-table">
+      <div class="sc-faq-item">
+        <div class="sc-faq-question">1. Do you supply components for older, end-of-life servers?</div>
+        <div class="sc-faq-answer">- Yes — this is one of our core specialisms. We maintain access to an extended global supply network covering discontinued and end-of-life server components. If an OEM no longer lists a part, contact us with your part number or server serial and our team will verify stock on your behalf.</div>
+      </div>
+      <div class="sc-faq-item">
+        <div class="sc-faq-question">2. Are the server components tested and certified before dispatch?</div>
+        <div class="sc-faq-answer">- All components undergo multi-point quality testing before dispatch. We verify functionality against original manufacturer specifications and will not dispatch parts that fail our quality checks. Warranty documentation is provided with every shipment.</div>
+      </div>
+      <div class="sc-faq-item">
+        <div class="sc-faq-question">3. Can you verify component compatibility before I order?</div>
+        <div class="sc-faq-answer">- Absolutely. Provide your server model along with the part number you have, and our technical team will verify compatibility before processing your order. This service is complimentary and prevents costly return shipping due to specification mismatches.</div>
+      </div>
+      <div class="sc-faq-item">
+        <div class="sc-faq-question">4. Can you supply matched server memory sets for specific configurations?</div>
+        <div class="sc-faq-answer">- Yes. For dual-channel and quad-channel memory configurations, we supply matched modules from the same manufacturing batch where possible — reducing the risk of stability issues. Let us know your server's channel configuration and we will advise on the optimal setup.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<section class="sc-cta">
+  <div class="sc-cta-inner">
+    <span class="sc-label">Get Started</span>
+    <h2>Can't Find the Server Component You Need?</h2>
+    <p>Tell us your part number, server model, or describe your requirement. Our expert team will verify the details and provide a quote within hours. Contact us today at <a href="tel:+442034358060">+44 20 3435 8060</a> or email at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>.</p>
+    <div class="sc-cta-btns">
+      <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Request a Quote →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

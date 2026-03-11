@@ -1,0 +1,1076 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}New & Refurbished Enterprise Servers | Dell, HPE, Lenovo & IBM
+{% endblock %}
+{% block meta_description %}
+Explore a wide range of Dell, HPE, Lenovo & IBM new & refurbished servers at Zaco, a trusted supplier of enterprise servers in the UK at best prices.
+{% endblock %}
+
+{% block content %}
+<style>
+    /* ═══════════════════════════════════════════
+    SERVERS UK — UNIQUE PAGE STYLES
+    Theme colours: --navy-dark, --navy-mid, --accent (#2D7DD2), --border
+    ═══════════════════════════════════════════ */
+
+    /* ── TRUST BAR ── */
+    .srv-trust-bar {
+        background: #028ef814;
+        padding: 0.75rem 5%;
+        display: flex; align-items: center; justify-content: center;
+        gap: 2rem; flex-wrap: wrap;
+        /*border-bottom: 2px solid #0c2c4e;*/
+    }
+    .srv-trust-item {
+        display: flex; align-items: center; gap: 0.5rem;
+        font-size: 0.8rem; font-weight: 600; color: #1a3546;
+        letter-spacing: 0.3px;
+    }
+    .srv-trust-item .ti { color: #0c2c4e; font-size: 1rem; }
+
+    /* ── HERO SPLIT ── */
+    .srv-hero {
+        background: linear-gradient(135deg, #0c2c4e 0%, #1a4a72 60%, #2D7DD2 100%);
+        padding: 90px 0 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .srv-hero::before {
+        content: '';
+        position: absolute; top: -80px; right: -80px;
+        width: 420px; height: 420px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(45,125,210,0.25) 0%, transparent 70%);
+    }
+    .srv-hero::after {
+        content: '';
+        position: absolute; bottom: 0; left: 0; right: 0;
+        height: 60px;
+        background: #f4f7fb;
+        clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .srv-hero-inner {
+        max-width: 1200px; margin: 0 auto; padding: 0 5%;
+        display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: end;
+    }
+    .srv-hero-text { padding-bottom: 80px; }
+    .srv-hero-eyebrow {
+        display: inline-flex; align-items: center; gap: 10px;
+        background: rgba(45,125,210,0.25); border: 1px solid rgba(45,125,210,0.4);
+        border-radius: 30px; padding: 6px 18px;
+        font-size: 0.75rem; font-weight: 700; color: #7ec8f7;
+        letter-spacing: 1.5px; text-transform: uppercase;
+        margin-bottom: 24px;
+    }
+    .srv-hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: #fff; font-weight: 800; line-height: 1.15;
+        margin-bottom: 20px;
+    }
+    .srv-hero h1 span { color: #7ec8f7; }
+    .srv-hero-sub {
+        color: rgba(255,255,255,0.75); font-size: 1.05rem; line-height: 1.8;
+        margin-bottom: 36px;
+    }
+    .srv-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .srv-hero-stats {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 1px; background: rgba(255,255,255,0.08);
+        border-radius: 16px 16px 0 0; overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1); border-bottom: none;
+        align-self: end;
+    }
+    .srv-stat-box {
+        background: rgba(255,255,255,0.06);
+        padding: 28px 24px; text-align: center;
+        transition: background 0.2s;
+    }
+    .srv-stat-box:hover { background: rgba(45,125,210,0.15); }
+    .srv-stat-num {
+        font-size: 2.2rem; font-weight: 900; color: #fff;
+        line-height: 1; margin-bottom: 6px;
+    }
+    .srv-stat-num span { color: #2D7DD2; }
+    .srv-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 500; }
+
+    @media (max-width: 900px) {
+        .srv-hero-inner { grid-template-columns: 1fr; }
+        .srv-hero-stats { grid-template-columns: repeat(4, 1fr); border-radius: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
+    }
+
+    /* ── INTRO + OVERVIEW ── */
+    .srv-overview {
+        background: #f4f7fb;
+        padding: 60px 0;
+    }
+    .srv-overview-inner {
+        max-width: 1500px; margin: 0 auto; padding: 0 5% ;
+    }
+    .srv-label {
+        font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+        text-transform: uppercase; color: #2D7DD2; margin-bottom: 12px;
+    }
+    .srv-overview-intro {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+        margin-bottom: 70px;
+    }
+    .srv-overview-intro h2 {
+        font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+        color: #0c2c4e; font-weight: 800; line-height: 1.25;
+        margin-bottom: 0;
+    }
+    .srv-overview-intro p {
+        color: #444; font-size: 0.97rem; line-height: 1.85; margin-bottom: 16px;
+    }
+    .srv-overview-intro p:last-child { margin-bottom: 0; }
+    @media (max-width: 768px) {
+        .srv-overview-intro { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    /* ── SERVER TYPE TILES ── */
+    .srv-types-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px; margin-bottom: 70px;
+    }
+    @media (max-width: 900px) { .srv-types-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .srv-types-grid { grid-template-columns: 1fr; } }
+    .srv-type-tile {
+        background: #fff;
+        border: 1.5px solid #dde4ef;
+        border-radius: 14px; padding: 28px 22px;
+        text-align: center;
+        transition: all 0.3s;
+        position: relative; overflow: hidden;
+    }
+    .srv-type-tile::after {
+        content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+        height: 3px; background: #0c2c4e;
+        transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .srv-type-tile:hover { border-color: #0c2c4e; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(45,125,210,0.12); }
+    .srv-type-tile:hover::after { transform: scaleX(1); }
+    .srv-type-icon { font-size: 2rem; margin-bottom: 14px; }
+    .srv-type-tile h4 { color: #0c2c4e; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .srv-type-tile p { color: #666; font-size: 0.82rem; margin: 0; }
+
+    /* ══════════════════════════
+    BRAND PLATFORM SECTION
+    Full-width alternating layout
+    ══════════════════════════ */
+    .srv-brands { background: #fff; padding: 80px 0; }
+    .srv-brands-inner { max-width: 1500px; margin: 0 auto; padding: 0 5%; }
+    .srv-brands-header { text-align: center; margin-bottom: 60px; }
+    .srv-brands-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: #0c2c4e; font-weight: 800; margin-bottom: 12px; }
+    .srv-brands-header p { color: #555; font-size: 0.97rem; max-width: 680px; margin: 0 auto; line-height: 1.7; }
+
+    /* Brand platform rows */
+    .srv-brand-row {
+        display: grid; grid-template-columns: 340px 1fr;
+        gap: 0; border-radius: 16px; overflow: hidden;
+        border: 1.5px solid #dde4ef;
+        margin-bottom: 28px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        transition: box-shadow 0.3s;
+    }
+    .srv-brand-row:hover { box-shadow: 0 10px 36px rgba(45,125,210,0.12); }
+    .srv-brand-row.reverse { grid-template-columns: 1fr 340px; }
+    .srv-brand-row.reverse .srv-brand-sidebar { order: 2; }
+    .srv-brand-row.reverse .srv-brand-body { order: 1; }
+
+    .srv-brand-sidebar {
+        padding: 40px 32px;
+        display: flex; flex-direction: column; justify-content: space-between;
+        min-height: 300px;
+    }
+    .srv-brand-sidebar.dell  { background: linear-gradient(160deg, #0c2c4e 0%, #0c2c4e 100%); }
+    .srv-brand-sidebar.hpe   { background: linear-gradient(160deg, #0c2c4e 0%, #0c2c4e 100%); }
+    .srv-brand-sidebar.lenovo{ background: linear-gradient(160deg, #0c2c4e 0%, #0c2c4e 100%); }
+    .srv-brand-sidebar.ibm   { background: linear-gradient(160deg, #0c2c4e 0%, #0c2c4e 100%); }
+
+    .srv-brand-logo-text {
+        font-size: 1.8rem; font-weight: 900; color: #fff;
+        letter-spacing: 2px; line-height: 1;
+        margin-bottom: 10px;
+    }
+    .srv-brand-gen {
+        display: inline-block;
+        background: rgba(255,255,255,0.18);
+        border-radius: 10px; padding: 4px 14px;
+        font-size: 0.75rem; color: rgba(255,255,255,0.9); font-weight: 900;
+        margin-bottom: 20px;
+    }
+    .srv-brand-models-gen {
+        display: inline-block;
+        background: #0c2c4e;
+        border-radius: 20px; padding: 4px 14px;
+        font-size: 0.75rem; color: rgba(255,255,255,0.9); font-weight: 600;
+        margin-bottom: 20px;
+    }
+    .srv-brand-tagline {
+        color: rgba(255,255,255,0.75); font-size: 0.88rem; line-height: 1.6; margin-bottom: 24px; flex: 1;
+    }
+    .srv-brand-sidebar .theme-btn { margin-top: auto; align-self: flex-start; }
+
+    .srv-brand-body {
+        background: #fff; padding: 36px 40px;
+        display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .srv-brand-models {
+        font-size: 0.82rem; color: #777;
+        background: #f4f7fb; border-radius: 8px;
+        padding: 12px 16px; margin-bottom: 28px;
+        line-height: 1.6;
+    }
+    .srv-brand-models strong { color: #0c2c4e; display: block; margin-bottom: 4px; font-size: 0.8rem; letter-spacing: 0.5px; text-transform: uppercase; }
+    .srv-specs-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        gap: 16px 24px; margin-bottom: 20px;
+    }
+    .srv-spec { }
+    .srv-spec-label { font-size: 0.72rem; font-weight: 700; color: #2D7DD2; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+    .srv-spec-val { font-size: 0.88rem; color: #1a3546; font-weight: 600; }
+    .srv-brand-desc {
+        font-size: 0.9rem; color: #555; line-height: 1.7;
+        border-top: 1px solid #eef2f7; padding-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+        .srv-brand-row, .srv-brand-row.reverse { grid-template-columns: 1fr; }
+        .srv-brand-row.reverse .srv-brand-sidebar { order: 1; }
+        .srv-brand-row.reverse .srv-brand-body { order: 2; }
+        .srv-brand-sidebar { min-height: auto; padding: 28px 24px; }
+        .srv-brand-body { padding: 28px 24px; }
+        .srv-specs-grid { grid-template-columns: repeat(2,1fr); }
+    }
+
+    /* ── CANT FIND CTA ── */
+    .srv-cant-find {
+        margin-top: 40px;
+        background: linear-gradient(90deg, rgba(45,125,210,0.07) 0%, rgba(45,125,210,0.03) 100%);
+        border: 2px solid rgba(45,125,210,0.3);
+        border-radius: 14px; padding: 30px 36px;
+        display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .srv-cant-find p { color: #0c2c4e; font-weight: 700; font-size: 1.05rem; margin: 0; }
+    .srv-cant-find span { color: #555; font-size: 0.9rem; font-weight: 400; display: block; margin-top: 4px; }
+
+    /* ═══════════════════════════════════
+    CERTIFIED REFURBISHED — SPLIT PANEL
+    ═══════════════════════════════════ */
+    .srv-refurb {
+        background: #f4f7fb;
+        padding: 80px 0;
+        position: relative; overflow: hidden;
+    }
+    .srv-refurb::before {
+        content: '';
+        position: absolute; top: -100px; right: -100px;
+        width: 500px; height: 500px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(45,125,210,0.12) 0%, transparent 70%);
+    }
+    .srv-refurb-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+    .srv-refurb-top {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 60px; align-items: start;
+    }
+    .srv-refurb-top h2 { color: #0c2c4e; font-size: clamp(1.6rem, 2.5vw, 2.1rem); font-weight: 800; line-height: 1.25; margin-bottom: 20px; }
+    .srv-refurb-top p { color: #0000; font-size: 0.95rem; line-height: 1.85; margin-bottom: 14px; }
+    .srv-refurb-top p:last-child { margin-bottom: 0; }
+    .srv-process-steps { display: flex; flex-direction: column; gap: 0; }
+    .srv-process-step {
+        display: flex; gap: 20px; align-items: flex-start;
+        padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .srv-process-step:last-child { border-bottom: none; }
+    .srv-step-num {
+        width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+        background: #2D7DD2;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.85rem; font-weight: 800; color: #000000;
+    }
+    .srv-step-text h4 { color: #0c2c4e; font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+    .srv-step-text p { color: rgba(0, 0, 0, 0.6); font-size: 0.83rem; margin: 0; line-height: 1.6; }
+
+    @media (max-width: 768px) { .srv-refurb-top { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* Comparison table */
+    .srv-compare-table {
+        border-radius: 14px; overflow: hidden;
+        border: 1px solid rgba(49, 46, 46, 0.36);
+   
+    }
+    .srv-compare-table table { width: 100%; border-collapse: collapse; }
+    .srv-compare-table thead tr {
+        background: #0c2c4e;
+    }
+    .srv-compare-table th {
+        padding: 16px 20px; text-align: left;
+        color: #ffffff; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;
+    }
+    .srv-compare-table tbody tr { border-bottom: 1px solid rgba(224, 217, 217, 0.85); transition: background 0.2s; background-color: #fff; }
+    .srv-compare-table tbody tr:hover { background: #028ef814; }
+    {% comment %} .srv-compare-table tbody tr:last-child { border-bottom: none; } {% endcomment %}
+    .srv-compare-table td { padding: 15px 20px; font-size: 0.88rem; vertical-align: middle; }
+    .srv-compare-table td:first-child { color: rgba(0, 0, 0, 0.9); font-weight: 600; }
+    .srv-compare-table td:nth-child(2) { color: rgb(0, 0, 0); }
+    .srv-compare-table td:nth-child(3) { color: #0c2c4e; font-weight: 600; }
+    .srv-refurb-cta {
+        text-align: center; margin-top: 40px;
+        padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .srv-refurb-cta p { color: rgba(255,255,255,0.65); font-size: 0.95rem; margin-bottom: 20px; }
+
+    /* ══════════════════════
+    VENDOR LOGOS (reuse existing swiper)
+    ══════════════════════ */
+    {% comment %} .srv-vendors { background: #f4f7fb; padding: 20px 0; }
+    .srv-vendors-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+    .srv-vendors-header { text-align: center; margin-bottom: 40px; }
+    .srv-vendors-header h2 { font-size: 1.5rem; color: #0c2c4e; font-weight: 800; margin-bottom: 8px; }
+    .srv-vendors-header p { color: #555; font-size: 0.9rem; } {% endcomment %}
+
+    /* ══════════════════════
+    WHY ZACO — HORIZONTAL TIMELINE STYLE
+    ══════════════════════ */
+    .srv-why { background: #fff; padding: 80px 0; }
+    .srv-why-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+    .srv-why-header { margin-bottom: 50px; }
+    .srv-why-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); color: #0c2c4e; font-weight: 800; margin-bottom: 14px; }
+    .srv-why-header p { color: #555; font-size: 0.97rem; max-width: 720px; line-height: 1.75; }
+    .srv-why-layout {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 0;
+    }
+    .srv-why-left { padding-right: 60px; border-right: 2px solid #eef2f7; }
+    .srv-why-right { padding-left: 60px; }
+    .srv-why-item {
+        display: flex; gap: 22px; align-items: flex-start;
+        padding: 28px 0; border-bottom: 1px solid #eef2f7;
+    }
+    .srv-why-item:last-child { border-bottom: none; }
+    .srv-why-num {
+        font-size: 3rem; font-weight: 900; color: #dde4ef;
+        line-height: 1; flex-shrink: 0; width: 60px; text-align: right;
+        transition: color 0.2s;
+    }
+    .srv-why-item:hover .srv-why-num { color: #2D7DD2; }
+    .srv-why-text h3 { color: #0c2c4e; font-size: 0.97rem; font-weight: 700; margin-bottom: 8px; }
+    .srv-why-text p { color: #555; font-size: 0.87rem; line-height: 1.7; margin: 0; }
+    @media (max-width: 900px) {
+        .srv-why-layout { grid-template-columns: 1fr; }
+        .srv-why-left { border-right: none; padding-right: 0; border-bottom: 2px solid #eef2f7; padding-bottom: 0; margin-bottom: 0; }
+        .srv-why-right { padding-left: 0; }
+    }
+
+    /* ══════════════════════
+    HOW IT WORKS — KEEP EXISTING ACCORDION, NEW SURROUND
+    ══════════════════════ */
+    .srv-hiw {
+        background: #0c2c4e;
+        padding: 80px 0;
+    }
+    .srv-hiw-inner { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+    .srv-hiw-header { text-align: center; margin-bottom: 50px; }
+    .srv-hiw-header .srv-label { color: #7ec8f7; }
+    .srv-hiw-header h2 { color: #fff; font-size: clamp(1.6rem, 2.5vw, 2.1rem); font-weight: 800; margin-bottom: 12px; }
+    .srv-hiw-header p { color: rgba(255,255,255,0.65); font-size: 0.97rem; max-width: 620px; margin: 0 auto; line-height: 1.7; }
+    .srv-hiw-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    @media (max-width: 900px) { .srv-hiw-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* Override accordion colours inside dark section */
+    .srv-hiw .accordion-box li { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; margin-bottom: 12px; }
+    .srv-hiw .accordion-box .acc-btn { color: #fff; }
+    .srv-hiw .accordion-box .acc-btn .count { color: #2D7DD2; }
+    .srv-hiw .accordion-box .text { color: rgba(255,255,255,0.7); }
+    .srv-hiw .accordion-box .active-block { background: rgba(45,125,210,0.15); border-color: rgba(45,125,210,0.3); }
+    .srv-hiw-image img { border-radius: 14px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+    /* ── RESPONSIVE GLOBAL ── */
+    @media (max-width: 600px) {
+        .srv-brand-body { padding: 20px 18px; }
+        .srv-specs-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+{% comment %} ********************* {% endcomment %}
+    /* ── TYPE BAR ── */
+    .type-bar {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        gap: 0; border-radius: 16px; overflow: hidden;
+        border: 2px solid #0c2c4e;
+        margin-bottom: 28px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        transition: box-shadow 0.3s;
+    }
+    .type-item {
+        display: flex; align-items: center; gap: 12px;
+        padding: 18px 20px; background: #fff; border-right: 2px solid #0c2c4e;
+        font-size: .84rem;
+        transition: all 0.3s;
+    }
+    .type-item:last-child { border-right: none; }
+    .type-ic { font-size: 2rem;  }
+    .type-item strong { display: block; font-size: .84rem; color: var(--ink); font-weight: 700; line-height: 1.3; }
+    .type-item span   { font-size: .74rem; color: var(--muted); }
+    
+    @media (max-width: 860px) {
+        .type-bar  { grid-template-columns: 1fr 1fr; }
+        .type-item { border-bottom: 1px solid var(--border); }
+        .bl-2col   { grid-template-columns: 1fr; }
+        .model-gen { grid-template-columns: 160px 1fr; }
+    }
+    @media (max-width: 560px) {
+        .type-bar  { grid-template-columns: 1fr; }
+        .model-gen { grid-template-columns: 1fr; gap: 4px; }
+        .listing-note { flex-direction: column; text-align: center; }
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        background: rgb(255, 255, 255);
+        padding: 40px;
+        border-radius: 12px;
+        margin: 40px 0;
+    }
+    .faq-item {
+        margin-bottom: 24px;
+        border-bottom: 2px solid rgba(45,125,210,0.1);
+        padding-bottom: 24px;
+    }
+    .faq-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    .faq-question {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1a3546;
+        margin-bottom: 12px;
+        cursor: pointer;
+    }
+    .faq-answer {
+        color: #000000;
+        line-height: 1.7;
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 100%);
+        color: #fff;
+        border-radius: 16px;
+        text-align: center;
+        padding: 60px 40px;
+    }
+    .cta-section h2 {
+        color: #1a3546;
+        margin-bottom: 20px;
+    }
+    .cta-section p {
+        color: rgba(0, 0, 0, 0.9);
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+    }
+
+    .srv-vendors{
+    background:#f4f7fb;
+    padding:80px 0;
+    }
+
+    .srv-vendors-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:0 5%;
+    }
+
+    .srv-vendors-header{
+    text-align:center;
+    margin-bottom:50px;
+    }
+
+    .srv-vendors-header h2{
+    font-size:2rem;
+    font-weight:800;
+    color:#0c2c4e;
+    margin-bottom:10px;
+    }
+
+    .srv-vendors-header p{
+    color:#555;
+    font-size:0.95rem;
+    }
+
+    /* grid layout */
+    .vendor-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:40px;
+    }
+
+    /* logo card */
+    .vendor-card{
+    background:white;
+    height:110px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:6px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.05);
+    transition:0.3s;
+    }
+
+    /* hover */
+    .vendor-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    /* logo image */
+    .vendor-card img{
+    max-width:120px;
+    max-height:120px;
+    object-fit:contain;
+    transition:0.3s;
+    }
+
+    .srv-table{
+    background:#fff;
+    padding:80px 0;
+    }
+    .srv-faq{
+    background:#f4f7fb;
+    padding:80px 0;
+    }
+
+    @media (max-width: 768px){
+
+    .vendor-grid{
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    scroll-snap-type:x mandatory;
+    padding-bottom:10px;
+    }
+
+    .vendor-card{
+    min-width:200px;
+    flex:0 0 auto;
+    scroll-snap-align:center;
+    }
+
+    .vendor-grid::-webkit-scrollbar{
+    display:none;
+    }
+    
+    .srv-vendors{
+    position:relative;
+    overflow:hidden;
+    }
+}
+
+</style>
+
+<!-- ═══════════════════════════════════════
+     BANNER (reuse existing slider component)
+═══════════════════════════════════════ -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text"><span>ENTERPRISE SERVERS</span></p>
+            <h1 class="slider-six__title">High-Performance New &amp; Refurbished Servers in the UK</h1>
+            <p style="color: azure; font-size: 1.1rem;">Support your organisation's infrastructure with servers designed to handle enterprise workloads and deliver reliable performance across your network.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRUST BAR
+═══════════════════════════════════════ -->
+<div class="srv-trust-bar">
+  <div class="srv-trust-item"><span class="ti">✔</span> Certified and Fully Tested</div>
+  <div class="srv-trust-item"><span class="ti">🛡</span> 1-Year Warranty with Extendable on Request</div>
+  <div class="srv-trust-item"><span class="ti">⚙</span> Custom Configuration</div>
+  <div class="srv-trust-item"><span class="ti">🔄</span> EOL and EOSL Support</div>
+  <div class="srv-trust-item"><span class="ti">🎧</span> 24×7 Remote Support</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     OVERVIEW — Intro + Server Type Tiles
+═══════════════════════════════════════ -->
+<section class="srv-overview" >
+  <div class="srv-overview-inner" style="margin-bottom: 0px;">
+
+        <div class="auto-container">
+            {% comment %} <div class="about-six__text" style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px; color: #000000;">
+                <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">Enterprise Servers Configured for Your Infrastructure Needs</h2>
+            </div> {% endcomment %}
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div>
+                        <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">Enterprise Servers Configured for Your Infrastructure Needs</h2>
+                        <p style="color: rgba(0, 0, 0, 0.9); font-size: 1rem; line-height: 1.8; margin-bottom: 30px;">Zaco Computers UK Limited is a London-based supplier of enterprise IT hardware, providing businesses, data centres, IT departments, and managed service providers across the United Kingdom with high-quality servers at highly competitive rates. <br>We stock an extensive range of new and refurbished rack, tower, and blade servers from Dell, HPE, Lenovo, and IBM. Every server, whether brand new or professionally refurbished, passes through our rigorous in-house testing process before dispatch.</p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 text-center ">
+                    <img 
+                        src="{% static 'images/uk/Stack_Image1.png' %}" 
+                        alt="Microsoft Third-Party Support"
+                        style="border-radius:12px; width:400px; height:400px; margin-top: 20px;"
+                    > 
+                </div>
+        </div>
+        
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     BRAND PLATFORM CARDS — Alternating rows
+═══════════════════════════════════════ -->
+<section class="srv-brands">
+  <div class="srv-brands-inner">
+        <div >
+            <p style="text-align: center; margin-bottom: 20px; margin-top: 0px;">SERVER RANGE</p>
+            <h2 style="color: #1a3546; text-align: center; margin-top: 0px;  margin-bottom: 20px; font-size: 1.3rem; font-weight: 700;">Types of New & Certified Refurbished Enterprise Servers</h2>
+            <p style="text-align: center; color: #000000; margin: 10px; margin-bottom: 40px;">Zaco Computers UK Limited maintains a broad inventory of rack, tower and blade servers across all major enterprise platforms. All units are available new or as certified refurbished, fully tested and covered by a 1-year warranty, extendable on request. Contact us to discuss your requirement and we will confirm availability and configuration options promptly.</p>
+        </div>
+        {% comment %} <div class="type-bar">
+            <div class="type-item">
+                <span class="type-ic">🖧</span>
+                <div>
+                <strong>Rack Servers</strong>
+                <span>1U, 2U and 4U form factors</span>
+                </div>
+            </div>
+            <div class="type-item">
+                <span class="type-ic">⬛</span>
+                <div>
+                <strong>Blade Servers</strong>
+                <span>High-density chassis and blades</span>
+                </div>
+            </div>
+            <div class="type-item">
+                <span class="type-ic">🗄</span>
+                <div>
+                <strong>Tower Servers</strong>
+                <span>Office and branch deployments</span>
+                </div>
+            </div>
+            <div class="type-item">
+                <span class="type-ic">🔄</span>
+                <div>
+                <strong>EOL and EOSL Models</strong>
+                <span>Legacy platform continuity</span>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <div class="srv-types-grid">
+            <div class="srv-type-tile">
+                <div class="srv-type-icon">🖧</div>
+                <h4>Rack Servers</h4>
+                <p>1U, 2U and 4U form factors</p>
+            </div>
+            <div class="srv-type-tile">
+                <div class="srv-type-icon">⬛</div>
+                <h4>Blade Servers</h4>
+                <p>High-density chassis and blades</p>
+            </div>
+            <div class="srv-type-tile">
+                <div class="srv-type-icon">🗄</div>
+                <h4>Tower Servers</h4>
+                <p>Office and branch deployments</p>
+            </div>
+            <div class="srv-type-tile">
+                <div class="srv-type-icon">🔄</div>
+                <h4>EOL &amp; EOSL Models</h4>
+                <p>Legacy platform continuity</p>
+            </div>
+        </div>
+
+        <!-- DELL -->
+        <div class="srv-brand-row">
+            <div class="srv-brand-sidebar dell">
+                <div>
+                <span class="srv-brand-gen">DELL</span> 
+                <div class="srv-brand-logo-text">Dell PowerEdge Servers</div>
+                <p class="srv-brand-tagline">Industry-standard Dell rack, tower &amp; blade servers for virtualisation, databases, ERP, web hosting, and mixed enterprise workloads. The world's best-selling server platform.</p>
+                </div>
+                <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Request Quote →</span>
+                </a>
+            </div>
+            <div class="srv-brand-body">
+                {% comment %} <span class="srv-brand-models" ><strong>PowerEdge — 13th, 14th, 15th, 16th, 17th Gen</strong></span> {% endcomment %}
+                <div class="srv-brand-models"> 
+                <strong>PowerEdge — 13th, 14th, 15th, 16th, 17th Gen</strong>   
+                <strong>Models Include</strong>
+                R630, R730, R640, R740, R840, R940, R650, R750, R660, R760, R670, R770, M630, M640, MX740, MX750, M1000E, MX7000, VRTX, FX2, FC630, FC640 &amp; more.
+                </div>
+                <div class="srv-specs-grid">
+                <div class="srv-spec"><p class="srv-spec-label">Form Factor</p><p class="srv-spec-val">1U / 2U Rack</p></div>
+                <div class="srv-spec"><p class="srv-spec-label">Processors</p><p class="srv-spec-val">Intel Xeon Scalable</p></div>
+                <div class="srv-spec"><p class="srv-spec-label">Memory</p><p class="srv-spec-val">Up to 8 TB DDR5</p></div>
+                <div class="srv-spec"><p class="srv-spec-label">Storage</p><p class="srv-spec-val">NVMe / SAS / SATA</p></div>
+                <div class="srv-spec"><p class="srv-spec-label">Availability</p><p class="srv-spec-val">New &amp; Refurbished</p></div>
+                <div class="srv-spec"><p class="srv-spec-label">Warranty</p><p class="srv-spec-val">1 year with extendable option</p></div>
+                </div>
+            </div>
+    </div>
+
+    <!-- HPE -->
+    <div class="srv-brand-row reverse">
+      <div class="srv-brand-sidebar hpe">
+        <div>
+          <span class="srv-brand-gen">HPE</span> 
+          <div class="srv-brand-logo-text">HPE ProLiant Servers</div>
+          {% comment %} <span class="srv-brand-gen">ProLiant — Gen 7, 8, 9, 10, 10+, 11</span> {% endcomment %}
+          <p class="srv-brand-tagline">HPE ProLiant Servers — renowned for reliability, security, and manageability. Ideal for SME infrastructure, virtualisation stacks, and high-availability applications.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Request Quote →</span>
+        </a>
+      </div>
+      <div class="srv-brand-body">
+        {% comment %} <span class="srv-brand-models"><strong>ProLiant — Gen 7, 8, 9, 10, 10+, 11</strong></span> {% endcomment %}
+        <div class="srv-brand-models">
+        <strong>ProLiant — Gen 7, 8, 9, 10, 10+, 11</strong>
+        <strong>Models Include</strong>
+          DL360, DL380, DL560, DL580, BL460c, C7000, ML10, ML110, ML310, ML350E &amp; more.
+        </div>
+        <div class="srv-specs-grid">
+          <div class="srv-spec"><p class="srv-spec-label">Form Factor</p><p class="srv-spec-val">Rack / Tower / Blade</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Processors</p><p class="srv-spec-val">Intel Xeon </p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Memory</p><p class="srv-spec-val">Up to 6 TB DDR4/5</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Management</p><p class="srv-spec-val">iLO 5 / iLO 6</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Availability</p><p class="srv-spec-val">New &amp; Refurbished</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Warranty</p><p class="srv-spec-val">1 year with extendable option</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LENOVO -->
+    <div class="srv-brand-row">
+      <div class="srv-brand-sidebar lenovo">
+        <div>
+          <span class="srv-brand-gen">LENOVO</span>
+          <div class="srv-brand-logo-text">Lenovo Servers</div>
+          {% comment %} <span class="srv-brand-gen">ThinkSystem — SR250 to SR950</span> {% endcomment %}
+          <p class="srv-brand-tagline">Lenovo ThinkSystem servers deliver enterprise reliability with excellent price-to-performance ratios. Strong choices for AI, analytics, and cloud-native workloads.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Request Quote →</span>
+        </a>
+      </div>
+      <div class="srv-brand-body">
+        <div class="srv-brand-models">
+          <strong>Models Include</strong>
+          SR250, SR530, SR630, SR650, SR850, SR950.
+        </div>
+        <div class="srv-specs-grid">
+          <div class="srv-spec"><p class="srv-spec-label">Form Factor</p><p class="srv-spec-val">1U / 2U / 4U Rack</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Processors</p><p class="srv-spec-val">Intel Xeon</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Memory</p><p class="srv-spec-val">Up to 4 TB DDR4</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Management</p><p class="srv-spec-val">XClarity Controller</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Availability</p><p class="srv-spec-val">New &amp; Refurbished</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Warranty</p><p class="srv-spec-val">1 year with extendable option</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IBM -->
+    <div class="srv-brand-row reverse">
+      <div class="srv-brand-sidebar ibm">
+        <div>
+          <span class="srv-brand-gen">IBM</span>
+          <div class="srv-brand-logo-text" style=" font-size: 1.9rem; letter-spacing: 1px" >IBM Power Systems</div>
+          {% comment %} <span class="srv-brand-gen">Power Systems — POWER10 / POWER9</span> {% endcomment %}
+          <p class="srv-brand-tagline">IBM Power servers for mission-critical UNIX and Linux environments — ideal for financial services, ERP, and organisations with existing IBM estates.</p>
+        </div>
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Request Quote →</span>
+        </a>
+      </div>
+      <div class="srv-brand-body">
+        <div class="srv-brand-models">
+          <strong>Models Include</strong>
+          Power SR630, SR650, SR850, X3630, x3650, Legacy POWER8/9 &amp; more.
+        </div>
+        <div class="srv-specs-grid">
+          <div class="srv-spec"><p class="srv-spec-label">Platform</p><p class="srv-spec-val">IBM POWER10 / POWER9</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">OS Support</p><p class="srv-spec-val">AIX · IBM i · Linux</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Memory</p><p class="srv-spec-val">Up to 8 TB DDR4</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Workloads</p><p class="srv-spec-val">ERP / SAP / Oracle DB</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Availability</p><p class="srv-spec-val">New &amp; Refurbished</p></div>
+          <div class="srv-spec"><p class="srv-spec-label">Warranty</p><p class="srv-spec-val">1 year with extendable option</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Can't find CTA -->
+    <div class="srv-cant-find">
+      <div>
+        <p>Can't Find Your Specification?</p>
+        <span>Tell us what you need — we'll confirm availability and configuration options promptly.</span>
+      </div>
+      <a class="theme-btn btn-style-one" href="tel:+442034358060">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Contact Us →</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     CERTIFIED REFURBISHED — Dark panel + table
+═══════════════════════════════════════ -->
+
+<section class="srv-overview" >
+    <div class="srv-overview-inner" style="margin-bottom: 0px;">
+        <div class="auto-container" style="margin-bottom: 10px;">
+            <p style="margin-bottom: 20px; margin-top: 0px;">CERTIFIED REFURBISHED SERVER HARDWARE</p>
+            <div class="about-six__text" style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px; color: #000000;">
+                <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">What Sets Certified Refurbished Apart</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div>
+                        {% comment %} <p>Certified Refurbished Server Hardware</p> {% endcomment %}
+                        {% comment %} <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">What Sets Certified Refurbished Apart</h2> {% endcomment %}
+                        <p style="color: rgba(0, 0, 0, 0.9); font-size: 1rem; line-height: 1.8; margin-bottom: 30px;">The term "refurbished" is frequently misunderstood. At Zaco Computers UK Limited, certified refurbished servers are not simply second-hand equipment resold as-is. These are units procured in advance from OEMs, professionally stripped, inspected, repaired where necessary, deep-cleaned and tested against manufacturer standards before being certified for deployment.<br> <br>For organisations facing End-of-Life (EOL) or End-of-Service-Life (EOSL) constraints, certified refurbished server hardware from Zaco provides a reliable, warranty-backed route to extending infrastructure without the capital outlay of new equipment. Every unit dispatched carries a 1-year warranty, extendable to suit your operational requirements.</p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 text-center ">
+                    <img 
+                        src="{% static 'images/uk/uk_server.png' %}" 
+                        alt="Microsoft Third-Party Support"
+                        style="border-radius:12px; width:100%; height:auto; box-shadow:0 10px 25px rgba(0,0,0,0.15); margin-top: 20px;"
+                    > 
+                </div>
+            </div>
+        </div>
+</section>
+
+<section class="srv-table">
+     <div class="auto-container">
+            <h2 style="text-align: center; color: #1a3546; margin-bottom: 20px; font-size: 1rem; font-weight: 700;">NEW vs. REFURBISHED — WHICH IS RIGHT FOR YOUR BUSINESS?</h2>
+            <p style="text-align: center; color:rgb(0, 0, 0); font-size:0.9rem; margin-bottom:30px;">Use this comparison to identify the best procurement approach for your workloads, budget, and timelines. Our team can also advise you directly.</p>
+            <div class="srv-compare-table">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width:28%">Consideration</th>
+                    <th style="width:36%">New Server</th>
+                    <th style="width:36%">Certified Refurbished Servers</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Initial Cost</td>
+                    <td>Higher outlay</td>
+                    <td>✔ Up to 50% less</td>
+                </tr>
+                <tr>
+                    <td>Latest Generation</td>
+                    <td>✔ Current-gen platforms</td>
+                    <td>Gen 9–15 proven platforms</td>
+                </tr>
+                <tr>
+                    <td>Custom Configuration</td>
+                    <td>Limited to OEM build options</td>
+                    <td>✔ Fully configurable to spec</td>
+                </tr>
+                {% comment %} <tr>
+                    <td>Ideal For</td>
+                    <td>Mission-critical, latest-gen workloads</td>
+                    <td>✔ Most business workloads, cost-sensitive projects, datacenter expansion</td>
+                </tr> {% endcomment %}
+                <tr>
+                    <td>EOL / EOSL Requirements</td>
+                    <td>Not applicable</td>
+                    <td>✔ Supported — ideal for lifecycle extension</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="">
+      <p style="text-align: left; color:rgb(0, 0, 0); font-size: 1rem; margin-top:30px; margin-bottom:30px; font-weight: 500">Not sure which option suits your workload? Our technical team will advise at no charge.</p>
+      <a class="theme-btn btn-style-one" href="tel:+442034358060">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Speak to a Server Specialist →</span>
+      </a>
+    </div> 
+</section>
+
+<section class="srv-vendors">
+    <div class="auto-container">
+
+    <div class="srv-vendors-header">
+        <p style="margin-bottom:20px;margin-top:0;">MULTI-VENDOR SUPPORT</p>
+        <h2>Trusted Server Brands We Stock & Support</h2>
+        <p>We supply servers from the world's leading enterprise hardware manufacturers across the UK, all certified and backed by warranty.</p>
+        </div>
+
+        <div class="vendor-grid">
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/hpe.jpg' %}" alt="HPE">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/home/lenovo.jpg' %}" alt="Lenovo">
+        </div>
+
+        <div class="vendor-card">
+        <img src="{% static 'images/uk/dellemc.jpg' %}" alt="Dell EMC">
+        </div>
+
+    </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     WHY ZACO — Split two-column numbered list
+═══════════════════════════════════════ -->
+<section style="background: #fff; padding: 80px 0;">
+    <div class="auto-container" >
+            {% comment %} <p style="margin-bottom: 20px; margin-top: 0px;">Certified Refurbished Server Hardware</p> {% endcomment %}
+            <div class="about-six__text" style=" font-size: 1rem; line-height: 1.8; color: #000000;">
+                <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">Why Zaco Computers UK Limited?</h2>
+                {% comment %} <p>Businesses across the United Kingdom have no shortage of IT hardware suppliers. What they often lack is a supplier who combines technical expertise, genuine flexibility, and the kind of after-sales commitment that actually matters when infrastructure is under pressure.</p> {% endcomment %}
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div>
+                        {% comment %} <p>Certified Refurbished Server Hardware</p> {% endcomment %}
+                        {% comment %} <h2 style="color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">What Sets Certified Refurbished Apart</h2> {% endcomment %}
+                        <p style="color: rgba(0, 0, 0, 0.9); font-size: 1rem; line-height: 1.8; margin-bottom: 30px;">Businesses across the United Kingdom have no shortage of IT hardware suppliers. What they often lack is a supplier who combines technical expertise, genuine flexibility, and the kind of after-sales commitment that actually matters when infrastructure is under pressure. <br>As a London-based enterprise IT hardware specialist, Zaco Computers UK Limited works with data centres, IT departments, and managed service providers throughout the UK to deliver servers that are properly tested, correctly configured, and backed by real warranty coverage. Whether you need the latest generation platform or a hard-to-source EOL model that your OEM stopped supporting years ago, we keep it in stock and ready to configure. <br>Every server we supply — new or certified refurbished — goes through a rigorous in-house testing process before it leaves us. That means faster deployment on your end and fewer surprises once the hardware is in your environment. Our team configures to your exact specification, so what arrives is ready to integrate, not ready to be rebuilt. <br>For organisations across the United Kingdom managing tight IT budgets, legacy infrastructure, or time-sensitive procurement, we offer a straightforward alternative to the delays and premium pricing of the traditional supply chain. Competitive rates, a one-year warranty on every unit, and 24×7 remote support included as standard. </p>
+
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4 text-center ">
+                    <img 
+                        src="{% static 'images/uk/uk_server1.jpg' %}" 
+                        alt="Microsoft Third-Party Support"
+                        style="border-radius:12px; width:100%; height:auto; box-shadow:0 10px 25px rgba(0,0,0,0.15); margin-top: 20px;"
+                    > 
+                </div>
+            </div>
+        </div>  
+</section>
+
+<!-- ═══════════════════════════════════════
+     HOW IT WORKS — Dark panel with accordion
+═══════════════════════════════════════ -->
+
+
+<!-- ═══════════════════════════════════════
+     FAQ — 2-column card grid
+═══════════════════════════════════════ -->
+<!-- FAQ Section -->
+<section class="srv-faq" >
+    <div class="auto-container">
+        <div class="section-header" style="margin-bottom: 20px ;">
+            <p style="text-align: center">Frequently Asked Questions</p>
+            <h2 style="text-align: center; color: #1a3546; margin-bottom: 20px; font-size: 1.8rem; font-weight: 700;">Common Questions from Enterprise IT Teams</h2>
+        </div>
+        <div>
+            <p style="text-align: center; color: #000000;">Answers to the questions we receive most frequently from IT procurement leads and infrastructure managers buying new and refurbished servers. Contact us if your query is not addressed below.</p>
+        
+        </div>
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question"> 1. Do refurbished servers come with a warranty?</div>
+                <div class="faq-answer">
+                    - Yes, all refurbished servers supplied by Zaco Computers UK Limited include a warranty as standard. Most units carry a 1-year warranty, with options to upgrade to 2 or 3 years including onsite support. We are confident in our testing process and warranty everything we sell.            </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"> 2. Can you configure a server to my exact specification?</div>
+                <div class="faq-answer">
+                    - Absolutely. This is one of our key strengths. Tell us your required CPU model, RAM capacity, storage type and capacity, RAID configuration, networking cards, and any other requirements. Our engineers will build it from stock and test it before dispatch.            </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"> 3. What is the difference between refurbished and used servers?</div>
+                <div class="faq-answer">
+                    - A "used" server may be sold as-is with minimal inspection. A "refurbished" server at Zaco has been fully stripped, component-tested, cleaned, repaired where necessary, and rebuilt to a tested and certified standard — then supplied with a warranty. Our refurbished servers are not simply second-hand items.            </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"> 4. Are refurbished servers reliable enough for business use?</div>
+                <div class="faq-answer">
+                    - Yes, enterprise servers are designed for 24×7 operation for 5–8 years. Most refurbished servers we sell are 2–4 years old, meaning they have many years of reliable life remaining. Our thorough component-level testing and warranty backing provides additional assurance.            </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"> 5. Do you supply servers to data centers and co-location facilities?</div>
+                <div class="faq-answer">
+                    - Yes, bulk orders for data centres are a core part of our business. We offer competitive pricing for volume purchases, rack-ready configuration, and can manage staggered delivery schedules. Contact us with your project details for a tailored proposal.
+            </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"> 6. Can i get support after purchasing a server from Zaco?</div>
+                <div class="faq-answer">
+                    - Yes, we offer 24×7 technical remote support as part of our managed IT services. Our support desk can assist with installation queries, configuration, firmware issues, and warranty replacements. We also offer ongoing maintenance contracts for businesses that need ongoing server management.
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<!-- CTA Section -->
+<div class="auto-container" style="padding-block: 40px">
+    <div class="cta-section">
+        <p>GET STARTED</p>
+        <h2><b>Get the Right Server Infrastructure for Your Organisation</b></h2>
+        <p>Not sure which server configuration fits your environment? Contact us at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> or call <a href="tel:+442034358060">+44 20 3435 8060</a> to get expert advice and dedicated account management today.</p>
+        <div class="link-box" style="margin-top: 30px; justify-content: center;">
+            <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Request a Quote</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<script>
+// FAQ accordion toggle
+document.querySelectorAll('.srv-faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+        var item = this.closest('.srv-faq-item');
+        var allItems = document.querySelectorAll('.srv-faq-item');
+        allItems.forEach(function(i) {
+            if (i !== item) i.classList.remove('active');
+        });
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+{% endblock %}

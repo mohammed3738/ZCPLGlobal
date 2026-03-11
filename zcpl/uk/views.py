@@ -9,6 +9,24 @@ from .forms import ContactForm
 def uk_home(request):
     return render(request,'uk/uk_home.html')
 
+def uk_it_hardware(request):
+    return render(request,'uk/uk_it_hardware.html')
+
+def uk_server(request):
+    return render(request,'uk/uk_server.html')
+
+def uk_server_hdd_sdd(request):
+    return render(request,'uk/uk_server_hdd_sdd.html')
+
+def uk_networking(request):
+    return render(request,'uk/uk_networking.html')
+
+def uk_server_storage(request):
+    return render(request,'uk/uk_server_storage.html')
+
+def uk_server_component(request):
+    return render(request,'uk/uk_server_component.html')
+
 # def uk_contact(request):
 #     return render(request,'uk/contact.html')
 
