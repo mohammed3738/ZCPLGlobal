@@ -272,7 +272,7 @@ class PPCSubcategoryAdmin(admin.ModelAdmin):
             'fields': ('category', 'name', 'slug', 'heading', 'is_active', 'order')
         }),
         ('Content', {
-            'fields': ('short_description', 'description')
+            'fields': ('short_description', 'description','pointer')
         }),
         ('Images', {
             'fields': ('icon', 'hero_image')

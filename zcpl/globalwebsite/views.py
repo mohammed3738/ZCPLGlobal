@@ -1,4 +1,5 @@
 from email import message
+from unicodedata import category
 from django.shortcuts import render, get_object_or_404
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
@@ -1775,16 +1776,39 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 
 
+# def ppc_category_detail(request, slug):
+#     category = get_object_or_404(PPCCategory, slug=slug, is_active=True)
+#     subcategories = category.subcategories.filter(is_active=True)
+#     # Get featured products directly under this category
+#     products = PPCProduct.objects.filter(category=category, is_active=True)[:6]
+
+#     context = {
+#         'category': category,
+#         'subcategories': subcategories,
+#         'products': products,
+#     }
+#     return render(request, 'ppc/ppc_category.html', context)
+
 def ppc_category_detail(request, slug):
     category = get_object_or_404(PPCCategory, slug=slug, is_active=True)
     subcategories = category.subcategories.filter(is_active=True)
-    # Get featured products directly under this category
     products = PPCProduct.objects.filter(category=category, is_active=True)[:6]
+
+    if request.method == "POST":
+        form = PPCCategoryQuoteForm(request.POST)
+        if form.is_valid():
+            quote = form.save(commit=False)
+            quote.category = category
+            quote.save()
+            return redirect("thank_you")
+    else:
+        form = PPCCategoryQuoteForm()
 
     context = {
         'category': category,
         'subcategories': subcategories,
         'products': products,
+        'form': form,
     }
     return render(request, 'ppc/ppc_category.html', context)
 
@@ -1792,11 +1816,23 @@ def ppc_category_detail(request, slug):
 def ppc_subcategory_detail(request, slug):
     subcategory = get_object_or_404(PPCSubcategory, slug=slug, is_active=True)
     products = PPCProduct.objects.filter(subcategory=subcategory, is_active=True)
+    
+    if request.method == "POST":
+        form = PPCSubcategoryQuoteForm(request.POST)
+        if form.is_valid():
+            quote = form.save(commit=False)
+            quote.subcategory = subcategory
+            quote.save()
+            return redirect("thank_you")
+    else:
+        form = PPCSubcategoryQuoteForm()
+
 
     context = {
         'subcategory': subcategory,
         'category': subcategory.category,
         'products': products,
+        'form': form,
     }
     return render(request, 'ppc/ppc_subcategory.html', context)
 

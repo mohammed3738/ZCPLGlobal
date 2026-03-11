@@ -12,6 +12,38 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 #         model = Product
 #         fields = ['name', 'description', 'price', 'image']
 
+class PPCCategoryQuoteForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+    class Meta:
+        model = PPCCategoryQuote
+        fields = ['name', 'email', 'phone', 'company', 'requirements']
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
+            'company': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company Name'}),
+            'requirements': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Server Requirements'}),
+        }
+
+
+class PPCSubcategoryQuoteForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+    class Meta:
+        model = PPCCategoryQuote
+        fields = ['name', 'email', 'phone', 'company', 'requirements']
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone Number'}),
+            'company': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company Name'}),
+            'requirements': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Server Requirements'}),
+        }
+
+        
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
