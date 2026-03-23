@@ -196,7 +196,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             style="
               background-color: #ffaa17;
               color: white;
-              padding: 10px 0;
               text-align: center;
               position: relative;
             "
@@ -267,7 +266,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     href="{% url "uk-home" %}"
                     title="Zaco Computers Private Limited"
                     ><img
-                      src="{% static 'images/Zacow1.png' %}"
+                      src="{% static 'images/uk/zaco_uk.png' %}"
                       id="thm-logo"
                       alt="Zaco Computers Private Limited"
                       title="Zaco Computers Private Limited"
@@ -338,9 +337,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </li> {% endcomment %}
 
                
+                   
                     <li class="dropdown">
+                      <a href="{% url 'uk-it-hardware' %}">IT Hardware</a>
+                      <ul>
+                        <li><a href="{% url 'uk-server' %}">Servers </a></li>
+                        <li><a href="{% url 'uk-server-storage' %}">Storage </a></li>
+                        <li><a href="{% url 'uk-networking' %}">Networking</a></li>
+                        <li><a href="{% url 'uk-server-hdd-sdd' %}">Server HDD & SSDs</a></li>
+                        <li><a href="{% url 'uk-server-components' %}">Server Components</a></li>
+                      </ul>
+                    </li>
+                    {% comment %} <li class="dropdown">
+                      <a href="{% url 'uk-server' %}">Services</a>
+                      <ul>
+                        <li><a href="{% url 'uk-server' %}">Server Maintenance</a></li>
+                        <li><a href="{% url 'uk-server' %}">Storage Maintenance</a></li>
+                        <li><a href="{% url 'uk-server' %}">Networking Maintenance</a></li>
+                        <li><a href="{% url 'uk-server' %}">VMware Support</a></li>
+                        <li><a href="{% url 'uk-server' %}">Microsoft Support</a></li>
+                        <li><a href="{% url 'uk-server' %}">Infrastructure Managed Services</a></li>
+                      </ul>
+                    </li> {% endcomment %}
+                     <li class="dropdown">
                       <a href="{% url 'uk-contact' %}">Contact Us</a>
-
                     </li>
                   </ul>
                 </nav>
@@ -418,7 +438,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   };
 </script>
-{% include "tidio.html" %}
+{% comment %} {% include "tidio.html" %} {% endcomment %}
+
+<style>
+    @media (max-width: 767px) {
+  /* Push WhatsApp bubble slightly above RFQ button */
+  [id^="gb-widget"] {
+    bottom: 70px !important;  /* adjust as needed */
+    right: 16px !important;   /* keep it aligned with RFQ button */
+  }
+}
+
+    </style>
+
+<script src="//code.tidio.co/2aucvkbzdmwq651fkqopnc51v5gagjx1.js" async></script>
+
+
+<!-- GetButton.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            whatsapp: "+447435533345", // Your WhatsApp number
+            call_to_action: "Need help? Chat with us!", // More engaging CTA
+            position: "right", // 'right' or 'left'
+            pre_filled_message: "Hi there! I'm interested and would like to know more.", // Message user sends on click
+            tooltip: "Chat with our support team on WhatsApp" // Optional: text shown on hover
+        };
+        var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
+<!-- /GetButton.io widget -->
 
   </body>
 </html>

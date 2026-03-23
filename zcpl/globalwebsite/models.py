@@ -13,8 +13,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.html import strip_tags
-from django.utils.html import strip_tags
 from django.utils.text import slugify
+
 
 # Create your models here.
 
@@ -170,12 +170,168 @@ class Product(models.Model):
 
 
 
+class PPCCategory(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    heading = models.CharField(max_length=255, help_text="Main heading shown on landing page e.g. 'HPE Servers for Your Business Needs'")
+    sub_heading = models.CharField(max_length=255, blank=True, help_text="Subheading e.g. 'Rack, Tower & Blade Servers Available'")
+
+    badge_1 = models.CharField(max_length=100, blank=True, default="Best Prices Guaranteed")
+    badge_2 = models.CharField(max_length=100, blank=True, default="Expert Support 24/7")
+    badge_3 = models.CharField(max_length=100, blank=True, default="Fast Shipping")
+
+    why_choose_heading = models.CharField(max_length=255, blank=True, default="Why Choose Us?")
+    short_description = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True)
+
+    hero_image = ProcessedImageField(
+        upload_to='ppc/categories/',
+        processors=[Transpose(), ResizeToFit(1200, 800)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+
+    partner_logo = ProcessedImageField(
+        upload_to='ppc/categories/partners/',
+        processors=[Transpose(), ResizeToFit(400, 200)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True,
+        help_text="Partner/certification logo shown at bottom (e.g. HPE, Dell EMC logo)"
+    )
+    partner_label = models.CharField(max_length=100, blank=True, default="Certified Partner of:")
+
+    testimonial_text = models.TextField(blank=True)
+
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    # SEO
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    # created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = 'PPC Category'
+        verbose_name_plural = 'PPC Categories'
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+            while PPCCategory.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+
+        if not self.meta_title:
+            self.meta_title = self.heading or self.name
+
+        if not self.meta_description and self.short_description:
+            self.meta_description = strip_tags(self.short_description)[:160]
+
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("ppc_category_detail", kwargs={"slug": self.slug})
+
+
+class PPCSubcategory(models.Model):
+    category = models.ForeignKey(
+        PPCCategory,
+        on_delete=models.CASCADE,
+        related_name='subcategories'
+    )
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    heading = models.CharField(max_length=255, blank=True)
+    short_description = RichTextUploadingField(blank=True)
+    description = RichTextUploadingField(blank=True)
+    pointer = RichTextUploadingField(blank=True)
+
+    icon = ProcessedImageField(
+        upload_to='ppc/subcategories/icons/',
+        processors=[Transpose(), ResizeToFit(100, 100)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+    hero_image = ProcessedImageField(
+        upload_to='ppc/subcategories/',
+        processors=[Transpose(), ResizeToFit(800, 600)],
+        format='WEBP',
+        options={'quality': 85},
+        null=True,
+        blank=True
+    )
+
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    # SEO
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    # created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = 'PPC Subcategory'
+        verbose_name_plural = 'PPC Subcategories'
+
+    def __str__(self):
+        return f"{self.category.name} > {self.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+            while PPCSubcategory.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+
+        if not self.meta_title:
+            self.meta_title = self.heading or self.name
+
+        if not self.meta_description and self.short_description:
+            self.meta_description = strip_tags(self.short_description)[:160]
+
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("ppc_subcategory_detail", kwargs={"slug": self.slug})
+
 
 class PPCProduct(models.Model):
+    category = models.ForeignKey(
+    PPCCategory,
+    on_delete=models.SET_NULL,
+    related_name='products',
+    null=True, blank=True
+)
+    subcategory = models.ForeignKey(
+        PPCSubcategory,
+        on_delete=models.SET_NULL,
+        related_name='products',
+        null=True, blank=True
+    )
+
     name = models.CharField(max_length=200)
     sub_heading = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     short_description = RichTextUploadingField(blank=True)
     pointer = RichTextUploadingField(blank=True)
@@ -221,6 +377,26 @@ class PPCProduct(models.Model):
     def get_absolute_url(self):
         return reverse("ppc_product_detail", kwargs={"slug": self.slug})
 
+
+class PPCCategoryQuote(models.Model):
+    category = models.ForeignKey(
+        PPCCategory,
+        on_delete=models.CASCADE,
+        related_name="quotes"
+    )
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    company = models.CharField(max_length=200, blank=True)
+    requirements = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.category.name}"
+    
+    
 
 class PPCQuote(models.Model):
     product = models.ForeignKey(
@@ -458,3 +634,107 @@ class NewsletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+
+# ********************************Vaishnavi
+
+# Build Server Request Model
+# class BuildServerRequest(models.Model):
+
+#     # Contact Info
+#     name        = models.CharField(max_length=200)
+#     email       = models.EmailField()
+#     phone       = models.CharField(max_length=20)
+
+#     # Server Basics
+#     server_brand  = models.CharField(max_length=100, blank=True)
+#     server_type   = models.CharField(max_length=100, blank=True)
+#     form_factor   = models.CharField(max_length=100, blank=True)
+#     server_model  = models.CharField(max_length=100, blank=True)
+
+#     # Core Config
+#     processor_cores = models.CharField(max_length=100, blank=True)
+#     memory          = models.CharField(max_length=100, blank=True)
+#     ethernet_card   = models.CharField(max_length=100, blank=True)
+
+#     # Storage — stored as text (each entry on a new line e.g. "960GB SSD × 2")
+#     ssd_config = models.TextField(blank=True)
+#     hdd_config = models.TextField(blank=True)
+
+#     # Other
+#     other_components      = models.TextField(blank=True)
+#     server_purpose        = models.TextField(blank=True)
+#     additional_requirement = models.TextField(blank=True)
+
+#     # Meta
+#     submitted_at = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         ordering = ['-submitted_at']
+#         verbose_name        = "Build Server Request"
+#         verbose_name_plural = "Build Server Requests"
+
+#     def __str__(self):
+#         return f"{self.name} — {self.server_brand} {self.server_model} ({self.submitted_at.strftime('%d %b %Y')})"
+
+
+class BuildServerRequest(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.IntegerField()
+
+    server_brand = models.CharField(max_length=100)
+    server_type = models.CharField(max_length=100)
+    form_factor = models.CharField(max_length=100)
+    server_model = models.CharField(max_length=100)
+
+    processor = models.CharField(max_length=200)
+    memory = models.CharField(max_length=100)
+    ethernet_card = models.CharField(max_length=100, blank=True)
+
+    server_purpose = models.TextField(blank=True)
+    additional_requirement = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.server_brand}"
+
+
+class ServerSSD(models.Model):
+    server_request = models.ForeignKey(
+        BuildServerRequest,
+        related_name="ssds",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=100)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.name} x {self.quantity}"
+
+class ServerHDD(models.Model):
+    server_request = models.ForeignKey(
+        BuildServerRequest,
+        related_name="hdds",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=100)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.name} x {self.quantity}"
+
+
+class ServerOtherComponent(models.Model):
+    server_request = models.ForeignKey(
+        BuildServerRequest,
+        related_name="other_components",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name

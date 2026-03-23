@@ -29,7 +29,9 @@ urlpatterns = [
     path('contact/',views.contact,name="contact"),
     path('contact-us/',views.contact,name="contact"),
     path('itad-services/',views.itadservices,name="itad-services"),
-    path('it-hardware/',views.it_hardware,name="it-hardware"),
+    path('it-hardware/',views.it_hardware,name="it-hardware"), 
+    path('vmware-support/',views.vmware_support,name="vmware-support"),
+    path('microsoft-thirdparty-support/',views.microsoft_support,name="microsoft-thirdparty-support"),
     path('server-maintenance/',views.server_maintenance,name="server-maintenance"),
     path('storage-maintenance/',views.storage_maintenance,name="storage-maintenance"),
     path('network-maintenance/',views.network_maintenance,name="network-maintenance"),
@@ -57,13 +59,17 @@ urlpatterns = [
     path('ppc/products/', views.ppc_product_manage, name='ppc-product-manage'),
     path('ppc/products/edit/<int:pk>/', views.ppc_product_manage, name='ppc-product-edit'),
     path('ppc/products/delete/<int:pk>/', views.ppc_product_delete, name='ppc-product-delete'),
+    # PPC Category landing pages
+    path('ppc/category/<slug:slug>/', views.ppc_category_detail, name='ppc_category_detail'),
 
+    # PPC Subcategory pages
+    path('ppc/subcategory/<slug:slug>/', views.ppc_subcategory_detail, name='ppc_subcategory_detail'),
     path(
         'ppc/<slug:slug>/',
         views.ppc_product_detail,
         name='ppc_product_detail'
     ),
-
+    path('quote/submit/', views.ppc_quote_submit, name='ppc_quote_submit'),
 
     path('cart/', views.cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),

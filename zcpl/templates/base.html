@@ -20,7 +20,7 @@
     <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512,..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -88,105 +88,133 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
     
     {% block extra_head %}{% endblock %}
+
+    <style>
+      /* ACTIVE MENU UNDERLINE WITH HOVER EFFECT */
+      .main-menu .navigation > li > a:before {
+        display: none !important;
+      }
+
+      /* Underline for active link */
+      .main-menu .navigation > li > a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: #19c74a !important;
+        display: block !important;
+        transition: all 0.3s ease;
+        border-radius: 3px;
+      }
+
+      /* Underline on hover (for all links) */
+      .main-menu .navigation > li > a:hover::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: #19c74a !important;
+        display: block !important;
+        transition: all 0.3s ease;
+        border-radius: 3px;
+      }
+
+      /* Hide underline for inactive links that are not hovered */
+      .navigation a:not(.active):not(:hover)::after {
+        display: none !important;
+      }
+
+      .main-menu .navigation a {
+        position: relative !important;
+      }
+
+      /* Mega menu styles */
+      .mega-menu-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: calc(100% + 0px);
+        background: #fff;
+        padding: 30px 20px;
+        margin: 0 20px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        border-radius: 0 0 8px 8px;
+        display: none;
+      }
+
+      .dropdown.megamenu:hover .mega-menu-wrapper {
+        display: block;
+      }
+
+      .mega-menu {
+        display: flex;
+        justify-content: space-between;
+      }
+      .mega-menu .column ul li a {
+        font-size: 15px;
+        padding: 6px 0;
+      }
+      .mega-menu .column ul li {
+        margin-bottom: 10px;
+      }
+      .mega-column {
+        width: 20%;
+        text-align: left;
+      }
+      .mega-column h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        color: #000;
+      }
+
+      .menu-section {
+        margin-bottom: 20px;
+        color: #000;
+        font-weight: 300;
+      }
+      .section-title {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 8px;
+        color: #000;
+      }
+
+      .menu-section a {
+        display: block;
+        font-size: 13px;
+        color: #141414;
+        line-height: 1.6;
+        text-decoration: none;
+        padding: 2px 0;
+      }
+
+      .menu-section a:hover {
+        color: #419747;
+      }
+
+      @media (max-width: 991px) {
+        .mega-menu {
+          flex-direction: column;
+          padding: 20px;
+          gap: 20px;
+        }
+
+        .mega-menu .column {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
-<style>
-
-
-
-
-
-/* Mega menu container */
-.mega-menu-wrapper {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: calc(100% + 0px);
-  background: #fff;
-  padding: 30px 20px;
-  margin: 0 20px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-  border-radius: 0 0 8px 8px;
-  display: none;
-}
-
-.dropdown.megamenu:hover .mega-menu-wrapper {
-  display: block;
-}
-
-/* Horizontal layout */
-.mega-menu {
-  display: flex;
-  justify-content: space-between;
-  /* gap: 80px; */
-}
-.mega-menu .column ul li a {
-  font-size: 15px;
-  padding: 6px 0;
-}
-.mega-menu .column ul li {
-  margin-bottom: 10px;
-}
-/* Each column setup */
-.mega-column {
-  width: 20%;
-  text-align: left;
-}
-.mega-column h4 {
-  margin: 0;
-  font-size: 18px;
- font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  color: #000;
-}
-
-/* Sections in column */
-.menu-section {
-  margin-bottom: 20px;
-  color: #000;
-  font-weight: 300;
-}
-.section-title {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 8px;
-  color: #000;
-}
-
-/* Links styling */
-.menu-section a {
-  display: block;
-  font-size: 13px;
-  color: #141414;
-  line-height: 1.6;
-  text-decoration: none;
-  padding: 2px 0;
-}
-
-/* Hover effect */
-.menu-section a:hover {
-  color: #419747;
-}
-
-/* IDs or classes already included in theme for nav widths */
-
-@media (max-width: 991px) {
-  .mega-menu {
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-  }
-
-  .mega-menu .column {
-    width: 100%;
-  }
-}
-
-</style>
-
 
   <body>
 
@@ -239,31 +267,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <br />
               <a href="tel:+91-22-69288800">+91 22 69288800</a>
             </p>
-
-  <!-- 🌍 Country Dropdown -->
-<div class="mobile-country-selector" style="margin-top: 15px; max-width: 250px;">
-  <label for="mobile-country" style="color: #fff; font-weight: bold; font-size: 14px;">Select Country:</label><br />
-  <select
-    id="mobile-country"
-    class="form-select"
-    onchange="redirectToPage(this.value)"
-    style="
-      margin-top: 5px;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      padding: 6px 10px;
-      font-size: 14px;
-      border-radius: 4px;
-    "
-  >
-    <option value="/in/">India</option>
-    <option value="/uk/">United Kingdom</option>
-    <option value="/uae/">United Arab Emirates</option>
-    <option value="/">Global</option>
-  </select>
-</div>
-
 
             <div class="side-menu__social">
               <a href="https://www.facebook.com/zacoitsolved"><i class="fab fa-facebook-square"></i></a>
@@ -352,13 +355,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   </div>
                   <div class="email d-flex align-items-center ms-3">
                     <div>
-                    <select id="country" class="form-select" onchange="redirectToPage(this.value)">
-                      <option value="/in/">India</option>
-                      <option value="/uk/">United Kingdom</option>
-                      <option value="/uae/">United Arab Emirates</option>
-                      {% comment %} <option value="/ca/">Canada</option> {% endcomment %}
-                      <option value="/">Global</option> <!-- Global LAST -->
-                    </select>
+                      <select
+                        id="country"
+                        name="country"
+                        class="form-select"
+                        onchange="redirectToPage(this.value)"
+                      >
+                        <option value="/in/">India</option>
+                        <option value="/uk/">United Kingdom</option>
+                        <option value="/uae/">United Arab Emirates</option>
+                        {% comment %} <option value="/ca/">Canada</option> {% endcomment %}
+                        <option value="/">Global</option> <!-- Global LAST -->
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -399,20 +407,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <nav class="main-menu navbar-expand-md navbar-light">
                   <ul class="navigation clearfix">
                     <li class="dropdown">
-                      <a href="{% url 'home' %}">Home</a>
+                      <a href="{% url 'home' %}" data-url="{% url 'home' %}">Home</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'about_us' %}">About Us</a>
+                      <a href="{% url 'about_us' %}" data-url="{% url 'about_us' %}">About Us</a>
                     </li>
-                    <!-- <li class="dropdown">
-                      <a href="{% url 'shop' %}">Online Store</a>
-                    </li> -->
-
-
-<!-- /////////////////////////////////////////////////////// -->
 
 <li class="dropdown megamenu">
-  <a href="{% url 'shop' %}">Online Store</a>
+  <a href="{% url 'shop' %}" data-url="{% url 'shop' %}">Online Store</a>
 
   <div class="mega-menu-wrapper">
     <div class="mega-menu">
@@ -443,66 +445,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </li>
 
-
-
-
-<!-- ////////////////////////////////////////////// -->
-
                     <li class="dropdown">
-                      <a href="{% url 'services' %}">Services</a>
+                      <a href="{% url 'services' %}" data-url="{% url 'services' %}">Services</a>
                       <ul>
                         <li>
-                          <a href="{% url 'it-hardware' %}">IT Hardware</a>
+                          <a href="{% url 'it-hardware' %}">IT aHardware</a>
                         </li>
                         <li>
-                          <a href="{% url 'server-maintenance' %}"
-                            >Server Maintenance</a
-                          >
-                        </li>
-
-                        <li>
-                          <a href="{% url 'storage-maintenance' %}"
-                            >Storage Maintenance</a
-                          >
+                          <a href="{% url 'server-maintenance' %}">Server Maintenance</a>
                         </li>
                         <li>
-                          <a href="{% url 'network-maintenance' %}"
-                            >Network Maintenance</a
-                          >
+                          <a href="{% url 'storage-maintenance' %}">Storage Maintenance</a>
                         </li>
                         <li>
-                          <a href="{% url 'rental-services' %}"
-                            >Rental Services</a
-                          >
+                          <a href="{% url 'network-maintenance' %}">Network Maintenance</a>
                         </li>
                         <li>
-                          <a href="{% url 'infrastructure-managed-service' %}"
-                            >Infrastructure Managed Service</a
-                          >
+                          <a href="{% url 'rental-services' %}">Rental Services</a>
                         </li>
-
+                        <li>
+                          <a href="{% url 'infrastructure-managed-service' %}">Infrastructure Managed Service</a>
+                        </li>
+                        <li>
+                          <a href="{% url 'vmware-support' %}">VMware Support</a>
+                        </li>
+                        <li>
+                          <a href="{% url 'microsoft-thirdparty-support' %}">Microsoft Third Party Support</a>
+                        </li>
                       </ul>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'global-it' %}">Global IT Support</a>
-
+                      <a href="{% url 'global-it' %}" data-url="{% url 'global-it' %}">Global IT Support</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'itad-services' %}">IT Buyback</a>
-
-                    </li>
-
-
-                    <li class="dropdown">
-                      <a href="{% url 'contact' %}">Contact Us</a>
-
+                      <a href="{% url 'itad-services' %}" data-url="{% url 'itad-services' %}">IT Buyback</a>
                     </li>
                     <li class="dropdown">
-                      <a href="{% url 'cart_detail' %}">
-  Cart ({{ request.session.cart|length|default:0 }})
-</a>
-
-
+                      <a href="{% url 'contact' %}" data-url="{% url 'contact' %}">Contact Us</a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="{% url 'cart_detail' %}">Cart ({{ request.session.cart|length|default:0 }})</a>
                     </li>
                   </ul>
                 </nav>
@@ -533,11 +515,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="{% static 'js/appear.js' %}"></script>
     <script src="{% static 'js/wow.js' %}"></script>
     <script src="{% static 'js/jQuery.style.switcher.min.js' %}"></script>
-    <script src="{% static 'js/custom_js.js' %}"></script>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"
-    ></script>
+    <script src="{% static 'js/custom_js.js' %}"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
     <script src="{% static 'js/jquery.easing.min.js' %}"></script>
     <script src="{% static 'js/jarallax.min.js' %}"></script>
     <script src="{% static 'js/swiper.min.js' %}"></script>
@@ -546,50 +525,106 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="{% static 'js/lang.js' %}"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="{% static 'js/color-switcher.js' %}"></script>
-<script>
-  function redirectToPage(value) {
-    if (value) {
-      localStorage.setItem("selectedCountry", value);
-      window.location.href = value;
-    }
-  }
 
-  window.onload = function () {
-    const currentPath = window.location.pathname;
-    const select = document.getElementById("country");
-    if (!select) return;
+    <!-- ACTIVE MENU HIGHLIGHTING - Inline Script -->
+    <script>
+    (function() {
+      'use strict';
 
-    console.log("Current Path:", currentPath);
+      function activateMenu() {
+        console.log('🔍 Checking active menu...');
+        
+        const currentPath = window.location.pathname;
+        console.log('📍 Current path:', currentPath);
 
-    const options = select.options;
-    let matched = false;
+        const navLinks = document.querySelectorAll('.navigation a[data-url]');
+        console.log('🔗 Found', navLinks.length, 'nav links with data-url');
 
-    for (let i = 0; i < options.length; i++) {
-      const optionPath = new URL(options[i].value, window.location.origin).pathname;
-      console.log(`Checking if "${currentPath}" starts with "${optionPath}"`);
+        navLinks.forEach(link => {
+          if (link.classList.contains('active')) {
+            link.classList.remove('active');
+          }
+        });
 
-      if (currentPath.startsWith(optionPath)) {
-        options[i].selected = true;
-        matched = true;
-        console.log("Matched:", optionPath);
-        break;
+        navLinks.forEach(link => {
+          const linkPath = link.getAttribute('data-url');
+          
+          if (!linkPath) return;
+
+          let normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+          let normalizedLink = linkPath.replace(/\/$/, '') || '/';
+
+          console.log(`Comparing: "${normalizedCurrent}" vs "${normalizedLink}"`);
+
+          const isMatch = (normalizedCurrent === normalizedLink) || 
+                          (normalizedLink !== '/' && currentPath.startsWith(normalizedLink + '/'));
+
+          if (isMatch) {
+            console.log('✅ MATCH FOUND:', link.textContent.trim());
+            link.classList.add('active');
+            
+            link.style.display = 'inline-block';
+            setTimeout(() => {
+              link.style.display = '';
+            }, 50);
+          }
+        });
       }
-    }
 
-    if (!matched) {
-      const savedValue = localStorage.getItem("selectedCountry");
-      console.log("No match. Falling back to saved value:", savedValue);
-      if (savedValue) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', activateMenu);
+      } else {
+        activateMenu();
+      }
+
+      setTimeout(activateMenu, 100);
+      setTimeout(activateMenu, 500);
+
+      window.addEventListener('load', activateMenu);
+    })();
+    </script>
+
+    <script>
+      function redirectToPage(value) {
+        if (value) {
+          localStorage.setItem("selectedCountry", value);
+          window.location.href = value;
+        }
+      }
+
+      window.onload = function () {
+        const currentPath = window.location.pathname;
+        const select = document.getElementById("country");
+        if (!select) return;
+
+        const options = select.options;
+        let matched = false;
+
         for (let i = 0; i < options.length; i++) {
-          if (options[i].value === savedValue) {
+          const optionPath = new URL(options[i].value, window.location.origin).pathname;
+
+          if (currentPath.startsWith(optionPath)) {
             options[i].selected = true;
+            matched = true;
             break;
           }
         }
-      }
-    }
-  };
-</script>
-{% include "tidio.html" %}
+
+        if (!matched) {
+          const savedValue = localStorage.getItem("selectedCountry");
+          if (savedValue) {
+            for (let i = 0; i < options.length; i++) {
+              if (options[i].value === savedValue) {
+                options[i].selected = true;
+                break;
+              }
+            }
+          }
+        }
+      };
+    </script>
+
+    {% block extra_js %}{% endblock %}
+    {% include "tidio.html" %}
   </body>
 </html>
