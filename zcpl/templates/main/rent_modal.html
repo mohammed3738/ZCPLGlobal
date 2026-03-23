@@ -50,7 +50,8 @@
               <textarea name="message" class="form-control" rows="4"
                         placeholder="Tell us your rental requirement" required></textarea>
             </div>
-{% comment %} <div class="field-inner"> {% endcomment %}
+<div class="form-group col-lg-12 col-md-12 col-sm-12">
+                  <div class="field-inner">
                       {{ form.captcha }}
                       {% if form.captcha.errors %}
                           <div class="error text-danger">
@@ -60,6 +61,7 @@
                           </div>
                       {% endif %}
                   </div>
+              </div>
           </div>
         </div>
 
