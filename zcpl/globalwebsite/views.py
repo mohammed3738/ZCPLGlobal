@@ -437,27 +437,21 @@ def shop(request, category_slug=None, subcategory_slug=None):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
     page_number = request.GET.get('page', 1)
-
     products = Product.objects.filter(available=True)
-
     category = None
     subcategory = None
-
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         subcategories = SubCategory.objects.filter(category=category)
-
         if subcategory_slug:
             subcategory = get_object_or_404(SubCategory, slug=subcategory_slug, category=category)
             products = products.filter(categories=subcategory)
         else:
             products = products.filter(categories__in=subcategories)
-
     if query:
         products = products.filter(
             Q(name__icontains=query) | Q(description__icontains=query)
         )
-
     if sort == 'price_asc':
         products = products.order_by('price')
     elif sort == 'price_desc':
@@ -466,22 +460,57 @@ def shop(request, category_slug=None, subcategory_slug=None):
         products = products.order_by('-created_at')
     elif sort == 'rating':
         products = products.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')
-
     paginator = Paginator(products, 9)
     page_obj = paginator.get_page(page_number)
-
+    # =========================
+    # ✅ BREADCRUMB SCHEMA LOGIC
+    # =========================
+    breadcrumb_items = [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.zacocomputer.com/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Online Store",
+            "item": "https://www.zacocomputer.com/shop/"
+        }
+    ]
+    position = 3
+    if category:
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": position,
+            "name": category.name,
+            "item": f"https://www.zacocomputer.com/shop/{category.slug}/"
+        })
+        position += 1
+    if subcategory:
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": position,
+            "name": subcategory.name,
+            "item": f"https://www.zacocomputer.com/shop/{category.slug}/{subcategory.slug}/"
+        })
+    breadcrumb_schema = json.dumps({
+        "@context": "https://schema.org/",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumb_items
+    })
+    # =========================
     # Contact form handling
+    # =========================
     contact_form = ShopContactForm()
     contact_success = False
-
     if request.method == 'POST' and 'contact_form_submit' in request.POST:
         contact_form = ShopContactForm(request.POST)
         if contact_form.is_valid():
-            contact_form.save()  # Save to ContactMessageGlobal model
-            
+            contact_form.save()
             cd = contact_form.cleaned_data
             full_message = f"Name: {cd['name']}\nEmail: {cd['email']}\nPhone: {cd['phone']}\n\nMessage:\n{cd['message']}"
-            
             send_mail(
                 cd['subject'],
                 full_message,
@@ -489,10 +518,8 @@ def shop(request, category_slug=None, subcategory_slug=None):
                 [settings.CONTACT_RECEIVER_EMAIL],
                 fail_silently=False,
             )
-            
             contact_success = True
             return redirect('thank_you')
-
     return render(request, 'main/shop.html', {
         'category': category,
         'subcategory': subcategory,
@@ -500,7 +527,12 @@ def shop(request, category_slug=None, subcategory_slug=None):
         'categories': Category.objects.all(),
         'contact_form': contact_form,
         'contact_success': contact_success,
+        'is_category': category is not None and subcategory is None,
+        'is_subcategory': subcategory is not None,
+        # ✅ ADD THIS
+        'breadcrumb_schema': breadcrumb_schema,
     })
+
 
 def cart_add(request, product_id):
     cart = Cart(request)

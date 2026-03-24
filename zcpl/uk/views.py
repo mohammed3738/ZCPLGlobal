@@ -27,6 +27,15 @@ def uk_server_storage(request):
 def uk_server_component(request):
     return render(request,'uk/uk_server_component.html')
 
+def uk_main_service(request):
+    return render(request,'uk/uk_main_service.html')
+
+def uk_vmware_support(request):
+    return render(request,'uk/uk_vmware_support.html')
+
+def uk_microsoft_support(request):
+    return render(request,'uk/uk_microsoft_support.html')
+
 # def uk_contact(request):
 #     return render(request,'uk/contact.html')
 

@@ -1,0 +1,758 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}Trusted IT Hardware &amp; Software Support Services in the UK - Zaco
+{% endblock %}
+{% block meta_description %}
+Zaco Computers provides reliable IT hardware &amp; software support solutions in the UK with expert hardware maintenance &amp; technical support. Contact now!
+{% endblock %}
+
+
+{% block schema %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/uk/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Hardware & Software Services",
+    "item": "https://www.zacocomputer.com/uk/it-hardware-and-software-services/"  
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is third-party IT maintenance (TPM) and how does it differ from OEM support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Third-party maintenance (TPM) is IT hardware and software support provided by an independent company rather than the original equipment manufacturer. TPM providers like Zaco Computers UK Limited typically offer equivalent or superior technical support at significantly lower cost — often 30–50% less than OEM contracts, with more flexible terms and continued coverage beyond OEM End of Life dates."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can Zaco provide support for hardware that has reached End of Life or End of Service Life?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes — this is one of the most valued aspects of our service. When OEMs discontinue support for your specific hardware model, Zaco Computers UK Limited continues to provide full maintenance and break-fix support. This allows you to extend the useful life of your infrastructure investments and plan hardware refresh programmes on your own timeline rather than the OEM's schedule."
+    }
+  },{
+    "@type": "Question",
+    "name": "What SLAs are available for UK businesses?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We offer a range of SLA tiers to suit different business requirements. All SLA options include 24/7/365 remote support as standard. The appropriate SLA for your environment will be agreed during the initial assessment and reflected in your service agreement."
+    }
+  },{
+    "@type": "Question",
+    "name": "Does Zaco provide VMware support following the Broadcom acquisition?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Following Broadcom's acquisition of VMware and the associated changes to licensing and support models, many UK organisations are exploring third-party VMware support as a more cost-effective alternative. Our qualified VMware engineers provide technical support for vSphere, vCenter, ESXi, vSAN, and NSX environments, along with Broadcom transition advisory services."
+    }
+  },{
+    "@type": "Question",
+    "name": "Will switching to third-party support void my OEM warranty?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No — in most circumstances, using third-party maintenance does not void your OEM warranty where one is still active. Our services are typically engaged for equipment that is post-warranty, approaching End of Life, or already End of Service Life. Our team will advise you on the optimal transition point to move from OEM to third-party support."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can you support multi-vendor environments with mixed hardware and software?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Absolutely. The majority of enterprise environments operate with mixed hardware and software from multiple vendors. Our engineers carry expertise across Dell, HPE, Cisco, Lenovo, IBM, NetApp, VMware, Microsoft, and more — consolidating your support into a single, accountable provider rather than managing multiple OEM relationships."
+    }
+  },{
+    "@type": "Question",
+    "name": "Is there a minimum contract term for Zaco's IT support services?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We offer flexible contract terms designed to suit UK business needs. Whether you require a short-term rolling arrangement or a multi-year agreement for budgeting certainty, we can accommodate your requirements. We do not enforce unnecessarily long lock-in periods and believe in demonstrating value through service quality."
+    }
+  }]
+}
+</script>
+
+{% endblock %}
+
+{% block content %}
+<style>
+    /* ── FULL-WIDTH SERVICE BANDS ── */
+        .svc-band {
+            padding: 72px 0;
+            position: relative;
+        }
+        .svc-band:nth-child(odd)  { background: #f0f5fb; }
+        .svc-band:nth-child(even) { background: #fff; }
+
+        .svc-band-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+    /* Even bands: image left, text right */
+        .svc-band.reverse .svc-band-inner {
+            direction: rtl;
+        }
+        .svc-band.reverse .svc-band-inner > * {
+            direction: ltr;
+        }
+        @media (max-width: 900px) {
+            .svc-band-inner { grid-template-columns: 1fr; gap: 36px; }
+            .svc-band.reverse .svc-band-inner { direction: ltr; }
+        }
+        
+        .svc-band-img {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 56px rgba(30,91,168,0.16);
+        }
+        .svc-band-img img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .svc-band:hover .svc-band-img img { transform: scale(1.03); }
+        .svc-band-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13,33,55,0.3) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .svc-band-tag {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(13,33,55,0.82);
+            backdrop-filter: blur(6px);
+            border-radius: 24px;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #a8d4ff;
+        }
+        
+        .svc-band-text {}
+        .svc-band-number {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #2D7DD2;
+            margin-bottom: 10px;
+        }
+        .svc-band-text h3 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #1a3546;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .svc-band-text > p {
+            color: #555;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+        .svc-bullet-list {
+            list-style: none;
+            padding: 0; margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .svc-bullet-list li {
+            font-size: 0.9rem;
+            color: #333;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+        .svc-bullet-list li::before {
+            content: "✓";
+            color: #1a3546;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+    /* ── LIFECYCLE ── */
+        .lifecycle-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .lifecycle-left > p {
+            color: #000000;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 44px;
+        }
+        .lifecycle-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .lifecycle-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            transition: background 0.2s;
+        }
+        .lifecycle-item:last-child {
+            border-bottom: none;
+        }
+        .lifecycle-item-tag {
+            background: rgba(45,125,210,0.3);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000000;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-top: 3px;
+            min-width: 70px;
+            text-align: center;
+        }
+        .lifecycle-item-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a3546;
+            margin-top: 10px;
+        }
+        .lifecycle-item-text p {
+            font-size: 0.88rem;
+            color: #000000;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Right image side */
+        .lifecycle-right {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        }
+        .lifecycle-right img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+        .lifecycle-right::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13,33,55,0.4) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .lifecycle-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .lifecycle-right img { height: 280px; }
+        }
+
+    /* ── WHY ZACO ── */
+        .svc-why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+            box-shadow: #000;
+        }
+        @media (max-width: 1024px) { .svc-why-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px)  { .svc-why-grid { grid-template-columns: 1fr; } }
+
+        .main-section .intro img {
+            width: 370px;
+            height: 288px;
+            box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+            object-fit: cover; 
+            
+        }
+        @media (max-width: 768px) {
+        .main-section .intro img {
+            width: 346px;
+            height: auto;
+        }
+        }
+
+
+      
+</style>
+
+<!-- ══════════════════════════════════════
+     Banner
+══════════════════════════════════════ -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            <p class="slider-six__text"><span>END-TO-END IT SOLUTIONS</span></p>
+            <h1 class="slider-six__title">Trusted Partner for IT Hardware &amp; Software Support Services in the UK</h1>
+            <p style="color: azure; font-size: 1.1rem;">From server maintenance &amp; enterprise storage to VMware, Microsoft &amp; fully managed remote IT services, we deliver reliable hardware &amp; software support that keeps your business systems running smoothly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+INTRO
+══════════════════════════════════════ -->
+<section class="main-section bg-white" >
+    <div class="auto-container">
+      <h2 class="header-title" style="text-align: left;">Enterprise IT Support That Keeps Your Business Operational</h2>
+        <div class="row intro">
+            <div class="col-md-12 col-lg-8">
+                <div>
+                  <p>When business operations depend on reliable IT infrastructure, slow vendor response times, rigid contracts, and rising OEM support costs can quickly become a challenge. Zaco Computers UK Limited delivers a smarter and more flexible approach to IT hardware and software support for businesses across the UK.</p>
+                  <p>Whether supporting enterprise servers, storage systems, or virtualisation environments such as VMware vSphere and Microsoft Windows Server, our tthird-party remote IT support solutions from India help organisations maintain performance, extend infrastructure life, and save up to 50% compared to OEM support contracts.</p>
+                  <p>With 24x7 remote support from India, we deliver service quality comparable to local providers at a cost-effective price, supported by a local UK business team to keep IT environments stable, supported, and ready for growth.</p>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4  ">
+                <img 
+                    src="{% static 'images/uk/main_services_1.jpeg' %}"
+                    alt="Enterprise IT Support — Zaco Computers UK">
+                    {% comment %} style="width: 370px; height: 288px;
+                        box-shadow: 0 16px 48px rgba(12,44,78,0.18);
+                        object-fit: cover;">  {% endcomment %}
+            </div>
+    </div>       
+</section>
+
+<!-- ══════════════════════════════════════
+     BAND 1 — Server Maintenance (text left, image right)
+══════════════════════════════════════ -->
+<section class="svc-band">
+  <div class="auto-container">
+    <p class="grey-label">IT Hardware &amp; Software Services</p>
+    <h2 class="header-title">What our IT Hardware &amp; Software Services Include</h2>
+    <p class="header-para" style="margin-bottom: 50px;">Here's what you can expect from our end-to-end third-party maintenance service for UK businesses, covering every layer of your IT infrastructure.</p>
+    <div class="svc-band-inner">
+      <div class="svc-band-text">
+        <h3>Server Maintenance</h3>
+        <p>Fast, flexible third-party server maintenance for UK enterprises, covering break-fix, proactive monitoring, and parts replacement under SLA agreements that work around your operations.</p>
+        <ul class="svc-bullet-list">
+          <li>24/7 remote support from India for the UK businesses</li>
+          <li>Proactive monitoring and preventive maintenance</li>
+          <li>Break-fix with rapid SLA response times</li>
+          <li>Spares management and parts replacement</li>
+          <li>Coverage from Day 1 through to EOSL</li>
+          <li>Flexible multi-year or rolling contracts</li>
+        </ul>
+      </div>
+      <div class="svc-band-img">
+        <img src="{% static 'images/uk/server_maintainence_UK.jpeg' %}" alt="Server Maintenance UK — Zaco Computers">
+        <div class="svc-band-img-overlay"></div>
+        <span class="svc-band-tag">Server Maintenance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BAND 2 — Storage Maintenance (image left, text right)
+══════════════════════════════════════ -->
+<section class="svc-band reverse">
+  <div class="auto-container">
+    <div class="svc-band-inner">
+      <div class="svc-band-text">
+        <h3>Storage Maintenance</h3>
+        <p>Keep your SAN, NAS, and all-flash arrays performing reliably with third-party storage maintenance that extends asset life beyond OEM support windows — without the OEM price tag.</p>
+        <ul class="svc-bullet-list">
+          <li>SAN, NAS, and all-flash array support</li>
+          <li>Drive replacement and RAID integrity management</li>
+          <li>Proactive monitoring and capacity planning</li>
+          <li>Post-warranty and EOSL coverage</li>
+          <li>Spare parts for rapid resolution</li>
+          <li>SLAs from NBD</li>
+        </ul>
+      </div>
+      <div class="svc-band-img">
+        <img src="{% static 'images/uk/storage-maintenance.jpg' %}" alt="Storage Maintenance — Zaco Computers UK">
+        <div class="svc-band-img-overlay"></div>
+        <span class="svc-band-tag">Storage Maintenance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BAND 3 — Network Maintenance (text left, image right)
+══════════════════════════════════════ -->
+<section class="svc-band">
+  <div class="auto-container">
+    <div class="svc-band-inner">
+      <div class="svc-band-text">
+        <h3>Network Maintenance</h3>
+        <p>Third-party maintenance for switches, routers, firewalls, and more — keeping your UK data centre and edge network stable, secure, and available around the clock.</p>
+        <ul class="svc-bullet-list">
+          <li>Switches, routers, and firewall support</li>
+          <li>Fault diagnosis and rapid incident resolution</li>
+          <li>Configuration and change management assistance</li>
+          <li>Spare parts management and hardware replacement</li>
+          <li>Support through to EOSL and beyond</li>
+        </ul>
+      </div>
+      <div class="svc-band-img">
+        <img src="{% static 'images/uk/networking_maintainence_UK.jpeg' %}" alt="Network Maintenance UK — Zaco Computers">
+        <div class="svc-band-img-overlay"></div>
+        <span class="svc-band-tag">Network Maintenance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BAND 4 — VMware Support (image left, text right)
+══════════════════════════════════════ -->
+<section class="svc-band reverse">
+  <div class="auto-container">
+    <div class="svc-band-inner">
+      <div class="svc-band-text">
+        <h3>VMware Support</h3>
+        <p>A cost-effective alternative to direct VMware agreements — particularly relevant following Broadcom's acquisition. Our certified engineers keep your virtualisation environment stable and optimised.</p>
+        <ul class="svc-bullet-list">
+          <li>vSphere, vCenter, ESXi, vSAN &amp; NSX-T support</li>
+          <li>Incident resolution and root cause analysis</li>
+          <li>Patching guidance and upgrade planning</li>
+          <li>Broadcom licence transition advisory</li>
+          <li>Performance tuning and capacity management</li>
+          <li>Integration support with Dell, HPE &amp; Cisco infrastructure</li>
+        </ul>
+      </div>
+      <div class="svc-band-img">
+        <img src="{% static 'images/uk/vmware-support.jpg' %}" alt="VMware Support UK — Zaco Computers">
+        <div class="svc-band-img-overlay"></div>
+        <span class="svc-band-tag">VMware Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BAND 5 — Microsoft Support (text left, image right)
+══════════════════════════════════════ -->
+<section class="svc-band">
+  <div class="auto-container">
+    <div class="svc-band-inner">
+      <div class="svc-band-text">
+        <h3>Standalone Microsoft Third-Party Software Support</h3>
+        <p>Independent support for on-premises and hybrid Microsoft environments — a flexible alternative to direct Microsoft agreements, covering Windows Server, SQL Server, and more.</p>
+        <ul class="svc-bullet-list">
+          <li>Windows Server 2012 through 2022 support</li>
+          <li>SQL Server incident resolution and tuning</li>
+          <li>Exchange Server and Hyper-V support</li>
+          <li>End-of-support lifecycle advisory</li>
+          <li>Active Directory, DNS &amp; DHCP troubleshooting</li>
+        </ul>
+      </div>
+      <div class="svc-band-img">
+        <img src="{% static 'images/uk/microsoft-support.jpg' %}" alt="Microsoft Third-Party Support UK — Zaco Computers">
+        <div class="svc-band-img-overlay"></div>
+        <span class="svc-band-tag">Microsoft Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BAND 6 — Managed Services (image left, text right)
+══════════════════════════════════════ -->
+<section class="svc-band reverse">
+  <div class="auto-container">
+    <div class="svc-band-inner">
+      <div class="svc-band-text">
+        <h3>Infrastructure Managed Services</h3>
+        <p>We become your extended IT team — monitoring, managing, and maintaining your full infrastructure estate so your in-house team can focus on what matters most to the business.</p>
+        <ul class="svc-bullet-list">
+          <li>24/7 proactive monitoring and alerting</li>
+          <li>Incident and change management to defined SLAs</li>
+          <li>Hardware and software lifecycle management</li>
+          <li>Capacity planning and performance reporting</li>
+        </ul>
+      </div>
+      <div class="svc-band-img">
+        <img src="{% static 'images/uk/managed-services.jpg' %}" alt="Infrastructure Managed Services UK — Zaco Computers">
+        <div class="svc-band-img-overlay"></div>
+        <span class="svc-band-tag">Managed Services</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BRAND SWIPER
+══════════════════════════════════════ -->
+
+<section class="main-section bg-light">
+  <div class="auto-container">
+    <div class="sec-title-eight text-center">
+      <h2 class="sec-title-eight__title" style="margin-bottom: 50px;">Supported OEMs</h2>
+    </div>
+    <div
+      class="thm-swiper__slider swiper-container"
+      data-swiper-options='{"spaceBetween": 100, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
+						"0": {
+							"spaceBetween": 30,
+							"slidesPerView": 2
+						},
+						"375": {
+							"spaceBetween": 30,
+							"slidesPerView": 2
+						},
+						"575": {
+							"spaceBetween": 30,
+							"slidesPerView": 3
+						},
+						"767": {
+							"spaceBetween": 50,
+							"slidesPerView": 4
+						},
+						"991": {
+							"spaceBetween": 50,
+							"slidesPerView": 5
+						},
+						"1199": {
+							"spaceBetween": 100,
+							"slidesPerView": 5
+						}
+					}}'
+    >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/hpe.jpg' %}" alt="Hewlett Packard Enterprise (HPE)" title="Hewlett Packard Enterprise (HPE)" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;" />
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/dell.jpg' %}" alt="Dell" title="Dell" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM" title="IBM" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;" />
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/lenovo.jpg' %}" alt="Lenovo" title="Lenovo" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;" />
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/cisco.jpg' %}" alt="Cisco" title="Cisco" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;" />
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/vm.jpg' %}" alt="VMware" title="VMware" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;" />
+        </div>
+        <div class="swiper-slide">
+          <img src="{% static 'images/home/microsoft.jpg' %}" alt="Microsoft" title="Microsoft" style="border:3px solid #e5e7eb; padding:25px; border-radius:8px; background:#ffffff;" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.auto-container -->
+</section>
+
+<!-- ══════════════════════════════════════
+     LIFECYCLE
+══════════════════════════════════════ -->
+<!-- LIFECYCLE SECTION -->
+<section class="main-section bg-white">
+  <div class="auto-container">
+    <h2 class="header-title" style="text-align: left;">End-to-End Hardware &amp; Software Support at Every Stage of the Asset Lifecycle!</h2>
+    <div class="lifecycle-inner">  
+      <!-- LEFT: text content -->
+      <div class="lifecycle-left">
+        
+        <p  >Whether you are deploying new equipment or running infrastructure beyond OEM support, Zaco Computers UK Limited delivers reliable coverage at a fraction of the OEM cost, helping you stay in control of your refresh cycle, not the OEM's calendar.</p>
+
+        <div class="lifecycle-items">
+          <div class="lifecycle-item">
+            <span class="lifecycle-item-tag">Day 1</span>
+            <div class="lifecycle-item-text">
+              <h4>New Deployments</h4>
+            </div>
+          </div>
+          <div class="lifecycle-item">
+            <span class="lifecycle-item-tag">3yr+</span>
+            <div class="lifecycle-item-text">
+              <h4>Post-Warranty</h4>
+            </div>
+          </div>
+          <div class="lifecycle-item">
+            <span class="lifecycle-item-tag">EOL</span>
+            <div class="lifecycle-item-text">
+              <h4>End of Life</h4>
+            </div>
+          </div>
+          <div class="lifecycle-item">
+            <span class="lifecycle-item-tag">EOSL</span>
+            <div class="lifecycle-item-text">
+              <h4>Beyond Service Life</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT: image -->
+      <div >
+        <img src="{% static 'images/uk/main-server-chart.png' %}" alt="IT Infrastructure Lifecycle — Zaco Computers UK">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WHY ZACO
+══════════════════════════════════════ -->
+<section class="main-section bg-light">
+  <div class="auto-container">
+    <h2 class="header-title" style="text-align:center;">Why Choose Zaco Computers UK Limited your Third Party IT Maintenance Provider?</h2>
+    <p class="header-para" style="text-align:center; margin-left:0;">A smarter, independent alternative to OEM support — built around your IT infrastructure needs.</p>
+    <div class="svc-why-grid">
+      <div class="problem-card">
+        <span class="icon">💰</span>
+        <h3>Up to 50% Cost Savings</h3>
+        <p>Save up to 50% compared to OEM support contracts</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">🔧</span>
+        <h3>Flexible Third-Party Support</h3>
+        <p>Maintenance tailored to your IT infrastructure needs</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">🤝</span>
+        <h3>One Partner Across All OEMs</h3>
+        <p>Consolidate your IT support across Dell, HPE, Cisco, NetApp, VMware, Microsoft, and more under a single, accountable provider.</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">📈</span>
+        <h3>Infrastructure Lifecycle Extension</h3>
+        <p>Maximise the value of existing IT investments</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">🕐</span>
+        <h3>24/7 Remote Support from India</h3>
+        <p>Round-the-clock assistance to keep your IT systems operational, with 24/7 remote support from India delivering consistent service quality at a cost-effective value.</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">📋</span>
+        <h3>Transparent &amp; Tailored Service Contracts</h3>
+        <p>No hidden charges, no surprise callout fees. Clear and customized SLAs with regular service reviews and infrastructure reporting.</p>
+      </div>
+      <div class="problem-card" style="grid-column: 1 / -1; max-width: 420px; margin: 0 auto;">
+        <span class="icon">⚙️</span>
+        <h3>Standalone or Bundled Support</h3>
+        <p>Choose hardware-only, software-only, or comprehensive bundled maintenance covering both hardware and software in one agreement.</p> VO SOCH tha hoga mohhmaed waha kya kar raha hai
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FAQ
+══════════════════════════════════════ -->
+<section class="main-section bg-white">
+  <div class="auto-container">
+      <span class="grey-label">FAQs</span>
+      <h2 class="header-title">Frequently Asked Questions</h2>
+    <div class="faq-section">
+        <div class="faq-item ">
+        <div class="faq-question">1. What is third-party IT maintenance (TPM) and how does it differ from OEM support?</div>
+        <div class="faq-answer">Third-party maintenance (TPM) is IT hardware and software support provided by an independent company rather than the original equipment manufacturer. TPM providers like Zaco Computers UK Limited typically offer equivalent or superior technical support at significantly lower cost — often 30–50% less than OEM contracts, with more flexible terms and continued coverage beyond OEM End of Life dates.</div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">2. Can Zaco provide support for hardware that has reached End of Life or End of Service Life?</div>
+        <div class="faq-answer">Yes — this is one of the most valued aspects of our service. When OEMs discontinue support for your specific hardware model, Zaco Computers UK Limited continues to provide full maintenance and break-fix support. This allows you to extend the useful life of your infrastructure investments and plan hardware refresh programmes on your own timeline rather than the OEM's schedule.</div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">3. What SLAs are available for UK businesses?</div>
+        <div class="faq-answer">We offer a range of SLA tiers to suit different business requirements. All SLA options include 24/7/365 remote support as standard. The appropriate SLA for your environment will be agreed during the initial assessment and reflected in your service agreement.</div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">4. Does Zaco provide VMware support following the Broadcom acquisition?</div>
+        <div class="faq-answer">Yes. Following Broadcom's acquisition of VMware and the associated changes to licensing and support models, many UK organisations are exploring third-party VMware support as a more cost-effective alternative. Our qualified VMware engineers provide technical support for vSphere, vCenter, ESXi, vSAN, and NSX environments, along with Broadcom transition advisory services.</div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">5. Will switching to third-party support void my OEM warranty?</div>
+        <div class="faq-answer">No — in most circumstances, using third-party maintenance does not void your OEM warranty where one is still active. Our services are typically engaged for equipment that is post-warranty, approaching End of Life, or already End of Service Life. Our team will advise you on the optimal transition point to move from OEM to third-party support.</div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">6. Can you support multi-vendor environments with mixed hardware and software?</div>
+        <div class="faq-answer">Absolutely. The majority of enterprise environments operate with mixed hardware and software from multiple vendors. Our engineers carry expertise across Dell, HPE, Cisco, Lenovo, IBM, NetApp, VMware, Microsoft, and more — consolidating your support into a single, accountable provider rather than managing multiple OEM relationships.</div>
+        </div>
+
+        <div class="faq-item">
+        <div class="faq-question">7. Is there a minimum contract term for Zaco's IT support services?</div>
+        <div class="faq-answer">We offer flexible contract terms designed to suit UK business needs. Whether you require a short-term rolling arrangement or a multi-year agreement for budgeting certainty, we can accommodate your requirements. We do not enforce unnecessarily long lock-in periods and believe in demonstrating value through service quality.</div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
+<div class="auto-container" style="padding-block: 40px">
+  <div class="cta-section">
+      <h2 class="header-title">Ready to explore a smarter alternative to OEM support?</h2>
+      <p class="header-para">Speak with the Zaco Computers UK Limited team. Tell us about your environment, your current challenges, and any upcoming contract deadlines. We will give you a direct, honest assessment of how we can help. Contact us at <a href="tel:+442034358060">+44 20 3435 8060</a> today!</p>
+      <div class="link-box" style="margin-top: 30px; justify-content: center;">
+        <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+          <i class="btn-curve"></i>
+          <span class="btn-title">Request a Quote</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.srv-faq .faq-item').forEach(function(item) {
+    item.querySelector('.faq-question').addEventListener('click', function() {
+        document.querySelectorAll('.srv-faq .faq-item').forEach(function(i) {
+            if (i !== item) i.classList.remove('active');
+        });
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+{% endblock %}

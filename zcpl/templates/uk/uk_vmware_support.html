@@ -1,0 +1,702 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}Secured Third-Party VMware Support Solution in the UK - Zaco{% endblock %}
+{% block meta_description %}
+Get expert VMware third party support in the UK with Zaco. Save support costs up to 50% &amp; gain a flexible alternative to Broadcom’s subscription model.
+{% endblock %}
+
+
+{% block schema %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/uk/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Hardware & Software Services",
+    "item": "https://www.zacocomputer.com/uk/it-hardware-and-software-services/"  
+  },{
+    "@type": "ListItem", 
+    "position": 3, 
+    "name": "VMware Third Party Support",
+    "item": "https://www.zacocomputer.com/uk/vmware-third-party-support/"  
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Which VMware versions and products do you cover?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We support legacy and current releases of VMware vSphere, including ESXi hypervisor and vCenter environments, as well as VMware Horizon and VMware Workstation. Coverage extends to older vSphere releases that Broadcom no longer supports under its standard agreements. During the onboarding process, our team assesses your specific version and configuration to confirm that coverage aligns precisely with your environment."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you provide migration services for UK organisations moving away from VMware?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We support structured transitions from VMware vSphere to Hyper-V, from vSphere to Proxmox, and from on-premises environments to Azure managed services or hybrid cloud architectures. All migration activity is guided by your technical and business requirements, not by vendor preference. UK clients retain full control over the timeline and scope of any transition, and third-party support continues to cover your VMware environment throughout the process."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can you supply VMware licences as well as provide support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We supply new and renewal VMware product licences alongside our managed IT services. This gives UK organisations a single accountable point of contact for both licensing and ongoing technical support, simplifying the vendor management and procurement process."
+    }
+  },{
+    "@type": "Question",
+    "name": "Will switching to third party support affect my existing VMware licences?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Your perpetual VMware licences remain valid and unaffected. Third party support covers the maintenance and technical assistance around those licences. Nothing changes about licence ownership when you move away from Broadcom OEM support."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you cover older versions of VMware vSphere that Broadcom no longer supports?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We support legacy and current vSphere releases including ESXi versions that have reached end of general support under Broadcom. Many UK businesses running stable older environments choose third party support specifically because it removes the pressure to upgrade before they are ready."
+    }
+  },{
+    "@type": "Question",
+    "name": "What is the process for starting VMware third-party support with Zaco?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Email info@zacocomputer.com or call +44 20 3435 8060 with a brief overview of your VMware environment. We schedule a scoping call, carry out a free assessment, and provide a proposal with SLA options and pricing. Onboarding for most UK environments is completed within a few weeks of contract agreement."
+    }
+  }]
+}
+</script>
+
+{% endblock %}
+
+{% block content %}
+    <style>
+        /* ══════════════════════════════════
+        COST COMPARISON BANNER
+        ══════════════════════════════════ */
+            .vm-cost-grid {
+                display: grid; grid-template-columns: 1fr 1fr;
+                gap: 28px; margin-bottom: 18px;
+            }
+            .vm-cost-card {
+                border-radius: 14px; overflow: hidden;
+                border: 1.5px solid #dde4ef;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            }
+            .vm-cost-card-head {
+                padding: 20px 28px;
+                background: #0c2c4e;
+                color: #fff;
+            }
+            .vm-cost-card-head h3 {
+                font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; color: #fff;
+            }
+            .vm-cost-card-head .vm-cost-badge {
+                font-size: 1rem; font-weight:700; color: #fff;
+            }
+            .vm-cost-card-body {
+                padding: 22px 28px; background: #fff;
+            }
+            .vm-cost-card-body p {
+                color: #333; font-size: 0.93rem; line-height: 1.7; margin: 0;
+            }
+            .vm-cost-note {
+                font-size: 0.82rem; color: #000000; margin-top: 10px;
+            }
+            @media (max-width: 700px) {
+                .vm-cost-grid { grid-template-columns: 1fr; }
+            }
+        /* ══════════════════════════════════
+        WHAT WE COVER — COVERAGE SECTION
+        ══════════════════════════════════ */
+            .vm-coverage-grid {
+                display: grid; grid-template-columns: repeat(1.5, 2fr);
+                gap: 24px; margin-bottom: 36px;
+            }
+            .vm-tag-strip {
+                background: #fff; border-radius: 12px;
+                padding: 22px 26px;
+                display: flex; flex-wrap: wrap; gap: 10px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+            .vm-tag-strip:hover{
+                border: 3px solid #1a3546;
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+            .vm-tag {
+                background: #f0f5ff; border: 1px solid #c8d9f0;
+                color: #0c2c4e; font-size: 0.79rem; font-weight: 600;
+                padding: 6px 14px; border-radius: 20px; white-space: nowrap;
+            }
+            @media (max-width: 900px) {
+                .vm-coverage-grid { grid-template-columns: 1fr 1fr; }
+            }
+            @media (max-width: 580px) {
+                .vm-coverage-grid { grid-template-columns: 1fr; }
+            }
+
+        /* ══════════════════════════════════
+        MIGRATION PATHWAYS
+        ══════════════════════════════════ */
+                .vm-migration-grid {
+                    display: grid; grid-template-columns: 1fr 1fr;
+                    gap: 48px; align-items: start;
+                    margin-top: 30px;
+                }
+                .vm-migration-paths { display: flex; flex-direction: column; gap: 14px; }
+                .vm-path-item {
+                    background: #fff; border-radius: 10px;
+                    border-left: 4px solid #1a3546;
+                    padding: 18px 22px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                }
+                .vm-path-item:hover{
+                    border: 3px solid #1a3546;
+                    transform: translateY(-4px);
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                }
+                .vm-path-item h4 {
+                    font-size: 0.95rem; font-weight: 700;
+                    color: #0c2c4e; margin-bottom: 6px;
+                }
+                .vm-path-item p {
+                    font-size: 0.88rem; color: #444; line-height: 1.65; margin: 0;
+                }
+                .vm-migration-steps {
+                    background: #0c2c4e; border-radius: 16px;
+                    padding: 36px 34px; color: #fff;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                }
+                .vm-migration-steps h3 {
+                    font-size: 1rem; font-weight: 700;
+                    color: rgba(255,255,255,0.7); margin-bottom: 28px;
+                    text-transform: uppercase; letter-spacing: 1px;
+                }
+                .vm-step-list { list-style: none; padding: 0; margin: 0; }
+                .vm-step-item {
+                    display: flex; gap: 18px; align-items: flex-start;
+                    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+                }
+                .vm-step-item:last-child { border-bottom: none; }
+                .vm-step-num {
+                    width: 32px; height: 32px; flex-shrink: 0;
+                    border-radius: 50%; background: #2D7DD2;
+                    display: flex; align-items: center; justify-content: center;
+                    font-size: 0.8rem; font-weight: 800; color: #fff;
+                }
+                .vm-step-text {
+                    font-size: 0.92rem; color: rgba(255,255,255,0.85);
+                    line-height: 1.5; padding-top: 6px;
+                }
+                @media (max-width: 860px) {
+                    .vm-migration-grid { grid-template-columns: 1fr; }
+                }
+
+        /* ══════════════════════════════════
+        WHY ZACO
+        ══════════════════════════════════ */
+            .vm-why-grid {
+                display: grid; grid-template-columns: 1.1fr 0.9fr;
+                gap: 60px; align-items: start;
+            }
+            .vm-benefit-list { list-style: none; padding: 0; margin: 0; }
+            .vm-benefit-item {
+                display: flex; gap: 16px; align-items: flex-start;
+                padding: 18px 0;
+                border-bottom: 1px solid #eef2f7;
+            }
+            .vm-benefit-item:last-child { border-bottom: none; }
+            .vm-benefit-check {
+                width: 30px; height: 30px; border-radius: 50%;
+                background: #2D7DD2; display: flex; align-items: center;
+                justify-content: center; flex-shrink: 0; margin-top: 2px;
+            }
+            .vm-benefit-check span { color: #000; font-size: 0.75rem; font-weight: 700; }
+            .vm-benefit-title {
+                font-size: 0.95rem; font-weight: 800; color: #0c2c4e; margin-bottom: 4px;
+            }
+            .vm-benefit-desc {
+                font-size: 0.88rem; color: #444; line-height: 1.65;
+            }
+            .vm-why-img img {
+                width: 100%; height: 728px;
+                object-fit: cover;
+                margin-top: 20px;
+            }
+            @media (max-width: 860px) {
+                .vm-why-grid { grid-template-columns: 1fr; gap: 36px; }
+                .vm-why-img img { height: auto; max-height: 300px;}
+            }
+
+            .main-section .intro img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 14px;
+                    object-fit: cover;
+                }
+
+                @media (max-width: 768px) {
+                .main-section .intro img {
+                    width: 343px;
+                    height: auto;
+                }
+            }
+    </style>
+
+
+<!-- ═══════════════════════════════════════
+     BANNER SLIDER
+═══════════════════════════════════════ -->
+<section class="slider-six">
+    <div class="slider-six__curv"></div>
+    <div class="swiper-container thm-swiper__slider"
+         data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade",
+         "pagination": {"el": "#main-slider-pagination", "type": "bullets", "clickable": true},
+         "navigation": {"nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev"},
+         "autoplay": {"delay": 5000}}'>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+                <div class="auto-container">
+                    <div class="slider-six__content">
+                        {% comment %} <p class="slider-six__text"><span>VMware Support Services</span></p> {% endcomment %}
+                        <p class="slider-six__text"><span>VMWARE SUPPORT SERVICES</span></p>
+                        <h1 class="slider-six__title">Third-Party VMware Support in the UK</h1>
+                        <p style="color:azure; font-size:1.1rem;">Keep your existing VMware licences and get expert third-party support while reducing costs by up to 50% compared to OEM VMware contracts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     INTRO
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+      <h2 class="header-title" style="text-align: left;">Flexible VMware Support for Businesses Across the United Kingdom</h2>
+        <div class="row intro">
+            <div class="col-md-12 col-lg-8">
+                <div>
+                    <p>Following Broadcom's acquisition of VMware, many organisations across the United Kingdom are reassessing how they manage and support their virtual environments. Businesses are exploring ways to retain their existing VMware licences, strengthen infrastructure support, or move away from direct Broadcom agreements.</p>
+                    <p>As a global provider of third-party enterprise software support &amp; <a href="{% url "uk-main-service" %}">remote IT services</a>, Zaco Computers UK Limited provides independent VMware third-party support that helps UK organisations maintain stability, control costs up to 50%, and keep their virtual environments running efficiently while internal teams focus on strategic priorities.</p>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center ">
+                <img 
+                    src="{% static 'images/uk/vmware-1.jpeg' %}"
+                    alt="VMware Third-Party Support UK — Zaco Computers">
+                    {% comment %} style="border-radius: 14px; width: 100%; height: auto;
+                        object-fit: cover;">  {% endcomment %}
+            </div>
+    </div>       
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     COST COMPARISON
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">How Third Party VMware Support Compares on Cost</h2>
+        <div class="vm-cost-grid">
+            <div class="vm-cost-card">
+                <div class="vm-cost-card-head">
+                    <h3>Broadcom OEM Renewal (VVF / VCF)</h3>
+                    <div class="vm-cost-badge" style="color : #c0392b">More than 2×</div>
+                </div>
+                <div class="vm-cost-card-body">
+                    <p>Renewal now requires VVF or VCF. You pay for the full bundle regardless of what your environment uses.</p>
+                </div>
+            </div>
+            <div class="vm-cost-card">
+                <div class="vm-cost-card-head ">
+                    <h3>Third Party VMware Support</h3>
+                    <div class="vm-cost-badge" style="color : #00b4a2">Up to 50% Cost Savings</div>
+                </div>
+                <div class="vm-cost-card-body">
+                    <p>Support for your existing perpetual environment. No bundle requirement. No platform migration needed.</p>
+                </div>
+            </div>
+        </div>
+        <p class="header-para" style="text-align: left;">* Indicative. Based on comparable United Kingdom engagements. Actual savings depend on environment size and licence spend.</p>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     COMPARISON TABLE
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">What actually changes when you switch models</h2>
+        <p class="header-para">A clear look at what Broadcom's subscription model delivers versus what independent VMware support provides for UK organisations retaining perpetual licences.</p>
+        <div class="compare-table-scroll">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>What Matters to UK IT Teams</th>
+                        <th style="color: #c0392b;">Broadcom OEM</th>
+                        <th style="color: #00b4a2;">Zaco Third Party Support</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Support for perpetual VMware licences</td>
+                        <td><span style="color: #c0392b; font-weight: 700;">✗ </span>Discontinued</td>
+                        <td><span style="color: #0c2c4e; font-weight: 700;">✓ </span>Fully covered</td>
+                    </tr>
+                    <tr>
+                        <td>Bundle purchase requirement</td>
+                        <td>VMware vSphere Foundation (VVF) / VMware Cloud Foundation (VCF) mandatory</td>
+                        <td>Support only what you use</td>
+                    </tr>
+                    <tr>
+                        <td>Annual cost change at renewal</td>
+                        <td><span style="color: #c0392b; font-weight: 700;">2×+ increase reported</span></td>
+                        <td><span style="color: #00b4a2; font-weight: 700;">Up to 50%* savings</span></td>
+                    </tr>
+                    <tr>
+                        <td>Legacy vSphere and ESXi release coverage</td>
+                        <td><span style="color: #d97706;">⚠ </span>Limited at EOL</td>
+                        <td><span style="color: #0c2c4e; font-weight: 700;">✓ </span>Older releases included</td>
+                    </tr>
+                    <tr>
+                        <td>SLA customisation by system criticality</td>
+                        <td>Standard tiers only</td>
+                        <td><span style="color: #0c2c4e; font-weight: 700;">✓ </span>Tailored per environment</td>
+                    </tr>
+                    <tr>
+                        <td>Around-the-clock engineer access</td>
+                        <td><span style="color: #d97706;">⚠ </span>Depends on contract tier</td>
+                        <td><span style="color: #0c2c4e; font-weight: 700;">✓ </span>24×7×365 remote support</td>
+                    </tr>
+                    <tr>
+                        <td>Migration guidance and planning</td>
+                        <td>Vendor-directed only</td>
+                        <td><span style="color: #0c2c4e; font-weight: 700;">✓ </span>Objective and environment-led</td>
+                    </tr>
+                    <tr>
+                        <td>Contract flexibility</td>
+                        <td>Annual subscription, 3-year minimum</td>
+                        <td>Annual or on-call, your choice</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     WHAT WE DELIVER — SERVICES
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="grey-label">What We Deliver</div>
+        <h2 class="header-title">VMware Managed Services and Support for UK Businesses</h2>
+        <p class="header-para">Rather than forcing a subscription migration or bundled licensing model, our 3rd party VMware support services give UK businesses the flexibility to continue running their existing VMware environments with expert technical support, allowing internal IT teams to focus on strategic priorities.</p>
+
+        <!-- Service 01 -->
+        <div class="brand-row">
+            <div class="brand-sidebar">
+                <div>
+                    <div class="brand-num">01</div>
+                    <div class="brand-logo-text" style="letter-spacing: 0;  font-size: 1.5rem;">VMware Break and Fix Support</div>
+                </div>
+                <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                    <i class="btn-curve"></i>
+                    <span class="btn-title">Enquire Now →</span>
+                </a>
+            </div>
+            <div class="brand-body">
+                <p>Incident diagnosis and resolution for ESXi and vCenter environments, delivered by engineers with hands-on platform experience. UK businesses operating business-critical VMware infrastructure receive 24×7×365 remote IT support from India, delivering the same service quality and outcomes as local providers at an affordable cost.</p>
+                <ul>
+                    <li>- ESXi host and vCenter incident resolution within agreed SLA windows</li>
+                    <li>- Proactive configuration reviews and environment health checks</li>
+                    <li>- Coverage for legacy vSphere releases no longer supported by Broadcom</li>
+                    <li>- Differentiated SLAs for production versus non-production workloads</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Service 02 -->
+        <div class="brand-row">
+            <div class="brand-sidebar">
+                <div>
+                    <div class="brand-num">02</div>
+                    <div class="brand-logo-text" style="letter-spacing: 0;  font-size: 1.5rem;">VMware Technology Advisory</div>
+                </div>
+                <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                    <i class="btn-curve"></i>
+                    <span class="btn-title">Enquire Now →</span>
+                </a>
+            </div>
+            <div class="brand-body">
+                <p>Not every business in the United Kingdom that runs VMware needs to migrate or rebuild its virtualisation estate right now. Our advisory service provides a vendor-neutral assessment of your vSphere environment and delivers clear, commercially grounded guidance on whether retaining, optimising, or transitioning makes sense given your situation.</p>
+                <ul>
+                    <li>- Full environment assessment covering versions, dependencies, and risks</li>
+                    <li>- Retain, optimise, or migrate recommendation based on your business case</li>
+                    <li>- No vendor preference — guidance covers Hyper-V, Proxmox, Azure, and more</li>
+                    <li>- Cost modelling included for each path considered</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     WHAT WE COVER — COVERAGE
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="grey-label">What We Cover</div>
+        <h2 class="header-title">Tailored Support for Core VMware Products &amp; Technologies</h2>
+        <p class="header-para">Our independent VMware support covers every core layer of the virtualisation stack for UK businesses and enterprise organisations operating on perpetual licences.</p>
+
+        <div class="vm-coverage-grid">
+            <div class="problem-card">
+                <h3 style="border-bottom: 2px solid #0c2c4e; padding-bottom: 10px;">VMware vSphere Including ESXi and vCenter</h3>
+                <ul style="padding-left: 16px; ">
+                    <li>&#11166; ESXi host installation, initial configuration, and ongoing administration Virtual machine lifecycle management including creation, cloning, and snapshots</li>
+                    {% comment %} <li>&#11166; Virtual machine lifecycle management including creation, cloning, and snapshots</li> {% endcomment %}
+                    <li>&#11166; vMotion and Storage vMotion for live workload migration</li>
+                    <li>&#11166; Distributed Resource Scheduler configuration and performance tuning</li>
+                    <li>&#11166; High Availability and Fault Tolerance setup, validation, and testing</li>
+                    <li>&#11166; Capacity planning and resource optimisation across the cluster</li>
+                    <li>&#11166; Third party support for legacy vSphere versions past Broadcom's standard window</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3 style="border-bottom: 2px solid #0c2c4e; padding-bottom: 10px;">VMware Horizon and Workstation</h3>
+                <ul style="padding-left: 16px; ">
+                    <li>&#11166; Virtual desktop and application delivery for Horizon environments</li>
+                    <li>&#11166; Session management and connectivity troubleshooting</li>
+                    <li>&#11166; Desktop virtualisation support for development, testing, and isolated workloads</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <h3 style="border-bottom: 2px solid #0c2c4e; padding-bottom: 10px;">Included Across All Service Tiers</h3>
+                <ul style="padding-left: 16px;">
+                    <li>&#11166; Break and fix resolution within agreed SLA timeframes</li>
+                    <li>&#11166; Configuration review and proactive health monitoring</li>
+                    <li>&#11166; Environment documentation and change record management</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="vm-tag-strip">
+            <span class="vm-tag">ESXi Hypervisor</span>
+            <span class="vm-tag">vSphere Platform</span>
+            <span class="vm-tag">vCenter</span>
+            <span class="vm-tag">VMware Horizon</span>
+            <span class="vm-tag">vMotion</span>
+            <span class="vm-tag">Storage vMotion</span>
+            <span class="vm-tag">High Availability</span>
+            <span class="vm-tag">Distributed Resource Scheduler</span>
+            <span class="vm-tag">Fault Tolerance</span>
+            <span class="vm-tag">VMware Workstation</span>
+            <span class="vm-tag">Legacy vSphere Release</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     MIGRATION PATHWAYS
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="grey-label">Migration Pathways</div>
+        <h2 class="header-title">Structured VMware Migration &amp; Maintenance with Less Broadcom Burden.</h2>
+        <p class="header-para">While many organisations continue operating VMware infrastructure successfully, some explore alternative platforms due to strategic direction or cost management. Zaco Computers UK Limited assists organisations across the United Kingdom with migration planning and implementation.</p>
+        <div class="vm-migration-grid">
+            <div class="vm-migration-content">         
+                <div class="vm-migration-paths">
+                    <div class="vm-path-item">
+                        <h4>Migrate from VMware to Hyper V</h4>
+                        <p>For organisations adopting Microsoft infrastructure we support structured migration from VMware environments to Hyper V.</p>
+                    </div>
+                    <div class="vm-path-item">
+                        <h4>Migrate from VMware to Proxmox</h4>
+                        <p>Organisations exploring open source virtualisation platforms can migrate workloads from VMware infrastructure to Proxmox environments.</p>
+                    </div>
+                    <div class="vm-path-item">
+                        <h4>VMware to Cloud Migration</h4>
+                        <p>Where cloud adoption aligns with infrastructure strategy we assist organisations in migrating workloads from on premises VMware environments to cloud platforms such as Microsoft Azure.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vm-migration-steps">
+                <h3>Migration typically follows a structured approach</h3>
+                <ul class="vm-step-list">
+                    <li class="vm-step-item">
+                        <div class="vm-step-num">1</div>
+                        <div class="vm-step-text">Environment Assessment</div>
+                    </li>
+                    <li class="vm-step-item">
+                        <div class="vm-step-num">2</div>
+                        <div class="vm-step-text">Migration Planning</div>
+                    </li>
+                    <li class="vm-step-item">
+                        <div class="vm-step-num">3</div>
+                        <div class="vm-step-text">Pilot Testing</div>
+                    </li>
+                    <li class="vm-step-item">
+                        <div class="vm-step-num">4</div>
+                        <div class="vm-step-text">Controlled Migration</div>
+                    </li>
+                    <li class="vm-step-item">
+                        <div class="vm-step-num">5</div>
+                        <div class="vm-step-text">Post Migration Support</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     WHY ZACO
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">Why Organisations in the United Kingdom Choose Zaco Computers</h2>
+        <p class="header-para">Zaco Computers supports enterprise organisations across multiple regions including the United Kingdom. Our VMware managed services help organisations maintain reliable infrastructure while controlling support costs.</p>
+        <div class="vm-why-grid">
+            <ul class="vm-benefit-list">
+                <li class="vm-benefit-item">
+                    <div class="vm-benefit-check"><span>✓</span></div>
+                    <div>
+                        <div class="vm-benefit-title">Cost efficient VMware support</div>
+                        <div class="vm-benefit-desc">Independent VMware support helps organisations reduce operational expenditure compared with subscription based support models.</div>
+                    </div>
+                </li>
+                <li class="vm-benefit-item">
+                    <div class="vm-benefit-check"><span>✓</span></div>
+                    <div>
+                        <div class="vm-benefit-title">Experienced VMware engineers</div>
+                        <div class="vm-benefit-desc">Our specialists support enterprise VMware environments including complex virtualisation infrastructures.</div>
+                    </div>
+                </li>
+                <li class="vm-benefit-item">
+                    <div class="vm-benefit-check"><span>✓</span></div>
+                    <div>
+                        <div class="vm-benefit-title">Flexible service agreements</div>
+                        <div class="vm-benefit-desc">Service level agreements can be structured according to the operational importance of each system.</div>
+                    </div>
+                </li>
+                <li class="vm-benefit-item">
+                    <div class="vm-benefit-check"><span>✓</span></div>
+                    <div>
+                        <div class="vm-benefit-title">24x7x365 remote support from India</div>
+                        <div class="vm-benefit-desc">Technical assistance is available at all times for production environments that require immediate support, with 24x7x365 remote support from India ensuring consistent service quality and outcomes comparable to local providers, while remaining cost-effective and supported by a dedicated local business team in the UK for seamless coordination.</div>
+                    </div>
+                </li>
+                <li class="vm-benefit-item">
+                    <div class="vm-benefit-check"><span>✓</span></div>
+                    <div>
+                        <div class="vm-benefit-title">Unified licensing and support services</div>
+                        <div class="vm-benefit-desc">Organisations can obtain VMware licensing assistance alongside ongoing VMware support services through a single partner.</div>
+                    </div>
+                </li>
+                <li class="vm-benefit-item">
+                    <div class="vm-benefit-check"><span>✓</span></div>
+                    <div>
+                        <div class="vm-benefit-title">Focus on operational efficiency</div>
+                        <div class="vm-benefit-desc">Outsourcing VMware managed services allows internal teams to focus on strategic initiatives rather than routine infrastructure management.</div>
+                    </div>
+                </li>
+            </ul>
+            <div class="vm-why-img">
+                <img src="{% static 'images/uk/uk_vmware_1.jpeg' %}" alt="Why Organisations Choose Zaco Computers for VMware Support UK">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="grey-label">FAQs</div>
+        <h2  class="header-title">Commonly Asked Questions About VMware Third Party Support</h2>
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question">1. Which VMware versions and products do you cover?</div>
+                <div class="faq-answer">- We support legacy and current releases of VMware vSphere, including ESXi hypervisor and vCenter environments, as well as VMware Horizon and VMware Workstation. Coverage extends to older vSphere releases that Broadcom no longer supports under its standard agreements. During the onboarding process, our team assesses your specific version and configuration to confirm that coverage aligns precisely with your environment.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">2. Do you provide migration services for UK organisations moving away from VMware?</div>
+                <div class="faq-answer">- Yes. We support structured transitions from VMware vSphere to Hyper-V, from vSphere to Proxmox, and from on-premises environments to Azure managed services or hybrid cloud architectures. All migration activity is guided by your technical and business requirements, not by vendor preference. UK clients retain full control over the timeline and scope of any transition, and third-party support continues to cover your VMware environment throughout the process.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">3. Can you supply VMware licences as well as provide support?</div>
+                <div class="faq-answer">- Yes. We supply new and renewal VMware product licences alongside our managed IT services. This gives UK organisations a single accountable point of contact for both licensing and ongoing technical support, simplifying the vendor management and procurement process.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">4. Will switching to third party support affect my existing VMware licences?</div>
+                <div class="faq-answer">- No. Your perpetual VMware licences remain valid and unaffected. Third party support covers the maintenance and technical assistance around those licences. Nothing changes about licence ownership when you move away from Broadcom OEM support.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">5. Do you cover older versions of VMware vSphere that Broadcom no longer supports?</div>
+                <div class="faq-answer">- Yes. We support legacy and current vSphere releases including ESXi versions that have reached end of general support under Broadcom. Many UK businesses running stable older environments choose third party support specifically because it removes the pressure to upgrade before they are ready.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">6. What is the process for starting VMware third-party support with Zaco?</div>
+                <div class="faq-answer">- Email info@zacocomputer.com or call +44 20 3435 8060 with a brief overview of your VMware environment. We schedule a scoping call, carry out a free assessment, and provide a proposal with SLA options and pricing. Onboarding for most UK environments is completed within a few weeks of contract agreement.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<div class="auto-container" style="padding-block: 40px">
+    <div class="cta-section">
+        <div class="grey-label">Get Started</div>
+        <h2 class="header-title">Maintain your VMware Environment with Reliable Third-party Support</h2>
+        <p class="header-para">If your organisation operates VMware infrastructure in the United Kingdom and requires reliable VMware technical support, our specialists can help. Zaco Computers will assess your VMware environment, identify potential cost optimisation opportunities, and recommend a suitable VMware support model. Contact our team to discuss VMware support services for your organisation at <a href="tel:+442034358060">+44 20 3435 8060</a> or email at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>.</p>
+    <div class="link-box" style="margin-top: 30px; justify-content: center;">
+            <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Request a Quote</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
