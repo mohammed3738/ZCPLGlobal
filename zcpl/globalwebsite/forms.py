@@ -254,8 +254,10 @@ class ContactForm(forms.Form):
     )
 
 class ShopContactForm(forms.ModelForm):
-    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="")
-
+    captcha = ReCaptchaField(
+        widget=ReCaptchaV2Checkbox,
+        required=True
+    )
     class Meta:
         model = ContactMessageGlobal
         fields = ['name', 'email', 'phone', 'subject', 'message']
