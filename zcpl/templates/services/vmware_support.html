@@ -6,1020 +6,553 @@
 {% block meta_description %}Need VMware extended support? Zaco Computers delivers SLA-backed third-party VMware ESXi & vSphere support without costly VVF or VCF bundles.
 {% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Services",
+    "item": "https://www.zacocomputer.com/services/"  
+  },{
+    "@type": "ListItem", 
+    "position": 3, 
+    "name": "VMware Third-party Support",
+    "item": "https://www.zacocomputer.com/vmware-third-party-support/"  
+  }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is VMware third-party support and is it legal?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "VMware third-party support means engaging an independent provider rather than Broadcom to handle break/fix incidents, vulnerability advisories, and technical guidance for your existing VMware software. It is entirely legal. Perpetual VMware licences remain valid after Broadcom's changes; what ended was the option to buy new perpetual licences and renew OEM support. Independent VMware support covers your existing environment at a significantly lower cost than a Broadcom VVF / VCF subscription."
+    }
+  },{
+    "@type": "Question",
+    "name": "What versions of VMware vSphere and ESXi do you support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We support organisations running legacy and current releases of VMware vSphere, including VMware ESXi hypervisors and vCenter environments. During onboarding, our team assesses your specific version and configuration to ensure coverage aligns with your actual environment."
+    }
+  },{
+    "@type": "Question",
+    "name": "How are SLAs structured? Can they be customised?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "SLAs are fully customisable based on the criticality of each system and your operational requirements. Differentiated response and resolution targets for production versus non-production environments are standard. Both annual and on-call managed IT services models are available — there is no single default arrangement imposed on all clients."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you provide migration services if we decide to move away from VMware?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We support structured efforts to migrate from Vmware (vSphere) to Hyper-V, migrate from Vmware (vSphere) to Proxmox, and transition to Azure managed services or hybrid architectures. Migration is guided by technical and business requirements — not by vendor preference. Organisations retain full control of the timeline and scope."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can you supply VMware licences as well as support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We supply new and renewal VMware products licences in addition to providing managed IT services. This gives one accountable point of contact for both licencing and ongoing VMware support."
+    }
+  },{
+    "@type": "Question",
+    "name": "Is there a minimum contract term?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We offer both annual managed IT services agreements and on-call arrangements. Annual contracts provide predictable cost and priority SLAs for ongoing managed services. On-call arrangements suit teams that need expert VMware technical support on an as-needed basis, without a fixed annual commitment."
+    }
+  },{
+    "@type": "Question",
+    "name": "How does 24×7 support access work for India-based organisations?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "India-based clients have access to a dedicated toll-free number connected directly to our service desk, available 24×7×365. For international clients, equivalent support channels are provided. Both ticket-based and phone-based escalation paths are available depending on incident urgency and the agreed SLA tier for the support engagement."
+    }
+  },{
+    "@type": "Question",
+    "name": "Is it possible to migrate from VMware to Hyper-V or Proxmox without downtime?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not zero downtime, but minimal. We build the target environment in parallel, migrate workloads in stages, and cut over during agreed maintenance windows. Business-critical systems move last, after validation on non-production workloads. The specific approach is confirmed during scoping, based on your environment and downtime tolerance."
+    }
+  },{
+    "@type": "Question",
+    "name": "How do we get started with VMware third-party support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Contact us at info@zacocomputer.com or call +91 98111 83994 with a brief overview of your environment, specifically the VMware (vSphere) versions in use and the type of VMware support needed. Our team will follow up with a scoping call and share a proposal with SLA options and pricing."
+    }
+  }]
+}
+</script>
+
+
+{% endblock %}
+
 {% block content %}
 <!-- Enhanced Styles -->
 <style>
-    /* Problem Section Styles */
-    .problem { background: var(--navy-mid); }
-    .problem-grid {
-        display: grid; 
-        grid-template-columns: 1fr 1fr;
-        gap: 32px; 
-        margin-top: 10px;
-        margin-bottom: 50px;
-    }
-    @media (max-width: 768px) {
-        .problem-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    .problem-card {
-        background: #fff;
-        border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 12px; 
-        padding: 28px 30px;
-        transition: all 0.3s ease;
-    }
-    .problem-card:hover { 
-        border-color: rgba(45,125,210,0.3);
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .problem-card .icon {
-        width: 42px; 
-        height: 42px; 
-        border-radius: 10px;
-        background: rgba(224,82,82,0.12); 
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-        margin-bottom: 18px; 
-        font-size: 1.2rem;
-    }
-    .problem-card h4 { 
-        font-size: 1.05rem; 
-        margin-bottom: 10px; 
-        color: var(--navy-dark);
-        font-weight: 600;
-    }
-    .problem-card p { 
-        font-size: 0.9rem; 
-        color: #555; 
-        line-height: 1.65; 
-    }
-    .problem-card .highlight { 
-        color: var(--danger); 
-        font-weight: 600; 
-    }
-
+    
     /* Cost Comparison Styles */
-    .cost-visual {
-        background: rgba(45, 125, 210, 0.05);
-        border: 2px solid rgba(45, 125, 210, 0.15);
-        border-radius: 16px; 
-        padding: 40px;
-        margin-top: 50px;
-        margin-bottom: 10px;
-    }
-    .cost-visual h4 { 
-        font-size: 1.1rem; 
-        color: var(--navy-dark); 
-        margin-bottom: 28px; 
-        font-weight: 600;
-    }
-    .cost-bars { 
-        display: flex; 
-        flex-direction: column; 
-        gap: 20px; 
-    }
-    .cost-bar-row { 
-        display: flex; 
-        align-items: center; 
-        gap: 20px;
-    }
-    .cost-bar-label { 
-        width: 180px; 
-        font-size: 0.9rem; 
-        color: var(--navy-dark);
-        flex-shrink: 0;
-        font-weight: 500;
-    }
-    .cost-bar-track { 
-        flex: 1; 
-        background: rgba(255,255,255,0.06); 
-        border-radius: 100px; 
-        height: 36px; 
-        position: relative; 
-        overflow: hidden;
-    }
-    .cost-bar-fill {
-        height: 100%; 
-        border-radius: 100px;
-        display: flex; 
-        align-items: center; 
-        padding-left: 14px;
-        font-size: 0.8rem; 
-        font-weight: 600; 
-        transition: width 0.8s ease;
-    }
-    .bar-broadcom { 
-        background: linear-gradient(90deg, #E05252, #C0392B); 
-        color: #fff; 
-    }
-    .bar-zaco { 
-        background: linear-gradient(90deg, #00B4A2, #00D4BE); 
-        color: var(--navy); 
-    }
-
-    /* Comparison Table Styles */
-    .comparison-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 40px 0;
-        background: rgba(45,125,210,0.05);
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-    .comparison-table th {
-        background: var(--navy-mid);
-        color: #000000;
-        padding: 16px;
-        text-align: left;
-        font-weight: 600;
-        font-size: 0.95rem;
-        border-bottom: 2px solid rgba(45,125,210,0.15);
-    }
-    .comparison-table td {
-        padding: 14px 16px;
-        border-bottom: 1What Third-Party VMware Support Actually Costspx solid rgba(45, 125, 210, 0.15);
-        font-size: 0.9rem;
-    }
-    .comparison-table tr:last-child td {
-        border-bottom: none;
-    }
-    .comparison-table tbody tr:hover {
-        background: rgba(45, 125, 210, 0.15);
-    }
-
-    /* Service Grid Styles */
-    .service-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-        margin: 40px 0;
-    }
-    @media (max-width: 1024px) {
-        .service-grid {
-            grid-template-columns: repeat(2, 1fr);
+        .cost-visual {
+            background: rgb(255, 255, 255);
+            border: 2px solid rgba(45, 125, 210, 0.15);
+            border-radius: 16px; 
+            padding: 40px;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
         }
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-        .service-grid {
-            grid-template-columns: 1fr;
+        .cost-visual:hover{
+            border-color: #1a3546;
+            box-shadow: 0 8px 24px rgba(45,125,210,0.12);
+            transform: translateY(-4px);
         }
-}
-    .service-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 32px;
-        margin: 40px 0;
-    }
-    
-    /* TABLET: 2 COLUMNS */
-    @media (max-width: 1024px) {
-        .service-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 24px;
+        .cost-visual h4 { 
+            font-size: 1.1rem; 
+            color: var(--navy-dark); 
+            margin-bottom: 28px; 
+            font-weight: 600;
         }
-    }
-    
-    /* MOBILE: 1 COLUMN */
-    @media (max-width: 768px) {
-        .service-grid {
-            grid-template-columns: 1fr !important;
+        .cost-bars { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+        }
+        .cost-bar-row { 
+            display: flex; 
+            align-items: center; 
             gap: 20px;
         }
-    }
-    
-    /* SERVICE CARDS */
-    .service-card {
-        background: linear-gradient(135deg, rgba(45,125,210,0.05) 0%, rgba(0,180,162,0.05) 100%);
-        border: 1px solid rgba(45,125,210,0.15);
-        border-radius: 12px;
-        padding: 32px;
-        transition: all 0.3s ease;
-    }
-    
-    .service-card:hover {
-        border-color: rgba(45,125,210,0.35);
-        box-shadow: 0 8px 24px rgba(45,125,210,0.12);
-        transform: translateY(-4px);
-    }
-    
-    .service-card h3 {
-        color: #1a3546;
-        margin-bottom: 16px;
-        font-size: 1.1rem;
-        font-weight: 600;
-    }
-    
-    .service-card p {
-        color: #000000;
-        line-height: 1.7;
-        font-size: 0.95rem;
-    }
-    
-    /* SMALL PHONES */
-    @media (max-width: 480px) {
-        .service-grid {
-            gap: 16px;
+        .cost-bar-label { 
+            width: 180px; 
+            font-size: 0.9rem; 
+            color: var(--navy-dark);
+            flex-shrink: 0;
+            font-weight: 500;
         }
-        
-        .service-card {
-            padding: 24px;
+        .cost-bar-track { 
+            flex: 1; 
+            background: rgba(255,255,255,0.06); 
+            border-radius: 100px; 
+            height: 36px; 
+            position: relative; 
+            overflow: hidden;
         }
-        
-        .service-card h3 {
-            font-size: 1rem;
+        .cost-bar-fill {
+            height: 100%; 
+            border-radius: 100px;
+            display: flex; 
+            align-items: center; 
+            padding-left: 14px;
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            transition: width 0.8s ease;
         }
-    }
+        .bar-broadcom { 
+            background: linear-gradient(90deg, #E05252, #C0392B); 
+            color: #fff; 
+        }
+        .bar-zaco { 
+            background: linear-gradient(90deg, #00B4A2, #00D4BE); 
+            color: var(--navy); 
+        }
 
-    .migration-steps {
-        display: flex; align-items: center; gap: 0;
-        margin-top: 50px; overflow-x: auto;
-    }
-    .step-item {
-        flex: 1; text-align: center; padding: 20px 12px;
-        position: relative;
-    }
-    .step-item::after {
-        content: '→';
-        position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
-        color: var(--gray-mid); font-size: 1rem;
-    }
-    .step-item:last-child::after { display: none; }
-    .step-num {
-        width: 36px; height: 36px; border-radius: 50%;
-        background: #00B4A2; color: #fff;
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem;
-        margin: 0 auto 10px;
-    }
-    .step-label { font-size: 1.1rem; color: #000000; }
-
-
-    /* FAQ Section */
-    .faq-section {
-        background: rgba(233, 229, 14, 0.02);
-        padding: 40px;
-        border-radius: 12px;
-        margin: 40px 0;
-    }
-    .faq-item {
-        margin-bottom: 24px;
-        border-bottom: 2px solid rgba(45,125,210,0.1);
-        padding-bottom: 24px;
-    }
-    .faq-item:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-    .faq-question {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1a3546;
-        margin-bottom: 12px;
-        cursor: pointer;
-    }
-    .faq-answer {
-        color: #000000;
-        line-height: 1.7;
-        font-size: 0.95rem;
-    }
+        .migration-steps {
+            display: flex; align-items: center; gap: 0;
+            margin-top: 50px; overflow-x: auto;
+        }
+        .step-item {
+            flex: 1; text-align: center; padding: 20px 12px;
+            position: relative;
+        }
+        .step-item::after {
+            content: '→';
+            position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+            color: var(--gray-mid); font-size: 1rem;
+        }
+        .step-item:last-child::after { display: none; }
+        .step-num {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #00B4A2; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem;
+            margin: 0 auto 10px;
+        }
+        .step-label { font-size: 1.1rem; color: #000000; }
 
     /* Benefits Section */
-    .benefits-list {
-        list-style: none;
-        padding: 0;
-    }
-    .benefits-list li {
-        padding: 16px 0;
-        border-bottom: 1px solid rgba(45,125,210,0.1);
-        font-size: 0.95rem;
-        color: #555;
-        line-height: 1.7;
-    }
-    .benefits-list li strong {
-        color: var(--navy-dark);
-        display: block;
-        margin-bottom: 8px;
-    }
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+        .benefits-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(45,125,210,0.1);
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+        }
+        .benefits-list li strong {
+            color: var(--navy-dark);
+            display: block;
+            margin-bottom: 8px;
+        }
 
-    /* CTA Section */
-    .cta-section {
-        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 100%);
-        color: #000000;
-        padding: 60px 40px;
-        border-radius: 12px;
-        text-align: center;
-        margin: 10px 0;
-    }
-    .cta-section h2 {
-        color: #1a3546;
-        margin-bottom: 20px;
-    }
-    .cta-section p {
-        color: rgba(0, 0, 0, 0.9);
-        font-size: 1.05rem;
-        margin-bottom: 10px;
-    }
-
-    .table-note {
-        font-size: 0.8rem; 
-        color: #000000;
-        margin-top: 16px; 
-        font-style: italic;
-    }
 
     /* ============================================
        RESPONSIVE MEDIA QUERIES
        ============================================ */
 
     /* Tablets (768px to 1024px) */
-    @media (max-width: 1024px) {
-        .problem-grid {
-            gap: 24px;
-            margin-top: 40px;
-            margin-bottom: 40px;
+        @media (max-width: 1024px) {       
+            .cost-bar-label {
+                width: 140px;
+                font-size: 0.85rem;
+            }
         }
-        
-        .service-grid {
-            gap: 24px;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 12px;
-            font-size: 0.85rem;
-        }
-
-        .cost-bar-label {
-            width: 140px;
-            font-size: 0.85rem;
-        }
-
-        h2 {
-            font-size: 1.5rem !important;
-        }
-
-        h3 {
-            font-size: 1rem !important;
-        }
-    }
 
     /* Small Tablets & Large Phones (768px and below) */
-    @media (max-width: 768px) {
-        .problem-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
+        @media (max-width: 768px) {
+            .cost-visual {
+                padding: 24px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
 
-        .problem-card {
-            padding: 20px 22px;
-        }
+            .cost-bar-label {
+                width: 120px;
+                font-size: 0.75rem;
+            }
 
-        .problem-card h4 {
-            font-size: 1rem;
-        }
+            .cost-bar-track {
+                height: 28px;
+            }
 
-        .problem-card p {
-            font-size: 0.85rem;
-        }
+            .cost-bar-fill {
+                font-size: 0.7rem;
+                padding-left: 10px;
+            }
 
-        .service-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+            .about-six__text {
+                font-size: 0.9rem !important;
+                line-height: 1.6 !important;
+            }
 
-        .service-card {
-            padding: 24px;
-        }
+            .slider-six__title {
+                font-size: 1.5rem !important;
+            }
 
-        .service-card h3 {
-            font-size: 1rem;
-            margin-bottom: 12px;
+            .slider-six__text {
+                font-size: 0.9rem !important;
+            }
         }
-
-        .service-card p {
-            font-size: 0.9rem;
-        }
-
-        .comparison-table {
-            margin: 30px 0;
-            font-size: 0.8rem;
-        }
-
-        .comparison-table th {
-            padding: 10px 8px;
-            font-size: 0.8rem;
-        }
-
-        .comparison-table td {
-            padding: 10px 8px;
-            font-size: 0.8rem;
-        }
-
-        .cost-visual {
-            padding: 24px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-
-        .cost-bar-label {
-            width: 120px;
-            font-size: 0.75rem;
-        }
-
-        .cost-bar-track {
-            height: 28px;
-        }
-
-        .cost-bar-fill {
-            font-size: 0.7rem;
-            padding-left: 10px;
-        }
-
-        .cta-section {
-            padding: 40px 24px;
-            margin: 40px 0;
-        }
-
-        .cta-section h2 {
-            font-size: 1.4rem;
-            margin-bottom: 16px;
-        }
-
-        .cta-section p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .faq-section {
-            padding: 24px;
-            margin: 30px 0;
-        }
-
-        .faq-question {
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-        }
-
-        .faq-answer {
-            font-size: 0.9rem;
-        }
-
-        .about-six__text {
-            font-size: 0.9rem !important;
-            line-height: 1.6 !important;
-        }
-
-        .slider-six__title {
-            font-size: 1.5rem !important;
-        }
-
-        .slider-six__text {
-            font-size: 0.9rem !important;
-        }
-
-        h2 {
-            font-size: 1.3rem !important;
-        }
-
-        h3 {
-            font-size: 0.95rem !important;
-        }
-
-        h4 {
-            font-size: 0.9rem !important;
-        }
-    }
 
     /* Small Phones (480px and below) */
-    @media (max-width: 480px) {
-        .auto-container {
-            padding: 0 15px !important;
-        }
+        @media (max-width: 480px) {
+            .row {
+                margin: 0 -8px;
+            }
 
-        .problem {
-            padding: 30px 0 !important;
-        }
+            .col-lg-4,
+            .col-lg-6,
+            .col-lg-8,
+            .col-md-6,
+            .col-md-12 {
+                padding: 0 8px;
+            }
 
-        .problem-grid {
-            gap: 16px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+            
 
-        .problem-card {
-            padding: 16px 18px;
-            border-radius: 10px;
-        }
+            .cost-visual {
+                padding: 20px;
+                margin: 25px 0;
+                border-radius: 12px;
+            }
 
-        .problem-card .icon {
-            width: 36px;
-            height: 36px;
-            font-size: 1rem;
-            margin-bottom: 12px;
-        }
+            .cost-visual h4 {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
 
-        .problem-card h4 {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
+            .cost-bars {
+                gap: 16px;
+            }
 
-        .problem-card p {
-            font-size: 0.8rem;
-            line-height: 1.5;
-        }
+            .cost-bar-row {
+                gap: 12px;
+                flex-direction: column;
+            }
 
-        .service-grid {
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
+            .cost-bar-label {
+                width: 100%;
+                font-size: 0.75rem;
+                margin-bottom: 4px;
+            }
 
-        .service-card {
-            padding: 18px;
-            border-radius: 10px;
-        }
+            .cost-bar-track {
+                height: 24px;
+            }
 
-        .service-card h3 {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
+            .cost-bar-fill {
+                font-size: 0.65rem;
+                padding-left: 8px;
+            }
 
-        .service-card p {
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
+            .benefits-list li {
+                padding: 12px 0;
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
 
-        .row {
-            margin: 0 -8px;
-        }
+            .benefits-list li strong {
+                font-size: 0.85rem;
+                margin-bottom: 4px;
+            }
 
-        .col-lg-4,
-        .col-lg-6,
-        .col-lg-8,
-        .col-md-6,
-        .col-md-12 {
-            padding: 0 8px;
-        }
+            .about-six__text {
+                font-size: 0.85rem !important;
+                line-height: 1.5 !important;
+                margin-bottom: 20px !important;
+            }
 
-        .comparison-table {
-            margin: 20px 0;
-            font-size: 0.75rem;
-            overflow-x: auto;
-            display: block;
-        }
+            .slider-six__title {
+                font-size: 1.2rem !important;
+                line-height: 1.3 !important;
+            }
 
-        .comparison-table thead {
-            display: none;
-        }
+            .slider-six__text {
+                font-size: 0.8rem !important;
+            }
 
-        .comparison-table tbody,
-        .comparison-table tr,
-        .comparison-table td {
-            display: block;
-            width: 100%;
-        }
+            .slider-six__content p {
+                font-size: 0.8rem !important;
+            }
 
-        .comparison-table tr {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
-        }
+            .theme-btn {
+                padding: 10px 20px !important;
+                font-size: 0.85rem !important;
+            }
 
-        .comparison-table td {
-            text-align: right;
-            padding: 10px;
-            padding-left: 50%;
-            position: relative;
-            border: none;
-            border-bottom: 1px solid #eee;
+            .link-box {
+                margin-top: 16px !important;
+            }
         }
-
-        .comparison-table td:last-child {
-            border-bottom: none;
-        }
-
-        .comparison-table td:before {
-            content: attr(data-label);
-            position: absolute;
-            left: 10px;
-            font-weight: 600;
-            color: var(--navy-dark);
-            text-align: left;
-        }
-
-        .cost-visual {
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 12px;
-        }
-
-        .cost-visual h4 {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        .cost-bars {
-            gap: 16px;
-        }
-
-        .cost-bar-row {
-            gap: 12px;
-            flex-direction: column;
-        }
-
-        .cost-bar-label {
-            width: 100%;
-            font-size: 0.75rem;
-            margin-bottom: 4px;
-        }
-
-        .cost-bar-track {
-            height: 24px;
-        }
-
-        .cost-bar-fill {
-            font-size: 0.65rem;
-            padding-left: 8px;
-        }
-
-        .cta-section {
-            padding: 30px 16px;
-            margin: 30px 0;
-            border-radius: 10px;
-        }
-
-        .cta-section h2 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-        }
-
-        .cta-section p {
-            font-size: 0.85rem;
-            margin-bottom: 16px;
-        }
-
-        .faq-section {
-            padding: 18px;
-            margin: 25px 0;
-            border-radius: 10px;
-        }
-
-        .faq-item {
-            margin-bottom: 18px;
-            padding-bottom: 18px;
-        }
-
-        .faq-question {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .faq-answer {
-            font-size: 0.8rem;
-            line-height: 1.5;
-            color: #666;
-        }
-
-        .benefits-list li {
-            padding: 12px 0;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        .benefits-list li strong {
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-        }
-
-        .about-six__text {
-            font-size: 0.85rem !important;
-            line-height: 1.5 !important;
-            margin-bottom: 20px !important;
-        }
-
-        .slider-six__title {
-            font-size: 1.2rem !important;
-            line-height: 1.3 !important;
-        }
-
-        .slider-six__text {
-            font-size: 0.8rem !important;
-        }
-
-        .slider-six__content p {
-            font-size: 0.8rem !important;
-        }
-
-        h2 {
-            font-size: 1.1rem !important;
-            margin-bottom: 10px !important;
-        }
-
-        h3 {
-            font-size: 0.85rem !important;
-        }
-
-        h4 {
-            font-size: 0.8rem !important;
-        }
-
-        .theme-btn {
-            padding: 10px 20px !important;
-            font-size: 0.85rem !important;
-        }
-
-        .link-box {
-            margin-top: 16px !important;
-        }
-
-        .table-note {
-            font-size: 0.7rem;
-            margin-top: 12px;
-        }
-
-        /* Hide desktop elements on mobile */
-        .desktop-only {
-            display: none;
-        }
-
-        /* Stack layout for benefit cards */
-        [class*="col-"] {
-            margin-bottom: 20px;
-        }
-
-        /* Adjust auto-container padding for mobile */
-        .auto-container[style*="padding-block"] {
-            padding: 40px 0 !important;
-        }
-    }
-
     /* Extra Small Phones (under 380px) */
-    @media (max-width: 380px) {
-        .problem-card {
-            padding: 12px 14px;
+        @media (max-width: 380px) {
+            .about-six__text {
+                font-size: 0.8rem !important;
+            }
         }
 
-        .service-card {
-            padding: 14px;
+   
+    /* Comparison table wrapper — always scrollable */
+        @media (max-width: 768px) {
+                
+            /* Cost bar: stack label above bar on mobile */
+            .cost-bar-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .cost-bar-label {
+                width: 100% !important;
+            }
+            .cost-bar-track {
+                width: 100%;
+            }
         }
 
-        .cta-section {
-            padding: 24px 12px;
+        @media (max-width: 600px) {
+            .migration-steps {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+            .step-item {
+                flex: 0 0 calc(100% - 12px);
+                padding: 14px 8px;
+            }
+            .step-item::after {
+                display: none;
+            }
         }
 
-        .faq-section {
-            padding: 14px;
+        @media (max-width: 380px) {
+            .step-item {
+                flex: 0 0 100%;
+            }
         }
-
-        .cost-visual {
-            padding: 16px;
-        }
-
-        h2 {
-            font-size: 0.95rem !important;
-        }
-
-        h3 {
-            font-size: 0.8rem !important;
-        }
-
-        .problem-card h4 {
-            font-size: 0.85rem;
-        }
-
-        .service-card h3 {
-            font-size: 0.85rem;
-        }
-
-        .faq-question {
-            font-size: 0.85rem;
-        }
-
-        .about-six__text {
-            font-size: 0.8rem !important;
-        }
-    }
-
-    /* Services main layout */
-    .services-main-layout {
-        display: flex;
-        gap: 50px;
-        align-items: flex-start;
-    }
-    .services-left-col { flex: 1; }
-    .services-right-col { flex: 1; margin-top: 70px; }
-    .services-right-col img { width: 100%; height: auto; border-radius: 12px; }
-
-    @media (max-width: 768px) {
-        .services-main-layout {
-            flex-direction: column;
-            gap: 24px;
-        }
-        .services-right-col {
-            margin-top: 0;
-            width: 100%;
-        }
-        .auto-container[style*="padding-block: 100px"] {
-            padding-block: 50px !important;
-        }
-        .auto-container[style*="padding-block: 80px"] {
-            padding-block: 50px !important;
-        }
-        .comparison-table {
-            min-width: 520px;
-        }
-        .comparison-table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            border-radius: 8px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .migration-steps {
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-        }
-        .step-item {
-            flex: 0 0 calc(50% - 12px);
-            padding: 14px 8px;
-        }
-        .step-item::after {
-            display: none;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .auto-container[style*="padding-block: 100px"] {
-            padding-block: 36px !important;
-        }
-        .auto-container[style*="padding-block: 80px"] {
-            padding-block: 36px !important;
-        }
-        .auto-container[style*="padding-block: 40px"] {
-            padding-block: 24px !important;
-        }
-    }
-
-    @media (max-width: 380px) {
-        .step-item {
-            flex: 0 0 100%;
-        }
-    }
 
     /* Landscape orientation for mobile devices */
-    @media (max-height: 500px) and (orientation: landscape) {
-        .slider-six__content {
-            padding: 40px 0 !important;
+        @media (max-height: 500px) and (orientation: landscape) {
+            .slider-six__content {
+                padding: 40px 0 !important;
+            }           
         }
 
-        .auto-container[style*="padding-block"] {
-            padding: 30px 0 !important;
-        }
 
-        .problem,
-        section {
-            padding: 30px 0 !important;
-        }
-    }
 
-    /* Large Desktops (1200px+) - optimization */
-    @media (min-width: 1200px) {
-        .problem-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .service-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .comparison-table {
-            font-size: 0.9rem;
-        }
-    }
-
-    /* Extra Large Screens (1600px+) */
-    @media (min-width: 1600px) {
-        .auto-container {
-            max-width: 1400px;
-        }
-
-        h2 {
-            font-size: 2rem !important;
-        }
-
-        h3 {
-            font-size: 1.3rem !important;
-        }
-
-        .problem-card p,
-        .service-card p,
-        .faq-answer {
-            font-size: 1rem;
-        }
-    }
-    .vmware-badges-section {
-        padding: 40px 0;
-    }
-    
-    .vmware-badges-section h2 {
-        font-size: 2rem;
-        color: var(--navy-dark, #1a3a52);
-        margin-bottom: 1px;
-        text-align: center;
-    }
-    
-    .badges-subtitle {
-        text-align: center;
-        color: #666;
-        font-size: 1rem;
-        margin-bottom: 40px;
-    }
-    
-    .badges-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .badge {
-        display: inline-block;
-        padding: 12px 22px;
-        border-radius: 30px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        white-space: nowrap;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: 1px solid transparent;
-    }
-    
-    .badge-primary {
-        background: linear-gradient(135deg, rgba(0, 180, 162, 0.15) 0%, rgba(0, 180, 162, 0.1) 100%);
-        color: #00897b;
-        border-color: rgba(0, 180, 162, 0.3);
-    }
-    
-    .badge-primary:hover {
-        background: linear-gradient(135deg, rgba(0, 180, 162, 0.25) 0%, rgba(0, 180, 162, 0.15) 100%);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 16px rgba(0, 180, 162, 0.2);
-        border-color: rgba(0, 180, 162, 0.5);
-    }
-    
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
         .vmware-badges-section {
             padding: 40px 0;
+            font-size: 2rem;
+            color: var(--navy-dark, #1a3a52);
+            margin-bottom: 1px;
+            text-align: center;
+            justify-content: center;
         }
-        
-        .vmware-badges-section h2 {
-            font-size: 1.5rem;
-        }
-        
+           
         .badges-container {
-            gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
         }
-        
-        .badge {
-            padding: 10px 18px;
-            font-size: 0.85rem;
-        }
-    }
     
-    @media (max-width: 480px) {
-        .vmware-badges-section h2 {
-            font-size: 1.2rem;
-        }
-        
-        .badges-container {
-            gap: 8px;
-        }
-        
         .badge {
-            padding: 8px 14px;
-            font-size: 0.8rem;
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
         }
         
-        .badges-subtitle {
-            font-size: 0.9rem;
+        .badge-primary {
+            background: linear-gradient(135deg, rgba(0, 180, 162, 0.15) 0%, rgba(0, 180, 162, 0.1) 100%);
+            color: #00897b;
+            border-color: rgba(0, 180, 162, 0.3);
         }
-    }
+        
+        .badge-primary:hover {
+            background: linear-gradient(135deg, rgba(0, 180, 162, 0.25) 0%, rgba(0, 180, 162, 0.15) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 180, 162, 0.2);
+            border-color: rgba(0, 180, 162, 0.5);
+        }
+    
+    /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .vmware-badges-section {
+                padding: 40px 0;
+            }
+            
+            .vmware-badges-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .badges-container {
+                gap: 10px;
+            }
+            
+            .badge {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .vmware-badges-section h2 {
+                font-size: 1.2rem;
+            }
+            
+            .badges-container {
+                gap: 8px;
+            }
+            
+            .badge {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+            
+        }
+    /*Mobile reponsive of intro*/
+        @media (max-width: 768px) {
+        .about-six__text{
+        font-size:0.9rem !important;
+        line-height:1.7 !important;
+        text-align:left;
+        }
+
+        .about-six__content{
+        margin-bottom:25px;
+        }
+
+        .link-box{
+        text-align:center;
+        }
+
+        .theme-btn{
+        width:100%;
+        text-align:center;
+        }
+
+        }
+    /* Coverage section mobile fix */
+        @media (max-width:768px){
+
+        /* list spacing */
+        .benefits-list li{
+        font-size:0.9rem;
+        line-height:1.6;
+        padding:10px 0;
+        }
+
+        /* fix icon alignment */
+        .benefits-list i{
+        margin-right:6px;
+        }
+
+        /* badges */
+        .badges-container{
+        gap:8px;
+        }
+
+        .badge{
+        font-size:0.75rem;
+        padding:6px 12px;
+        }
+
+        }
+    /* Coverage section desktop alignment fix */
+        .benefits-list{
+        text-align:left;
+        padding-left:0;
+        }
+
+        .benefits-list li{
+        display:flex;
+        align-items:flex-start;
+        gap:8px;
+        text-align:left;
+        border-bottom:1px solid rgba(0,0,0,0.08);
+        }
+
+        .benefits-list li i{
+        margin-top:4px;
+        }
+
+
+
 </style>
 
 <!-- Banner Section -->
@@ -1043,47 +576,42 @@
 <!-- /.slider-six -->
 
 <!-- Introduction Section -->
-<div class="auto-container" style="padding-block: 100px">
-    <div class="about-six__text" style="font-size: 1rem; line-height: 1.8; margin-bottom: 20px; color: #000000;">
-        Since <a href="https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware" rel="nofollow">Broadcom acquired VMware in 2023</a>, it ended perpetual licences and support renewals, forcing customers toward expensive VMware vSphere Foundation (VVF) / VMware Cloud Foundation (VCF) subscriptions. This has driven annual costs up by more than 2×, pushing many organisations to seek third-party support to maintain their perpetual licences, strengthen existing VMware environments, or move away from Broadcom's services altogether.
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 col-lg-8">
-            <div class="about-six__content">
-                <div class="about-six__text" style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px; color: #000000;">
-                    For organisations seeking to retain their existing virtualisation investments, this represents a significant and sudden financial burden. Seeking an alternative VMware support model has become an essential consideration for teams looking to control costs without compromising service quality.
-                </div>
-                <div class="about-six__text" style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 24px; color: #000000;">
-                    As a global leader of end-to-end third-party enterprise software support providers, Zaco Computers understands the importance of maintaining operational continuity for your existing VMware environment, without forcing costly upgrades or unnecessary licence bundles.
-                </div>
-                <div class="link-box" style="margin-top: 30px;">
-                    <a class="theme-btn btn-style-one" href="{% url 'contact' %}">
-                        <i class="btn-curve"></i>
-                        <span class="btn-title">Contact Us for Consultation</span>
-                    </a>
+<section class="main-section">
+    <div class="auto-container">
+        <div class="row intro">
+            <p style="text-align: left;">
+                Since <a href="https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware" rel="nofollow">Broadcom acquired VMware in 2023</a>, it ended perpetual licences and support renewals, forcing customers toward expensive VMware vSphere Foundation (VVF) / VMware Cloud Foundation (VCF) subscriptions. This has driven annual costs up by more than 2×, pushing many organisations to seek third-party support to maintain their perpetual licences, strengthen existing VMware environments, or move away from Broadcom's services altogether.
+            </p>
+            <div class="col-md-12 col-lg-8">
+                <div class="about-six__content">
+                    <p>
+                        For organisations seeking to retain their existing virtualisation investments, this represents a significant and sudden financial burden. Seeking an alternative VMware support model has become an essential consideration for teams looking to control costs without compromising service quality.
+                    </p>
+                    <p>
+                        As a global leader of end-to-end third-party enterprise software support providers, Zaco Computers understands the importance of maintaining operational continuity for your existing VMware environment, without forcing costly upgrades or unnecessary licence bundles.
+                    </p>
+                    <div class="link-box" style="margin-top: 30px;">
+                        <a class="theme-btn btn-style-one" href="{% url 'contact' %}">
+                            <i class="btn-curve"></i>
+                            <span class="btn-title">Contact Us for Consultation</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 col-lg-4 text-center">
-            <img 
-                src="{% static 'images/services/vmware_main.png' %}" 
-                alt="VMware Third-Party Support"
-                style="border-radius:12px; width:100%; height:auto; box-shadow:0 10px 25px rgba(0,0,0,0.15);"
-            >
+            <div class="col-md-12 col-lg-4 text-center " >
+                <img 
+                    src="{% static 'images/services/vmware_global1.png' %}" 
+                    alt="VMware Third-Party Support"
+                    style="border-radius:12px; width:100%; height:auto; max-height:268px; box-shadow:0 10px 25px rgba(0,0,0,0.15);"
+                >
+            </div>
         </div>
     </div>
-</div>
-<!-- /.auto-container -->
+</section>
 
 <!-- Problems/Challenges Section -->
-<section class="problem">
-    <div class="auto-container">
-        {% comment %} <div style="text-align: center; margin-bottom: 50px;">
-            <h2 style="color: #000000; font-size: 1.8rem; margin-bottom: 16px;">Why VMware Support Costs Are Skyrocketing</h2>
-            <p style="color: rgba(0, 0, 0, 0.8); font-size: 1rem;">Understanding the challenges created by Broadcom's VMware restructuring</p>
-        </div> {% endcomment %}
-        
+<section class="main-section">
+    <div class="auto-container">       
         <div class="problem-grid">
             <div class="problem-card">
                 <div class="icon">📈</div>
@@ -1114,118 +642,117 @@
 <!-- /.problem -->
 
 <!-- Cost Comparison Section -->
-<div class="auto-container" style="padding-block: 80px">
-    <div style="text-align: center; margin-bottom: 50px;">
-        <div >COST COMPARISON</div>
-        <h2 style="font-size: 1.8rem; color: #1a3546; margin-bottom: 12px;"><b>What Third-Party VMware Support Actually Costs</b></h2>
-        <p style="color: #000000; font-size: 1rem;">A side-by-side view of how Broadcom's subscription model compares with independent VMware managed services for organisations retaining perpetual licences.</p>
-    </div>
+<section class="main-section">
+    <div class="auto-container">
+            <div class="grey-label" >COST COMPARISON</div>
+            <h2 class="header-title"><b>What Third-Party VMware Support Actually Costs</b></h2>
+            <p class="header-para">A side-by-side view of how Broadcom's subscription model compares with independent VMware managed services for organisations retaining perpetual licences.</p>
 
-    <div class="cost-visual ">
-        <h4 style="color: #1a3546;">Indicative annual support cost: same environment, different model</h4>
-        <div class="cost-bars">
-            <div class="cost-bar-row">
-                <div class="cost-bar-label" style="color: #000000;">Broadcom OEM (VVF/VCF)</div>
-                <div class="cost-bar-track">
-                    <div class="cost-bar-fill bar-broadcom" style="width: 100%;">More than 2× cost uplift</div>
+        <div class="cost-visual ">
+            <h4 style="color: #1a3546;">Indicative annual support cost: same environment, different model</h4>
+            <div class="cost-bars">
+                <div class="cost-bar-row">
+                    <div class="cost-bar-label" style="color: #000000;">Broadcom OEM (VVF/VCF)</div>
+                    <div class="cost-bar-track">
+                        <div class="cost-bar-fill bar-broadcom" style="width: 100%;">More than 2× cost uplift</div>
+                    </div>
+                </div>
+                <div class="cost-bar-row">
+                    <div class="cost-bar-label" style="color: #000000;">Third-Party Support</div>
+                    <div class="cost-bar-track">
+                        <div class="cost-bar-fill bar-zaco" style="width: 50%; color: #000;">Up to 50%* savings</div>
+                    </div>
                 </div>
             </div>
-            <div class="cost-bar-row">
-                <div class="cost-bar-label" style="color: #000000;">Third-Party Support</div>
-                <div class="cost-bar-track">
-                    <div class="cost-bar-fill bar-zaco" style="width: 50%; color: #000;">Up to 50%* savings</div>
-                </div>
-            </div>
+            <p class="header-para" style="text-align: left;">* Up to 50% savings are indicative, based on comparable engagements, and depend on environment size, VMware licence cost spends, and configuration. Contact us for an environment-specific assessment.</p>
         </div>
-        <p class="table-note" style="color: #000000;">* Up to 50% savings are indicative, based on comparable engagements, and depend on environment size, VMware licence cost spends, and configuration. Contact us for an environment-specific assessment.</p>
     </div>
-</div>
+</section>
 
 <!-- Comparison Table -->
-<div class="auto-container" style="padding-block: 40px">
-    <h2 style="text-align: center; font-size: 1.6rem; color: #000; margin-bottom: 10px;"><b>Third-Party Support vs. OEM Subscription</b></h2>
-    <p style="text-align: center; font-size: 1rem; color: #000; margin-bottom: 40px;">A clear comparison of what changes when organisations move from Broadcom to Zaco’s Third-Party Support</p>
-    
-    <div class="comparison-table-wrapper">
-    <table class="comparison-table">
-        <thead > 
-            <tr>
-                <th style="color: #000000;">Criterion</th>
-                <th style="color: #e05252;">Broadcom OEM</th>
-                <th style="color: #00b4a2;">Third-Party Support</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>VMware support for perpetual licences</strong></td>
-                <td>Discontinued ❌</td>
-                <td>Fully supported ✅</td>
-            </tr>
-            <tr>
-                <td><strong>Bundled product requirement</strong></td>
-                <td>VVF / VCF bundle mandatory</td>
-                <td>Support only what you use</td>
-            </tr>
-            <tr>
-                <td><strong>VMware licence cost / annual spend</strong></td>
-                <td>More than 2× increase reported</td>
-                <td>Up to 50% savings*</td>
-            </tr>
-            <tr>
-                <td><strong>Legacy VMware vSphere / ESXi coverage</strong></td>
-                <td>Limited at EOL ⚠️</td>
-                <td>Full coverage including older releases</td>
-            </tr>
-            <tr>
-                <td><strong>SLA flexibility</strong></td>
-                <td>Standard tiers only</td>
-                <td>Customisable per system criticality</td>
-            </tr>
-            <tr>
-                <td><strong>24×7 access to engineers</strong></td>
-                <td>Tier-dependent ⚠️</td>
-                <td>24×7×365 service desk</td>
-            </tr>
-            <tr>
-                <td><strong>Migration advisory</strong></td>
-                <td>Vendor-led only</td>
-                <td>Objective, environment-led guidance</td>
-            </tr>
-            <tr>
-                <td><strong>Engagement model</strong></td>
-                <td>Annual subscription only</td>
-                <td>Annual or on-call, your choice</td>
-            </tr>
-        </tbody>
-    </table>
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title"><b>Third-Party Support vs. OEM Subscription</b></h2>
+        <p class="header-para">A clear comparison of what changes when organisations move from Broadcom to Zaco’s Third-Party Support</p>
+        
+        <div class="compare-table-scroll">
+            <table class="compare-table">
+                <thead > 
+                    <tr>
+                        <th style="color: #ffffff;">Criterion</th>
+                        <th style="color: #e05252;">Broadcom OEM</th>
+                        <th style="color: #00b4a2;">Third-Party Support</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>VMware support for perpetual licences</strong></td>
+                        <td>Discontinued ❌</td>
+                        <td>Fully supported ✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bundled product requirement</strong></td>
+                        <td>VVF / VCF bundle mandatory</td>
+                        <td>Support only what you use</td>
+                    </tr>
+                    <tr>
+                        <td><strong>VMware licence cost / annual spend</strong></td>
+                        <td>More than 2× increase reported</td>
+                        <td>Up to 50% savings*</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Legacy VMware vSphere / ESXi coverage</strong></td>
+                        <td>Limited at EOL ⚠️</td>
+                        <td>Full coverage including older releases</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SLA flexibility</strong></td>
+                        <td>Standard tiers only</td>
+                        <td>Customisable per system criticality</td>
+                    </tr>
+                    <tr>
+                        <td><strong>24×7 access to engineers</strong></td>
+                        <td>Tier-dependent ⚠️</td>
+                        <td>24×7×365 service desk</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Migration advisory</strong></td>
+                        <td>Vendor-led only</td>
+                        <td>Objective, environment-led guidance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Engagement model</strong></td>
+                        <td>Annual subscription only</td>
+                        <td>Annual or on-call, your choice</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+</section>
 
-<section style="background:#f8f9fa; padding:80px 0;">
+<!-- What We Deliver -->
+<section class="main-section">
   <div class="auto-container">
-
-    <div style="text-align:center; margin-bottom:50px;">
-      <div>WHAT WE DELIVER</div>
-      <h2 style="font-size:1.8rem; color:#1a3546; margin-bottom:12px;">
-        <b>VMware Managed Services and Support</b>
-      </h2>
-      <p>Two core service areas designed to protect your existing VMware software investment.</p>
-    </div>
+      <div class="grey-label">WHAT WE DELIVER</div>
+      <h2 class="header-title">VMware Managed Services and Support</h2>
+      <p class="header-para">Two core service areas designed to protect your existing VMware software investment.</p>
+    
 
     <!-- MAIN LAYOUT -->
-    <div class="services-main-layout">
+    <div class="service-flex-layout" style="flex:1">
 
       <!-- LEFT COLUMN (STACKED CARDS) -->
-      <div class="services-left-col">
-        <div class="service-grid" style="display:flex; flex-direction:column; gap:24px;">
+      <div>
+        <div class="service-grid">
     
           <div class="service-card">
-            <h3><b>🔧 Software Break/Fix Support</b></h3>
+            <h3 style="color : #1a3546;">🔧 Software Break/Fix Support</h3>
             <p>Incident diagnosis and resolution for VMware ESXi and vCenter environments. Delivered by engineers with hands-on platform expertise. Response and resolution governed by agreed SLAs, available around the clock for business-critical systems.</p>
           </div>
 
           <div class="service-card">
-            <h3><b>📋 Technology Advisory Services</b></h3>
+            <h3 style="color : #1a3546;">📋 Technology Advisory Services</h3>
             <p>Not every organisation needs to migrate immediately. We assess your VMware vSphere stack and provide objective guidance on whether to retain, optimise, or transition, without any vendor preference influencing the recommendation.</p>
           </div>
 
@@ -1233,9 +760,9 @@
       </div>
 
       <!-- RIGHT COLUMN (IMAGE) -->
-      <div class="services-right-col">
+      <div class="service-img-col">
         <img 
-        src={% static 'images/services/vmware_support.jpeg' %} 
+        src={% static 'images/services/vmware_global2.png' %} 
         >
       </div>
 
@@ -1244,81 +771,83 @@
 </section>
 
 <!-- Coverage Section -->
-<div class="auto-container" style="padding-block: 80px">
-    <div>COVERAGE</div>
-    <h2 style="font-size: 1.6rem; color:#1a3546; margin-bottom: 16px;"><b>VMware Software and Technologies We Support</b></h2>
-    <p style="color: #000000; margin-bottom: 40px; font-size: 1rem;">Our VMware support covers the core virtualisation stack, from hypervisor to virtual desktop infrastructure, for organisations that want to retain and extend their existing environment.</p>
+<section class="main-section">
+    <div class="auto-container">
+        <div class="grey-label">COVERAGE</div>
+        <h2 class="header-title"><b>VMware Software and Technologies We Support</b></h2>
+        <p class="header-para">Our VMware support covers the core virtualisation stack, from hypervisor to virtual desktop infrastructure, for organisations that want to retain and extend their existing environment.</p>
 
-    <div class="row">
-        <div class="col-lg-6">
-            <h4 style="color:#1a3546; margin: 20px 0 16px 0; font-size: 1.1rem;"><b>VMware vSphere (VMware ESXi & vCenter)</b></h4>
-            <ul class="benefits-list">
-                <li><i class="fa-solid fa-angles-right"></i> Hypervisor installation and initial configuration of VMware ESXi hosts</li>
-                <li><i class="fa-solid fa-angles-right"></i> Virtual Machine (VM) creation and lifecycle management</li>
-                <li><i class="fa-solid fa-angles-right"></i> vMotion and Storage vMotion for live workload migration</li>
-                <li><i class="fa-solid fa-angles-right"></i> Distributed Resource Scheduler (DRS) configuration and tuning</li>
-                <li><i class="fa-solid fa-angles-right"></i> High Availability (HA) and Fault Tolerance (FT) setup and validation</li>
-                <li><i class="fa-solid fa-angles-right"></i> Capacity planning</li>
-            </ul>
+        <div class="row">
+            <div class="col-lg-6 ">
+                <h4 style="color:#1a3546; margin: 20px 0 16px 0; font-size: 1.1rem;"><b>VMware vSphere (VMware ESXi & vCenter)</b></h4>
+                <ul class="benefits-list" >
+                    <li><i class="fa-solid fa-angles-right"></i> Hypervisor installation and initial configuration of VMware ESXi hosts</li>
+                    <li><i class="fa-solid fa-angles-right"></i> Virtual Machine (VM) creation and lifecycle management</li>
+                    <li><i class="fa-solid fa-angles-right"></i> vMotion and Storage vMotion for live workload migration</li>
+                    <li><i class="fa-solid fa-angles-right"></i> Distributed Resource Scheduler (DRS) configuration and tuning</li>
+                    <li><i class="fa-solid fa-angles-right"></i> High Availability (HA) and Fault Tolerance (FT) setup and validation</li>
+                    <li><i class="fa-solid fa-angles-right"></i> Capacity planning</li>
+                </ul>
 
-            <section class="vmware-badges-section">
-                <div class="auto-container">
-                    <div class="badges-container">
-                        <span class="badge badge-primary">ESXi Hypervisor</span>
-                        <span class="badge badge-primary">vSphere Platform</span>
-                        <span class="badge badge-primary">vCenter</span>
-                        <span class="badge badge-primary">VMware Horizon</span>
-                        <span class="badge badge-primary">vMotion</span>
-                        <span class="badge badge-primary">High Availability</span>
-                        <span class="badge badge-primary">DRS</span>
-                        <span class="badge badge-primary">Fault Tolerance</span>
-                        <span class="badge badge-primary">Storage vMotion</span>
+                <section class="vmware-badges-section">
+                    <div class="auto-container">
+                        <div class="badges-container">
+                            <span class="badge badge-primary">ESXi Hypervisor</span>
+                            <span class="badge badge-primary">vSphere Platform</span>
+                            <span class="badge badge-primary">vCenter</span>
+                            <span class="badge badge-primary">VMware Horizon</span>
+                            <span class="badge badge-primary">vMotion</span>
+                            <span class="badge badge-primary">High Availability</span>
+                            <span class="badge badge-primary">DRS</span>
+                            <span class="badge badge-primary">Fault Tolerance</span>
+                            <span class="badge badge-primary">Storage vMotion</span>
+                        </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
 
-        <div class="col-lg-6">
-            <h4 style="color:#1a3546; margin: 20px 0 16px 0; font-size: 1.1rem;"><b>VMware Horizon & Workstation</b></h4>
-            <ul class="benefits-list">
-                <li><strong>VMware Horizon:</strong><i class="fa-solid fa-angles-right"></i> Virtual desktop and application delivery, session management, and connectivity troubleshooting for organisations running virtual desktop infrastructure.</li>
-                <li><strong>VMware Workstation:</strong><i class="fa-solid fa-angles-right"></i> Desktop virtualisation support for development, testing, and isolated environment use cases</li>
-            </ul>
+            <div class="col-lg-6">
+                <h4 style="color:#1a3546; margin: 20px 0 16px 0; font-size: 1.1rem;"><b>VMware Horizon & Workstation</b></h4>
+                <ul class="benefits-list">
+                    <li><strong>VMware Horizon:</strong><i class="fa-solid fa-angles-right"></i> Virtual desktop and application delivery, session management, and connectivity troubleshooting for organisations running virtual desktop infrastructure.</li>
+                    <li><strong>VMware Workstation:</strong><i class="fa-solid fa-angles-right"></i> Desktop virtualisation support for development, testing, and isolated environment use cases</li>
+                </ul>
 
-            <h4 style="color:#1a3546; margin: 30px 0 16px 0; font-size: 1.1rem;"><b>Support includes the following:</b></h4>
-            <ul class="benefits-list" style="border-bottom: none; margin-bottom: 0;">
-                <li><i class="fa-solid fa-angles-right"></i> Break/fix incident resolution within agreed SLA windows</li>
-                <li><i class="fa-solid fa-angles-right"></i> Configuration review and ongoing proactive health checks</li>
-                <li><i class="fa-solid fa-angles-right"></i> Third-party support for older vSphere releases Broadcom no longer covers</li>
-            </ul>
+                <h4 style="color:#1a3546; margin: 30px 0 16px 0; font-size: 1.1rem;"><b>Support includes the following:</b></h4>
+                <ul class="benefits-list" style="border-bottom: none; margin-bottom: 0;">
+                    <li><i class="fa-solid fa-angles-right"></i> Break/fix incident resolution within agreed SLA windows</li>
+                    <li><i class="fa-solid fa-angles-right"></i> Configuration review and ongoing proactive health checks</li>
+                    <li><i class="fa-solid fa-angles-right"></i> Third-party support for older vSphere releases Broadcom no longer covers</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Migration Pathways Section -->
-<section style="background: rgba(45,125,210,0.05); padding: 80px 0;">
+<section class="main-section">
     <div class="auto-container">
-        <div>MIGRATION PATHWAYS</div>
-        <h2 style="font-size: 1.6rem; color: #1a3546; margin-bottom: 16px;"><b>When Migration Makes Sense, We Guide You Through It</b></h2>
-        <p style="color: #000000; margin-bottom: 40px; font-size: 1rem;">Third-party support for VMware is not always permanent. For organisations that decide to transition, we provide structured migration planning and execution across the most common paths - at a pace the organisation controls.</p>
+        <div class="grey-label">MIGRATION PATHWAYS</div>
+        <h2 class="header-title">When Migration Makes Sense, We Guide You Through It</h2>
+        <p class="header-para">Third-party support for VMware is not always permanent. For organisations that decide to transition, we provide structured migration planning and execution across the most common paths - at a pace the organisation controls.</p>
 
         <div class="service-grid">
             <div class="service-card">
-                <div style="color: #666; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px;" >VMware → Hyper-V</div>
-                <h3>Migrate from VMware to Hyper-V</h3>
+                <div class="title-service-card" >VMware → Hyper-V</div>
+                <h3 style="color : #1a3546;">Migrate from VMware to Hyper-V</h3>
                 <p>For organisations looking to consolidate on Microsoft's native hypervisor, we manage the full migration from VMware to Hyper-V process — workload assessment, parallel environment setup, and live cutover planning.</p>
             </div>
 
             <div class="service-card">
-                <div style="color: #666; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px;">VMware → Proxmox</div>
-                <h3>Migrate from VMware to Proxmox</h3>
+                <div class="title-service-card">VMware → Proxmox</div>
+                <h3 style="color : #1a3546;">Migrate from VMware to Proxmox</h3>
                 <p>Where open-source virtualisation is a priority, we support the process to migrate from VMware to Proxmox, including staging, validation, and a structured post-migration handover.</p>
             </div>
 
             <div class="service-card">
-                <div style="color: #666; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px;">On-Premises → Cloud</div>
-                <h3>On-Premises to Cloud</h3>
-                <p>Where cloud migration aligns with business objectives, we advise on and assist with workload transitions to Azure managed services, at a scope and timeline that suits the organisation, not a vendor deadline. </p>
+                <div class="title-service-card">On-Premises → Cloud</div>
+                    <h3 style="color : #1a3546;">On-Premises to Cloud</h3>
+                    <p>Where cloud migration aligns with business objectives, we advise on and assist with workload transitions to Azure managed services, at a scope and timeline that suits the organisation, not a vendor deadline. </p>
             </div>
         </div>
         <div class="migration-steps">
@@ -1346,74 +875,75 @@
     </div>
 </section>
 
-
-
 <!-- Why Choose Zaco Section -->
-<div class="auto-container" style="padding-block: 80px">
-    <h2 style="font-size: 1.8rem; color: #1a3546; text-align: center; margin-bottom: 10px;"><b>Why Choose Zaco Computer as a VMware Support Partner?</b></h2>
-    <p style="text-align: center; color: #000000; margin-bottom: 50px; font-size: 1rem;">As an experienced <a href="{% url 'infrastructure-managed-service' %}">managed IT service provider</a> supporting organisations in India, the <a href="{% url 'uk-home' %}">UK</a>, the <a href="{% url 'uae-home' %}">UAE</a>, and worldwide, we help with the following:</p>
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">Why Choose Zaco Computer as a VMware Support Partner?</h2>
+        <p class="header-para">As an experienced <a href="{% url 'infrastructure-managed-service' %}">managed IT service provider</a> supporting organisations in India, the <a href="{% url 'uk-home' %}">UK</a>, the <a href="{% url 'uae-home' %}">UAE</a>, and worldwide, we help with the following:</p>
 
-    <div class="row">
-        <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
-            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; height: 100%; transition: all 0.3s ease;" class="benefit-card">
-                <div style="font-size: 2rem; margin-bottom: 16px;">💰</div>
-                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600">Keep Existing Licences & Save Up to 50%</h3>
-                <p style="color: #000000; font-size: 0.9rem;">Retain your perpetual VMware licences. Avoid paying for bundled products you don't need. Qualifying organisations save up to 50%* compared to current OEM VMware licence cost spend.</p>
+        <div class="row three-grid">
+            <div class="col-lg-4 col-md-6" >
+                <div class="three-card">
+                    <div class="three-icon">💰</div>
+                    <h3 >Keep Existing Licences & Save Up to 50%</h3>
+                    <p >Retain your perpetual VMware licences. Avoid paying for bundled products you don't need. Qualifying organisations save up to 50%* compared to current OEM VMware licence cost spend.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
-            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; height: 100%; transition: all 0.3s ease;" class="benefit-card">
-                <div style="font-size: 2rem; margin-bottom: 16px;">🛡️</div>
-                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600">De-Risk Operations</h3>
-                <p style="color: #000000; font-size: 0.9rem;">Proactive vulnerability management and structured incident response reduce operational risk, even for platforms past Broadcom's official support window.</p>
+            <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
+                <div class="three-card">
+                    <div class="three-icon">🛡️</div>
+                    <h3 >De-Risk Operations</h3>
+                    <p >Proactive vulnerability management and structured incident response reduce operational risk, even for platforms past Broadcom's official support window.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
-            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; height: 100%; transition: all 0.3s ease;" class="benefit-card">
-                <div style="font-size: 2rem; margin-bottom: 16px;">📋</div>
-                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600">Flexible Engagement & SLAs</h3>
-                <p style="color: #000000; font-size: 0.9rem;">Annual contracts or on-call engagements. SLAs calibrated to the criticality of each system. Define what adequate VMware support looks like for your environment; we commit to it in writing.</p>
+            <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
+                <div class="three-card">
+                    <div class="three-icon">📋</div>
+                    <h3 >Flexible Engagement & SLAs</h3>
+                    <p >Annual contracts or on-call engagements. SLAs calibrated to the criticality of each system. Define what adequate VMware support looks like for your environment; we commit to it in writing.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
-            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; height: 100%; transition: all 0.3s ease;" class="benefit-card">
-                <div style="font-size: 2rem; margin-bottom: 16px;">🕐</div>
-                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600">24×7×365 Support Access</h3>
-                <p style="color: #000000; font-size: 0.9rem;">Our service desk is available around the clock, every day. Organisations in India have access to a dedicated toll-free number for direct connection to our managed IT services support team. International clients have equivalent support channels.</p>
+            <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
+                <div class="three-card">
+                    <div class="three-icon">🕐</div>
+                    <h3 >24×7×365 Support Access</h3>
+                    <p >Our service desk is available around the clock, every day. Organisations in India have access to a dedicated toll-free number for direct connection to our managed IT services support team. International clients have equivalent support channels.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
-            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; height: 100%; transition: all 0.3s ease;" class="benefit-card">
-                <div style="font-size: 2rem; margin-bottom: 16px;">⚡</div>
-                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600">Achieve Operational Efficiency</h3>
-                <p style="color: #000000; font-size: 0.9rem;">Outsourcing VMware managed services frees internal teams to focus on core business outcomes rather than reactive infrastructure management. The cost reduction improves the ROI of IT investment.</p>
+            <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
+                <div class="three-card">
+                    <div class="three-icon">⚡</div>
+                    <h3 >Achieve Operational Efficiency</h3>
+                    <p >Outsourcing VMware managed services frees internal teams to focus on core business outcomes rather than reactive infrastructure management. The cost reduction improves the ROI of IT investment.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
-            <div style="background: #fff; border: 1px solid #ddd; border-radius: 12px; padding: 32px; height: 100%; transition: all 0.3s ease;" class="benefit-card">
-                <div style="font-size: 2rem; margin-bottom: 16px;">🏆</div>
-                <h3 style="color: #1a3546; font-size: 1.1rem; margin-bottom: 12px; font-weight: 600">Licence Supply & Support</h3>
-                <p style="color: #000000; font-size: 0.9rem;">We supply new and renewal VMware product licences in addition to providing managed IT services. One accountable point of contact for both licensing and support.</p>
+            <div class="col-lg-4 col-md-6" style="margin-bottom: 32px;">
+                <div class="three-card">
+                    <div class="three-icon">🏆</div>
+                    <h3 >Licence Supply & Support</h3>
+                    <p >We supply new and renewal VMware product licences in addition to providing managed IT services. One accountable point of contact for both licensing and support.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- FAQ Section -->
-<section style="background: #f8f9fa; padding: 80px 0;">
+<section class="main-section">
     <div class="auto-container">
-        <h2 style="font-size: 1.8rem; color: #1a3546; text-align: center; margin-bottom: 50px; font-weight: 600;">Frequently Asked Questions about Third-Party VMware Support Services</h2>
+        <p class="grey-label">FREQUENTLY ASKED QUESTIONS</p>
+        <h2 class="header-title">Frequently Asked Questions about Third-Party VMware Support Services</h2>
 
         <div class="faq-section">
             <div class="faq-item">
                 <div class="faq-question"> 1. What is VMware third-party support and is it legal?</div>
                 <div class="faq-answer">
-                    -	VMware third-party support means engaging an independent provider rather than Broadcom to handle break/fix incidents, vulnerability advisories, and technical guidance for your existing VMware software. It is entirely legal. Perpetual VMware licences remain valid after Broadcom's changes; what ended was the option to buy new perpetual licences and renew OEM support. Independent VMware support covers your existing environment at a significantly lower cost than a Broadcom VVF / VCF subscription.
+                    - VMware third-party support means engaging an independent provider rather than Broadcom to handle break/fix incidents, vulnerability advisories, and technical guidance for your existing VMware software. It is entirely legal. Perpetual VMware licences remain valid after Broadcom's changes; what ended was the option to buy new perpetual licences and renew OEM support. Independent VMware support covers your existing environment at a significantly lower cost than a Broadcom VVF / VCF subscription.
                  </div>
             </div>
 
@@ -1427,42 +957,42 @@
             <div class="faq-item">
                 <div class="faq-question"> 3. How are SLAs structured? Can they be customised?</div>
                 <div class="faq-answer">
-                   -	SLAs are fully customisable based on the criticality of each system and your operational requirements. Differentiated response and resolution targets for production versus non-production environments are standard. Both annual and on-call managed IT services models are available — there is no single default arrangement imposed on all clients.
+                   - SLAs are fully customisable based on the criticality of each system and your operational requirements. Differentiated response and resolution targets for production versus non-production environments are standard. Both annual and on-call managed IT services models are available — there is no single default arrangement imposed on all clients.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question"> 4. Do you provide migration services if we decide to move away from VMware?</div>
                 <div class="faq-answer">
-                    -	Yes. We support structured efforts to migrate from Vmware (vSphere) to Hyper-V, migrate from Vmware (vSphere) to Proxmox, and transition to Azure managed services or hybrid architectures. Migration is guided by technical and business requirements — not by vendor preference. Organisations retain full control of the timeline and scope.
+                    - Yes. We support structured efforts to migrate from Vmware (vSphere) to Hyper-V, migrate from Vmware (vSphere) to Proxmox, and transition to Azure managed services or hybrid architectures. Migration is guided by technical and business requirements — not by vendor preference. Organisations retain full control of the timeline and scope.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question"> 5. Can you supply VMware licences as well as support?</div>
                 <div class="faq-answer">
-                    -	Yes. We supply new and renewal VMware products licences in addition to providing managed IT services. This gives one accountable point of contact for both licencing and ongoing VMware support.
+                    - Yes. We supply new and renewal VMware products licences in addition to providing managed IT services. This gives one accountable point of contact for both licencing and ongoing VMware support.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question"> 6. Is there a minimum contract term?</div>
                 <div class="faq-answer">
-                    -	We offer both annual managed IT services agreements and on-call arrangements. Annual contracts provide predictable cost and priority SLAs for ongoing managed services. On-call arrangements suit teams that need expert VMware technical support on an as-needed basis, without a fixed annual commitment.
+                    - We offer both annual managed IT services agreements and on-call arrangements. Annual contracts provide predictable cost and priority SLAs for ongoing managed services. On-call arrangements suit teams that need expert VMware technical support on an as-needed basis, without a fixed annual commitment.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question"> 7. How does 24×7 support access work for India-based organisations?</div>
                 <div class="faq-answer">
-                    -	India-based clients have access to a dedicated toll-free number connected directly to our service desk, available 24×7×365. For international clients, equivalent support channels are provided. Both ticket-based and phone-based escalation paths are available depending on incident urgency and the agreed SLA tier for the support engagement.
+                    - India-based clients have access to a dedicated toll-free number connected directly to our service desk, available 24×7×365. For international clients, equivalent support channels are provided. Both ticket-based and phone-based escalation paths are available depending on incident urgency and the agreed SLA tier for the support engagement.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question"> 8. Is it possible to migrate from VMware to Hyper-V or Proxmox without downtime?</div>
                 <div class="faq-answer">
-                    -	Not zero downtime, but minimal. We build the target environment in parallel, migrate workloads in stages, and cut over during agreed maintenance windows. Business-critical systems move last, after validation on non-production workloads. The specific approach is confirmed during scoping, based on your environment and downtime tolerance.
+                    - Not zero downtime, but minimal. We build the target environment in parallel, migrate workloads in stages, and cut over during agreed maintenance windows. Business-critical systems move last, after validation on non-production workloads. The specific approach is confirmed during scoping, based on your environment and downtime tolerance.
                 </div>
             </div>
 
@@ -1480,9 +1010,8 @@
 <div class="auto-container" style="padding-block: 80px">
     <div class="cta-section">
         <div>GET STARTED</div>
-        <h2><b>Ready to Reduce Your VMware Support Costs?</b></h2>
-        <p>Our engineers will assess your current VMware environment, identify savings opportunities, and recommend a tailored VMware support model, with no obligation.</p>
-        <p>Contact our team today at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> or call <a href="tel:+919811183994">+91 98111 83994</a>. We support organisations across India, the UK, the UAE, and globally, helping you optimise costs while maintaining performance and reliability.</p>
+        <h2 class="header-title" >Ready to Reduce Your VMware Support Costs?</h2>
+        <p class="header-para">Our engineers will assess your current VMware environment, identify savings opportunities, and recommend a tailored VMware support model, with no obligation. Contact our team today at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> or call <a href="tel:+919811183994">+91 98111 83994</a>. We support organisations across India, the UK, the UAE, and globally, helping you optimise costs while maintaining performance and reliability.</p>
         <div class="link-box" style="margin-top: 30px; justify-content: center;">
             <a class="theme-btn btn-style-one" href="{% url 'contact' %}" >
                 <i class="btn-curve"></i>

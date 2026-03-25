@@ -57,6 +57,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       id="jssDefault"
       href="{% static 'css/colors/color-10.css' %}"
     />
+    <link rel="stylesheet" href="{% static 'css/custom-globe.css' %}">
 
     <link
       rel="shortcut icon"
@@ -84,6 +85,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script
     ><![endif]-->
     <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+  {% block schema %}{% endblock %}
   </head>
 
   <body>
@@ -232,7 +235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <div class="email d-flex align-items-center ms-3">
                     <span class="icon flaticon-email me-1"></span>
                     <a href="mailto:info@zacocomputer.com"
-                      >info@zacocomputer.com</a
+                      >info@zacocomputer.com</a 
                     >
                   </div>
                   <div class="email d-flex align-items-center ms-3">
@@ -247,12 +250,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                   </div>
                 </div>
-
-                <!-- /.phone -->
-
-                <!-- /.social-links -->
               </div>
-              <!-- /.right-content -->
             </div>
             <!-- /.auto-container -->
           </div>
@@ -283,6 +281,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- Main Menu -->
                 <nav class="main-menu navbar-expand-md navbar-light">
                   <ul class="navigation clearfix">
+                    <li class="dropdown mobile-global">
+                      <a href="#">Global</a>
+                      <ul>
+                        <li><a href="/in/">India</a></li>
+                        <li><a href="/uk/">United Kingdom</a></li>
+                        <li><a href="/uae/">United Arab Emirates</a></li>
+                        <li><a href="/">Global</a></li>
+                      </ul>
+                    </li>
                     <li class="dropdown">
                       <a href="{% url 'uk-home' %}">Home</a>
                     </li>
@@ -348,17 +355,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <li><a href="{% url 'uk-server-components' %}">Server Components</a></li>
                       </ul>
                     </li>
-                    {% comment %} <li class="dropdown">
-                      <a href="{% url 'uk-server' %}">Services</a>
+                    <li class="dropdown">
+                      <a href="{% url 'uk-main-service' %}">Services</a>
                       <ul>
-                        <li><a href="{% url 'uk-server' %}">Server Maintenance</a></li>
+                        <li><a href="{% url 'uk-vmware-support' %}">VMware Third Party Support</a></li>
+                        <li><a href="{% url 'uk-microsoft-support' %}">Microsoft Third Party Support</a></li>
+                        {% comment %} <li><a href="{% url 'uk-server' %}">Server Maintenance</a></li>
                         <li><a href="{% url 'uk-server' %}">Storage Maintenance</a></li>
                         <li><a href="{% url 'uk-server' %}">Networking Maintenance</a></li>
-                        <li><a href="{% url 'uk-server' %}">VMware Support</a></li>
-                        <li><a href="{% url 'uk-server' %}">Microsoft Support</a></li>
-                        <li><a href="{% url 'uk-server' %}">Infrastructure Managed Services</a></li>
+                        <li><a href="{% url 'uk-server' %}">Infrastructure Managed Services</a></li> {% endcomment %}
                       </ul>
-                    </li> {% endcomment %}
+                    </li> 
                      <li class="dropdown">
                       <a href="{% url 'uk-contact' %}">Contact Us</a>
                     </li>
@@ -447,6 +454,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     bottom: 70px !important;  /* adjust as needed */
     right: 16px !important;   /* keep it aligned with RFQ button */
   }
+}
+
+    /* hide global in desktop */
+@media (min-width: 992px){
+.mobile-global{
+display:none;
+}
 }
 
     </style>

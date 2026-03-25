@@ -1,0 +1,562 @@
+{% extends 'uk/base.html' %}
+{% load static %}
+
+{% block title %}Third-Party Microsoft Support in UK - SQL Server, Azure &amp; More{% endblock %}
+{% block meta_description %}
+Get reliable Microsoft  third party support &amp; managed services in the UK for Azure, Dynamics 365, Windows Server &amp; SQL Server at Zaco Computers.
+{% endblock %}
+
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/uk/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Hardware & Software Services",
+    "item": "https://www.zacocomputer.com/uk/it-hardware-and-software-services/"  
+  },{
+    "@type": "ListItem", 
+    "position": 3, 
+    "name": "Microsoft Third Party Support",
+    "item": "https://www.zacocomputer.com/uk/microsoft-thirdparty-support/"  
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Can we keep using our current Microsoft software without upgrading?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. If your current Microsoft environment is stable and meets your operational needs, upgrading solely to satisfy a vendor support lifecycle is not justified. Zaco extends support for your existing software, improving ROI without a forced migration."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can we choose support for only specific Microsoft products or systems?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Support can be scoped to the specific Microsoft products or systems your organisation needs covered. You are not required to take a blanket contract across your entire Microsoft estate."
+    }
+  },{
+    "@type": "Question",
+    "name": "What happens if Microsoft discontinues support for a product?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "When Microsoft discontinues support, the software continues to work but stops receiving security patches, non-security updates, and technical assistance. For most organisations, this creates pressure to upgrade immediately, often at significant cost and disruption, regardless of whether the existing system is meeting business needs.\This is where a third party support provider like Zaco comes in. We continue supporting your Microsoft environment beyond the vendor end-of-life date, maintaining performance, and stability on your terms. You upgrade when your business is ready, not because a vendor deadline forces it."
+    }
+  },{
+    "@type": "Question",
+    "name": "How much will a UK organisation save by switching to Zaco Microsoft third party support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "UK organisations can save up to 30 to 50% on annual Microsoft IT support costs, depending on their environment, with Zaco's fixed-rate model that does not increase as your Microsoft footprint grows."
+    }
+  },{
+    "@type": "Question",
+    "name": "Does switching to third party support affect our Microsoft licences?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Microsoft licence agreements remain unchanged. Third party support replaces only the support and maintenance contract, not the underlying software entitlements."
+    }
+  },{
+    "@type": "Question",
+    "name": "Which Microsoft products does Zaco support in the UK?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Zaco provides third party support across SQL Server (all editions from 2008 onwards), Windows Server including versions approaching end-of-life such as Windows Server 2012 R2, Microsoft Azure, Dynamics 365, and Dynamics AX environments."
+    }
+  },{
+    "@type": "Question",
+    "name": "How do we migrate from Microsoft Unified Support to your services?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The transition is straightforward. Reach out to us at info@zacocomputer.com and we will walk you through the process, provide a cost comparison against your current Unified Support contract, and outline the SLA options available. Once your contract is in place, we onboard your environment, assign a dedicated engineer, and take over support with no gap in coverage."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you provide proactive guidance for future upgrades or migrations?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Beyond resolving issues, our expert team advises on upgrade timelines, migration planning, and infrastructure decisions, so you can move when it makes business sense, not when a vendor deadline forces it."
+    }
+  }]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<style>
+      /* ── STAT BAND ── */
+        .ms-stat-band {
+            background: #0c2c4e;
+            padding: 64px 2%;
+            display: flex;
+            justify-content: center;
+        }
+        .ms-stat-inner {
+            max-width: 1200px;
+            width: 100%;
+            text-align: left;
+        }
+        .ms-stat-heading {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 900; color: #fff;
+            margin-bottom: 24px; line-height: 1.2;
+            max-width: 1200px;
+
+        }
+        .ms-stat-subtext {
+            color: rgba(255,255,255,0.65);
+            font-size: 1rem; line-height: 1.75;
+            max-width: 1200px;
+            margin-bottom: 0;
+            
+        }
+        .ms-stat-subtext p { margin-bottom: 14px; }
+        .ms-stat-subtext p:last-child { margin-bottom: 0; }
+
+    
+    /*Microsoft Grid*/
+            .vm-coverage-grid {
+                display: grid; grid-template-columns: repeat(2, 2fr);
+                gap: 24px; margin-bottom: 36px;
+            }
+            @media (max-width: 900px) {
+                .vm-coverage-grid { grid-template-columns: 1fr 1fr; }
+            }
+            @media (max-width: 580px) {
+                .vm-coverage-grid { grid-template-columns: 1fr; }
+            }
+
+
+    /* ══════════════════════════════════
+       SERVICES SECTION
+    ══════════════════════════════════ */    
+        .ms-services-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 28px; margin-top: 44px;
+        }
+        @media (max-width: 760px) {
+            .ms-services-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+    /* ══════════════════════════════════
+       ENGAGEMENT MODELS
+    ══════════════════════════════════ */
+        .ms-engage-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+        .ms-engage-card {
+            background: #fff; border-radius: 16px;
+            border: 1.5px solid #dde4ef;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+            transition: box-shadow 0.3s;
+        }
+        .ms-engage-card:hover { box-shadow: 0 12px 40px rgba(45,125,210,0.13); }
+        .ms-engage-header {
+            background: linear-gradient(160deg, #0c2c4e 0%, #0e3560 100%);
+            padding: 28px 32px;
+        }
+        .ms-engage-header h3 {
+            font-size: 1.15rem; font-weight: 900; color: #fff; margin-bottom: 4px;
+        }
+        .ms-engage-header .ms-engage-sub {
+            font-size: 0.85rem; color: rgba(255,255,255,0.65);
+        }
+        .ms-engage-body {
+            padding: 28px 32px;
+        }
+        .ms-engage-list {
+            list-style: none; padding: 0; margin: 0;
+        }
+        .ms-engage-list li {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.92rem; color: #333; line-height: 1.6;
+            padding: 9px 0; border-bottom: 1px solid #f0f4f9;
+        }
+        .ms-engage-list li:last-child { border-bottom: none; }
+        .ms-engage-list li::before {
+            content: "✓"; color: #0e3560; font-weight: 700;
+            font-size: 0.85rem; flex-shrink: 0; margin-top: 1px;
+        }
+        @media (max-width: 760px) {
+            .ms-engage-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+        .main-section .intro img {
+            width: 100%;
+            height: 422px;
+            border-radius: 14px;"
+        }
+
+        @media (max-width: 768px) {
+        .main-section .intro img {
+            width: 343px;
+            height: 300px;
+        }
+        }
+</style>
+
+<!-- ═══════════════════════════════════════
+     BANNER SLIDER
+═══════════════════════════════════════ -->
+<section class="slider-six">
+  <div class="slider-six__curv"></div>
+  <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": {"el": "#main-slider-pagination", "type": "bullets", "clickable": true}, "navigation": {"nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev"}, "autoplay": {"delay": 5000}}'>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="image-layer" style="background-image: url({% static 'images/it-hardware/IT-hardware-solutions.jpg' %});"></div>
+        <div class="auto-container">
+          <div class="slider-six__content">
+            {% comment %} <p class="slider-six__text"><span>Microsoft Support Solutions</span></p> {% endcomment %}
+            <p class="slider-six__text"><span>MICROSOFT SUPPORT SOLUTIONS</span></p>
+            <h1 class="slider-six__title">Third-Party Microsoft Support Built for UK Enterprises</h1>
+            <p style="color:azure; font-size:1.1rem;">A smarter alternative to Microsoft Unified Support that delivers faster response times and can reduce annual support costs by up to 50%, while keeping your IT roadmap fully in your control.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════════════════
+     INTRO
+═══════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+      <h2 class="header-title" style="text-align: left;">Tailored Microsoft Unified/Premier Support Alternative for UK Organisations</h2>
+        <div class="row intro">
+            <div class="col-md-12 col-lg-8">
+                <div>
+                    <p>Technology issues can be frustrating, especially when slow response times, multiple engineer hand-offs, and rising costs stand in the way. At Zaco Computers UK Limited, we understand these challenges and have designed our Microsoft Unified Support Alternative Services to address them.</p>
+                    <p>Our tailored, cost effective Microsoft third party support delivers fast response times, proactive guidance, and a flexible approach that aligns with your IT roadmap. Covering the full range of enterprise Microsoft products including SQL Server, Windows Server, Azure, Dynamics 365, and Dynamics AX, whether on premises, in the cloud, or across hybrid environments, Zaco Computers UK Limited helps you eliminate traditional support inefficiencies while keeping your business running smoothly, efficiently, and under full control.</p>
+                    <ul>
+                      <li>Remote IT support from India delivered by dedicated engineers familiar with your specific environment</li>
+                      <li>Financially backed SLAs with guaranteed response times</li>
+                      <li>No forced upgrades or vendor-dictated migrations</li>
+                      <li>Support for customised and legacy Microsoft deployments</li>
+                      <li>Consistent single point of contact for ongoing cases</li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center ">
+                <img 
+                    src="{% static 'images/uk/uk_microsoft_1.png' %}"
+                    alt="VMware Third-Party Support UK — Zaco Computers">
+                    {% comment %} style=" width: 100%; height: 422px; border-radius: 14p x;">  {% endcomment %}
+            </div>
+        </div>  
+    </div>     
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     STAT BAND
+═══════════════════════════════════════ -->
+<section class="ms-stat-band">
+  <div class="ms-stat-inner">
+    <h2 class="ms-stat-heading">Why UK Enterprises Are Reconsidering Their Microsoft Support Model</h2>
+    <div class="ms-stat-subtext">
+      <p>Around 72% of IT leaders are actively evaluating alternatives to vendor support models, with cost and response quality cited as the primary drivers.</p>
+      <p>Microsoft Unified Support costs are projected to increase by around 9% year on year through to 2027. Priced as a percentage of your total Microsoft spend, costs rise automatically as your environment grows, regardless of whether your support usage does.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     MICROSOFT PRODUCTS COVERAGE
+═══════════════════════════════════════ -->
+<section class="main-section">
+  <div class="auto-container">
+    <div class="grey-label">Microsoft Products</div>
+      <h2 class="header-title">Microsoft Products We Support Across the UK</h2>
+      <p class="header-para">Our Microsoft third party support in the United Kingdom covers the complete server and infrastructure stack from SQL Server 2008 through to current versions, Windows Server 2012 to 2025, and the surrounding Microsoft services that enterprise environments depend on.</p>
+      <p class="header-para">All Microsoft products below are supported under annual or on-call contracts, with SLAs set to match your operational criticality.</p>
+
+    <div class="vm-coverage-grid">
+
+        <div class="problem-card ">
+            <h3 style="padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Windows Server</h3>
+            <ul style="padding-left: 16px;">
+                <li>&#11166; Windows Server 2012 / R2</li>
+                {% comment %} <li>&#11166; Virtual machine lifecycle management including creation, cloning, and snapshots</li> {% endcomment %}
+                <li>&#11166; Windows Server 2016</li>
+                <li>&#11166; Windows Server 2019</li>
+                <li>&#11166; Windows Server 2022</li>
+                <li>&#11166; Windows Server 2025</li>
+                <li>&#11166; Windows Deployment Imaging</li>
+            </ul>
+        </div>
+
+        <div class="problem-card ">
+            <h3 style="padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">SQL Server</h3>
+            <ul style="padding-left: 16px;">
+                <li>&#11166; SQL Server 2008 / R2</li>
+                <li>&#11166; SQL Server 2012</li>
+                <li>&#11166; SQL Server 2014</li>
+                <li>&#11166; SQL Server 2016</li>
+                <li>&#11166; SQL Server 2017</li>
+                <li>&#11166; SQL Server 2019</li>
+                <li>&#11166; SQL Server 2022</li>
+            </ul>
+        </div>
+
+        <div class="problem-card ">
+            <h3 style="padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Identity and Directory</h3>
+            <ul style="padding-left: 16px;">
+                <li>&#11166; Active Directory</li>
+                <li>&#11166; AD Federation Services (ADFS)</li>
+                <li>&#11166; AD Certificate Services</li>
+                <li>&#11166; Domain Name System (DNS)</li>
+                <li>&#11166; Dynamic Host Configuration Protocol (DHCP)</li>
+                <li>&#11166; Distributed File System (DFS)</li>
+                <li>&#11166; Remote Desktop Services</li>
+                <li>&#11166; Network Policy Server</li>
+            </ul>
+        </div>
+
+        <div class="problem-card ">
+            <h3 style="padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Cloud and Hybrid</h3>
+            <ul style="padding-left: 16px;">
+                <li>&#11166; Azure Infrastructure</li>
+                <li>&#11166; Azure DevOps</li>
+                <li>&#11166; Hybrid On-Premises / Azure</li>
+                <li>&#11166; Hyper-V</li>
+                <li>&#11166; Dynamics CRM Deployment</li>
+                <li>&#11166; Internet Information Services (IIS)</li>
+            </ul>
+        </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SERVICES SECTION
+═══════════════════════════════════════ -->
+<section class="main-section">
+  <div class="auto-container">
+      <h2 class="header-title">What Zaco Delivers Across Your Microsoft Infrastructure</h2>
+      <p class="header-para">Each service area addresses a distinct operational requirement — from live incident resolution to long-term infrastructure planning.</p>
+    
+    <div class="ms-services-grid">
+
+      <div class="problem-card ">
+        <h3 style=" padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Break / Fix Incident Resolution</h3>
+        <p>Diagnosis and resolution of incidents across the Microsoft server and infrastructure stack. Engineers hold hands-on expertise across on-premises, hybrid, and Azure-connected environments. Production environments and business-critical databases carry the highest response priority under SLAs agreed during onboarding.</p>
+      </div>
+
+      <div class="problem-card ">
+        <h3 style=" padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Technology Advisory and Migration Planning</h3>
+        <p>An objective assessment of your Windows Server, SQL Server, and connected Microsoft infrastructure. We evaluate the case for maintaining current systems under managed IT services cover, upgrading in place, or migrating toward Azure managed services. Recommendations are based on your operational requirements and cost position — not on a vendor's upgrade roadmap.</p>
+      </div>
+
+      <div class="problem-card ">
+        <h3 style=" padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Microsoft Managed Services</h3>
+        <p>Administration, configuration, and integration support for Microsoft environments, covering identity, connectivity, and access — the layers most likely to generate real-world incidents. Integration with on-premises Active Directory and ADFS is within scope.</p>
+      </div>
+
+      <div class="problem-card ">
+        <h3 style=" padding-bottom: 10px; border-bottom: 2px solid #0c2c4e;">Azure Infrastructure and Hybrid Environments</h3>
+        <p>Support for Azure-hosted workloads, Azure DevOps, and hybrid on-premises-to-Azure configurations. Mixed environments running some components on-premises and others in Azure are fully within scope, including ongoing management of the connectivity.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     COMPARISON TABLE
+═══════════════════════════════════════ -->
+<section class="main-section">
+  <div class="auto-container">
+      <h2 class="header-title">Zaco Microsoft Third Party Support vs Microsoft Unified Support</h2>
+      <p class="header-para">A direct comparison for UK enterprises and IT procurement teams evaluating Microsoft Unified Support alternatives in the United Kingdom.</p>
+      <div class="compare-table-scroll">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Criteria</th>
+                <th style="color: #FFAA17;;">Zaco UK Microsoft Support</th>
+                <th>Microsoft Unified Support</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Annual cost</td>
+                <td> Up to 50% lower than Unified Support</td>
+                <td style="color: #0c2c4e; font-weight: 600; ">8–10% of total Microsoft spend, rising annually</td>
+              </tr>
+              <tr>
+                <td>Pricing model</td>
+                <td >Fixed rate, no automatic escalation</td>
+                <td style="color: #0c2c4e; font-weight: 600; ">Scales as your Microsoft spend increases</td>
+              </tr>
+              <tr>
+                <td>SLA flexibility</td>
+                <td ><span style="color: #0c2c4e; font-weight: 700; ">✓</span> Customisable to your operations</td>
+                <td style="color: #0c2c4e; font-weight: 600; "><span class="ms-cross">✗</span> Fixed tier structure</td>
+              </tr>
+              <tr>
+                <td>24×7 Service Desk Support</td>
+                <td ><span style="color: #0c2c4e; font-weight: 700; ">✓</span> Included on all contracts</td>
+                <td style="color: #0c2c4e; font-weight: 600; ">Premium tiers only, at additional cost</td>
+              </tr>
+              <tr>
+                <td>Upgrade requirement</td>
+                <td ><span style="color: #0c2c4e; font-weight: 700; ">✓</span> No upgrade needed to stay supported</td>
+                <td style="color: #0c2c4e; font-weight: 600; "><span class="ms-cross">✗</span> End-of-life products lose coverage</td>
+              </tr>
+              <tr>
+                <td>Legacy SQL and Windows Server</td>
+                <td ><span style="color: #0c2c4e; font-weight: 700; ">✓</span> Covered from 2008 / 2012 onwards</td>
+                <td style="color: #0c2c4e; font-weight: 600; "><span class="ms-cross">✗</span> Not covered post end-of-extended-support</td>
+              </tr>
+              <tr>
+                <td>Contract options</td>
+                <td >Annual or on-call, your choice</td>
+                <td style="color: #0c2c4e; font-weight: 600; ">Annual subscription only</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ENGAGEMENT MODELS
+═══════════════════════════════════════ -->
+<section class="main-section">
+  <div class="auto-container">
+    <h2 class="header-title">Engagement Service Models Built Around Your Infrastructure</h2>
+    <p class="header-para">As a global leader in end-to-end third party software support, management, and maintenance solutions for Microsoft, Zaco Computers UK Limited serves as a strategic partner, offering <a href="{% url "uk-main-service" %}">remote IT services</a> across the following engagement models to support every aspect of your IT environment.</p>
+    <div class="ms-engage-grid">
+
+      <div class="ms-engage-card">
+        <div class="ms-engage-header">
+          <h3>Annual Managed Services</h3>
+          <div class="ms-engage-sub">Continuous Microsoft Managed Services</div>
+        </div>
+        <div class="ms-engage-body">
+          <p style="color:#333; font-size:0.92rem; line-height:1.7; margin-bottom:16px;">An annual engagement designed for organisations that require predictable cost, proactive oversight, and a structured support relationship across their full Microsoft infrastructure.</p>
+          <ul class="ms-engage-list">
+            <li>Custom SLAs per system tier, defined by production criticality</li>
+            <li>24×7×365 remote service support included at all engagement levels</li>
+            <li>Microsoft licence procurement with transparent pricing and no true-up billing surprises</li>
+            <li>Coverage spans EOL and current product versions simultaneously</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ms-engage-card">
+        <div class="ms-engage-header">
+          <h3>On-Call Support</h3>
+          <div class="ms-engage-sub">As-Needed Microsoft IT Support</div>
+        </div>
+        <div class="ms-engage-body">
+          <p style="color:#333; font-size:0.92rem; line-height:1.7; margin-bottom:16px;">Expert Microsoft IT support accessed as incidents arise, without committing to a standing annual agreement. Suited to stable environments with a low incident frequency.</p>
+          <ul class="ms-engage-list">
+            <li>Engineer access on a per-incident or per-project basis</li>
+            <li>Response SLAs agreed at engagement initiation</li>
+            <li>Coverage can be limited to specific components — SQL Server, Active Directory, or Azure — without full-environment scope</li>
+            <li>Suited to organisations with infrequent incidents or specific project requirements</li>
+            <li>Convertible to an annual managed IT services agreement at any point without penalty</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+<section class="main-section">
+  <div class="auto-container">
+      <div class="grey-label">FAQs</div>
+      <h2 class="header-title">Frequently Asked Questions</h2>
+    
+    <div class="faq-section">
+
+      <div class="faq-item">
+        <div class="faq-question">1. Can we keep using our current Microsoft software without upgrading?</div>
+        <div class="faq-answer">- Yes. If your current Microsoft environment is stable and meets your operational needs, upgrading solely to satisfy a vendor support lifecycle is not justified. Zaco extends support for your existing software, improving ROI without a forced migration.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">2. Can we choose support for only specific Microsoft products or systems?</div>
+        <div class="faq-answer">- Yes. Support can be scoped to the specific Microsoft products or systems your organisation needs covered. You are not required to take a blanket contract across your entire Microsoft estate.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">3. What happens if Microsoft discontinues support for a product?</div>
+        <div class="faq-answer">
+          - When Microsoft discontinues support, the software continues to work but stops receiving security patches, non-security updates, and technical assistance. For most organisations, this creates pressure to upgrade immediately, often at significant cost and disruption, regardless of whether the existing system is meeting business needs. <br>This is where a third party support provider like Zaco comes in. We continue supporting your Microsoft environment beyond the vendor end-of-life date, maintaining performance, and stability on your terms. You upgrade when your business is ready, not because a vendor deadline forces it.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">4. How much will a UK organisation save by switching to Zaco Microsoft third party support?</div>
+        <div class="faq-answer">- UK organisations can save up to 30 to 50% on annual Microsoft IT support costs, depending on their environment, with Zaco's fixed-rate model that does not increase as your Microsoft footprint grows.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">5. Does switching to third party support affect our Microsoft licences?</div>
+        <div class="faq-answer">- No. Microsoft licence agreements remain unchanged. Third party support replaces only the support and maintenance contract, not the underlying software entitlements.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">6. Which Microsoft products does Zaco support in the UK?</div>
+        <div class="faq-answer">- Zaco provides third party support across SQL Server (all editions from 2008 onwards), Windows Server including versions approaching end-of-life such as Windows Server 2012 R2, Microsoft Azure, Dynamics 365, and Dynamics AX environments.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">7. How do we migrate from Microsoft Unified Support to your services?</div>
+        <div class="faq-answer">- The transition is straightforward. Reach out to us at <a href="mailto:info@zacocomputer.com" style="font-weight:400;">info@zacocomputer.com</a> and we will walk you through the process, provide a cost comparison against your current Unified Support contract, and outline the SLA options available. Once your contract is in place, we onboard your environment, assign a dedicated engineer, and take over support with no gap in coverage.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">8. Do you provide proactive guidance for future upgrades or migrations?</div>
+        <div class="faq-answer">- Yes. Beyond resolving issues, our expert team advises on upgrade timelines, migration planning, and infrastructure decisions, so you can move when it makes business sense, not when a vendor deadline forces it.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<div class="auto-container" style="padding-block: 40px">
+  <div class="cta-section">
+    <div class="grey-label">Get Started</div>
+    <h2 class="header-title">Want to get more value from your Microsoft environment?</h2>
+    <p class="header-para">Get in touch with our team today. Call us on <a href="tel:+442034358060">+44 20 3435 8060</a> or email <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> to learn how Zaco Computers UK Limited's Microsoft third party support and expert remote IT services can help you maximise the value of your existing Microsoft investments.</p>
+    <div class="link-box" style="margin-top: 30px; justify-content: center;">
+      <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+        <i class="btn-curve"></i>
+        <span class="btn-title">Request a Quote</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -7,482 +7,255 @@
 Get enterprise IT hardware solutions in the UK, including servers, storage, networking, and server components from Zaco with trusted hardware support.
 {% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/uk/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Hardware UK",
+    "item": "https://www.zacocomputer.com/uk/it-hardware/"  
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Is refurbished IT hardware reliable for enterprise use?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Our certified refurbished IT hardware undergoes a rigorous multi-point testing process, including functional testing under load, firmware verification and full diagnostic validation. Each system is professionally inspected and warranty-backed, ensuring suitability for enterprise production environments."
+    }
+  },{
+    "@type": "Question",
+    "name": "What brands do you supply?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We support leading enterprise platforms including Dell, HPE, Lenovo, IBM, Cisco, Microsoft, VMware and Veeam. Our vendor-neutral approach allows you to source compatible infrastructure solutions from a single supplier relationship."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do all products come with a warranty?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. All hardware supplied by Zaco Computers UK Limited is warranty-backed. Full documentation is provided with every shipment, covering servers, storage systems, networking hardware and components."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can you configure hardware to our exact specification?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Every system is built and configured to your specific requirements before dispatch. This includes processor selection, memory configuration, storage setup, RAID configuration and firmware alignment to match your environment."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you supply hardware for data centres?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We support data centre expansion, consolidation and lifecycle extension projects. Our solutions range from single components to full infrastructure deployments tailored to operational and compliance requirements."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you offer IT support alongside hardware supply?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. In addition to hardware procurement, Zaco provides managed IT services, remote support, and third-party support options including VMware and Microsoft environments. This ensures both your hardware and its ongoing operation are supported."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can you support infrastructure that is no longer under manufacturer support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We specialise in EOL and EOSL environments, supplying compatible replacement systems and components to help extend infrastructure lifecycle without forcing unnecessary upgrades."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can Zaco Computer handle large IT hardware deployments?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We support large-scale deployments across the UK, including full data centre rollouts, multi-site infrastructure projects, and bulk IT hardware supply. Every deployment is configured, tested, and coordinated to ensure seamless integration."
+    }
+  },{
+    "@type": "Question",
+    "name": "What sets Zaco Computer apart from other IT hardware providers in the UK?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Zaco focuses exclusively on enterprise IT infrastructure. We combine new and certified refurbished options, strong EOL/EOSL expertise, multi-vendor support, and precise configuration before delivery, ensuring reliability, lifecycle continuity, and simplified procurement."
+    }
+  }]
+}
+</script>
+
+{% endblock %}
+
 {% block content %}
 <!-- Enhanced Styles -->
 <style>
-    /* Problem Section Styles */
-    .problem { background: var(--navy-mid); }
-    .problem-grid {
+    /*Intro*/
+        .hardware-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Left Content */
+        .hardware-content h2 {
+            color: #1a3546;
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 28px;
+        }
+
+        .hardware-content p {
+            color: #444;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .hardware-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* Right Card */
+        .hardware-card {
+            background: rgb(2 142 248 / 8%);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        /* Feature Items */
+        .feature-item {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            padding: 20px 0;
+            border-bottom: 1px solid #028ef814;
+        }
+
+        .feature-item.last {
+            border-bottom: none;
+        }
+
+        .feature-item .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #2D7DD2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #000;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-item .title {
+            color: #000;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .feature-item p {
+            color: rgba(0,0,0,0.65);
+            font-size: 0.87rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ========================= */
+        /* 🔥 RESPONSIVE FIX (IMPORTANT) */
+        /* ========================= */
+
+        @media (max-width: 992px) {
+            .hardware-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hardware-card {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hardware-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .hardware-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hardware-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hardware-card {
+                padding: 24px;
+            }
+        }
+    
+    {% comment %} dont delete {% endcomment %}
+    .why-zaco-grid{
         display: grid; 
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 32px; 
         margin-top: 10px;
         margin-bottom: 50px;
+
     }
-    @media (max-width: 768px) {
-        .problem-grid {
-            grid-template-columns: 1fr;
-        }
+    /* tablet */
+    @media (max-width:1024px){
+    .why-zaco-grid{
+    grid-template-columns:repeat(2,1fr);
     }
-    .problem-card {
-        background: #fff;
-        border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 12px; 
-        padding: 28px 30px;
-        transition: all 0.3s ease;
-    }
-    .problem-card:hover { 
-        border-color: rgba(45,125,210,0.3);
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .problem-card .icon {
-        width: 42px; 
-        height: 42px; 
-        border-radius: 10px;
-        background: rgba(45,125,210,0.10); 
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-        margin-bottom: 18px; 
-        font-size: 1.2rem;
-    }
-    .problem-card h4 { 
-        font-size: 1.05rem; 
-        margin-bottom: 10px; 
-        color: var(--navy-dark);
-        font-weight: 600;
-    }
-    .problem-card p { 
-        font-size: 0.9rem; 
-        color: #555; 
-        line-height: 1.65; 
-    }
-    .problem-card .highlight { 
-        color: var(--danger); 
-        font-weight: 600; 
     }
 
-    /* Service Grid Styles */
-    .service-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-        margin: 50px 0;
+    /* small tablet */
+    @media (max-width:768px){
+    .why-zaco-grid{
+    grid-template-columns:repeat(2,1fr);
     }
-    @media (max-width: 1024px) {
-        .service-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (max-width: 768px) {
-        .service-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    .service-card {
-        background: rgba(255,255,255,0.97);
-        border: 1px solid rgba(45,125,210,0.1);
-        border-radius: 12px;
-        padding: 32px;
-        transition: all 0.3s ease;
-    }
-    .service-card:hover {
-        border-color: rgba(45,125,210,0.3);
-        box-shadow: 0 8px 32px rgba(45,125,210,0.12);
-        transform: translateY(-4px);
-    }
-    .service-card .number {
-        display: flex;
-        background: linear-gradient(135deg, #2D7DD2, #1E5BA8);
-        color: #fff;
-        width: 48px;
-        height: 48px;
-        border-radius: 8px;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-    }
-    .service-card h3 {
-        font-size: 1.15rem;
-        color: var(--navy-dark);
-        margin-bottom: 16px;
-        font-weight: 600;
-    }
-    .service-card p {
-        font-size: 0.9rem;
-        color: #555;
-        line-height: 1.7;
     }
 
-    /* Coverage List Styles */
-    .coverage-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 40px;
-        margin: 30px 0;
+    /* mobile */
+    @media (max-width:480px){
+    .why-zaco-grid{
+    grid-template-columns:1fr;
     }
-    @media (max-width: 768px) {
-        .coverage-list {
-            grid-template-columns: 1fr;
-        }
-    }
-    .coverage-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-    }
-    .coverage-item::before {
-        content: "✓";
-        color: #00B4A2;
-        font-weight: bold;
-        font-size: 1.1rem;
-        flex-shrink: 0;
-        margin-top: 2px;
-    }
-    .coverage-item p {
-        font-size: 0.95rem;
-        color: #333;
-        margin: 0;
     }
 
-    /* How It Works Steps */
-    .steps-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-        margin: 50px 0;
-    }
-    @media (max-width: 768px) {
-        .steps-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    .step-card {
-        background: rgba(45,125,210,0.04);
-        border: 2px solid rgba(45,125,210,0.12);
-        border-radius: 14px;
-        padding: 32px;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    .step-card:hover {
-        border-color: rgba(45,125,210,0.3);
-        box-shadow: 0 8px 32px rgba(45,125,210,0.1);
-        transform: translateY(-4px);
-    }
-    .step-card .step-num {
-        display: inline-flex;
-        background: linear-gradient(135deg, #2D7DD2, #1E5BA8);
-        color: #fff;
-        width: 52px;
-        height: 52px;
-        border-radius: 12px;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-    }
-    .step-card h3 {
-        font-size: 1.15rem;
-        color: var(--navy-dark);
-        margin-bottom: 12px;
-        font-weight: 600;
-    }
-    .step-card p {
-        font-size: 0.9rem;
-        color: #555;
-        line-height: 1.7;
-    }
-
-    /* Benefit Cards */
-    .benefit-card {
-        transition: all 0.3s ease;
-    }
-
-    /* FAQ Section */
-    .faq-section {
-        background: rgba(233, 229, 14, 0.02);
-        padding: 40px;
-        border-radius: 12px;
-        margin: 40px 0;
-    }
-    .faq-item {
-        margin-bottom: 24px;
-        border-bottom: 2px solid rgba(45,125,210,0.1);
-        padding-bottom: 24px;
-    }
-    .faq-item:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-    .faq-question {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #1a3546;
-        margin-bottom: 12px;
-        cursor: pointer;
-    }
-    .faq-answer {
-        color: #000000;
-        line-height: 1.7;
-        font-size: 0.95rem;
-    }
-
-    /* CTA Section */
-    .cta-section {
-        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 100%);
-        color: #fff;
-        border-radius: 16px;
-        text-align: center;
-        padding: 60px 40px;
-    }
-    .cta-section h2 {
-        color: #1a3546;
-        margin-bottom: 20px;
-    }
-    .cta-section p {
-        color: rgba(0, 0, 0, 0.9);
-        font-size: 1.05rem;
-        margin-bottom: 10px;
-    }
-    {% comment %} .cta-section a { color: #00D4BE; } {% endcomment %}
-
-    /* Hero Section Enhancement */
-    .hero-section {
-        background: linear-gradient(135deg, rgba(30, 91, 168, 0.95) 0%, rgba(45, 125, 210, 0.95) 100%);
-        color: #fff;
-        padding: 80px 0;
-        position: relative;
-        overflow: hidden;
-    }
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        border-radius: 50%;
-        margin-top: -100px;
-        margin-right: -100px;
-    }
-    .hero-section h1 {
-        font-size: 2.5rem;
-        margin-bottom: 24px;
-        font-weight: 700;
-        position: relative;
-        z-index: 1;
-    }
-    .hero-section p {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Highlight Box */
-    .highlight-box {
-        background: #028ef814;
-        border: 2px solid #037dda14;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 40px 0;
-        text-align: center;
-    }
-    .highlight-box .value {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--navy-dark);
-        margin-bottom: 10px;
-    }
-    .highlight-box .label {
-        font-size: 1rem;
-        color: #555;
-    }
-
-    /* Section Headers */
-    .section-header {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-    .section-header .subtitle {
-        color: #2D7DD2;
-        font-weight: 600;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-    }
-    .section-header h2 {
-        font-size: 2rem;
-        color: var(--navy-dark);
-        margin-bottom: 16px;
-        font-weight: 700;
-    }
-    .section-header p {
-        font-size: 1.05rem;
-        color: #666;
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.7;
-    }
-
-    /* Vendor Logos Strip */
-    .vendor-strip {
-        background: rgba(45,125,210,0.04);
-        border: 1px solid rgba(45,125,210,0.1);
-        border-radius: 14px;
-        padding: 32px 40px;
-        margin: 50px 0;
-        text-align: center;
-    }
-    .vendor-strip h3 {
-        font-size: 0.85rem;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        color: #2D7DD2;
-        margin-bottom: 24px;
-    }
-    .vendor-logos {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 16px;
-    }
-    .vendor-badge {
-        background: #fff;
-        border: 1.5px solid rgba(45,125,210,0.15);
-        border-radius: 8px;
-        padding: 10px 22px;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #1a3546;
-        transition: all 0.25s ease;
-        letter-spacing: 0.5px;
-    }
-    .vendor-badge:hover {
-        border-color: rgba(45,125,210,0.4);
-        box-shadow: 0 4px 14px rgba(45,125,210,0.1);
-        transform: translateY(-2px);
-    }
-
-    /* Why Choose Section */
-    .why-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 28px;
-        margin: 50px 0;
-    }
-    @media (max-width: 1024px) {
-        .why-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-        .why-grid { grid-template-columns: 1fr; }
-    }
-    .why-card {
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        padding: 30px;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    .why-card:hover {
-        box-shadow: 0 8px 24px rgba(45,125,210,0.12);
-        transform: translateY(-4px);
-        border-color: rgba(45,125,210,0.3);
-    }
-    .why-card .why-num {
+    .why-num {
         font-size: 2.5rem;
         font-weight: 900;
         color: rgb(12, 44, 78);
         line-height: 1;
         margin-bottom: 12px;
     }
-    .why-card h3 {
-        font-size: 1rem;
-        color: #1a3546;
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-    .why-card p {
-        font-size: 0.88rem;
-        color: #555;
-        line-height: 1.65;
-    }
 
-    /* Trust Bar */
-    .trust-bar {
-        background: #028ef814;
-        border-bottom: 1px solid var(--border);
-        padding: 0.85rem 5%;
-        display: flex; align-items: center; justify-content: center;
-        gap: 2.5rem; flex-wrap: wrap;
-    }
-    .trust-item {
-        display: flex; align-items: center; gap: 0.5rem;
-        font-size: 0.82rem; font-weight: 500; color: #1a3546;
-    }
-    .trust-item .icon { font-size: 1rem; }
-
-    /* ── CATEGORY CARDS ── */
-    .categories {
-        background: var(--off-white); 
-        margin-bottom: 10px;
-    }
-    .cat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.25rem;
-        margin-top: 3rem;
-    }
-    .cat-card {
-        background: linear-gradient(135deg, rgba(45, 125, 210, 0.05) 0%, rgba(0, 180, 162, 0.05) 100%);
-        border: 1px solid rgb(45 125 210 / 15%);
-        border-radius: 10px;
-        padding: 2rem 1.75rem;
-        transition: all 0.25s;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-    }
-    .cat-card::before {
-        content: '';
-        position: absolute; bottom: 0; left: 0; right: 0;
-        height: 3px;
-        background: var(--accent);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s;
-    }
-    .cat-card:hover { border-color: var(--accent); box-shadow: 0 8px 32px rgba(13,127,232,0.12); transform: translateY(-3px); }
-    .cat-card:hover::before { transform: scaleX(1); }
-    .cat-icon {
-        width: 48px; height: 48px;
-        background: var(--sky);
-        border-radius: 10px;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.5rem;
-        margin-bottom: 1.2rem;
-        transition: background 0.2s;
-    }
-    .cat-card:hover .cat-icon { background: rgba(13,127,232,0.12); }
-    .cat-card h3 { margin-bottom: 0.6rem; font-weight: 700; }
-    .cat-card p { font-size: 0.88rem; color: #555; margin-bottom: 1.2rem; }
-    .cat-link {
-        font-size: 0.85rem; font-weight: 600;
-        color: var(--accent); text-decoration: none;
-        display: inline-flex; align-items: center; gap: 0.35rem;
-        transition: gap 0.2s;
-    }
-    .cat-link:hover { gap: 0.6rem; }
+    
 
 </style>
 
@@ -515,321 +288,238 @@ Get enterprise IT hardware solutions in the UK, including servers, storage, netw
   <div class="trust-item"><span class="icon">✔</span> Customised Configurations</div>
 </div>
 
-<!-- Main Content -->
-<div class="auto-container" style="padding-block: 80px">
-
-    <!-- Intro / Stop Overpaying Section -->
-    <section style="margin-bottom: 80px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
-
-            <!-- LEFT: Text + Buttons -->
-            <div>
-                {% comment %} <p>WHY ZACO COMPUTERS UK</p> {% endcomment %}
-                <h2 style="color: #1a3546; font-size: 2.4rem; font-weight: 800; line-height: 1.2; margin-bottom: 28px;">Stop Overpaying for IT Hardware!</h2>
-                <p style="color: #444; font-size: 1rem; line-height: 1.8; margin-bottom: 18px;">Let Zaco Computers UK Limited help you find the best IT hardware solutions according to your business environment, performance requirements, and lifecycle strategy.</p>
-                <p style="color: #444; font-size: 1rem; line-height: 1.8; margin-bottom: 18px;">From data centre expansion to EOL and EOSL support, we provide tested, warranty-backed systems designed to ensure operational continuity across UK organisations.</p>
-                <p style="color: #444; font-size: 1rem; line-height: 1.8; margin-bottom: 36px;">Every product we supply is configured to your exact specification before dispatch. Our multi-vendor expertise spans Dell, HPE, Lenovo, IBM and Cisco, meaning you can source your entire infrastructure requirement from a single trusted partner.</p>
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
-                        <i class="btn-curve"></i>
-                        <span class="btn-title">Request a Quote</span>
-                    </a>
-                    <a class="theme-btn btn-style-two" href="tel:+442034358060">
-                        <i class="btn-curve"></i>
-                        <span class="btn-title">Speak to an Infrastructure Specialist</span>
-                    </a>
-                </div>
+<!-- Intro Content -->
+<section class="main-section">
+    <div class="auto-container" >
+        <div class="hardware-section">
+        <!-- LEFT -->
+        <div class="hardware-content">
+            <h2>Stop Overpaying for IT Hardware!</h2>
+            <p>
+                Let Zaco Computers UK Limited help you find the best IT hardware solutions according to your business environment, performance requirements, and lifecycle strategy.
+            </p>
+            <p>
+                From data centre expansion to EOL and EOSL support, we provide tested, warranty-backed systems designed to ensure operational continuity across UK organisations.
+            </p>
+            <p>
+                Every product we supply is configured to your exact specification before dispatch. Our multi-vendor expertise spans Dell, HPE, Lenovo, IBM and Cisco.
+            </p>
+            <div class="hardware-buttons">
+                <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
+                    <span class="btn-title">Request a Quote</span>
+                </a>
+                <a class="theme-btn btn-style-two" href="tel:+442034358060">
+                    <span class="btn-title">Speak to an Infrastructure Specialist</span>
+                </a>
             </div>
-
-            <!-- RIGHT: Dark Navy Feature Card -->
-            <div style="background: rgb(2 142 248 / 8%); border-radius: 16px; padding: 40px; ">
-                <div style="display: flex; flex-direction: column; gap: 0;">
-
-                    <div style="display: flex; gap: 18px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid #028ef814;">
-                        <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
-                        </div>
-                        <div>
-                            <p style="color: #000000; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">Certified and Tested</p>
-                            <p style="color: rgba(0, 0, 0, 0.65); font-size: 0.87rem; line-height: 1.6; margin: 0;">Every item passes our rigorous multi-point testing process, including functional testing under load and firmware verification.</p>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 18px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid #028ef814;">
-                        <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
-                        </div>
-                        <div>
-                            <p style="color: #000000; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">Warranty Backed</p>
-                            <p style="color: rgba(0, 0, 0, 0.65); font-size: 0.87rem; line-height: 1.6; margin: 0;">Full warranty documentation provided with every shipment, covering servers, storage, networking and components.</p>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 18px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid #028ef814;">
-                        <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
-                        </div>
-                        <div>
-                            <p style="color: #000000; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">Custom Configuration</p>
-                            <p style="color: rgba(0, 0, 0, 0.65); font-size: 0.87rem; line-height: 1.6; margin: 0;">Hardware assembled, tested, and shipped to your precise specification. From individual components to full data centre deployments.</p>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 18px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid #028ef814;">
-                        <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
-                        </div>
-                        <div>
-                            <p style="color: #000000; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">Fast UK Delivery</p>
-                            <p style="color: rgba(0, 0, 0, 0.65); font-size: 0.87rem; line-height: 1.6; margin: 0;">Stocked items typically dispatched within days. Express options available for time-critical requirements.</p>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 18px; align-items: flex-start; padding: 20px 0;">
-                        <div style="width: 30px; height: 30px; border-radius: 50%; background: #2D7DD2; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <span style="color: #000000; font-size: 0.75rem; font-weight: 700;">✓</span>
-                        </div>
-                        <div>
-                            <p style="color: #000000; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px;">EOL and EOSL Continuity</p>
-                            <p style="color: rgba(0, 0, 0, 0.65); font-size: 0.87rem; line-height: 1.6; margin: 0;">Extended support for end-of-life and end-of-service-life systems. Keep your infrastructure running beyond manufacturer timelines.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
-
-        <!-- Mobile responsive -->
-        <style>
-            @media (max-width: 900px) {
-                .stop-overpaying-grid { grid-template-columns: 1fr !important; }
-            }
-        </style>
-    </section>
+        <!-- RIGHT -->
+        <div class="hardware-card">
+            <div class="feature-item">
+                <div class="icon">✓</div>
+                <div>
+                    <p class="title">Certified and Tested</p>
+                    <p>Every item passes rigorous multi-point testing.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="icon">✓</div>
+                <div>
+                    <p class="title">Warranty Backed</p>
+                    <p>Full warranty documentation provided.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="icon">✓</div>
+                <div>
+                    <p class="title">Custom Configuration</p>
+                    <p>Hardware built to your exact specification.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="icon">✓</div>
+                <div>
+                    <p class="title">Fast UK Delivery</p>
+                    <p>Quick dispatch with express options.</p>
+                </div>
+            </div>
+            <div class="feature-item last">
+                <div class="icon">✓</div>
+                <div>
+                    <p class="title">EOL and EOSL Continuity</p>
+                    <p>Extend infrastructure beyond OEM timelines.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     
-    <!-- Our Comprehensive IT Hardware Solutions -->
+<!-- Our Comprehensive IT Hardware Solutions -->
+<section  class="main-section">
+        <div class="auto-container" >      
+            <h2 class="header-title">Our Comprehensive IT Hardware Solutions</h2>
+            <p class="header-para">From single components to full server room deployments, we supply, configure and deliver enterprise IT hardware to organisations of every size.</p>
 
-    <!-- Multi-Vendor Expertise -->
-    {% comment %} <section style="margin-bottom: 80px;">
-        <div class="vendor-strip">
-            <h3>Multi-Vendor Expertise Across All Leading Manufacturers</h3>
-            <div class="vendor-logos">
-                <span class="vendor-badge">Dell EMC</span>
-                <span class="vendor-badge">HPE</span>
-                <span class="vendor-badge">Lenovo</span>
-                <span class="vendor-badge">IBM</span>
-                <span class="vendor-badge">VMware</span>
-                <span class="vendor-badge">Microsoft</span>
-                <span class="vendor-badge">Veeam</span>
-                <span class="vendor-badge">Cisco</span>
-            </div>
-        </div>
-    </section> {% endcomment %}
+            <div class="problem-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
 
-    <!-- Hardware Product Categories -->
-    <!-- CATEGORIES -->
-    <section class="categories" id="hardware">
-        <div class="section-header"  style="margin-bottom: 20px ;">
-            <h2 style="color: #1a3546;">Our Comprehensive IT Hardware Solutions</h2>
-        </div>
-        <div>
-            <p style="text-align: center; color: #000000;">From single components to full server room deployments, we supply, configure and deliver enterprise IT hardware to organisations of every size.</p>
-        </div>
-
-            <div class="cat-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-
-                <div class="cat-card">
-                    <div class="cat-icon">🖥</div>
+                <div class="problem-card">
+                    <div class="icon">🖥</div>
                     <h3>New &amp; Refurbished Servers</h3>
                     <p >Zaco Computers UK Limited offers the world's leading brands of servers with full warranty coverage for both new and used servers. We ensure all parts are available to fulfil your server configuration to the highest standard. OEM alternatives, in stock, with extendable warranties.</p>
                     
                 </div>
 
-                <div class="cat-card">
-                    <div class="cat-icon">🌐</div>
+                <div class="problem-card">
+                    <div class="icon">🌐</div>
                     <h3>Networking</h3>
                     <p>We stock leading networking brands to meet your business requirements, including certified Cisco switches, routers, and firewalls that deliver enterprise-grade network infrastructure at a significantly lower cost compared to new OEM pricing.</p>
                     
                 </div>
 
-                <div class="cat-card">
-                    <div class="cat-icon">💾</div>
+                <div class="problem-card">
+                    <div class="icon">💾</div>
                     <h3>Storage Systems</h3>
                     <p>We offer a complete range of major branded storage products, including SAN, NAS, and storage arrays from Dell EMC, HPE, IBM, and NetApp, all thoroughly tested and configured to meet your specific infrastructure requirements. Our storage solutions are designed to support data-intensive applications, delivering high performance, and reliability for your business operations.</p>
                     
                 </div>
 
-                <div class="cat-card">
-                    <div class="cat-icon">🔧</div>
+                <div class="problem-card">
+                    <div class="icon">🔧</div>
                     <h3>Components</h3>
                     <p>We supply hard-to-find server spare parts, including memory, hard drives, SSDs memory, processor, motherboards, power supplies, RAID controllers, and more. Our extensive inventory of Dell, HPE, Lenovo, and IBM components ensures fast fulfilment across the United Kingdom.</p>
                 </div>
 
             </div>
+        </div>
     
-    </section>
+</section>
 
-
-    <section class="sponsor-six" style="margin-bottom: 80px;">
-        <div class="auto-container">
-            <div class="sec-title-eight text-center">
-            <!-- <p class="sec-title-eight__text">Recent Cases</p> -->
-            <!-- /.sec-title-eight__text -->
+<!-- Multi-Vendor Expertise Across All Leading Manufacturers -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="sec-title-eight text-center">
             <h2 class="sec-title-eight__title" style="margin-bottom: 30px;">Multi-Vendor Expertise Across All Leading Manufacturers</h2>
-            <!-- /.sec-title-eight__title -->
-            </div>
-            <div
+        </div>
+        <div
             class="thm-swiper__slider swiper-container"
             data-swiper-options='{"spaceBetween": 100, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
-                                "0": {
-                                    "spaceBetween": 30,
-                                    "slidesPerView": 2
-                                },
-                                "375": {
-                                    "spaceBetween": 30,
-                                    "slidesPerView": 2
-                                },
-                                "575": {
-                                    "spaceBetween": 30,
-                                    "slidesPerView": 3
-                                },
-                                "767": {
-                                    "spaceBetween": 50,
-                                    "slidesPerView": 4
-                                },
-                                "991": {
-                                    "spaceBetween": 50,
-                                    "slidesPerView": 5
-                                },
-                                "1199": {
-                                    "spaceBetween": 100,
-                                    "slidesPerView": 5
-                                }
-                            }}'
-            >
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/hpe.jpg' %}" alt="Hewlett Packard Enterprise (HPE)" title="Hewlett Packard Enterprise (HPE)" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/dell.jpg' %}" alt="Dell" title="Dell" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM" title="IBM" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/lenovo.jpg' %}" alt="Lenovo" title="Lenovo" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/cisco.jpg' %}" alt="Cisco" title="Cisco" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/uk/dellemc.jpg' %}" alt="Dell EMC" title="Dell EMC" />
-                </div> 
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/vm.jpg' %}" alt="VMware" title="VMware" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/microsoft.jpg' %}" alt="Microsoft" title="Microsoft" />
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/veeam.jpg' %}" alt="Veeam" title="Veeam" />
-                </div>
-                <!-- /.swiper-slide -->
-                {% comment %} <div class="swiper-slide">
-                <img src="{% static 'images/home/sec.jpg' %}" alt="" />
-                </div> {% endcomment %}
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                <img src="{% static 'images/home/redhat.jpg' %}" alt="Red Hat" title="Red Hat" />
-                </div>
-                <!-- /.swiper-slide -->
-
-                <!-- /.swiper-slide -->
+                            "0": {
+                                "spaceBetween": 30,
+                                "slidesPerView": 2
+                            },
+                            "375": {
+                                "spaceBetween": 30,
+                                "slidesPerView": 2
+                            },
+                            "575": {
+                                "spaceBetween": 30,
+                                "slidesPerView": 3
+                            },
+                            "767": {
+                                "spaceBetween": 50,
+                                "slidesPerView": 4
+                            },
+                            "991": {
+                                "spaceBetween": 50,
+                                "slidesPerView": 5
+                            },
+                            "1199": {
+                                "spaceBetween": 100,
+                                "slidesPerView": 5
+                            }
+                        }}'
+        >
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/hpe.jpg' %}" alt="Hewlett Packard Enterprise (HPE)" title="Hewlett Packard Enterprise (HPE)" />
             </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/dell.jpg' %}" alt="Dell" title="Dell" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/ibm.jpg' %}" alt="IBM" title="IBM" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/lenovo.jpg' %}" alt="Lenovo" title="Lenovo" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/cisco.jpg' %}" alt="Cisco" title="Cisco" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/uk/dellemc.jpg' %}" alt="Dell EMC" title="Dell EMC" style="width: 83% ; height: auto;"/>
+            </div> 
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/vm.jpg' %}" alt="VMware" title="VMware" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/microsoft.jpg' %}" alt="Microsoft" title="Microsoft" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/veeam.jpg' %}" alt="Veeam" title="Veeam" />
+            </div>
+            <div class="swiper-slide">
+            <img src="{% static 'images/home/redhat.jpg' %}" alt="Red Hat" title="Red Hat" />
             </div>
         </div>
-        <!-- /.auto-container -->
-    </section>
-
-
-    <!-- Why Businesses Choose Zaco -->
-    <section style="margin-bottom: 40px;">
-        <div class="section-header" style="margin-bottom: 20px;">
-            <h2 style="color: #1a3546;">Why Businesses in UK Choose Zaco Enterprise IT Hardware?</h2>
         </div>
-        <div> 
-            <p style="color: #000000; text-align: center;">Businesses and IT teams across the UK trust Zaco for hardware that performs, support that responds, and savings that make a real difference to IT budgets.</p>
-        
-        </div>
+    </div>
+</section>
 
-        <div class="why-grid">
-            <div class="why-card benefit-card">
+
+<!-- Why Businesses Choose Zaco -->
+<section class="main-section">
+    <div class="auto-container">   
+        <h2 class="header-title">Why Businesses in UK Choose Zaco Enterprise IT Hardware?</h2>
+        <p class="header-para">Businesses and IT teams across the UK trust Zaco for hardware that performs, support that responds, and savings that make a real difference to IT budgets.</p>
+        <div class="why-zaco-grid">
+            <div class="problem-card">
                 <div class="why-num">01</div>
                 <h3>Flexible New &amp; Refurbished Options</h3>
                 <p>	Choose between brand-new OEM hardware or certified refurbished alternatives depending on your infrastructure requirements and capital allocation strategy. <br>Our certified refurbished solutions can deliver up to 50–60% cost savings compared to equivalent new systems, making them a practical option for lifecycle extension and EOL/EOSL continuity.</p>
                 </div>
 
-            <div class="why-card benefit-card">
+            <div class="problem-card">
                 <div class="why-num">02</div>
                 <h3>Quality You Can Rely On</h3>
                 <p>Every item undergoes a rigorous multi-point testing process before dispatch. Functional load testing, firmware verification, and visual inspection are standard for every shipment.</p>
             </div>
 
-            <div class="why-card benefit-card">
+            <div class="problem-card">
                 <div class="why-num">03</div>
                 <h3>One Supplier. Every Brand.</h3>
                 <p>Dell, HPE, Lenovo, IBM, Cisco and more — all available from a single supplier relationship. Simplify your procurement and reduce vendor management overhead.</p>
             </div>
 
-            <div class="why-card benefit-card">
+            <div class="problem-card">
                 <div class="why-num">04</div>
                 <h3>24x7 Support</h3>
                 <p>Round-the-clock infrastructure monitoring and incident response. Our remote service desk operates continuously, ensuring your systems receive attention the moment an issue arises.</p>
             </div>
 
-            <div class="why-card benefit-card">
+            <div class="problem-card">
                 <div class="why-num">05</div>
                 <h3>Managed IT Included</h3>
                 <p>Beyond hardware supply, Zaco offers managed IT services, third-party VMware support, and Microsoft infrastructure support. Your hardware and its operation, covered in one place.</p>
             </div>
 
-            <div class="why-card benefit-card">
+            <div class="problem-card">
                 <div class="why-num">06</div>
                 <h3>UK Registered and Trusted</h3>
                 <p>London registered, LCCI member, and actively supporting businesses from startups to large enterprises across the United Kingdom.</p>
             </div>
         </div>
-    </section>
-
-</div>
+    </div>
+</section>
 
 <!-- How It Works Section -->
-<section style="background: #f8f9fa; padding: 40px 0;">
+<section class="main-section">
     <div class="auto-container">
-        <div class="section-header" style="margin-bottom: 20px;">
-            <p>HOW IT WORKS</p>
-            <h2 style="color: #1a3546;">From Enquiry to Delivery in Four Steps</h2>
-        </div>
-        <div style="margin-bottom: 50px;">
-             <p style="color: #000000; text-align: center;">We make procurement straightforward. Tell us what you need, and our team handles everything from configuration to delivery.</p>
-        </div>
+            <div class="grey-label">HOW IT WORKS</div>
+            <h2 class="header-title">From Enquiry to Delivery in Four Steps</h2>
+             <p class="header-para">We make procurement straightforward. Tell us what you need, and our team handles everything from configuration to delivery.</p>
 
         <div class="row clearfix">
-          <!--Left Column-->
-    
-          <!--Right Column-->
           <div class="right-col col-lg-6 col-md-12 col-sm-12" style="margin-block: auto">
-              
             <div class="inner">
               <div class="faq-box">
                 <ul class="accordion-box clearfix">
@@ -894,45 +584,15 @@ Get enterprise IT hardware solutions in the UK, including servers, storage, netw
               </div>
           </div>
         </div>
-        {% comment %} <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-num">01</div>
-                <h3>Tell Us What You Need</h3>
-                <p>Share your IT hardware requirements, whether that is a specific SKU, a server specification, or a broader infrastructure refresh plan. Our team will respond promptly.</p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-num">02</div>
-                <h3>Receive a Tailored Quote</h3>
-                <p>We will provide a detailed quote covering the hardware, configuration options, warranty terms and delivery timeline. No hidden charges, no unnecessary complexity.</p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-num">03</div>
-                <h3>We Configure and Test</h3>
-                <p>Your hardware is built, configured and rigorously tested to your specification before it leaves our facility. Every item ships ready to integrate into your environment.</p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-num">04</div>
-                <h3>Delivered Across the UK</h3>
-                <p>Fast, reliable delivery to your site anywhere in the United Kingdom. For ongoing support requirements, our managed IT team is on hand from day one.</p>
-            </div>
-        </div> {% endcomment %}
     </div>
 </section>
 
 <!-- FAQ Section -->
-<section style="background: #fff; padding: 40px 0;">
+<section class="main-section">
     <div class="auto-container">
-        <div class="section-header" style="margin-bottom: 20px ;">
-            <p>COMMON QUESTIONS</p>
-            <h2 style="color: #1a3546;">Frequently Asked Questions</h2>
-            </div>
-        <div>
-            <p style="text-align: center; color: #000000;">Everything you need to know about sourcing enterprise IT hardware through Zaco Computers UK Limited.</p>
-        
-        </div>
+            <div class="grey-label">COMMON QUESTIONS</div>
+            <h2 class="header-title">Frequently Asked Questions</h2>
+            <p class="header-para">Everything you need to know about sourcing enterprise IT hardware through Zaco Computers UK Limited.</p>
         <div class="faq-section">
             <div class="faq-item">
                 <div class="faq-question"> 1. Is refurbished IT hardware reliable for enterprise use?</div>
@@ -993,9 +653,8 @@ Get enterprise IT hardware solutions in the UK, including servers, storage, netw
 <div class="auto-container" style="padding-block: 40px">
     <div class="cta-section">
         <p>GET STARTED</p>
-        <h2><b>Build Infrastructure That Supports Your Long-Term IT Strategy</b></h2>
-        <p>Partner with Zaco Computers UK Limited for enterprise IT hardware that aligns with your performance goals, infrastructure strategy and long-term growth plans.</p>
-        <p>From new deployments to lifecycle extension, we deliver reliable, fully configured systems across the United Kingdom. To discuss your requirements or request a tailored quote, contact our team at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> or call <a href="tel:+442034358060">+44 20 3435 8060</a> and speak directly with an infrastructure specialist.</p>
+        <h2 class="header-title">Build Infrastructure That Supports Your Long-Term IT Strategy</h2>
+        <p class="header-para">Partner with Zaco Computers UK Limited for enterprise IT hardware that aligns with your performance goals, infrastructure strategy and long-term growth plans. From new deployments to lifecycle extension, we deliver reliable, fully configured systems across the United Kingdom. To discuss your requirements or request a tailored quote, contact our team at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a> or call <a href="tel:+442034358060">+44 20 3435 8060</a> and speak directly with an infrastructure specialist.</p>
         <div class="link-box" style="margin-top: 30px; justify-content: center;">
             <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
                 <i class="btn-curve"></i>

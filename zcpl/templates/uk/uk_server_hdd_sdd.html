@@ -1,292 +1,115 @@
 {% extends 'uk/base.html' %}
 {% load static %}
 
-{% block title %}New & Refurbished Enterprise Server Hard Drives & SSDs UK
+{% block title %}New &amp; Refurbished Enterprise Server Hard Drives &amp; SSDs UK
 {% endblock %}
 {% block meta_description %}
-Shop new & refurbished enterprise server hard drives & SSDs at Zaco, including 2.5" & 3.5" SAS & SATA HDDs, plus SAS, SATA & NVMe SSDs in UK.
+Shop new &amp; refurbished enterprise server hard drives &amp; SSDs at Zaco, including 2.5" &amp; 3.5" SAS &amp; SATA HDDs, plus SAS, SATA & NVMe SSDs in UK.
+{% endblock %}
+
+
+{% block schema %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/uk/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Hardware UK",
+    "item": "https://www.zacocomputer.com/uk/it-hardware/"  
+  },{
+    "@type": "ListItem", 
+    "position": 3, 
+    "name": "HDD & SSDs",
+    "item": "https://www.zacocomputer.com/uk/server-hard-drives-ssds/"  
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Which storage type is faster, HDD or SSD?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "SSDs deliver much faster data transfer rates and quicker access times than HDDs."
+    }
+  },{
+    "@type": "Question",
+    "name": "What is the difference between SAS, SATA and NVMe enterprise drives?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "SAS offers dual-port redundancy for storage arrays. SATA is cost-effective for boot and secondary storage. NVMe delivers the lowest latency via PCIe, suited to databases and virtualisation."
+    }
+  },{
+    "@type": "Question",
+    "name": "Are refurbished enterprise drives safe to use in a production server?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Every refurbished drive is SMART-tested, stress-cycled and certified before dispatch. Only drives that pass our full test regime are shipped."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you supply server-specific or OEM-branded hard drives?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We supply OEM-branded drives with the correct firmware for Dell, HPE, Lenovo and IBM servers, preventing lock-out errors common with generic drives."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can you identify the correct drive for my server?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Share your server make, model and cage type and we will confirm the compatible specification before quoting."
+    }
+  },{
+    "@type": "Question",
+    "name": "What is the minimum order quantity?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "There is no minimum order. We supply single drives for emergency replacements as readily as bulk orders."
+    }
+  }]
+}
+</script>
+
+
 {% endblock %}
 
 {% block content %}
 <style>
-    /* ═══════════════════════════════════════════
-       HDD / SSD UK PAGE — UNIQUE STYLES
-       Theme: --navy-dark (#0c2c4e), --accent (#2D7DD2), light backgrounds
-    ═══════════════════════════════════════════ */
+  .main-section .intro img {
+      width: 100%;
+      height: auto;
+  }
 
-    /* ── INTRO SECTION ── */
-        .drv-intro {
-            background: #f4f7fb;
-            padding: 60px 0;
-        }
-        .drv-label {
-            font-size: 1 rem; font-weight: 500; letter-spacing: 1px;
-            text-transform: uppercase; color: #666666; margin-bottom: 12px;
-            display: block; text-align: center;
-        }
-        .drv-intro-inner {
-            max-width: 1500px; margin: 0 auto; padding: 0 5%;
-        }
-        .drv-intro-grid {
-            display: grid; grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px; align-items: center;
-        }
-        .drv-intro-inner h2 {
-            font-size: clamp(1.6rem, 2.5vw, 2.1rem);
-            color: #1a3546; font-weight: 800; line-height: 1.25;
-            margin-bottom: 30px;
-        }
-        .drv-intro-grid p {
-            color: #000000; font-size: 1 rem; line-height: 1.85; margin-bottom: 16px;
-        }
-        .drv-intro-grid p:last-child { margin-bottom: 0; }
-        .drv-intro-img img {
-            border-radius: 14px; width: 100%; height: auto;
-            box-shadow: 0 16px 48px rgba(12,44,78,0.18);
-        }
-        @media (max-width: 860px) {
-            .drv-intro-grid { grid-template-columns: 1fr; gap: 36px; }
+  @media (max-width: 768px) {
+  .main-section .intro img {
+      width: 310px;
+      height: auto;
+  }
+  }
+  .why-img {
+            width: 400px !important;
+            height: 400px !important;
         }
 
-    
-    /* ── SSD vs HDD COMPARISON TABLE ── */
-        .drv-table-section {
-            background: #fff;
-            padding: 80px 0;
+        @media (max-width: 768px) {
+            .why-img {
+                width: 348px !important;
+                height: 300px !important;
+            }
         }
-        .drv-table-inner {
-            max-width: 1500px; margin: 0 auto; padding: 0 5%;
-        }
-        .drv-section-header {
-            margin-bottom: 30px;
-        }
-        .drv-section-header h2 {
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
-            color: #1a3546; font-weight: 800; margin-bottom: 14px; text-align: center;
-        }
-        .drv-section-header p {
-            color: #000000; font-size: 1 rem; line-height: 1.85; text-align: center; 
-        }
-        .drv-compare-table {
-            border-radius: 14px; overflow: hidden;
-            border: 1.5px solid #dde4ef;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        .drv-compare-table table { width: 100%; border-collapse: collapse; }
-        .drv-compare-table thead tr { background: #0c2c4e; }
-        .drv-compare-table th {
-            padding: 16px 20px; text-align: left;
-            color: #fff; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px;
-        }
-        .drv-compare-table th:first-child { color: #ffffff; }
-        .drv-compare-table tbody tr {
-            border-bottom: 1px solid #eef2f7;
-            background: #fff; transition: background 0.2s;
-        }
-        .drv-compare-table tbody tr:last-child { border-bottom: none; }
-        .drv-compare-table tbody tr:hover { background: #f0f6ff; }
-        .drv-compare-table td { padding: 14px 20px; font-size: 1rem; vertical-align: middle; color: #444; }
-        .drv-compare-table td:first-child { color: #0c2c4e; font-weight: 700; font-size: 1rem; }
-        .drv-compare-table td:nth-child(2) { color: #000000; }
-        .drv-compare-table td:nth-child(3) { color: #000000; }
-        @media (max-width: 640px) {
-            .drv-compare-table td, .drv-compare-table th { padding: 11px 12px; font-size: 0.8rem; }
-        }
-
-    /* ── DRIVE TYPE ROWS (SAS / SATA / NVMe) ── */
-        .drv-types-section {
-            background: #f4f7fb;
-            padding: 80px 0;
-        }
-        .drv-types-inner {
-            max-width: 1500px; margin: 0 auto; padding: 0 5%;
-        }
-        .drv-type-row {
-            display: grid; grid-template-columns: 300px 1fr;
-            border-radius: 16px; overflow: hidden;
-            border: 1.5px solid #dde4ef;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            margin-bottom: 28px;
-            transition: box-shadow 0.3s;
-        }
-        .drv-type-row:hover { box-shadow: 0 12px 40px rgba(45,125,210,0.13); }
-        .drv-type-sidebar {
-            background: linear-gradient(160deg, #0c2c4e 0%, #0c2c4e 100%);
-            padding: 40px 30px;
-            display: flex; flex-direction: column; justify-content: space-between;
-            min-height: 260px;
-        }
-        .drv-type-icon-big {
-            font-size: 2.8rem; margin-bottom: 20px; line-height: 1;
-        }
-        .drv-type-name {
-            font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 20px; line-height: 1.2;
-        }
-        .drv-type-badge {
-            display: inline-block;
-            background: rgba(45,125,210,0.35);
-            border: 1px solid rgba(45,125,210,0.5);
-            border-radius: 20px; padding: 4px 14px;
-            font-size: 0.72rem; color: #7ec8f7; font-weight: 700;
-            letter-spacing: 1px; text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-        .drv-type-tagline {
-            color: rgba(255,255,255,0.72); font-size: 0.85rem; line-height: 1.65;
-            margin-bottom: 24px; flex: 1;
-        }
-        .drv-type-body {
-            background: #fff; padding: 36px 40px;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .drv-type-desc {
-            color: #555; font-size: 0.92rem; line-height: 1.75;
-            margin-bottom: 24px;
-            padding-bottom: 20px; border-bottom: 1px solid #eef2f7;
-        }
-        .drv-specs-row {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 16px 20px; margin-bottom: 24px;
-        }
-        .drv-spec-label {
-            font-size: 0.7rem; font-weight: 700; color: #2D7DD2;
-            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;
-        }
-        .drv-spec-val {
-            font-size: 0.87rem; color: #0c2c4e; font-weight: 600; line-height: 1.4;
-        }
-        @media (max-width: 900px) {
-            .drv-type-row { grid-template-columns: 1fr; }
-            .drv-type-sidebar { min-height: auto; padding: 28px 24px; }
-            .drv-type-body { padding: 28px 24px; }
-            .drv-specs-row { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-            .drv-specs-row { grid-template-columns: 1fr 1fr; }
-        }
-
-    /* ── INTERFACE GUIDE — TABLE ── */
-        .drv-interface-section {
-            background: #fff;
-            padding: 80px 0;
-        }
-        .drv-interface-inner {
-            max-width: 1500px; margin: 0 auto; padding: 0 5%;
-        }
-        .drv-iface-table {
-            border-radius: 14px; overflow: hidden;
-            border: 1.5px solid #dde4ef;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            margin-top: 40px;
-            overflow-x: auto;
-        }
-        .drv-iface-table table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        .drv-iface-table thead tr { background: #0c2c4e; }
-        .drv-iface-table th {
-            padding: 20px 22px; text-align: left; 
-            font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px; text-align: left;
-        }
-        .drv-iface-table th:first-child { color: #ffffff; width: 20%; }
-        .drv-iface-table th:nth-child(2),
-        .drv-iface-table th:nth-child(3),
-        .drv-iface-table th:nth-child(4) { color: #fff; width: 26.6%; }
-        .drv-iface-table th span {
-            display: block; font-size: 1rem;
-            color: rgba(255, 255, 255, 0.81); font-weight: 500;
-            letter-spacing: 0.3px; margin-top: 2px;
-        }
-        .drv-iface-table tbody tr {
-            border-bottom: 1px solid #eef2f7;
-            background: #fff; transition: background 0.2s;
-        }
-        .drv-iface-table tbody tr:last-child { border-bottom: none; }
-        .drv-iface-table tbody tr:hover { background: #f8fafd; }
-        .drv-iface-table td { padding: 17px 22px; font-size: 1rem; vertical-align: middle; color: #444; line-height: 1.5; }
-        .drv-iface-table td:first-child { color: #0c2c4e; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .drv-iface-table .best-row td { background: #f0f6ff; font-style: italic; color: #0c2c4e; }
-        .drv-iface-table .best-row td:first-child { color: #0c2c4e; font-style: normal; }
-        
-
-    /* ── FAQ's ── */
-        .faq-section {
-            background: #ffffff;
-            padding: 80px 0;
-            border-radius: 12px;
-        }
-        .faq-section-inner {
-            max-width: 1500px; margin: 0 auto; padding: 0 5%;
-        }
-        .faq-section-header {
-            margin-bottom: 30px;
-        }
-        .faq-section-header h2 {
-            font-size: clamp(1.5rem, 2.5vw, 2rem);
-            color: #1a3546; font-weight: 800; margin-bottom: 14px; text-align: center;
-        }
-        .faq-section-header p {
-            color: #000000; font-size: 1 rem; line-height: 1.85; text-align: center; 
-        }
-        .faq-section-table {
-            border-radius: 14px; overflow: hidden;
-            border: 1.5px solid #dde4ef;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            margin-top: 40px;
-            overflow-x: auto;
-        }
-        .faq-item {    
-            border-bottom: 2px solid rgba(45,125,210,0.1);
-            padding: 24px 30px;
-        }
-        .faq-item:last-child {
-            border-bottom: none;
-            margin-bottom: 20px;
-        }
-        .faq-question {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1a3546;
-            margin-bottom: 12px;
-            cursor: pointer;
-        }
-        .faq-answer {
-            color: #000000;
-            line-height: 1.7;
-            font-size: 0.95rem;
-            
-        }
-    /* ── CTA BAND ── */
-    
-        .drv-cta {
-            background: #F2F2F2;
-            padding: 80px 0; text-align: center;
-        }
-        .drv-cta-inner {
-            max-width: 1500px; margin: 0 auto; padding: 0 5%;
-        }
-        {% comment %} .drv-cta-inner .drv-label { color: #7ec8f7; text-align: center; } {% endcomment %}
-        .drv-cta-inner h2 {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            color: #1a3546; font-weight: 800; margin-bottom: 16px; line-height: 1.25;
-        }
-        .drv-cta-inner p {
-            color: rgb(0, 0, 0); font-size: 1rem; line-height: 1.75;
-            margin-bottom: 32px;
-        }
-        {% comment %} .drv-cta-inner p a { color: #7ec8f7; } {% endcomment %}
-        .drv-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    
-        /* ── CANT-FIND BAR ── */
-        .drv-cant-find {
-            margin-top: 36px;
-            background: linear-gradient(90deg, rgba(45,125,210,0.07) 0%, rgba(45,125,210,0.03) 100%);
-            border: 2px solid rgba(45,125,210,0.3);
-            border-radius: 14px; padding: 28px 32px;
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 20px; flex-wrap: wrap;
-        }
-        .drv-cant-find p { color: #0c2c4e; font-weight: 700; font-size: 1.02rem; margin: 0; }
-        .drv-cant-find span { color: #555; font-size: 0.88rem; font-weight: 400; display: block; margin-top: 4px; }
 </style>
 
 <!-- ═══════════════════════════════════════
@@ -313,35 +136,34 @@ Shop new & refurbished enterprise server hard drives & SSDs at Zaco, including 2
 <!-- ═══════════════════════════════════════
      INTRO
 ═══════════════════════════════════════ -->
-<section class="drv-intro">
-  <div class="drv-intro-inner">
-     {% comment %} <span class="drv-label">Server Hard Drives &amp; Solid-State Drives</span>
-        <h2>Enterprise-class Hard Disk Drive (HDD) &amp; Solid-state Drive (SSD) for UK Businesses</h2> {% endcomment %}
-    <div class="drv-intro-grid">
-      <div>
-        <p>A drive that is wrong for the workload costs more than just money. It slows performance, shortens lifespan and creates compatibility issues that surface at the worst possible time. At Zaco Computers UK Limited we supply new and refurbished enterprise-grade HDDs and SSDs across a wide range of capacities and interfaces, including SAS, SATA and NVMe, to support servers, storage arrays and NAS systems</p>        
-        <p>We use the same underlying drive manufacturers and models as the major OEMs, ensuring full compatibility with HPE ProLiant, Dell PowerEdge, Lenovo ThinkSystem and IBM servers.</p>
-        <p>Every drive we supply is rigorously tested and certified before dispatch, with a warranty included and 24/7 free remote support available across the United Kingdom.</p>
-      </div>
-      <div >
-        <img src="{% static 'images/uk/ssd2.jpeg' %}" alt="Enterprise HDDs and SSDs UK">
-      </div>
-    </div>
-  </div>
+<section class="main-section bg-light">
+    <div class="auto-container">
+        <div class="row intro">
+            <div class="col-md-12 col-lg-8">
+                <div>
+                    <p>A drive that is wrong for the workload costs more than just money. It slows performance, shortens lifespan and creates compatibility issues that surface at the worst possible time. At Zaco Computers UK Limited we supply new and refurbished enterprise-grade HDDs and SSDs across a wide range of capacities and interfaces, including SAS, SATA and NVMe, to support servers, storage arrays and NAS systems</p>        
+                    <p>We use the same underlying drive manufacturers and models as the major OEMs, ensuring full compatibility with HPE ProLiant, Dell PowerEdge, Lenovo ThinkSystem and IBM servers.</p>
+                    <p>Every drive we supply is rigorously tested and certified before dispatch, with a warranty included and 24/7 free remote support available across the United Kingdom.</p>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center ">
+                <img 
+                    src="{% static 'images/uk/ssd2.jpeg' %}"
+                    alt="Enterprise HDDs and SSDs UK"> 
+            </div>
+    </div>       
 </section>
+
 
 <!-- ═══════════════════════════════════════
      SSD vs HDD COMPARISON TABLE
 ═══════════════════════════════════════ -->
-<section class="drv-table-section">
-  <div class="drv-table-inner">
-    <div class="drv-section-header">
-      {% comment %} <span class="drv-label">SSD vs HDD</span> {% endcomment %}
-      <h2>SSD vs HDD: Key Differences Between Solid State Drives and Hard Disk Drives</h2>
-      <p>Choosing between an HDD and an SSD comes down to your workload, budget and capacity requirements. Both have a clear role in enterprise environments. Understanding the differences helps you get the right drive in the right slot, rather than overspending on performance you do not need or under-specifying where it counts.</p>
-    </div>
-    <div class="drv-compare-table">
-      <table>
+<section class="main-section">
+  <div class="auto-container">
+      <h2 class="header-title">SSD vs HDD: Key Differences Between Solid State Drives and Hard Disk Drives</h2>
+      <p class="header-para">Choosing between an HDD and an SSD comes down to your workload, budget and capacity requirements. Both have a clear role in enterprise environments. Understanding the differences helps you get the right drive in the right slot, rather than overspending on performance you do not need or under-specifying where it counts.</p>
+    <div class="compare-table-scroll">
+      <table class="compare-table">
         <thead>
           <tr>
             <th>Specification</th>
@@ -409,175 +231,132 @@ Shop new & refurbished enterprise server hard drives & SSDs at Zaco, including 2
 <!-- ═══════════════════════════════════════
      DRIVE TYPE ROWS — SAS / SATA / NVMe
 ═══════════════════════════════════════ -->
-<section class="drv-types-section">
-  <div class="drv-types-inner">
-    <div class="drv-section-header">
-      {% comment %} <span class="drv-label">New &amp; Refurbished Stock</span> {% endcomment %}
-      <h2>New and Refurbished Hard Drives &amp; Solid State Drives Available in the UK</h2>
-      <p>Every server and workload has different storage demands. Some need raw capacity at low cost per terabyte. Others need the highest possible IOPS with the lowest latency. Below are the three enterprise drive types we stock and supply across the UK, each suited to different environments and budgets.</p>
-    </div>
-
+<section class="main-section">
+  <div class="auto-container">
+      <h2 class="header-title">New and Refurbished Hard Drives &amp; Solid State Drives Available in the UK</h2>
+      <p class="header-para">Every server and workload has different storage demands. Some need raw capacity at low cost per terabyte. Others need the highest possible IOPS with the lowest latency. Below are the three enterprise drive types we stock and supply across the UK, each suited to different environments and budgets.</p>
     <!-- SAS HDD -->
-    <div class="drv-type-row">
-      <div class="drv-type-sidebar">
+    <div class="brand-row">
+      <div class="brand-sidebar">
         <div>
-          <div class="drv-type-icon-big"></div>
-          {% comment %} <div class="drv-type-badge">SAS HDD</div> {% endcomment %}
-          <div class="drv-type-name">SAS Hard Disk Drives</div>
-          <p class="drv-type-tagline">The standard interface for enterprise storage arrays and mission-critical servers requiring dual-port redundancy.</p>
+          <div class="brand-icon-big"></div>
+          {% comment %} <div class="brand-badge">SAS HDD</div> {% endcomment %}
+          <div class="brand-logo-text">SAS Hard Disk Drives</div>
+          <p class="brand-tagline">The standard interface for enterprise storage arrays and mission-critical servers requiring dual-port redundancy.</p>
         </div>
         <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
           <i class="btn-curve"></i>
           <span class="btn-title">Get a Quote →</span>
         </a>
       </div>
-      <div class="drv-type-body">
-        <p class="drv-type-desc">Enterprise SAS HDDs deliver dual-port redundancy, sustained throughput and a design life suited to 24/7 server and storage array operation. Available in 2.5″ SFF and 3.5″ LFF at 7.2K, 10K and 15K RPM, from 300 GB to 20 TB.</p>
-        <div class="drv-specs-row">
+      <div class="brand-body">
+        <p class="brand-desc">Enterprise SAS HDDs deliver dual-port redundancy, sustained throughput and a design life suited to 24/7 server and storage array operation. Available in 2.5″ SFF and 3.5″ LFF at 7.2K, 10K and 15K RPM, from 300 GB to 20 TB.</p>
+        <div class="brand-specs-grid" style="grid-template-columns: repeat(2, 1fr);">
           <div>
-            <p class="drv-spec-label">Interface</p>
-            <p class="drv-spec-val">SAS 12Gb/s, SAS 6Gb/s</p>
+            <p class="brand-spec-label">Interface</p>
+            <p class="brand-spec-val">SAS 12Gb/s, SAS 6Gb/s</p>
           </div>
           <div>
-            <p class="drv-spec-label">Form Factors</p>
-            <p class="drv-spec-val">2.5″ SFF · 3.5″ LFF</p>
+            <p class="brand-spec-label">Form Factors</p>
+            <p class="brand-spec-val">2.5″ SFF · 3.5″ LFF</p>
           </div>
           <div>
-            <p class="drv-spec-label">Spindle Speeds</p>
-            <p class="drv-spec-val">7,200 rpm (nearline), 10K, 15K rpm</p>
+            <p class="brand-spec-label">Spindle Speeds</p>
+            <p class="brand-spec-val">7,200 rpm (nearline), 10K, 15K rpm</p>
           </div>
           <div>
-            <p class="drv-spec-label">Capacity Range</p>
-            <p class="drv-spec-val">300 GB to 20 TB</p>
+            <p class="brand-spec-label">Capacity Range</p>
+            <p class="brand-spec-val">300 GB to 20 TB</p>
           </div>
-          {% comment %} <div>
-            <p class="drv-spec-label">Compatible With</p>
-            <p class="drv-spec-val">Dell · HPE · Lenovo · IBM</p>
-          </div>
-          <div>
-            <p class="drv-spec-label">Availability</p>
-            <p class="drv-spec-val">New &amp; Refurbished</p>
-          </div> {% endcomment %}
         </div>
       </div>
     </div>
 
     <!-- SATA SSD -->
-    <div class="drv-type-row">
-      <div class="drv-type-sidebar">
+    <div class="brand-row">
+      <div class="brand-sidebar">
         <div>
-          <div class="drv-type-icon-big"></div>
-          {% comment %} <div class="drv-type-badge">SATA SSD</div> {% endcomment %}
-          <div class="drv-type-name">SATA Solid State Drives</div>
-          <p class="drv-type-tagline">A direct drop-in replacement for SATA HDDs, delivering faster boot times and lower power draw with no hardware changes.</p>
+          <div class="brand-icon-big"></div>
+          {% comment %} <div class="brand-badge">SATA SSD</div> {% endcomment %}
+          <div class="brand-logo-text">SATA Solid State Drives</div>
+          <p class="brand-tagline">A direct drop-in replacement for SATA HDDs, delivering faster boot times and lower power draw with no hardware changes.</p>
         </div>
         <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
           <i class="btn-curve"></i>
           <span class="btn-title">Get a Quote →</span>
         </a>
       </div>
-      <div class="drv-type-body">
-        <p class="drv-type-desc">SATA SSDs fit the same 2.5″ and 3.5″ bays as conventional HDDs with no hardware changes required. We offer two endurance levels per capacity: read-intensive (~1 DWPD) and mixed-use (~3 DWPD), fully compatible with Dell PowerEdge, HPE ProLiant, Lenovo ThinkSystem and IBM servers.</p>
-        <div class="drv-specs-row">
+      <div class="brand-body">
+        <p class="brand-desc">SATA SSDs fit the same 2.5″ and 3.5″ bays as conventional HDDs with no hardware changes required. We offer two endurance levels per capacity: read-intensive (~1 DWPD) and mixed-use (~3 DWPD), fully compatible with Dell PowerEdge, HPE ProLiant, Lenovo ThinkSystem and IBM servers.</p>
+        <div class="brand-specs-grid" style="grid-template-columns: repeat(2, 1fr);">
           <div>
-            <p class="drv-spec-label">Interface</p>
-            <p class="drv-spec-val">SATA 6Gb/s</p>
+            <p class="brand-spec-label">Interface</p>
+            <p class="brand-spec-val">SATA 6Gb/s</p>
           </div>
           <div>
-            <p class="drv-spec-label">Form Factors</p>
-            <p class="drv-spec-val">2.5″ SFF · 3.5″ LFF</p>
+            <p class="brand-spec-label">Form Factors</p>
+            <p class="brand-spec-val">2.5″ SFF · 3.5″ LFF</p>
           </div>
           <div>
-            <p class="drv-spec-label">Read Speed</p>
-            <p class="drv-spec-val">Up to 560 MB/s</p>
+            <p class="brand-spec-label">Read Speed</p>
+            <p class="brand-spec-val">Up to 560 MB/s</p>
           </div>
           <div>
-            <p class="drv-spec-label">Capacities</p>
-            <p class="drv-spec-val">240 GB · 480 GB · 960 GB · 1.92 TB · 3.84 TB · 7.68 TB</p>
+            <p class="brand-spec-label">Capacities</p>
+            <p class="brand-spec-val">240 GB · 480 GB · 960 GB · 1.92 TB · 3.84 TB · 7.68 TB</p>
           </div>
-          {% comment %} <div>
-            <p class="drv-spec-label">Endurance</p>
-            <p class="drv-spec-val">Read-Intensive &amp; Mixed-Use</p>
-          </div>
-          <div>
-            <p class="drv-spec-label">Availability</p>
-            <p class="drv-spec-val">New &amp; Refurbished</p>
-          </div> {% endcomment %}
         </div>
       </div>
     </div>
 
     <!-- NVMe SSD -->
-    <div class="drv-type-row">
-      <div class="drv-type-sidebar">
+    <div class="brand-row">
+      <div class="brand-sidebar">
         <div>
-          <div class="drv-type-icon-big"></div>
-          {% comment %} <div class="drv-type-badge">NVMe SSD</div> {% endcomment %}
-          <div class="drv-type-name">NVMe Solid State Drives</div>
-          <p class="drv-type-tagline">The highest-performance storage interface available, communicating directly over PCIe for sub-millisecond latency.</p>
+          <div class="brand-icon-big"></div>
+          {% comment %} <div class="brand-badge">NVMe SSD</div> {% endcomment %}
+          <div class="brand-logo-text">NVMe Solid State Drives</div>
+          <p class="brand-tagline">The highest-performance storage interface available, communicating directly over PCIe for sub-millisecond latency.</p>
         </div>
         <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
           <i class="btn-curve"></i>
           <span class="btn-title">Get a Quote →</span>
         </a>
       </div>
-      <div class="drv-type-body">
-        <p class="drv-type-desc">NVMe drives communicate directly over PCIe, bypassing legacy storage protocols for exceptional throughput and sub-millisecond latency. Suited to databases, virtualisation and AI workloads. Compatible with Dell PowerEdge (14G+), HPE ProLiant Gen10+ and Lenovo ThinkSystem.</p>
-        <div class="drv-specs-row">
+      <div class="brand-body">
+        <p class="brand-desc">NVMe drives communicate directly over PCIe, bypassing legacy storage protocols for exceptional throughput and sub-millisecond latency. Suited to databases, virtualisation and AI workloads. Compatible with Dell PowerEdge (14G+), HPE ProLiant Gen10+ and Lenovo ThinkSystem.</p>
+        <div class="brand-specs-grid" style="grid-template-columns: repeat(2, 1fr);">
           <div>
-            <p class="drv-spec-label">Interface</p>
-            <p class="drv-spec-val">PCIe 4.0 / 5.0 NVMe</p>
+            <p class="brand-spec-label">Interface</p>
+            <p class="brand-spec-val">PCIe 4.0 / 5.0 NVMe</p>
           </div>
           <div>
-            <p class="drv-spec-label">Form Factors</p>
-            <p class="drv-spec-val">U.2 (2.5″) · M.2 · EDSFF</p>
+            <p class="brand-spec-label">Form Factors</p>
+            <p class="brand-spec-val">U.2 (2.5″) · M.2 · EDSFF</p>
           </div>
           <div>
-            <p class="drv-spec-label">Read Speed</p>
-            <p class="drv-spec-val">Up to 7,000 MB/s</p>
+            <p class="brand-spec-label">Read Speed</p>
+            <p class="brand-spec-val">Up to 7,000 MB/s</p>
           </div>
           <div>
-            <p class="drv-spec-label">Capacity Range</p>
-            <p class="drv-spec-val">400 GB to 30.72 TB</p>
+            <p class="brand-spec-label">Capacity Range</p>
+            <p class="brand-spec-val">400 GB to 30.72 TB</p>
           </div>
-          {% comment %} <div>
-            <p class="drv-spec-label">Best For</p>
-            <p class="drv-spec-val">Databases · Virtualisation · AI</p>
-          </div>
-          <div>
-            <p class="drv-spec-label">Availability</p>
-            <p class="drv-spec-val">New &amp; Refurbished</p>
-          </div> {% endcomment %}
         </div>
       </div>
     </div>
-
-    <!-- Can't find -->
-    {% comment %} <div class="drv-cant-find">
-      <div>
-        <p>Can't Find Your Drive Specification?</p>
-        <span>Share your server make, model and cage type — we'll confirm the compatible specification before quoting.</span>
-      </div>
-      <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
-        <i class="btn-curve"></i>
-        <span class="btn-title">Contact Us →</span>
-      </a>
-    </div> {% endcomment %}
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════
      INTERFACE GUIDE — COMPARISON TABLE
 ═══════════════════════════════════════ -->
-<section class="drv-interface-section">
-  <div class="drv-interface-inner">
-    <div class="drv-section-header">
-      {% comment %} <span class="drv-label">Interface Selection Guide</span> {% endcomment %}
-      <h2>SAS, SATA or NVMe: Which Interface Do You Need?</h2>
-      <p>Use the guide below to match the interface to your workload and server. Not sure? Call us and we will confirm compatibility before you order.</p>
-    </div>
-    <div class="drv-iface-table">
-      <table>
+<section class="main-section">
+  <div class="auto-container">
+      <h2 class="header-title">SAS, SATA or NVMe: Which Interface Do You Need?</h2>
+      <p class="header-para">Use the guide below to match the interface to your workload and server. Not sure? Call us and we will confirm compatibility before you order.</p>
+    <div class="compare-table-scroll">
+      <table class="compare-table">
         <thead>
           <tr>
             <th>Specification </th>
@@ -619,9 +398,9 @@ Shop new & refurbished enterprise server hard drives & SSDs at Zaco, including 2
           </tr>
           <tr class="best-row">
             <td></td>
-            <td>Best choice for high-availability servers and storage arrays where redundant data paths are required.</td>
-            <td>Ideal for OS boot volumes, secondary storage and cost-sensitive builds where dual-path redundancy is not required.</td>
-            <td>Choose NVMe when your workload is I/O-bound. Databases, virtualisation and AI inference benefit most.</td>
+            <td style="font-style: italic;">Best choice for high-availability servers and storage arrays where redundant data paths are required.</td>
+            <td style="font-style: italic;">Ideal for OS boot volumes, secondary storage and cost-sensitive builds where dual-path redundancy is not required.</td>
+            <td style="font-style: italic;">Choose NVMe when your workload is I/O-bound. Databases, virtualisation and AI inference benefit most.</td>
           </tr>
         </tbody>
       </table>
@@ -632,39 +411,38 @@ Shop new & refurbished enterprise server hard drives & SSDs at Zaco, including 2
 <!-- ═══════════════════════════════════════
      WHY ZACO
 ═══════════════════════════════════════ -->
-
-<section class="drv-intro">
-  <div class="drv-intro-inner">
-     {% comment %} <span class="drv-label">Server Hard Drives &amp; Solid-State Drives</span> {% endcomment %}
-    <h2>Why Do UK Businesses Buy HDD &amp; SSDs From Zaco?</h2>
-    <div class="drv-intro-grid">
-      <div>
-        <p>At Zaco Computers UK Limited, a trusted IT solutions company in the UK, we specialise in high-quality new and refurbished enterprise IT hardware from trusted brands like HPE, Dell, Lenovo, and IBM. Every hard drive and SSD we supply undergoes rigorous qualification testing and certified data erasure by our expert technical team, guaranteeing compatibility and reliable performance across a wide range of server platforms and operating systems, old and new.<br>We also offer:</p>
-        <p>✓ Server-matched supply — interface, firmware and form factor confirmed against your server model before every order</p>
-        <p>✓ Warranty included on every unit</p>
-        <p>✓ 24/7 free remote support for compatibility queries</p>
-        <p>✓ UK-stocked and dispatched from London within minimal time.</p>
-      </div>
-      <div >
-        <img src="{% static 'images/uk/ssd1.jpeg' %}" alt="Enterprise HDDs and SSDs UK">
-      </div>
-    </div>
-  </div>
+<section class="main-section">
+    <div class="auto-container">
+      <h2 class="header-title" style="text-align: left;">Why Do UK Businesses Buy HDD &amp; SSDs From Zaco?</h2>
+        <div class="row intro">
+            <div class="col-md-12 col-lg-8">
+                <div>
+                    {% comment %} <h2>Why Do UK Businesses Buy HDD &amp; SSDs From Zaco?</h2> {% endcomment %}
+                    <p>At Zaco Computers UK Limited, a trusted IT solutions company in the UK, we specialise in high-quality new and refurbished enterprise IT hardware from trusted brands like HPE, Dell, Lenovo, and IBM. Every hard drive and SSD we supply undergoes rigorous qualification testing and certified data erasure by our expert technical team, guaranteeing compatibility and reliable performance across a wide range of server platforms and operating systems, old and new.<br>We also offer:</p>
+                    <p>✓ Server-matched supply — interface, firmware and form factor confirmed against your server model before every order</p>
+                    <p>✓ Warranty included on every unit</p>
+                    <p>✓ 24/7 free remote support for compatibility queries</p>
+                    <p>✓ UK-stocked and dispatched from London within minimal time.</p>
+                  </div>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center ">
+                <img class="why-img" 
+                    src="{% static 'images/uk/uk_ssd_hdd.jpeg' %}"
+                    alt="Enterprise HDDs and SSDs UK"> 
+            </div>
+    </div>       
 </section>
 
 
 <!-- ═══════════════════════════════════════
      FAQ
 ═══════════════════════════════════════ -->
-<section class="faq-section">
-  <div class="faq-section-inner">
-    <div class="faq-section-header" >
-      {% comment %} <p style="text-align: center">Frequently Asked Questions</p> {% endcomment %}
-      <h2 >Frequently Asked Questions About HDD &amp; Solid State Drives</h2>
-      <p >Answers to the questions we receive most frequently from IT procurement leads and infrastructure managers. Contact us if your query is not addressed below.</p>
-    </div>
-
-    <div class="faq-section-table">
+<section class="main-section">
+  <div class="auto-container">
+      <h2 class="header-title">Frequently Asked Questions About HDD &amp; Solid State Drives</h2>
+      <p class="header-para">Answers to the questions we receive most frequently from IT procurement leads and infrastructure managers. Contact us if your query is not addressed below.</p>
+    
+      <div class="faq-section">
       <div class="faq-item">
         <div class="faq-question">1. Which storage type is faster, HDD or SSD?</div>
         <div class="faq-answer">- SSDs deliver much faster data transfer rates and quicker access times than HDDs.</div>
@@ -696,23 +474,19 @@ Shop new & refurbished enterprise server hard drives & SSDs at Zaco, including 2
 <!-- ═══════════════════════════════════════
      FINAL CTA
 ═══════════════════════════════════════ -->
-<section class="drv-cta">
-  <div class="drv-cta-inner">
-    <span class="drv-label">Ready to Order?</span>
-    <h2>Get a Same-Day Quote on Hard Drives and SSDs</h2>
-    <p>Tell us your server model, drive type and required quantity. Call us on <a href="tel:+442034358060">+44 20 3435 8060</a> or email us at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>, and our expert team will provide a fully compatible recommendation and quote within hours.</p>
-    <div class="drv-cta-btns">
+<div class="auto-container" style="padding-block: 40px">
+  <div class="cta-section">
+    <div class="grey-label">Ready to Order?</div>
+    <h2 class="header-title">Get a Same-Day Quote on Hard Drives and SSDs</h2>
+    <p class="header-para">Tell us your server model, drive type and required quantity. Call us on <a href="tel:+442034358060">+44 20 3435 8060</a> or email us at <a href="mailto:info@zacocomputer.com">info@zacocomputer.com</a>, and our expert team will provide a fully compatible recommendation and quote within hours.</p>
+    <div class="link-box" style="margin-top: 30px; justify-content: center;">
       <a class="theme-btn btn-style-one" href="{% url 'uk-contact' %}">
         <i class="btn-curve"></i>
         <span class="btn-title">Request a Quote →</span>
       </a>
-      {% comment %} <a class="theme-btn btn-style-two" href="tel:+442034358060">
-        <i class="btn-curve"></i>
-        <span class="btn-title">Call +44 20 3435 8060</span>
-      </a> {% endcomment %}
     </div>
   </div>
-</section>
+</div>
 
 <script>
 // FAQ accordion

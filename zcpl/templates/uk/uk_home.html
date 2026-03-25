@@ -41,6 +41,88 @@
   grid-template-columns:1fr;
   }
   }
+
+  /*Three colum grid*/
+    .three-column-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .three-column-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: 0.3s ease;
+    }
+
+    .three-column-card:hover {
+      border: 2px solid #1a3546;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .three-column-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .three-column-icon {
+      background: #1a3c6e;
+      color: #fff;
+      border-radius: 6px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .three-column-card h4 {
+      margin: 0;
+      color: #1a3c6e;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .three-column-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .three-column-card ul li {
+      font-size: 13.5px;
+      color: #000;
+      padding: 6px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .three-column-card ul li:last-child {
+      border-bottom: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .three-column-card {
+        padding: 18px;
+      }
+
+      .three-column-card h4 {
+        font-size: 14px;
+      }
+
+      .three-column-card ul li {
+        font-size: 13px;
+      }
+    }
+
 </style>
 
 
@@ -67,7 +149,7 @@
 </section>
 
 <!-- Introduction Section -->
-<section class="about-seven" id="about" style="background-color: #EDF1F3;">
+<section class="main-section">
   <div class="auto-container" >
     <div class="row">
       <div class="col-md-12 col-lg-6 wow fadeInLeft" data-wow-duration="1500ms">
@@ -87,7 +169,7 @@
             </h2>
           </div>
           <p class="about-seven__summery" style="color: #000000;">
-            As a premier IT solutions company and managed IT service provider, Zaco Computers UK Limited is dedicated to delivering innovative IT solutions and services tailored to meet the needs of businesses across the United Kingdom. With expertise spanning <a href="https://www.zacocomputer.com/shop/it-hardware/">enterprise IT hardware</a>, VMware virtualisation, remote working solutions, and infrastructure support, we empower organisations to achieve operational excellence and sustainable growth.
+            As a premier IT solutions company and managed IT service provider, Zaco Computers UK Limited is dedicated to delivering innovative IT solutions and services tailored to meet the needs of businesses across the United Kingdom. With expertise spanning <a href="{% url "uk-it-hardware" %}">enterprise IT hardware</a>, VMware virtualisation, remote working solutions, and infrastructure support, we empower organisations to achieve operational excellence and sustainable growth.
           </p>
         </div>
       </div>
@@ -96,7 +178,7 @@
 </section>
 
 <!-- Introduction Section 2 -->
-<section class="about-six" style="margin-top: 0; background-color: #f7f9fb;">
+<section class="main-section">
   <div class="auto-container">
     <div class="row">
       <div class="col-md-12 col-lg-5" style="margin-block: auto">
@@ -132,7 +214,7 @@
 
 
 <!-- UK based Supplier of Enterprise Servers and IT Components Across the Globe -->
-<section class="lcci-section py-5" style="background-color: #EDF1F3;">
+<section class="main-section">
    <div class="auto-container">
     <div class="row">
       <div class="col-md-12 col-lg-12" style="margin-block: auto">
@@ -143,16 +225,16 @@
             </h2>
           </div>
           <div class="about-six__text">
-            <p style="color: #000000;">As an established trader of brand new and refurbished servers, <a href="https://www.zacocomputer.com/shop/it-hardware/spare-parts/">spare parts</a>, and enterprise IT hardware, Zaco Computers UK Limited supplies businesses, data centres, and IT professionals across the globe with cost effective, warranty backed solutions. Our extensive inventory includes:
+            <p style="color: #000000;">As an established trader of brand new and <a href="{% url "uk-server" %}">refurbished servers,</a> <a href="{% url "uk-server-components" %}">spare parts</a>, and enterprise IT hardware, Zaco Computers UK Limited supplies businesses, data centres, and IT professionals across the globe with cost effective, warranty backed solutions. Our extensive inventory includes:
               <ul style="color: #000000;">  
-              <li><b>●	<a href="https://www.zacocomputer.com/shop/it-hardware/hard-drive/">Hard Disk Drives (HDD)</a> –</b> SAS and SATA drives for enterprise storage</li>
+              <li><b>●	<a href="{% url "uk-server-hdd-sdd" %}">Hard Disk Drives (HDD)</a> –</b> SAS and SATA drives for enterprise storage</li>
                 <li><b>●	<a href="https://www.zacocomputer.com/shop/it-hardware/memory/">Server Memory (RAM)</a> -</b> DDR3, DDR4, and DDR5 modules</li>
                 <li><b>●	<a href="https://www.zacocomputer.com/shop/it-hardware/server-processor/">Processors (CPU)</a> –</b> Intel Xeon and AMD EPYC</li>
                 <li><b>●	<a href="https://www.zacocomputer.com/shop/it-hardware/ssd/">Solid State Drives (SSD)</a> –</b> High performance enterprise storage solutions</li>
                 <li><b>●	Enterprise Servers –</b> Dell PowerEdge, HPE ProLiant, Lenovo ThinkSystem</li>
                 <li><b>●	Server Spare Parts –</b> Power supplies, RAID controllers, network adapters</li>
-                <li><b>●	<a href="https://www.zacocomputer.com/shop/it-hardware/storage/">Storage Solutions</a> –</b> SAN, NAS, and storage arrays</li> 
-                <li><b>●	Networking Equipment –</b> Cisco switches, routers, and firewalls</li>
+                <li><b>●	<a href="{% url "uk-server-storage" %}">Storage Solutions</a> –</b> SAN, NAS, and storage arrays</li> 
+                <li><b>●	<a href="{% url "uk-networking" %}">Networking Equipment</a> –</b> Cisco switches, routers, and firewalls</li>
               </ul>
               <br>
             <p style="color: #000000;">
@@ -167,7 +249,7 @@
 
 
 <!-- London Chamber of Commerce and Industry -->
-<section class="lcci-section py-5" style="background-color: #f7f9fb;">
+<section class="main-section">
   <div class="auto-container">
     <div class="row justify-content-center align-items-center">
       
@@ -203,7 +285,7 @@
 
 
 <!-- Your Trusted IT Partner – Zaco Computers UK Limited -->
-<section class="about-eleven" id="about" style="background-color: #EDF1F3;">
+<section class="main-section">
     <div class="auto-container">
         <div class="row">
             <div class="col-lg-6">
@@ -217,7 +299,7 @@
                         <h2 class="sec-title-eight__title">Your Trusted IT Partner – Zaco Computers UK Limited</h2>
                     </div>
                     <p class="about-eleven__summery" style="color: #000000;">
-                      From IT infrastructure support to software solutions and cybersecurity, we're here to support your business every step of the way. Our team of experts is committed to delivering personalised service and tailored solutions that align with your unique goals and objectives.<br><br> We provide multi vendor support across leading technology platforms including <a href="https://www.zacocomputer.com/shop/dell/">Dell</a>, <a href="https://www.zacocomputer.com/shop/hpe/">HPE</a>, <a href="https://www.zacocomputer.com/shop/lenovo/">Lenovo</a>, <a href="https://www.zacocomputer.com/shop/ibm/">IBM</a>, <a href="https://www.zacocomputer.com/shop/cisco/">Cisco</a>, Microsoft, VMware, and Veeam, ensuring seamless integration and compatibility across your entire IT estate.
+                      From IT infrastructure support to software solutions and cybersecurity, we're here to support your business every step of the way. Our team of experts is committed to delivering personalised service and tailored solutions that align with your unique goals and objectives.<br><br> We provide multi vendor support across leading technology platforms including <a href="https://www.zacocomputer.com/shop/dell/">Dell</a>, <a href="https://www.zacocomputer.com/shop/hpe/">HPE</a>, <a href="https://www.zacocomputer.com/shop/lenovo/">Lenovo</a>, <a href="https://www.zacocomputer.com/shop/ibm/">IBM</a>, <a href="https://www.zacocomputer.com/shop/cisco/">Cisco</a>, <a href="{% url "uk-microsoft-support" %}">Microsoft,</a> <a href="{% url "uk-vmware-support" %}">VMware,</a> and Veeam, ensuring seamless integration and compatibility across your entire IT estate.
 
                     </p>
                 </div>
@@ -226,276 +308,226 @@
     </div>
 </section>
 
-
-<section class="about-six" style="background-color: #f7f9fb;">
-  <div class="about-six__curv">
+<!-- Managed IT Services in the United Kingdom -->
+<section class="main-section">
     <div class="auto-container">
       <div class="row">
         <div class="col-md-12 col-lg-12" >
-          <div class="about-six__content">
-            <div class="sec-title-six">
-              <h2 class="sec-title-six__title">
+              <h2 class="header-title">
                   Managed IT Services in the United Kingdom
               </h2>
-            </div>
-            <div class="about-six__text" style="color: #000000;">
-              Experience peace of mind with our managed IT services. From proactive monitoring and maintenance to strategic planning and implementation, we handle all aspects of IT management so you can focus on what matters most – running your business.
-              <br><br>
-              As a leading managed IT services company in the UK, we offer comprehensive IT infrastructure support covering:
-              </div>
+            <div class="header-para" style="text-align: left;">
+              Experience peace of mind with our managed IT services. From proactive monitoring and maintenance to strategic planning and implementation, we handle all aspects of IT management so you can focus on what matters most – running your business.</div>
+              <div class="header-para" style="text-align: left;">As a leading managed IT services company in the UK, we offer comprehensive IT infrastructure support covering:</div>
             <div class="it-services-grid">
-              <div style="background:#fff;border:1px solid #e2e8f0;border-left:4px solid #1a3c6e;border-radius:8px;padding:18px 14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:10px;">
-                <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;">🖥</div>
-                <div><b style="color:#1a3c6e;display:block;margin-bottom:4px;font-size:13.5px;">Server Maintenance</b><span style="color:#555;font-size:12.5px;line-height:1.5;">Monitoring, patching, and lifecycle management</span></div>
+              <div class="problem-card" style="border-left:4px solid #1a3c6e;">
+                <div class="icon" style="font-size: 1.5rem;">🖥</div>
+                <h4>Server Maintenance</h4>
+                <p>Monitoring, patching, and lifecycle management</p>
               </div>
-              <div style="background:#fff;border:1px solid #e2e8f0;border-left:4px solid #1a3c6e;border-radius:8px;padding:18px 14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:10px;">
-                <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;">💾</div>
-                <div><b style="color:#1a3c6e;display:block;margin-bottom:4px;font-size:13.5px;">Storage Maintenance</b><span style="color:#555;font-size:12.5px;line-height:1.5;">Capacity planning and performance tuning</span></div>
+              <div class="problem-card" style="border-left:4px solid #1a3c6e;">
+                <div class="icon" style="font-size: 1.4rem;">💾</div>
+                <h4>Storage Maintenance</h4>
+                <p>Capacity planning and performance tuning</p>
               </div>
-              <div style="background:#fff;border:1px solid #e2e8f0;border-left:4px solid #1a3c6e;border-radius:8px;padding:18px 14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:10px;">
-                <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;">🌐</div>
-                <div><b style="color:#1a3c6e;display:block;margin-bottom:4px;font-size:13.5px;">Network Maintenance</b><span style="color:#555;font-size:12.5px;line-height:1.5;">Configuration management and security updates</span></div>
+              <div class="problem-card" style="border-left:4px solid #1a3c6e;">
+                <div class="icon" style="font-size: 1.4rem;">🌐</div>
+                <h4>Network Maintenance</h4>
+                <p>Configuration management and security updates</p>
               </div>
-              <div style="background:#fff;border:1px solid #e2e8f0;border-left:4px solid #1a3c6e;border-radius:8px;padding:18px 14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:10px;">
-                <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;">⚙</div>
-                <div><b style="color:#1a3c6e;display:block;margin-bottom:4px;font-size:13.5px;">Virtualisation Management</b><span style="color:#555;font-size:12.5px;line-height:1.5;">VMware vSphere, ESXi, vCenter, Hyper V support</span></div>
+              <div class="problem-card" style="border-left:4px solid #1a3c6e;">
+                <div class="icon" style="font-size: 1.4rem;">⚙️</div>
+                <h4>Virtualisation Management</h4>
+                <p>VMware vSphere, ESXi, vCenter, Hyper V support</p>
               </div>
-              <div style="background:#fff;border:1px solid #e2e8f0;border-left:4px solid #1a3c6e;border-radius:8px;padding:18px 14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column;gap:10px;">
-                <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;">🕐</div>
-                <div><b style="color:#1a3c6e;display:block;margin-bottom:4px;font-size:13.5px;">24x7 Support</b><span style="color:#555;font-size:12.5px;line-height:1.5;">Round the clock monitoring and incident response</span></div>
+              <div class="problem-card" style="border-left:4px solid #1a3c6e;">
+                <div class="icon" style="font-size: 1.4rem;">🕐</div>
+                <h4>24x7 Support</h4>
+                <p>Round the clock monitoring and incident response</p>
               </div>
             </div>
-          </div>
+
         </div>
         </div>
       </div>
     </div>
-  </div>
+  
 
 </section>
 
-<section class="about-six" style="background-color: #EDF1F3;">
-  <div class="about-six__curv">
+<!-- Third Party VMware Support – Extend Your Perpetual Licenses -->
+<section class="main-section bg-light">
     <div class="auto-container" >
       <div class="row">
         <div class="col-md-12 col-lg-12" >
-          <div class="about-six__content">
-            <div class="sec-title-six">
-              <h2 class="sec-title-six__title " style="line-height: 1.5; margin-top: 0;">
-                  Third Party VMware Support – Extend Your Perpetual Licenses
-              </h2>
-            </div>
-            <div class="about-six__text" style="color: #000000;">
+            <h2 class="header-title">
+                  Third Party VMware Support – Extend Your Perpetual Licenses</h2>
+            <div class="header-para">
               VMware remains one of the most robust hypervisors, but rising subscription costs create financial pressure. Zaco Computers UK Limited offers third party support for existing VMware perpetual licenses, enabling you to:
-              <br><br>
-              <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">Extend the life of current VMware investments without costly upgrades</b>
-                  </div>
-                </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">Reduce operational costs by up to 50% compared to OEM support</b>
-                  </div>
-                </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">Maintain business continuity with faster response times</b>
-                  </div>
-                </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">Avoid downtime through proactive monitoring</b>
-                  </div>
-                </div>
-              </div>
-              <h3 style="color: #1a3c6e; font-weight:600 ;">VMware Technologies We Support</h3>
-              <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">VMware vSphere (ESXi and vCenter)</b>
-                  </div>
-                </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">VMware Horizon</b>
-                  </div>
-                </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">VMware Workstation</b>
-                  </div>
-                </div>
-              </div>
-              
-              We assist with hypervisor installation, virtual machine creation, vMotion, Storage vMotion, Distributed Resource Scheduler, High Availability, and Fault Tolerance.
-
             </div>
-          </div>
-        </div>
+              <div class="service-grid">
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point" style="text-align: left;">Extend the life of current VMware investments without costly upgrades</div>                
+                </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point" style="text-align: left;">Reduce operational costs by up to 50% compared to OEM support</div>
+                </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point" style="text-align: left;">Maintain business continuity with faster response times</div>
+                </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point">Avoid downtime through proactive monitoring</div>
+                </div>
+              </div>
+              <h3 style="color: #1a3c6e; font-weight:600; margin-top: 30px; ">VMware Technologies We Support</h3>
+              <div class="service-grid">
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point">VMware vSphere (ESXi and vCenter)</div>
+                </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point">VMware Horizon</div>
+                </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point">VMware Workstation</div>
+                </div>
+              </div>
+              <p class="header-para" style="text-align: left;">We assist with hypervisor installation, virtual machine creation, vMotion, Storage vMotion, Distributed Resource Scheduler, High Availability, and Fault Tolerance.</p>
       </div>
     </div>
-  </div>
 </section>
 
-<section class="about-six" style="background-color: #f7f9fb;">
-  <div class="about-six__curv">
+<!-- Tird Party Microsoft Support – Maximise ROI Without Forced Upgrades -->
+<section class="main-section bg-white">
     <div class="auto-container ">
       <div class="row">
-        <div class="col-md-12 col-lg-12" >
-          <div class="about-six__content">
-            <div class="sec-title-six" style="margin-bottom: 10px ;">
-              <h2 class="sec-title-six__title " style="line-height: 1.5;">
+        <div class="col-md-12 col-lg-12" >    
+              <h2 class="header-title">
                   Third Party Microsoft Support – Maximise ROI Without Forced Upgrades
               </h2>
-            </div>
-            <div class="about-six__text" style="color: #000000;">
+            <div class="header-para">
               If your Microsoft environment is stable and meeting business requirements, upgrading is unnecessary. Zaco Computers UK Limited provides third party Microsoft support to extend the life of existing deployments.
-              <br><br>
+            </div>
               <h3 style="color: ##1a3c6e; font-weight: 600;">Microsoft Technologies We Support</h3>
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:16px;">
-                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;">🖥</div>
-                    <h4 style="margin:0;color:#1a3c6e;font-size:15px;">Windows Server</h4>
+              <div class="three-column-grid">
+                <div class="three-column-card">
+                  <div class="three-column-card-header">
+                    <div class="three-column-icon">🖥</div>
+                    <h4>Windows Server</h4>
                   </div>
-                  <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;border-bottom:1px solid #f0f0f0;">Windows Server 2012 to 2025</li>
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;border-bottom:1px solid #f0f0f0;">Active Directory, DNS, DHCP, DFS</li>
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;">Certificate Services, IIS, Windows Deployment</li>
+                  <ul>
+                    <li>Windows Server 2012 to 2025</li>
+                    <li>Active Directory, DNS, DHCP, DFS</li>
+                    <li>Certificate Services, IIS, Windows Deployment</li>
                   </ul>
                 </div>
-                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;">📦</div>
-                    <h4 style="margin:0;color:#1a3c6e;font-size:15px;">Application Platforms</h4>
+
+                <div class="three-column-card">
+                  <div class="three-column-card-header">
+                    <div class="three-column-icon">📦</div>
+                    <h4>Application Platforms</h4>
                   </div>
-                  <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;border-bottom:1px solid #f0f0f0;">SQL Server 2008 to 2022</li>
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;">Azure DevOps, Dynamics CRM</li>
+                  <ul>
+                    <li>SQL Server 2008 to 2022</li>
+                    <li>Azure DevOps, Dynamics CRM</li>
                   </ul>
                 </div>
-                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <div style="background:#1a3c6e;color:#fff;border-radius:6px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;">🔗</div>
-                    <h4 style="margin:0;color:#1a3c6e;font-size:15px;">Remote Access & Virtualisation</h4>
+
+                <div class="three-column-card">
+                  <div class="three-column-card-header">
+                    <div class="three-column-icon">🔗</div>
+                    <h4>Remote Access &amp; Virtualisation</h4>
                   </div>
-                  <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;border-bottom:1px solid #f0f0f0;">Remote Desktop Services and Gateway</li>
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;border-bottom:1px solid #f0f0f0;">Hyper V</li>
-                    <li style="font-size:13.5px;color: #000000;padding:6px 0;">Network Policy and Remote Access</li>
+                  <ul>
+                    <li>Remote Desktop Services and Gateway</li>
+                    <li>Hyper V</li>
+                    <li>Network Policy and Remote Access</li>
                   </ul>
                 </div>
               </div>
-              </div>
-          </div>
-        </div>
+            </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 
-<section class="about-six" style="background-color: #EDF1F3;">
-  <div class="about-six__curv">
+<!-- Remote Support Delivery – 24x7 Coverage from India for UK Businesses -->
+<section class="main-section bg-light">
     <div class="auto-container">
       <div class="row">
         <div class="col-md-12 col-lg-12" style="margin-block: auto">
-          <div class="about-six__content">
-            <div class="sec-title-six" style="margin-bottom: 20px;">
-              <h2 class="sec-title-six__title" style="line-height: 59px;">
+              <h2 class="header-title">
                 Remote Support Delivery – 24x7 Coverage from India for UK Businesses
               </h2>
-            </div>
-            <div class="about-six__text">
-              <p style="color: #000000; margin-bottom: 30px;">Zaco delivers managed IT services remotely from our Service Desk team in India, providing UK businesses with:</p>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0 24px;">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-top:4px solid #1a3c6e;border-radius:8px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                    <div style="font-size:28px;margin-bottom:10px;">🕐</div>
-                    <b style="color:#1a3c6e;display:block;margin-bottom:6px;">Round the Clock Coverage</b>
-                    <span style="color:#666;font-size:13px;">True 24x7 support for issues outside UK hours</span>
+              <p class="header-para">Zaco delivers managed IT services remotely from our Service Desk team in India, providing UK businesses with:</p>
+                <div class="it-services-grid">
+                  <div class="problem-card" style="border-top: 4px solid #1a3c6e;">
+                    <div class="icon" style="font-size: 1.5rem;">🕐</div>
+                    <h4>Round the Clock Coverage</h4>
+                    <p>True 24x7 support for issues outside UK hours</p>
                   </div>
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-top:4px solid #1a3c6e;border-radius:8px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                    <div style="font-size:28px;margin-bottom:10px;">⚡</div>
-                    <b style="color:#1a3c6e;display:block;margin-bottom:6px;">Faster Resolution</b>
-                    <span style="color:#666;font-size:13px;">Continuous monitoring reduces downtime</span>
+                  <div class="problem-card" style="border-top: 4px solid #1a3c6e;">
+                    <div class="icon" style="font-size: 1.5rem;">⚡</div>
+                    <h4>Faster Resolution</h4>
+                    <p>Continuous monitoring reduces downtime</p>
                   </div>
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-top:4px solid #1a3c6e;border-radius:8px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                    <div style="font-size:28px;margin-bottom:10px;">💰</div>
-                    <b style="color:#1a3c6e;display:block;margin-bottom:6px;">Cost Optimisation</b>
-                    <span style="color:#666;font-size:13px;">Enterprise grade support at reduced costs</span>
+                  <div class="problem-card" style="border-top: 4px solid #1a3c6e;">
+                    <div class="icon" style="font-size: 1.5rem;">💰</div>
+                    <h4>Cost Optimisation</h4>
+                    <p>Enterprise grade support at reduced costs</p>
                   </div>
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-top:4px solid #1a3c6e;border-radius:8px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                    <div style="font-size:28px;margin-bottom:10px;">🤝</div>
-                    <b style="color:#1a3c6e;display:block;margin-bottom:6px;">Flexible Engagement</b>
-                    <span style="color:#666;font-size:13px;">Annual contracts or on call basis</span>
+                  <div class="problem-card" style="border-top: 4px solid #1a3c6e;">
+                    <div class="icon" style="font-size: 1.5rem;">🤝</div>
+                    <h4>Flexible Engagement</h4>
+                    <p>Annual contracts or on call basis</p>
                   </div>
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-top:4px solid #1a3c6e;border-radius:8px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                    <div style="font-size:28px;margin-bottom:10px;">📋</div>
-                    <b style="color:#1a3c6e;display:block;margin-bottom:6px;">Customisable SLAs</b>
-                    <span style="color:#666;font-size:13px;">Tailored to your business criticality</span>
+                  <div class="problem-card" style="border-top: 4px solid #1a3c6e;">
+                    <div class="icon" style="font-size: 1.5rem;">📋</div>
+                    <h4>Customisable SLAs</h4>
+                    <p>Tailored to your business criticality</p>
                   </div>
                 </div>
                 <br>
-              <p style="color: #000000;">
+              <p class="header-para" style="text-align: left;">
                 Every product is certified, fully tested, and backed by warranty, ensuring reliability and value for money. Whether you need a single server hard drive or are equipping an entire data centre with refurbished servers, we configure systems to your exact specifications and deliver across the United Kingdom within days.
               </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 
-<section class="about-six" style="background-color: #f7f9fb;">
-  <div class="about-six__curv">
+<!-- Licensing Capability – VMware and Microsoft Partnership -->
+<section class="main-section bg-white">
     <div class="auto-container ">
       <div class="row">
         <div class="col-md-12 col-lg-12" style="margin-block: auto">
-          <div class="about-six__content">
-            <div class="sec-title-six">
-              <h2 class="sec-title-six__title" style="line-height: 59px; ">
+              <h2 class="header-title">
                 Licensing Capability – VMware and Microsoft Partnership
               </h2>
-            </div>
-            <div class="about-six__text">
-              <p style="color: #000000;">As a partner of VMware and Microsoft, Zaco assists with:</p>
-              <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">●	New licenses at competitive pricing</b>
-                  </div>
+              <p class="header-para">As a partner of VMware and Microsoft, Zaco assists with:</p>
+              <div  class="service-grid">
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point" style="text-align: left;">●	New licenses at competitive pricing</div>
                 </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff;border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">●	License renewals and compliance management</b>
-                  </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point" style="text-align: left;">●	License renewals and compliance management</div>
                 </div>
-                <div style="display:flex;gap:0;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
-                  <div style="background:#fff; color: #000000;font-size:14px; border:1px solid #e2e8f0;border-left:3px solid #1a3c6e;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;">
-                    <b style="color: #000000;font-size:14px;">●	License optimisation to reduce costs</b>
-                  </div>
+                <div class="service-card" style="border-left:4px solid #1a3c6e;">
+                    <div class="header-point" style="text-align: left;">●	License optimisation to reduce costs</div>
                 </div>
                   </div>
                 </div>
               </div>
                 <br>
-              <p style="color: #000000; margin-top: 0;">
+              <p class="header-para" style="text-align: left;">
                 Every product is certified, fully tested, and backed by warranty, ensuring reliability and value for money. Whether you need a single server hard drive or are equipping an entire data centre with refurbished servers, we configure systems to your exact specifications and deliver across the United Kingdom within days.
               </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 
-
-<section class="about-six" style="background-color: #EDF1F3;">
-  <div class="about-six__curv">
+<!-- Tailored Software Solutions for Seamless IT Integration -->
+<section class="main-section bg-light">
     <div class="auto-container ">
       <div class="row">
             <div class="sec-title-six">
@@ -523,10 +555,10 @@
       </div>
     </div>
   </div>
-  </div>
 </section>
 
-<section class="we-do-section" style="background-color: #f7f9fb;">
+<!-- Why Choose Zaco Computers UK Limited? -->
+<section class="main-section bg-white">
   <div class="auto-container">
       <div class="sec-title " style="text-align:center;padding-bottom:5px ">
           <h2>
@@ -642,28 +674,19 @@
   </div>
 </section>
 
-<section class="about-six" style="background-color: #EDF1F3;">
-  <div class="about-six__curv">
-    <div class="auto-container">
-      <div class="row">
-        <div class="col-md-12 col-lg-12" >
-          <div class="about-six__content">
-            <div class="sec-title-six">
-              <h2 class="sec-title-six__title" style="line-height: 59px; text-align: center;">
-                  Partner with Zaco Computers UK Limited for Reliable IT Solutions
-              </h2>
-            </div>
-            <div class="about-six__text" style="line-height: 2rem; color: #000000; text-align: center;">
-              Whether you're a small business or large enterprise, Zaco delivers cost effective, sustainable IT solutions and services.<br>Contact us today to request a quote or purchase hardware and software services. Discover how Zaco transforms IT operations while reducing costs across the United Kingdom.
-              <br>📞 Get in touch now for tailored managed IT services, refurbished servers, and expert IT infrastructure support.
-
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- cta -->
+<div class="auto-container" style="padding-block: 80px">
+  <div class="cta-section">
+      <h2 class="header-title">
+          Partner with Zaco Computers UK Limited for Reliable IT Solutions
+      </h2>
+    <div class="header-para" >
+      Whether you're a small business or large enterprise, Zaco delivers cost effective, sustainable IT solutions and services.<br>Contact us today to request a quote or purchase hardware and software services. Discover how Zaco transforms IT operations while reducing costs across the United Kingdom.
+      <br>📞 Get in touch now for tailored managed IT services, refurbished servers, and expert IT infrastructure support.
     </div>
   </div>
-</section>
+</div>
+
 
 
 

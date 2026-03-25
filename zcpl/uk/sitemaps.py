@@ -8,6 +8,15 @@ class UKSitemap(Sitemap):
     def items(self):
         return [
             "uk-home",
+            "uk-it-hardware",
+            "uk-server",
+            "uk-server-hdd-sdd",
+            "uk-networking",
+            "uk-server-storage",
+            "uk-server-components",
+            "uk-main-service",
+            "uk-vmware-support",
+            "uk-microsoft-support",
             "uk-contact",
         ]
 

@@ -43,8 +43,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link href="{% static 'css/hover.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/jarallax.css' %}" />
     <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}" />
-    <link href="{% static 'css/custom-animate.css' %}" rel="stylesheet" />
+    
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    
+    <link href="{% static 'css/custom-animate.css' %}" rel="stylesheet" />
     <!-- rtl css -->
     <link href="{% static 'css/rtl.css' %}" rel="stylesheet" />
     <!-- Responsive File -->
@@ -59,6 +61,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       id="jssDefault"
       href="{% static 'css/colors/color-10.css' %}"
     />
+    <link rel="stylesheet" href="{% static 'css/custom-globe.css' %}">
 
     <link
       rel="shortcut icon"
@@ -213,7 +216,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           width: 100%;
         }
       }
+
+      /* hide global in desktop */
+      @media (min-width: 992px){
+      .mobile-global{
+      display:none;
+      }
+      }
+    
     </style>
+    {% block schema %}{% endblock %}
+    
   </head>
 
   <body>
@@ -406,6 +419,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- Main Menu -->
                 <nav class="main-menu navbar-expand-md navbar-light">
                   <ul class="navigation clearfix">
+                    <li class="dropdown mobile-global">
+                      <a href="#">Global</a>
+                      <ul>
+                        <li><a href="/in/">India</a></li>
+                        <li><a href="/uk/">United Kingdom</a></li>
+                        <li><a href="/uae/">United Arab Emirates</a></li>
+                        <li><a href="/">Global</a></li>
+                      </ul>
+                    </li>
                     <li class="dropdown">
                       <a href="{% url 'home' %}" data-url="{% url 'home' %}">Home</a>
                     </li>
@@ -413,43 +435,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       <a href="{% url 'about_us' %}" data-url="{% url 'about_us' %}">About Us</a>
                     </li>
 
-<li class="dropdown megamenu">
-  <a href="{% url 'shop' %}" data-url="{% url 'shop' %}">Online Store</a>
+                    <li class="dropdown megamenu">
+                      <a href="{% url 'shop' %}" data-url="{% url 'shop' %}">Online Store</a>
 
-  <div class="mega-menu-wrapper">
-    <div class="mega-menu">
+                      <div class="mega-menu-wrapper">
+                        <div class="mega-menu">
 
-      {% for category in categories %}
-        <div class="mega-column">
+                          {% for category in categories %}
+                            <div class="mega-column">
 
-          <!-- MAIN CATEGORY LINK -->
-          <h4>
-            <a href="{% url 'shop_by_category' category.slug %}">
-              {{ category.name }}
-            </a>
-          </h4>
+                              <!-- MAIN CATEGORY LINK -->
+                              <h4>
+                                <a href="{% url 'shop_by_category' category.slug %}">
+                                  {{ category.name }}
+                                </a>
+                              </h4>
 
-          <!-- SUB CATEGORIES -->
-          <div class="menu-section">
-            {% for subcategory in category.subcategories.all %}
-              <a href="{% url 'shop_by_subcategory' category.slug subcategory.slug %}">
-                {{ subcategory.name }}
-              </a>
-            {% endfor %}
-          </div>
+                              <!-- SUB CATEGORIES -->
+                              <div class="menu-section">
+                                {% for subcategory in category.subcategories.all %}
+                                  <a href="{% url 'shop_by_subcategory' category.slug subcategory.slug %}">
+                                    {{ subcategory.name }}
+                                  </a>
+                                {% endfor %}
+                              </div>
 
-        </div>
-      {% endfor %}
+                            </div>
+                          {% endfor %}
 
-    </div>
-  </div>
-</li>
+                        </div>
+                      </div>
+                    </li>
 
                     <li class="dropdown">
                       <a href="{% url 'services' %}" data-url="{% url 'services' %}">Services</a>
                       <ul>
                         <li>
-                          <a href="{% url 'it-hardware' %}">IT aHardware</a>
+                          <a href="{% url 'it-hardware' %}">IT Hardware</a>
                         </li>
                         <li>
                           <a href="{% url 'server-maintenance' %}">Server Maintenance</a>
@@ -467,7 +489,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                           <a href="{% url 'infrastructure-managed-service' %}">Infrastructure Managed Service</a>
                         </li>
                         <li>
-                          <a href="{% url 'vmware-support' %}">VMware Support</a>
+                          <a href="{% url 'vmware-support' %}">VMware Third Party Support</a>
                         </li>
                         <li>
                           <a href="{% url 'microsoft-thirdparty-support' %}">Microsoft Third Party Support</a>
