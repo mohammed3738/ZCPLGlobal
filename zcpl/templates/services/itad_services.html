@@ -114,7 +114,7 @@
       <div class="col-lg-6" style="border: 1px solid black; padding:20px; border-radius: 5px;">
         <div class="form-box">
           <div class="default-form">
-            <form method="post" action="sendemail.php">
+            <form method="post" onsubmit="redirectPage(event)"> 
               <div class="row clearfix">
                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
                   <div class="field-inner">
@@ -130,11 +130,15 @@
                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
                   <div class="field-inner">
                     <input
-                      type="number"
+                      type="tel"
                       name="contact"
                       value=""
                       placeholder="Contact"
+                      pattern="[0-9]{10}"
+                      maxlength="10"
+                      minlength="10"
                       required=""
+                      oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"
                     />
                   </div>
                 </div>
@@ -198,7 +202,7 @@
                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                   <button class="theme-btn btn-style-one">
                     <i class="btn-curve"></i>
-                    <span class="btn-title">Send message</span>
+                    <span class="btn-title">Send message</span> 
                   </button>
                 </div>
               </div>
@@ -389,5 +393,10 @@
 <!-- /.history-timeline -->
 
 
-
+<script>
+  function redirectPage(e) {
+    e.preventDefault();
+    window.location.href = "/thank-you/";
+  }
+</script>
 {% endblock %}

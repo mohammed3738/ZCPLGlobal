@@ -54,7 +54,7 @@
                                     <ul class="clearfix" style="font-size:13px;">
                                         <li><span class="far fa-clock"></span> {{ blog.created_at|date:"d M, Y" }}</li>
                                         <li><span class="far fa-user-circle"></span> {{ blog.author.get_full_name|default:blog.author.username }}</li>
-                                        <li><span class="far fa-comments"></span> {{ comments.count }} Comments</li>
+                                        {% comment %} <li><span class="far fa-comments"></span> {{ comments.count }} Comments</li> {% endcomment %}
                                     </ul>
                                 </div>
                                 <h2>{{ blog.title }}</h2>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
 
-                    <!-- Comments Area -->
+                    {% comment %} <!-- Comments Area -->
                     <div class="comments-area mt-5">
                         <div class="comments-title">
                             <h3>{{ comments.count }} Comments</h3>
@@ -124,7 +124,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
 
                 </div>
             </div>

@@ -546,6 +546,7 @@ document.addEventListener("DOMContentLoaded", function () {
     qtyField.name = type === "ssd" ? "ssd_qty[]" : "hdd_qty[]";
     qtyField.type = "number";
     qtyField.min = "1";
+    qtyField.max = "20";
     qtyField.value = "1";
 
     const removeBtn = document.createElement("button");

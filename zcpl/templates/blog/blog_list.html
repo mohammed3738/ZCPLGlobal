@@ -63,7 +63,7 @@ Stay informed with Zaco Computer's IT blog. Practical guides & expert insights o
                                     <ul class="clearfix">
                                         <li><span class="far fa-clock"></span> {{ i.created_at|date:"d M, Y" }}</li>
                                         <li><span class="far fa-user-circle"></span> {{ i.author.get_full_name|default:i.author.username }}</li>
-                                        <li><span class="far fa-comments"></span> {{ i.comments.count }} Comments</li> 
+                                        {% comment %} <li><span class="far fa-comments"></span> {{ i.comments.count }} Comments</li>  {% endcomment %}
                                     </ul>
                                 </div>
                                 <h5 style="font-size:16px; margin-bottom:5px;">

@@ -966,6 +966,24 @@ def product_detail(request, slug):
     rent_form = ShopContactForm()
 
     # --------------------------------------------------
+    # HANDLE REVIEW FORM
+    # --------------------------------------------------
+    if request.method == "POST" and "rating" in request.POST:
+        name = request.POST.get("name")
+        comment = request.POST.get("comment")
+        rating = request.POST.get("rating")
+
+        if name and comment and rating:
+            Review.objects.create(
+                product=product,
+                name=name,
+                comment=comment,
+                rating=int(rating)
+            )
+
+        return redirect(request.path)
+
+    # --------------------------------------------------
     # HANDLE RENT REQUEST FORM
     # --------------------------------------------------
     if request.method == "POST" and "rent_request" in request.POST:

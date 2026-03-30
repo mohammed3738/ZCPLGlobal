@@ -171,6 +171,48 @@
     padding: 8px;
     text-align: left;
   }
+
+    .commentbg{
+        background: #f9fafc;
+        padding: 16px 18px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        transition: all 0.2s ease;
+    }
+
+    .commentbg:hover{
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        background: #ffffff;
+    }
+
+
+    .rating-date{
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+
+    .review-date{
+        font-size:13px;
+        color:#777;
+    }
+
+    .review-text{
+        margin-top:6px;
+        font-size:15px;
+    }
+    @media (max-width:768px){
+        .rating-date{
+            padding-left:20px;
+        }
+        .review-date{
+            padding-left:20px;
+        }
+        .review-text{
+            padding-left:20px;
+        }
+    }
 </style>
 
 <!-- Banner Section -->
@@ -326,23 +368,27 @@
             </div>
 
             {% for review in reviews %}
-            <div class="comment">
-                <div class="info">
-                    <div class="name">{{ review.name }}</div>
-                    <div class="date">{{ review.created_at|date:"M d, Y H:i" }}</div>
-                </div>
-                <div class="text">{{ review.comment }}</div>
+            <div class="comment mb-3 commentbg">
 
-                <div class="reply-btn">
-                    <p class="mb-1">
-                        {% for _ in review.rating|times %}
-                            <i class="fa fa-star text-warning"></i>
-                        {% endfor %}
-                        {% for _ in 5|subtract:review.rating|times %}
-                            <i class="fa fa-star text-secondary"></i>
-                        {% endfor %}
-                    </p>
+                <!-- Line 1 : Stars + Date -->
+                <div class="rating-date mb-1">
+                    {% for _ in review.rating|times %}
+                        <i class="fa fa-star text-warning"></i>
+                    {% endfor %}
+                    {% for _ in 5|subtract:review.rating|times %}
+                        <i class="fa fa-star text-secondary"></i>
+                    {% endfor %}
+
+                    <span class="review-date">
+                        {{ review.created_at|date:"M d, Y" }}
+                    </span>
                 </div>
+
+                <!-- Line 2 : Comment + Name -->
+                <div class="review-text">
+                    {{ review.comment }} <strong>({{ review.name }})</strong>
+                </div>
+
             </div>
             {% empty %}
                 <p>No reviews yet. Be the first to write one!</p>
@@ -382,7 +428,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <button class="theme-btn btn-style-one" type="submit">
+                    <button class="theme-btn btn-style-one" type="submit" name="review_submit">
                         <i class="btn-curve"></i>
                         <span class="btn-title">Submit Review</span>
                     </button>
