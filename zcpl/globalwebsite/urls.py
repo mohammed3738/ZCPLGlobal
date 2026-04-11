@@ -39,6 +39,7 @@ urlpatterns = [
     path('infrastructure-managed-service/',views.infrastructure_service,name="infrastructure-managed-service"),
     path('global-it/',views.global_it,name="global-it"),
     path('microsoft-vm/',views.microsoft_vm,name="microsoft-vm"),
+    path('email-migration-services/',views.email_migration,name="email-migration"),
     path('privacy-policy/',views.privacy,name="privacy"),
     path('terms-and-conditions/',views.term,name="term"),
     # path('shop',views.shop,name="shop"),

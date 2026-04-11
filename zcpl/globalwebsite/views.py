@@ -166,6 +166,9 @@ def global_it(request):
 def microsoft_vm(request):
     return render(request,'services/microsoft_vm.html')
 
+def email_migration(request):
+    return render(request,'services/email_migration.html')
+
 
 def privacy(request):
     return render(request,'main/privacy.html')

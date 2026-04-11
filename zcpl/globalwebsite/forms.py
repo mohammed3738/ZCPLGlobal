@@ -114,7 +114,7 @@ class PPCProductForm(forms.ModelForm):
 
 
 class CartAddProductForm(forms.Form):
-    quantity = forms.IntegerField(min_value=1, initial=1)
+    quantity = forms.IntegerField(min_value=1, initial=1, max_value=25)
     override = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)
 
 

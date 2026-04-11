@@ -9,14 +9,14 @@
 
 /* Control banner background image height */
 .page-banner .image-layer {
-    height: 567px !important;
+    height: 601px !important;
     background-size: cover !important;
     background-position: center !important;
 }
 
 /* Reduce banner title font size */
 .page-banner h1 {
-    font-size: 100px !important;
+    font-size: 32px !important;
     font-weight: 600 !important;
     line-height: 1.2 !important;
 }
@@ -46,3 +46,4 @@
 .blog-detail-title {
     display: none !important;
 }
+

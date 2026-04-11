@@ -1,0 +1,824 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}India's Leading Email Migration Services for All Business Needs{% endblock %}
+
+{% block meta_description %}
+At Zaco Computer, we offer fully managed email migration services for businesses across India tailored to your infrastructure & compliance requirements.
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+    {
+    "@context": "https://schema.org/", 
+    "@type": "BreadcrumbList", 
+    "itemListElement": [{
+        "@type": "ListItem", 
+        "position": 1, 
+        "name": "Home",
+        "item": "https://www.zacocomputer.com/in/"  
+    },{
+        "@type": "ListItem", 
+        "position": 2, 
+        "name": "IT Services in India",
+        "item": "https://www.zacocomputer.com/in/services"  
+    },{
+        "@type": "ListItem", 
+        "position": 3, 
+        "name": "Email Migration Services in India",
+        "item": "https://www.zacocomputer.com/in/email-migration-services"  
+    }]
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+        "@type": "Question",
+        "name": "How much does email migration cost in India?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pricing depends on the number of users, your current platform, and how much data needs to move. We provide a full written quote before starting. Contact us at +91 98111 83994 for a free assessment and we will send you a clear number within 24 hours."
+        }
+    },{
+        "@type": "Question",
+        "name": "Is my business data safe during email migration?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every mail migration we carry out begins with a complete backup of your current environment. Only authorised personnel interact with your data under a role-based access model. Integrity checks run throughout every phase of the migration, and your original environment remains intact until you have confirmed and approved go-live."
+        }
+    },{
+        "@type": "Question",
+        "name": "Can you migrate from Google Workspace to Microsoft 365?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We handle this regularly. Emails, Gmail labels and folders, Calendar, Contacts, and files all move across. We also handle all the domain and DNS reconfiguration so your team does not have to deal with any of the technical setup."
+        }
+    },{
+        "@type": "Question",
+        "name": "What support do we get after migration is done?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every migration includes a post go live support window. We monitor for any delivery or sync issues, help your team with questions, and provide full admin documentation your IT team can refer to at any time."
+        }
+    },{
+        "@type": "Question",
+        "name": "Do you provide services across all of India?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We work with businesses remotely across India including Mumbai, Delhi, Bangalore, Hyderabad, Pune, Chennai, Ahmedabad and other cities. On site support is available for larger enterprise migrations where required."
+        }
+    },{
+        "@type": "Question",
+        "name": "What is the Indian alternative to Gmail?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zoho Mail is widely regarded as the strongest Indian alternative to Gmail. It is developed by Zoho Corporation, headquartered in Chennai, with India-based data hosting, GST-ready billing, and a full suite of business productivity tools. It is a practical, cost-effective choice for Indian businesses that prefer domestic SaaS infrastructure."
+        }
+    },{
+        "@type": "Question",
+        "name": "Do you support Zoho Mail migration for small and medium enterprises?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Zoho Mail migration is one of the services we specifically offer for Indian businesses. We handle migration from Zoho to Microsoft 365, from Microsoft 365 or Google Workspace to Zoho Mail, and from legacy servers to Zoho. Zoho is particularly popular among Indian SMBs and our team is experienced in managing these migrations efficiently."
+        }
+    },{
+        "@type": "Question",
+        "name": "Is it possible to migrate only selected mailboxes or folders?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we provide flexible migration options based on your needs. You can move full mailboxes, selected folders, or only specific data types. This is helpful if you want to migrate active emails while keeping older data in your current system or when consolidating multiple mailboxes."
+        }
+    },{
+        "@type": "Question",
+        "name": "Will there be any downtime during the migration?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At Zaco Computers, our team uses proven tools and a well-planned approach to keep downtime to a minimum. In most cases, your users can continue working without interruption while the migration runs in the background. We carefully schedule every step to ensure your business continues to run smoothly throughout the process."
+        }
+    },{
+        "@type": "Question",
+        "name": "Which email platforms do you support for migration in India?",
+        "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We support migrations across all major platforms, including Microsoft 365, Google Workspace, Zoho Mail, on-premise Microsoft Exchange, IMAP servers, Rackspace, and other hosted mail providers. If your current platform is not on this list, contact us and we will confirm support for your specific environment."
+        }
+    }]
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+
+<style>
+/* ── STAT BAND ── */
+    .ms-stat-band {
+        background: #0c2c4e;
+        padding: 64px 2%;
+        display: flex;
+        justify-content: center;
+    }
+    .ms-stat-inner {
+        max-width: 1200px;
+        width: 100%;
+        text-align: left;
+    }
+    .ms-stat-heading {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 900; color: #fff;
+        margin-bottom: 24px; line-height: 1.2;
+        max-width: 1200px;
+
+    }
+    .ms-stat-subtext {
+        color: rgba(255,255,255,0.65);
+        font-size: 1rem; line-height: 1.75;
+        max-width: 1200px;
+        margin-bottom: 0;
+        
+    }
+    .ms-stat-subtext p { margin-bottom: 14px; }
+    .ms-stat-subtext p:last-child { margin-bottom: 0; }
+
+        
+/* ── Platform Pills ── */
+    .platform-pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+    }
+    .platform-pill {
+        background: #f0f5ff;
+        border: 1px solid #c8d9f0;
+        color: #0c2c4e;
+        border-radius: 50px;
+        padding: 2px 15px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    }
+
+/* ── Achieve After Migration List ── */
+    .achieve-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 600px;
+        margin-top: 30px;
+    }
+    .achieve-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.97rem;
+        color: rgba(0,0,0,0.8);
+        line-height: 1.6;
+    }
+    .achieve-list li::before {
+        content: '✓';
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #0c2c4e;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-top: 1px;
+    }
+    @media (max-width: 768px) {
+
+        .achieve-list {
+            max-width: 90%;
+        }
+
+        .achieve-list li {
+            font-size: 0.9rem;
+            gap: 10px;
+        }
+
+        .achieve-list li::before {
+            min-width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+        }
+    }
+
+/* ── Platform Migration Cards ── */
+    .migration-platform-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px; margin-bottom: 40px;
+    }
+    .plat-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #1a3546;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .two-problem-grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+    }
+    .three-problem-grid{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+    }
+
+/* ── img ── */
+    .hardware-img{
+        width:100%;
+        max-width:800px;
+        height:700px;
+    }
+
+    @media (max-width:768px){
+        .hardware-img{
+            max-width:100%;
+        }
+    }
+
+    @media (max-width:480px){
+        .hardware-img{
+            max-width:320px;
+            margin:auto;
+            display:block;
+        }
+    }
+
+/* ── Responsive ── */
+    @media (max-width: 768px) {
+        .migration-platform-grid { grid-template-columns: 1fr; }
+        .two-problem-grid { grid-template-columns: 1fr; }
+        .three-problem-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<!-- ═══════════════════════════════════════════
+     BANNER SECTION
+════════════════════════════════════════════ -->
+<section class="slider-six">
+    <div class="slider-six__curv"></div>
+    <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image-layer" style="background-image: url({% static 'images/it-hardware/server-back.jpg' %});"></div>
+                <div class="auto-container">
+                    <div class="slider-six__content">
+                        <p class="slider-six__text"><span>Email Migration Services</span></p>
+                        <h1 class="slider-six__title">Fast & Secure Email Migration Services in India</h1>
+                        <p style="color: azure; font-size: 1.1rem;">Seamlessly migrate business emails across leading platforms in India, including Microsoft 365, Google Workspace, Zoho Mail, and more, with complete transfer of metadata, calendars, contacts, and critical data, ensuring minimal downtime and uninterrupted operations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     INTRO SECTION
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="row intro">
+            
+            <div class="col-md-12 col-lg-8">   
+                <h2>End to End Email Migration Solutions for Indian Businesses</h2>
+                <p>Every Indian business, whether a growing startup in Bangalore or an enterprise in Mumbai or Delhi, depends on email for day to day operations. When your email system is outdated or hosted on ageing on-premise servers, issues like email delivery failures, storage limits, and operational delays become part of daily work.</p>
+                <p>As a trusted email migration service provider in India, Zaco Computer helps businesses migrate to Microsoft 365, Google Workspace, and Zoho Mail from all leading email platforms, including legacy servers, IMAP based systems, and other cloud environments, with complete data transfer and minimal disruption.</p>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center">
+                <img
+                    src="{% static 'images/india/services/email_in_2.jpeg' %}"
+                    alt="Email Migration Services"        
+                >
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     Migration Support for Every Platform Indian Businesses Run On
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">Migration Support for Every Platform Indian Businesses Run On</h2>
+        <p class="header-para">Whether your business is moving to the cloud for the first time or switching between cloud platforms, we cover the full range of email migration services that Indian businesses actually need — from Microsoft 365 and Google Workspace to Zoho Mail and legacy server migrations.</p>
+
+        <div class="migration-platform-grid">
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">Microsoft 365</span> {% endcomment %}
+                <h3>Office 365 Migration Services</h3>
+                <p>Moving to Microsoft 365 means every mailbox, calendar, contact, and shared resource needs to arrive intact on the other side. Full domain and DNS configuration is handled as part of the engagement, so nothing is left for your team to figure out after go-live.</p>
+                <ul>
+                    <li>⮞ Mailbox, folder, and attachment migration</li>
+                    <li>⮞ Calendars, contacts, and shared resource transfer</li>
+                    <li>⮞ Domain and DNS reconfiguration</li>
+                    <li>⮞ Exchange to Microsoft 365 migration</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">Google Workspace</span> {% endcomment %}
+                <h3>Google Workspace Migration</h3>
+                <p>Google Workspace migrations, whether incoming or outgoing, involve more than just email. Gmail, Drive, Calendar, and Contacts all move across with complete data mapping and validation at each stage before cutover.</p>
+                <ul>
+                    <li>⮞ Gmail to Outlook migration and reverse</li>
+                    <li>⮞ Google Drive to OneDrive or SharePoint transfer</li>
+                    <li>⮞ Google Workspace to Microsoft 365 migration</li>
+                    <li>⮞ User identity and permissions mapping</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">Zoho Mail Migration</span> {% endcomment %}
+                <h3>Zoho Mail Migration </h3>
+                <p>Zoho Mail migrations cover the full setup, from mailbox transfer and custom domain configuration to MX records and admin console onboarding, so your team lands on a fully operational environment from day one.</p>
+                <ul>
+                    <li>⮞ Zoho to Microsoft 365 migration</li>
+                    <li>⮞ Google Workspace to Zoho Mail migration</li>
+                    <li>⮞ Custom domain and MX record setup</li>
+                    <li>⮞ Admin console setup and user onboarding</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">Cross-Platform Migration</span> {% endcomment %}
+                <h3>Cross-Platform Email Migration</h3>
+                <p>Not every migration follows a standard path. Legacy IMAP setups, historical archives, shared mailboxes, and distribution lists all need careful handling, and every source-to-destination combination is supported.</p>
+                <ul>
+                    <li>⮞ IMAP source migration to any cloud platform</li>
+                    <li>⮞ Historical archive and attachment migration</li>
+                    <li>⮞ Shared mailbox and distribution list transfer</li>
+                    <li>⮞ Gmail to Office 365 migration</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">New Email Setup</span> {% endcomment %}
+                <h3>New Business Email Setup and Configuration</h3>
+                <p>Setting up business email correctly from the start prevents problems down the line. Custom domain, SPF, DKIM, DMARC, and device-level configuration are all done right the first time, so your team is ready to go without back-and-forth.</p>
+                <ul>
+                    <li>⮞ Custom domain email creation</li>
+                    <li>⮞ SPF, DKIM, DMARC configuration</li>
+                    <li>⮞ Email client setup on all devices</li>
+                    <li>⮞ Spam filters and security policy setup</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">Post-Migration</span> {% endcomment %}
+                <h3>Post-Migration Support</h3>
+                <p>Go-live is where many migrations leave businesses on their own. Dedicated post-migration support covers environment monitoring, delivery and sync issues, end-user queries, and admin documentation, so your team has everything needed to run the new platform confidently.</p>
+                <ul>
+                    <li>⮞ Dedicated support for post-go-live issues</li>
+                    <li>⮞ Delivery and sync monitoring and resolution</li>
+                    <li>⮞ End-user guidance and onboarding</li>
+                    <li>⮞ Admin documentation for your IT team</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     Why Indian Businesses Choose Zaco for Email Migration
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+            <h2 class="header-title">Why Indian Businesses Choose Zaco for Email Migration</h2>
+            <p class="header-para">Choosing the right email migration partner comes down to more than technical capability. It comes down to transparency, accountability, and a team that stays with you beyond go-live. Here is what makes Zaco the trusted choice for businesses across India.</p>
+        <div class="sec-title">
+            <div class="row clearfix">
+                <div class="right-col col-lg-6 col-md-12 col-sm-12" style="margin-block: auto">  
+                    <div class="inner">
+                        <div class="faq-box">
+                            <ul class="accordion-box clearfix">
+                                <!--Block-->
+                                <li class="accordion block active-block">
+                                    <h4 class="acc-btn active" >
+                                    <span class="count">1.</span> Affordable Pricing with No Hidden Charges
+                                    </h4>
+                                    <div class="acc-content current">
+                                    <div class="content">
+                                        <div class="text" >
+                                            Every engagement is scoped and priced clearly before work begins. No hidden charges, no billing surprises. What is quoted is what is invoiced, with a proper GST invoice for every project.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">2.</span> India Presence with International-Grade Expertise
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            Certified experts backed by a global process, with a locally available team for support, escalation, and on-site assistance when required.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">3.</span> Minimal Downtime Migration
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                           Migration phases are scheduled outside peak hours and cutover runs in a controlled sequence to keep your team working throughout.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">4.</span> Industry-Grade Email Migration Tools
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                           Migrations are executed using proven, enterprise-grade email migration tools for accurate, reliable data transfer.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">5.</span> Tailored Migration Strategy for Every Business
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                           No two environments are identical. The migration plan is built around your existing platforms, team size, data volume, and operational requirements — not a generic template applied to every client.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">6.</span> End-to-End Support
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            From initial planning and risk assessment to real-time monitoring and post-migration support, Zaco Computers delivers end-to-end migration solutions that keep your communication systems reliable and efficient.
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-col col-lg-6 col-md-12 col-sm-12" style="margin-block: auto">
+                    <div>
+                        <img src="{% static 'images/india/services/email_in_1.jpeg' %}"
+                        alt="IT Hardware"
+                        class="hardware-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STAT BAND
+═════════════════════════════════════════════ -->
+<section class="ms-stat-band">
+  <div class="ms-stat-inner">
+    <h2 class="ms-stat-heading">Not Sure Which Migration Path Is Right for You?</h2>
+    <div class="ms-stat-subtext">
+      <p>Tell us your current setup and the number of users. Our India team will review it and send you a clear recommendation with transparent pricing — no sales pressure, no commitment required.</p>
+    </div>
+    <div class="link-box" style="margin-top: 30px; justify-content: center;">
+        <a class="theme-btn btn-style-one" href="https://wa.me/919811183994?text=Hi,%20I%20want%20a%20free%20assessment%20for%20my%20current%20setup.">
+            <i class="btn-curve"></i>
+            <span class="btn-title"><i class="fa-brands fa-whatsapp" style="font-size:20px;"></i> WhatsApp Us to Get Free Assessment &#x2192;</span>
+        </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     What Your Business Gains After Migration
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <p class="grey-label">Business Outcomes</p>
+        <h2 class="header-title">What Your Business Gains After Migration</h2>
+        <p class="header-para">A successful cloud email migration changes how your team works, collaborates, and scales. Indian businesses that migrate to Microsoft 365, Google Workspace, or Zoho Mail typically see measurable improvements across daily operations.</p>
+
+        <div class="three-problem-grid">
+
+            <div class="problem-card">
+                <h3>Access from Anywhere</h3>
+                <p>Reliable cloud email from any device or location across India.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Better Team Collaboration</h3>
+                <p>Shared calendars, contacts, and integrated productivity tools.</p>
+            </div>
+            <div class="problem-card">
+                <h3>No More Legacy Overhead</h3>
+                <p>Reduced dependence on on-premise servers and their maintenance costs.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Scalable Infrastructure</h3>
+                <p>Grows with your business without adding new hardware.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Simpler IT Management</h3>
+                <p>Centralised admin console for your IT team.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Lower Operating Costs</h3>
+                <p>Reduced long-term spend compared to on-premise environments.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EMAIL MIGRATION PROCESS
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="history-timeline">
+        <div class="auto-container" style="margin-top: 40px;">
+            <p class="grey-label">How We Work</p>
+            <h2 class="header-title">Our Email Migration Process</h2>
+            <p class="header-para">Migrating business email demands structure, not improvisation. Every engagement follows a consistent, proven workflow that keeps your migration on track and your team informed at every stage.</p>
+            <div class="history-timeline__card">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Assessment</h3>
+                            <p class="history-timeline__text">
+                                We evaluate your current system, data size, and migration requirements.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Planning</h3>
+                            <p class="history-timeline__text">
+                                A structured migration plan is built around your platforms, business size, and operational needs.</p>
+                            </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Pre-Migration Backup</h3>
+                            <p class="history-timeline__text">
+                                A complete backup is taken before any migration work begins.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Secure Migration Execution</h3>
+                            <p class="history-timeline__text">
+                              Migration is executed using controlled workflows with minimal business disruption.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Testing and Validation</h3>
+                            <p class="history-timeline__text">
+                                Emails, contacts, and calendars are validated to confirm data accuracy before go-live.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Go Live</h3>
+                            <p class="history-timeline__text">
+                               Users are transitioned to the new platform with minimal disruption.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Ongoing Support</h3>
+                            <p class="history-timeline__text">
+                              Continued support after migration covers monitoring, issue resolution, and end-user training.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECURITY & COMPLIANCE
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">Commitments Behind Every Migration We Do</h2>
+        <p class="header-para">We make email migration simple and risk-free, so you can switch with confidence. Every project is handled with clear communication and support from start to finish, backed by these core commitments.</p>
+        <div class="two-problem-grid">
+            <div class="problem-card">
+                <h3>Pre-Migration Backup</h3>
+                <p>A complete backup of your current email environment is taken before any migration work begins. This gives you a full restore point in the event any recovery is needed at any stage.</p>
+            </div>
+
+            <div class="problem-card">
+                <h3>Role-Based Access Control</h3>
+                <p>Only authorised personnel interact with migration data. User roles and permissions are verified and correctly mapped before and after migration completes to protect your business data throughout.</p>
+            </div>
+
+            <div class="problem-card">
+                <h3>Pre-Planned Rollback Strategy</h3>
+                <p>A rollback plan is defined before migration begins. Your original environment remains fully intact and accessible until you are completely satisfied with the new setup and have approved go-live.</p>
+            </div>
+
+            <div class="problem-card">
+                <h3>Staged Validation at Every Step</h3>
+                <p>Integrity checks run after each phase, not just at the end. Issues are caught and resolved early, well before they could affect your business operations or delay your go-live.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FAQ SECTION
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <p class="grey-label">Common Questions</p>
+        <h2 class="header-title">Frequently Asked Questions </h2>
+
+        <div class="faq-section">
+
+            <div class="faq-item">
+                <div class="faq-question">1. How much does email migration cost in India?</div>
+                <div class="faq-answer">
+                    Pricing depends on the number of users, your current platform, and how much data needs to move. We provide a full written quote before starting. Contact us at +91 98111 83994 for a free assessment and we will send you a clear number within 24 hours.                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">2. Is my business data safe during email migration?</div>
+                <div class="faq-answer">
+                    Yes. Every mail migration we carry out begins with a complete backup of your current environment. Only authorised personnel interact with your data under a role-based access model. Integrity checks run throughout every phase of the migration, and your original environment remains intact until you have confirmed and approved go-live.                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">3. Can you migrate from Google Workspace to Microsoft 365?</div>
+                <div class="faq-answer">
+                    Yes. We handle this regularly. Emails, Gmail labels and folders, Calendar, Contacts, and files all move across. We also handle all the domain and DNS reconfiguration so your team does not have to deal with any of the technical setup.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">4. What support do we get after migration is done?</div>
+                <div class="faq-answer">
+                    Every migration includes a post go live support window. We monitor for any delivery or sync issues, help your team with questions, and provide full admin documentation your IT team can refer to at any time.                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">5. Do you provide services across all of India?</div>
+                <div class="faq-answer">
+                    Yes. We work with businesses remotely across India including Mumbai, Delhi, Bangalore, Hyderabad, Pune, Chennai, Ahmedabad and other cities. On site support is available for larger enterprise migrations where required.                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">6. What is the Indian alternative to Gmail?</div>
+                <div class="faq-answer">
+                    Zoho Mail is widely regarded as the strongest Indian alternative to Gmail. It is developed by Zoho Corporation, headquartered in Chennai, with India-based data hosting, GST-ready billing, and a full suite of business productivity tools. It is a practical, cost-effective choice for Indian businesses that prefer domestic SaaS infrastructure.                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">7. Do you support Zoho Mail migration for small and medium enterprises?</div>
+                <div class="faq-answer">
+                    Yes. Zoho Mail migration is one of the services we specifically offer for Indian businesses. We handle migration from Zoho to Microsoft 365, from Microsoft 365 or Google Workspace to Zoho Mail, and from legacy servers to Zoho. Zoho is particularly popular among Indian SMBs and our team is experienced in managing these migrations efficiently.                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">8. Is it possible to migrate only selected mailboxes or folders?</div>
+                <div class="faq-answer">
+                    Yes, we provide flexible migration options based on your needs. You can move full mailboxes, selected folders, or only specific data types. This is helpful if you want to migrate active emails while keeping older data in your current system or when consolidating multiple mailboxes.
+                </div>      
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">9. Will there be any downtime during the migration?</div>
+                <div class="faq-answer">
+                    At Zaco Computers, our team uses proven tools and a well-planned approach to keep downtime to a minimum. In most cases, your users can continue working without interruption while the migration runs in the background. We carefully schedule every step to ensure your business continues to run smoothly throughout the process.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">10. Which email platforms do you support for migration in India?</div>
+                <div class="faq-answer">
+                    We support migrations across all major platforms, including Microsoft 365, Google Workspace, Zoho Mail, on-premise Microsoft Exchange, IMAP servers, Rackspace, and other hosted mail providers. If your current platform is not on this list, contact us and we will confirm support for your specific environment.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA SECTION
+════════════════════════════════════════════ -->
+<div class="auto-container" style="padding-block: 80px">
+    <div class="cta-section">
+        <p class="grey-label">Ready to Get Reliable email migration services?</p>
+        <h2 class="header-title">Talk to Our Email Migration Experts Today!</h2>
+        <p class="header-para">Talk to our India team today and get a no-obligation assessment for your migration. Our certified experts handle everything from planning to go-live and beyond, so your business keeps running without interruption.</p>
+        <ul class="achieve-list">
+            <li>Complete data integrity across all mailboxes</li>
+            <li>Minimal downtime with controlled cutover</li>
+            <li>Customized mail migration plans with transparent pricing</li>
+            <li>Comprehensive post-migration support and documentation for admins</li>
+        </ul>
+        <div class="link-box" style="margin-top: 30px; justify-content: center;">
+            <a class="theme-btn btn-style-one" href="{% url 'india-contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Request a Consultation</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function () {
+            const faqItem = this.closest('.faq-item');
+            const allItems = document.querySelectorAll('.faq-item');
+            allItems.forEach(item => {
+                if (item !== faqItem) item.classList.remove('active');
+            });
+            faqItem.classList.toggle('active');
+        });
+    });
+</script>
+
+{% endblock %}

@@ -21,13 +21,14 @@ class IndiaStaticSitemap(Sitemap):
             "rental-services-india",
             "infrastructure-managed-service-india",
             "refurbished-servers-mumbai",
-            "refurbished-servers-bangalore",
+            "refurbished-servers-bangalore", 
             "refurbished-servers-chennai",
             "refurbished-servers-kolkata",
             "refurbished-servers-ahmedabad",
             "refurbished-servers-hyderabad",
             "refurbished-servers-pune",
             "refurbished-servers-delhi",
+            "email-migration-india",
         ]
 
     def location(self, item):

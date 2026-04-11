@@ -87,7 +87,7 @@ def india_home(request):
 
 
 
-def india_contact(request):
+def india_contact(request): 
     success = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -144,6 +144,8 @@ def network_maintenance_india(request):
 def rental_services_india(request):
     return render(request,'india/rental_services.html')
 
+def email_migration_india(request):
+    return render(request,'india/service/email_migration.html')
 
 def infrastructure_service_india(request):
     return render(request,'india/infrastructure_service.html')

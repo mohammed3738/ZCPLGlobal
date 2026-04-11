@@ -86,7 +86,17 @@
 <section class="page-title" style="padding: 40px 0 10px 0;">
   <div class="auto-container">
     <h1 style="font-size: 30px; font-weight: 700; text-align: left; margin-left: 0;">
-      Buy or Rent Servers, Storage & Networking Equipment Online at Affordable Rates
+      {% comment %} Buy or Rent Servers, Storage & Networking Equipment Online at Affordable Rates {% endcomment %}
+      {% if subcategory and subcategory.heading %}
+          {{ subcategory.heading }}
+
+      {% elif category and category.heading %}
+          {{ category.heading }}
+
+      {% else %}
+          Buy or Rent Servers, Storage & Networking Equipment Online at Affordable Rates
+      {% endif %}
+
     </h1>
   </div>
 </section>
@@ -183,7 +193,8 @@
           <ul class="pagination justify-content-center">
             {% if products.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="?q={{ request.GET.q }}&page={{ products.previous_page_number }}">&laquo;</a>
+              {% comment %} <a class="page-link" href="?q={{ request.GET.q }}&page={{ products.previous_page_number }}">&laquo;</a> {% endcomment %}
+              <a class="page-link" href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a>
             </li>
             {% else %}
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>

@@ -23,7 +23,8 @@ urlpatterns = [
     path('refurbished-servers-ahmedabad',views.server_ahmedabad,name="refurbished-servers-ahmedabad"),
     path('refurbished-servers-hyderabad',views.server_hyderabad,name="refurbished-servers-hyderabad"),
     path('refurbished-servers-pune',views.server_pune,name="refurbished-servers-pune"),
-    path('refurbished-servers-delhi',views.server_delhi,name="refurbished-servers-delhi"),
+    path('refurbished-servers-delhi',views.server_delhi,name="refurbished-servers-delhi"), 
+    path('email-migration-services/',views.email_migration_india,name="email-migration-india"),
 
 
 ]

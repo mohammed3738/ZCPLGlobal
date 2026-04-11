@@ -1,0 +1,746 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}End-to-end Email Migration Services | Office 365, Zoho & more{% endblock %}
+
+{% block meta_description %}
+Looking for trusted email migration services? Zaco provides secure migration from Microsoft 365 to Google Workspace, Zoho & more with zero data loss.
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/", 
+  "@type": "BreadcrumbList", 
+  "itemListElement": [{
+    "@type": "ListItem", 
+    "position": 1, 
+    "name": "Home",
+    "item": "https://www.zacocomputer.com/"  
+  },{
+    "@type": "ListItem", 
+    "position": 2, 
+    "name": "IT Services",
+    "item": "https://www.zacocomputer.com/services/"  
+  },{
+    "@type": "ListItem", 
+    "position": 3, 
+    "name": "Email Migration Services",
+    "item": "https://www.zacocomputer.com/email-migration-services/"  
+  }]
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is email migration?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Email migration is the process of transferring emails, contacts, and calendars from one platform to another. Businesses use email migration services to move to cloud platforms like Microsoft 365, Google Workspace, or Zoho for better performance and accessibility."
+    }
+  },{
+    "@type": "Question",
+    "name": "How long does email migration take?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The duration depends on users, mailbox size, and platforms. Most email migration services are completed within a few days. A proper assessment helps define timelines and ensures minimal disruption during the migration process."
+    }
+  },{
+    "@type": "Question",
+    "name": "Will there be downtime during migration?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Our email migration services are designed to reduce downtime. In some cases, users can continue working during the migration. We follow a structured approach to maintain business continuity while transitioning to the new platform."
+    }
+  },{
+    "@type": "Question",
+    "name": "Is my data secure during migration?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, we follow secure email migration practices including backups and controlled access. Data is protected at every stage to ensure accuracy throughout the migration process."
+    }
+  },{
+    "@type": "Question",
+    "name": "What platforms do you support?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We support Microsoft 365, Google Workspace, Zoho Mail, and other IMAP based systems. Our email migration services are flexible and designed to support different business and technical requirements."
+    }
+  },{
+    "@type": "Question",
+    "name": "How much does email migration cost?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Cost depends on the number of users, platforms involved, and complexity of your environment. We offer transparent, project-based pricing with no hidden fees. Connect with our team for a detailed assessment and receive a clear quote for your migration."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do you provide support after the migration is complete?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Post-migration support is included as standard. We monitor the new environment, resolve any issues, and deliver admin documentation so your IT team can manage the platform from day one."
+    }
+  }]
+}
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+/* ── Platform Pills ── */
+    .platform-pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+    }
+    .platform-pill {
+        background: #f0f5ff;
+        border: 1px solid #c8d9f0;
+        color: #0c2c4e;
+        border-radius: 50px;
+        padding: 2px 15px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: all 0.25s ease;
+    }
+
+/* ── Achieve After Migration List ── */
+    .achieve-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 600px;
+        margin-top: 30px;
+    }
+    .achieve-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.97rem;
+        color: rgba(0,0,0,0.8);
+        line-height: 1.6;
+    }
+    .achieve-list li::before {
+        content: '✓';
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #00b4a2;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-top: 1px;
+    }
+    @media (max-width: 768px) {
+
+        .achieve-list {
+            max-width: 90%;
+        }
+
+        .achieve-list li {
+            font-size: 0.9rem;
+            gap: 10px;
+        }
+
+        .achieve-list li::before {
+            min-width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+        }
+    }
+
+/* ── Platform Migration Cards ── */
+    .migration-platform-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px; margin-bottom: 40px;
+    }
+    .plat-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #1a3546;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .two-problem-grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+    }
+/* ── img ── */
+    .hardware-img{
+        width:100%;
+        max-width:800px;
+        height:auto;
+    }
+
+    @media (max-width:768px){
+        .hardware-img{
+            max-width:100%;
+        }
+    }
+
+    @media (max-width:480px){
+        .hardware-img{
+            max-width:320px;
+            margin:auto;
+            display:block;
+        }
+    }
+
+/* ── Responsive ── */
+    @media (max-width: 768px) {
+        .migration-platform-grid { grid-template-columns: 1fr; }
+        .two-problem-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<!-- ═══════════════════════════════════════════
+     BANNER SECTION
+════════════════════════════════════════════ -->
+<section class="slider-six">
+    <div class="slider-six__curv"></div>
+    <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true, "effect": "fade", "pagination": { "el": "#main-slider-pagination", "type": "bullets", "clickable": true }, "navigation": { "nextEl": "#main-slider__swiper-button-next", "prevEl": "#main-slider__swiper-button-prev" }, "autoplay": { "delay": 5000 }}'>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="image-layer" style="background-image: url({% static 'images/it-hardware/server-back.jpg' %});"></div>
+                <div class="auto-container">
+                    <div class="slider-six__content">
+                        <p class="slider-six__text"><span>Email Migration Services</span></p>
+                        <h1 class="slider-six__title">End-to-end Email Migration Services</h1>
+                        <p style="color: azure; font-size: 1.1rem;">Fully managed email migration across Microsoft 365, Google Workspace, Zoho, and other leading email platforms with minimal downtime, complete data integrity, and expert support from day one.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     INTRO SECTION
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <div class="row intro">
+            <h2>A Global Email Migration Partner You Can Rely On</h2>
+            <div class="col-md-12 col-lg-8">
+                
+                <p>Email remains a critical business communication tool, yet many organizations still rely on on-premise systems that involve high maintenance, ongoing licensing costs, and limited scalability. These legacy environments often slow down operations and make it harder to adapt to modern business needs.</p>
+                <p>Migrating to cloud-based platforms such as Microsoft 365, Google Workspace, and Zoho Mail enables cost optimization, secure access from anywhere, and improved operational efficiency across teams.</p>
+                <p>Zaco Computer offers secure email migration services designed to help businesses transition without risk or disruption. As a trusted email migration company, we ensure minimal downtime, and a seamless migration experience from start to finish.</p>
+            </div>
+            <div class="col-md-12 col-lg-4 text-center">
+                <img
+                    src="{% static 'images/services/email2.jpeg' %}"
+                    alt="Email Migration Services"        
+                >
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     COMPLETE EMAIL MIGRATION SERVICES
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">Complete Email Migration Services for Every Platform</h2>
+        <p class="header-para">Wherever your email lives today, we move it securely to where it needs to be — with full data integrity and minimal disruption guaranteed.</p>
+
+        <div class="migration-platform-grid">
+
+            <div class="problem-card">
+                <span class="plat-label">Microsoft 365</span>
+                <h3>Microsoft 365 to Google Workspace Migration</h3>
+                <p>Complete migration of mailboxes, calendars, contacts, and shared drives from Microsoft 365 to Google Workspace, with full data mapping and validation at every stage.</p>
+                <ul>
+                    <li>⮞ Complete mailbox and folder migration</li>
+                    <li>⮞ Calendars, contacts, and shared resources</li>
+                    <li>⮞ Domain and DNS reconfiguration</li>
+                    <li>⮞ User account provisioning</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <span class="plat-label">Google Workspace</span>
+                <h3>Google Workspace to Microsoft 365 Migration</h3>
+                <p>Seamless migration from Google Workspace to Microsoft 365 including Gmail, Drive, Calendar, and Contacts.</p>
+                <ul>
+                    <li>⮞ Gmail to Outlook mailbox migration</li>
+                    <li>⮞ Google Drive to OneDrive transfer</li>
+                    <li>⮞ User identity and permissions mapping</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <span class="plat-label">Zoho Mail Migration</span>
+                <h3>Zoho Mail Migration Services</h3>
+                <p>Migrate from Microsoft 365, Google Workspace, or legacy servers to Zoho Mail. Full data integrity and minimal disruption guaranteed.</p>
+                <ul>
+                    <li>⮞ Mailbox and folder structure transfer</li>
+                    <li>⮞ Custom domain setup on Zoho</li>
+                    <li>⮞ MX record configuration and testing</li>
+                    <li>⮞ Admin console setup and user onboarding</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <span class="plat-label">Cross-Platform Migration</span>
+                <h3>Cross-Platform Email Migration</h3>
+                <p>We migrate between all major platforms, and from any legacy source. Wherever your email lives today, we move it securely to where it needs to be.</p>
+                <ul>
+                    <li>⮞ Microsoft 365 to Google Workspace migration</li>
+                    <li>⮞ Gmail to Office 365 migration</li>
+                    <li>⮞ IMAP source migration</li>
+                    <li>⮞ Historical archive and attachment migration</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <span class="plat-label">New Email Setup</span>
+                <h3>New Email Setup and Configuration</h3>
+                <p>Starting fresh? We set up your full business email environment — custom domain, users, security policies, and device configuration from day one.</p>
+                <ul>
+                    <li>⮞ Custom domain email creation</li>
+                    <li>⮞ SPF, DKIM, DMARC configuration</li>
+                    <li>⮞ Email client setup on all devices</li>
+                    <li>⮞ Spam and security policy setup</li>
+                </ul>
+            </div>
+
+            <div class="problem-card">
+                <span class="plat-label">Post-Migration</span>
+                <h3>Post-Migration Support</h3>
+                <p>Migration does not end at go-live. Our team stays available for monitoring, issue resolution, and environment management after launch.</p>
+                <ul>
+                    <li>⮞ Structured post-go-live support window</li>
+                    <li>⮞ Delivery and sync issue monitoring</li>
+                    <li>⮞ End-user guidance and escalation</li>
+                    <li>⮞ Environment health checks</li>
+                </ul>
+            </div>
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">New Email Setup</span> {% endcomment %}
+                <h3>Admin Documentation and Training</h3>
+                <p>Your IT team gets relevant documents of the activity which can be used as and when required.</p>
+            </div>
+
+            <div class="problem-card">
+                {% comment %} <span class="plat-label">Post-Migration</span> {% endcomment %}
+                <h3>Platforms We Support</h3>
+                <div class="platform-pill-row">
+                    <span class="platform-pill">Microsoft 365</span>
+                    <span class="platform-pill">Google Workspace</span>
+                    <span class="platform-pill">Zoho Mail</span>
+                    <span class="platform-pill">Outlook</span>
+                    <span class="platform-pill">Exchange Server</span>
+                    <span class="platform-pill">Other leading platforms</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WHY BUSINESSES CHOOSE US
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+            <h2 class="header-title">Why Businesses Choose Our Email Migration Services</h2>
+            <p class="header-para">As an experienced email migration services provider having presence in India, the UK, UAE, and international markets, we deliver secure, seamless migrations with predictable outcomes. Backed by a team of seasoned experts, our cost-effective solutions ensure reliability and efficiency at every stage.</p>
+        <div class="sec-title">
+            <div class="row clearfix">
+                <div class="right-col col-lg-6 col-md-12 col-sm-12" style="margin-block: auto">  
+                    <div class="inner">
+                        <div class="faq-box">
+                            <ul class="accordion-box clearfix">
+                                <!--Block-->
+                                <li class="accordion block active-block">
+                                    <h4 class="acc-btn active" >
+                                    <span class="count">1.</span> End-to-End Migration Expertise
+                                    </h4>
+                                    <div class="acc-content current">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Microsoft 365, Google Workspace, Zoho Mail, Exchange, IMAP/POP3, and other leading platforms
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Emails, contacts, calendars, and attachments — all migrated and verified
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">2.</span> Minimal Downtime Migration
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>In order to reduce the effect on your business we ensure lowest possible downtime
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>We schedule heavy migration phases outside peak hours
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">3.</span> Post-Migration Support
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Dedicated support window after go-live for issue resolution
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Monitoring for delivery, sync, and configuration issues
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>End-user assistance to ensure smooth platform adoption
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">4.</span> New Email Setup Services
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Custom domain email created and configured from scratch
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>SPF, DKIM, and DMARC records set correctly from day one
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Device-level email client setup for all team members
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">5.</span> Experienced Technical Team
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Certified experts with a proven track record in enterprise migrations
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Dedicated project oversight for every migration engagement
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Direct access to technical support throughout the project
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">6.</span> Transparent &amp; Cost-Effective Pricing
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Affordable mail migration packages available for businesses of all sizes
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Clear pricing with no hidden charges or surprise fees
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Post-migration support included in standard packages
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <h4 class="acc-btn">
+                                    <span class="count">7.</span> Nationwide Reach and Service Coverage
+                                    </h4>
+                                    <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text" style="color: rgba(0, 0, 0, 0.64);">
+                                            <i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Services available across India for businesses of all sizes and sectors
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Remote and on-site migration support based on your requirements
+                                            <br><i style='font-size:16px; margin-right: 10px;' class='fas'>&#xf0da;</i>Quick turnaround available for urgent or time-sensitive migrations
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-col col-lg-6 col-md-12 col-sm-12" style="margin-block: auto">
+                    <div>
+                        <img src="{% static 'images/services/email3.jpeg' %}"
+                        alt="IT Hardware"
+                        class="hardware-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WHAT YOU ACHIEVE AFTER MIGRATION
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">What You Achieve After Migration</h2>
+        <ul class="achieve-list">
+            <li>Reliable access through cloud email migration environments</li>
+            <li>Improved collaboration across teams and locations</li>
+            <li>Reduced dependency on outdated systems</li>
+            <li>Scalable infrastructure for business growth</li>
+            <li>Simplified email management for IT teams</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EMAIL MIGRATION PROCESS
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="history-timeline">
+        <div class="auto-container" style="margin-top: 40px;">
+            <h2 class="header-title">Our Email Migration Process</h2>
+            <div class="history-timeline__card">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Assessment</h3>
+                            <p class="history-timeline__text">
+                                We evaluate your current system, data size, and migration requirements.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Planning</h3>
+                            <p class="history-timeline__text">
+                                Our email migration services support both SMB and enterprise email migration needs with a structured plan.                </p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Secure Migration Execution</h3>
+                            <p class="history-timeline__text">
+                                We execute secure email migration using controlled workflows.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Testing and Validation</h3>
+                            <p class="history-timeline__text">
+                                We validate emails, contacts, and calendars to ensure data accuracy.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Go Live</h3>
+                            <p class="history-timeline__text">
+                                We transition users to the new system with minimal disruption.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="history-timeline__info">
+                            <span class="history-timeline__date"></span>
+                            <h3 class="history-timeline__title">Ongoing Support</h3>
+                            <p class="history-timeline__text">
+                                We provide continued support after migration for stability and issue resolution.</p>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                    <div class="col-md-12 col-lg-6"></div>
+                    <!-- /.col-md-12 col-lg-6 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECURITY & COMPLIANCE
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <h2 class="header-title">SECURITY &amp; COMPLIANCE</h2>
+        <div class="two-problem-grid">
+            <div class="problem-card">
+                <h3>Pre-Migration Backup</h3>
+                <p>A complete backup is taken before any migration work begins, giving you a full restore point in the unlikely event any recovery is needed.</p>
+            </div>
+
+            <div class="problem-card">
+                <h3>Role-Based Access Control</h3>
+                <p>Only authorised personnel interact with migration data. User roles and permissions are verified and correctly mapped before and after migration completes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     GUARANTEES THAT PROTECT YOUR BUSINESS
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <p class="grey-label">Our Commitment to You</p>
+        <h2 class="header-title">Guarantees That Protect Your Business</h2>
+        <p class="header-para">We remove the risk from email migration so you can make the switch with complete confidence.</p>
+
+        <div class="two-problem-grid">
+
+            <div class="problem-card">
+                <h4>Pre-Planned Rollback Strategy</h4>
+                <p>A rollback plan is defined before migration begins. Your original environment remains fully intact and accessible until you are completely satisfied with the new setup and have approved go-live.</p>
+            </div>
+
+            <div class="problem-card">
+                <h4>Staged Validation at Every Step</h4>
+                <p>Integrity checks run after each phase, not just at the end. Issues are caught and resolved early, long before they could affect your business operations or delay your go-live timeline.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FAQ SECTION
+════════════════════════════════════════════ -->
+<section class="main-section">
+    <div class="auto-container">
+        <p class="grey-label">Common Questions</p>
+        <h2 class="header-title">Email Migration FAQ</h2>
+
+        <div class="faq-section">
+
+            <div class="faq-item">
+                <div class="faq-question">1. What is email migration?</div>
+                <div class="faq-answer">
+                    Email migration is the process of transferring emails, contacts, and calendars from one platform to another. Businesses use email migration services to move to cloud platforms like Microsoft 365, Google Workspace, or Zoho for better performance and accessibility.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">2. How long does email migration take?</div>
+                <div class="faq-answer">
+                    The duration depends on users, mailbox size, and platforms. Most email migration services are completed within a few days. A proper assessment helps define timelines and ensures minimal disruption during the migration process.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">3. Will there be downtime during migration?</div>
+                <div class="faq-answer">
+                    Our email migration services are designed to reduce downtime. In some cases, users can continue working during the migration. We follow a structured approach to maintain business continuity while transitioning to the new platform.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">4. Is my data secure during migration?</div>
+                <div class="faq-answer">
+                    Yes, we follow secure email migration practices including backups and controlled access. Data is protected at every stage to ensure accuracy throughout the migration process.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">5. What platforms do you support?</div>
+                <div class="faq-answer">
+                    We support Microsoft 365, Google Workspace, Zoho Mail, and other IMAP based systems. Our email migration services are flexible and designed to support different business and technical requirements.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">6. How much does email migration cost?</div>
+                <div class="faq-answer">
+                    Cost depends on the number of users, platforms involved, and complexity of your environment. We offer transparent, project-based pricing with no hidden fees. Connect with our team for a detailed assessment and receive a clear quote for your migration.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">7. Do you provide support after the migration is complete?</div>
+                <div class="faq-answer">
+                    Yes. Post-migration support is included as standard. We monitor the new environment, resolve any issues, and deliver admin documentation so your IT team can manage the platform from day one.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA SECTION
+════════════════════════════════════════════ -->
+<div class="auto-container" style="padding-block: 80px">
+    <div class="cta-section">
+        <p class="grey-label">Ready to Migrate</p>
+        <h2 class="header-title">Talk to Our Email Migration Experts Today!</h2>
+        <p class="header-para">Get a free consultation and pre-migration assessment. We will scope your migration, give you an accurate timeline, and provide a transparent quote with zero obligation.</p>
+        <div class="link-box" style="margin-top: 30px; justify-content: center;">
+            <a class="theme-btn btn-style-one" href="{% url 'contact' %}">
+                <i class="btn-curve"></i>
+                <span class="btn-title">Request a Consultation</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function () {
+            const faqItem = this.closest('.faq-item');
+            const allItems = document.querySelectorAll('.faq-item');
+            allItems.forEach(item => {
+                if (item !== faqItem) item.classList.remove('active');
+            });
+            faqItem.classList.toggle('active');
+        });
+    });
+</script>
+
+{% endblock %}

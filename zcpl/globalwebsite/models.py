@@ -37,6 +37,8 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     description = RichTextField(blank=True, null=True)
+    heading = models.CharField(max_length=500, blank=True, null=True)
+    
 
     # ✅ SEO fields
     meta_title = models.CharField(max_length=150, blank=True, null=True)
@@ -66,11 +68,12 @@ class SubCategory(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='subcategories'
+        related_name='subcategories' 
     )
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     description = RichTextField(blank=True, null=True)
+    heading = models.CharField(max_length=500, blank=True, null=True)
 
     # ✅ SEO fields
     meta_title = models.CharField(max_length=150, blank=True, null=True)

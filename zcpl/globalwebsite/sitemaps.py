@@ -59,6 +59,7 @@ class StaticViewSitemap(Sitemap):
             {"url": "network-maintenance", "priority": 0.85, "changefreq": "weekly"},
             {"url": "vmware-support", "priority": 0.85, "changefreq": "weekly"},
             {"url": "microsoft-thirdparty-support", "priority": 0.85, "changefreq": "weekly"},
+            {"url": "email-migration-services", "priority": 0.85, "changefreq": "weekly"},
             {"url": "build_your_server", "priority": 0.85, "changefreq": "weekly"},
             {"url": "rental-services", "priority": 0.85, "changefreq": "weekly"},
             {"url": "global-it", "priority": 0.85, "changefreq": "weekly"},
