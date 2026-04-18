@@ -693,56 +693,52 @@ def derive_brand_using_subcategory_category(product):
 
     return "Generic"
 
+from decimal import Decimal
+from django.utils.html import strip_tags
+
+
 def build_jsonld_dicts(request, product):
     """
-    Build Product and Breadcrumb JSON-LD dicts and return them.
+    Build Product and Breadcrumb JSON-LD dicts.
     """
+
     base = f"{request.scheme}://{request.get_host()}"
 
-    # description cleaned (removes &nbsp; etc.)
-    desc = ""
-    if hasattr(product, 'meta_description') and product.meta_description:
+    # -------- Description --------
+    if getattr(product, "meta_description", None):
         desc = clean_text_for_jsonld(product.meta_description, 500)
     else:
-        desc = clean_text_for_jsonld(getattr(product, 'short_description', ''), 500)
+        desc = clean_text_for_jsonld(getattr(product, "short_description", ""), 500)
 
-    # images absolute urls
+    # -------- Images --------
     images = []
-    if hasattr(product, 'image') and getattr(product, 'image', None):
-        try:
-            images.append(f"{base}{product.image.url}")
-        except Exception:
-            pass
-    if hasattr(product, 'images') and getattr(product, 'images', None) is not None:
-        try:
-            for img in product.images.all():
-                if getattr(img, 'image', None):
-                    try:
-                        images.append(f"{base}{img.image.url}")
-                    except Exception:
-                        continue
-        except Exception:
-            pass
 
-    # brand resolution
-    jsonld_brand = derive_brand_using_subcategory_category(product)
+    if getattr(product, "image", None):
+        images.append(f"{base}{product.image.url}")
 
-    # price only if numeric > 0
+    if getattr(product, "images", None):
+        for img in product.images.all():
+            if getattr(img, "image", None):
+                images.append(f"{base}{img.image.url}")
+
+    # -------- Brand --------
+    jsonld_brand = derive_brand_using_subcategory_category(product) or "Generic"
+
+    # -------- Price --------
     jsonld_price = None
-    if hasattr(product, 'price') and product.price not in (None, ''):
+    if getattr(product, "price", None):
         try:
-            p = Decimal(product.price)
+            p = Decimal(str(product.price).replace(",", ""))
             if p > 0:
                 jsonld_price = float(p)
         except Exception:
-            jsonld_price = None
+            pass
 
-    # Product dict
+    # -------- Product JSONLD --------
     product_ld = {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": strip_tags(getattr(product, 'name', '') or ""),
-        "image": images,
+        "name": strip_tags(getattr(product, "name", "") or ""),
         "description": desc,
         "brand": {
             "@type": "Brand",
@@ -750,41 +746,85 @@ def build_jsonld_dicts(request, product):
         }
     }
 
-    if jsonld_price is not None:
-        product_ld["offers"] = {
-            "@type": "Offer",
-            "url": request.build_absolute_uri(),
-            "priceCurrency": "INR",
-            "price": jsonld_price,
-            "availability": "https://schema.org/InStock" if getattr(product, 'available', True) else "https://schema.org/OutOfStock",
-            "seller": {
-                "@type": "Organization",
-                "name": "Zaco Computers Pvt. Ltd."
-            }
-        }
+    if images:
+        product_ld["image"] = images
 
-    # Breadcrumbs (subcategory -> product)
+    # -------- Offers --------
+    offers = {
+        "@type": "Offer",
+        "url": request.build_absolute_uri(),
+        "availability": "https://schema.org/InStock"
+        if getattr(product, "available", True)
+        else "https://schema.org/OutOfStock",
+        "seller": {
+            "@type": "Organization",
+            "name": "Zaco Computers Pvt. Ltd."
+        }
+    }
+
+    if jsonld_price is not None:
+        offers["priceCurrency"] = "INR"
+        offers["price"] = jsonld_price
+
+    product_ld["offers"] = offers
+
+    # -------- Breadcrumbs --------
     breadcrumb_items = [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{base}/"},
-        {"@type": "ListItem", "position": 2, "name": "Shop", "item": f"{base}/shop/"},
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": f"{base}/",
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Shop",
+            "item": f"{base}/shop/",
+        },
     ]
-    try:
-        subcat = getattr(product, 'category', None)
-        if subcat is not None and getattr(subcat, 'name', None):
-            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": subcat.name, "item": f"{base}/shop/{getattr(subcat, 'slug', '')}/"})
-            breadcrumb_items.append({"@type": "ListItem", "position": 4, "name": strip_tags(getattr(product, 'name', '')), "item": request.build_absolute_uri()})
+
+    subcat = getattr(product, "category", None)
+
+    if subcat and getattr(subcat, "name", None):
+
+        slug = getattr(subcat, "slug", None)
+
+        if slug:
+            subcat_url = f"{base}/shop/{slug}/"
         else:
-            breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": strip_tags(getattr(product, 'name', '')), "item": request.build_absolute_uri()})
-    except Exception:
-        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": strip_tags(getattr(product, 'name', '')), "item": request.build_absolute_uri()})
+            subcat_url = f"{base}/shop/"
+
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": 3,
+            "name": subcat.name,
+            "item": subcat_url,
+        })
+
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": 4,
+            "name": strip_tags(getattr(product, "name", "")),
+            "item": request.build_absolute_uri(),
+        })
+
+    else:
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": 3,
+            "name": strip_tags(getattr(product, "name", "")),
+            "item": request.build_absolute_uri(),
+        })
 
     breadcrumb_ld = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": breadcrumb_items
+        "itemListElement": breadcrumb_items,
     }
 
     return product_ld, breadcrumb_ld
+
 # ---------- View ----------
 
 # def product_detail(request, slug):

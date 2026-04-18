@@ -2,6 +2,74 @@
 {% load static %}
 {% block content %}
 
+<style>
+
+/* Terms & Conditions Page */
+
+.terms-conditions-content{
+    padding:80px 20px;
+}
+
+.terms-conditions-content .content-box{
+    max-width:850px;
+    margin:auto;
+    padding:40px;
+    background:#ffffff;
+    border-radius:6px;
+}
+
+.terms-conditions-content h3{
+    font-size:24px;
+    font-weight:600;
+    margin-top:30px;
+    margin-bottom:12px;
+    color:#222;
+}
+
+.terms-conditions-content p{
+    font-size:16px;
+    line-height:1.7;
+    color:#555;
+    margin-bottom:15px;
+}
+
+.terms-conditions-content ul{
+    padding-left:20px;
+    margin-bottom:20px;
+}
+
+.terms-conditions-content ul li{
+    font-size:16px;
+    line-height:1.6;
+    color:#555;
+    margin-bottom:8px;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width:768px){
+
+    .terms-conditions-content{
+        padding:50px 15px;
+    }
+
+    .terms-conditions-content .content-box{
+        padding:25px;
+    }
+
+    .terms-conditions-content h3{
+        font-size:20px;
+    }
+
+    .terms-conditions-content p,
+    .terms-conditions-content ul li{
+        font-size:15px;
+    }
+
+}
+
+</style>
+
 <!-- Banner Section -->
 <section class="slider-six">
   <div class="slider-six__curv"></div>
@@ -18,7 +86,7 @@
         ></div>
         <div class="auto-container">
           <div class="slider-six__content">
-            <h2 class="slider-six__title">Terms and Conditions</h2>
+            <h1 class="slider-six__title">Terms and Conditions</h1>
           </div>
         </div>
       </div>
