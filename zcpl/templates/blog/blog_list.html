@@ -70,7 +70,8 @@ Stay informed with Zaco Computer's IT blog. Practical guides & expert insights o
                                     <a href="{% url 'blog_detail' i.slug %}">{{ i.title }}</a>
                                 </h5>
                                 <div class="text" style="font-size:14px;">
-                                    {{ i.content|truncatechars:100|safe }}
+                                    {% comment %} {{ i.content|truncatechars:100|safe }} {% endcomment %}
+                                    {{ i.content|striptags|truncatechars:120 }}
                                 </div>
                                 <div class="link-box mt-2">
                                     <a class="theme-btn" href="{% url 'blog_detail' i.slug %}">

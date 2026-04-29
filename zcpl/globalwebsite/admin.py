@@ -11,6 +11,8 @@ admin.site.register(ContactMessageGlobal)
 # admin.site.register(Product)
 # admin.site.register(Category)
 admin.site.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_per_page = 900
 # admin.site.register(SubCategory)
 admin.site.register(Order)
 admin.site.register(PPCQuote)
@@ -63,6 +65,8 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 # admin.site.register(Blog)
 admin.site.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_per_page = 900
 
 
 
