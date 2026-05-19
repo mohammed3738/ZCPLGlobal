@@ -481,13 +481,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       <a href="{% url 'contact' %}">Contact Us</a>
 
                     </li>
-                    {% comment %} <li class="dropdown">
-                      <a href="{% url 'cart_detail' %}">
-  Cart ({{ request.session.cart|length|default:0 }})
-</a>
-
-
-                    </li> {% endcomment %}
+                    <li class="dropdown">
+                      <a href="{% url 'cart_detail' %}">Cart ({{ request.session.cart|length|default:0 }})</a>
+                    </li>
                   </ul>
                 </nav>
               </div>

@@ -20,7 +20,7 @@
     {% endif %}
 {% endblock %}
 
-{% block extra_meta %}
+{% block extra_head %}
     <meta property="og:title" content="{{ product.meta_title|default:product.name }}">
     <meta property="og:description" content="{{ product.meta_description|default:product.short_description|striptags|truncatechars:200 }}">
     {% if product.image %}

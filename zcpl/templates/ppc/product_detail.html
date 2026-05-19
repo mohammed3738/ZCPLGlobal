@@ -859,7 +859,7 @@
         {% comment %} <button class="btn-inquiry" onclick="window.location.href='tel:9811183994'">
           <i class="fas fa-phone"></i> Call for Best Prices
         </button> {% endcomment %}
-                        <a class="theme-btn btn-style-two" href="{% url "contact" %}">
+                        <a class="theme-btn btn-style-two" href="tel:+919811183994">
                     <i class="btn-curve"></i>
     <span class="btn-title" style="background: #0071bd !important; font-size: 17px !important;">
         <i class="fa-solid fa-phone me-2"></i> Call for Best Prices
@@ -974,7 +974,7 @@
 <script>
 
 function addCart() {
-  alert('Added to cart!');
+  window.location.href = "{% url 'cart_detail' %}";
 }
 </script>
 
