@@ -327,6 +327,10 @@ class PPCServiceLeadForm(forms.ModelForm):
             "phone": forms.TextInput(attrs={
                 "class": "form-input",
                 "placeholder": "Phone *",
+                "maxlength": "10",
+                "minlength": "10",
+                "inputmode": "numeric",
+                "oninput": "this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);",
             }),
 
             "company_name": forms.TextInput(attrs={
@@ -340,6 +344,20 @@ class PPCServiceLeadForm(forms.ModelForm):
                 "rows": 3,
             }),
         }
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+
+        if not phone.isdigit():
+            raise forms.ValidationError(
+                "Phone number must contain only numbers."
+            )
+
+        if len(phone) != 10:
+            raise forms.ValidationError(
+                "Phone number must be exactly 10 digits."
+            )
+
+        return phone
 
     def __init__(self, *args, service=None, **kwargs):
         super().__init__(*args, **kwargs)
