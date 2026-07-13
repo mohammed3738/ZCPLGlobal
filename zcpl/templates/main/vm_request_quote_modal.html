@@ -52,13 +52,13 @@ body {
       <!-- Modal Header -->
       <div class="modal-header">
         <h5 class="modal-title" id="quoteModalLabel">
-          Request a Quote for {{ product.name }}
+          Get Your VMware Support Quote Today!
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <!-- Form -->
-      <form method="post" action="{% url 'request_quote' %}">
+      <form method="post" action="{% url 'vmware_request_quote' %}">
         {% csrf_token %}
 
         <div class="modal-body">
@@ -86,16 +86,17 @@ body {
                     title="Please enter a valid 10-digit phone number">
             </div>
 
+
             <!-- Subject -->
             <div class="col-md-6 mb-3">
-              <input type="text" name="product_name" class="form-control"
-                     value="Quote Request for {{ product.name }}" required>
+              <input type="text" name="company_name" class="form-control"
+                     placeholder="Company Name">
             </div>
 
             <!-- Message -->
             <div class="col-12 mb-3">
               <textarea name="requirements" class="form-control" rows="4"
-                        placeholder="Your Message" required></textarea>
+                        placeholder="Tell us about your VMware support requirements or challenges." required></textarea>
             </div>
 
             <!-- Captcha (Only if exists) -->

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_tags %}
 
 {% block title %}Reliable VMware Third Party Support Services - Zaco Computers
 {% endblock %}
@@ -591,12 +592,16 @@ Need VMware extended support? Zaco Computers offers SLA-backed VMware third-part
                     <p>
                         As a global leader of end-to-end third-party enterprise software support providers, Zaco Computers understands the importance of maintaining operational continuity for your existing VMware environment, without forcing costly upgrades or unnecessary licence bundles.
                     </p>
-                    <div class="link-box" style="margin-top: 30px;">
+                    {% comment %} <div class="link-box" style="margin-top: 30px;">
                         <a class="theme-btn btn-style-one" href="{% url 'contact' %}">
                             <i class="btn-curve"></i>
-                            <span class="btn-title">Contact Us for Consultation</span>
+                            <span class="btn-title">Request a Free Consultation</span>
                         </a>
-                    </div>
+                    </div> {% endcomment %}
+                    <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal" style="margin-top: 30px;">
+                                <i class="btn-curve"></i>
+                                <span class="btn-title">Request a Free Consultation</span>
+                    </button>
                 </div>
             </div>
             <div class="col-md-12 col-lg-4 text-center " >
@@ -1046,4 +1051,5 @@ Need VMware extended support? Zaco Computers offers SLA-backed VMware third-part
     });
 </script>
 
+{% include "main/vm_request_quote_modal.html" %}
 {% endblock %}

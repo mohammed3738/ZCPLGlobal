@@ -1465,6 +1465,14 @@ def blogs_by_archive(request, year, month):
 
 def blog_detail(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
+    related_blogs = Blog.objects.filter(
+                        category=blog.category,
+                        slug__isnull=False
+                    ).exclude(
+                        id=blog.id
+                    ).exclude(
+                        slug=""
+                    ).order_by('-created_at')[:5]
     comments = blog.comments.all().order_by('-created_at')
     latest_posts = Blog.objects.order_by("-created_at")[:3]  # for sidebar
 
@@ -1491,6 +1499,7 @@ def blog_detail(request, slug):
         "categories_blog": categories,
         "tags": tags,
         "archives": archives,
+        "related_blogs": related_blogs,
     })
 
 
@@ -2441,3 +2450,94 @@ def newsletter_subscribe(request):
                 messages.success(request, "Thanks for subscribing!")
 
         return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+
+#*****************************Vaishnavi
+
+def request_quote(request):
+    if request.method == "POST":
+        RequestQuote.objects.create(
+            name=request.POST.get("name"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            product_name=request.POST.get("product_name"),
+            requirements=request.POST.get("requirements"),
+        )
+
+        return redirect(request.META.get("HTTP_REFERER"))
+
+    return redirect("/")
+
+def vmware_request_quote(request):
+    if request.method == "POST":
+        VMWareRequestQuote.objects.create(
+            name=request.POST.get("name"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            company_name=request.POST.get("company_name"),
+            requirements=request.POST.get("requirements"),
+        )
+
+        return redirect(request.META.get("HTTP_REFERER"))
+
+    return redirect("/")
+
+def ppc_service_detail(request, slug):
+
+    service = get_object_or_404(
+        PPCService,
+        slug=slug,
+        is_active=True
+    )
+
+    if request.method == "POST":
+
+        form = PPCServiceLeadForm(
+            request.POST,
+            service=service
+        )
+
+        if form.is_valid():
+
+            lead = form.save(commit=False)
+            lead.service = service
+            lead.save()
+
+            # SAVE CUSTOM FIELD ANSWERS
+            for custom_field in service.custom_fields.all():
+
+                field_name = f"custom_{custom_field.id}"
+                answer = form.cleaned_data.get(field_name)
+
+                if answer:
+                    PPCServiceLeadAnswer.objects.create(
+                        lead=lead,
+                        field=custom_field,
+                        field_label=custom_field.label,
+                        answer=answer
+                    )
+
+            messages.success(
+                request,
+                "Thank you! Your request has been submitted."
+            )
+
+            return redirect(
+                "ppc_service_detail",
+                slug=service.slug
+            )
+
+    else:
+        form = PPCServiceLeadForm(service=service)
+
+    context = {
+        "service": service,
+        "form": form,
+    }
+
+    return render(
+        request,
+        "ppc/service_detail.html",
+        context
+    )

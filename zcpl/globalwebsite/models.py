@@ -741,3 +741,183 @@ class ServerOtherComponent(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+#************************Vaishnavi
+class RequestQuote(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    product_name = models.CharField(max_length=200, blank=True)
+    requirements = models.TextField(blank=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.product_name}"
+
+class VMWareRequestQuote(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    company_name = models.CharField(max_length=200, blank=True)
+    requirements = models.TextField(blank=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.company_name}"
+
+
+class PPCService(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, blank=True)
+
+    sub_heading = models.CharField(max_length=500, blank=True)
+    intro_description = models.TextField(blank=True)
+
+    description = RichTextUploadingField(blank=True)
+
+    is_active = models.BooleanField(default=True)
+
+    meta_title = models.CharField(max_length=150, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+    
+class PPCServiceImage(models.Model):
+    service = models.ForeignKey(
+        PPCService,
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
+
+    image = models.ImageField(upload_to="ppc/services/")
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"{self.service.name} - Image {self.order}"
+    
+from django.db import models
+from django.core.exceptions import ValidationError
+
+
+class PPCServiceCustomField(models.Model):
+
+    FIELD_TYPES = [
+        ("text", "Text Field"),
+        ("dropdown", "Dropdown"),
+    ]
+
+    service = models.ForeignKey(
+        PPCService,
+        on_delete=models.CASCADE,
+        related_name="custom_fields"
+    )
+
+    label = models.CharField(max_length=255)
+
+    field_type = models.CharField(
+        max_length=20,
+        choices=FIELD_TYPES
+    )
+
+    dropdown_options = models.TextField(
+        blank=True,
+        help_text="Enter options separated by commas. Example: AWS, Azure, VMware"
+    )
+
+    is_required = models.BooleanField(default=False)
+
+    order = models.PositiveIntegerField(default=0)
+
+    def clean(self):
+        if self.service_id and not self.pk:
+            if self.service.custom_fields.count() >= 2:
+                raise ValidationError(
+                    "Maximum 2 custom fields are allowed per service."
+                )
+
+        if self.field_type == "dropdown" and not self.dropdown_options:
+            raise ValidationError(
+                "Dropdown options are required for dropdown fields."
+            )
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"{self.service.name} - {self.label}"
+
+
+class PPCServiceLead(models.Model):
+
+    service = models.ForeignKey(
+        PPCService,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="leads"
+    )
+
+    # Save service name snapshot
+    service_name = models.CharField(
+        max_length=255,
+        blank=True
+    )
+
+    name = models.CharField(max_length=255)
+
+    email = models.EmailField()
+
+    phone = models.CharField(max_length=20)
+
+    company_name = models.CharField(
+        max_length=255,
+        blank=True, null= True
+    )
+
+    requirements = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if self.service:
+            self.service_name = self.service.name
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name} - {self.service_name}"
+
+
+class PPCServiceLeadAnswer(models.Model):
+
+    lead = models.ForeignKey(
+        PPCServiceLead,
+        on_delete=models.CASCADE,
+        related_name="custom_answers"
+    )
+
+    field = models.ForeignKey(
+        PPCServiceCustomField,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    field_label = models.CharField(max_length=255)
+
+    answer = models.TextField()
+
+    def __str__(self):
+        return f"{self.field_label}: {self.answer}"

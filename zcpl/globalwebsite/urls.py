@@ -148,5 +148,11 @@ urlpatterns = [
     # path("sitemap-products.xml",sitemap,{"sitemaps": {"products": ProductSitemap,"categories": CategorySitemap,"subcategories": SubCategorySitemap,}}),
     path("newsletter/subscribe/", views.newsletter_subscribe, name="newsletter_subscribe"),
 
+    #**********Vaishnnaavi
+        path("request-quote/", views.request_quote, name="request_quote"),
+        path("vmware-request-quote/", views.vmware_request_quote, name="vmware_request_quote"),
+
+        path("ppc/service/<slug:slug>/", views.ppc_service_detail, name="ppc_service_detail"),
+
 ]
 

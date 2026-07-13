@@ -289,3 +289,94 @@ class NewsletterForm(forms.ModelForm):
                 "required": True,
             })
         }
+
+
+# *************Vaishnavi
+from django import forms
+# from captcha.fields import CaptchaField
+
+from .models import PPCServiceLead
+
+
+class PPCServiceLeadForm(forms.ModelForm):
+
+    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+    class Meta:
+        model = PPCServiceLead
+
+        fields = [
+            "name",
+            "email",
+            "phone",
+            "company_name",
+            "requirements",
+        ]
+
+        widgets = {
+            "name": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "Name *",
+            }),
+
+            "email": forms.EmailInput(attrs={
+                "class": "form-input",
+                "placeholder": "Email *",
+            }),
+
+            "phone": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "Phone *",
+            }),
+
+            "company_name": forms.TextInput(attrs={
+                "class": "form-input",
+                "placeholder": "Company Name",
+            }),
+
+            "requirements": forms.Textarea(attrs={
+                "class": "form-input",
+                "placeholder": "Specify Your Requirements *",
+                "rows": 3,
+            }),
+        }
+
+    def __init__(self, *args, service=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.service = service
+
+        if service:
+            for custom_field in service.custom_fields.all():
+
+                field_name = f"custom_{custom_field.id}"
+
+                if custom_field.field_type == "dropdown":
+
+                    options = [
+                        (option.strip(), option.strip())
+                        for option in custom_field.dropdown_options.split(",")
+                        if option.strip()
+                    ]
+
+                    options.insert(0, ("", f"Select {custom_field.label}"))
+
+                    self.fields[field_name] = forms.ChoiceField(
+                        label=custom_field.label,
+                        choices=options,
+                        required=custom_field.is_required,
+                        widget=forms.Select(attrs={
+                            "class": "form-input"
+                        })
+                    )
+
+                else:
+
+                    self.fields[field_name] = forms.CharField(
+                        label=custom_field.label,
+                        required=custom_field.is_required,
+                        widget=forms.TextInput(attrs={
+                            "class": "form-input",
+                            "placeholder": custom_field.label
+                        })
+                    )

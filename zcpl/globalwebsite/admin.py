@@ -215,11 +215,24 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
+# admin.site.register(RequestQuote)
 
 
+@admin.register(RequestQuote)
+class RequestQuoteAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'phone', 'product_name', 'requirements', 'submitted_at']
+    search_fields = ['name', 'email', 'phone', 'product_name']
+    list_filter = ['submitted_at']
+    readonly_fields = ['name', 'email', 'phone', 'product_name', 'requirements', 'submitted_at']
+    ordering = ("-submitted_at",)
 
-
-
+@admin.register(VMWareRequestQuote)
+class VMWareRequestQuoteAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'phone', 'company_name', 'requirements', 'submitted_at']
+    search_fields = ['name', 'email', 'phone', 'company_name']
+    list_filter = ['submitted_at']
+    readonly_fields = ['name', 'email', 'phone', 'company_name', 'requirements', 'submitted_at']
+    ordering = ("-submitted_at",)
 
 
 
@@ -299,3 +312,86 @@ class PPCProductAdmin(admin.ModelAdmin):
 
     view_on_site = True
 
+from django.contrib import admin
+from .models import PPCService, PPCServiceImage, PPCServiceLead
+
+
+class PPCServiceImageInline(admin.TabularInline):
+    model = PPCServiceImage
+    extra = 1
+
+class PPCServiceCustomFieldInline(admin.TabularInline):
+    model = PPCServiceCustomField
+    extra = 1
+    max_num = 2
+
+@admin.register(PPCService)
+class PPCServiceAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "slug",
+        "is_active",
+        "created_at",
+    )
+
+    search_fields = ("name",)
+    list_filter = ("is_active",)
+
+    prepopulated_fields = {
+        "slug": ("name",)
+    }
+
+    inlines = [
+        PPCServiceImageInline,
+        PPCServiceCustomFieldInline,
+    ]
+
+class PPCServiceLeadAnswerInline(admin.TabularInline):
+    model = PPCServiceLeadAnswer
+    extra = 0
+
+    fields = (
+        "field_label",
+        "answer",
+    )
+
+    readonly_fields = (
+        "field_label",
+        "answer",
+    )
+
+    can_delete = False
+
+@admin.register(PPCServiceLead)
+class PPCServiceLeadAdmin(admin.ModelAdmin):
+
+    list_display = (
+        "name",
+        "email",
+        "phone",
+        "company_name",
+        "service_name",
+        "created_at",
+    )
+
+    list_filter = (
+        "service",
+        "created_at",
+    )
+
+    search_fields = (
+        "name",
+        "email",
+        "phone",
+        "company_name",
+        "service_name",
+    )
+
+    readonly_fields = (
+        "service_name",
+        "created_at",
+    )
+
+    inlines = [
+        PPCServiceLeadAnswerInline,
+    ]
