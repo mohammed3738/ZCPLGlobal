@@ -333,6 +333,7 @@ class PPCServiceAdmin(admin.ModelAdmin):
         "is_active",
         "created_at",
     )
+    view_on_site = True
 
     search_fields = ("name",)
     list_filter = ("is_active",)

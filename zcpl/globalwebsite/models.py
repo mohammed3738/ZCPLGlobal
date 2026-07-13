@@ -790,6 +790,12 @@ class PPCService(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse(
+            "ppc_service_detail",
+            kwargs={"slug": self.slug}
+        )
+
     def __str__(self):
         return self.name
     
