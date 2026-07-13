@@ -299,7 +299,10 @@ from .models import PPCServiceLead
 
 
 class PPCServiceLeadForm(forms.ModelForm):
-
+    captcha = ReCaptchaField(
+        widget=ReCaptchaV2Checkbox,
+        required=True
+    )
     # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     class Meta:
@@ -311,7 +314,9 @@ class PPCServiceLeadForm(forms.ModelForm):
             "phone",
             "company_name",
             "requirements",
+            
         ]
+        
 
         widgets = {
             "name": forms.TextInput(attrs={
