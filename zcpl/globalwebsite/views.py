@@ -2457,29 +2457,66 @@ def newsletter_subscribe(request):
 
 def request_quote(request):
     if request.method == "POST":
-        RequestQuote.objects.create(
+        quote = RequestQuote.objects.create(
             name=request.POST.get("name"),
             email=request.POST.get("email"),
             phone=request.POST.get("phone"),
             product_name=request.POST.get("product_name"),
             requirements=request.POST.get("requirements"),
         )
+        subject = f"New Quote Request – {quote.product_name}"
+        message = f"""
+New Quote Request Received
 
-        return redirect(request.META.get("HTTP_REFERER"))
+Product: {quote.product_name}
+
+Name: {quote.name}
+Email: {quote.email}
+Phone: {quote.phone}
+Requirement:
+{quote.requirements}
+"""
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            ["info@zacocomputer.com"],
+            fail_silently=False,
+        )
+
+        return redirect('thank_you')
 
     return redirect("/")
 
 def vmware_request_quote(request):
     if request.method == "POST":
-        VMWareRequestQuote.objects.create(
+        quote = VMWareRequestQuote.objects.create(
             name=request.POST.get("name"),
             email=request.POST.get("email"),
             phone=request.POST.get("phone"),
             company_name=request.POST.get("company_name"),
             requirements=request.POST.get("requirements"),
         )
+        subject = f"New VMWare Quote Request"
+        message = f"""
+New VMWare Quote Request Received
 
-        return redirect(request.META.get("HTTP_REFERER"))
+Name: {quote.name}
+Email: {quote.email}
+Phone: {quote.phone}
+Company: {quote.company_name}
+Requirement:
+{quote.requirements}
+"""
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            ["info@zacocomputer.com"],
+            fail_silently=False,
+        )
+
+        return redirect('thank_you')
 
     return redirect("/")
 
@@ -2522,11 +2559,30 @@ def ppc_service_detail(request, slug):
                 request,
                 "Thank you! Your request has been submitted."
             )
+            subject = f"New PPC Service Lead - {service.name}"
+            message = f"""
+            New PPC Service Lead Received
 
-            return redirect(
-                "ppc_service_detail",
-                slug=service.slug
+            Service: {service.name}
+
+            Name: {lead.name}
+            Email: {lead.email}
+            Phone: {lead.phone}
+            Company Name: {lead.company_name or "Not Provided"}
+
+            Requirements:
+            {lead.requirements}
+            """
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
             )
+
+            return redirect('thank_you')
 
     else:
         form = PPCServiceLeadForm(service=service)
