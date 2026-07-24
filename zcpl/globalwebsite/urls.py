@@ -115,12 +115,16 @@ urlpatterns = [
     path('shop/', views.shop, name='shop'),
     path('shop/<slug:category_slug>/', views.shop, name='shop_by_category'),
     path('shop/<slug:category_slug>/<slug:subcategory_slug>/', views.shop, name='shop_by_subcategory'),
+    path('shop/<slug:category_slug>/<slug:subcategory_slug>/<slug:series_slug>/', views.shop, name='shop_by_series'),
     
     path('categories/', views.category_manager, name='category_manager'),
     path('categories/edit/<int:category_id>/', views.category_manager, name='edit_category'),
 
     path('subcategories/', views.subcategory_manager, name='subcategory_manager'),
     path('subcategories/edit/<int:subcategory_id>/', views.subcategory_manager, name='edit_subcategory'),
+
+    path('series/', views.series_manager, name='series_manager'),
+    path('series/edit/<int:series_id>/', views.series_manager, name='edit_series'),
 
     path('api/request-quote/', views.request_quote_api, name='request_quote_api'),
     path(

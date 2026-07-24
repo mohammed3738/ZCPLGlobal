@@ -44,23 +44,111 @@
 {% block content %}
 
 <style>
-/* Arrow toggle for categories */
-.arrow-toggle, .arrow-down, .arrow-up {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid #333;
-  border-bottom: 2px solid #333;
-  transform: rotate(45deg);
-  transition: transform 0.3s ease;
-  margin-left: 8px;
-  cursor: pointer;
-}
+/* ── Filter sidebar ─────────────────────────────── */
+.filter-list { list-style: none; padding: 0; margin: 0; }
+.filter-list li { margin: 0; }
 
-.arrow-up { transform: rotate(-135deg); }
-.arrow-toggle.open { transform: rotate(-135deg); }
-.category-header { display: flex; justify-content: space-between; align-items: center; }
-.category-link { flex-grow: 1; text-decoration: none; color: inherit; white-space: nowrap; }
+/* All link */
+.filter-all {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  padding: 5px 0 8px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 4px;
+  text-decoration: none;
+}
+.filter-all:hover { color: #19c74a; }
+
+/* ── Level 1: Category ──────────────────────────── */
+.filter-cat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.filter-cat-row a {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex: 1;
+}
+.filter-cat-row a:hover { color: #19c74a; }
+
+/* ── Level 2: SubCategory ───────────────────────── */
+.filter-subcat-list {
+  list-style: none;
+  padding: 4px 0 4px 14px;
+  margin: 0;
+  border-left: 2px solid #e0e0e0;
+  display: none;
+}
+.filter-subcat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+.filter-subcat-row a {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  flex: 1;
+}
+.filter-subcat-row a:hover { color: #19c74a; }
+
+/* ── Level 3: Series ────────────────────────────── */
+.filter-series-list {
+  list-style: none;
+  padding: 3px 0 3px 12px;
+  margin: 0;
+  border-left: 2px solid #ececec;
+  display: none;
+}
+.filter-series-list li { padding: 3px 0; }
+.filter-series-list li a {
+  font-size: 12px;
+  color: #666;
+  text-decoration: none;
+}
+.filter-series-list li a:hover { color: #19c74a; }
+
+/* ── Toggle button ──────────────────────────────── */
+.filter-toggle {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: #555;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.filter-toggle:hover { background: #f5f5f5; }
+.filter-toggle.open { background: #19c74a; color: #fff; border-color: #19c74a; }
+
+/* Category toggle in the title row */
+.sidebar-title-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+  line-height: 1;
+  padding: 0;
+}
 </style>
 
 <!-- Banner -->
@@ -87,12 +175,12 @@
   <div class="auto-container">
     <h1 style="font-size: 30px; font-weight: 700; text-align: left; margin-left: 0;">
       {% comment %} Buy or Rent Servers, Storage & Networking Equipment Online at Affordable Rates {% endcomment %}
-      {% if subcategory and subcategory.heading %}
+      {% if series and series.heading %}
+          {{ series.heading }}
+      {% elif subcategory and subcategory.heading %}
           {{ subcategory.heading }}
-
       {% elif category and category.heading %}
           {{ category.heading }}
-
       {% else %}
           Buy or Rent Servers, Storage & Networking Equipment Online at Affordable Rates
       {% endif %}
@@ -122,25 +210,42 @@
 
           <!-- Categories -->
           <div class="shop-category shop-sidebar__single">
-            <h6 class="shop-sidebar__title" onclick="toggleCategoryList()" style="cursor:pointer;font-size:larger;">
+            <h6 class="shop-sidebar__title" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-size:larger;" onclick="toggleCategoryList(this)">
               Filter by Category
-              <span id="category-toggle-arrow" class="arrow-down"></span>
+              <button class="sidebar-title-toggle" id="cat-main-toggle" tabindex="-1">+</button>
             </h6>
 
-            <ul id="category-list" class="list-unstyled" style="display:none;">
-              <li><a href="{% url 'shop' %}">All</a></li>
+            <ul id="category-list" class="filter-list" style="display:none;">
+              <li><a href="{% url 'shop' %}" class="filter-all">All</a></li>
+
               {% for cat in categories %}
               <li>
-                <div class="category-header">
+                <div class="filter-cat-row">
                   <a href="{% url 'shop_by_category' cat.slug %}">{{ cat.name }}</a>
                   {% if cat.subcategories.count %}
-                    <span class="arrow-toggle" onclick="toggleSubcategories(this)"></span>
+                  <button class="filter-toggle" onclick="toggleNext(this)" title="Expand">+</button>
                   {% endif %}
                 </div>
+
                 {% if cat.subcategories.count %}
-                <ul class="subcategory-list" style="display:none; padding-left:15px;">
+                <ul class="filter-subcat-list">
                   {% for subcat in cat.subcategories.all %}
-                  <li><a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a></li>
+                  <li>
+                    <div class="filter-subcat-row">
+                      <a href="{% url 'shop_by_subcategory' cat.slug subcat.slug %}">{{ subcat.name }}</a>
+                      {% if subcat.series.count %}
+                      <button class="filter-toggle" onclick="toggleNext(this)" title="Expand">+</button>
+                      {% endif %}
+                    </div>
+
+                    {% if subcat.series.count %}
+                    <ul class="filter-series-list">
+                      {% for s in subcat.series.all %}
+                      <li><a href="{% url 'shop_by_series' cat.slug subcat.slug s.slug %}">{{ s.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+                  </li>
                   {% endfor %}
                 </ul>
                 {% endif %}
@@ -218,7 +323,12 @@
           </ul>
         </div>
 
-        {% if subcategory and subcategory.description %}
+        {% if series and series.description %}
+        <section class="category-description container my-4">
+          <h2 style="font-size:38px;">{{ series.name }}</h2>
+          <div>{{ series.description|safe }}</div>
+        </section>
+        {% elif subcategory and subcategory.description %}
         <section class="category-description container my-4">
           <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
           <div>{{ subcategory.description|safe }}</div>
@@ -235,19 +345,24 @@
 </section>
 
 <script>
-function toggleCategoryList() {
+function toggleCategoryList(titleEl) {
   const list = document.getElementById('category-list');
-  const arrow = document.getElementById('category-toggle-arrow');
-  const isVisible = list.style.display === 'block';
-  list.style.display = isVisible ? 'none' : 'block';
-  arrow.className = isVisible ? 'arrow-down' : 'arrow-up';
+  const btn  = document.getElementById('cat-main-toggle');
+  const open = list.style.display === 'block';
+  list.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '+' : '−';
+  btn.classList.toggle('open', !open);
 }
 
-function toggleSubcategories(el) {
-  const subList = el.closest('li').querySelector('.subcategory-list');
-  const isVisible = subList.style.display === 'block';
-  subList.style.display = isVisible ? 'none' : 'block';
-  el.classList.toggle('open', !isVisible);
+function toggleNext(btn) {
+  // The next sibling list (subcat or series) sits right after the row div
+  const row  = btn.closest('.filter-cat-row, .filter-subcat-row');
+  const list = row.parentElement.querySelector('.filter-subcat-list, .filter-series-list');
+  if (!list) return;
+  const open = list.style.display === 'block';
+  list.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '+' : '−';
+  btn.classList.toggle('open', !open);
 }
 </script>
 

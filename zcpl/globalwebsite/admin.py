@@ -203,6 +203,14 @@ class SubCategoryAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+class SeriesAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+
+    class Meta:
+        model = Series
+        fields = '__all__'
+
+
 class CategoryAdmin(admin.ModelAdmin):
     form = CategoryAdminForm
     list_display = ['name', 'slug']
@@ -213,8 +221,16 @@ class SubCategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'category']
 
 
+class SeriesAdmin(admin.ModelAdmin):
+    form = SeriesAdminForm
+    list_display = ['name', 'slug', 'subcategory']
+    list_filter = ['subcategory__category', 'subcategory']
+    search_fields = ['name', 'subcategory__name']
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
+admin.site.register(Series, SeriesAdmin)
 # admin.site.register(RequestQuote)
 
 
