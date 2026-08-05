@@ -287,7 +287,7 @@
                     <span>{{ review_count }} Customer Review{{ review_count|pluralize }}</span>
                 </div>
 
-                {% if product.price != 0 %}
+                {% if product.price %}
                     <div class="product-details__price">₹{{ product.price }}</div>
                 {% endif %}
 
@@ -312,7 +312,7 @@
 {% endif %}
 
                     <div class="product-details__buttons">
-                        {% if product.price != 0 %}
+                        {% if product.price %}
                             <button type="button" class="theme-btn btn-style-one" data-bs-toggle="modal" data-bs-target="#quoteModal">
                                 <i class="btn-curve"></i>
                                 <span class="btn-title">Request Quote</span>
