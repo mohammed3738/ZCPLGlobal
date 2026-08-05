@@ -327,6 +327,8 @@
           </ul>
         </div>
 
+<<<<<<< HEAD
+=======
         {% if series and series.description %}
         <section class="category-description container my-4">
           <h2 style="font-size:38px;">{{ series.name }}</h2>
@@ -343,8 +345,22 @@
           <div>{{ category.description|safe }}</div>
         </section>
         {% endif %}
+>>>>>>> fdacf925a806bb1a3504cf419cf1f51e732b031f
       </div>
     </div>
+
+    {% if subcategory and subcategory.description %}
+    <section class="category-description my-4">
+      <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
+      <div>{{ subcategory.description|safe }}</div>
+    </section>
+    {% elif category and category.description %}
+    <section class="category-description my-4">
+      <h2 style="font-size:38px;">{{ category.name }}</h2>
+      <div>{{ category.description|safe }}</div>
+    </section>
+    {% endif %}
+
   </div>
 </section>
 
