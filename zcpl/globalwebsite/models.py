@@ -161,7 +161,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     description = RichTextUploadingField(blank=True)
     short_description = RichTextUploadingField(blank=True, null=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image = ProcessedImageField(
         upload_to='products/',
         processors=[Transpose(), ResizeToFit(800, 800)],
