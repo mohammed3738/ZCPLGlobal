@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Series Manager</title>
+</head>
+<body>
+  <h1>{% if editing %}Edit{% else %}Create{% endif %} Series</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if editing %}Update{% else %}Create{% endif %}</button>
+  </form>
+
+  <h2>All Series</h2>
+  <ul>
+    {% for s in all_series %}
+      <li>
+        <strong>{{ s.name }}</strong>
+        (SubCategory: {{ s.subcategory.name }} → Category: {{ s.subcategory.category.name }})
+        - <a href="{% url 'edit_series' s.id %}">Edit</a>
+        {% if s.description %}
+          <div>{{ s.description|safe }}</div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No series found.</li>
+    {% endfor %}
+  </ul>
+
+  <!-- CKEditor JS -->
+  <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+  <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+</body>
+</html>

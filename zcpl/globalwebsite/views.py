@@ -436,19 +436,24 @@ from django.core.paginator import Paginator
 
 # views.py
 
-def shop(request, category_slug=None, subcategory_slug=None):
+def shop(request, category_slug=None, subcategory_slug=None, series_slug=None):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
     page_number = request.GET.get('page', 1)
     products = Product.objects.filter(available=True)
     category = None
     subcategory = None
+    series = None
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         subcategories = SubCategory.objects.filter(category=category)
         if subcategory_slug:
             subcategory = get_object_or_404(SubCategory, slug=subcategory_slug, category=category)
-            products = products.filter(categories=subcategory)
+            if series_slug:
+                series = get_object_or_404(Series, slug=series_slug, subcategory=subcategory)
+                products = products.filter(series=series)
+            else:
+                products = products.filter(categories=subcategory)
         else:
             products = products.filter(categories__in=subcategories)
     if query:
@@ -498,6 +503,14 @@ def shop(request, category_slug=None, subcategory_slug=None):
             "name": subcategory.name,
             "item": f"https://www.zacocomputer.com/shop/{category.slug}/{subcategory.slug}/"
         })
+        position += 1
+    if series:
+        breadcrumb_items.append({
+            "@type": "ListItem",
+            "position": position,
+            "name": series.name,
+            "item": f"https://www.zacocomputer.com/shop/{category.slug}/{subcategory.slug}/{series.slug}/"
+        })
     breadcrumb_schema = json.dumps({
         "@context": "https://schema.org/",
         "@type": "BreadcrumbList",
@@ -526,13 +539,14 @@ def shop(request, category_slug=None, subcategory_slug=None):
     return render(request, 'main/shop.html', {
         'category': category,
         'subcategory': subcategory,
+        'series': series,
         'products': page_obj,
-        'categories': Category.objects.all(),
+        'categories': Category.objects.prefetch_related('subcategories__series').all(),
         'contact_form': contact_form,
         'contact_success': contact_success,
         'is_category': category is not None and subcategory is None,
         'is_subcategory': subcategory is not None,
-        # ✅ ADD THIS
+        'is_series': series is not None,
         'breadcrumb_schema': breadcrumb_schema,
     })
 
@@ -1646,11 +1660,10 @@ def subcategory_manager(request, subcategory_id=None):
 
     if request.method == 'POST' and form.is_valid():
         subcategory = form.save(commit=False)
-        # Auto-fill meta title and description if empty
         if not subcategory.meta_title:
             subcategory.meta_title = f"{subcategory.name} | {subcategory.category.name}"
         if not subcategory.meta_description:
-            subcategory.meta_description = subcategory.description[:160]  # First 160 chars
+            subcategory.meta_description = subcategory.description[:160]
         subcategory.save()
         return redirect('subcategory_manager')
 
@@ -1659,6 +1672,32 @@ def subcategory_manager(request, subcategory_id=None):
         'form': form,
         'subcategories': subcategories,
         'editing': subcategory_id is not None,
+    })
+
+
+@login_required
+def series_manager(request, series_id=None):
+    if series_id:
+        instance = get_object_or_404(Series, id=series_id)
+        form = SeriesForm(request.POST or None, instance=instance)
+    else:
+        instance = None
+        form = SeriesForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        series = form.save(commit=False)
+        if not series.meta_title:
+            series.meta_title = f"{series.name} | {series.subcategory.name} | Zaco Computers"
+        if not series.meta_description and series.description:
+            series.meta_description = series.description[:160]
+        series.save()
+        return redirect('series_manager')
+
+    all_series = Series.objects.select_related('subcategory__category').all()
+    return render(request, 'main/series_manager.html', {
+        'form': form,
+        'all_series': all_series,
+        'editing': series_id is not None,
     })
 
 

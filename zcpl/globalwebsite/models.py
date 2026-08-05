@@ -103,6 +103,42 @@ class SubCategory(models.Model):
 
 
 
+class Series(models.Model):
+    subcategory = models.ForeignKey(
+        SubCategory,
+        on_delete=models.CASCADE,
+        related_name='series'
+    )
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    description = RichTextField(blank=True, null=True)
+    heading = models.CharField(max_length=500, blank=True, null=True)
+
+    meta_title = models.CharField(max_length=150, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.subcategory.name} → {self.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.name)
+            slug = base_slug
+            counter = 1
+            while Series.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        if not self.meta_title:
+            self.meta_title = f"{self.name} | {self.subcategory.name} | Zaco Computers"
+        if not self.meta_description and self.description:
+            self.meta_description = (
+                self.description[:155].replace('\n', ' ')
+                if len(self.description) > 155 else self.description
+            )
+        super().save(*args, **kwargs)
+
+
 class Product(models.Model):
     category = models.ForeignKey(
         'SubCategory',
@@ -114,6 +150,11 @@ class Product(models.Model):
     categories = models.ManyToManyField(
         'SubCategory',
         related_name='product',
+        blank=True
+    )
+    series = models.ManyToManyField(
+        'Series',
+        related_name='products',
         blank=True
     )
 

@@ -245,6 +245,16 @@ class SubCategoryForm(forms.ModelForm):
     class Meta:
         model = SubCategory
         fields = ['category', 'name', 'slug', 'description', 'meta_title', 'meta_description']
+
+
+class SeriesForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+    meta_title = forms.CharField(max_length=150, required=False)
+    meta_description = forms.CharField(widget=forms.Textarea, required=False)
+
+    class Meta:
+        model = Series
+        fields = ['subcategory', 'name', 'slug', 'description', 'meta_title', 'meta_description']
                
 class ContactMessageGlobalForm(forms.ModelForm):
     class Meta:
@@ -299,7 +309,10 @@ from .models import PPCServiceLead
 
 
 class PPCServiceLeadForm(forms.ModelForm):
-
+    captcha = ReCaptchaField(
+        widget=ReCaptchaV2Checkbox,
+        required=True
+    )
     # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     class Meta:
@@ -311,7 +324,9 @@ class PPCServiceLeadForm(forms.ModelForm):
             "phone",
             "company_name",
             "requirements",
+            
         ]
+        
 
         widgets = {
             "name": forms.TextInput(attrs={
