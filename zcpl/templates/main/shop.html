@@ -2,20 +2,24 @@
 {% load static %}
 
 {% block title %}
-    {% if subcategory.meta_title %}
-        {{subcategory.meta_title}}
+    {% if series.meta_title %}
+        {{ series.meta_title }}
+    {% elif subcategory.meta_title %}
+        {{ subcategory.meta_title }}
     {% elif category.meta_title %}
-        {{category.meta_title}}
+        {{ category.meta_title }}
     {% else %}
         Buy Enterprise Servers &amp; IT Hardware Online at Best Price
     {% endif %}
 {% endblock %}
 
 {% block meta_description %}
-    {% if subcategory.meta_description %}
-        {{subcategory.meta_description}}
+    {% if series.meta_description %}
+        {{ series.meta_description }}
+    {% elif subcategory.meta_description %}
+        {{ subcategory.meta_description }}
     {% elif category.meta_description %}
-        {{category.meta_description}}
+        {{ category.meta_description }}
     {% else %}
         Shop new &amp; refurbished enterprise-grade servers, storage, racks, & networking devices online at Zaco Computers for multi-vendor IT hardware at best prices.
     {% endif %}
