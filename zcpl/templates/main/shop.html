@@ -218,19 +218,21 @@
           </ul>
         </div>
 
-        {% if subcategory and subcategory.description %}
-        <section class="category-description container my-4">
-          <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
-          <div>{{ subcategory.description|safe }}</div>
-        </section>
-        {% elif category and category.description %}
-        <section class="category-description container my-4">
-          <h2 style="font-size:38px;">{{ category.name }}</h2>
-          <div>{{ category.description|safe }}</div>
-        </section>
-        {% endif %}
       </div>
     </div>
+
+    {% if subcategory and subcategory.description %}
+    <section class="category-description my-4">
+      <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
+      <div>{{ subcategory.description|safe }}</div>
+    </section>
+    {% elif category and category.description %}
+    <section class="category-description my-4">
+      <h2 style="font-size:38px;">{{ category.name }}</h2>
+      <div>{{ category.description|safe }}</div>
+    </section>
+    {% endif %}
+
   </div>
 </section>
 
