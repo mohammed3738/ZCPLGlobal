@@ -288,7 +288,7 @@
                 <h3 class="product-card__title" style="font-size:16px; line-height:1.2;">
                   <a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a>
                 </h3>
-                {% if product.price != 0 %}
+                {% if product.price %}
                   <p class="product-card__price">₹{{ product.price }}</p>
                 {% endif %}
               </div>
