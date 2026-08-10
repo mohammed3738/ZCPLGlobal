@@ -263,6 +263,13 @@
 
       <!-- Products -->
       <div class="col-lg-9">
+
+        {% if series and series.description %}
+        <div class="series-description-block mb-4" style="padding: 20px 24px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #1a3546;">
+          <div class="ck-reset">{{ series.description|safe }}</div>
+        </div>
+        {% endif %}
+
         <div class="product-sorting default-form mb-3">
           <p>Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results</p>
         </div>
