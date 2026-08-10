@@ -263,13 +263,6 @@
 
       <!-- Products -->
       <div class="col-lg-9">
-
-        {% if series and series.description %}
-        <div class="series-description-block mb-4" style="padding: 20px 24px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #1a3546;">
-          <div class="ck-reset">{{ series.description|safe }}</div>
-        </div>
-        {% endif %}
-
         <div class="product-sorting default-form mb-3">
           <p>Showing {{ products.start_index }}–{{ products.end_index }} of {{ products.paginator.count }} results</p>
         </div>
@@ -336,7 +329,12 @@
       </div>
     </div>
 
-    {% if subcategory and subcategory.description %}
+    {% if series and series.description %}
+    <section class="category-description my-4">
+      <h2 style="font-size:38px;">{{ series.name }}</h2>
+      <div>{{ series.description|safe }}</div>
+    </section>
+    {% elif subcategory and subcategory.description %}
     <section class="category-description my-4">
       <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
       <div>{{ subcategory.description|safe }}</div>
@@ -347,8 +345,6 @@
       <div>{{ category.description|safe }}</div>
     </section>
     {% endif %}
-
-    {% comment %} Series description is shown above the product grid when on a series page {% endcomment %}
 
   </div>
 </section>
