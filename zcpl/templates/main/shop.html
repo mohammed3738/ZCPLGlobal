@@ -448,7 +448,12 @@
       </div>
     </div>
 
-    {% if subcategory and subcategory.description %}
+    {% if series and series.description %}
+    <section class="category-description my-4">
+      <h2 style="font-size:38px;">{{ series.name }}</h2>
+      <div>{{ series.description|safe }}</div>
+    </section>
+    {% elif subcategory and subcategory.description %}
     <section class="category-description my-4">
       <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
       <div>{{ subcategory.description|safe }}</div>
