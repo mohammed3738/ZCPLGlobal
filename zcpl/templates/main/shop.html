@@ -45,6 +45,74 @@
 
 {% endblock %}
 
+{% block schema %}
+
+    {% if subcategory %}
+        
+        {% if not subcategory.description and category and category.faqs.exists %}
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {% for faq in category.faqs.all %}
+                    {
+                        "@type": "Question",
+                        "name": "{{ faq.question|escapejs }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{{ faq.answer|escapejs }}"
+                        }
+                    }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ]
+            }
+            </script>
+
+        {% elif subcategory.faqs.exists %}
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {% for faq in subcategory.faqs.all %}
+                    {
+                        "@type": "Question",
+                        "name": "{{ faq.question|escapejs }}",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "{{ faq.answer|escapejs }}"
+                        }
+                    }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ]
+            }
+            </script>
+        {% endif %}
+
+    {% elif category and category.faqs.exists %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {% for faq in category.faqs.all %}
+                {
+                    "@type": "Question",
+                    "name": "{{ faq.question|escapejs }}",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "{{ faq.answer|escapejs }}"
+                    }
+                }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            ]
+        }
+        </script>
+    {% endif %}
+
+{% endblock %}
+
 {% block content %}
 
 <style>
@@ -153,6 +221,57 @@
   line-height: 1;
   padding: 0;
 }
+
+/* FAQ Section */
+  .product-faq-section {
+      padding: 30px 0 50px;
+  }
+
+  .product-faq-section h2 {
+      font-size: 32px;
+      font-weight: 600;
+      color: #24384a;
+      margin-bottom: 20px;
+      padding-bottom:30px; 
+      border-bottom: 2px solid rgba(45, 125, 210, 0.1);
+      
+  }
+
+  /* FAQ Item */
+  .faq-item {
+      margin-bottom: 18px;
+  }
+
+  /* Question */
+  .faq-question {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+      line-height: 1.5;
+  }
+
+  /* Answer */
+  .faq-answer {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #333;
+  }
+
+  @media (max-width: 767px) {
+      .product-faq-section {
+          padding: 25px 0 40px;
+      }
+
+      .product-faq-section h2 {
+          font-size: 26px;
+      }
+
+      .faq-question,
+      .faq-answer {
+          font-size: 14px;
+      }
+  }
 </style>
 
 <!-- Banner -->
@@ -334,11 +453,43 @@
       <h2 style="font-size:38px;">{{ subcategory.name }}</h2>
       <div>{{ subcategory.description|safe }}</div>
     </section>
+    {% if subcategory.faqs.exists %}
+    <section class="product-faq-section">
+        <h2>Frequently Asked Questions (FAQs)</h2>
+
+        {% for faq in subcategory.faqs.all %}
+        <div class="faq-item">
+            <div class="faq-question">
+                Q.{{ forloop.counter }} {{ faq.question }}
+            </div>
+            <div class="faq-answer">
+                {{ faq.answer|linebreaksbr }}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
     {% elif category and category.description %}
     <section class="category-description my-4">
       <h2 style="font-size:38px;">{{ category.name }}</h2>
       <div>{{ category.description|safe }}</div>
     </section>
+    {% if category.faqs.exists %}
+    <section class="product-faq-section">
+        <h2>Frequently Asked Questions (FAQs)</h2>
+
+        {% for faq in category.faqs.all %}
+        <div class="faq-item">
+            <div class="faq-question">
+                Q.{{ forloop.counter }} {{ faq.question }}
+            </div>
+            <div class="faq-answer">
+                {{ faq.answer|linebreaksbr }}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+    {% endif %}
     {% endif %}
 
   </div>

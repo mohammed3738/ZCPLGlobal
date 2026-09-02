@@ -3,6 +3,7 @@ from .models import *
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django.contrib.contenttypes.admin import GenericTabularInline
 
 # Register your models here.
 
@@ -18,6 +19,11 @@ admin.site.register(Order)
 admin.site.register(PPCQuote)
 admin.site.register(PPCCategoryQuote)
 
+class FAQInline(GenericTabularInline):
+    model = FAQ
+    extra = 1
+    fields = ('question', 'answer', 'order')
+    ordering = ('order',)
 
 class SSDInline(admin.TabularInline):
     model = ServerSSD
@@ -56,7 +62,7 @@ class ProductImageInline(admin.TabularInline):  # You can use StackedInline if y
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, FAQInline]
     list_display = ('name', 'price', 'available', 'created')
     list_filter = ('available', 'created')
     search_fields = ('name', 'description')
@@ -69,63 +75,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_per_page = 900
 
 
-
 from django.utils.html import format_html
-
-# ------------------------
-# Category Admin
-# ------------------------
-# class SubCategoryBlogInline(admin.TabularInline):
-#     model = SubCategoryBlog
-#     extra = 1
-#     fields = ('name', 'slug')
-#     readonly_fields = ('slug',)
-
-# @admin.register(CategoryBlog)
-# class CategoryBlogAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'slug', 'subcategories_count')
-#     search_fields = ('name',)
-#     # inlines = [SubCategoryBlogInline]
-#     prepopulated_fields = {"slug": ("name",)}
-
-#     def subcategories_count(self, obj):
-#         return obj.subcategories.count()
-#     subcategories_count.short_description = "SubCategories"
-
-
-# # ------------------------
-# # SubCategory Admin
-# # ------------------------
-# @admin.register(SubCategoryBlog)
-# class SubCategoryBlogAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'category', 'slug')
-#     list_filter = ('category',)
-#     search_fields = ('name', 'category__name')
-#     prepopulated_fields = {"slug": ("name",)}
-
-
-# ------------------------
-# Tag Admin
-# ------------------------
-
-
-
-# ------------------------
-# Blog Admin
-# ------------------------
-# @admin.register(Blog)
-# class BlogAdmin(admin.ModelAdmin):
-#     list_display = ('title', 'category', 'subcategory', 'author', 'created_at', 'updated_at', 'tag_list')
-#     list_filter = ('category', 'tags', 'author', 'created_at')
-#     search_fields = ('title', 'content', 'category__name', 'tags__name', 'author__username')
-#     prepopulated_fields = {"slug": ("title",)}
-#     date_hierarchy = 'created_at'  # This provides the archive by year/month
-
-#     def tag_list(self, obj):
-#         return ", ".join([tag.name for tag in obj.tags.all()])
-#     tag_list.short_description = "Tags"
-
-
 
 # -------------------------
 # Blog Form for Admin
@@ -173,6 +123,8 @@ class BlogAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     readonly_fields = ('created_at', 'updated_at')
 
+    inlines = [FAQInline]
+
     fieldsets = (
         (None, {
             'fields': ('title', 'slug', 'content', 'image')
@@ -187,13 +139,13 @@ class BlogAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+
 class CategoryAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget(), required=False)
 
     class Meta:
         model = Category
         fields = '__all__'
-
 
 class SubCategoryAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget(), required=False)
@@ -202,7 +154,6 @@ class SubCategoryAdminForm(forms.ModelForm):
         model = SubCategory
         fields = '__all__'
 
-
 class SeriesAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget(), required=False)
 
@@ -210,16 +161,15 @@ class SeriesAdminForm(forms.ModelForm):
         model = Series
         fields = '__all__'
 
-
 class CategoryAdmin(admin.ModelAdmin):
     form = CategoryAdminForm
     list_display = ['name', 'slug']
-
+    inlines = [FAQInline]
 
 class SubCategoryAdmin(admin.ModelAdmin):
     form = SubCategoryAdminForm
     list_display = ['name', 'slug', 'category']
-
+    inlines = [FAQInline]
 
 class SeriesAdmin(admin.ModelAdmin):
     form = SeriesAdminForm
@@ -227,12 +177,10 @@ class SeriesAdmin(admin.ModelAdmin):
     list_filter = ['subcategory__category', 'subcategory']
     search_fields = ['name', 'subcategory__name']
 
-
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Series, SeriesAdmin)
 # admin.site.register(RequestQuote)
-
 
 @admin.register(RequestQuote)
 class RequestQuoteAdmin(admin.ModelAdmin):
@@ -249,10 +197,6 @@ class VMWareRequestQuoteAdmin(admin.ModelAdmin):
     list_filter = ['submitted_at']
     readonly_fields = ['name', 'email', 'phone', 'company_name', 'requirements', 'submitted_at']
     ordering = ("-submitted_at",)
-
-
-
-
 
 @admin.register(PPCCategory)
 class PPCCategoryAdmin(admin.ModelAdmin):
@@ -284,13 +228,11 @@ class PPCCategoryAdmin(admin.ModelAdmin):
         }),
     )
 
-
 class PPCProductInline(admin.TabularInline):
     model = PPCProduct
     fields = ['name', 'price', 'is_active']
     extra = 0
     show_change_link = True
-
 
 @admin.register(PPCSubcategory)
 class PPCSubcategoryAdmin(admin.ModelAdmin):
@@ -317,8 +259,6 @@ class PPCSubcategoryAdmin(admin.ModelAdmin):
         }),
     )
 
-
-
 @admin.register(PPCProduct)
 class PPCProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -330,7 +270,6 @@ class PPCProductAdmin(admin.ModelAdmin):
 
 from django.contrib import admin
 from .models import PPCService, PPCServiceImage, PPCServiceLead
-
 
 class PPCServiceImageInline(admin.TabularInline):
     model = PPCServiceImage

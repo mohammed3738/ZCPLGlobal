@@ -10,7 +10,43 @@ from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 
+
+#**************************Vaishnavi FAQ Model
+
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+
+class FAQ(models.Model):
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        related_name="casestudy_faq_content_types"
+    )
+    object_id = models.PositiveIntegerField()
+
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
+    )
+
+    question = models.TextField()
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'id']
+
+    def __str__(self):
+        return self.question
+    
+#**************************Vaishnavi FAQ Model End
+
+
 class CaseStudy(models.Model):
+    faqs = GenericRelation(
+        FAQ,
+        related_query_name='casestudy'
+    )
     title = models.CharField(max_length=255)
     meta_title = models.CharField(max_length=255, blank=True, null=True)
     meta_desc = models.TextField(blank=True, null=True)

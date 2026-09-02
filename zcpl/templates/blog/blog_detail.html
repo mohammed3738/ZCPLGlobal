@@ -7,6 +7,87 @@
 <link rel="canonical" href="https://www.zacocomputer.com/blogs/{{ blog.slug }}/">
 {% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ blog.title|escapejs }}",
+  "description": "{{ blog.meta_desc|default:blog.title|escapejs }}",
+  "image": "{% if blog.image %}https://www.zacocomputer.com{{ blog.image.url }}{% else %}https://www.zacocomputer.com{% static 'images/default-blog.jpg' %}{% endif %}",
+  "author": {
+    "@type": "Organization",
+    "name": "Zaco Computer Pvt. Ltd.",
+    "url": "https://www.zacocomputer.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zaco Computer Pvt. Ltd.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.zacocomputer.com{% static 'images/Zacow1.png' %}"
+    }
+  },
+  "datePublished": "{{ blog.created_at|date:"d F Y" }}"
+}
+</script>
+
+
+
+<!-- Breadcrumb Schema -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.zacocomputer.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Latest Blogs",
+      "item": "https://www.zacocomputer.com/blogs/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ blog.title|escapejs }}",
+      "item": "https://www.zacocomputer.com/blogs/{{ blog.slug }}/"
+    }
+  ]
+}
+</script>
+
+{% if blog.faqs.exists %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {% for faq in blog.faqs.all %}
+        {
+            "@type": "Question",
+            "name": "{{ faq.question|escapejs }}",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{{ faq.answer|escapejs }}"
+            }
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endif %}
+
+{% endblock %}
+
+
+
 {% block content %}
 
 <style>
@@ -151,6 +232,57 @@
             font-size: 14px;
         }
     }
+
+    /* FAQ Section */
+  .product-faq-section {
+      padding: 30px 0 50px;
+  }
+
+  .product-faq-section h2 {
+      font-size: 32px;
+      font-weight: 600;
+      color: #24384a;
+      margin-bottom: 20px;
+      padding-bottom:30px; 
+      border-bottom: 2px solid rgba(45, 125, 210, 0.1);
+      
+  }
+
+  /* FAQ Item */
+  .faq-item {
+      margin-bottom: 18px;
+  }
+
+  /* Question */
+  .faq-question {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+      line-height: 1.5;
+  }
+
+  /* Answer */
+  .faq-answer {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #333;
+  }
+
+  @media (max-width: 767px) {
+      .product-faq-section {
+          padding: 25px 0 40px;
+      }
+
+      .product-faq-section h2 {
+          font-size: 26px;
+      }
+
+      .faq-question,
+      .faq-answer {
+          font-size: 14px;
+      }
+  }
 </style>
 
 <!-- Banner Section -->
@@ -205,6 +337,24 @@
                                 <div class="blog-content mt-3" style="font-size:18px;">
                                     {{ blog.content|safe }}
                                 </div>
+
+                                {% if blog.faqs.exists %}
+                                <section class="product-faq-section">
+                                    <h2>Frequently Asked Questions (FAQs)</h2>
+
+                                    {% for faq in blog.faqs.all %}
+                                    <div class="faq-item">
+                                        <div class="faq-question">
+                                            Q.{{ forloop.counter }} {{ faq.question }}
+                                        </div>
+
+                                        <div class="faq-answer">
+                                            {{ faq.answer|linebreaksbr }}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </section>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

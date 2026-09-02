@@ -32,8 +32,41 @@ class ContactMessageGlobal(models.Model):
         return f"{self.name} - {self.subject} - {self.submitted_at}"
 
 
+#**************************Vaishnavi FAQ Model
+
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+
+class FAQ(models.Model):
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField()
+
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
+    )
+
+    question = models.TextField()
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'id']
+
+    def __str__(self):
+        return self.question
+    
+#**************************Vaishnavi FAQ Model End
+
 
 class Category(models.Model):
+    faqs = GenericRelation(
+        FAQ,
+        related_query_name='category'
+    )
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     description = RichTextField(blank=True, null=True)
@@ -70,6 +103,10 @@ class SubCategory(models.Model):
         on_delete=models.CASCADE,
         related_name='subcategories' 
     )
+    faqs = GenericRelation(
+        FAQ,
+        related_query_name='subcategory'
+    )
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     description = RichTextField(blank=True, null=True)
@@ -97,9 +134,6 @@ class SubCategory(models.Model):
             )
 
         super().save(*args, **kwargs)
-
-
-
 
 
 
@@ -156,6 +190,10 @@ class Product(models.Model):
         'Series',
         related_name='products',
         blank=True
+    )
+    faqs = GenericRelation(
+        FAQ,
+        related_query_name='product'
     )
 
     name = models.CharField(max_length=200)
@@ -622,6 +660,10 @@ class Blog(models.Model):
         null=True,
         blank=True
     )
+    faqs = GenericRelation(
+        FAQ,
+        related_query_name='blog'
+    )
     tags = models.ManyToManyField('Tag', blank=True)
 
     # Optimized blog thumbnail
@@ -968,3 +1010,5 @@ class PPCServiceLeadAnswer(models.Model):
 
     def __str__(self):
         return f"{self.field_label}: {self.answer}"
+
+
