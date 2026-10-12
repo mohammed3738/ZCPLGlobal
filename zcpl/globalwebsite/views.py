@@ -2515,13 +2515,16 @@ Phone: {quote.phone}
 Requirement:
 {quote.requirements}
 """
-        send_mail(
-            subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
-            ["info@zacocomputer.com"],
-            fail_silently=False,
-        )
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
+            )
+        except Exception:
+            logger.exception("Failed to send RequestQuote email for id=%s", quote.id)
 
         return redirect('thank_you')
 
@@ -2547,13 +2550,16 @@ Company: {quote.company_name}
 Requirement:
 {quote.requirements}
 """
-        send_mail(
-            subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
-            ["info@zacocomputer.com"],
-            fail_silently=False,
-        )
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["info@zacocomputer.com"],
+                fail_silently=False,
+            )
+        except Exception:
+            logger.exception("Failed to send VMWareRequestQuote email for id=%s", quote.id)
 
         return redirect('thank_you')
 
