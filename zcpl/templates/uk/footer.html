@@ -97,7 +97,8 @@
                         <div class="widget-content">
                             <h5>Newsletter</h5>
                             <div class="newsletter-form">
-                                <form method="post" action="contact.html">
+                                <form method="post" action="{% url 'newsletter_subscribe' %}">
+                                    {% csrf_token %}
                                     <div class="form-group clearfix">
                                         <input type="email" name="email" value="" placeholder="Email Address"
                                             required="">

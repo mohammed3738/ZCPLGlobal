@@ -114,7 +114,8 @@
       <div class="col-lg-6" style="border: 1px solid black; padding:20px; border-radius: 5px;">
         <div class="form-box">
           <div class="default-form">
-            <form method="post" onsubmit="redirectPage(event)"> 
+            <form method="post" action="{% url 'itad-services' %}" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="row clearfix">
                 <div class="form-group col-lg-6 col-md-6 col-sm-12">
                   <div class="field-inner">
@@ -387,11 +388,4 @@
 </section>
 <!-- /.history-timeline -->
 
-
-<script>
-  function redirectPage(e) {
-    e.preventDefault();
-    window.location.href = "/thank-you/";
-  }
-</script>
 {% endblock %}

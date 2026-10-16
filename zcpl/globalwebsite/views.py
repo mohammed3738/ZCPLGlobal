@@ -27,6 +27,7 @@ from django.db import transaction
 
 from django.db.models import Count
 from django.utils.timezone import now
+from .utils import send_lead_email
 import logging
 
 logger = logging.getLogger(__name__)
@@ -101,13 +102,7 @@ def contact(request):
 
             full_message = f"Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage:\n{message}"
 
-            send_mail(
-                subject,
-                full_message,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
-            )
+            send_lead_email(subject or "New Contact Enquiry", full_message)
 
             # ✅ Set session flag for thank you page access
             request.session['form_submitted'] = True  
@@ -134,6 +129,40 @@ def services(request):
 
 
 def itadservices(request):
+    if request.method == 'POST':
+        name = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('contact', '').strip()
+        company = request.POST.get('company', '').strip()
+        location = request.POST.get('location', '').strip()
+        message = request.POST.get('message', '').strip()
+
+        attachment = request.FILES.get('fileUpload')
+        if attachment and (
+            not attachment.name.lower().endswith(('.docx', '.xlsx', '.pdf'))
+            or attachment.size > 10 * 1024 * 1024
+        ):
+            messages.error(request, "Upload must be a .docx, .xlsx or .pdf file up to 10 MB.")
+            return render(request, 'services/itad_services.html')
+
+        if name and email and phone:
+            subject = f"ITAD Enquiry – {company or name}"
+            full_message = (
+                f"Name: {name}\nEmail: {email}\nPhone: {phone}\n"
+                f"Company: {company}\nLocation: {location}\n\nMessage:\n{message}"
+            )
+            ContactMessageGlobal.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                subject=subject,
+                message=f"Company: {company}\nLocation: {location}\n\n{message}",
+            )
+            send_lead_email(subject, full_message, attachments=[attachment] if attachment else None)
+            return redirect('thank_you')
+
+        messages.error(request, "Name, Email and Contact are required.")
+
     return render(request,'services/itad_services.html')
 
 def it_hardware(request):
@@ -527,13 +556,7 @@ def shop(request, category_slug=None, subcategory_slug=None, series_slug=None):
             contact_form.save()
             cd = contact_form.cleaned_data
             full_message = f"Name: {cd['name']}\nEmail: {cd['email']}\nPhone: {cd['phone']}\n\nMessage:\n{cd['message']}"
-            send_mail(
-                cd['subject'],
-                full_message,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
-            )
+            send_lead_email(cd['subject'] or "New Shop Enquiry", full_message)
             contact_success = True
             return redirect('thank_you')
     return render(request, 'main/shop.html', {
@@ -1060,13 +1083,7 @@ def product_detail(request, slug):
                 f"Submitted At: {obj.submitted_at}"
             )
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["info@zacocomputer.com"],
-                fail_silently=False,
-            )
+            send_lead_email(subject, message, settings.QUOTE_RECIPIENTS)
 
             return redirect("thank_you")
 
@@ -1088,13 +1105,7 @@ def product_detail(request, slug):
                 f"Message:\n{obj.message}"
             )
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["info@zacocomputer.com"],
-                fail_silently=False,
-            )
+            send_lead_email(subject, message, settings.QUOTE_RECIPIENTS)
 
             return redirect("thank_you")
 
@@ -1285,8 +1296,7 @@ Amount: ₹{cart.get_total_price()}
 
 Please verify the payment and process the order.
 """
-            admin_email = 'admin@example.com'  # replace with your admin email
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [admin_email])
+            send_lead_email(subject, message, settings.ORDER_RECIPIENTS)
 
             cart.clear()
             return render(request, "main/order_success.html", {"order": order})
@@ -1818,13 +1828,8 @@ def request_quote_api(request):
         f"Source URL: {request.META.get('HTTP_REFERER', 'unknown')}\n"
     )
 
-    # Determine recipients
-    primary = getattr(settings, "CONTACT_RECEIVER_EMAIL", None) or getattr(settings, "DEFAULT_FROM_EMAIL", None)
-    recipients = []
-    if primary:
-        recipients.append(primary)
-    # add abhiraj as requested
-    recipients.append("info@zacocomputer.com")
+    # Determine recipients (contact + quote inboxes, de-duplicated)
+    recipients = list(dict.fromkeys(settings.CONTACT_RECIPIENTS + settings.QUOTE_RECIPIENTS))
 
     from_email = getattr(settings, "DEFAULT_FROM_EMAIL", None) or settings.EMAIL_HOST_USER
 
@@ -1930,6 +1935,27 @@ from django.shortcuts import get_object_or_404, redirect, render
 #     }
 #     return render(request, 'ppc/ppc_category.html', context)
 
+def _ppc_quote_message(quote, category, subcategory=None):
+    lines = [
+        "New PPC Quote Request Received",
+        "",
+        f"Category: {category}",
+    ]
+    if subcategory:
+        lines.append(f"Subcategory: {subcategory}")
+    lines += [
+        "",
+        f"Name: {quote.name}",
+        f"Email: {quote.email}",
+        f"Phone: {quote.phone}",
+        f"Company: {quote.company or 'Not Provided'}",
+        "",
+        "Requirements:",
+        quote.requirements or "N/A",
+    ]
+    return "\n".join(lines)
+
+
 def ppc_category_detail(request, slug):
     category = get_object_or_404(PPCCategory, slug=slug, is_active=True)
     subcategories = category.subcategories.filter(is_active=True)
@@ -1941,6 +1967,11 @@ def ppc_category_detail(request, slug):
             quote = form.save(commit=False)
             quote.category = category
             quote.save()
+            send_lead_email(
+                f"New PPC Quote Request – {category.name}",
+                _ppc_quote_message(quote, category=category.name),
+                settings.QUOTE_RECIPIENTS,
+            )
             return redirect("thank_you")
     else:
         form = PPCCategoryQuoteForm()
@@ -1961,9 +1992,15 @@ def ppc_subcategory_detail(request, slug):
     if request.method == "POST":
         form = PPCSubcategoryQuoteForm(request.POST)
         if form.is_valid():
+            # PPCCategoryQuote has no subcategory FK, so attach it to the parent category
             quote = form.save(commit=False)
-            quote.subcategory = subcategory
+            quote.category = subcategory.category
             quote.save()
+            send_lead_email(
+                f"New PPC Quote Request – {subcategory.name}",
+                _ppc_quote_message(quote, category=subcategory.category.name, subcategory=subcategory.name),
+                settings.QUOTE_RECIPIENTS,
+            )
             return redirect("thank_you")
     else:
         form = PPCSubcategoryQuoteForm()
@@ -2011,13 +2048,7 @@ Requirement:
 {quote.message}
 """
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["info@zacocomputer.com"],
-                fail_silently=False,
-            )
+            send_lead_email(subject, message, settings.QUOTE_RECIPIENTS)
 
             return redirect("thank_you")
     else:
@@ -2064,8 +2095,8 @@ Requirements: {requirements}
         send_mail(
             subject,
             message,
-            'noreply@zacocomputer.com',
-            ['info@zacocomputer.com'],
+            settings.DEFAULT_FROM_EMAIL,
+            settings.QUOTE_RECIPIENTS,
             fail_silently=True,
         )
 
@@ -2271,7 +2302,7 @@ def ppc_product_delete(request, pk):
 #                 subject="BUILD YOUR OWN SERVER REQUEST",
 #                 message=final_message,
 #                 from_email=settings.DEFAULT_FROM_EMAIL,
-#                 recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
+#                 recipient_list=settings.CONTACT_RECIPIENTS,
 #                 fail_silently=False,
 #             )
 #         except Exception as e:
@@ -2437,7 +2468,7 @@ def build_your_server(request):
                 subject="BUILD YOUR OWN SERVER REQUEST",
                 message=final_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_RECEIVER_EMAIL],
+                recipient_list=settings.CONTACT_RECIPIENTS,
                 fail_silently=False,
             )
         except Exception as e:
@@ -2477,18 +2508,24 @@ def get_server_models(request):
 
 def newsletter_subscribe(request):
     if request.method == "POST":
-        form = NewsletterForm(request.POST)
+        email = request.POST.get("email", "").strip().lower()
+        # ModelForm's unique check would reject an existing subscriber, so
+        # treat "already subscribed" as a successful submission too.
+        if NewsletterSubscriber.objects.filter(email__iexact=email).exists():
+            return redirect("thank_you")
 
+        form = NewsletterForm({"email": email})
         if form.is_valid():
-            email = form.cleaned_data["email"]
+            subscriber = form.save()
+            send_lead_email(
+                "New Newsletter Subscription",
+                f"New newsletter subscriber: {subscriber.email}",
+            )
+            return redirect("thank_you")
 
-            if NewsletterSubscriber.objects.filter(email=email).exists():
-                messages.info(request, "You are already subscribed.")
-            else:
-                form.save()
-                messages.success(request, "Thanks for subscribing!")
+        messages.error(request, "Please enter a valid email address.")
 
-        return redirect(request.META.get("HTTP_REFERER", "/"))
+    return redirect(request.META.get("HTTP_REFERER", "/"))
 
 
 
@@ -2515,16 +2552,7 @@ Phone: {quote.phone}
 Requirement:
 {quote.requirements}
 """
-        try:
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["info@zacocomputer.com"],
-                fail_silently=False,
-            )
-        except Exception:
-            logger.exception("Failed to send RequestQuote email for id=%s", quote.id)
+        send_lead_email(subject, message, settings.QUOTE_RECIPIENTS)
 
         return redirect('thank_you')
 
@@ -2550,16 +2578,7 @@ Company: {quote.company_name}
 Requirement:
 {quote.requirements}
 """
-        try:
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["info@zacocomputer.com"],
-                fail_silently=False,
-            )
-        except Exception:
-            logger.exception("Failed to send VMWareRequestQuote email for id=%s", quote.id)
+        send_lead_email(subject, message, settings.QUOTE_RECIPIENTS)
 
         return redirect('thank_you')
 
@@ -2619,13 +2638,7 @@ def ppc_service_detail(request, slug):
             {lead.requirements}
             """
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["info@zacocomputer.com"],
-                fail_silently=False,
-            )
+            send_lead_email(subject, message, settings.QUOTE_RECIPIENTS)
 
             return redirect('thank_you')
 

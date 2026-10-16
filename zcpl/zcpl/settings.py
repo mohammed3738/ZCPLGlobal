@@ -12,21 +12,33 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Secrets and per-environment values live in zcpl/.env (see .env.example).
+# Real environment variables take precedence over the file.
+load_dotenv(BASE_DIR / '.env')
+
+
+def env_bool(name, default=False):
+    return os.environ.get(name, str(default)).strip().lower() in ('1', 'true', 'yes', 'on')
+
+
+def env_list(name, default=''):
+    return [v.strip() for v in os.environ.get(name, default).split(',') if v.strip()]
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o8#vzyqkh9qwkq(m*8qxte+=4=p-l_e2zd*%tkx+i-9m7vfm=a'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+DEBUG = env_bool('DJANGO_DEBUG', False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', '*')
 
 
 # Application definition
@@ -216,19 +228,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'zacoitsolution@gmail.com'
-EMAIL_HOST_PASSWORD = 'gnld rcoa bgap dysg'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_USE_TLS = env_bool('EMAIL_USE_TLS', True)
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-# CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
-CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
+
+# Form notification recipients (lists; comma-separated in .env)
+# Contact pages, ITAD, newsletter, Build Your Server
+CONTACT_RECIPIENTS = env_list('CONTACT_RECEIVER_EMAIL', 'info@zacocomputer.com')
+# Quote / rent / PPC / VMware quote requests
+QUOTE_RECIPIENTS = env_list('QUOTE_RECEIVER_EMAIL', 'info@zacocomputer.com')
+# Checkout bank-transfer order notifications
+ORDER_RECIPIENTS = env_list('ORDER_RECEIVER_EMAIL', 'info@zacocomputer.com')
 
 
-RECAPTCHA_PUBLIC_KEY = '6LfaCZMrAAAAAJxdbefcTWNIcr8x3B92YYgyFjMf'
-RECAPTCHA_PRIVATE_KEY = '6LfaCZMrAAAAAFWsNm_QzfmQEt8qfBq15jtOpmQS'
-# RECAPTCHA_PUBLIC_KEY = '6LcL9ZIrAAAAABqTwm1NNe6PQ63La_AIQztS4um5'
-# RECAPTCHA_PRIVATE_KEY = '6LcL9ZIrAAAAAK-HCSZZ7HBKX8fuZV-RLSlbmfnO'
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

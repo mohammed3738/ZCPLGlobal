@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 # from .forms import ContactForm
 from django.conf import settings
+from globalwebsite.utils import send_lead_email
 from .models import *
 from .forms import ContactForm
 
@@ -80,13 +81,7 @@ def uae_contact(request):
 
             full_message = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
 
-            send_mail(
-                subject,
-                full_message,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
-            )
+            send_lead_email(subject or "New Contact Enquiry", full_message)
             request.session['form_submitted'] = True
             return redirect('thank_you')
     else:

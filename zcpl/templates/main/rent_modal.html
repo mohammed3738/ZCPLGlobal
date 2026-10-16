@@ -51,6 +51,16 @@
                         placeholder="Tell us your rental requirement" required></textarea>
             </div>
 
+            <!-- Captcha (required by ShopContactForm) -->
+            <div class="col-12 mb-3">
+              {{ rent_form.captcha }}
+              {% for field, errors in rent_form.errors.items %}
+                {% for error in errors %}
+                  <small class="text-danger d-block">{{ error }}</small>
+                {% endfor %}
+              {% endfor %}
+            </div>
+
           </div>
         </div>
 
@@ -65,3 +75,12 @@
   </div>
 
 </div>
+
+{% if rent_form.errors %}
+<script>
+  // Re-open the modal so the visitor sees why the rent request was rejected
+  document.addEventListener('DOMContentLoaded', function () {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('rentModal')).show();
+  });
+</script>
+{% endif %}
