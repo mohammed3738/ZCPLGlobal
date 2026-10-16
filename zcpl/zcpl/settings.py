@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o8#vzyqkh9qwkq(m*8qxte+=4=p-l_e2zd*%tkx+i-9m7vfm=a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -107,7 +107,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'globalwebsite.context_processors.categories_context',
-                
+                # 'globalwebsite.context_processors.contact_receiver_email',
 
             ],
         },
@@ -220,11 +220,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'zacoitsolution@gmail.com'
-EMAIL_HOST_PASSWORD = 'rulf vgep fomh brsi'
+EMAIL_HOST_PASSWORD = 'gnld rcoa bgap dysg'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
-# CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
+# CONTACT_RECEIVER_EMAIL = 'info@zacocomputer.com'
+CONTACT_RECEIVER_EMAIL = 'abhiraj@zacocomputer.com'
 
 
 RECAPTCHA_PUBLIC_KEY = '6LfaCZMrAAAAAJxdbefcTWNIcr8x3B92YYgyFjMf'
