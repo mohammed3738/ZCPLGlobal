@@ -557,9 +557,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <li class="dropdown">
                       <a href="{% url 'contact' %}" data-url="{% url 'contact' %}">Contact Us</a>
                     </li>
-                    <li class="dropdown">
-                      <a href="{% url 'cart_detail' %}">Cart ({{ request.session.cart|length|default:0 }})</a>
-                    </li>
+                    {% comment %} Cart link hidden (quote-only flow) {% endcomment %}
                   </ul>
                 </nav>
               </div>

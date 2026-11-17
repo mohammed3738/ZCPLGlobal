@@ -825,36 +825,11 @@
         </div> {% endcomment %}
       </div>
 
-      <!-- PRICE -->
-      <div class="price-section">
-        {% comment %} <div class="price-label">Starting From</div> {% endcomment %}
-        <div class="price-display">
-<span class="current-price">
-  {% if product.price %}
-    ₹{{ product.price }}
-  {% else %}
-    Contact for Price
-  {% endif %}
-</span>
-          {% comment %} <span class="original-price">₹17,50,000</span>
-          <span class="discount-badge">14% OFF</span> {% endcomment %}
-        </div>
-        {% comment %} <div class="price-note">
-          <i class="fas fa-info-circle"></i> GST & shipping calculated at checkout
-        </div> {% endcomment %}
-      </div>
+      <!-- PRICE (hidden) -->
 
       <!-- ACTION BUTTONS -->
       <div class="action-buttons">
-        {% comment %} <button class="btn-add" onclick="addCart()">
-          <i class="fas fa-shopping-cart"></i> Add to Cart
-        </button> {% endcomment %}
-                        <a class="theme-btn btn-style-two" onclick="addCart()">
-                    <i class="btn-curve"></i>
-    <span class="btn-title" style="background: #0071bd !important;">
-        <i class="fa-solid fa-cart-shopping me-2"></i> Add to Cart
-    </span>
-                </a>
+        <!-- cart button removed: quote-only flow -->
 
         {% comment %} <button class="btn-inquiry" onclick="window.location.href='tel:9811183994'">
           <i class="fas fa-phone"></i> Call for Best Prices
@@ -971,12 +946,7 @@
 </section>
 
 
-<script>
-
-function addCart() {
-  window.location.href = "{% url 'cart_detail' %}";
-}
-</script>
+<!-- addCart() removed (quote-only flow) -->
 
 
 <script>

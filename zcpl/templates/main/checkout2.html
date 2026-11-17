@@ -169,8 +169,6 @@
           <tr>
             <th>Product</th>
             <th>Qty</th>
-            <th>Unit Price</th>
-            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -178,13 +176,11 @@
           <tr>
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>₹{{ item.product.price }}</td>
-            <td>₹{{ item.total_price }}</td>
           </tr>
           {% endfor %}
           <tr>
-            <td colspan="3" class="text-end"><strong>Cart Total:</strong></td>
-            <td><strong>₹{{ cart.get_total_price }}</strong></td>
+            <td class="text-end"><strong>Pricing:</strong></td>
+            <td><strong>On request</strong></td>
           </tr>
         </tbody>
       </table>

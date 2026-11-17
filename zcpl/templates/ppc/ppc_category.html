@@ -631,10 +631,7 @@ IMAGE + QUOTE SECTION
             </div>
           {% endif %}
           <div class="model-card-body">
-            <div class="price">
-              ₹{{ product.price|floatformat:0 }}
-              <small>Starting from</small>
-            </div>
+            {% comment %} Price display hidden {% endcomment %}
             {% if product.sub_heading %}
               <p style="font-size:12px; color:#666; margin:6px 0 0;">{{ product.sub_heading }}</p>
             {% endif %}

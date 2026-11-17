@@ -42,9 +42,7 @@ Review selected servers, storage and IT hardware in your cart. Update quantities
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Price</th>
                             <th>Quantity</th>
-                            <th>Total</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
@@ -57,13 +55,11 @@ Review selected servers, storage and IT hardware in your cart. Update quantities
                                     <h3 style="font-size: 16px; line-height: 1.2;"> <a href="{% url 'product_detail' item.product.id %}">{{ item.product.name }}</a></h3>
                                 </div>
                             </td>
-                            <td>₹{{ item.product.price }}</td>
                             <td>
                                 <div class="quantity-box">
                                     <input type="number" name="quantity_{{ item.product.id }}" value="{{ item.quantity }}" min="1" max="25">
                                 </div>
                             </td>
-                            <td>₹{{ item.total_price }}</td>
                             <td>
                                 <a href="{% url 'cart_remove' item.product.id %}" class="remove-icon">
                                     <i class="flaticon-delete"></i>
@@ -98,9 +94,8 @@ Review selected servers, storage and IT hardware in your cart. Update quantities
             <div class="row mt-4">
                 <div class="col-lg-4 offset-lg-8">
                     <ul class="cart-total list-unstyled" >
-                        <li><span>Subtotal</span><span>₹{{ cart.get_total_price }}</span></li>
-                        <li><span>Shipping Cost</span><span>₹0.00</span></li>
-                        <li><span>Total</span><span class="cart-total__total">₹{{ cart.get_total_price }}</span></li>
+                        <li><span>Items</span><span>{{ cart|length }}</span></li>
+                        <li><span>Pricing</span><span class="cart-total__total">On request</span></li>
                     </ul>
                     <div class="cart-page__buttons">
                         <button type="submit" class="theme-btn btn-style-two" style="margin-bottom: 10px;">
